@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>FlipWords Wireframe</title>
   <style>
     :root {
@@ -25,6 +25,7 @@
     html {
       height: 100%;
       overflow: hidden;
+      touch-action: manipulation;
     }
 
     body {
@@ -38,6 +39,9 @@
       background: var(--bg);
       color: var(--ink);
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      touch-action: manipulation;
+      overscroll-behavior: none;
+      -webkit-text-size-adjust: 100%;
     }
 
     .game {
@@ -51,6 +55,7 @@
       justify-content: center;
       transform: translateY(-8vh);
       overflow: hidden;
+      touch-action: manipulation;
     }
 
     .rotate-message {
@@ -259,7 +264,7 @@
 
     .controls {
       display: grid;
-      grid-template-columns: 118px 118px;
+      grid-template-columns: 126px 126px;
       align-items: center;
       justify-content: center;
       gap: 8px;
@@ -273,14 +278,15 @@
       justify-content: center;
       border: 0;
       border-radius: 999px;
-      padding: 0 14px;
-      width: 118px;
-      height: 46px;
+      padding: 0 15px;
+      width: 126px;
+      height: 50px;
       line-height: 1;
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       letter-spacing: 0.01em;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     button:disabled {
@@ -315,8 +321,8 @@
     .action-slot {
       position: relative;
       display: block;
-      width: 118px;
-      height: 46px;
+      width: 126px;
+      height: 50px;
       line-height: 0;
     }
 
@@ -351,6 +357,7 @@
       font-size: 27px;
       opacity: 0;
       transform: translateY(0);
+      pointer-events: none;
     }
 
     .message.score-pop { animation: score-pop 2000ms ease-out forwards; }
@@ -366,14 +373,14 @@
     .status {
       margin-top: 28px;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 17px;
       line-height: 1.45;
     }
 
     .score-line {
       margin-top: 4px;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.35;
     }
 
@@ -401,9 +408,9 @@
         height: clamp(96px, 27vw, 114px);
       }
       .letter { font-size: clamp(29px, 8vw, 40px); }
-      .controls { grid-template-columns: 112px 112px; }
-      button { width: 112px; height: 44px; font-size: 15px; }
-      .action-slot { width: 112px; height: 44px; }
+      .controls { grid-template-columns: 122px 122px; }
+      button { width: 122px; height: 48px; font-size: 16px; }
+      .action-slot { width: 122px; height: 48px; }
     }
 
     @media (min-width: 760px) and (min-height: 650px) and (hover: hover) {
@@ -429,19 +436,19 @@
       .letter { font-size: clamp(42px, 4.8vw, 56px); }
 
       .controls {
-        grid-template-columns: 128px 128px;
+        grid-template-columns: 140px 140px;
         gap: 10px;
       }
 
       button {
-        width: 128px;
-        height: 48px;
-        font-size: 15px;
+        width: 140px;
+        height: 52px;
+        font-size: 16px;
       }
 
       .action-slot {
-        width: 128px;
-        height: 48px;
+        width: 140px;
+        height: 52px;
       }
 
       .message {
@@ -450,7 +457,7 @@
       }
 
       .status,
-      .score-line { font-size: 16px; }
+      .score-line { font-size: 18px; }
 
       .status { margin-top: 32px; }
     }
@@ -747,9 +754,7 @@
         const p = currentPuzzle();
         status.textContent = `Current: ${words.top.toUpperCase()} / ${words.bottom.toUpperCase()} · Target: ${p.answer1.toUpperCase()} / ${p.answer2.toUpperCase()}`;
       } else {
-        const p = currentPuzzle();
-        const difficulty = p.difficulty ? p.difficulty.charAt(0).toUpperCase() + p.difficulty.slice(1) : "";
-        status.textContent = `Puzzle ${puzzleIndex + 1} of ${puzzles.length}${difficulty ? " · " + difficulty : ""}`;
+        status.textContent = `Level ${puzzleIndex + 1}`;
       }
 
       scoreLine.textContent = `Score ${totalScore}`;
@@ -1050,6 +1055,11 @@
       puzzleIndex = (puzzleIndex + 1) % puzzles.length;
       setupPuzzle();
     });
+
+    // Prevent accidental double-tap zoom during rapid play on mobile browsers.
+    document.addEventListener("dblclick", (event) => {
+      event.preventDefault();
+    }, { passive: false });
 
     setupPuzzle();
   </script>
