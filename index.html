@@ -94,7 +94,7 @@
     }
 
     .board-shell {
-      padding: 16px 14px 14px;
+      padding: 20px 14px 18px;
       border-radius: 24px;
     }
 
@@ -419,11 +419,11 @@
         transform: translateY(-11.5vh);
       }
 
-      .subtitle { margin-bottom: 42px; }
+      .subtitle { margin-bottom: 44px; }
 
       .board-shell {
-        padding-top: 20px;
-        padding-bottom: 20px;
+        padding-top: 24px;
+        padding-bottom: 24px;
       }
 
       .board { gap: 14px; }
@@ -499,7 +499,6 @@
     const puzzles = [
       // 4-letter tests
       { word1: "lazy", word2: "once", answer1: "clay", answer2: "zone", difficulty: "medium" },
-      { word1: "carrot", word2: "danced", answer1: "accord", answer2: "ardent", difficulty: "hard" },
       { word1: "race", word2: "mild", answer1: "card", answer2: "lime", difficulty: "easy" },
       { word1: "port", word2: "ride", answer1: "dirt", answer2: "rope", difficulty: "easy" },
       { word1: "corn", word2: "flat", answer1: "clan", answer2: "fort", difficulty: "easy" },
@@ -530,7 +529,7 @@
 
       // 6-letter tests
       { word1: "bright", word2: "poison", answer1: "hoping", answer2: "orbits", difficulty: "medium" },
-      
+      { word1: "carrot", word2: "danced", answer1: "accord", answer2: "ardent", difficulty: "hard" },
       { word1: "wander", word2: "errors", answer1: "arrows", answer2: "render", difficulty: "easy" },
       { word1: "region", word2: "strait", answer1: "artist", answer2: "ignore", difficulty: "hard" },
       { word1: "doctor", word2: "unions", answer1: "counts", answer2: "indoor", difficulty: "medium" }
@@ -1066,7 +1065,7 @@
 
         returnedToStartNoticeShown = true;
         showInfoMessage("These were the start words", "returned-start");
-      }, 1000);
+      }, 1500);
     }
 
     startWordsBtn.addEventListener("click", showStartingWords);
