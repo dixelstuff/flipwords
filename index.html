@@ -20,12 +20,20 @@
       --hint-glow: rgba(212, 167, 44, 0.24);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
 
     html {
       height: 100%;
       overflow: hidden;
       touch-action: manipulation;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
 
     body {
@@ -42,6 +50,9 @@
       touch-action: manipulation;
       overscroll-behavior: none;
       -webkit-text-size-adjust: 100%;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
     }
 
     .game {
@@ -107,6 +118,7 @@
     }
 
     .tile-wrap {
+      position: relative;
       width: clamp(54px, 12.5vw, 84px);
       height: clamp(100px, 21.5vw, 142px);
       cursor: grab;
@@ -252,6 +264,34 @@
     }
 
     .drag-proxy .tile-stage { perspective: 700px; }
+
+    .tutorial-hand {
+      position: absolute;
+      right: -18px;
+      bottom: -12px;
+      z-index: 5;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      filter: drop-shadow(0 5px 8px rgba(39, 32, 51, 0.22));
+      pointer-events: none;
+      animation: hand-demo 2500ms ease-in-out 450ms 1 both;
+    }
+
+    @keyframes hand-demo {
+      0% { opacity: 0; transform: translate(0, 0) scale(0.95); }
+      8% { opacity: 1; transform: translate(0, 0) scale(1); }
+      20% { transform: translate(-7px, -5px) scale(0.92); }
+      32% { transform: translate(6px, -5px) scale(1); }
+      46% { transform: translate(18px, -5px) scale(1); }
+      60% { transform: translate(6px, -5px) scale(1); }
+      74% { transform: translate(6px, -5px) scale(0.9); }
+      86% { transform: translate(6px, -5px) scale(1); opacity: 1; }
+      100% { transform: translate(6px, -5px) scale(1); opacity: 0; }
+    }
 
     .feedback-area {
       height: 32px;
@@ -484,9 +524,9 @@
     </div>
 
     <div class="controls">
-      <button id="startWordsBtn" class="start-words" type="button">Starters</button>
+      <button id="hintBtn" class="hint" type="button">Hint</button>
       <span class="action-slot">
-        <button id="hintBtn" class="hint" type="button">Hint</button>
+        <button id="startWordsBtn" class="start-words" type="button">Starters</button>
         <button id="nextBtn" class="next" type="button">Next</button>
       </span>
     </div>
@@ -549,7 +589,7 @@
     let totalScore = 0;
     let lastPuzzleScore = null;
     let puzzleAwarded = false;
-    let scoreAnimationShown = false;
+    let pendingScorePop = false;
 
     const board = document.getElementById("board");
     const startWordsBtn = document.getElementById("startWordsBtn");
@@ -679,7 +719,7 @@
       clearInfoMessage();
       lastPuzzleScore = null;
       puzzleAwarded = false;
-      scoreAnimationShown = false;
+      pendingScorePop = false;
       solved = false;
       completedWithHints = false;
       dragState = null;
@@ -693,7 +733,7 @@
         completedWithHints = restoreCompletedWithHints;
         puzzleAwarded = restoreAwarded;
         lastPuzzleScore = restoreLastScore;
-        scoreAnimationShown = true;
+        pendingScorePop = false;
       }
 
       render();
@@ -740,7 +780,7 @@
       lastPuzzleScore = scoreForCurrentPuzzle();
       totalScore += lastPuzzleScore;
       puzzleAwarded = true;
-      scoreAnimationShown = false;
+      pendingScorePop = true;
     }
 
     function checkSolved() {
@@ -781,24 +821,30 @@
         wrap.dataset.id = tile.id;
         wrap.dataset.locked = tile.locked ? "1" : "0";
         wrap.innerHTML = makeTileHTML(tile);
+        if (shouldShowTutorial(index)) {
+          const hand = document.createElement("div");
+          hand.className = "tutorial-hand";
+          hand.textContent = "☝️";
+          wrap.appendChild(hand);
+        }
         wrap.addEventListener("pointerdown", (event) => handlePointerDown(event, tile.id));
         board.appendChild(wrap);
       });
 
       const allLocked = tiles.every(t => t.locked);
       nextBtn.classList.toggle("visible", solved);
-      hintBtn.classList.toggle("hidden", solved);
-      hintBtn.disabled = allLocked;
-      startWordsBtn.disabled = solved || isShowingStartingWords();
+      startWordsBtn.classList.toggle("hidden", solved);
+      hintBtn.disabled = solved || allLocked;
+      startWordsBtn.disabled = isShowingStartingWords();
 
-      if (solved && lastPuzzleScore !== null && !scoreAnimationShown) {
+      if (solved && lastPuzzleScore !== null && pendingScorePop) {
         clearInfoMessage(false);
         message.classList.toggle("score-zero", lastPuzzleScore === 0);
         message.textContent = `+${lastPuzzleScore}`;
         message.classList.remove("score-pop");
         void message.offsetWidth;
         message.classList.add("score-pop");
-        scoreAnimationShown = true;
+        pendingScorePop = false;
       } else if (!message.classList.contains("info") && !message.classList.contains("score-pop")) {
         message.textContent = "";
         message.classList.remove("score-zero");
@@ -813,6 +859,10 @@
       }
 
       scoreLine.textContent = `Score ${totalScore}`;
+    }
+
+    function shouldShowTutorial(tileIndex) {
+      return puzzleIndex === 0 && interactionCount === 0 && !solved && tileIndex === 0;
     }
 
     function noteInteraction() {
@@ -1141,6 +1191,13 @@
     document.addEventListener("dblclick", (event) => {
       event.preventDefault();
     }, { passive: false });
+
+    message.addEventListener("animationend", () => {
+      if (message.classList.contains("score-pop")) {
+        message.classList.remove("score-pop", "score-zero");
+        if (!message.classList.contains("info")) message.textContent = "";
+      }
+    });
 
     function initGame() {
       const saved = loadSavedState();
