@@ -366,8 +366,8 @@
     @keyframes score-pop {
       0% { opacity: 0; transform: translateY(8px) scale(0.96); }
       16% { opacity: 1; transform: translateY(0) scale(1.05); }
-      66% { opacity: 1; transform: translateY(-8px) scale(1); }
-      100% { opacity: 0; transform: translateY(-24px) scale(0.98); }
+      72% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-10px) scale(0.98); }
     }
 
     .status {
@@ -496,9 +496,12 @@
   </main>
 
   <script>
+    const STORAGE_KEY = "flipwords:gameState:v1";
+    const DEBUG = false;
+
     const puzzles = [
-      // 4-letter tests
       { word1: "lazy", word2: "once", answer1: "clay", answer2: "zone", difficulty: "medium" },
+      { word1: "carrot", word2: "danced", answer1: "accord", answer2: "ardent", difficulty: "hard" },
       { word1: "race", word2: "mild", answer1: "card", answer2: "lime", difficulty: "easy" },
       { word1: "port", word2: "ride", answer1: "dirt", answer2: "rope", difficulty: "easy" },
       { word1: "corn", word2: "flat", answer1: "clan", answer2: "fort", difficulty: "easy" },
@@ -509,8 +512,6 @@
       { word1: "love", word2: "fits", answer1: "five", answer2: "lots", difficulty: "easy" },
       { word1: "safe", word2: "date", answer1: "deaf", answer2: "seat", difficulty: "medium" },
       { word1: "east", word2: "wind", answer1: "dawn", answer2: "ties", difficulty: "medium" },
-
-      // 5-letter tests
       { word1: "least", word2: "saint", answer1: "natal", answer2: "sites", difficulty: "hard" },
       { word1: "blast", word2: "tires", answer1: "salts", answer2: "tribe", difficulty: "hard" },
       { word1: "creep", word2: "saint", answer1: "panic", answer2: "trees", difficulty: "medium" },
@@ -526,10 +527,7 @@
       { word1: "money", word2: "verge", answer1: "enemy", answer2: "grove", difficulty: "easy" },
       { word1: "dance", word2: "tired", answer1: "dried", answer2: "enact", difficulty: "medium" },
       { word1: "carry", word2: "stool", answer1: "carol", answer2: "story", difficulty: "easy" },
-
-      // 6-letter tests
       { word1: "bright", word2: "poison", answer1: "hoping", answer2: "orbits", difficulty: "medium" },
-      { word1: "carrot", word2: "danced", answer1: "accord", answer2: "ardent", difficulty: "hard" },
       { word1: "wander", word2: "errors", answer1: "arrows", answer2: "render", difficulty: "easy" },
       { word1: "region", word2: "strait", answer1: "artist", answer2: "ignore", difficulty: "hard" },
       { word1: "doctor", word2: "unions", answer1: "counts", answer2: "indoor", difficulty: "medium" }
@@ -546,13 +544,12 @@
     let hintOrientationInverted = null;
     let interactionCount = 0;
     let returnedToStartNoticeShown = false;
-    let infoMessageTimer = null;
     let returnedToStartTimer = null;
+    let infoMessageTimer = null;
     let totalScore = 0;
     let lastPuzzleScore = null;
     let puzzleAwarded = false;
-    let scorePopId = 0;
-    const DEBUG = false;
+    let scoreAnimationShown = false;
 
     const board = document.getElementById("board");
     const startWordsBtn = document.getElementById("startWordsBtn");
@@ -564,6 +561,40 @@
 
     function currentPuzzle() { return puzzles[puzzleIndex]; }
     function pairCode(a, b) { return [a, b].sort().join(""); }
+
+    function loadSavedState() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has("reset")) {
+        localStorage.removeItem(STORAGE_KEY);
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        }
+        return null;
+      }
+
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === "object" ? parsed : null;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveGameState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          puzzleIndex,
+          totalScore,
+          hintsUsed,
+          solved,
+          completedWithHints,
+          lastPuzzleScore,
+          puzzleAwarded
+        }));
+      } catch (error) {}
+    }
 
     function buildHintOrder(tileList) {
       return [...tileList]
@@ -610,7 +641,13 @@
       return mapping;
     }
 
-    function setupPuzzle() {
+    function setupPuzzle(options = {}) {
+      const restoreHints = Number(options.restoreHints || 0);
+      const restoreSolved = Boolean(options.restoreSolved);
+      const restoreAwarded = Boolean(options.restoreAwarded);
+      const restoreLastScore = typeof options.restoreLastScore === "number" ? options.restoreLastScore : null;
+      const restoreCompletedWithHints = Boolean(options.restoreCompletedWithHints);
+
       const p = currentPuzzle();
       const baseTiles = p.word1.split("").map((top, i) => ({
         id: `${puzzleIndex}-${i}`,
@@ -642,11 +679,25 @@
       clearInfoMessage();
       lastPuzzleScore = null;
       puzzleAwarded = false;
+      scoreAnimationShown = false;
       solved = false;
       completedWithHints = false;
       dragState = null;
       clearDragProxy();
+
+      if (restoreHints > 0) applyHintsSilently(Math.min(restoreHints, tiles.length));
+
+      if (restoreSolved) {
+        lockAllTilesToAnswer();
+        solved = true;
+        completedWithHints = restoreCompletedWithHints;
+        puzzleAwarded = restoreAwarded;
+        lastPuzzleScore = restoreLastScore;
+        scoreAnimationShown = true;
+      }
+
       render();
+      saveGameState();
     }
 
     function visibleTop(tile) { return tile.flipped ? tile.bottom : tile.top; }
@@ -689,7 +740,7 @@
       lastPuzzleScore = scoreForCurrentPuzzle();
       totalScore += lastPuzzleScore;
       puzzleAwarded = true;
-      scorePopId++;
+      scoreAnimationShown = false;
     }
 
     function checkSolved() {
@@ -699,6 +750,7 @@
         awardPuzzleScoreIfNeeded();
       }
       render();
+      saveGameState();
     }
 
     function makeTileHTML(tile) {
@@ -739,16 +791,17 @@
       hintBtn.disabled = allLocked;
       startWordsBtn.disabled = solved || isShowingStartingWords();
 
-      if (solved && lastPuzzleScore !== null) {
+      if (solved && lastPuzzleScore !== null && !scoreAnimationShown) {
         clearInfoMessage(false);
         message.classList.toggle("score-zero", lastPuzzleScore === 0);
         message.textContent = `+${lastPuzzleScore}`;
         message.classList.remove("score-pop");
         void message.offsetWidth;
         message.classList.add("score-pop");
-      } else if (!message.classList.contains("info")) {
+        scoreAnimationShown = true;
+      } else if (!message.classList.contains("info") && !message.classList.contains("score-pop")) {
         message.textContent = "";
-        message.classList.remove("score-pop", "score-zero");
+        message.classList.remove("score-zero");
       }
 
       if (DEBUG) {
@@ -840,9 +893,7 @@
         }
       }
 
-      if (state.hasDragged && state.startOrder !== tiles.map(t => t.id).join("|")) {
-        noteInteraction();
-      }
+      if (state.hasDragged && state.startOrder !== tiles.map(t => t.id).join("|")) noteInteraction();
 
       dragState = null;
       clearDragProxy();
@@ -885,7 +936,6 @@
 
       const currentUnlockedIndex = tiles.filter(t => !t.locked).findIndex(t => t.id === tileId);
       let insertAt = currentUnlockedIndex;
-
       const movingRight = clientX > dragState.lastX;
       const movingLeft = clientX < dragState.lastX;
 
@@ -913,7 +963,6 @@
         render();
         moveDragProxy(dragState.x, dragState.y);
       }
-
       dragState.lastX = clientX;
     }
 
@@ -969,8 +1018,7 @@
       }
     }
 
-    function useHint() {
-      if (solved) return;
+    function applyOneHint({ silent = false } = {}) {
       while (hintCursor < hintOrder.length) {
         const id = hintOrder[hintCursor++];
         const tile = tiles.find(t => t.id === id);
@@ -979,29 +1027,57 @@
         const isFirstHint = hintsUsed === 0;
         tile.locked = true;
 
-        if (tile.top !== tile.bottom && hintOrientationInverted === null) {
-          // The first non-identical hinted tile chooses the answer orientation.
-          // Identical tiles like A/A cannot choose an orientation, so they do not
-          // force all later hints into the wrong top/bottom arrangement.
-          hintOrientationInverted = tile.flipped !== tile.targetFlipped;
-        } else if (tile.top !== tile.bottom && hintOrientationInverted !== null) {
+        if (isFirstHint) {
+          if (tile.top !== tile.bottom) hintOrientationInverted = tile.flipped !== tile.targetFlipped;
+        } else if (tile.top !== tile.bottom) {
+          if (hintOrientationInverted === null) hintOrientationInverted = tile.flipped !== tile.targetFlipped;
           tile.flipped = tile.targetFlipped !== hintOrientationInverted;
         }
 
         tile.flipAnim = "";
         hintsUsed++;
-        interactionCount++;
-        returnedToStartNoticeShown = false;
+        if (!silent) noteInteraction();
 
         const unlockedOrdered = tiles.filter(t => !t.locked);
         tiles = rebuildWithLockedTiles(unlockedOrdered);
-
         forceNonSolvedStateIfNeeded();
+        return true;
+      }
+      return false;
+    }
+
+    function applyHintsSilently(count) {
+      for (let i = 0; i < count; i++) {
+        if (!applyOneHint({ silent: true })) break;
+      }
+    }
+
+    function lockAllTilesToAnswer() {
+      tiles.forEach(tile => {
+        tile.locked = true;
+        if (tile.top !== tile.bottom) tile.flipped = tile.targetFlipped;
+      });
+      const ordered = [...tiles].sort((a, b) => a.targetIndex - b.targetIndex);
+      tiles = ordered;
+    }
+
+    function useHint() {
+      if (solved) return;
+      const applied = applyOneHint();
+      if (applied) {
         render();
         checkSolved();
+        saveGameState();
         return;
       }
       render();
+    }
+
+    function clearReturnedToStartTimer() {
+      if (returnedToStartTimer) {
+        window.clearTimeout(returnedToStartTimer);
+        returnedToStartTimer = null;
+      }
     }
 
     function clearInfoMessage(clearText = true) {
@@ -1021,7 +1097,6 @@
       message.dataset.infoType = type;
       void message.offsetWidth;
       message.classList.add("info");
-
       infoMessageTimer = window.setTimeout(() => {
         message.classList.remove("info");
         message.dataset.infoType = "";
@@ -1032,37 +1107,25 @@
 
     function showStartingWords() {
       if (solved || isShowingStartingWords()) return;
-
       if (message.classList.contains("info") && message.dataset.infoType === "starters") {
         clearInfoMessage();
         return;
       }
-
       const p = currentPuzzle();
       showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`, "starters");
     }
 
-    function clearReturnedToStartTimer() {
-      if (returnedToStartTimer) {
-        window.clearTimeout(returnedToStartTimer);
-        returnedToStartTimer = null;
-      }
-    }
-
     function maybeShowReturnedToStartNotice() {
       clearReturnedToStartTimer();
-
       if (solved) return;
       if (interactionCount < 3) return;
       if (returnedToStartNoticeShown) return;
       if (!isShowingStartingWords()) return;
-
       returnedToStartTimer = window.setTimeout(() => {
         returnedToStartTimer = null;
         if (solved) return;
         if (returnedToStartNoticeShown) return;
         if (!isShowingStartingWords()) return;
-
         returnedToStartNoticeShown = true;
         showInfoMessage("These were the start words", "returned-start");
       }, 1500);
@@ -1075,12 +1138,26 @@
       setupPuzzle();
     });
 
-    // Prevent accidental double-tap zoom during rapid play on mobile browsers.
     document.addEventListener("dblclick", (event) => {
       event.preventDefault();
     }, { passive: false });
 
-    setupPuzzle();
+    function initGame() {
+      const saved = loadSavedState();
+      if (saved) {
+        if (Number.isInteger(saved.puzzleIndex)) puzzleIndex = Math.max(0, Math.min(saved.puzzleIndex, puzzles.length - 1));
+        if (typeof saved.totalScore === "number" && Number.isFinite(saved.totalScore)) totalScore = Math.max(0, saved.totalScore);
+      }
+      setupPuzzle({
+        restoreHints: saved && Number.isInteger(saved.hintsUsed) ? Math.max(0, saved.hintsUsed) : 0,
+        restoreSolved: Boolean(saved && saved.solved),
+        restoreCompletedWithHints: Boolean(saved && saved.completedWithHints),
+        restoreAwarded: Boolean(saved && saved.puzzleAwarded),
+        restoreLastScore: saved && typeof saved.lastPuzzleScore === "number" ? saved.lastPuzzleScore : null
+      });
+    }
+
+    initGame();
   </script>
 </body>
 </html>
