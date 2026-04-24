@@ -322,7 +322,11 @@
       box-shadow: 0 2px 8px rgba(122, 93, 0, 0.08);
     }
 
-    .hint:disabled { box-shadow: none; }
+    .hint:disabled {
+      color: var(--ink);
+      background: var(--reset-bg);
+      box-shadow: none;
+    }
 
     .action-slot {
       position: relative;
@@ -469,8 +473,68 @@
     }
 
     @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
-      .game { display: none; }
-      .rotate-message { display: grid; }
+      .game {
+        display: flex;
+        width: min(96vw, 760px);
+        padding: max(10px, env(safe-area-inset-top)) 12px max(10px, env(safe-area-inset-bottom));
+        transform: none;
+        justify-content: center;
+      }
+
+      .rotate-message { display: none; }
+
+      .title { font-size: 34px; }
+
+      .subtitle {
+        max-width: 520px;
+        margin: 4px auto 8px;
+        padding: 0 10px;
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .board-shell { padding: 6px 8px 8px; }
+
+      .board { gap: 7px; min-height: 86px; }
+
+      .tile-wrap {
+        width: clamp(42px, 8vw, 58px);
+        height: clamp(76px, 17vw, 96px);
+      }
+
+      .letter { font-size: clamp(24px, 4.4vw, 34px); }
+
+      .feedback-area { height: 24px; margin-bottom: 0; }
+
+      .message { font-size: 20px; }
+      .message.info { font-size: 15px; }
+
+      .controls {
+        grid-template-columns: 104px 104px;
+        gap: 8px;
+        min-height: 38px;
+      }
+
+      button {
+        width: 104px;
+        height: 38px;
+        font-size: 14px;
+      }
+
+      .action-slot {
+        width: 104px;
+        height: 38px;
+      }
+
+      .status {
+        margin-top: 8px;
+        font-size: 14px;
+      }
+
+      .score-line {
+        margin-top: 0;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
