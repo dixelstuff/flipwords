@@ -292,17 +292,17 @@
       0% { opacity: 0; transform: translateY(4px); }
       4% { opacity: 1; transform: translateY(0); }
       92% { opacity: 1; transform: translateY(0); }
-      100% { opacity: 0; transform: translateY(-4px); }
+      100% { opacity: 0; transform: translateY(4px); }
     }
+
     .hint {
       color: #5c4700;
       background: #f4df8a;
       box-shadow: 0 2px 8px rgba(122, 93, 0, 0.08);
     }
 
-    .hint:disabled {
-      box-shadow: none;
-    }
+    .hint:disabled { box-shadow: none; }
+
     .action-slot {
       position: relative;
       display: block;
@@ -344,31 +344,14 @@
       transform: translateY(0);
     }
 
-    .message.score-pop {
-      animation: score-pop 2000ms ease-out forwards;
-    }
-
-    .message.score-zero {
-      color: var(--muted);
-    }
+    .message.score-pop { animation: score-pop 2000ms ease-out forwards; }
+    .message.score-zero { color: var(--muted); }
 
     @keyframes score-pop {
-      0% {
-        opacity: 0;
-        transform: translateY(8px) scale(0.96);
-      }
-      16% {
-        opacity: 1;
-        transform: translateY(0) scale(1.05);
-      }
-      66% {
-        opacity: 1;
-        transform: translateY(-8px) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-24px) scale(0.98);
-      }
+      0% { opacity: 0; transform: translateY(8px) scale(0.96); }
+      16% { opacity: 1; transform: translateY(0) scale(1.05); }
+      66% { opacity: 1; transform: translateY(-8px) scale(1); }
+      100% { opacity: 0; transform: translateY(-24px) scale(0.98); }
     }
 
     .status {
@@ -420,27 +403,21 @@
         transform: translateY(-11.5vh);
       }
 
-      .subtitle {
-        margin-bottom: 42px;
-      }
+      .subtitle { margin-bottom: 42px; }
 
       .board-shell {
         padding-top: 20px;
         padding-bottom: 20px;
       }
 
-      .board {
-        gap: 14px;
-      }
+      .board { gap: 14px; }
 
       .tile-wrap {
         width: clamp(72px, 8.5vw, 92px);
         height: clamp(130px, 15vw, 156px);
       }
 
-      .letter {
-        font-size: clamp(42px, 4.8vw, 56px);
-      }
+      .letter { font-size: clamp(42px, 4.8vw, 56px); }
 
       .controls {
         grid-template-columns: 128px 128px;
@@ -464,13 +441,9 @@
       }
 
       .status,
-      .score-line {
-        font-size: 16px;
-      }
+      .score-line { font-size: 16px; }
 
-      .status {
-        margin-top: 32px;
-      }
+      .status { margin-top: 32px; }
     }
 
     @media (hover: none) and (pointer: coarse) and (orientation: landscape) {
@@ -555,6 +528,9 @@
     let hintCursor = 0;
     let hintsUsed = 0;
     let hintOrientationInverted = false;
+    let interactionCount = 0;
+    let returnedToStartNoticeShown = false;
+    let infoMessageTimer = null;
     let totalScore = 0;
     let lastPuzzleScore = null;
     let puzzleAwarded = false;
@@ -570,46 +546,12 @@
     const scoreLine = document.getElementById("scoreLine");
 
     function currentPuzzle() { return puzzles[puzzleIndex]; }
-
     function pairCode(a, b) { return [a, b].sort().join(""); }
 
-    function seededRandom(seed) {
-      let x = seed >>> 0;
-      return function() {
-        x += 0x6D2B79F5;
-        let t = x;
-        t = Math.imul(t ^ (t >>> 15), t | 1);
-        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-      };
-    }
-
-    function hashString(str) {
-      let h = 2166136261;
-      for (let i = 0; i < str.length; i++) {
-        h ^= str.charCodeAt(i);
-        h = Math.imul(h, 16777619);
-      }
-      return h >>> 0;
-    }
-
-    function seededShuffle(array, seedText) {
-      const rand = seededRandom(hashString(seedText));
-      const copy = [...array];
-      for (let i = copy.length - 1; i > 0; i--) {
-        const j = Math.floor(rand() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-      }
-      return copy;
-    }
-
-    function buildHintOrder(tileList, seedText) {
-      const byTarget = [...tileList].sort((a, b) => a.targetIndex - b.targetIndex);
-      const first = byTarget[0]?.id;
-      const last = byTarget[byTarget.length - 1]?.id;
-      const middle = byTarget.slice(1, -1).map(t => t.id);
-      const shuffledMiddle = seededShuffle(middle, seedText + "|middle-hints");
-      return [first, last, ...shuffledMiddle].filter(Boolean);
+    function buildHintOrder(tileList) {
+      return [...tileList]
+        .sort((a, b) => a.targetIndex - b.targetIndex)
+        .map(t => t.id);
     }
 
     function computeCanonicalMapping(puzzle, tileIds) {
@@ -673,11 +615,13 @@
         targetFlipped: mappingById.get(tile.id).targetFlipped
       }));
 
-      const seedText = `${p.word1}|${p.word2}|${p.answer1}|${p.answer2}`;
-      hintOrder = buildHintOrder(tiles, seedText);
+      hintOrder = buildHintOrder(tiles);
       hintCursor = 0;
       hintsUsed = 0;
       hintOrientationInverted = false;
+      interactionCount = 0;
+      returnedToStartNoticeShown = false;
+      clearInfoMessage();
       lastPuzzleScore = null;
       puzzleAwarded = false;
       solved = false;
@@ -775,7 +719,7 @@
       startWordsBtn.disabled = solved || isShowingStartingWords();
 
       if (solved && lastPuzzleScore !== null) {
-        message.classList.remove("info");
+        clearInfoMessage(false);
         message.classList.toggle("score-zero", lastPuzzleScore === 0);
         message.textContent = `+${lastPuzzleScore}`;
         message.classList.remove("score-pop");
@@ -799,6 +743,11 @@
       scoreLine.textContent = `Score ${totalScore}`;
     }
 
+    function noteInteraction() {
+      interactionCount++;
+      returnedToStartNoticeShown = false;
+    }
+
     function handlePointerDown(event, tileId) {
       if (solved) return;
       if (event.button !== undefined && event.button !== 0) return;
@@ -808,9 +757,18 @@
       const tileEl = event.currentTarget;
       const rect = tileEl.getBoundingClientRect();
       dragState = {
-        tileId, pointerId: event.pointerId, startX: event.clientX, startY: event.clientY,
-        x: event.clientX, y: event.clientY, lastX: event.clientX, hasDragged: false,
-        width: rect.width, height: rect.height, tileSnapshot: { ...tile }
+        tileId,
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        x: event.clientX,
+        y: event.clientY,
+        lastX: event.clientX,
+        hasDragged: false,
+        startOrder: tiles.map(t => t.id).join("|"),
+        width: rect.width,
+        height: rect.height,
+        tileSnapshot: { ...tile }
       };
 
       tileEl.setPointerCapture(event.pointerId);
@@ -849,17 +807,27 @@
           const wasFlipped = tile.flipped;
           tile.flipAnim = wasFlipped ? "anim-flip-up" : "anim-flip-down";
           tile.flipped = !tile.flipped;
+          noteInteraction();
           dragState = null;
           clearDragProxy();
           render();
-          window.setTimeout(() => { tile.flipAnim = ""; checkSolved(); }, 360);
+          window.setTimeout(() => {
+            tile.flipAnim = "";
+            maybeShowReturnedToStartNotice();
+            checkSolved();
+          }, 360);
           return;
         }
+      }
+
+      if (state.hasDragged && state.startOrder !== tiles.map(t => t.id).join("|")) {
+        noteInteraction();
       }
 
       dragState = null;
       clearDragProxy();
       render();
+      maybeShowReturnedToStartNotice();
       checkSolved();
     }
 
@@ -902,14 +870,12 @@
       const movingLeft = clientX < dragState.lastX;
 
       if (movingRight) {
-        // When entering a tile from the left, swap after travelling 1/3 into it.
         for (let i = 0; i < otherUnlockedEls.length; i++) {
           const rect = otherUnlockedEls[i].getBoundingClientRect();
           const threshold = rect.left + rect.width * 0.33;
           if (clientX > threshold) insertAt = i + 1;
         }
       } else if (movingLeft) {
-        // When entering a tile from the right, swap after travelling 1/3 into it.
         for (let i = otherUnlockedEls.length - 1; i >= 0; i--) {
           const rect = otherUnlockedEls[i].getBoundingClientRect();
           const threshold = rect.right - rect.width * 0.33;
@@ -918,7 +884,6 @@
       }
 
       insertAt = Math.max(0, Math.min(insertAt, otherUnlocked.length));
-
       const newUnlocked = [...otherUnlocked];
       newUnlocked.splice(insertAt, 0, dragged);
       const rebuilt = rebuildWithLockedTiles(newUnlocked);
@@ -964,9 +929,6 @@
     }
 
     function forceNonSolvedStateIfNeeded() {
-      // A hint should not accidentally finish the puzzle unless it is the final hint.
-      // If the hint creates the solved arrangement while there are still unlocked tiles,
-      // deliberately make one unlocked tile incorrect so the player must still interact.
       if (!isSolved()) return;
       if (tiles.every(t => t.locked)) return;
 
@@ -995,26 +957,23 @@
         if (!tile || tile.locked) continue;
 
         const isFirstHint = hintsUsed === 0;
-
         tile.locked = true;
 
         if (isFirstHint) {
-          // The first hint reveals position only. Whatever orientation the tile
-          // currently has determines whether the remaining hints complete the
-          // default answer orientation or the swapped top/bottom orientation.
-          hintOrientationInverted = tile.flipped !== tile.targetFlipped;
+          hintOrientationInverted = (tile.top === tile.bottom) ? false : (tile.flipped !== tile.targetFlipped);
         } else {
           tile.flipped = tile.targetFlipped !== hintOrientationInverted;
         }
 
         tile.flipAnim = "";
         hintsUsed++;
+        interactionCount++;
+        returnedToStartNoticeShown = false;
 
         const unlockedOrdered = tiles.filter(t => !t.locked);
         tiles = rebuildWithLockedTiles(unlockedOrdered);
 
         forceNonSolvedStateIfNeeded();
-
         render();
         checkSolved();
         return;
@@ -1022,19 +981,52 @@
       render();
     }
 
-    function showStartingWords() {
-      if (solved || isShowingStartingWords()) return;
-      const p = currentPuzzle();
-      message.classList.remove("score-pop", "score-zero");
+    function clearInfoMessage(clearText = true) {
+      if (infoMessageTimer) {
+        window.clearTimeout(infoMessageTimer);
+        infoMessageTimer = null;
+      }
       message.classList.remove("info");
-      message.textContent = `Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`;
+      message.dataset.infoType = "";
+      if (clearText && !solved) message.textContent = "";
+    }
+
+    function showInfoMessage(text, type = "info") {
+      if (infoMessageTimer) window.clearTimeout(infoMessageTimer);
+      message.classList.remove("score-pop", "score-zero", "info");
+      message.textContent = text;
+      message.dataset.infoType = type;
       void message.offsetWidth;
       message.classList.add("info");
 
-      window.setTimeout(() => {
+      infoMessageTimer = window.setTimeout(() => {
         message.classList.remove("info");
+        message.dataset.infoType = "";
         if (!solved) message.textContent = "";
+        infoMessageTimer = null;
       }, 4000);
+    }
+
+    function showStartingWords() {
+      if (solved || isShowingStartingWords()) return;
+
+      if (message.classList.contains("info") && message.dataset.infoType === "starters") {
+        clearInfoMessage();
+        return;
+      }
+
+      const p = currentPuzzle();
+      showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`, "starters");
+    }
+
+    function maybeShowReturnedToStartNotice() {
+      if (solved) return;
+      if (interactionCount < 3) return;
+      if (returnedToStartNoticeShown) return;
+      if (!isShowingStartingWords()) return;
+
+      returnedToStartNoticeShown = true;
+      showInfoMessage("These were the start words", "returned-start");
     }
 
     startWordsBtn.addEventListener("click", showStartingWords);
