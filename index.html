@@ -490,11 +490,11 @@
     </div>
 
     <div class="controls">
+      <button id="hintBtn" class="hint" type="button">Hint</button>
       <span class="action-slot">
         <button id="startWordsBtn" class="start-words" type="button">Starters</button>
         <button id="nextBtn" class="next" type="button">Next</button>
       </span>
-      <button id="hintBtn" class="hint" type="button">Hint</button>
     </div>
 
     <div id="status" class="status"></div>
@@ -824,6 +824,10 @@
       interactionCount++;
       returnedToStartNoticeShown = false;
       clearReturnedToStartTimer();
+
+      if (message.classList.contains("info") && message.dataset.infoType === "returned-start") {
+        clearInfoMessage();
+      }
     }
 
     function handlePointerDown(event, tileId) {
