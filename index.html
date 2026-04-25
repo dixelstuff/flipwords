@@ -41,63 +41,66 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <script>
 const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_LIMITS_MS={3:25000,4:70000,5:130000,6:180000},AUTO_HINT_FILL_MS=6000;
 const puzzleRows=[
-  ["old","dog","log","odd"],
   ["tip","are","era","pit"],
   ["port","ride","dirt","rope"],
   ["fish","calm","cash","film"],
-  ["doc","out","cud","too"],
+  ["ace","yet","cat","eye"],
   ["carry","stool","carol","story"],
   ["love","fits","five","lots"],
-  ["eel","win","lie","new"],
   ["race","mild","card","lime"],
+  ["awe","gas","age","was"],
   ["fairy","event","every","faint"],
-
-  ["key","tap","yak","pet"],
   ["talk","cage","gate","lack"],
+
+  ["doc","out","cud","too"],
   ["chair","broke","brake","choir"],
   ["corn","flat","clan","fort"],
   ["smile","heart","earth","miles"],
-  ["ant","ear","ran","tea"],
+  ["eel","win","lie","new"],
   ["milk","nose","link","some"],
   ["snap","cord","sand","crop"],
   ["least","cares","carts","lease"],
+  ["key","tap","yak","pet"],
   ["slow","cord","crow","sold"],
 
-  ["irk","sad","ask","rid"],
   ["poke","fell","folk","peel"],
   ["money","verge","enemy","grove"],
+  ["gel","bow","log","web"],
   ["bowl","keen","blow","knee"],
   ["chair","green","grain","cheer"],
   ["rain","loop","nail","poor"],
   ["vocal","races","coral","caves"],
-  ["end","how","den","who"],
+  ["ant","ear","ran","tea"],
   ["wander","errors","arrows","render"],
   ["lazy","once","clay","zone"],
 
-  ["age","gym","egg","may"],
   ["safe","date","deaf","seat"],
+  ["jog","ate","ago","jet"],
   ["east","wind","dawn","ties"],
   ["deep","gulf","feed","plug"],
   ["soft","less","self","toss"],
   ["true","been","beer","tune"],
+  ["irk","sad","ask","rid"],
   ["shade","trace","react","heads"],
   ["world","sites","slots","weird"],
-  ["nil","low","ill","own"],
   ["glue","down","lung","owed"],
 
+  ["end","how","den","who"],
   ["harp","epic","arch","pipe"],
   ["spike","slain","likes","pains"],
   ["stereo","porter","poorer","street"],
   ["doctor","unions","counts","indoor"],
-  ["ink","odd","don","kid"],
+  ["owl","ate","eat","low"],
   ["creep","saint","panic","trees"],
   ["clown","venue","uncle","woven"],
   ["spill","chain","hills","panic"],
   ["budget","mentor","button","merged"],
-  ["dance","tired","dried","enact"],
 
+  ["hey","out","the","you"],
+  ["dance","tired","dried","enact"],
   ["bright","poison","hoping","orbits"],
   ["agree","short","great","horse"],
+  ["wow","art","two","war"],
   ["carrot","danced","accord","ardent"],
   ["blast","tires","salts","tribe"],
   ["region","strait","artist","ignore"],
@@ -115,7 +118,7 @@ function setupPuzzle(opts={}){clearAllTimers();const p=currentPuzzle(),restoreHi
 const visibleTop=t=>t.flipped?t.bottom:t.top,visibleBottom=t=>t.flipped?t.top:t.bottom,currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(visibleBottom).join("")});
 function isShowingStartingWords(){const p=currentPuzzle(),w=currentWords();return(w.top===p.word1&&w.bottom===p.word2)||(w.top===p.word2&&w.bottom===p.word1)}
 function isSolved(){const p=currentPuzzle(),w=currentWords();return(w.top===p.answer1&&w.bottom===p.answer2)||(w.top===p.answer2&&w.bottom===p.answer1)}
-function scoreForCurrentPuzzle(){const n=tiles.length;if(hintsUsed>=n)return 0;if(hintsUsed===0)return 100;if(hintsUsed===1)return 70;if(hintsUsed===2)return 50;if(hintsUsed===3)return 30;return 10}
+function scoreForCurrentPuzzle(){const hintsRemaining=Math.max(0,tiles.length-hintsUsed);return hintsRemaining===0?0:hintsRemaining*20+20}
 function getStreakBonus(streak){if(streak>=5&&streak%5===0)return{label:`${streak}-clean streak`,points:streak*11};return null}
 function awardPuzzleScoreIfNeeded(){if(puzzleAwarded)return;const clean=hintsUsed===0;lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];if(clean){noHintStreak++;const streakBonus=getStreakBonus(noHintStreak);if(streakBonus){totalScore+=streakBonus.points;lastBonusMessages.push(`${streakBonus.label} +${streakBonus.points}`)}}else noHintStreak=0;totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false}
 function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
