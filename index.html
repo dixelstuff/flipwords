@@ -5,7 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FlipWords</title>
 <style>
-:root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24)}
+:root{
+  --bg: #ece8f3;
+  --panel: #f4f1f8;
+  --tile: #fffdfc;
+  --tile-border: #cfc6dd;
+
+  --text: #2d2438;
+  --muted: #766d84;
+
+  --button-bg: #f3eef8;
+  --button-border: #bfaedc;
+  --button-text: #4a356b;
+  --button-disabled-bg: #ece7f3;
+  --button-disabled-border: #d3c9e1;
+  --button-disabled-text: #9a90aa;
+
+  --message-bg: #f5f1fa;
+  --message-text: #4b3d61;
+
+  --locked-border: #d9b84e;
+  --locked-glow: rgba(217,184,78,0.24);
+
+  --solved-border: #4aae73;
+  --solved-glow: rgba(74,174,115,0.22);
+
+  --hint-fill: rgba(161,114,248,0.24);
+}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;overflow:hidden;touch-action:manipulation}
 body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overscroll-behavior:none;-webkit-text-size-adjust:100%}
@@ -49,62 +75,80 @@ const puzzleRows=[
   ["talk","cage","gate","lack"],
   ["old","dog","log","odd"],
   ["corn","flat","clan","fort"],
+  ["smile","heart","earth","miles"],
+  ["love","fits","five","lots"],
+  ["blue","reef","beef","rule"],
   ["real","sofa","fare","also"],
   ["carry","stool","carol","story"],
-
-  ["smile","heart","earth","miles"],
   ["eel","win","lie","new"],
   ["milk","nose","link","some","leon","skim"],
-  ["love","fits","five","lots"],
-  ["snap","cord","sand","crop"],
   ["least","cares","carts","lease"],
   ["key","tap","yak","pet"],
-  ["poke","fell","folk","peel"],
-  ["money","verge","enemy","grove"],
-  ["gel","bow","log","web"],
-  ["slow","cord","crow","sold"],
-
   ["frost","place","craft","slope"],
-  ["bowl","keen","blow","knee"],
-  ["green","chair","grain","cheer"],
-  ["rain","loop","nail","poor"],
-  ["vocal","races","coral","caves"],
+  ["gold","mine","gone","mild"],
+  ["snap","cord","sand","crop"],
+  ["money","verge","enemy","grove"],
+  ["poke","fell","folk","peel"],
   ["ant","ear","ran","tea"],
-  ["deep","gulf","feed","plug"],
-  ["lazy","once","clay","zone"],
-  ["naive","tests","taste","veins"],
-  ["safe","date","deaf","seat"],
-  ["jog","ate","ago","jet"],
+  ["bowl","keen","blow","knee"],
+  ["vocal","races","coral","caves"],
 
-  ["east","wind","dawn","ties"],
-  ["soft","less","self","toss"],
-  ["true","been","beer","tune"],
+  ["flat","hood","halt","food"],
+  ["naive","tests","taste","veins"],
+  ["rain","loop","nail","poor"],
+  ["green","chair","grain","cheer"],
+  ["gel","bow","log","web"],
+  ["lazy","once","clay","zone"],
   ["space","world","crowd","lapse"],
+  ["safe","date","deaf","seat"],
+  ["drawn","ridge","grand","wider"],
+  ["jog","ate","ago","jet"],
+  ["deep","gulf","feed","plug"],
+  ["true","been","beer","tune"],
+  ["giant","sense","genes","stain"],
   ["irk","sad","ask","rid"],
   ["shade","trace","react","heads"],
   ["glue","down","lung","owed"],
-  ["end","how","den","who"],
-  ["world","sites","slots","weird"],
-  ["harp","epic","arch","pipe"],
-
-  ["spike","slain","likes","pains"],
-  ["drawn","ridge","grand","wider"],
-  ["creep","saint","panic","trees"],
-  ["canoe","rally","clean","royal"],
-  ["ocean","parts","acorn","tapes"],
-  ["clown","venue","uncle","woven"],
-  ["owl","ate","eat","low"],
-  ["spill","chain","hills","panic","spain","chill"],
-  ["elder","necks","dense","clerk"],
   ["budget","mentor","button","merged"],
-  ["ghost","crews","chest","grows"],
-  ["magic","there","cream","eight"],
-  ["dance","tired","dried","enact"],
-  ["hey","out","the","you"],
+  ["soft","less","self","toss"],
+  ["harp","epic","arch","pipe"],
+  ["canoe","rally","clean","royal"],
+  ["end","how","den","who"],
+  ["guide","array","argue","diary"],
+  ["east","wind","dawn","ties"],
+  ["gnome","raven","among","never"],
+  ["slow","cord","crow","sold"],
 
+  ["leased","corpse","please","scored"],
+  ["owl","ate","eat","low"],
+  ["ocean","parts","acorn","tapes"],
+  ["daily","scene","since","delay"],
+  ["count","swore","ounce","worst"],
+  ["patron","sorted","proton","stared"],
+  ["hey","out","the","you"],
+  ["ghost","crews","chest","grows"],
+  ["spike","slain","likes","pains"],
+  ["stereo","porter","poorer","street"],
+  ["clasp","bored","blade","corps"],
+  ["world","sites","slots","weird"],
+  ["magic","there","cream","eight"],
+  ["nod","dad","and","odd"],
+  ["creep","saint","panic","trees"],
+  ["tragic","prices","grapes","critic"],
+  ["dance","tired","dried","enact"],
   ["agree","short","great","horse"],
+  ["castle","burial","racial","subtle"],
+  ["elder","necks","dense","clerk"],
+  ["oar","tag","ago","art"],
+  ["cancer","whinge","caring","whence"],
+  ["finer","gifts","stiff","reign"],
+  ["spill","chain","hills","panic","spain","chill"],
+  ["tasted","spleen","latent","speeds"],
+  ["blast","tires","salts","tribe"],
+  ["bright","poison","hoping","orbits"],
+  ["feeble","singer","belief","greens"],
   ["wow","art","two","war"],
-  ["blast","tires","salts","tribe"]
+  ["marine","tattoo","retain","tomato"]
 ];
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,blocked1,blocked2])=>({word1,word2,answer1,answer2,blocked1,blocked2}));
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false,noticeTimer=null,returnedToStartTimer=null,infoMessageTimer=null,totalScore=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now(),noHintStreak=0,bonusTimerIds=[],autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
