@@ -317,9 +317,13 @@
     }
 
     .hint {
+      --hint-progress: 0%;
       color: #5c4700;
-      background: #f4df8a;
+      background:
+        linear-gradient(90deg, #e2bd45 var(--hint-progress), transparent var(--hint-progress)),
+        #f4df8a;
       box-shadow: 0 2px 8px rgba(122, 93, 0, 0.08);
+      transition: background 120ms linear, opacity 160ms ease;
     }
 
     .hint:disabled {
@@ -569,39 +573,44 @@
     const STORAGE_KEY = "flipwords:gameState:v1";
     const DEBUG = false;
 
-    const puzzles = [
-      { word1: "lazy", word2: "once", answer1: "clay", answer2: "zone", difficulty: "medium" },
-      { word1: "race", word2: "mild", answer1: "card", answer2: "lime", difficulty: "easy" },
-      { word1: "port", word2: "ride", answer1: "dirt", answer2: "rope", difficulty: "easy" },
-      { word1: "corn", word2: "flat", answer1: "clan", answer2: "fort", difficulty: "easy" },
-      { word1: "slow", word2: "cord", answer1: "crow", answer2: "sold", difficulty: "easy" },
-      { word1: "bowl", word2: "keen", answer1: "blow", answer2: "knee", difficulty: "easy" },
-      { word1: "milk", word2: "nose", answer1: "link", answer2: "some", difficulty: "easy" },
-      { word1: "rain", word2: "loop", answer1: "nail", answer2: "poor", difficulty: "easy" },
-      { word1: "love", word2: "fits", answer1: "five", answer2: "lots", difficulty: "easy" },
-      { word1: "safe", word2: "date", answer1: "deaf", answer2: "seat", difficulty: "medium" },
-      { word1: "east", word2: "wind", answer1: "dawn", answer2: "ties", difficulty: "medium" },
-      { word1: "least", word2: "saint", answer1: "natal", answer2: "sites", difficulty: "hard" },
-      { word1: "blast", word2: "tires", answer1: "salts", answer2: "tribe", difficulty: "hard" },
-      { word1: "creep", word2: "saint", answer1: "panic", answer2: "trees", difficulty: "medium" },
-      { word1: "least", word2: "cares", answer1: "carts", answer2: "lease", difficulty: "easy" },
-      { word1: "fairy", word2: "event", answer1: "every", answer2: "faint", difficulty: "easy" },
-      { word1: "spike", word2: "slain", answer1: "likes", answer2: "pains", difficulty: "medium" },
-      { word1: "clown", word2: "venue", answer1: "uncle", answer2: "woven", difficulty: "medium" },
-      { word1: "spill", word2: "chain", answer1: "hills", answer2: "panic", difficulty: "medium" },
-      { word1: "chair", word2: "broke", answer1: "brake", answer2: "choir", difficulty: "easy" },
-      { word1: "world", word2: "sites", answer1: "slots", answer2: "weird", difficulty: "medium" },
-      { word1: "budget", word2: "mentor", answer1: "button", answer2: "merged", difficulty: "medium" },
-      { word1: "smile", word2: "heart", answer1: "earth", answer2: "miles", difficulty: "easy" },
-      { word1: "money", word2: "verge", answer1: "enemy", answer2: "grove", difficulty: "easy" },
-      { word1: "dance", word2: "tired", answer1: "dried", answer2: "enact", difficulty: "medium" },
-      { word1: "carry", word2: "stool", answer1: "carol", answer2: "story", difficulty: "easy" },
-      { word1: "bright", word2: "poison", answer1: "hoping", answer2: "orbits", difficulty: "medium" },
-      { word1: "carrot", word2: "danced", answer1: "accord", answer2: "ardent", difficulty: "hard" },
-      { word1: "wander", word2: "errors", answer1: "arrows", answer2: "render", difficulty: "easy" },
-      { word1: "region", word2: "strait", answer1: "artist", answer2: "ignore", difficulty: "hard" },
-      { word1: "doctor", word2: "unions", answer1: "counts", answer2: "indoor", difficulty: "medium" }
+    const puzzleRows = [
+      ["deep", "gulf", "feed", "plug"],
+      ["great", "horse", "agree", "short"],
+      ["shade", "trace", "react", "heads"],
+      ["lazy", "once", "clay", "zone"],
+      ["race", "mild", "card", "lime"],
+      ["port", "ride", "dirt", "rope"],
+      ["corn", "flat", "clan", "fort"],
+      ["slow", "cord", "crow", "sold"],
+      ["bowl", "keen", "blow", "knee"],
+      ["milk", "nose", "link", "some"],
+      ["rain", "loop", "nail", "poor"],
+      ["love", "fits", "five", "lots"],
+      ["safe", "date", "deaf", "seat"],
+      ["east", "wind", "dawn", "ties"],
+      ["least", "saint", "natal", "sites"],
+      ["blast", "tires", "salts", "tribe"],
+      ["creep", "saint", "panic", "trees"],
+      ["least", "cares", "carts", "lease"],
+      ["fairy", "event", "every", "faint"],
+      ["spike", "slain", "likes", "pains"],
+      ["clown", "venue", "uncle", "woven"],
+      ["spill", "chain", "hills", "panic"],
+      ["chair", "broke", "brake", "choir"],
+      ["world", "sites", "slots", "weird"],
+      ["budget", "mentor", "button", "merged"],
+      ["smile", "heart", "earth", "miles"],
+      ["money", "verge", "enemy", "grove"],
+      ["dance", "tired", "dried", "enact"],
+      ["carry", "stool", "carol", "story"],
+      ["bright", "poison", "hoping", "orbits"],
+      ["carrot", "danced", "accord", "ardent"],
+      ["wander", "errors", "arrows", "render"],
+      ["region", "strait", "artist", "ignore"],
+      ["doctor", "unions", "counts", "indoor"]
     ];
+
+    const puzzles = puzzleRows.map(([word1, word2, answer1, answer2]) => ({ word1, word2, answer1, answer2 }));
 
     let puzzleIndex = 0;
     let tiles = [];
@@ -620,6 +629,11 @@
     let lastPuzzleScore = null;
     let puzzleAwarded = false;
     let scoreAnimationShown = false;
+    let autoHintStartTime = null;
+    let autoHintFrame = null;
+
+    const AUTO_HINT_DELAY_MS = 120000;
+    const AUTO_HINT_FILL_MS = 20000;
 
     const board = document.getElementById("board");
     const startWordsBtn = document.getElementById("startWordsBtn");
@@ -754,6 +768,7 @@
       completedWithHints = false;
       dragState = null;
       clearDragProxy();
+      stopAutoHintTimer();
 
       if (restoreHints > 0) applyHintsSilently(Math.min(restoreHints, tiles.length));
 
@@ -768,6 +783,7 @@
 
       render();
       saveGameState();
+      startAutoHintTimer();
     }
 
     function visibleTop(tile) { return tile.flipped ? tile.bottom : tile.top; }
@@ -859,6 +875,10 @@
       nextBtn.classList.toggle("visible", solved);
       hintBtn.disabled = solved || allLocked;
       startWordsBtn.disabled = solved || isShowingStartingWords();
+
+      if (solved || allLocked) {
+        stopAutoHintTimer();
+      }
 
       if (solved && lastPuzzleScore !== null && !scoreAnimationShown) {
         clearInfoMessage(false);
@@ -1133,16 +1153,68 @@
       tiles = [...tiles].sort((a, b) => a.targetIndex - b.targetIndex);
     }
 
-    function useHint() {
+    function useHint({ automatic = false } = {}) {
       if (solved) return;
       const applied = applyOneHint();
       if (applied) {
         render();
         checkSolved();
         saveGameState();
+        if (!solved && !tiles.every(t => t.locked)) startAutoHintTimer();
         return;
       }
       render();
+    }
+
+    function setHintProgress(percent) {
+      hintBtn.style.setProperty("--hint-progress", `${Math.max(0, Math.min(100, percent))}%`);
+    }
+
+    function stopAutoHintTimer() {
+      if (autoHintFrame) {
+        window.cancelAnimationFrame(autoHintFrame);
+        autoHintFrame = null;
+      }
+      autoHintStartTime = null;
+      setHintProgress(0);
+    }
+
+    function startAutoHintTimer() {
+      stopAutoHintTimer();
+      if (solved || tiles.every(t => t.locked)) return;
+
+      autoHintStartTime = performance.now();
+
+      function tick(now) {
+        if (solved || tiles.every(t => t.locked)) {
+          stopAutoHintTimer();
+          return;
+        }
+
+        const elapsed = now - autoHintStartTime;
+
+        if (elapsed < AUTO_HINT_DELAY_MS) {
+          setHintProgress(0);
+        } else {
+          const fillElapsed = elapsed - AUTO_HINT_DELAY_MS;
+          const progress = (fillElapsed / AUTO_HINT_FILL_MS) * 100;
+          setHintProgress(progress);
+
+          if (fillElapsed >= AUTO_HINT_FILL_MS) {
+            setHintProgress(100);
+            window.setTimeout(() => {
+              if (!solved && !tiles.every(t => t.locked)) {
+                useHint({ automatic: true });
+              }
+            }, 120);
+            return;
+          }
+        }
+
+        autoHintFrame = window.requestAnimationFrame(tick);
+      }
+
+      autoHintFrame = window.requestAnimationFrame(tick);
     }
 
     function clearReturnedToStartTimer() {
@@ -1204,7 +1276,7 @@
     }
 
     startWordsBtn.addEventListener("click", showStartingWords);
-    hintBtn.addEventListener("click", useHint);
+    hintBtn.addEventListener("click", () => useHint());
     nextBtn.addEventListener("click", () => {
       puzzleIndex = (puzzleIndex + 1) % puzzles.length;
       setupPuzzle();
