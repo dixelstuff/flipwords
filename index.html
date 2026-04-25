@@ -39,10 +39,43 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 </main>
 <script>
-const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_MS=180000,AUTO_HINT_FILL_MS=6000,SPEED_BONUS_MS=30000,SPEED_BONUS_POINTS=35,STREAK_TARGET=5,STREAK_BONUS_POINTS=55;
+const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_MS=180000,AUTO_HINT_FILL_MS=6000,SPEED_BONUS_MS=30000,SPEED_BONUS_POINTS=35,STREAK_TARGET=3,STREAK_BONUS_POINTS=55;
 const puzzleRows=[
-["deep","gulf","feed","plug"],["great","horse","agree","short"],["shade","trace","react","heads"],
-["lazy","once","clay","zone"],["race","mild","card","lime"],["port","ride","dirt","rope"],["corn","flat","clan","fort"],["slow","cord","crow","sold"],["bowl","keen","blow","knee"],["milk","nose","link","some"],["rain","loop","nail","poor"],["love","fits","five","lots"],["safe","date","deaf","seat"],["east","wind","dawn","ties"],["least","saint","natal","sites"],["blast","tires","salts","tribe"],["creep","saint","panic","trees"],["least","cares","carts","lease"],["fairy","event","every","faint"],["spike","slain","likes","pains"],["clown","venue","uncle","woven"],["spill","chain","hills","panic"],["chair","broke","brake","choir"],["world","sites","slots","weird"],["budget","mentor","button","merged"],["smile","heart","earth","miles"],["money","verge","enemy","grove"],["dance","tired","dried","enact"],["carry","stool","carol","story"],["bright","poison","hoping","orbits"],["carrot","danced","accord","ardent"],["wander","errors","arrows","render"],["region","strait","artist","ignore"],["doctor","unions","counts","indoor"]];
+["port","ride","dirt","rope"],
+["love","fits","five","lots"],
+["race","mild","card","lime"],
+["corn","flat","clan","fort"],
+["milk","nose","link","some"],
+["slow","cord","crow","sold"],
+["bowl","keen","blow","knee"],
+["rain","loop","nail","poor"],
+["carry","stool","carol","story"],
+["fairy","event","every","faint"],
+["least","cares","carts","lease"],
+["chair","broke","brake","choir"],
+["smile","heart","earth","miles"],
+["money","verge","enemy","grove"],
+["wander","errors","arrows","render"],
+["lazy","once","clay","zone"],
+["safe","date","deaf","seat"],
+["east","wind","dawn","ties"],
+["deep","gulf","feed","plug"],
+["shade","trace","react","heads"],
+["world","sites","slots","weird"],
+["spike","slain","likes","pains"],
+["doctor","unions","counts","indoor"],
+["creep","saint","panic","trees"],
+["clown","venue","uncle","woven"],
+["spill","chain","hills","panic"],
+["budget","mentor","button","merged"],
+["dance","tired","dried","enact"],
+["bright","poison","hoping","orbits"],
+["great","horse","agree","short"],
+["carrot","danced","accord","ardent"],
+["least","saint","natal","sites"],
+["blast","tires","salts","tribe"],
+["region","strait","artist","ignore"]
+];
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2])=>({word1,word2,answer1,answer2}));
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,interactionCount=0,returnedToStartNoticeShown=false,returnedToStartTimer=null,infoMessageTimer=null,totalScore=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now(),noHintStreak=0,bonusTimerIds=[],autoHintDelayTimer=null,autoHintFrame=null,autoHintFillStart=null;
 const board=document.getElementById("board"),startWordsBtn=document.getElementById("startWordsBtn"),hintBtn=document.getElementById("hintBtn"),nextBtn=document.getElementById("nextBtn"),message=document.getElementById("message"),status=document.getElementById("status"),scoreLine=document.getElementById("scoreLine");
