@@ -39,32 +39,42 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 </main>
 <script>
-const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_MS=180000,AUTO_HINT_FILL_MS=6000,SPEED_BONUS_MS=30000,SPEED_BONUS_POINTS=35,STREAK_BONUS_POINTS_3=35;
+const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_LIMITS_MS={3:80000,4:130000,5:180000,6:200000},AUTO_HINT_FILL_MS=6000,SPEED_BONUS_LIMITS_MS={3:15000,4:30000,5:50000,6:70000},SPEED_BONUS_POINTS=35,STREAK_BONUS_POINTS_3=35;
 const puzzleRows=[
+  ["old","dog","log","odd"],
+  ["tip","are","era","pit"],
   ["port","ride","dirt","rope"],
   ["fish","calm","cash","film"],
+  ["doc","out","cud","too"],
   ["carry","stool","carol","story"],
   ["love","fits","five","lots"],
+  ["eel","win","lie","new"],
   ["race","mild","card","lime"],
   ["fairy","event","every","faint"],
+
+  ["key","tap","yak","pet"],
   ["talk","cage","gate","lack"],
   ["chair","broke","brake","choir"],
   ["corn","flat","clan","fort"],
   ["smile","heart","earth","miles"],
-
+  ["ant","ear","ran","tea"],
   ["milk","nose","link","some"],
   ["snap","cord","sand","crop"],
   ["least","cares","carts","lease"],
   ["slow","cord","crow","sold"],
+
+  ["irk","sad","ask","rid"],
   ["poke","fell","folk","peel"],
   ["money","verge","enemy","grove"],
   ["bowl","keen","blow","knee"],
   ["chair","green","grain","cheer"],
   ["rain","loop","nail","poor"],
   ["vocal","races","coral","caves"],
-
+  ["end","how","den","who"],
   ["wander","errors","arrows","render"],
   ["lazy","once","clay","zone"],
+
+  ["age","gym","egg","may"],
   ["safe","date","deaf","seat"],
   ["east","wind","dawn","ties"],
   ["deep","gulf","feed","plug"],
@@ -72,12 +82,14 @@ const puzzleRows=[
   ["true","been","beer","tune"],
   ["shade","trace","react","heads"],
   ["world","sites","slots","weird"],
+  ["nil","low","ill","own"],
   ["glue","down","lung","owed"],
 
   ["harp","epic","arch","pipe"],
   ["spike","slain","likes","pains"],
   ["stereo","porter","poorer","street"],
   ["doctor","unions","counts","indoor"],
+  ["ink","odd","don","kid"],
   ["creep","saint","panic","trees"],
   ["clown","venue","uncle","woven"],
   ["spill","chain","hills","panic"],
@@ -105,7 +117,7 @@ function isShowingStartingWords(){const p=currentPuzzle(),w=currentWords();retur
 function isSolved(){const p=currentPuzzle(),w=currentWords();return(w.top===p.answer1&&w.bottom===p.answer2)||(w.top===p.answer2&&w.bottom===p.answer1)}
 function scoreForCurrentPuzzle(){const n=tiles.length;if(hintsUsed>=n)return 0;if(hintsUsed===0)return 100;if(hintsUsed===1)return 70;if(hintsUsed===2)return 50;if(hintsUsed===3)return 30;return 10}
 function getStreakBonus(streak){if(streak===3&&!awardedIntroStreaks[3]){awardedIntroStreaks[3]=true;return{label:"3-streak",points:STREAK_BONUS_POINTS_3}}if(streak>=5&&streak%5===0)return{label:`${streak}-streak`,points:streak*11};return null}
-function awardPuzzleScoreIfNeeded(){if(puzzleAwarded)return;const clean=hintsUsed===0,ms=Date.now()-puzzleStartTime;lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];if(clean&&ms<=SPEED_BONUS_MS){totalScore+=SPEED_BONUS_POINTS;lastBonusMessages.push(`Speed +${SPEED_BONUS_POINTS}`)}if(clean){noHintStreak++;const streakBonus=getStreakBonus(noHintStreak);if(streakBonus){totalScore+=streakBonus.points;lastBonusMessages.push(`${streakBonus.label} +${streakBonus.points}`)}}else noHintStreak=0;totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false}
+function awardPuzzleScoreIfNeeded(){if(puzzleAwarded)return;const clean=hintsUsed===0,ms=Date.now()-puzzleStartTime;lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];if(clean&&ms<=getSpeedBonusLimitMs()){totalScore+=SPEED_BONUS_POINTS;lastBonusMessages.push(`Speed +${SPEED_BONUS_POINTS}`)}if(clean){noHintStreak++;const streakBonus=getStreakBonus(noHintStreak);if(streakBonus){totalScore+=streakBonus.points;lastBonusMessages.push(`${streakBonus.label} +${streakBonus.points}`)}}else noHintStreak=0;totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false}
 function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
 function render(){board.classList.toggle("short-board",tiles.length<=3);board.innerHTML="";tiles.forEach(t=>{const w=document.createElement("div");w.className="tile-wrap";if(t.flipped)w.classList.add("flipped");if(t.flipAnim)w.classList.add("flip-feedback",t.flipAnim);if(t.locked)w.classList.add("locked");if(solved)w.classList.add("solved-tile");if(dragState&&dragState.tileId===t.id)w.classList.add("dragging");w.dataset.id=t.id;w.dataset.locked=t.locked?"1":"0";w.innerHTML=makeTileHTML(t);w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w)});const allLocked=tiles.every(t=>t.locked);nextBtn.classList.toggle("visible",solved);hintBtn.disabled=solved||allLocked;startWordsBtn.disabled=solved||isShowingStartingWords();if(solved&&lastPuzzleScore!==null&&!scoreAnimationShown){clearInfoMessage(false);popMessage(`+${lastPuzzleScore}`,lastPuzzleScore===0);scoreAnimationShown=true;queueBonusAnimations()}else if(!message.classList.contains("info")&&!message.classList.contains("score-pop")){message.textContent="";message.classList.remove("score-zero")}status.textContent=DEBUG?JSON.stringify(currentWords()):`Level ${puzzleIndex+1}`;scoreLine.textContent=`Score ${totalScore}`}
@@ -122,7 +134,7 @@ function sameOrder(a,b){return a.length===b.length&&a.every((t,i)=>t.id===b[i].i
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked))return;const f=tiles.find(t=>!t.locked&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!i.tile.locked);if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
 function applyOneHint({silent=false,auto=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}function lockAllTilesToAnswer(){tiles.forEach(t=>{t.locked=true;if(t.top!==t.bottom)t.flipped=t.targetFlipped});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}function useHint(auto=false){if(solved)return;stopAutoHintTimer();if(applyOneHint({auto})){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
-function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${Math.max(0,Math.min(100,pct))}%`)}function stopAutoHintTimer(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null;autoHintFillStart=null;setHintFill(0)}function startAutoHintTimer(){stopAutoHintTimer();if(solved||hintBtn.disabled)return;autoHintDelayTimer=setTimeout(()=>{autoHintFillStart=performance.now();const step=now=>{const pct=((now-autoHintFillStart)/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint(true);else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)},AUTO_HINT_DELAY_MS)}
+function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${Math.max(0,Math.min(100,pct))}%`)}function getSpeedBonusLimitMs(){return SPEED_BONUS_LIMITS_MS[tiles.length]||SPEED_BONUS_LIMITS_MS[6]}function getAutoHintDelayMs(){return AUTO_HINT_DELAY_LIMITS_MS[tiles.length]||AUTO_HINT_DELAY_LIMITS_MS[6]}function stopAutoHintTimer(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null;autoHintFillStart=null;setHintFill(0)}function startAutoHintTimer(){stopAutoHintTimer();if(solved||hintBtn.disabled)return;autoHintDelayTimer=setTimeout(()=>{autoHintFillStart=performance.now();const step=now=>{const pct=((now-autoHintFillStart)/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint(true);else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)},getAutoHintDelayMs())}
 function clearAllTimers(){clearReturnedToStartTimer();clearInfoMessage();clearBonusTimers();stopAutoHintTimer()}function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(returnedToStartTimer);returnedToStartTimer=null}}function clearInfoMessage(clearText=true){if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info");message.dataset.infoType="";if(clearText&&!solved)message.textContent=""}
 function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
 function showStartingWords(){if(solved||isShowingStartingWords())return;if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")}function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{returnedToStartTimer=null;if(!solved&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
