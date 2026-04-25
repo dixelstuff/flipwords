@@ -39,7 +39,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 </main>
 <script>
-const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_LIMITS_MS={3:25000,4:70000,5:130000,6:180000},AUTO_HINT_FILL_MS=6000;
+const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_LIMITS_MS={3:20000,4:70000,5:130000,6:180000},AUTO_HINT_FILL_MS=6000;
 const puzzleRows=[
   ["ace","yet","cat","eye"],
   ["port","ride","dirt","rope"],
@@ -51,7 +51,7 @@ const puzzleRows=[
   ["fairy","event","every","faint"],
   ["talk","cage","gate","lack"],
 
-  ["doc","out","cud","too"],
+  ["old","dog","log","odd"],
   ["corn","flat","clan","fort"],
   ["smile","heart","earth","miles"],
   ["eel","win","lie","new"],
@@ -69,13 +69,13 @@ const puzzleRows=[
   ["rain","loop","nail","poor"],
   ["vocal","races","coral","caves"],
   ["ant","ear","ran","tea"],
-  ["wander","errors","arrows","render"],
+  ["deep","gulf","feed","plug"],
   ["lazy","once","clay","zone"],
 
   ["safe","date","deaf","seat"],
   ["jog","ate","ago","jet"],
   ["east","wind","dawn","ties"],
-  ["deep","gulf","feed","plug"],
+  ["wander","errors","arrows","render"],
   ["soft","less","self","toss"],
   ["true","been","beer","tune"],
   ["irk","sad","ask","rid"],
@@ -86,23 +86,20 @@ const puzzleRows=[
   ["end","how","den","who"],
   ["harp","epic","arch","pipe"],
   ["spike","slain","likes","pains"],
-  ["stereo","porter","poorer","street"],
-  ["doctor","unions","counts","indoor"],
-  ["owl","ate","eat","low"],
   ["creep","saint","panic","trees"],
   ["clown","venue","uncle","woven"],
+  ["owl","ate","eat","low"],
   ["spill","chain","hills","panic"],
   ["budget","mentor","button","merged"],
+  ["dance","tired","dried","enact"],
 
   ["hey","out","the","you"],
-  ["dance","tired","dried","enact"],
+  ["stereo","porter","poorer","street"],
   ["bright","poison","hoping","orbits"],
   ["agree","short","great","horse"],
   ["wow","art","two","war"],
   ["carrot","danced","accord","ardent"],
-  ["blast","tires","salts","tribe"],
-  ["region","strait","artist","ignore"],
-  ["eating","sinner","strain","engine"]
+  ["blast","tires","salts","tribe"]
 ];
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2])=>({word1,word2,answer1,answer2}));
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,interactionCount=0,returnedToStartNoticeShown=false,returnedToStartTimer=null,infoMessageTimer=null,totalScore=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now(),noHintStreak=0,bonusTimerIds=[],autoHintDelayTimer=null,autoHintFrame=null,autoHintFillStart=null;
