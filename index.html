@@ -39,7 +39,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 </main>
 <script>
-const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_MS=180000,AUTO_HINT_FILL_MS=6000,SPEED_BONUS_MS=30000,SPEED_BONUS_POINTS=35,STREAK_BONUS_POINTS_3=35,STREAK_BONUS_POINTS_4=45;
+const STORAGE_KEY="flipwords:gameState:v1",DEBUG=false,AUTO_HINT_DELAY_MS=180000,AUTO_HINT_FILL_MS=6000,SPEED_BONUS_MS=30000,SPEED_BONUS_POINTS=35,STREAK_BONUS_POINTS_3=35;
 const puzzleRows=[
 ["port","ride","dirt","rope"],
 ["love","fits","five","lots"],
@@ -89,7 +89,7 @@ const visibleTop=t=>t.flipped?t.bottom:t.top,visibleBottom=t=>t.flipped?t.top:t.
 function isShowingStartingWords(){const p=currentPuzzle(),w=currentWords();return(w.top===p.word1&&w.bottom===p.word2)||(w.top===p.word2&&w.bottom===p.word1)}
 function isSolved(){const p=currentPuzzle(),w=currentWords();return(w.top===p.answer1&&w.bottom===p.answer2)||(w.top===p.answer2&&w.bottom===p.answer1)}
 function scoreForCurrentPuzzle(){const n=tiles.length;if(hintsUsed>=n)return 0;if(hintsUsed===0)return 100;if(hintsUsed===1)return 70;if(hintsUsed===2)return 50;if(hintsUsed===3)return 30;return 10}
-function getStreakBonus(streak){if(streak===3&&!awardedIntroStreaks[3]){awardedIntroStreaks[3]=true;return{label:"3-streak",points:STREAK_BONUS_POINTS_3}}if(streak===4&&!awardedIntroStreaks[4]){awardedIntroStreaks[4]=true;return{label:"4-streak",points:STREAK_BONUS_POINTS_4}}if(streak>=5&&streak%5===0)return{label:`${streak}-streak`,points:streak*11};return null}
+function getStreakBonus(streak){if(streak===3&&!awardedIntroStreaks[3]){awardedIntroStreaks[3]=true;return{label:"3-streak",points:STREAK_BONUS_POINTS_3}}if(streak>=5&&streak%5===0)return{label:`${streak}-streak`,points:streak*11};return null}
 function awardPuzzleScoreIfNeeded(){if(puzzleAwarded)return;const clean=hintsUsed===0,ms=Date.now()-puzzleStartTime;lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];if(clean&&ms<=SPEED_BONUS_MS){totalScore+=SPEED_BONUS_POINTS;lastBonusMessages.push(`Speed +${SPEED_BONUS_POINTS}`)}if(clean){noHintStreak++;const streakBonus=getStreakBonus(noHintStreak);if(streakBonus){totalScore+=streakBonus.points;lastBonusMessages.push(`${streakBonus.label} +${streakBonus.points}`)}}else noHintStreak=0;totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false}
 function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
