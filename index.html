@@ -159,7 +159,27 @@ const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,blocked1,blocked2])=>
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false,noticeTimer=null,returnedToStartTimer=null,infoMessageTimer=null,totalScore=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now(),noHintStreak=0,bonusTimerIds=[],autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 const board=document.getElementById("board"),startWordsBtn=document.getElementById("startWordsBtn"),hintBtn=document.getElementById("hintBtn"),nextBtn=document.getElementById("nextBtn"),message=document.getElementById("message"),starBurst=document.getElementById("starBurst"),status=document.getElementById("status"),scoreLine=document.getElementById("scoreLine");
 const currentPuzzle=()=>puzzles[puzzleIndex],pairCode=(a,b)=>[a,b].sort().join("");
-function loadSavedState(){const params=new URLSearchParams(location.search);let jumpLevel=null;for(const key of params.keys()){const m=key.match(/^level([0-9]+)$/i);if(m)jumpLevel=Number(m[1])}if(params.has("reset")||jumpLevel){localStorage.removeItem(STORAGE_KEY);if(jumpLevel){window.__jumpLevel=Math.max(1,Math.min(jumpLevel,puzzles.length))}history?.replaceState?.({},document.title,location.pathname);return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
+function getUrlJumpLevel(){
+  const query=location.search.replace(/^\?/,"");
+  const match=query.match(/(?:^|&)level([0-9]+)(?:&|$)/i);
+  if(!match)return null;
+  const n=Number(match[1]);
+  return Number.isFinite(n)?Math.max(1,Math.min(n,puzzles.length)):null;
+}
+function clearQueryString(){
+  if(window.history&&window.history.replaceState)window.history.replaceState({},document.title,location.pathname);
+}
+function loadSavedState(){
+  const params=new URLSearchParams(location.search);
+  const jumpLevel=getUrlJumpLevel();
+  if(params.has("reset")||jumpLevel!==null){
+    localStorage.removeItem(STORAGE_KEY);
+    window.__jumpLevel=jumpLevel;
+    clearQueryString();
+    return null;
+  }
+  try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}
+}
 function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,solved,completedWithHints,lastPuzzleScore,lastBonusMessages,puzzleAwarded,noHintStreak,puzzleStartTime}))}catch{}}
 function buildHintOrder(list){return[...list].sort((a,b)=>a.targetIndex-b.targetIndex).map(t=>t.id)}
 function computeCanonicalMapping(p,tileIds){const originals=p.word1.split("").map((top,i)=>({id:tileIds[i],top,bottom:p.word2[i],code:pairCode(top,p.word2[i])})),targets=p.answer1.split("").map((top,i)=>({index:i,top,bottom:p.answer2[i],code:pairCode(top,p.answer2[i])})),used=new Set(),mapping=[];function backtrack(pos){if(pos===targets.length)return true;const target=targets[pos];for(const tile of originals){if(used.has(tile.id)||tile.code!==target.code)continue;let flipped;if(tile.top===target.top&&tile.bottom===target.bottom)flipped=false;else if(tile.top===target.bottom&&tile.bottom===target.top)flipped=true;else continue;used.add(tile.id);mapping.push({id:tile.id,targetIndex:target.index,targetFlipped:flipped});if(backtrack(pos+1))return true;mapping.pop();used.delete(tile.id)}return false}if(!backtrack(0))throw Error("Could not compute puzzle mapping");return mapping}
@@ -202,7 +222,7 @@ hintBtn.addEventListener("click",()=>useHint(false));startWordsBtn.addEventListe
 document.addEventListener("visibilitychange",()=>{document.hidden?pauseAutoHintTimer():resumeAutoHintTimer()});
 window.addEventListener("pagehide",pauseAutoHintTimer);
 window.addEventListener("pageshow",resumeAutoHintTimer);
-function initGame(){const saved=loadSavedState();if(window.__jumpLevel){puzzleIndex=window.__jumpLevel-1;totalScore=0;noHintStreak=0}else if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=Math.max(0,Math.min(saved.puzzleIndex,puzzles.length-1));if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak)}setupPuzzle(nusMessages)?saved.lastBonusMessages:[],restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
+function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){puzzleIndex=window.__jumpLevel-1;totalScore=0;noHintStreak=0}else if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=Math.max(0,Math.min(saved.puzzleIndex,puzzles.length-1));if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak)}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreBonusMessages:saved&&Array.isArray(saved.lastBonusMessages)?saved.lastBonusMessages:[],restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
 initGame();
 </script>
 </body>
