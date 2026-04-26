@@ -43,8 +43,8 @@ const STORAGE_KEY="flipwords:gameState:v2";
 const DEBUG=false;
 const AUTO_HINT_DELAY_LIMITS_MS={3:22000,4:70000,5:130000,6:180000};
 const AUTO_HINT_FILL_MS=6000;
-const QUICK_SOLVE_LIMITS_MS={3:6000,4:11000,5:15000,6:15000};
-const QUICK_SOLVE_POINTS=100;
+const QUICK_SOLVE_LIMITS_MS={3:6000,4:12000,5:16000,6:20000};
+const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
 
 const puzzleRows=[
   ["ace","yet","cat","eye"],
@@ -292,12 +292,13 @@ function isBlockedProperNounSolution(){const p=currentPuzzle(),w=currentWords();
 function scoreForCurrentPuzzle(){const hintsRemaining=Math.max(0,tiles.length-hintsUsed);return hintsRemaining===0?0:hintsRemaining*20+20}
 function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-clean streak`,points:streak*11}:null}
 function getQuickSolveLimitMs(){return QUICK_SOLVE_LIMITS_MS[tiles.length]||QUICK_SOLVE_LIMITS_MS[6]}
+function getQuickSolvePoints(){return QUICK_SOLVE_POINTS_BY_LENGTH[tiles.length]||QUICK_SOLVE_POINTS_BY_LENGTH[6]}
 function getAutoHintDelayMs(){return AUTO_HINT_DELAY_LIMITS_MS[tiles.length]||AUTO_HINT_DELAY_LIMITS_MS[6]}
 function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
   const clean=hintsUsed===0,quick=Date.now()-puzzleStartTime<=getQuickSolveLimitMs();
   lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];
-  if(clean&&quick){totalScore+=QUICK_SOLVE_POINTS;lastBonusMessages.push(`Quick solve +${QUICK_SOLVE_POINTS}`)}
+  if(clean&&quick){const quickPoints=getQuickSolvePoints();totalScore+=quickPoints;lastBonusMessages.push(`Quick solve +${quickPoints}`)}
   if(clean){noHintStreak++;const bonus=getStreakBonus(noHintStreak);if(bonus){totalScore+=bonus.points;lastBonusMessages.push(`${bonus.label} +${bonus.points}`)}}else noHintStreak=0;
   totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false;
 }
