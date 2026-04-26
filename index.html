@@ -411,8 +411,24 @@ function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved|
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if(solved||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if(!solved&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
 function showStartingWords(){if(solved||isShowingStartingWords())return;if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")}
-function showSolvedStartPreview(){if(!solved||previewingStartWords)return;previewingStartWords=true;render()}
-function hideSolvedStartPreview(){if(!previewingStartWords)return;previewingStartWords=false;render()}
+function scoreForSolvedLevelDisplay(){
+  const bonusTotal=lastBonusMessages.reduce((sum,msg)=>sum+(Number((msg.match(/\+([0-9]+)/)||[])[1])||0),0);
+  return (lastPuzzleScore||0)+bonusTotal;
+}
+function showSolvedStartPreview(){
+  if(!solved||previewingStartWords)return;
+  previewingStartWords=true;
+  clearInfoMessage(false);
+  popMessage(`+${scoreForSolvedLevelDisplay()}`,scoreForSolvedLevelDisplay()===0);
+  render();
+}
+function hideSolvedStartPreview(){
+  if(!previewingStartWords)return;
+  previewingStartWords=false;
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop");
+  message.textContent="";
+  render();
+}
 
 function handlePointerDown(e,id){if(solved||(e.button!==undefined&&e.button!==0))return;const t=tiles.find(x=>x.id===id);if(!t||t.locked)return;const r=e.currentTarget.getBoundingClientRect();dragState={tileId:id,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,lastX:e.clientX,hasDragged:false,startOrder:tiles.map(t=>t.id).join("|"),width:r.width,height:r.height,tileSnapshot:{...t}};e.currentTarget.setPointerCapture(e.pointerId);document.addEventListener("pointermove",handlePointerMove);document.addEventListener("pointerup",handlePointerUp);document.addEventListener("pointercancel",handlePointerCancel)}
 function handlePointerMove(e){if(!dragState||e.pointerId!==dragState.pointerId)return;dragState.x=e.clientX;dragState.y=e.clientY;const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}}
