@@ -411,18 +411,13 @@ function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved|
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if(solved||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if(!solved&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
 function showStartingWords(){if(solved||isShowingStartingWords())return;if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")}
-function scoreForSolvedLevelDisplay(){
-  const bonusTotal=lastBonusMessages.reduce((sum,msg)=>sum+(Number((msg.match(/\+([0-9]+)/)||[])[1])||0),0);
-  return (lastPuzzleScore||0)+bonusTotal;
-}
 function showSolvedStartPreview(){
   if(!solved||previewingStartWords)return;
   previewingStartWords=true;
-  const score=scoreForSolvedLevelDisplay();
   clearInfoMessage(false);
   message.classList.remove("info","score-pop","score-zero","quick-pop","streak-pop");
   message.classList.add("hold-score");
-  message.textContent=`You scored ${score}`;
+  message.textContent="These were the start words";
   render();
 }
 function hideSolvedStartPreview(){
