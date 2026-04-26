@@ -312,7 +312,7 @@ const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,blocked1,blocked2])=>
 const $=id=>document.getElementById(id);
 const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),status=$("status"),scoreLine=$("scoreLine");
 
-let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null;
+let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false;
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null;
 let totalScore=0,noHintStreak=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
@@ -363,7 +363,7 @@ function setupPuzzle(opts={}){
   const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
   tiles=base.map(t=>({...t,...mapById.get(t.id)}));
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;hintOrientationInverted=null;
-  solved=false;completedWithHints=false;dragState=null;puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastBonusMessages=[];
+  solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
   clearDragProxy();
   if(restoreHints>0)applyHintsSilently(Math.min(restoreHints,tiles.length));
@@ -390,9 +390,11 @@ function awardPuzzleScoreIfNeeded(){
 function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
+function startPreviewTiles(){const p=currentPuzzle();return p.word1.split("").map((top,i)=>({id:`preview-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
 function render(){
-  board.classList.toggle("short-board",tiles.length<=3);board.innerHTML="";
-  tiles.forEach(t=>{const w=document.createElement("div");w.className="tile-wrap";if(t.flipped)w.classList.add("flipped");if(t.flipAnim)w.classList.add("flip-feedback",t.flipAnim);if(t.locked)w.classList.add("locked");if(solved)w.classList.add("solved-tile");if(dragState?.tileId===t.id)w.classList.add("dragging");w.dataset.id=t.id;w.dataset.locked=t.locked?"1":"0";w.innerHTML=makeTileHTML(t);w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w)});
+  const renderTiles=previewingStartWords?startPreviewTiles():tiles;
+  board.classList.toggle("short-board",renderTiles.length<=3);board.innerHTML="";
+  renderTiles.forEach(t=>{const w=document.createElement("div");w.className="tile-wrap";if(t.flipped)w.classList.add("flipped");if(t.flipAnim)w.classList.add("flip-feedback",t.flipAnim);if(t.locked)w.classList.add("locked");if(solved&&!previewingStartWords)w.classList.add("solved-tile");if(dragState?.tileId===t.id)w.classList.add("dragging");w.dataset.id=t.id;w.dataset.locked=t.locked?"1":"0";w.innerHTML=makeTileHTML(t);w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w)});
   const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=puzzles.length-1;
   nextBtn.classList.toggle("visible",solved&&!isFinal);nextBtn.textContent="Next";
   hintBtn.disabled=solved||allLocked;startWordsBtn.disabled=solved||isShowingStartingWords();
@@ -409,6 +411,8 @@ function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved|
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if(solved||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if(!solved&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
 function showStartingWords(){if(solved||isShowingStartingWords())return;if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")}
+function showSolvedStartPreview(){if(!solved||previewingStartWords)return;previewingStartWords=true;render()}
+function hideSolvedStartPreview(){if(!previewingStartWords)return;previewingStartWords=false;render()}
 
 function handlePointerDown(e,id){if(solved||(e.button!==undefined&&e.button!==0))return;const t=tiles.find(x=>x.id===id);if(!t||t.locked)return;const r=e.currentTarget.getBoundingClientRect();dragState={tileId:id,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,lastX:e.clientX,hasDragged:false,startOrder:tiles.map(t=>t.id).join("|"),width:r.width,height:r.height,tileSnapshot:{...t}};e.currentTarget.setPointerCapture(e.pointerId);document.addEventListener("pointermove",handlePointerMove);document.addEventListener("pointerup",handlePointerUp);document.addEventListener("pointercancel",handlePointerCancel)}
 function handlePointerMove(e){if(!dragState||e.pointerId!==dragState.pointerId)return;dragState.x=e.clientX;dragState.y=e.clientY;const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}}
@@ -445,6 +449,10 @@ function clearAllTimers(){clearReturnedToStartTimer();clearNoticeTimer();clearIn
 hintBtn.addEventListener("click",()=>useHint());
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
+board.addEventListener("pointerdown",e=>{if(!solved)return;e.preventDefault();showSolvedStartPreview();board.setPointerCapture?.(e.pointerId)});
+board.addEventListener("pointerup",hideSolvedStartPreview);
+board.addEventListener("pointercancel",hideSolvedStartPreview);
+board.addEventListener("lostpointercapture",hideSolvedStartPreview);
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0)}});
 document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
