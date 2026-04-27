@@ -406,10 +406,12 @@ function clearAllTimers(){clearReturnedToStartTimer();clearNoticeTimer();clearIn
 hintBtn.addEventListener("click",()=>useHint());
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
-board.addEventListener("pointerdown",e=>{if(!solved)return;e.preventDefault();showSolvedStartPreview();board.setPointerCapture?.(e.pointerId)});
-board.addEventListener("pointerup",hideSolvedStartPreview);
-board.addEventListener("pointercancel",hideSolvedStartPreview);
-board.addEventListener("lostpointercapture",hideSolvedStartPreview);
+document.querySelectorAll(".subtitle,.board-shell,.feedback-area").forEach(zone=>{
+  zone.addEventListener("pointerdown",e=>{if(!solved)return;e.preventDefault();showSolvedStartPreview();zone.setPointerCapture?.(e.pointerId)});
+  zone.addEventListener("pointerup",hideSolvedStartPreview);
+  zone.addEventListener("pointercancel",hideSolvedStartPreview);
+  zone.addEventListener("lostpointercapture",hideSolvedStartPreview);
+});
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0)}});
 document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
