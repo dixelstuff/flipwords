@@ -357,11 +357,14 @@ function awardPuzzleScoreIfNeeded(){
     const quickPoints=getQuickSolvePoints();
     totalScore+=quickPoints;
     lastBonusMessages.push(`Quick solve +${quickPoints}`);
+  }
 
-    if(shields<MAX_SHIELDS){
-      shields++;
-      lastBonusMessages.push("Shield +1");
-    }
+  const shieldLevel=(puzzleIndex+1)%10===0;
+  const requestedShields=(clean&&quick?1:0)+(shieldLevel?1:0);
+  const awardedShields=Math.min(requestedShields,MAX_SHIELDS-shields);
+  if(awardedShields>0){
+    shields+=awardedShields;
+    lastBonusMessages.push(`Shield +${awardedShields}`);
   }
 
   if(clean){
@@ -408,7 +411,8 @@ function updateFooterDisplay(){
 function applyDisplayedReward(text){
   let m=text.match(/^\+([0-9]+)$/)||text.match(/Quick solve \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/);
   if(m)displayedTotalScore+=Number(m[1]);
-  if(text==="Shield +1")displayedShields=Math.min(MAX_SHIELDS,displayedShields+1);
+  const shieldMatch=text.match(/^Shield \+([0-9]+)$/);
+  if(shieldMatch)displayedShields=Math.min(MAX_SHIELDS,displayedShields+Number(shieldMatch[1]));
   updateFooterDisplay();
 }
 function popMessage(text,isZero=false,isFinal=false){
@@ -416,7 +420,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.toggle("score-zero",isZero);
   message.classList.toggle("streak-pop",/[0-9]+-streak/.test(text));
   message.classList.toggle("quick-pop",/Quick solve/.test(text));
-  message.classList.toggle("shield-pop",text==="Shield +1");
+  message.classList.toggle("shield-pop",/^Shield \+[0-9]+$/.test(text));
   message.classList.toggle("final-pop",isFinal);
   message.textContent=text;
   void message.offsetWidth;
@@ -431,7 +435,7 @@ function queueBonusAnimations(){
       applyDisplayedReward(text);
       popMessage(text,false,i===lastBonusMessages.length-1);
       if(/Quick solve|[0-9]+-streak/.test(text))showStarBurst();
-      if(text==="Shield +1")showShieldBurst();
+      if(/^Shield \+[0-9]+$/.test(text))showShieldBurst();
     },1150+i*1250));
   });
 }
