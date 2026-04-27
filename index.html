@@ -406,12 +406,18 @@ function clearAllTimers(){clearReturnedToStartTimer();clearNoticeTimer();clearIn
 hintBtn.addEventListener("click",()=>useHint());
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
-document.querySelectorAll(".subtitle,.board-shell,.feedback-area").forEach(zone=>{
-  zone.addEventListener("pointerdown",e=>{if(!solved)return;e.preventDefault();showSolvedStartPreview();zone.setPointerCapture?.(e.pointerId)});
-  zone.addEventListener("pointerup",hideSolvedStartPreview);
-  zone.addEventListener("pointercancel",hideSolvedStartPreview);
-  zone.addEventListener("lostpointercapture",hideSolvedStartPreview);
+document.querySelector(".game").addEventListener("pointerdown",e=>{
+  if(!solved||e.target.closest(".controls"))return;
+  const top=document.querySelector(".title").getBoundingClientRect().bottom;
+  const bottom=document.querySelector(".controls").getBoundingClientRect().top;
+  if(e.clientY<top||e.clientY>bottom)return;
+  e.preventDefault();
+  showSolvedStartPreview();
+  e.currentTarget.setPointerCapture?.(e.pointerId);
 });
+document.querySelector(".game").addEventListener("pointerup",hideSolvedStartPreview);
+document.querySelector(".game").addEventListener("pointercancel",hideSolvedStartPreview);
+document.querySelector(".game").addEventListener("lostpointercapture",hideSolvedStartPreview);
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0)}});
 document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
