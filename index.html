@@ -45,6 +45,7 @@ const AUTO_HINT_DELAY_LIMITS_MS={3:23000,4:80000,5:170000,6:230000};
 const AUTO_HINT_FILL_MS=6000;
 const QUICK_SOLVE_LIMITS_MS={3:6000,4:13000,5:20000,6:28000};
 const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
+const MAX_SHIELDS=20;
 
 const puzzleRows=[
   ["ace","yet","cat","eye"],
@@ -271,7 +272,6 @@ const puzzleRows=[
 ];
 
 
-
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,blocked1,blocked2])=>({word1,word2,answer1,answer2,blocked1,blocked2}));
 
 const $=id=>document.getElementById(id);
@@ -279,7 +279,7 @@ const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nex
 
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false;
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null;
-let totalScore=0,noHintStreak=0,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
+let totalScore=0,noHintStreak=0,shields=0,shieldUsedThisLevel=false,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 let returnedToStartTimer=null,noticeTimer=null,infoMessageTimer=null,bonusTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
@@ -291,11 +291,11 @@ const visibleBottom=t=>t.flipped?t.top:t.bottom;
 const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(visibleBottom).join("")});
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
-function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,solved,completedWithHints,lastPuzzleScore,lastBonusMessages,puzzleAwarded,noHintStreak,puzzleStartTime}))}catch{}}
+function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,solved,completedWithHints,lastPuzzleScore,lastBonusMessages,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime}))}catch{}}
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
-function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;noHintStreak=0;setupPuzzle()}
+function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;noHintStreak=0;shields=0;shieldUsedThisLevel=false;setupPuzzle()}
 function goNext(){const nextIndex=puzzleIndex+1;if(nextIndex>=puzzles.length)return;puzzleIndex=nextIndex;setupPuzzle()}
 
 function computeCanonicalMapping(p,tileIds){
@@ -328,7 +328,7 @@ function setupPuzzle(opts={}){
   const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
   tiles=base.map(t=>({...t,...mapById.get(t.id)}));
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;hintOrientationInverted=null;
-  solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastBonusMessages=[];
+  solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;shieldUsedThisLevel=false;puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
   clearDragProxy();
   if(restoreHints>0)applyHintsSilently(Math.min(restoreHints,tiles.length));
@@ -348,8 +348,8 @@ function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
   const clean=hintsUsed===0,quick=Date.now()-puzzleStartTime<=getQuickSolveLimitMs();
   lastPuzzleScore=scoreForCurrentPuzzle();lastBonusMessages=[];
-  if(clean&&quick){const quickPoints=getQuickSolvePoints();totalScore+=quickPoints;lastBonusMessages.push(`Quick solve +${quickPoints}`)}
-  if(clean){noHintStreak++;const bonus=getStreakBonus(noHintStreak);if(bonus){totalScore+=bonus.points;lastBonusMessages.push(`${bonus.label} +${bonus.points}`)}}else noHintStreak=0;
+  if(clean&&quick){const quickPoints=getQuickSolvePoints();totalScore+=quickPoints;shields=Math.min(MAX_SHIELDS,shields+1);lastBonusMessages.push(`Quick solve +${quickPoints}`)}
+  if(clean){noHintStreak++;const bonus=getStreakBonus(noHintStreak);if(bonus){totalScore+=bonus.points;lastBonusMessages.push(`${bonus.label} +${bonus.points}`)}}else if(shieldUsedThisLevel){lastBonusMessages.push("Streak shield used")}else noHintStreak=0;
   totalScore+=lastPuzzleScore;puzzleAwarded=true;scoreAnimationShown=false;
 }
 function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
@@ -367,7 +367,7 @@ function render(){
   else if(!message.classList.contains("info")&&!message.classList.contains("score-pop")&&!message.classList.contains("hold-score")){message.textContent="";message.classList.remove("score-zero")}
   subtitle.classList.toggle("level-label",puzzleIndex>0);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
-  if(solved&&isFinal&&!DEBUG){status.innerHTML='Refresh your browser to see if there are more puzzles yet.<br>If you want to restart at level 1 <a href="#" id="restartLink" class="restart-link">click here</a>.'}else status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${totalScore}`;scoreLine.innerHTML=noHintStreak>0&&hintsUsed===0?`Streak ${noHintStreak}`:"&nbsp;";
+  if(solved&&isFinal&&!DEBUG){status.innerHTML='Refresh your browser to see if there are more puzzles yet.<br>If you want to restart at level 1 <a href="#" id="restartLink" class="restart-link">click here</a>.'}else status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${totalScore}`;scoreLine.innerHTML=`${noHintStreak>0&&hintsUsed===0?`Streak ${noHintStreak}`:"&nbsp;"}${shields>0?`<br>Shields ${shields}`:""}`;
 }
 function popMessage(text,isZero=false){message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop");message.classList.toggle("score-zero",isZero);message.classList.toggle("streak-pop",/clean streak/.test(text));message.classList.toggle("quick-pop",/Quick solve/.test(text));message.textContent=text;void message.offsetWidth;message.classList.add("score-pop")}
 function showStarBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
@@ -407,7 +407,7 @@ function createDragProxy(t,x,y,w,h){clearDragProxy();const p=document.createElem
 function moveDragProxy(x,y){const p=$("dragProxy");if(p){p.style.left=`${x}px`;p.style.top=`${y}px`}}
 function clearDragProxy(){$("dragProxy")?.remove()}
 
-function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
+function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;if(first&&!shieldUsedThisLevel&&shields>0){shields--;shieldUsedThisLevel=true}t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(){tiles.forEach(t=>{t.locked=true;if(t.top!==t.bottom)t.flipped=t.targetFlipped});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked))return;const f=tiles.find(t=>!t.locked&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!i.tile.locked);if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
@@ -453,7 +453,7 @@ window.addEventListener("pageshow",resumeAutoHintTimer);
 window.addEventListener("orientationchange",()=>setTimeout(()=>{message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""},80));
 window.addEventListener("resize",()=>{if(solved){message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""}});
 
-function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak)}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreBonusMessages:saved&&Array.isArray(saved.lastBonusMessages)?saved.lastBonusMessages:[],restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
+function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreBonusMessages:saved&&Array.isArray(saved.lastBonusMessages)?saved.lastBonusMessages:[],restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
 initGame();
 </script>
 </body>
