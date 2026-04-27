@@ -411,14 +411,18 @@ function applyDisplayedReward(text){
   if(text==="Shield +1")displayedShields=Math.min(MAX_SHIELDS,displayedShields+1);
   updateFooterDisplay();
 }
-"final-pop","hold-score");
+function popMessage(text,isZero=false,isFinal=false){
+  message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","final-pop","hold-score");
   message.classList.toggle("score-zero",isZero);
   message.classList.toggle("streak-pop",/[0-9]+-streak/.test(text));
   message.classList.toggle("quick-pop",/Quick solve/.test(text));
   message.classList.toggle("shield-pop",text==="Shield +1");
   message.classList.toggle("final-pop",isFinal);
   message.textContent=text;
-  void message.t.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
+  void message.offsetWidth;
+  message.classList.add("score-pop");
+}
+function showStarBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="shield-icon";s.textContent="🛡️";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function queueBonusAnimations(){
   clearBonusTimers();
