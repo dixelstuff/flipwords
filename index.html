@@ -493,7 +493,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.toggle("streak-pop",isStreakMessage);
   message.classList.toggle("quick-pop",/Quick solve/.test(text));
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
-  message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text));
+  message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text)||text==="ERROR");
   message.classList.toggle("shield-pop",/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text));
   message.classList.toggle("final-pop",isFinal&&!isStreakMessage);
   message.textContent=text;
@@ -504,7 +504,8 @@ function showStarBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-1
 function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="shield-icon";s.textContent="🛡️";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function queueRewardAnimations(){
   clearBonusTimers();
-  const messages=[...lastAccountingMessages,...lastBonusMessages];
+  let messages=[...lastAccountingMessages,...lastBonusMessages];
+  if(!messages.length)messages=["ERROR"];
   const now=Date.now();
   if(messages.length){
     const finalText=messages[messages.length-1];
