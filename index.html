@@ -48,6 +48,9 @@ const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const MAX_SHIELDS=4;
 const SOLVED_TOGGLE_DELAY_MS=1250;
+const SCORE_POP_MS=2000;
+const FINAL_POP_MS=3000;
+const STREAK_POP_MS=3800;
 
 const puzzleRows=[
   ["ace","yet","cat","eye"],
@@ -430,7 +433,7 @@ function awardPuzzleScoreIfNeeded(){
   puzzleAwarded=true;
   scoreAnimationShown=false;
 }
-function checkSolved(){if(isSolved()){const wasSolved=solved;solved=true;if(!wasSolved)solvedToggleReadyAt=Date.now()+SOLVED_TOGGLE_DELAY_MS;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}else footerInfoShown=false;render();saveGameState()}
+function checkSolved(){if(isSolved()){const wasSolved=solved;solved=true;if(!wasSolved)solvedToggleReadyAt=Infinity;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}else footerInfoShown=false;render();saveGameState()}
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
 function startPreviewTiles(){const p=currentPuzzle();return p.word1.split("").map((top,i)=>({id:`preview-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
@@ -502,6 +505,14 @@ function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[
 function queueRewardAnimations(){
   clearBonusTimers();
   const messages=[...lastAccountingMessages,...lastBonusMessages];
+  const now=Date.now();
+  if(messages.length){
+    const finalText=messages[messages.length-1];
+    const finalDuration=/[0-9]+-streak/.test(finalText)?STREAK_POP_MS:FINAL_POP_MS;
+    solvedToggleReadyAt=now+(messages.length-1)*1250+finalDuration+150;
+  }else{
+    solvedToggleReadyAt=now+SOLVED_TOGGLE_DELAY_MS;
+  }
   messages.forEach((text,i)=>{
     bonusTimerIds.push(setTimeout(()=>{
       applyDisplayedReward(text);
