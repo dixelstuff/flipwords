@@ -322,6 +322,7 @@ function computeCanonicalMapping(p,tileIds){
 }
 function buildHintOrder(list){return[...list].sort((a,b)=>a.targetIndex-b.targetIndex).map(t=>t.id)}
 function setupPuzzle(opts={}){
+  footerInfoShown=false;
   clearAllTimers();
   displayedTotalScore=totalScore;
   displayedShields=shields;
@@ -384,7 +385,7 @@ function awardPuzzleScoreIfNeeded(){
   puzzleAwarded=true;
   scoreAnimationShown=false;
 }
-function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}render();saveGameState()}
+function checkSolved(){if(isSolved()){solved=true;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}else footerInfoShown=false;render();saveGameState()}
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
 function startPreviewTiles(){const p=currentPuzzle();return p.word1.split("").map((top,i)=>({id:`preview-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
@@ -423,7 +424,7 @@ function hideFooterInfo(){
   updateFooterDisplay();
 }
 function toggleFooterInfo(){
-  if(solved&&puzzleIndex>=puzzles.length-1&&!DEBUG)return;
+  if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;
   footerInfoShown=!footerInfoShown;
   if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}
   updateFooterDisplay();
