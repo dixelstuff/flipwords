@@ -281,7 +281,7 @@ let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null;
 let totalScore=0,displayedTotalScore=0,noHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false,lastPuzzleScore=null,lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
-let returnedToStartTimer=null,noticeTimer=null,infoMessageTimer=null,bonusTimerIds=[];
+let returnedToStartTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 
 const currentPuzzle=()=>puzzles[puzzleIndex];
@@ -295,7 +295,7 @@ function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({pu
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
-function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;setupPuzzle()}
+function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;noHintStreak=0;shields=0;shieldUsedThisLevel=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}setupPuzzle()}
 function goNext(){const nextIndex=puzzleIndex+1;if(nextIndex>=puzzles.length)return;puzzleIndex=nextIndex;setupPuzzle()}
 
 function computeCanonicalMapping(p,tileIds){
@@ -366,7 +366,7 @@ function awardPuzzleScoreIfNeeded(){
   }
   if(shieldLevel&&shields<MAX_SHIELDS){
     shields++;
-    lastBonusMessages.push("Level bonus +1");
+    lastBonusMessages.push(`Level ${puzzleIndex+1} bonus +1`);
   }
 
   if(clean){
@@ -405,15 +405,33 @@ function updateFooterDisplay(){
   const isFinal=solved&&puzzleIndex>=puzzles.length-1&&!DEBUG;
   if(isFinal){
     status.innerHTML='Refresh your browser to see if there are more puzzles yet.<br>If you want to restart at level 1 <a href="#" id="restartLink" class="restart-link">click here</a>.';
-  }else{
-    status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${displayedTotalScore}`;
+    scoreLine.innerHTML="&nbsp;";
+    return;
   }
+  if(footerInfoShown){
+    status.innerHTML='Shields protect your streak when you use a hint. Earn one every 10th level and for each quick solve, up to 4.';
+    scoreLine.innerHTML="&nbsp;";
+    return;
+  }
+  status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${displayedTotalScore}`;
   scoreLine.innerHTML=`Streak ${noHintStreak} | Shields ${displayedShields}`;
+}
+function hideFooterInfo(){
+  footerInfoShown=false;
+  if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}
+  updateFooterDisplay();
+}
+function toggleFooterInfo(){
+  if(solved&&puzzleIndex>=puzzles.length-1&&!DEBUG)return;
+  if(footerInfoShown){hideFooterInfo();return}
+  footerInfoShown=true;
+  updateFooterDisplay();
+  footerInfoTimer=setTimeout(hideFooterInfo,5000);
 }
 function applyDisplayedReward(text){
   let m=text.match(/^\+([0-9]+)$/)||text.match(/Quick solve \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/);
   if(m)displayedTotalScore+=Number(m[1]);
-  const shieldMatch=text.match(/^(?:Shield|Level bonus) \+([0-9]+)$/);
+  const shieldMatch=text.match(/^(?:Shield|Level [0-9]+ bonus) \+([0-9]+)$/);
   if(shieldMatch)displayedShields=Math.min(MAX_SHIELDS,displayedShields+Number(shieldMatch[1]));
   updateFooterDisplay();
 }
@@ -422,7 +440,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.toggle("score-zero",isZero);
   message.classList.toggle("streak-pop",/[0-9]+-streak/.test(text));
   message.classList.toggle("quick-pop",/Quick solve/.test(text));
-  message.classList.toggle("shield-pop",/^(?:Shield|Level bonus) \+[0-9]+$/.test(text));
+  message.classList.toggle("shield-pop",/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text));
   message.classList.toggle("final-pop",isFinal);
   message.textContent=text;
   void message.offsetWidth;
@@ -437,7 +455,7 @@ function queueBonusAnimations(){
       applyDisplayedReward(text);
       popMessage(text,false,i===lastBonusMessages.length-1);
       if(/Quick solve|[0-9]+-streak/.test(text))showStarBurst();
-      if(/^(?:Shield|Level bonus) \+[0-9]+$/.test(text))showShieldBurst();
+      if(/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text))showShieldBurst();
     },1150+i*1250));
   });
 }
@@ -511,7 +529,8 @@ document.querySelector(".game").addEventListener("pointerdown",e=>{
 document.querySelector(".game").addEventListener("pointerup",hideSolvedStartPreview);
 document.querySelector(".game").addEventListener("pointercancel",hideSolvedStartPreview);
 document.querySelector(".game").addEventListener("lostpointercapture",hideSolvedStartPreview);
-status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0)}});
+status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0);return}toggleFooterInfo()});
+scoreLine.addEventListener("click",toggleFooterInfo);
 document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
 document.addEventListener("contextmenu",e=>e.preventDefault(),{passive:false});
