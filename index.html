@@ -41,7 +41,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
 const DEBUG=false;
-const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:170000,4:80000,3:23000,2:15000};
+const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:170000,4:76000,3:23000,2:15000};
 const AUTO_HINT_FILL_MS=10000;
 const SPEED_BONUS_WINDOW_FACTOR=0.5;
 const MAX_SPEED_BONUS=85;
@@ -327,8 +327,6 @@ const puzzleRows=[
 ["soul","done","loud","eons",3,"",""],
 ["chai","lens","inch","sale",3,"",""]
 ];
-
-
 
 
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2}));
