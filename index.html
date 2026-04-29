@@ -44,11 +44,11 @@ const DEBUG=false;
 const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:170000,4:76000,3:23000,2:15000};
 const AUTO_HINT_FILL_MS=10000;
 const SPEED_BONUS_WINDOW_FACTOR=0.5;
-const MAX_SPEED_BONUS=85;
+const MAX_SPEED_BONUS=75;
 const MIN_SPEED_BONUS=5;
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:2,5:5,6:10};
-const EFFICIENCY_CAP_POINTS=100;
+const EFFICIENCY_CAP_POINTS=75;
 const ENABLE_LEVEL_BONUS_SHIELDS=false;
 const ENABLE_SPEED_BONUS=true;
 const MAX_SHIELDS=4;
@@ -457,7 +457,7 @@ function scoreByHintsRemaining(n){return SCORE_BY_HINTS_REMAINING[Math.max(0,Mat
 function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(tiles.length)}
 function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
-function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-streak`,points:streak*11}:null}
+function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-streak`,points:streak*15}:null}
 function getAutoHintDelayForTileCount(n){return AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS[n]??null}
 function getSpeedBonusLimitMs(){return (getAutoHintDelayForTileCount(tiles.length)||0)*SPEED_BONUS_WINDOW_FACTOR}
 function roundToNearestFive(n){return Math.round(n/5)*5}
@@ -655,18 +655,18 @@ function showStreakCelebration(){
   const flamesC=[[-145,-118,-18],[-62,-165,-8],[62,-165,8],[145,-118,16],[-190,-5,-12],[190,-5,12],[-90,105,10],[90,105,-10]];
   const starsD=[[-200,-95,-35],[200,-95,30],[-140,-160,45],[140,-160,-40],[-235,10,-20],[235,10,25],[-155,135,30],[155,135,-30],[-60,-215,-18],[60,-215,18]];
   const flamesD=[[-155,-120,-18],[-70,-170,-8],[70,-170,8],[155,-120,16],[-205,-20,-12],[205,-20,12],[-100,115,10],[100,115,-10]];
-const waves=[
-  [0,"★",starsA,"star streak-star"],
-  [300,"🔥",flamesA,"star flame"],
-  [860,"★",starsB,"star streak-star"],
-  [1160,"🔥",flamesB,"star flame"],
-  [1740,"★",starsC,"star streak-star"],
-  [2180,"🔥",flamesC,"star flame"],
-  [2580,"★",starsD,"star streak-star"],
-  [2920,"🔥",flamesD,"star flame"]
-];
-waves.forEach(([delay,char,points,cls])=>setTimeout(()=>burstGlyph(char,points,cls),delay));
-setTimeout(()=>{starBurst.innerHTML=""},4450);
+  const waves=[
+    [0,"★",starsA,"star streak-star"],
+    [300,"🔥",flamesA,"star flame"],
+    [860,"★",starsB,"star streak-star"],
+    [1160,"🔥",flamesB,"star flame"],
+    [1740,"★",starsC,"star streak-star"],
+    [2180,"🔥",flamesC,"star flame"],
+    [2580,"★",starsD,"star streak-star"],
+    [2920,"🔥",flamesD,"star flame"]
+  ];
+  waves.forEach(([delay,char,points,cls])=>setTimeout(()=>burstGlyph(char,points,cls),delay));
+  setTimeout(()=>{starBurst.innerHTML=""},4450);
 }
 function queueRewardAnimations(){
   clearBonusTimers();
