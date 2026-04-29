@@ -336,7 +336,15 @@ function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^
 function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime}))}catch{}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}setupPuzzle()}
-function goNext(){const nextIndex=puzzleIndex+1;if(nextIndex>=puzzles.length)return;puzzleIndex=nextIndex;setupPuzzle()}
+function goNext(){
+  const nextIndex=puzzleIndex+1;
+  if(nextIndex>=puzzles.length)return;
+  previewingStartWords=false;
+  message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");
+  message.textContent="";
+  puzzleIndex=nextIndex;
+  setupPuzzle();
+}
 
 function computeCanonicalMapping(p,tileIds){
   const originals=p.word1.split("").map((top,i)=>({id:tileIds[i],top,bottom:p.word2[i],code:pairCode(top,p.word2[i])}));
@@ -470,7 +478,25 @@ function awardPuzzleScoreIfNeeded(){
   scoreAnimationShown=false;
 }
 function recordMove(){movesUsed++}
-function checkSolved(){if(isSolved()){const wasSolved=solved;solved=true;if(!wasSolved)solvedToggleReadyAt=Infinity;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}else footerInfoShown=false;render();saveGameState()}
+function checkSolved(){
+  if(isSolved()){
+    const wasSolved=solved;
+    solved=true;
+    if(!wasSolved)solvedToggleReadyAt=Infinity;
+    completedWithHints=hintsUsed>=tiles.length;
+    stopAutoHintTimer();
+    awardPuzzleScoreIfNeeded();
+    if(!wasSolved&&lastPuzzleScore!==null&&!scoreAnimationShown){
+      clearInfoMessage(false);
+      scoreAnimationShown=true;
+      queueRewardAnimations();
+    }
+  }else{
+    footerInfoShown=false;
+  }
+  render();
+  saveGameState();
+}
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
 function startPreviewTiles(){const p=currentPuzzle();return p.word1.split("").map((top,i)=>({id:`preview-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
