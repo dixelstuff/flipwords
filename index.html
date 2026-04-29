@@ -41,10 +41,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
 const DEBUG=false;
-const AUTO_HINT_DELAY_LIMITS_MS={3:23000,4:80000,5:170000,6:230000};
+const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:170000,4:80000,3:23000,2:15000};
 const AUTO_HINT_FILL_MS=10000;
-const SPEED_BONUS_LIMITS_MS={3:12000,4:39000,5:60000,6:84000};
-const MAX_SPEED_BONUS=100;
+const SPEED_BONUS_WINDOW_FACTOR=0.5;
+const MAX_SPEED_BONUS=85;
 const MIN_SPEED_BONUS=5;
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:3,5:6,6:12};
@@ -402,17 +402,22 @@ function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(tiles.length)
 function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-streak`,points:streak*11}:null}
-function getSpeedBonusLimitMs(){return SPEED_BONUS_LIMITS_MS[tiles.length]||SPEED_BONUS_LIMITS_MS[6]}
+function getAutoHintDelayForTileCount(n){return AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS[n]??null}
+function getSpeedBonusLimitMs(){return (getAutoHintDelayForTileCount(tiles.length)||0)*SPEED_BONUS_WINDOW_FACTOR}
 function roundToNearestFive(n){return Math.round(n/5)*5}
 function getSpeedBonusPoints(){
   if(!ENABLE_SPEED_BONUS||hintsUsed>0)return 0;
   const limit=getSpeedBonusLimitMs();
+  if(!limit)return 0;
   const elapsed=Date.now()-puzzleStartTime;
   if(elapsed>limit)return 0;
   const raw=MAX_SPEED_BONUS-(elapsed/limit)*(MAX_SPEED_BONUS-MIN_SPEED_BONUS);
   return clamp(roundToNearestFive(raw),MIN_SPEED_BONUS,MAX_SPEED_BONUS);
 }
-function getAutoHintDelayMs(){return AUTO_HINT_DELAY_LIMITS_MS[tiles.length]||AUTO_HINT_DELAY_LIMITS_MS[6]}
+function getAutoHintDelayMs(){
+  const unlocked=tiles.filter(t=>!t.locked).length;
+  return getAutoHintDelayForTileCount(unlocked);
+}
 function getEfficiencyMoveLimit(){
   const minMoves=Number(currentPuzzle().minMoves);
   if(!Number.isFinite(minMoves)||minMoves<=0)return null;
@@ -620,7 +625,14 @@ function useHint(){if(solved)return;stopAutoHintTimer();if(applyOneHint()){rende
 function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${clamp(pct,0,100)}%`)}
 function clearAutoHintTimers(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null}
 function stopAutoHintTimer(){clearAutoHintTimers();autoHintDelayStartedAt=null;autoHintDelayRemainingMs=null;autoHintFillStart=null;autoHintFillElapsedMs=0;autoHintFilling=false;setHintFill(0)}
-function startAutoHintTimer(delayMs=null){stopAutoHintTimer();if(solved||hintBtn.disabled||document.hidden)return;autoHintDelayRemainingMs=delayMs??getAutoHintDelayMs();autoHintDelayStartedAt=performance.now();autoHintDelayTimer=setTimeout(beginAutoHintFill,autoHintDelayRemainingMs)}
+function startAutoHintTimer(delayMs=null){
+  stopAutoHintTimer();
+  if(solved||hintBtn.disabled||document.hidden)return;
+  autoHintDelayRemainingMs=delayMs??getAutoHintDelayMs();
+  if(autoHintDelayRemainingMs===null||autoHintDelayRemainingMs===undefined)return;
+  autoHintDelayStartedAt=performance.now();
+  autoHintDelayTimer=setTimeout(beginAutoHintFill,autoHintDelayRemainingMs);
+}
 function beginAutoHintFill(){clearAutoHintTimers();if(solved||hintBtn.disabled||document.hidden)return;autoHintFilling=true;autoHintFillStart=performance.now()-autoHintFillElapsedMs;const step=now=>{if(document.hidden)return;autoHintFillElapsedMs=now-autoHintFillStart;const pct=(autoHintFillElapsedMs/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint();else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)}
 function pauseAutoHintTimer(){if(!autoHintDelayTimer&&!autoHintFrame)return;if(autoHintFilling){if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintFrame=null;if(autoHintFillStart!==null)autoHintFillElapsedMs=Math.min(AUTO_HINT_FILL_MS,performance.now()-autoHintFillStart)}else{if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);autoHintDelayTimer=null;if(autoHintDelayStartedAt!==null)autoHintDelayRemainingMs=Math.max(0,autoHintDelayRemainingMs-(performance.now()-autoHintDelayStartedAt))}autoHintDelayStartedAt=null}
 function resumeAutoHintTimer(){if(solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
