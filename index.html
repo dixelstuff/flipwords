@@ -43,13 +43,14 @@ const STORAGE_KEY="flipwords:gameState:v3";
 const DEBUG=false;
 const AUTO_HINT_DELAY_LIMITS_MS={3:23000,4:80000,5:170000,6:230000};
 const AUTO_HINT_FILL_MS=10000;
-const QUICK_SOLVE_LIMITS_MS={3:6000,4:13000,5:20000,6:28000};
-const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
+const SPEED_BONUS_LIMITS_MS={3:12000,4:39000,5:60000,6:84000};
+const MAX_SPEED_BONUS=100;
+const MIN_SPEED_BONUS=5;
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:3,5:6,6:12};
 const EFFICIENCY_CAP_POINTS=100;
 const ENABLE_LEVEL_BONUS_SHIELDS=false;
-const ENABLE_QUICK_SOLVE=false;
+const ENABLE_SPEED_BONUS=true;
 const MAX_SHIELDS=4;
 const SOLVED_TOGGLE_DELAY_MS=1250;
 const SCORE_POP_MS=2000;
@@ -393,8 +394,16 @@ function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(tiles.length)
 function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-streak`,points:streak*11}:null}
-function getQuickSolveLimitMs(){return QUICK_SOLVE_LIMITS_MS[tiles.length]||QUICK_SOLVE_LIMITS_MS[6]}
-function getQuickSolvePoints(){return QUICK_SOLVE_POINTS_BY_LENGTH[tiles.length]||QUICK_SOLVE_POINTS_BY_LENGTH[6]}
+function getSpeedBonusLimitMs(){return SPEED_BONUS_LIMITS_MS[tiles.length]||SPEED_BONUS_LIMITS_MS[6]}
+function roundToNearestFive(n){return Math.round(n/5)*5}
+function getSpeedBonusPoints(){
+  if(!ENABLE_SPEED_BONUS||hintsUsed>0)return 0;
+  const limit=getSpeedBonusLimitMs();
+  const elapsed=Date.now()-puzzleStartTime;
+  if(elapsed>limit)return 0;
+  const raw=MAX_SPEED_BONUS-(elapsed/limit)*(MAX_SPEED_BONUS-MIN_SPEED_BONUS);
+  return clamp(roundToNearestFive(raw),MIN_SPEED_BONUS,MAX_SPEED_BONUS);
+}
 function getAutoHintDelayMs(){return AUTO_HINT_DELAY_LIMITS_MS[tiles.length]||AUTO_HINT_DELAY_LIMITS_MS[6]}
 function getEfficiencyMoveLimit(){
   const minMoves=Number(currentPuzzle().minMoves);
@@ -410,7 +419,7 @@ function isEfficientSolve(){
 function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
   const clean=hintsUsed===0;
-  const quick=ENABLE_QUICK_SOLVE&&Date.now()-puzzleStartTime<=getQuickSolveLimitMs();
+  const speedBonus=getSpeedBonusPoints();
   const gross=grossScoreForCurrentPuzzle();
   const penalty=hintPenaltyForCurrentPuzzle();
   lastPuzzleScore=scoreForCurrentPuzzle();
@@ -424,10 +433,9 @@ function awardPuzzleScoreIfNeeded(){
     if(penalty>0)lastAccountingMessages.push(`${hintsUsed===1?"Hint":"Hints"} -${penalty}`);
   }
 
-  if(clean&&quick){
-    const quickPoints=getQuickSolvePoints();
-    totalScore+=quickPoints;
-    lastBonusMessages.push(`Quick solve +${quickPoints}`);
+  if(clean&&speedBonus>0){
+    totalScore+=speedBonus;
+    lastBonusMessages.push(`Speed bonus +${speedBonus}`);
   }
 
   if(isEfficientSolve()){
@@ -507,7 +515,7 @@ function updateFooterDisplay(){
 }
 function toggleFooterInfo(){if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;footerInfoShown=!footerInfoShown;updateFooterDisplay()}
 function applyDisplayedReward(text){
-  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Quick solve \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
+  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Speed bonus \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
   if(add&&!/^Efficiency \+1/.test(text))displayedTotalScore+=Number(add[1]);
   const subtract=text.match(/^Hints? -([0-9]+)$/);
   if(subtract)displayedTotalScore=Math.max(0,displayedTotalScore-Number(subtract[1]));
@@ -523,7 +531,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");
   message.classList.toggle("score-zero",isZero);
   message.classList.toggle("streak-pop",isStreakMessage);
-  message.classList.toggle("quick-pop",/Quick solve|^Efficiency \+(?!1)[0-9]+/.test(text));
+  message.classList.toggle("quick-pop",/Speed bonus|^Efficiency \+(?!1)[0-9]+/.test(text));
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
   message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text));
   message.classList.toggle("shield-pop",isShieldReward);
@@ -549,7 +557,7 @@ function queueRewardAnimations(){
     bonusTimerIds.push(setTimeout(()=>{
       applyDisplayedReward(text);
       popMessage(text,text==="+0",i===messages.length-1);
-      if(/Quick solve|[0-9]+-streak/.test(text)||/^Efficiency \+(?!1)[0-9]+/.test(text))showStarBurst();
+      if(/Speed bonus|[0-9]+-streak/.test(text)||/^Efficiency \+(?!1)[0-9]+/.test(text))showStarBurst();
       if(/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+/.test(text)||/^Efficiency \+1/.test(text))showShieldBurst();
     },i*1250));
   });
