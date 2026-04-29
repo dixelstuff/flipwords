@@ -46,6 +46,9 @@ const AUTO_HINT_FILL_MS=6000;
 const QUICK_SOLVE_LIMITS_MS={3:6000,4:13000,5:20000,6:28000};
 const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
+const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:1,5:2,6:4};
+const EFFICIENCY_CAP_POINTS=100;
+const ENABLE_LEVEL_BONUS_SHIELDS=false;
 const MAX_SHIELDS=4;
 const SOLVED_TOGGLE_DELAY_MS=1250;
 const SCORE_POP_MS=2000;
@@ -53,287 +56,266 @@ const FINAL_POP_MS=3000;
 const STREAK_POP_MS=3800;
 
 const puzzleRows=[
-  ["ace","yet","cat","eye"],
-  ["port","ride","dirt","rope"],
-  ["fish","calm","cash","film"],
-  ["awe","gas","age","was"],
-  ["race","mild","card","lime"],
-  ["talk","cage","gate","lack"],
-  ["old","dog","log","odd"],
-  ["corn","flat","clan","fort"],
-  ["smile","heart","earth","miles"],
-  ["love","fits","five","lots"],
-  ["blue","reef","beef","rule"],
-  ["real","sofa","fare","also"],
-  ["honey","boost","ebony","shoot"],
-  ["eel","win","lie","new"],
-  ["milk","nose","link","some","leon","skim"],
-  ["least","cares","carts","lease"],
-  ["key","tap","yak","pet"],
-  ["frost","place","craft","slope"],
-  ["gold","mine","gone","mild"],
-  ["snap","cord","sand","crop"],
-
-  ["money","verge","enemy","grove"],
-  ["poke","fell","folk","peel"],
-  ["ant","ear","ran","tea"],
-  ["bowl","keen","blow","knee"],
-  ["vocal","races","coral","caves"],
-  ["flat","hood","halt","food"],
-  ["naive","tests","taste","veins"],
-  ["rain","loop","nail","poor"],
-  ["green","chair","grain","cheer"],
-  ["lazy","once","clay","zone"],
-
-  ["space","world","crowd","lapse"],
-  ["safe","date","deaf","seat"],
-  ["gel","bow","log","web"],
-  ["drawn","ridge","grand","wider"],
-  ["deep","gulf","feed","plug"],
-  ["giant","sense","genes","stain"],
-  ["jog","ate","ago","jet"],
-  ["true","been","beer","tune"],
-  ["shade","trace","react","heads"],
-  ["glue","down","lung","owed"],
-
-  ["canoe","rally","clean","royal"],
-  ["soft","less","self","toss"],
-  ["irk","sad","ask","rid"],
-  ["harp","epic","arch","pipe"],
-  ["guide","array","argue","diary"],
-  ["east","wind","dawn","ties"],
-  ["gnome","raven","among","never"],
-  ["slow","cord","crow","sold"],
-  ["ocean","parts","acorn","tapes"],
-  ["pony","bite","bone","pity"],
-
-  ["daily","scene","since","delay"],
-  ["bear","heir","bare","hire"],
-  ["end","how","den","who"],
-  ["count","swore","ounce","worst"],
-  ["haul","form","foul","harm"],
-  ["ghost","crews","chest","grows"],
-  ["owl","ate","eat","low"],
-  ["grit","feel","feet","girl"],
-  ["spike","slain","likes","pains"],
-  ["year","amid","army","idea"],
-
-  ["clasp","bored","blade","corps"],
-  ["seal","nets","lean","sets","sean","lets"],
-  ["hey","out","the","you"],
-  ["load","grow","drag","wool"],
-  ["world","sites","slots","weird"],
-  ["clot","bout","boot","cult"],
-  ["magic","there","cream","eight"],
-  ["sore","face","cafe","rose"],
-  ["creep","saint","panic","trees"],
-  ["wave","ties","east","view"],
-
-  ["dance","tired","dried","enact"],
-  ["heal","pigs","leap","sigh"],
-  ["nod","dad","and","odd"],
-  ["agree","short","great","horse"],
-  ["lion","flag","golf","nail"],
-  ["elder","necks","dense","clerk"],
-  ["oar","tag","ago","art"],
-  ["tuna","meat","aunt","team"],
-  ["finer","gifts","stiff","reign"],
-  ["sick","fade","cafe","disk"],
-
-  ["spill","chain","hills","panic","spain","chill"],
-  ["wood","bark","book","ward"],
-  ["wow","art","two","war"],
-  ["safe","gist","sage","fist"],
-  ["blast","tires","salts","tribe"],
-  ["farm","trip","firm","trap"],
-  ["shock","blame","block","shame"],
-  ["dice","lord","cold","ride"],
-  ["spire","radio","aides","prior"],
-  ["tilt","door","riot","told"],
-
-  ["lemon","thank","month","ankle"],
-  ["deep","rent","peer","tend"],
-  ["sun","fix","fun","six"],
-  ["river","lodge","lover","ridge"],
-  ["nude","hero","hour","need"],
-  ["false","worth","flash","wrote"],
-  ["cat","use","sue","act"],
-  ["test","iron","nets","trio"],
-  ["mercy","bride","crime","derby"],
-  ["loud","tank","knot","dual"],
-
-  ["blood","peaks","baked","pools"],
-  ["plop","lots","poll","stop"],
-  ["gem","art","arm","get"],
-  ["anti","hype","they","pain"],
-  ["store","items","moist","reset"],
-  ["type","math","myth","tape"],
-  ["fresh","slate","shelf","tears"],
-  ["frog","walk","flag","work"],
-  ["sheep","atlas","phase","steal"],
-  ["echo","plea","each","pole"],
-
-  ["opera","waste","aware","poets"],
-  ["life","zest","size","felt"],
-  ["its","eye","tie","yes"],
-  ["clone","rises","close","risen"],
-  ["snow","pest","step","owns"],
-  ["motto","fears","feast","motor"],
-  ["low","end","new","old"],
-  ["joke","salt","jolt","sake"],
-  ["glare","skies","eagle","risks"],
-  ["good","loss","dogs","solo"],
-
-  ["glee","sins","else","sign"],
-  ["alien","chess","seals","niche"],
-  ["not","yet","ten","toy"],
-  ["vote","amen","mate","oven"],
-  ["outer","norms","tuner","rooms"],
-  ["pork","cube","buck","rope"],
-  ["soy","pet","top","yes"],
-  ["algae","spoon","loose","pagan"],
-  ["thin","flea","leaf","hint"],
-  ["cash","gift","sigh","fact"],
-
-  ["await","trash","awash","trait"],
-  ["vent","hate","even","that"],
-  ["aid","net","din","tea"],
-  ["book","club","bulb","cook"],
-  ["bagel","sales","gases","label"],
-  ["slip","fete","step","file"],
-  ["basil","smell","balls","smile"],
-  ["vast","core","acts","over"],
-  ["plush","sleep","helps","pulse"],
-  ["bare","rule","lube","rare"],
-
-  ["moral","seeds","model","sears"],
-  ["spot","ally","lost","play"],
-  ["ape","arc","cap","ear"],
-  ["mount","chase","chant","mouse"],
-  ["lamb","duck","dumb","lack"],
-  ["broke","birds","brisk","bored"],
-  ["one","saw","sea","own"],
-  ["fawn","slim","film","swan"],
-  ["argue","later","eager","ultra"],
-  ["free","weed","feed","were"],
-
-  ["best","cafe","beef","cats"],
-  ["short","cutie","tours","ethic"],
-  ["dub","sir","bus","rid"],
-  ["gala","over","gave","oral"],
-  ["doubt","needs","debut","nodes"],
-  ["prod","meat","drop","team"],
-  ["wet","own","new","two"],
-  ["fresh","towel","three","flows"],
-  ["good","drum","drug","mood"],
-  ["glue","roof","goof","rule"],
-
-  ["reset","title","trite","steel"],
-  ["gosh","pipe","pope","sigh"],
-  ["beg","ate","age","bet"],
-  ["bang","kiss","bass","king"],
-  ["forms","trend","frond","terms"],
-  ["dump","jeep","deep","jump"],
-  ["clear","swamp","swear","clamp"],
-  ["cell","shoe","loch","else"],
-  ["rifle","bones","fires","noble"],
-  ["easy","sums","muse","says"],
-
-  ["denim","tread","dried","meant"],
-  ["mint","uses","mess","unit"],
-  ["pay","tap","yap","pat"],
-  ["disco","elect","cited","close"],
-  ["host","pact","chat","spot"],
-  ["angel","carol","along","clear"],
-  ["hot","use","out","she"],
-  ["seem","true","teem","sure"],
-  ["loyal","setup","alloy","upset"],
-  ["soup","risk","kiss","pour"],
-  ["hail","bees","bias","heel"],
-  ["make","acid","cake","amid"],
-  ["goose","cling","close","going"],
-  ["bot","nor","rob","ton"],
-  ["city","tune","cute","tiny"],
-  ["large","claws","grace","walls"],
-  ["huge","wart","wage","hurt"],
-  ["nude","yeti","unit","eyed"],
-  ["delay","start","dealt","stray"],
-  ["lack","toys","yolk","cats"],
-  ["sung","what","thaw","guns"],
-
-  ["viral","clips","crisp","villa"],
-  ["whip","beat","bath","wipe"],
-  ["exact","psalm","latex","camps"],
-  ["red","fun","fed","run"],
-  ["kink","deal","kind","leak"],
-  ["gauge","limit","image","guilt"],
-  ["seek","term","trek","seem"],
-  ["cover","pearl","clear","prove"],
-  ["warp","yard","draw","pray"],
-  ["ashes","drift","shaft","rides"],
-  ["dark","city","rack","tidy"],
-  ["wives","lingo","swing","olive"],
-  ["deny","tick","tiny","deck"],
-
-  ["taco","rush","chat","sour"],
-  ["right","paced","patch","ridge"],
-  ["slow","bond","bold","snow"],
-  ["human","lever","lemur","haven"],
-  ["snip","rats","pins","star"],
-  ["dream","leave","levee","drama"],
-  ["pert","duke","kept","rude"],
-  ["stiff","hedge","fifth","edges"],
-  ["hot","gas","got","has"],
-  ["haute","rolls","halls","route"],
-  ["full","load","loaf","dull"],
-  ["hatch","wings","hangs","witch"],
-  ["paid","user","pair","used"],
-  ["surge","boost","sober","gusto"],
-  ["rap","age","are","gap"],
-  ["area","hire","aria","here"],
-  ["forge","craft","force","graft"],
-  ["nerd","meat","dean","term"],
-  ["valid","alter","dealt","rival"],
-  ["seal","ears","earl","seas"],
-  ["that","hour","hurt","oath"],
-
-  ["paste","style","petty","seals"],
-  ["how","new","hew","now"],
-  ["hawk","eats","take","wash"],
-  ["lunar","resin","ruins","learn"],
-  ["jack","pipe","jape","pick"],
-  ["bar","row","rob","war"],
-  ["spare","plant","strap","penal"],
-  ["sofa","mode","does","foam"],
-  ["hike","were","heir","week"],
-  ["wears","glove","worse","gavel"],
-  ["dewy","nuts","duty","news"],
-  ["donor","tells","dolls","tenor"],
-  ["show","most","toss","whom"],
-  ["beds","envy","bevy","ends"],
-  ["mars","solo","lass","room"],
-
-  ["crane","spine","pecan","resin"],
-  ["free","tier","fire","tree"],
-  ["legit","happy","apply","eight"],
-  ["halo","prey","hero","play"],
-  ["imp","era","aim","per","mia","rep"],
-  ["door","went","redo","town"],
-  ["meet","noun","menu","note","nemo","tune"],
-  ["avid","idol","dial","void"],
-  ["kale","case","lace","sake"],
-  ["colon","hands","canon","holds"]
+["ace","yet","cat","eye",2,"",""],
+["port","ride","dirt","rope",3,"",""],
+["fish","calm","cash","film",2,"",""],
+["awe","gas","age","was",2,"",""],
+["race","mild","card","lime",3,"",""],
+["talk","cage","gate","lack",3,"",""],
+["old","dog","log","odd",2,"",""],
+["corn","flat","clan","fort",2,"",""],
+["smile","heart","earth","miles",1,"",""],
+["love","fits","five","lots",2,"",""],
+["blue","reef","beef","rule",2,"",""],
+["real","sofa","fare","also",4,"",""],
+["honey","boost","ebony","shoot",2,"",""],
+["eel","win","lie","new",3,"",""],
+["milk","nose","link","some",3,"leon","skim"],
+["least","cares","carts","lease",3,"",""],
+["key","tap","yak","pet",3,"",""],
+["frost","place","craft","slope",4,"",""],
+["gold","mine","gone","mild",2,"",""],
+["snap","cord","sand","crop",2,"",""],
+["money","verge","enemy","grove",4,"",""],
+["poke","fell","folk","peel",3,"",""],
+["ant","ear","ran","tea",2,"",""],
+["bowl","keen","blow","knee",1,"",""],
+["vocal","races","coral","caves",3,"",""],
+["flat","hood","halt","food",2,"",""],
+["naive","tests","taste","veins",4,"",""],
+["rain","loop","nail","poor",3,"",""],
+["green","chair","grain","cheer",2,"",""],
+["lazy","once","clay","zone",2,"",""],
+["space","world","crowd","lapse",4,"",""],
+["safe","date","deaf","seat",2,"",""],
+["gel","bow","log","web",3,"",""],
+["drawn","ridge","grand","wider",3,"",""],
+["deep","gulf","feed","plug",4,"",""],
+["giant","sense","genes","stain",3,"",""],
+["jog","ate","ago","jet",2,"",""],
+["true","been","beer","tune",3,"",""],
+["shade","trace","react","heads",2,"",""],
+["glue","down","lung","owed",2,"",""],
+["canoe","rally","clean","royal",3,"",""],
+["soft","less","self","toss",3,"",""],
+["irk","sad","ask","rid",2,"",""],
+["harp","epic","arch","pipe",2,"",""],
+["guide","array","argue","diary",4,"",""],
+["east","wind","dawn","ties",3,"",""],
+["gnome","raven","among","never",4,"",""],
+["slow","cord","crow","sold",2,"",""],
+["ocean","parts","acorn","tapes",3,"",""],
+["pony","bite","bone","pity",2,"",""],
+["daily","scene","since","delay",2,"",""],
+["bear","heir","bare","hire",1,"",""],
+["end","how","den","who",1,"",""],
+["count","swore","ounce","worst",2,"",""],
+["haul","form","foul","harm",2,"",""],
+["ghost","crews","chest","grows",2,"",""],
+["owl","ate","eat","low",1,"",""],
+["grit","feel","feet","girl",2,"",""],
+["spike","slain","likes","pains",2,"",""],
+["year","amid","army","idea",3,"",""],
+["clasp","bored","blade","corps",3,"",""],
+["seal","nets","lean","sets",3,"sean","lets"],
+["hey","out","the","you",2,"",""],
+["load","grow","drag","wool",4,"",""],
+["world","sites","slots","weird",3,"",""],
+["clot","bout","boot","cult",2,"",""],
+["magic","there","cream","eight",6,"",""],
+["sore","face","cafe","rose",2,"",""],
+["creep","saint","panic","trees",5,"",""],
+["wave","ties","east","view",3,"",""],
+["dance","tired","dried","enact",4,"",""],
+["heal","pigs","leap","sigh",3,"",""],
+["nod","dad","and","odd",2,"",""],
+["agree","short","great","horse",2,"",""],
+["lion","flag","golf","nail",4,"",""],
+["elder","necks","dense","clerk",5,"",""],
+["oar","tag","ago","art",2,"",""],
+["tuna","meat","aunt","team",2,"",""],
+["finer","gifts","stiff","reign",4,"",""],
+["sick","fade","cafe","disk",3,"",""],
+["spill","chain","hills","panic",3,"spain","chill"],
+["wood","bark","book","ward",2,"",""],
+["wow","art","two","war",2,"",""],
+["safe","gist","sage","fist",4,"",""],
+["blast","tires","salts","tribe",5,"",""],
+["farm","trip","firm","trap",3,"",""],
+["shock","blame","block","shame",2,"",""],
+["dice","lord","cold","ride",3,"",""],
+["spire","radio","aides","prior",4,"",""],
+["tilt","door","riot","told",4,"",""],
+["lemon","thank","month","ankle",4,"",""],
+["deep","rent","peer","tend",3,"",""],
+["sun","fix","fun","six",1,"",""],
+["river","lodge","lover","ridge",2,"",""],
+["nude","hero","hour","need",2,"",""],
+["false","worth","flash","wrote",2,"",""],
+["cat","use","sue","act",1,"",""],
+["test","iron","nets","trio",3,"",""],
+["mercy","bride","crime","derby",4,"",""],
+["loud","tank","knot","dual",4,"",""],
+["blood","peaks","baked","pools",3,"",""],
+["plop","lots","poll","stop",4,"",""],
+["gem","art","arm","get",1,"",""],
+["anti","hype","they","pain",3,"",""],
+["store","items","moist","reset",4,"",""],
+["type","math","myth","tape",1,"",""],
+["fresh","slate","shelf","tears",4,"",""],
+["frog","walk","flag","work",3,"",""],
+["sheep","atlas","phase","steal",4,"",""],
+["echo","plea","each","pole",2,"",""],
+["opera","waste","aware","poets",5,"",""],
+["life","zest","size","felt",4,"",""],
+["its","eye","tie","yes",2,"",""],
+["clone","rises","close","risen",3,"",""],
+["snow","pest","step","owns",2,"",""],
+["motto","fears","feast","motor",2,"",""],
+["low","end","new","old",2,"",""],
+["joke","salt","jolt","sake",2,"",""],
+["glare","skies","eagle","risks",3,"",""],
+["good","loss","dogs","solo",3,"",""],
+["glee","sins","else","sign",3,"",""],
+["alien","chess","seals","niche",4,"",""],
+["not","yet","ten","toy",3,"",""],
+["vote","amen","mate","oven",3,"",""],
+["outer","norms","tuner","rooms",3,"",""],
+["pork","cube","buck","rope",3,"",""],
+["soy","pet","top","yes",3,"",""],
+["algae","spoon","loose","pagan",4,"",""],
+["thin","flea","leaf","hint",1,"",""],
+["cash","gift","sigh","fact",4,"",""],
+["await","trash","awash","trait",2,"",""],
+["vent","hate","even","that",2,"",""],
+["aid","net","din","tea",3,"",""],
+["book","club","bulb","cook",2,"",""],
+["bagel","sales","gases","label",3,"",""],
+["slip","fete","step","file",3,"",""],
+["basil","smell","balls","smile",2,"",""],
+["vast","core","acts","over",3,"",""],
+["plush","sleep","helps","pulse",4,"",""],
+["bare","rule","lube","rare",3,"",""],
+["moral","seeds","model","sears",3,"",""],
+["spot","ally","lost","play",2,"",""],
+["ape","arc","cap","ear",2,"",""],
+["mount","chase","chant","mouse",2,"",""],
+["lamb","duck","dumb","lack",2,"",""],
+["broke","birds","brisk","bored",3,"",""],
+["one","saw","sea","own",2,"",""],
+["fawn","slim","film","swan",2,"",""],
+["argue","later","eager","ultra",3,"",""],
+["free","weed","feed","were",2,"",""],
+["best","cafe","beef","cats",3,"",""],
+["short","cutie","tours","ethic",4,"",""],
+["dub","sir","bus","rid",3,"",""],
+["gala","over","gave","oral",3,"",""],
+["doubt","needs","debut","nodes",2,"",""],
+["prod","meat","drop","team",2,"",""],
+["wet","own","new","two",3,"",""],
+["fresh","towel","three","flows",3,"",""],
+["good","drum","drug","mood",4,"",""],
+["glue","roof","goof","rule",2,"",""],
+["reset","title","trite","steel",4,"",""],
+["gosh","pipe","pope","sigh",3,"",""],
+["beg","ate","age","bet",2,"",""],
+["bang","kiss","bass","king",2,"",""],
+["forms","trend","frond","terms",3,"",""],
+["dump","jeep","deep","jump",1,"",""],
+["clear","swamp","swear","clamp",2,"",""],
+["cell","shoe","loch","else",4,"",""],
+["rifle","bones","fires","noble",4,"",""],
+["easy","sums","muse","says",3,"",""],
+["denim","tread","dried","meant",5,"",""],
+["mint","uses","mess","unit",2,"",""],
+["pay","tap","yap","pat",2,"",""],
+["disco","elect","cited","close",5,"",""],
+["host","pact","chat","spot",2,"",""],
+["angel","carol","along","clear",3,"",""],
+["hot","use","out","she",2,"",""],
+["seem","true","teem","sure",2,"",""],
+["loyal","setup","alloy","upset",2,"",""],
+["soup","risk","kiss","pour",3,"",""],
+["hail","bees","bias","heel",3,"",""],
+["make","acid","cake","amid",3,"",""],
+["goose","cling","close","going",2,"",""],
+["bot","nor","rob","ton",3,"",""],
+["city","tune","cute","tiny",2,"",""],
+["large","claws","grace","walls",4,"",""],
+["huge","wart","wage","hurt",2,"",""],
+["nude","yeti","unit","eyed",4,"",""],
+["delay","start","dealt","stray",2,"",""],
+["lack","toys","yolk","cats",4,"",""],
+["sung","what","thaw","guns",2,"",""],
+["viral","clips","crisp","villa",4,"",""],
+["whip","beat","bath","wipe",2,"",""],
+["exact","psalm","latex","camps",4,"",""],
+["red","fun","fed","run",1,"",""],
+["kink","deal","kind","leak",3,"",""],
+["gauge","limit","image","guilt",5,"",""],
+["seek","term","trek","seem",2,"",""],
+["cover","pearl","clear","prove",2,"",""],
+["warp","yard","draw","pray",4,"",""],
+["ashes","drift","shaft","rides",3,"",""],
+["dark","city","rack","tidy",3,"",""],
+["wives","lingo","swing","olive",3,"",""],
+["deny","tick","tiny","deck",2,"",""],
+["taco","rush","chat","sour",3,"",""],
+["right","paced","patch","ridge",3,"",""],
+["slow","bond","bold","snow",3,"",""],
+["human","lever","lemur","haven",4,"",""],
+["snip","rats","pins","star",3,"",""],
+["dream","leave","levee","drama",2,"",""],
+["pert","duke","kept","rude",3,"",""],
+["stiff","hedge","fifth","edges",4,"",""],
+["hot","gas","got","has",1,"",""],
+["haute","rolls","halls","route",2,"",""],
+["full","load","loaf","dull",4,"",""],
+["hatch","wings","hangs","witch",2,"",""],
+["paid","user","pair","used",1,"",""],
+["surge","boost","sober","gusto",5,"",""],
+["rap","age","are","gap",2,"",""],
+["area","hire","aria","here",3,"",""],
+["forge","craft","force","graft",4,"",""],
+["nerd","meat","dean","term",3,"",""],
+["valid","alter","dealt","rival",3,"",""],
+["seal","ears","earl","seas",1,"",""],
+["that","hour","hurt","oath",3,"",""],
+["paste","style","petty","seals",4,"",""],
+["how","new","hew","now",1,"",""],
+["hawk","eats","take","wash",3,"",""],
+["lunar","resin","ruins","learn",2,"",""],
+["jack","pipe","jape","pick",2,"",""],
+["bar","row","rob","war",3,"",""],
+["spare","plant","strap","penal",4,"",""],
+["sofa","mode","does","foam",3,"",""],
+["hike","were","heir","week",2,"",""],
+["wears","glove","worse","gavel",2,"",""],
+["dewy","nuts","duty","news",2,"",""],
+["donor","tells","dolls","tenor",2,"",""],
+["show","most","toss","whom",3,"",""],
+["beds","envy","bevy","ends",2,"",""],
+["mars","solo","lass","room",4,"",""],
+["crane","spine","pecan","resin",3,"",""],
+["free","tier","fire","tree",2,"",""],
+["legit","happy","apply","eight",3,"",""],
+["halo","prey","hero","play",3,"",""],
+["imp","era","aim","per",2,"mia","rep"],
+["door","went","redo","town",3,"",""],
+["meet","noun","menu","note",3,"nemo","tune"],
+["avid","idol","dial","void",3,"",""],
+["kale","case","lace","sake",3,"",""],
+["colon","hands","canon","holds",2,"",""]
 ];
 
 
-
-const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,blocked1,blocked2])=>({word1,word2,answer1,answer2,blocked1,blocked2}));
+const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2}));
 
 const $=id=>document.getElementById(id);
 const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine");
 
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false,solvedToggleReadyAt=0;
-let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null;
+let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,movesUsed=0;
 let totalScore=0,displayedTotalScore=0,noHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false;
 let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
@@ -349,7 +331,7 @@ const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(vis
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
-function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,solved,completedWithHints,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime}))}catch{}}
+function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime}))}catch{}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}setupPuzzle()}
 function goNext(){const nextIndex=puzzleIndex+1;if(nextIndex>=puzzles.length)return;puzzleIndex=nextIndex;setupPuzzle()}
@@ -386,12 +368,13 @@ function setupPuzzle(opts={}){
   const base=p.word1.split("").map((top,i)=>({id:`${puzzleIndex}-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
   const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
   tiles=base.map(t=>({...t,...mapById.get(t.id)}));
-  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;hintOrientationInverted=null;
+  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;shieldUsedThisLevel=false;
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
   clearDragProxy();
   if(restoreHints>0)applyHintsSilently(Math.min(restoreHints,tiles.length));
+  movesUsed=Number.isInteger(opts.restoreMovesUsed)?Math.max(0,opts.restoreMovesUsed):0;
   shieldUsedThisLevel=!!opts.restoreShieldUsedThisLevel;
   if(opts.restoreSolved){
     lockAllTilesToAnswer();solved=true;solvedToggleReadyAt=0;completedWithHints=!!opts.restoreCompletedWithHints;puzzleAwarded=!!opts.restoreAwarded;
@@ -412,6 +395,16 @@ function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}
 function getQuickSolveLimitMs(){return QUICK_SOLVE_LIMITS_MS[tiles.length]||QUICK_SOLVE_LIMITS_MS[6]}
 function getQuickSolvePoints(){return QUICK_SOLVE_POINTS_BY_LENGTH[tiles.length]||QUICK_SOLVE_POINTS_BY_LENGTH[6]}
 function getAutoHintDelayMs(){return AUTO_HINT_DELAY_LIMITS_MS[tiles.length]||AUTO_HINT_DELAY_LIMITS_MS[6]}
+function getEfficiencyMoveLimit(){
+  const minMoves=Number(currentPuzzle().minMoves);
+  if(!Number.isFinite(minMoves)||minMoves<=0)return null;
+  const extra=EFFICIENCY_EXTRA_MOVES_BY_LENGTH[tiles.length]??EFFICIENCY_EXTRA_MOVES_BY_LENGTH[6];
+  return minMoves+extra;
+}
+function isEfficientSolve(){
+  const limit=getEfficiencyMoveLimit();
+  return hintsUsed===0&&limit!==null&&movesUsed<=limit;
+}
 
 function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
@@ -436,11 +429,17 @@ function awardPuzzleScoreIfNeeded(){
     lastBonusMessages.push(`Quick solve +${quickPoints}`);
   }
 
-  const shieldLevel=(puzzleIndex+1)%10===0;
-  if(clean&&quick&&shields<MAX_SHIELDS){
-    shields++;
-    lastBonusMessages.push("Shield +1");
+  if(isEfficientSolve()){
+    if(shields<MAX_SHIELDS){
+      shields++;
+      lastBonusMessages.push("Efficiency +1");
+    }else{
+      totalScore+=EFFICIENCY_CAP_POINTS;
+      lastBonusMessages.push(`Efficiency +${EFFICIENCY_CAP_POINTS}`);
+    }
   }
+
+  const shieldLevel=ENABLE_LEVEL_BONUS_SHIELDS&&(puzzleIndex+1)%10===0;
   if(shieldLevel&&shields<MAX_SHIELDS){
     shields++;
     lastBonusMessages.push(`Level ${puzzleIndex+1} bonus +1`);
@@ -461,6 +460,7 @@ function awardPuzzleScoreIfNeeded(){
   puzzleAwarded=true;
   scoreAnimationShown=false;
 }
+function recordMove(){movesUsed++}
 function checkSolved(){if(isSolved()){const wasSolved=solved;solved=true;if(!wasSolved)solvedToggleReadyAt=Infinity;completedWithHints=hintsUsed>=tiles.length;stopAutoHintTimer();awardPuzzleScoreIfNeeded()}else footerInfoShown=false;render();saveGameState()}
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
@@ -506,23 +506,26 @@ function updateFooterDisplay(){
 }
 function toggleFooterInfo(){if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;footerInfoShown=!footerInfoShown;updateFooterDisplay()}
 function applyDisplayedReward(text){
-  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Quick solve \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/);
-  if(add)displayedTotalScore+=Number(add[1]);
+  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Quick solve \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)$/);
+  if(add&&!(text==="Efficiency +1"))displayedTotalScore+=Number(add[1]);
   const subtract=text.match(/^Hints? -([0-9]+)$/);
   if(subtract)displayedTotalScore=Math.max(0,displayedTotalScore-Number(subtract[1]));
-  const shieldMatch=text.match(/^(?:Shield|Level [0-9]+ bonus) \+([0-9]+)$/);
-  if(shieldMatch)displayedShields=Math.min(MAX_SHIELDS,displayedShields+Number(shieldMatch[1]));
+  const shieldMatch=text.match(/^(?:Shield|Efficiency|Level [0-9]+ bonus) \+([0-9]+)$/);
+  if(shieldMatch&&text==="Efficiency +1")displayedShields=Math.min(MAX_SHIELDS,displayedShields+1);
+  else if(shieldMatch&&!text.startsWith("Efficiency"))displayedShields=Math.min(MAX_SHIELDS,displayedShields+Number(shieldMatch[1]));
   updateFooterDisplay();
 }
 function popMessage(text,isZero=false,isFinal=false){
+  const isEfficiencyShield=text==="Efficiency +1";
+  const isShieldReward=/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text)||isEfficiencyShield;
+  const isStreakMessage=/[0-9]+-streak/.test(text);
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");
   message.classList.toggle("score-zero",isZero);
-  const isStreakMessage=/[0-9]+-streak/.test(text);
   message.classList.toggle("streak-pop",isStreakMessage);
-  message.classList.toggle("quick-pop",/Quick solve/.test(text));
+  message.classList.toggle("quick-pop",/Quick solve|^Efficiency \+(?!1$)[0-9]+$/.test(text));
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
-  message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text)||text==="ERROR");
-  message.classList.toggle("shield-pop",/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text));
+  message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text));
+  message.classList.toggle("shield-pop",isShieldReward);
   message.classList.toggle("final-pop",isFinal&&!isStreakMessage);
   message.textContent=text;
   void message.offsetWidth;
@@ -532,8 +535,7 @@ function showStarBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-1
 function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="shield-icon";s.textContent="🛡️";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function queueRewardAnimations(){
   clearBonusTimers();
-  let messages=[...lastAccountingMessages,...lastBonusMessages];
-  if(!messages.length)messages=["ERROR"];
+  const messages=[...lastAccountingMessages,...lastBonusMessages];
   const now=Date.now();
   if(messages.length){
     const finalText=messages[messages.length-1];
@@ -546,8 +548,8 @@ function queueRewardAnimations(){
     bonusTimerIds.push(setTimeout(()=>{
       applyDisplayedReward(text);
       popMessage(text,text==="+0",i===messages.length-1);
-      if(/Quick solve|[0-9]+-streak/.test(text))showStarBurst();
-      if(/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text))showShieldBurst();
+      if(/Quick solve|[0-9]+-streak/.test(text)||/^Efficiency \+(?!1$)[0-9]+$/.test(text))showStarBurst();
+      if(/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+$/.test(text)||text==="Efficiency +1")showShieldBurst();
     },i*1250));
   });
 }
@@ -564,7 +566,7 @@ function toggleSolvedStartPreview(){if(!solved)return;previewingStartWords?hideS
 
 function handlePointerDown(e,id){if(solved||(e.button!==undefined&&e.button!==0))return;const t=tiles.find(x=>x.id===id);if(!t||t.locked)return;const r=e.currentTarget.getBoundingClientRect();dragState={tileId:id,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,lastX:e.clientX,hasDragged:false,startOrder:tiles.map(t=>t.id).join("|"),width:r.width,height:r.height,tileSnapshot:{...t}};e.currentTarget.setPointerCapture(e.pointerId);document.addEventListener("pointermove",handlePointerMove);document.addEventListener("pointerup",handlePointerUp);document.addEventListener("pointercancel",handlePointerCancel)}
 function handlePointerMove(e){if(!dragState||e.pointerId!==dragState.pointerId)return;dragState.x=e.clientX;dragState.y=e.clientY;const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}}
-function handlePointerUp(e){if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();if(!s.hasDragged){const t=tiles.find(x=>x.id===s.tileId);if(t){t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return}}if(s.hasDragged&&s.startOrder!==tiles.map(t=>t.id).join("|"))noteInteraction();dragState=null;clearDragProxy();render();maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()}
+function handlePointerUp(e){if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();if(!s.hasDragged){const t=tiles.find(x=>x.id===s.tileId);if(t){t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return}}if(s.hasDragged&&s.startOrder!==tiles.map(t=>t.id).join("|")){recordMove();noteInteraction();}dragState=null;clearDragProxy();render();maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()}
 function handlePointerCancel(e){if(!dragState||e.pointerId!==dragState.pointerId)return;cleanupPointerListeners();dragState=null;clearDragProxy();render()}
 function cleanupPointerListeners(){document.removeEventListener("pointermove",handlePointerMove);document.removeEventListener("pointerup",handlePointerUp);document.removeEventListener("pointercancel",handlePointerCancel)}
 function liveReorderFromX(x,id){const dragged=tiles.find(t=>t.id===id);if(!dragged||dragged.locked||!dragState)return;const others=tiles.filter(t=>!t.locked&&t.id!==id),els=[...board.querySelectorAll(".tile-wrap")].filter(el=>el.dataset.id!==id&&el.dataset.locked!=="1");let insertAt=tiles.filter(t=>!t.locked).findIndex(t=>t.id===id);if(x>dragState.lastX){for(let i=0;i<els.length;i++){const r=els[i].getBoundingClientRect();if(x>r.left+r.width*.33)insertAt=i+1}}else if(x<dragState.lastX){for(let i=els.length-1;i>=0;i--){const r=els[i].getBoundingClientRect();if(x<r.right-r.width*.33)insertAt=i}}insertAt=clamp(insertAt,0,others.length);const next=[...others];next.splice(insertAt,0,dragged);const rebuilt=rebuildWithLockedTiles(next);if(!sameOrder(rebuilt,tiles)){tiles=rebuilt;render();moveDragProxy(dragState.x,dragState.y)}dragState.lastX=x}
@@ -611,7 +613,7 @@ window.addEventListener("pageshow",resumeAutoHintTimer);
 window.addEventListener("orientationchange",()=>setTimeout(()=>{message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""},80));
 window.addEventListener("resize",()=>{if(solved){message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""}});
 
-function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
+function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
 initGame();
 </script>
 </body>
