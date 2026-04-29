@@ -46,9 +46,10 @@ const AUTO_HINT_FILL_MS=6000;
 const QUICK_SOLVE_LIMITS_MS={3:6000,4:13000,5:20000,6:28000};
 const QUICK_SOLVE_POINTS_BY_LENGTH={3:50,4:100,5:150,6:200};
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
-const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:3,5:5,6:9};
+const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:3,5:6,6:12};
 const EFFICIENCY_CAP_POINTS=100;
 const ENABLE_LEVEL_BONUS_SHIELDS=false;
+const ENABLE_QUICK_SOLVE=false;
 const MAX_SHIELDS=4;
 const SOLVED_TOGGLE_DELAY_MS=1250;
 const SCORE_POP_MS=2000;
@@ -409,7 +410,7 @@ function isEfficientSolve(){
 function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
   const clean=hintsUsed===0;
-  const quick=Date.now()-puzzleStartTime<=getQuickSolveLimitMs();
+  const quick=ENABLE_QUICK_SOLVE&&Date.now()-puzzleStartTime<=getQuickSolveLimitMs();
   const gross=grossScoreForCurrentPuzzle();
   const penalty=hintPenaltyForCurrentPuzzle();
   lastPuzzleScore=scoreForCurrentPuzzle();
