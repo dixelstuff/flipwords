@@ -318,7 +318,7 @@ const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nex
 
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false,solvedToggleReadyAt=0;
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,movesUsed=0;
-let totalScore=0,displayedTotalScore=0,noHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false;
+let totalScore=0,displayedTotalScore=0,noHintStreak=0,displayedNoHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false;
 let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[];
@@ -335,7 +335,7 @@ function clearQueryString(){history?.replaceState?.({},document.title,location.p
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
 function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime}))}catch{}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
-function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}setupPuzzle()}
+function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}setupPuzzle()}
 function goNext(){
   const nextIndex=puzzleIndex+1;
   if(nextIndex>=puzzles.length)return;
@@ -373,6 +373,7 @@ function setupPuzzle(opts={}){
   footerInfoShown=false;
   clearAllTimers();
   displayedTotalScore=totalScore;
+  displayedNoHintStreak=noHintStreak;
   displayedShields=shields;
   const p=currentPuzzle(),restoreHints=Number(opts.restoreHints||0);
   const base=p.word1.split("").map((top,i)=>({id:`${puzzleIndex}-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
@@ -473,6 +474,8 @@ function awardPuzzleScoreIfNeeded(){
     if(bonus){
       totalScore+=bonus.points;
       lastBonusMessages.push(`${bonus.label} +${bonus.points}`);
+    }else{
+      lastBonusMessages.push("Streak +1 🔥");
     }
   }else if(!shieldUsedThisLevel){
     noHintStreak=0;
@@ -542,12 +545,13 @@ function updateFooterDisplay(){
     return;
   }
   status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${displayedTotalScore}`;
-  scoreLine.innerHTML=`Streak ${noHintStreak} | Shields ${displayedShields}`;
+  scoreLine.innerHTML=`Streak ${displayedNoHintStreak} | Shields ${displayedShields}`;
 }
 function toggleFooterInfo(){if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;footerInfoShown=!footerInfoShown;updateFooterDisplay()}
 function applyDisplayedReward(text){
   const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Speed bonus \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
   if(add&&!/^Efficiency \+1/.test(text))displayedTotalScore+=Number(add[1]);
+  if(/^Streak \+1/.test(text)||/[0-9]+-streak/.test(text))displayedNoHintStreak=Math.min(noHintStreak,displayedNoHintStreak+1);
   const subtract=text.match(/^Hints? -([0-9]+)$/);
   if(subtract)displayedTotalScore=Math.max(0,displayedTotalScore-Number(subtract[1]));
   const shieldMatch=text.match(/^(?:Shield|Efficiency|Level [0-9]+ bonus) \+([0-9]+)/);
@@ -558,6 +562,7 @@ function applyDisplayedReward(text){
 function popMessage(text,isZero=false,isFinal=false){
   const isEfficiencyShield=/^Efficiency \+1/.test(text);
   const isShieldReward=/^(?:Shield|Level [0-9]+ bonus) \+[0-9]+/.test(text)||isEfficiencyShield;
+  const isStreakIncrement=/^Streak \+1/.test(text);
   const isStreakMessage=/[0-9]+-streak/.test(text);
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");
   message.classList.toggle("score-zero",isZero);
@@ -565,7 +570,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.toggle("quick-pop",/Speed bonus|^Efficiency \+(?!1)[0-9]+/.test(text));
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
   message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text));
-  message.classList.toggle("shield-pop",isShieldReward);
+  message.classList.toggle("shield-pop",isShieldReward||isStreakIncrement);
   message.classList.toggle("final-pop",isFinal&&!isStreakMessage);
   message.textContent=text;
   void message.offsetWidth;
@@ -660,7 +665,7 @@ window.addEventListener("pageshow",resumeAutoHintTimer);
 window.addEventListener("orientationchange",()=>setTimeout(()=>{message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""},80));
 window.addEventListener("resize",()=>{if(solved){message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""}});
 
-function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
+function initGame(){const saved=loadSavedState();if(window.__jumpLevel!==undefined&&window.__jumpLevel!==null){resetGame(window.__jumpLevel-1);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now()})}
 initGame();
 </script>
 </body>
