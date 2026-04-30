@@ -402,7 +402,6 @@ const puzzleRows=[
 ];
 
 
-
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus}));
 
 const $=id=>document.getElementById(id);
@@ -572,6 +571,7 @@ function awardPuzzleScoreIfNeeded(){
     }
   }else if(!shieldUsedThisLevel){
     noHintStreak=0;
+    displayedNoHintStreak=0;
   }
 
   totalScore+=lastPuzzleScore;
