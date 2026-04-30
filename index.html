@@ -430,7 +430,7 @@ let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAw
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
-let stats={solvedCount:0,longestStreak:0,speedRatingTotal:0,efficiencyRatingTotal:0,fastestByLength:{3:null,4:null,5:null}};
+let stats={longestStreak:0,byLength:{3:{solved:0,clean:0,fastest:null},4:{solved:0,clean:0,fastest:null},5:{solved:0,clean:0,fastest:null}}};
 
 const currentPuzzle=()=>puzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
@@ -440,7 +440,16 @@ const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(vis
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function normalizeStats(s){
-  return {solvedCount:Math.max(0,Number(s?.solvedCount)||0),longestStreak:Math.max(0,Number(s?.longestStreak)||0),speedRatingTotal:Math.max(0,Number(s?.speedRatingTotal)||0),efficiencyRatingTotal:Math.max(0,Number(s?.efficiencyRatingTotal)||0),fastestByLength:{3:s?.fastestByLength?.[3]??null,4:s?.fastestByLength?.[4]??null,5:s?.fastestByLength?.[5]??null}};
+  const blank={longestStreak:Math.max(0,Number(s?.longestStreak)||0),byLength:{3:{solved:0,clean:0,fastest:null},4:{solved:0,clean:0,fastest:null},5:{solved:0,clean:0,fastest:null}}};
+  [3,4,5].forEach(len=>{
+    const src=s?.byLength?.[len]||{};
+    blank.byLength[len]={
+      solved:Math.max(0,Number(src.solved)||0),
+      clean:Math.max(0,Number(src.clean)||0),
+      fastest:typeof src.fastest==="number"?src.fastest:null
+    };
+  });
+  return blank;
 }
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
@@ -531,47 +540,14 @@ function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(tiles.length)
 function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function getStreakBonus(streak){return streak>=5&&streak%5===0?{label:`${streak}-streak`,points:streak*15}:null}
-function getSpeedRatingForSolve(elapsedMs){
-  const delay=getAutoHintDelayForTileCount(tiles.length)||0;
-  if(!delay)return 0;
-  const ratio=elapsedMs/delay;
-  let rating=0;
-  if(ratio<=.25)rating=5;
-  else if(ratio<=.35)rating=4.5;
-  else if(ratio<=.50)rating=4;
-  else if(ratio<=.60)rating=3.5;
-  else if(ratio<=.75)rating=3;
-  else if(ratio<=.85)rating=2.5;
-  else if(ratio<=1.00)rating=2;
-  else if(ratio<=1.10)rating=1.5;
-  else if(ratio<=1.35)rating=1;
-  return hintsUsed>0?Math.min(rating,3.5):rating;
-}
-function getEfficiencyRatingForSolve(){
-  const minMoves=Number(currentPuzzle().minMoves);
-  if(!Number.isFinite(minMoves)||minMoves<=0)return 0;
-  const allowance=EFFICIENCY_EXTRA_MOVES_BY_LENGTH[tiles.length]??0;
-  const base=minMoves+allowance;
-  let rating=1;
-  if(movesUsed<=base*1.2)rating=5;
-  else if(movesUsed<=base*1.6)rating=4.5;
-  else if(movesUsed<=base*2.1)rating=4;
-  else if(movesUsed<=base*2.5)rating=3.5;
-  else if(movesUsed<=base*3.5)rating=3;
-  else if(movesUsed<=base*4.5)rating=2.5;
-  else if(movesUsed<=base*6.0)rating=2;
-  else if(movesUsed<=base*7.0)rating=1.5;
-  return hintsUsed>0?Math.min(rating,3):rating;
-}
 function updateStatsForSolvedPuzzle(elapsedMs){
-  const speedRating=getSpeedRatingForSolve(elapsedMs),efficiencyRating=getEfficiencyRatingForSolve();
-  stats.solvedCount++;
-  stats.speedRatingTotal+=speedRating;
-  stats.efficiencyRatingTotal+=efficiencyRating;
   stats.longestStreak=Math.max(stats.longestStreak,noHintStreak);
-  if(hintsUsed===0&&tiles.length>=3&&tiles.length<=5){
-    const current=stats.fastestByLength[tiles.length];
-    if(current===null||elapsedMs<current)stats.fastestByLength[tiles.length]=elapsedMs;
+  if(tiles.length<3||tiles.length>5)return;
+  const row=stats.byLength[tiles.length];
+  row.solved++;
+  if(hintsUsed===0){
+    row.clean++;
+    if(row.fastest===null||elapsedMs<row.fastest)row.fastest=elapsedMs;
   }
 }
 function getAutoHintDelayForTileCount(n){return AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS[n]??null}
@@ -710,23 +686,21 @@ function render(){
 
 function formatScore(n){return Number(n).toLocaleString("en-AU")}
 function formatTime(ms){return `${(ms/1000).toFixed(1)}s`}
-function ratingStars(value){
-  let html='<span class="star-rating">';
-  for(let i=1;i<=5;i++){
-    const fill=clamp(value-(i-1),0,1)*100;
-    html+=`<span class="rate-star"><span class="fill" style="--fill:${fill}%"></span></span>`;
-  }
-  return html+'</span>';
-}
 function updateStatsPanel(){
   const rows=[];
   if(stats.longestStreak>0)rows.push(`Longest streak ${stats.longestStreak}`);
-  if(stats.solvedCount>0){
-    const speed=stats.speedRatingTotal/stats.solvedCount,eff=stats.efficiencyRatingTotal/stats.solvedCount;
-    rows.push(`Speed ${ratingStars(speed)} (${speed.toFixed(1)})`);
-    rows.push(`Efficiency ${ratingStars(eff)} (${eff.toFixed(1)})`);
+  const cleanRows=[];
+  [3,4,5].forEach(len=>{
+    const row=stats.byLength[len];
+    if(!row||row.solved<=0)return;
+    const pct=Math.round((row.clean/row.solved)*100);
+    const best=row.fastest!==null&&row.fastest!==undefined?` · best ${formatTime(row.fastest)}`:"";
+    cleanRows.push(`${len}-letter ${row.clean}/${row.solved} (${pct}%)${best}`);
+  });
+  if(cleanRows.length){
+    rows.push("0-hint solves");
+    rows.push(...cleanRows);
   }
-  [3,4,5].forEach(len=>{const t=stats.fastestByLength[len];if(t!==null&&t!==undefined)rows.push(`Fastest ${len}-letter ${formatTime(t)}`)});
   statsPanel.innerHTML=rows.join("<br>");
   statsPanel.classList.toggle("visible",solved&&rows.length>0);
 }
