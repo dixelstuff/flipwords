@@ -45,7 +45,7 @@ const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:140000,4:71000,3:23000,2:
 const AUTO_HINT_FILL_MS=10000;
 const SPEED_BONUS_WINDOW_FACTOR=0.5;
 const MAX_SPEED_BONUS=75;
-const MIN_SPEED_BONUS=5;
+const MIN_SPEED_BONUS=10;
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const EFFICIENCY_EXTRA_MOVES_BY_LENGTH={3:0,4:2,5:5,6:10};
 const EFFICIENCY_CAP_POINTS=75;
@@ -399,7 +399,6 @@ const puzzleRows=[
 ];
 
 
-
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus}));
 
 const $=id=>document.getElementById(id);
@@ -501,8 +500,9 @@ function getSpeedBonusPoints(){
   if(!limit)return 0;
   const elapsed=Date.now()-puzzleStartTime;
   if(elapsed>limit)return 0;
-  const raw=MAX_SPEED_BONUS-(elapsed/limit)*(MAX_SPEED_BONUS-MIN_SPEED_BONUS);
-  return clamp(roundToNearestFive(raw),MIN_SPEED_BONUS,MAX_SPEED_BONUS);
+  const raw=MAX_SPEED_BONUS-(elapsed/limit)*(MAX_SPEED_BONUS-5);
+  const rounded=roundToNearestFive(raw);
+  return rounded<MIN_SPEED_BONUS?0:clamp(rounded,MIN_SPEED_BONUS,MAX_SPEED_BONUS);
 }
 function getAutoHintDelayMs(){
   const unlocked=tiles.filter(t=>!t.locked).length;
@@ -621,6 +621,7 @@ function render(){
   updateFooterDisplay();
 }
 
+function formatScore(n){return Number(n).toLocaleString("en-AU")}
 function updateFooterDisplay(){
   const isFinal=solved&&puzzleIndex>=puzzles.length-1&&!DEBUG;
   status.classList.toggle("footer-info",footerInfoShown&&!isFinal);
@@ -634,7 +635,7 @@ function updateFooterDisplay(){
     scoreLine.innerHTML="&nbsp;";
     return;
   }
-  status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${displayedTotalScore}`;
+  status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${formatScore(displayedTotalScore)}`;
   scoreLine.innerHTML=`Streak ${displayedNoHintStreak} | Shields ${displayedShields}`;
 }
 function toggleFooterInfo(){if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;footerInfoShown=!footerInfoShown;updateFooterDisplay()}
