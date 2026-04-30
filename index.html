@@ -489,9 +489,6 @@ const puzzleRows=[
 ];
 
 
-
-
-
 const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus}));
 
 const $=id=>document.getElementById(id);
@@ -505,7 +502,7 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let statsDetailsShown=false;
-let stats={solvedCount:0,longestStreak:0,byLength:{3:{solved:0,clean:0,cleanTimeTotal:0,fastest:null},4:{solved:0,clean:0,cleanTimeTotal:0,fastest:null},5:{solved:0,clean:0,cleanTimeTotal:0,fastest:null}}};
+let stats={solvedCount:0,longestStreak:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
 const currentPuzzle=()=>puzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
@@ -515,13 +512,13 @@ const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(vis
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function normalizeStats(s){
-  const blank={solvedCount:Math.max(0,Number(s?.solvedCount)||0),longestStreak:Math.max(0,Number(s?.longestStreak)||0),byLength:{3:{solved:0,clean:0,cleanTimeTotal:0,fastest:null},4:{solved:0,clean:0,cleanTimeTotal:0,fastest:null},5:{solved:0,clean:0,cleanTimeTotal:0,fastest:null}}};
+  const blank={solvedCount:Math.max(0,Number(s?.solvedCount)||0),longestStreak:Math.max(0,Number(s?.longestStreak)||0),byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
   [3,4,5].forEach(len=>{
     const src=s?.byLength?.[len]||{};
     blank.byLength[len]={
       solved:Math.max(0,Number(src.solved)||0),
       clean:Math.max(0,Number(src.clean)||0),
-      cleanTimeTotal:Math.max(0,Number(src.cleanTimeTotal)||0),
+      cleanTimes:Array.isArray(src.cleanTimes)?src.cleanTimes.filter(t=>typeof t==="number"&&Number.isFinite(t)):(src.clean>0&&src.cleanTimeTotal?[src.cleanTimeTotal/src.clean]:[]),
       fastest:typeof src.fastest==="number"?src.fastest:null
     };
   });
@@ -624,7 +621,7 @@ function updateStatsForSolvedPuzzle(elapsedMs){
   row.solved++;
   if(hintsUsed===0){
     row.clean++;
-    row.cleanTimeTotal+=elapsedMs;
+    row.cleanTimes.push(elapsedMs);
     if(row.fastest===null||elapsedMs<row.fastest)row.fastest=elapsedMs;
   }
 }
@@ -753,7 +750,8 @@ function render(){
   });
   const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=puzzles.length-1;
   nextBtn.classList.toggle("visible",solved&&!isFinal);nextBtn.textContent="Next";
-  hintBtn.disabled=solved||allLocked;startWordsBtn.disabled=solved||isShowingStartingWords();
+  hintBtn.disabled=solved||allLocked;startWordsBtn.disabled=solved||(hintsUsed>0&&isShowingStartingWords());
+  startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
   subtitle.classList.toggle("level-label",puzzleIndex>0);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
   if(solved&&lastPuzzleScore!==null&&!scoreAnimationShown){clearInfoMessage(false);scoreAnimationShown=true;queueRewardAnimations()}
@@ -764,15 +762,22 @@ function render(){
 
 function formatScore(n){return Number(n).toLocaleString("en-AU")}
 function formatTime(ms){return `${(ms/1000).toFixed(1)}s`}
+function medianTime(times){
+  if(!Array.isArray(times)||!times.length)return null;
+  const sorted=[...times].sort((a,b)=>a-b);
+  const mid=Math.floor(sorted.length/2);
+  return sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2;
+}
 function updateStatsPanel(){
   const tableRows=[];
   [3,4,5].forEach(len=>{
-    const row=stats.byLength[len]||{solved:0,clean:0,cleanTimeTotal:0,fastest:null};
+    const row=stats.byLength[len]||{solved:0,clean:0,cleanTimes:[],fastest:null};
     const pct=row.solved>0?Math.round((row.clean/row.solved)*100):null;
     const rate=row.solved>0?`${row.clean}/${row.solved} (${pct}%)`:"—";
-    const avg=row.clean>0?formatTime(row.cleanTimeTotal/row.clean):"—";
+    const median=medianTime(row.cleanTimes);
+    const med=median!==null?formatTime(median):"—";
     const best=row.fastest!==null&&row.fastest!==undefined?formatTime(row.fastest):"—";
-    tableRows.push(`<tr><td>${len}-letter</td><td>${rate}</td><td>${avg}</td><td>${best}</td></tr>`);
+    tableRows.push(`<tr><td>${len}-letter</td><td>${rate}</td><td>${med}</td><td>${best}</td></tr>`);
   });
   statsPanel.innerHTML=`
     <div class="stats-card" role="dialog" aria-modal="true" aria-label="Game details">
@@ -785,7 +790,7 @@ function updateStatsPanel(){
         <div class="stats-summary">Longest streak: <strong>${stats.longestStreak||0}</strong></div>
       </div>
       <hr>
-      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>0-hint solves</th><th>Rate</th><th>Avg</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
+      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>0-hint solves</th><th>Rate</th><th>Median</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
       <p class="stats-explainer">Solve quickly to avoid auto-hints, but efficiently to earn shields. Shields protect your streak from hints, helping you score bigger streak bonuses. You can hold up to 3 shields only.</p>
     </div>`;
   statsToggle.classList.toggle("visible",solved);
@@ -895,7 +900,25 @@ function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved|
 function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if(solved||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if(!solved&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if(solved||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if(!solved&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
-function showStartingWords(){if(solved||isShowingStartingWords())return;if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")}
+function resetToStartingWords(){
+  if(solved||hintsUsed>0)return;
+  clearDragProxy();
+  dragState=null;
+  tiles=[...tiles].sort((a,b)=>Number(a.id.split("-").pop())-Number(b.id.split("-").pop())).map(t=>({...t,flipped:false,flipAnim:"",locked:false}));
+  returnedToStartNoticeShown=true;
+  clearReturnedToStartTimer();
+  clearSingleStartWordTimer();
+  clearNoticeTimer();
+  if(message.classList.contains("info"))clearInfoMessage();
+  render();
+  saveGameState();
+}
+function showStartingWords(){
+  if(hintsUsed===0&&!solved){resetToStartingWords();return}
+  if(solved||isShowingStartingWords())return;
+  if(message.classList.contains("info")&&message.dataset.infoType==="starters"){clearInfoMessage();return}
+  const p=currentPuzzle();showInfoMessage(`Started as: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}`,"starters")
+}
 function showSolvedStartPreview(){if(!solved||previewingStartWords)return;previewingStartWords=true;clearInfoMessage(false);message.classList.remove("info","score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop");message.classList.add("hold-score");message.textContent="These were the start words";render()}
 function hideSolvedStartPreview(){if(!previewingStartWords)return;previewingStartWords=false;message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");message.textContent="";render()}
 function toggleSolvedStartPreview(){if(!solved)return;previewingStartWords?hideSolvedStartPreview():showSolvedStartPreview()}
