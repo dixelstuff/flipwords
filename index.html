@@ -23,7 +23,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .feedback-area{position:relative;height:32px;display:flex;align-items:flex-start;justify-content:center;margin:0 0 2px}.message{min-height:24px;margin-top:-5px;color:var(--success);font-weight:800;font-size:24px;opacity:0;pointer-events:none}.message.info{color:var(--muted);font-size:19px;font-weight:750;animation:info-fade 4s ease-out forwards}.message.score-pop{animation:score-pop 2s ease-out forwards}.message.quick-pop{animation-duration:2.7s}.message.score-zero{color:var(--muted)}.message.quick-pop,.message.streak-pop,.message.shield-pop,.message.accounting-pop,.message.penalty-pop{font-size:23px}.message.penalty-pop{color:#737475}.message.shield-pop{color:#737475}.message.final-pop{animation:final-score-pop 3s ease-out forwards}.message.streak-pop{animation:streak-score-pop 7.6s ease-out forwards}.message.hold-score{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none;transform:none}.message.hold-score{opacity:1;transform:translateY(0) scale(1);animation:none}.star-burst{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center}.star{position:absolute;color:#d7a829;font-size:19px;font-weight:900;opacity:0;animation:star-burst 1.15s cubic-bezier(.18,.75,.2,1) forwards}.streak-star{font-size:22px}.star.flame{font-size:22px}.message.streak-pop{font-size:23px}.shield-icon{position:absolute;font-size:19px;opacity:0;animation:shield-burst 1.15s cubic-bezier(.18,.75,.2,1) forwards}
 @keyframes star-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes shield-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes info-fade{0%{opacity:0;transform:translateY(4px)}4%,92%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(4px)}}@keyframes score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}16%{opacity:1;transform:translateY(0) scale(1.05)}72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes final-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}10%{opacity:1;transform:translateY(0) scale(1.05)}68%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes streak-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1.05)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
 .controls{display:grid;grid-template-columns:126px 126px;align-items:center;justify-content:center;gap:8px;min-height:44px}button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:0 15px;width:126px;height:50px;line-height:1;font-size:16px;font-weight:700;letter-spacing:.01em;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.46;cursor:default}.start-words{color:var(--ink);background:var(--soft)}.hint{position:relative;overflow:hidden;color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint::before{content:"";position:absolute;inset:0;width:var(--hint-fill,0%);background:rgba(255,255,255,.42);pointer-events:none;transition:width .08s linear}.hint span{position:relative;z-index:1}.hint:disabled{color:var(--ink);background:var(--soft);box-shadow:none}.action-slot{position:relative;display:block;width:126px;height:50px;line-height:0}.action-slot button{position:absolute;inset:0}.next{visibility:hidden;color:#fff;background:var(--success);pointer-events:none}.next.visible{visibility:visible;pointer-events:auto}.hidden{visibility:hidden!important;pointer-events:none}
-.status{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.35;min-height:62px;display:flex;align-items:flex-end;justify-content:center;padding:0 12px;transform:translateY(-28px)}.status.footer-info{align-items:center;padding-left:28px;padding-right:28px;transform:translateY(10px)}.restart-link{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.score-line{margin-top:0;color:var(--muted);font-size:16px;line-height:1.25;min-height:22px;transform:translateY(-28px)}.stats-toggle{display:none;margin:2px auto 0;background:transparent;border:none;padding:0;color:#0a84ff;font:inherit;font-size:16px;line-height:1.35;cursor:pointer}.stats-toggle.visible{display:block}.stats-panel{display:none;margin:10px auto 0;max-width:420px;padding:12px 20px;color:var(--muted);font-size:13px;line-height:1.45;text-align:center}.stats-panel.visible{display:block}.stats-heading{margin-top:8px;font-weight:800;color:var(--ink)}.stats-heading:first-child{margin-top:0}.stats-row{white-space:nowrap}.star-rating{display:inline-flex;gap:1px;vertical-align:-1px}.rate-star{position:relative;display:inline-block;width:14px;color:#d8d4cc}.rate-star::before{content:"★"}.rate-star .fill{position:absolute;left:0;top:0;width:var(--fill);overflow:hidden;color:#d7a829}.rate-star .fill::before{content:"★"}
+.status{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.35;min-height:62px;display:flex;align-items:flex-end;justify-content:center;padding:0 12px;transform:translateY(-28px)}.status.footer-info{align-items:center;padding-left:28px;padding-right:28px;transform:translateY(10px)}.restart-link{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.score-line{margin-top:0;color:var(--muted);font-size:16px;line-height:1.25;min-height:22px;transform:translateY(-28px)}.stats-toggle{display:none;margin:-24px auto 0;background:transparent;border:none;padding:0;color:#0a84ff;font:inherit;font-size:16px;line-height:1.35;cursor:pointer;transform:translateY(-28px)}.stats-toggle.visible{display:block}.stats-panel{display:none;position:fixed;inset:0;z-index:9999;background:rgba(36,30,50,.28);align-items:center;justify-content:center;padding:22px;color:var(--muted);font-size:14px;line-height:1.45;text-align:left}.stats-panel.visible{display:flex}.stats-card{width:min(420px,calc(100vw - 44px));background:#fff;border-radius:24px;box-shadow:0 18px 48px rgba(37,31,52,.22);padding:22px 22px 18px}.stats-card h3{margin:0 0 10px;color:var(--ink);font-size:22px;line-height:1.2;text-align:center}.stats-card hr{border:none;border-top:1px solid rgba(37,31,52,.12);margin:14px 0}.stats-summary{font-weight:800;color:var(--ink);text-align:center;margin-bottom:2px}.stats-subheading{font-weight:800;color:var(--ink);margin-bottom:8px}.stats-table{width:100%;border-collapse:collapse;font-size:13px}.stats-table th{font-weight:800;color:var(--ink);text-align:left;border-bottom:1px solid rgba(37,31,52,.12);padding:5px 4px}.stats-table td{padding:6px 4px;border-bottom:1px solid rgba(37,31,52,.07);white-space:nowrap}.stats-table td:not(:first-child),.stats-table th:not(:first-child){text-align:right}.stats-close{display:block;margin:16px auto 0;background:var(--green);border:none;border-radius:999px;color:white;font-weight:800;font-size:16px;padding:10px 28px;cursor:pointer}.star-rating{display:inline-flex;gap:1px;vertical-align:-1px}.rate-star{position:relative;display:inline-block;width:14px;color:#d8d4cc}.rate-star::before{content:"★"}.rate-star .fill{position:absolute;left:0;top:0;width:var(--fill);overflow:hidden;color:#d7a829}.rate-star .fill::before{content:"★"}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:340px;height:47px;padding:0 22px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:24px;padding-bottom:24px}.board{gap:14px}.tile-wrap{width:clamp(72px,8.5vw,92px);height:clamp(130px,15vw,156px)}.letter{font-size:clamp(42px,4.8vw,56px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){.game{display:flex;width:min(96vw,760px);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));transform:none;justify-content:center}.title{font-size:34px}.subtitle{max-width:520px;height:35px;margin:4px auto 8px;padding:0 10px;font-size:14px;line-height:1.25}.subtitle.level-label{font-size:20px;padding-top:10px}.board-shell{padding:6px 8px 8px}.board{gap:7px;min-height:86px}.board.short-board{gap:10px}.tile-wrap{width:clamp(42px,8vw,58px);height:clamp(76px,17vw,96px)}.letter{font-size:clamp(24px,4.4vw,34px)}.feedback-area{height:24px}.message{font-size:20px}.message.info{font-size:15px}.controls{grid-template-columns:104px 104px;gap:8px;min-height:38px}button{width:104px;height:38px;font-size:14px}.action-slot{width:104px;height:38px}.status{margin-top:8px;font-size:14px;min-height:42px}.status.footer-info{padding-left:18px;padding-right:18px}.score-line{margin-top:0;font-size:14px;min-height:19px}}
@@ -691,48 +691,38 @@ function render(){
 function formatScore(n){return Number(n).toLocaleString("en-AU")}
 function formatTime(ms){return `${(ms/1000).toFixed(1)}s`}
 function updateStatsPanel(){
-  const rows=[];
-  rows.push('<div class="stats-heading">Scoring</div>');
-  rows.push('Solve efficiently to earn shields, and quickly for bonus points. Shields protect your streak from hints, helping you build bigger streak bonuses. Shield cap: 3.');
-  if(stats.longestStreak>0){
-    rows.push('<div class="stats-heading">Stats</div>');
-    rows.push(`Longest streak ${stats.longestStreak}`);
-  }
-  const cleanRows=[];
+  const tableRows=[];
   [3,4,5].forEach(len=>{
     const row=stats.byLength[len];
     if(!row||row.solved<=0)return;
     const pct=Math.round((row.clean/row.solved)*100);
-    const avg=row.clean>0?` · avg ${formatTime(row.cleanTimeTotal/row.clean)}`:"";
-    const best=row.fastest!==null&&row.fastest!==undefined?` · best ${formatTime(row.fastest)}`:"";
-    cleanRows.push(`<div class="stats-row">${len}-letter ${row.clean}/${row.solved} (${pct}%)${avg}${best}</div>`);
+    const avg=row.clean>0?formatTime(row.cleanTimeTotal/row.clean):"—";
+    const best=row.fastest!==null&&row.fastest!==undefined?formatTime(row.fastest):"—";
+    tableRows.push(`<tr><td>${len}-letter</td><td>${row.clean}/${row.solved} (${pct}%)</td><td>${avg}</td><td>${best}</td></tr>`);
   });
-  if(cleanRows.length){
-    rows.push('<div class="stats-heading">0-hint solves</div>');
-    rows.push(...cleanRows);
-  }
-  statsPanel.innerHTML=rows.join("<br>");
+  statsPanel.innerHTML=`
+    <div class="stats-card" role="dialog" aria-modal="true" aria-label="Game details">
+      <h3>Details</h3>
+      ${stats.longestStreak>0?`<div class="stats-summary">Longest streak ${stats.longestStreak}</div>`:""}
+      ${tableRows.length?`<hr><div class="stats-subheading">0-hint solves</div><table class="stats-table"><thead><tr><th>Length</th><th>Rate</th><th>Avg</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>`:""}
+      <button id="statsClose" class="stats-close" type="button">Close</button>
+    </div>`;
   statsToggle.classList.toggle("visible",solved);
-  statsToggle.textContent=statsDetailsShown?"Hide details":"View details";
+  statsToggle.textContent="View details";
   statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
 }
 function updateFooterDisplay(){
   const isFinal=solved&&puzzleIndex>=puzzles.length-1&&!DEBUG;
-  status.classList.toggle("footer-info",footerInfoShown&&!isFinal);
+  status.classList.remove("footer-info");
   if(isFinal){
     status.innerHTML='Refresh your browser to see if there are more puzzles yet.<br>If you want to restart at level 1 <a href="#" id="restartLink" class="restart-link">click here</a>.';
-    scoreLine.innerHTML="&nbsp;";
-    return;
-  }
-  if(footerInfoShown){
-    status.innerHTML='Solve efficiently to earn shields, and quickly for bonus points. Shields protect your streak from hints, helping you build bigger streak bonuses. Shield cap: 3.';
     scoreLine.innerHTML="&nbsp;";
     return;
   }
   status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${formatScore(displayedTotalScore)}`;
   scoreLine.innerHTML=`Streak ${displayedNoHintStreak} | Shields ${displayedShields}`;
 }
-function toggleFooterInfo(){if(!solved||puzzleIndex>=puzzles.length-1&&!DEBUG)return;footerInfoShown=!footerInfoShown;updateFooterDisplay()}
+function toggleFooterInfo(){return}
 function applyDisplayedReward(text){
   const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/Speed bonus \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
   if(add&&!/^Efficiency \+1(?:\s|$)/.test(text))displayedTotalScore+=Number(add[1]);
@@ -875,7 +865,8 @@ nextBtn.addEventListener("click",goNext);
 document.querySelector(".game").addEventListener("click",e=>{if(!solved||Date.now()<solvedToggleReadyAt||e.target.closest(".controls"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();toggleSolvedStartPreview()});
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();resetGame(0);return}toggleFooterInfo()});
 scoreLine.addEventListener("click",toggleFooterInfo);
-statsToggle.addEventListener("click",()=>{if(!solved)return;statsDetailsShown=!statsDetailsShown;updateStatsPanel()});
+statsToggle.addEventListener("click",()=>{if(!solved)return;statsDetailsShown=true;updateStatsPanel()});
+statsPanel.addEventListener("click",e=>{if(e.target===statsPanel||e.target.id==="statsClose"){statsDetailsShown=false;updateStatsPanel()}});
 document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
 document.addEventListener("contextmenu",e=>e.preventDefault(),{passive:false});
