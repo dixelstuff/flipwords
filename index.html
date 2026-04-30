@@ -536,10 +536,14 @@ function getSpeedRatingForSolve(elapsedMs){
   if(!delay)return 0;
   const ratio=elapsedMs/delay;
   let rating=0;
-  if(ratio<=.35)rating=5;
-  else if(ratio<=.60)rating=4;
-  else if(ratio<=.85)rating=3;
-  else if(ratio<=1.10)rating=2;
+  if(ratio<=.25)rating=5;
+  else if(ratio<=.35)rating=4.5;
+  else if(ratio<=.50)rating=4;
+  else if(ratio<=.60)rating=3.5;
+  else if(ratio<=.75)rating=3;
+  else if(ratio<=.85)rating=2.5;
+  else if(ratio<=1.00)rating=2;
+  else if(ratio<=1.10)rating=1.5;
   else if(ratio<=1.35)rating=1;
   return hintsUsed>0?Math.min(rating,3.5):rating;
 }
@@ -549,10 +553,14 @@ function getEfficiencyRatingForSolve(){
   const allowance=EFFICIENCY_EXTRA_MOVES_BY_LENGTH[tiles.length]??0;
   const base=minMoves+allowance;
   let rating=1;
-  if(movesUsed<=base*1.6)rating=5;
-  else if(movesUsed<=base*2.5)rating=4;
-  else if(movesUsed<=base*4.5)rating=3;
-  else if(movesUsed<=base*7.0)rating=2;
+  if(movesUsed<=base*1.2)rating=5;
+  else if(movesUsed<=base*1.6)rating=4.5;
+  else if(movesUsed<=base*2.1)rating=4;
+  else if(movesUsed<=base*2.5)rating=3.5;
+  else if(movesUsed<=base*3.5)rating=3;
+  else if(movesUsed<=base*4.5)rating=2.5;
+  else if(movesUsed<=base*6.0)rating=2;
+  else if(movesUsed<=base*7.0)rating=1.5;
   return hintsUsed>0?Math.min(rating,3):rating;
 }
 function updateStatsForSolvedPuzzle(elapsedMs){
