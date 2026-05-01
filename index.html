@@ -165,7 +165,7 @@ const puzzleRows=[
 ["panda","wires","award","spine",3,"","",""],
 ["test","iron","nets","trio",3,"","",""],
 ["mercy","bride","crime","derby",4,"","",""],
-["loud","tank","knot","dual",4,"","",""],
+["dull","soda","dual","sold",2,"","",""],
 ["blood","peaks","baked","pools",3,"","",""],
 ["plop","lots","poll","stop",4,"","",""],
 ["gem","art","arm","get",1,"","",""],
@@ -516,7 +516,11 @@ const puzzleRows=[
 ["droid","valve","drove","valid",2,"","","cannot be reversed"],
 ["ample","panic","manic","apple",3,"","",""],
 ["like","damn","made","kiln",3,"","",""],
-["stark","drone","store","drank",2,"","",""]
+["stark","drone","store","drank",2,"","",""],
+["flat","mood","malt","food",2,"","",""],
+["shear","bolts","rehab","slots",4,"","",""],
+["girl","flip","grip","fill",2,"","",""],
+["kings","spear","rings","speak",4,"","",""]
 ];
 
 
@@ -937,7 +941,8 @@ function queueRewardAnimations(){
       applyDisplayedReward(text);
       popMessage(text,text==="+0",i===messages.length-1);
       if(/[0-9]+-streak/.test(text))showStreakCelebration();
-      else if(/Speed bonus/.test(text)||/^Efficiency [+](?!1(?: |$))[0-9]+/.test(text))showStarBurst();ldBurst();
+      else if(/Speed bonus/.test(text)||/^Efficiency [+](?!1(?: |$))[0-9]+/.test(text))showStarBurst();
+      if(/^(?:Shield) \+[0-9]+/.test(text)||/^Efficiency \+1(?:\s|$)/.test(text))showShieldBurst();
     },i*1250));
   });
 }
