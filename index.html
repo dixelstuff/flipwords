@@ -519,7 +519,7 @@ let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,movesUsed
 let totalScore=0,displayedTotalScore=0,noHintStreak=0,displayedNoHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false;
 let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
-let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[];
+let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let statsDetailsShown=false;
 let stats={solvedCount:0,longestStreak:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
@@ -810,7 +810,7 @@ function updateStatsPanel(){
         <div class="stats-summary">Longest streak: <strong>${stats.longestStreak||0}</strong></div>
       </div>
       <hr>
-      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>0-hint solves</th><th>Clean</th><th>Median</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
+      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>Clean solves</th><th></th><th>Median</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
       <p class="stats-explainer">Solve quickly to avoid auto-hints, but efficiently to earn shields. Shields protect your streak from hints, helping you score bigger streak bonuses. You can hold up to 3 shields only.</p>
     </div>`;
   statsToggle.classList.toggle("visible",solved);
@@ -871,6 +871,7 @@ function burstGlyph(char,points,className="star"){
   });
 }
 function showStreakCelebration(){
+  clearCelebrationTimers();
   starBurst.innerHTML="";
   const starsA=[[-170,-90,-35],[170,-90,30],[-115,-150,45],[120,-160,-40],[-210,0,-20],[210,0,25],[-120,120,30],[130,120,-30],[-55,-210,-18],[55,-210,18]];
   const flamesA=[[-135,-105,-18],[-55,-150,-8],[55,-150,8],[135,-105,16],[-185,-32,-12],[185,-32,12],[-75,90,10],[75,90,-10]];
@@ -890,8 +891,8 @@ function showStreakCelebration(){
     [2580,"★",starsD,"star streak-star"],
     [2920,"🔥",flamesD,"star flame"]
   ];
-  waves.forEach(([delay,char,points,cls])=>setTimeout(()=>burstGlyph(char,points,cls),delay));
-  setTimeout(()=>{starBurst.innerHTML=""},4450);
+  waves.forEach(([delay,char,points,cls])=>celebrationTimerIds.push(setTimeout(()=>burstGlyph(char,points,cls),delay)));
+  celebrationTimerIds.push(setTimeout(()=>{starBurst.innerHTML=""},4450));
 }
 function queueRewardAnimations(){
   clearBonusTimers();
@@ -977,11 +978,12 @@ function pauseAutoHintTimer(){if(!autoHintDelayTimer&&!autoHintFrame)return;if(a
 function resumeAutoHintTimer(){if(solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
 
 function clearBonusTimers(){bonusTimerIds.forEach(id=>clearTimeout(id));bonusTimerIds=[]}
+function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(id));celebrationTimerIds=[];starBurst.innerHTML=""}
 function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(returnedToStartTimer);returnedToStartTimer=null}}
 function clearSingleStartWordTimer(){if(singleStartWordTimer){clearTimeout(singleStartWordTimer);singleStartWordTimer=null}}
 function clearNoticeTimer(){if(noticeTimer){clearTimeout(noticeTimer);noticeTimer=null}}
 function clearInfoMessage(clearText=true){if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info");message.dataset.infoType="";if(clearText&&!solved)message.textContent=""}
-function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();clearBonusTimers();stopAutoHintTimer()}
+function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();clearBonusTimers();clearCelebrationTimers();stopAutoHintTimer()}
 
 hintBtn.addEventListener("click",()=>useHint());
 startWordsBtn.addEventListener("click",showStartingWords);
