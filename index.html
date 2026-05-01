@@ -498,7 +498,14 @@ const puzzleRows=[
 ["cuss","male","lace","sums",3,"","",""],
 ["never","sober","verse","borne",4,"","",""],
 ["mass","step","stem","pass",4,"","",""],
-["plate","speed","pedal","steep",4,"","",""]
+["plate","speed","pedal","steep",4,"","",""],
+["mango","waste","mates","wagon",2,"","",""],
+["drum","look","lurk","doom",3,"","",""],
+["most","open","omen","post",3,"","",""],
+["droid","valve","drove","valid",2,"","","cannot be reversed"],
+["ample","panic","manic","apple",3,"","",""],
+["like","damn","made","kiln",3,"","",""],
+["stark","drone","store","drank",2,"","",""]
 ];
 
 
@@ -763,8 +770,8 @@ function render(){
   });
   const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=puzzles.length-1;
   nextBtn.classList.toggle("visible",solved&&!isFinal);nextBtn.textContent="Next";
-  hintBtn.disabled=solved||allLocked;startWordsBtn.disabled=solved||(hintsUsed>0&&isShowingStartingWords());
-  startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
+  hintBtn.disabled=solved||allLocked;startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
+  startWordsBtn.disabled=solved||isShowingStartingWords();
   subtitle.classList.toggle("level-label",puzzleIndex>0);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
   if(solved&&lastPuzzleScore!==null&&!scoreAnimationShown){clearInfoMessage(false);scoreAnimationShown=true;queueRewardAnimations()}
@@ -786,7 +793,7 @@ function updateStatsPanel(){
   [3,4,5].forEach(len=>{
     const row=stats.byLength[len]||{solved:0,clean:0,cleanTimes:[],fastest:null};
     const pct=row.solved>0?Math.round((row.clean/row.solved)*100):null;
-    const rate=row.solved>0?`${row.clean}/${row.solved} (${pct}%)`:"—";
+    const rate=row.solved>0?`${pct}% (${row.clean}/${row.solved})`:"—";
     const median=medianTime(row.cleanTimes);
     const med=median!==null?formatTime(median):"—";
     const best=row.fastest!==null&&row.fastest!==undefined?formatTime(row.fastest):"—";
@@ -803,7 +810,7 @@ function updateStatsPanel(){
         <div class="stats-summary">Longest streak: <strong>${stats.longestStreak||0}</strong></div>
       </div>
       <hr>
-      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>0-hint solves</th><th>Rate</th><th>Median</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
+      <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>0-hint solves</th><th>Clean</th><th>Median</th><th>Best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
       <p class="stats-explainer">Solve quickly to avoid auto-hints, but efficiently to earn shields. Shields protect your streak from hints, helping you score bigger streak bonuses. You can hold up to 3 shields only.</p>
     </div>`;
   statsToggle.classList.toggle("visible",solved);
