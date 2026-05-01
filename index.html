@@ -43,16 +43,16 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
 const DEBUG=false;
-const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:130000,4:74000,3:23000,2:15000};
+const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:150000,4:76000,3:24000,2:15000};
 const AUTO_HINT_FILL_MS=10000;
-const SPEED_BONUS_WINDOW_FACTOR=0.4;
+const SPEED_BONUS_WINDOW_FACTOR=0.35;
 const MAX_SPEED_BONUS=75;
-const MIN_SPEED_BONUS=10;
+const MIN_SPEED_BONUS=15;
 const SCORE_BY_HINTS_REMAINING={6:150,5:120,4:90,3:60,2:30,1:0,0:0};
 const EFFICIENCY_ALLOWANCE_FACTOR_BY_LENGTH={3:0,4:.7,5:1,6:1.75};
 const EFFICIENCY_CAP_POINTS=75;
 const ENABLE_SPEED_BONUS=true;
-const MAX_SHIELDS=3;
+const MAX_SHIELDS=4;
 const SOLVED_TOGGLE_DELAY_MS=1250;
 const SCORE_POP_MS=2000;
 const FINAL_POP_MS=3000;
@@ -861,8 +861,8 @@ function updateStatsPanel(){
       </div>
       <hr>
       <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>Clean solves</th><th></th><th class="stat-time-head">median</th><th class="stat-time-head">best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
-      <p class="stats-explainer">Solve quickly to avoid auto-hints, but efficiently to earn shields. Shields protect your streak from hints, helping you score bigger streak bonuses.</p>
-      <div class="stats-status"><span class="stats-fire">🔥${noHintStreak||0}</span><span class="stats-shields">${[1,2,3].map(i=>`<span class="${i<=displayedShields?'':'stats-shield-empty'}">🛡️</span>`).join('')}</span></div>
+      <p class="stats-explainer">Solve quickly to avoid auto-hints, but efficiently to earn shields. Shields protect your streak from hints, helping you score bigger streak bonuses. You can hold up to 4 shields.</p>
+      <div class="stats-status"><span class="stats-fire">🔥${noHintStreak||0}</span><span class="stats-shields">${[1,2,3,4].map(i=>`<span class="${i<=displayedShields?'':'stats-shield-empty'}">🛡️</span>`).join('')}</span></div>
     </div>`;
   statsToggle.classList.remove("visible");
   statsToggle.textContent="View details";
