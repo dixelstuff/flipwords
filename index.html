@@ -24,6 +24,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 @keyframes star-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes shield-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes info-fade{0%{opacity:0;transform:translateY(4px)}4%,92%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(4px)}}@keyframes hold-fade-down{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(8px)}}@keyframes score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}16%{opacity:1;transform:translateY(0) scale(1.05)}72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes final-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}10%{opacity:1;transform:translateY(0) scale(1.05)}68%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes streak-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1.05)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
 .controls{display:grid;grid-template-columns:126px 126px;align-items:center;justify-content:center;gap:8px;min-height:44px}button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:0 15px;width:126px;height:50px;line-height:1;font-size:16px;font-weight:700;letter-spacing:.01em;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.46;cursor:default}.start-words{color:var(--ink);background:var(--soft)}.hint{position:relative;overflow:hidden;color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint::before{content:"";position:absolute;inset:0;width:var(--hint-fill,0%);background:rgba(255,255,255,.42);pointer-events:none;transition:width .08s linear}.hint span{position:relative;z-index:1}.hint:disabled{color:var(--ink);background:var(--soft);box-shadow:none}.action-slot{position:relative;display:block;width:126px;height:50px;line-height:0}.action-slot button{position:absolute;inset:0}.next{visibility:hidden;color:#fff;background:var(--success);pointer-events:none}.next.visible{visibility:visible;pointer-events:auto}.hidden{visibility:hidden!important;pointer-events:none}
 .status{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.35;min-height:62px;display:flex;align-items:flex-end;justify-content:center;padding:0 12px;transform:translateY(-28px)}.status.footer-info{align-items:center;padding-left:28px;padding-right:28px;transform:translateY(10px)}.restart-link{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.score-line{margin-top:0;color:var(--muted);font-size:16px;line-height:1.25;min-height:22px;transform:translateY(-28px)}.stats-toggle{display:none}.end-message{display:none;position:fixed;left:18px;right:18px;bottom:12px;text-align:center;color:var(--muted);font-size:14px;line-height:1.35;z-index:2}.end-message.visible{display:block}.footer-details{display:block;margin-top:1px;color:#0a84ff;font-size:16px;line-height:1.25}.footer-clickable{cursor:pointer}.stats-panel{display:none;position:fixed;inset:0;z-index:9999;background:rgba(36,30,50,.42);align-items:center;justify-content:center;padding:22px;color:var(--muted);font-size:14px;line-height:1.45;text-align:left}.stats-panel.visible{display:flex}.stats-card{position:relative;width:min(430px,calc(100vw - 40px));background:#fff;border-radius:24px;box-shadow:0 18px 48px rgba(37,31,52,.22);padding:18px 22px 22px}.stats-x{position:absolute;right:14px;top:12px;width:34px;height:34px;background:transparent;border:none;color:var(--muted);font-size:28px;line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}.stats-explainer-title{display:none}.stats-explainer{color:var(--muted);font-size:15px;line-height:1.45;text-align:center;padding:0;margin:24px 0 0}.stats-status{display:flex;align-items:center;justify-content:center;gap:18px;margin:20px 0 0;font-size:22px;line-height:1}.stats-shields{letter-spacing:1px}.stats-shield-empty{opacity:.23;filter:grayscale(1)}.stats-fire{font-weight:800;color:var(--ink);font-size:20px}.stats-cap{display:none}.stats-card h3{display:none}.stats-card hr{border:none;border-top:1px solid rgba(37,31,52,.12);margin:18px 0}.stats-title{font-size:25px;font-weight:650;color:var(--muted);text-align:left;margin:0 34px 12px 0}.stats-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 20px;margin-bottom:4px}.stats-summary{font-size:14px;color:var(--muted);text-align:left;margin:2px 0}.stats-summary .label{font-weight:650;color:var(--ink)}.stats-summary strong{color:var(--muted);font-weight:400}.stats-subheading{font-weight:800;color:var(--ink);margin-bottom:8px}.stats-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}.stats-table col:nth-child(1){width:38%}.stats-table col:nth-child(2){width:28%}.stats-table col:nth-child(3){width:17%}.stats-table col:nth-child(4){width:17%}.stats-table th{font-weight:800;color:var(--ink);border-bottom:1px solid rgba(37,31,52,.12);padding:6px 4px}.stats-table th.stat-time-head{font-weight:400;color:var(--muted)}.stats-table td{color:var(--muted);border-bottom:1px solid rgba(37,31,52,.08);padding:8px 4px;white-space:nowrap}.stats-table th:nth-child(1),.stats-table td:nth-child(1){text-align:left}.stats-table th:nth-child(2),.stats-table td:nth-child(2),.stats-table th:nth-child(3),.stats-table td:nth-child(3),.stats-table th:nth-child(4),.stats-table td:nth-child(4){text-align:center}.stats-close{display:none}
+.mode-toggle{position:fixed;left:50%;bottom:10px;z-index:10;transform:translateX(-50%);display:flex;gap:3px;padding:3px;background:rgba(255,255,255,.74);border:1px solid rgba(37,31,52,.10);border-radius:999px;box-shadow:0 6px 18px rgba(37,31,52,.10);backdrop-filter:blur(8px)}.mode-toggle button{width:auto;height:30px;padding:0 12px;border-radius:999px;background:transparent;color:var(--muted);font-size:13px;font-weight:750}.mode-toggle button.active{background:var(--ink);color:#fff}.daily-result{font-size:17px;line-height:1.45;color:var(--muted)}.daily-result strong{color:var(--ink)}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:340px;height:47px;padding:0 22px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:24px;padding-bottom:24px}.board{gap:14px}.tile-wrap{width:clamp(72px,8.5vw,92px);height:clamp(130px,15vw,156px)}.letter{font-size:clamp(42px,4.8vw,56px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){.game{display:flex;width:min(96vw,760px);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));transform:none;justify-content:center}.title{font-size:34px}.subtitle{max-width:520px;height:35px;margin:4px auto 8px;padding:0 10px;font-size:14px;line-height:1.25}.subtitle.level-label{font-size:20px;padding-top:10px}.board-shell{padding:6px 8px 8px}.board{gap:7px;min-height:86px}.board.short-board{gap:10px}.tile-wrap{width:clamp(42px,8vw,58px);height:clamp(76px,17vw,96px)}.letter{font-size:clamp(24px,4.4vw,34px)}.feedback-area{height:24px}.message{font-size:20px}.message.info{font-size:15px}.controls{grid-template-columns:104px 104px;gap:8px;min-height:38px}button{width:104px;height:38px;font-size:14px}.action-slot{width:104px;height:38px}.status{margin-top:8px;font-size:14px;min-height:42px}.status.footer-info{padding-left:18px;padding-right:18px}.score-line{margin-top:0;font-size:14px;min-height:19px}}
@@ -40,9 +41,14 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <button id="statsToggle" class="stats-toggle" type="button">View details</button>
 <div id="endMessage" class="end-message"></div>
 <div id="statsPanel" class="stats-panel"></div>
+<div id="modeToggle" class="mode-toggle" aria-label="Mode"><button id="dailyModeBtn" type="button">daily</button><button id="gameModeBtn" type="button">game</button></div>
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
+const DAILY_STATS_KEY="flipwords:dailyStats:v1";
+const DAILY_MODE_KEY="flipwords:mode:v1";
+const DAILY_HINT_UNLOCKS_MS=[4*60*1000,7*60*1000];
 const DEBUG=false;
 const AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS={6:230000,5:150000,4:76000,3:24000,2:15000};
 const AUTO_HINT_FILL_MS=10000;
@@ -570,10 +576,512 @@ const puzzleRows=[
 ];
 
 
-const puzzles=puzzleRows.map(([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus}));
+const dailyTriplets = [
+  {
+    id: "day-001",
+    puzzles: [
+      ["gel","bow","log","web",3,"","",""],
+      ["flat","hood","halt","food",2,"","",""],
+      ["green","chair","grain","cheer",2,"","",""]
+    ]
+  },
+  {
+    id: "day-002",
+    puzzles: [
+      ["jog","ate","ago","jet",2,"","",""],
+      ["lazy","once","clay","zone",2,"","",""],
+      ["canoe","rally","clean","royal",3,"","",""]
+    ]
+  },
+  {
+    id: "day-003",
+    puzzles: [
+      ["irk","sad","ask","rid",2,"","",""],
+      ["safe","date","deaf","seat",2,"","",""],
+      ["ocean","parts","acorn","tapes",3,"","",""]
+    ]
+  },
+  {
+    id: "day-004",
+    puzzles: [
+      ["end","how","den","who",1,"","",""],
+      ["port","ride","dirt","rope",3,"","",""],
+      ["frost","place","craft","slope",4,"","",""]
+    ]
+  },
+  {
+    id: "day-005",
+    puzzles: [
+      ["owl","ate","eat","low",1,"","",""],
+      ["race","mild","card","lime",3,"","",""],
+      ["money","verge","enemy","grove",4,"","",""]
+    ]
+  },
+  {
+    id: "day-006",
+    puzzles: [
+      ["hey","out","the","you",2,"","",""],
+      ["glue","down","lung","owed",2,"","",""],
+      ["clasp","bored","blade","corps",3,"","",""]
+    ]
+  },
+  {
+    id: "day-007",
+    puzzles: [
+      ["nod","dad","and","odd",2,"","","cannot be reversed"],
+      ["harp","epic","arch","pipe",2,"","",""],
+      ["world","sites","slots","weird",3,"","",""]
+    ]
+  },
+  {
+    id: "day-008",
+    puzzles: [
+      ["oar","tag","ago","art",2,"","",""],
+      ["slow","cord","crow","sold",2,"","",""],
+      ["spill","chain","hills","panic",3,"spain","chill",""]
+    ]
+  },
+  {
+    id: "day-009",
+    puzzles: [
+      ["wow","art","two","war",2,"","",""],
+      ["pony","bite","bone","pity",2,"","",""],
+      ["panda","wires","award","spine",3,"","",""]
+    ]
+  },
+  {
+    id: "day-010",
+    puzzles: [
+      ["sun","fix","fun","six",1,"","",""],
+      ["talk","cage","gate","lack",3,"","",""],
+      ["naive","tests","taste","veins",4,"","","cannot be reversed"]
+    ]
+  },
+  {
+    id: "day-011",
+    puzzles: [
+      ["cat","use","sue","act",1,"","",""],
+      ["milk","nose","link","some",3,"leon","skim",""],
+      ["space","world","crowd","lapse",4,"","",""]
+    ]
+  },
+  {
+    id: "day-012",
+    puzzles: [
+      ["gem","art","arm","get",1,"","",""],
+      ["poke","fell","folk","peel",3,"","",""],
+      ["guide","array","argue","diary",4,"","",""]
+    ]
+  },
+  {
+    id: "day-013",
+    puzzles: [
+      ["its","eye","tie","yes",2,"","",""],
+      ["haul","form","foul","harm",2,"","",""],
+      ["blood","peaks","baked","pools",3,"","",""]
+    ]
+  },
+  {
+    id: "day-014",
+    puzzles: [
+      ["ace","yet","cat","eye",2,"","",""],
+      ["fish","calm","cash","film",2,"","",""],
+      ["least","cares","carts","lease",3,"","",""]
+    ]
+  },
+  {
+    id: "day-015",
+    puzzles: [
+      ["low","end","new","old",2,"","",""],
+      ["grit","feel","feet","girl",2,"","","cannot be reversed"],
+      ["clone","rises","close","risen",3,"","",""]
+    ]
+  },
+  {
+    id: "day-016",
+    puzzles: [
+      ["not","yet","ten","toy",3,"","",""],
+      ["clot","bout","boot","cult",2,"","",""],
+      ["shade","trace","react","heads",2,"","",""]
+    ]
+  },
+  {
+    id: "day-017",
+    puzzles: [
+      ["soy","pet","top","yes",3,"","",""],
+      ["sore","face","cafe","rose",2,"","",""],
+      ["daily","scene","since","delay",2,"","",""]
+    ]
+  },
+  {
+    id: "day-018",
+    puzzles: [
+      ["aid","net","din","tea",3,"","",""],
+      ["tuna","meat","aunt","team",2,"","",""],
+      ["count","swore","ounce","worst",2,"","",""]
+    ]
+  },
+  {
+    id: "day-019",
+    puzzles: [
+      ["ape","arc","cap","ear",2,"","",""],
+      ["wood","bark","book","ward",2,"","",""],
+      ["glare","skies","eagle","risks",3,"","",""]
+    ]
+  },
+  {
+    id: "day-020",
+    puzzles: [
+      ["one","saw","sea","own",2,"","",""],
+      ["nude","hero","hour","need",2,"","",""],
+      ["outer","norms","tuner","rooms",3,"","",""]
+    ]
+  },
+  {
+    id: "day-021",
+    puzzles: [
+      ["dub","sir","bus","rid",3,"","",""],
+      ["dull","soda","dual","sold",2,"","",""],
+      ["ghost","crews","chest","grows",2,"","",""]
+    ]
+  },
+  {
+    id: "day-022",
+    puzzles: [
+      ["wet","own","new","two",3,"","",""],
+      ["echo","plea","each","pole",2,"","",""],
+      ["spike","slain","likes","pains",2,"","",""]
+    ]
+  },
+  {
+    id: "day-023",
+    puzzles: [
+      ["beg","ate","age","bet",2,"","",""],
+      ["snow","pest","step","owns",2,"","",""],
+      ["bagel","sales","gases","label",3,"","",""]
+    ]
+  },
+  {
+    id: "day-024",
+    puzzles: [
+      ["pay","tap","yap","pat",2,"","",""],
+      ["joke","salt","jolt","sake",2,"","",""],
+      ["moral","seeds","model","sears",3,"","",""]
+    ]
+  },
+  {
+    id: "day-025",
+    puzzles: [
+      ["awe","gas","age","was",2,"","",""],
+      ["corn","flat","clan","fort",2,"","",""],
+      ["vocal","races","coral","caves",3,"","",""]
+    ]
+  },
+  {
+    id: "day-026",
+    puzzles: [
+      ["hot","use","out","she",2,"","",""],
+      ["vent","hate","even","that",2,"","",""],
+      ["broke","birds","brisk","bored",3,"","",""]
+    ]
+  },
+  {
+    id: "day-027",
+    puzzles: [
+      ["bot","nor","rob","ton",3,"","",""],
+      ["bulb","cook","book","club",2,"","","cannot be reversed"],
+      ["agree","short","great","horse",2,"","",""]
+    ]
+  },
+  {
+    id: "day-028",
+    puzzles: [
+      ["red","fun","fed","run",1,"","",""],
+      ["rain","loop","nail","poor",3,"","",""],
+      ["gnome","raven","among","never",4,"","",""]
+    ]
+  },
+  {
+    id: "day-029",
+    puzzles: [
+      ["hot","gas","got","has",1,"","",""],
+      ["true","been","beer","tune",3,"","",""],
+      ["fauna","dwell","awful","laden",4,"","",""]
+    ]
+  },
+  {
+    id: "day-030",
+    puzzles: [
+      ["rap","age","are","gap",2,"","",""],
+      ["spot","ally","lost","play",2,"","",""],
+      ["argue","later","eager","ultra",3,"","",""]
+    ]
+  },
+  {
+    id: "day-031",
+    puzzles: [
+      ["how","new","hew","now",1,"","",""],
+      ["soft","less","self","toss",3,"","",""],
+      ["blame","dream","amber","medal",4,"","",""]
+    ]
+  },
+  {
+    id: "day-032",
+    puzzles: [
+      ["bar","row","rob","war",3,"","",""],
+      ["lamb","duck","dumb","lack",2,"","",""],
+      ["shock","blame","block","shame",2,"","",""]
+    ]
+  },
+  {
+    id: "day-033",
+    puzzles: [
+      ["imp","era","aim","per",2,"mia","rep",""],
+      ["fawn","slim","film","swan",2,"","",""],
+      ["fresh","towel","three","flows",3,"","",""]
+    ]
+  },
+  {
+    id: "day-034",
+    puzzles: [
+      ["toy","yes","soy","yet",3,"","",""],
+      ["free","weed","feed","were",2,"","","cannot be reversed"],
+      ["river","lodge","lover","ridge",2,"","",""]
+    ]
+  },
+  {
+    id: "day-035",
+    puzzles: [
+      ["wet","fib","web","fit",1,"","",""],
+      ["east","wind","dawn","ties",3,"","",""],
+      ["thief","theft","teeth","fifth",4,"","",""]
+    ]
+  },
+  {
+    id: "day-036",
+    puzzles: [
+      ["hog","are","ago","her",2,"","",""],
+      ["prod","meat","drop","team",2,"","",""],
+      ["forms","trend","frond","terms",3,"","",""]
+    ]
+  },
+  {
+    id: "day-037",
+    puzzles: [
+      ["yam","dad","day","mad",3,"amy","add","cannot be reversed"],
+      ["glue","roof","goof","rule",2,"","",""],
+      ["false","worth","flash","wrote",2,"","",""]
+    ]
+  },
+  {
+    id: "day-038",
+    puzzles: [
+      ["fig","tax","fix","tag",1,"","",""],
+      ["year","amid","army","idea",3,"","",""],
+      ["dance","tired","dried","enact",4,"","",""]
+    ]
+  },
+  {
+    id: "day-039",
+    puzzles: [
+      ["old","dog","log","odd",2,"","",""],
+      ["love","fits","five","lots",2,"","",""],
+      ["drawn","ridge","grand","wider",3,"","",""]
+    ]
+  },
+  {
+    id: "day-040",
+    puzzles: [
+      ["boo","two","bow","too",2,"","","cannot be reversed"],
+      ["bang","kiss","bass","king",2,"","",""],
+      ["angel","carol","along","clear",3,"","",""]
+    ]
+  },
+  {
+    id: "day-041",
+    puzzles: [
+      ["new","bug","web","gun",3,"","",""],
+      ["mint","uses","mess","unit",2,"","",""],
+      ["motto","fears","feast","motor",2,"","",""]
+    ]
+  },
+  {
+    id: "day-042",
+    puzzles: [
+      ["cap","lie","alp","ice",2,"","",""],
+      ["host","pact","chat","spot",2,"","",""],
+      ["ashes","drift","shaft","rides",3,"","",""]
+    ]
+  },
+  {
+    id: "day-043",
+    puzzles: [
+      ["mew","bus","sum","web",3,"","",""],
+      ["seem","true","teem","sure",2,"","",""],
+      ["await","trash","awash","trait",2,"","",""]
+    ]
+  },
+  {
+    id: "day-044",
+    puzzles: [
+      ["pup","too","out","pop",3,"","","cannot be reversed"],
+      ["city","tune","cute","tiny",2,"","",""],
+      ["basil","smell","balls","smile",2,"","",""]
+    ]
+  },
+  {
+    id: "day-045",
+    puzzles: [
+      ["big","max","bag","mix",1,"","",""],
+      ["seal","nets","lean","sets",3,"sean","lets",""],
+      ["finer","gifts","stiff","reign",4,"","",""]
+    ]
+  },
+  {
+    id: "day-046",
+    puzzles: [
+      ["box","law","lax","bow",1,"","",""],
+      ["wave","ties","east","view",3,"","",""],
+      ["spire","radio","aides","prior",4,"","",""]
+    ]
+  },
+  {
+    id: "day-047",
+    puzzles: [
+      ["own","bit","nib","two",3,"","",""],
+      ["huge","wart","wage","hurt",2,"","",""],
+      ["mount","chase","chant","mouse",2,"","",""]
+    ]
+  },
+  {
+    id: "day-048",
+    puzzles: [
+      ["rot","how","hot","row",1,"","",""],
+      ["heal","pigs","leap","sigh",3,"","",""],
+      ["lemon","thank","month","ankle",4,"","",""]
+    ]
+  },
+  {
+    id: "day-049",
+    puzzles: [
+      ["ion","war","air","own",2,"","",""],
+      ["sung","what","thaw","guns",2,"","",""],
+      ["wives","lingo","swing","olive",3,"","",""]
+    ]
+  },
+  {
+    id: "day-050",
+    puzzles: [
+      ["eel","win","lie","new",3,"","",""],
+      ["blue","reef","beef","rule",2,"","",""],
+      ["honey","boost","ebony","shoot",2,"","",""]
+    ]
+  },
+  {
+    id: "day-051",
+    puzzles: [
+      ["are","arm","mar","ear",1,"","",""],
+      ["sick","fade","cafe","disk",3,"","",""],
+      ["tenth","comes","meets","notch",4,"","",""]
+    ]
+  },
+  {
+    id: "day-052",
+    puzzles: [
+      ["bad","buy","bud","bay",1,"","",""],
+      ["farm","trip","firm","trap",3,"","",""],
+      ["mercy","bride","crime","derby",4,"","",""]
+    ]
+  },
+  {
+    id: "day-053",
+    puzzles: [
+      ["woe","yet","eye","two",2,"","",""],
+      ["whip","beat","bath","wipe",2,"","",""],
+      ["right","paced","patch","ridge",3,"","",""]
+    ]
+  },
+  {
+    id: "day-054",
+    puzzles: [
+      ["raw","bee","web","ear",3,"","",""],
+      ["seek","term","trek","seem",2,"","",""],
+      ["doubt","needs","debut","nodes",2,"","",""]
+    ]
+  },
+  {
+    id: "day-055",
+    puzzles: [
+      ["sly","fix","fly","six",1,"","",""],
+      ["dice","lord","cold","ride",3,"","",""],
+      ["vital","whale","wheat","villa",4,"","",""]
+    ]
+  },
+  {
+    id: "day-056",
+    puzzles: [
+      ["tip","ups","pup","its",2,"","",""],
+      ["deny","tick","tiny","deck",2,"","",""],
+      ["valid","alter","dealt","rival",3,"","",""]
+    ]
+  },
+  {
+    id: "day-057",
+    puzzles: [
+      ["key","tap","yak","pet",3,"","",""],
+      ["gold","mine","gone","mild",2,"","",""],
+      ["mules","crash","clues","marsh",2,"","",""]
+    ]
+  },
+  {
+    id: "day-058",
+    puzzles: [
+      ["peg","tag","gap","get",3,"","",""],
+      ["jack","pipe","jape","pick",2,"","",""],
+      ["clear","swamp","swear","clamp",2,"","",""]
+    ]
+  },
+  {
+    id: "day-059",
+    puzzles: [
+      ["cow","but","bow","cut",1,"","",""],
+      ["deep","rent","peer","tend",3,"","",""],
+      ["store","items","moist","reset",4,"","",""]
+    ]
+  },
+  {
+    id: "day-060",
+    puzzles: [
+      ["eye","sir","ire","yes",2,"","",""],
+      ["hike","were","heir","week",2,"","",""],
+      ["crane","spine","pecan","resin",3,"","",""]
+    ]
+  },
+  {
+    id: "day-061",
+    puzzles: [
+      ["dye","sad","add","yes",2,"","",""],
+      ["dewy","nuts","duty","news",2,"","",""],
+      ["legit","happy","apply","eight",3,"","",""]
+    ]
+  },
+  {
+    id: "day-062",
+    puzzles: [
+      ["ant","ear","ran","tea",2,"","",""],
+      ["snap","cord","sand","crop",2,"","",""],
+      ["giant","sense","genes","stain",3,"","",""]
+    ]
+  }
+];
+
+const makePuzzle=([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus});
+const puzzles=puzzleRows.map(makePuzzle);
+const dailyPuzzles=dailyTriplets.map(day=>({...day,puzzles:day.puzzles.map(makePuzzle)}));
+let activePuzzles=puzzles;
 
 const $=id=>document.getElementById(id);
-const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel");
+const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
 
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false,solvedToggleReadyAt=0,solvedAnswerInverted=false;
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,movesUsed=0;
@@ -584,9 +1092,13 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let statsDetailsShown=false;
+let mode="game",dailyDayIndex=0,dailyTotalMoves=0,dailyHintsEarned=0,dailyHintsUsed=0,dailyCurrentCompleted=false,dailyTimer=null;
+let dailyStats={completed:{}};
 let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
-const currentPuzzle=()=>puzzles[puzzleIndex];
+const isDailyMode=()=>mode==="daily";
+const currentDaily=()=>dailyPuzzles[dailyDayIndex];
+const currentPuzzle=()=>activePuzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
 const visibleTop=t=>t.flipped?t.bottom:t.top;
 const visibleBottom=t=>t.flipped?t.top:t.bottom;
@@ -608,6 +1120,8 @@ function normalizeStats(s){
 }
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
+function getUrlJumpDay(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)day([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,dailyPuzzles.length):null}
+function getUrlMode(){const q=location.search.toLowerCase();if(getUrlJumpDay()!==null||/(?:\?|&)daily(?:&|$)/.test(q))return "daily";if(/(?:\?|&)game(?:&|$)/.test(q))return "game";return localStorage.getItem(DAILY_MODE_KEY)||"game"}
 function getAutoHintSaveState(){
   let remaining=autoHintDelayRemainingMs;
   let fillElapsed=autoHintFillElapsedMs;
@@ -616,9 +1130,30 @@ function getAutoHintSaveState(){
   return {autoHintFilling,autoHintDelayRemainingMs:remaining,autoHintFillElapsedMs:fillElapsed};
 }
 function saveGameState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
-function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
+function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);return raw?JSON.parse(raw):null}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;setupPuzzle()}
+function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
+function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
+function saveDailyStats(){try{localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(dailyStats))}catch{}}
+function getDailyProgress(){try{return JSON.parse(localStorage.getItem(DAILY_PROGRESS_KEY)||"{}")||{}}catch{return {}}}
+function saveDailyProgress(){if(!isDailyMode())return;const all=getDailyProgress();all[currentDaily().id]={dayIndex:dailyDayIndex,puzzleIndex,dailyTotalMoves,dailyHintsEarned,dailyHintsUsed,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),solved,solvedAnswerInverted,hintsUsed,movesUsed,dailyCurrentCompleted};try{localStorage.setItem(DAILY_PROGRESS_KEY,JSON.stringify(all))}catch{}}
+function clearDailyTimer(){if(dailyTimer){clearInterval(dailyTimer);dailyTimer=null}}
+function getDailyHintsAvailable(){return Math.min(1,Math.max(0,dailyHintsEarned-dailyHintsUsed))}
+function checkDailyHintUnlocks(){if(!isDailyMode()||solved||dailyCurrentCompleted)return;const elapsed=getActivePuzzleElapsedMs();let changed=false;while(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length&&elapsed>=DAILY_HINT_UNLOCKS_MS[dailyHintsEarned]){const before=getDailyHintsAvailable();dailyHintsEarned++;if(before>0)dailyHintsUsed++;if(getDailyHintsAvailable()>before)changed=true}if(changed)showInfoMessage("Free hint available","daily-hint");render();saveDailyProgress()}
+function startDailyTimer(){clearDailyTimer();if(!isDailyMode()||solved||dailyCurrentCompleted||document.hidden)return;dailyTimer=setInterval(checkDailyHintUnlocks,500)}
+function pauseDailyTimer(){clearDailyTimer();checkDailyHintUnlocks()}
+function medianNumber(values){if(!values.length)return null;const sorted=[...values].sort((a,b)=>a-b),mid=Math.floor(sorted.length/2);return sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2}
+function formatClock(ms){const total=Math.max(0,Math.round(ms/1000)),m=Math.floor(total/60),s=total%60;return `${m}:${String(s).padStart(2,"0")}`}
+function getDayNumberFromId(id){const m=String(id||"").match(/day-?(\d+)/i);return m?Number(m[1]):null}
+function getDailyCompletedEntries(){return Object.values(dailyStats.completed||{}).filter(x=>x&&typeof x.timeMs==="number"&&typeof x.moves==="number")}
+function getDailyStreak(){const done=new Set(Object.keys(dailyStats.completed||{}).map(getDayNumberFromId).filter(Boolean));let n=1,best=0,cur=0;while(n<=dailyPuzzles.length){if(done.has(n)){cur++;best=Math.max(best,cur)}else cur=0;n++}const latest=Math.max(0,...[...done]);let current=0;for(let i=latest;i>=1&&done.has(i);i--)current++;return {current,best}}
+function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;const id=currentDaily().id;dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
+function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
+function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade");message.textContent="";puzzleIndex=nextIndex;setupPuzzle({restoreActivePuzzleElapsedMs:getActivePuzzleElapsedMs()});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
+function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else saveGameState();mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);clearQueryString();initMode()}
+
 function goNext(){
+  if(isDailyMode()){goDailyNext();return}
   const nextIndex=puzzleIndex+1;
   if(nextIndex>=puzzles.length)return;
   previewingStartWords=false;
@@ -666,7 +1201,7 @@ function setupPuzzle(opts={}){
   displayedNoHintStreak=noHintStreak;
   displayedShields=shields;
   const p=currentPuzzle(),restoreHints=Number(opts.restoreHints||0);
-  const base=p.word1.split("").map((top,i)=>({id:`${puzzleIndex}-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
+  const base=p.word1.split("").map((top,i)=>({id:`${isDailyMode()?currentDaily().id:"game"}-${puzzleIndex}-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
   const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
   tiles=base.map(t=>({...t,...mapById.get(t.id)}));
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
@@ -680,12 +1215,16 @@ function setupPuzzle(opts={}){
   movesUsed=Number.isInteger(opts.restoreMovesUsed)?Math.max(0,opts.restoreMovesUsed):0;
   shieldUsedThisLevel=!!opts.restoreShieldUsedThisLevel;
   if(opts.restoreSolved){
-    solvedAnswerInverted=!!opts.restoreSolvedAnswerInverted;lockAllTilesToAnswer(solvedAnswerInverted);solved=true;solvedToggleReadyAt=0;completedWithHints=!!opts.restoreCompletedWithHints;puzzleAwarded=!!opts.restoreAwarded;
+    solvedAnswerInverted=!!opts.restoreSolvedAnswerInverted;lockAllTilesToAnswer(solvedAnswerInverted);solved=true;activePuzzleStartedAt=null;solvedToggleReadyAt=0;completedWithHints=!!opts.restoreCompletedWithHints;puzzleAwarded=!!opts.restoreAwarded;
     lastPuzzleScore=typeof opts.restoreLastScore==="number"?opts.restoreLastScore:null;scoreAnimationShown=true;
   }
-  render();saveGameState();
+  render();
+  if(isDailyMode())saveDailyProgress();else saveGameState();
   if(!solved){
-    if(opts.restoreAutoHintFilling){
+    if(isDailyMode()){
+      stopAutoHintTimer();
+      startDailyTimer();
+    }else if(opts.restoreAutoHintFilling){
       stopAutoHintTimer();
       autoHintFillElapsedMs=clamp(Number(opts.restoreAutoHintFillElapsedMs)||0,0,AUTO_HINT_FILL_MS);
       beginAutoHintFill();
@@ -825,7 +1364,7 @@ function awardPuzzleScoreIfNeeded(){
   puzzleAwarded=true;
   scoreAnimationShown=false;
 }
-function recordMove(){movesUsed++}
+function recordMove(){movesUsed++;if(isDailyMode())dailyTotalMoves++}
 function checkSolved(){
   if(isSolved()){
     const wasSolved=solved;
@@ -834,17 +1373,25 @@ function checkSolved(){
     if(!wasSolved)solvedToggleReadyAt=Infinity;
     completedWithHints=hintsUsed>=tiles.length;
     stopAutoHintTimer();
-    awardPuzzleScoreIfNeeded();
-    if(!wasSolved&&lastPuzzleScore!==null&&!scoreAnimationShown){
-      clearInfoMessage(false);
+    if(isDailyMode()){
+      pauseDailyTimer();
+      pausePuzzleClock();
       scoreAnimationShown=true;
-      queueRewardAnimations();
+      if(puzzleIndex>=activePuzzles.length-1){completeDailyIfNeeded();}
+      else solvedToggleReadyAt=Date.now()+SOLVED_TOGGLE_DELAY_MS;
+    }else{
+      awardPuzzleScoreIfNeeded();
+      if(!wasSolved&&lastPuzzleScore!==null&&!scoreAnimationShown){
+        clearInfoMessage(false);
+        scoreAnimationShown=true;
+        queueRewardAnimations();
+      }
     }
   }else{
     footerInfoShown=false;
   }
   render();
-  saveGameState();
+  if(isDailyMode())saveDailyProgress();else saveGameState();
 }
 
 function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
@@ -862,12 +1409,13 @@ function render(){
     w.dataset.id=t.id;w.dataset.locked=t.locked?"1":"0";w.innerHTML=makeTileHTML(t);
     w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w);
   });
-  const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=puzzles.length-1;
+  const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=activePuzzles.length-1;
   nextBtn.classList.toggle("visible",solved&&!isFinal);nextBtn.textContent="Next";
-  hintBtn.disabled=solved||allLocked;startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
+  hintBtn.disabled=solved||allLocked||(isDailyMode()&&getDailyHintsAvailable()<1);
+  startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
   startWordsBtn.disabled=solved||isShowingStartingWords();
-  subtitle.classList.toggle("level-label",puzzleIndex>0);
-  subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
+  subtitle.classList.toggle("level-label",puzzleIndex>0||isDailyMode());
+  subtitle.textContent=isDailyMode()?`Day ${dailyDayIndex+1} · Puzzle ${puzzleIndex+1} of ${activePuzzles.length}`:(puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`);
   if(solved&&lastPuzzleScore!==null&&!scoreAnimationShown){clearInfoMessage(false);scoreAnimationShown=true;queueRewardAnimations()}
   else if(!message.classList.contains("info")&&!message.classList.contains("score-pop")&&!message.classList.contains("hold-score")&&!message.classList.contains("hold-fade")){message.textContent="";message.classList.remove("score-zero")}
   updateFooterDisplay();
@@ -883,6 +1431,7 @@ function medianTime(times){
   return sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2;
 }
 function updateStatsPanel(){
+  if(isDailyMode()){statsPanel.classList.toggle("visible",solved&&statsDetailsShown);return}
   const tableRows=[];
   [3,4,5].forEach(len=>{
     const row=stats.byLength[len]||{solved:0,clean:0,cleanTimes:[],fastest:null};
@@ -915,6 +1464,27 @@ function updateStatsPanel(){
   statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
 }
 function updateFooterDisplay(){
+  if(isDailyMode()){
+    const done=dailyStats.completed[currentDaily().id];
+    const isFinal=solved&&puzzleIndex>=activePuzzles.length-1;
+    status.classList.remove("footer-info");
+    endMessage.classList.remove("visible");
+    endMessage.innerHTML="";
+    if(isFinal&&done){
+      const r=getDailyFinalLines();
+      status.innerHTML=`<div class="daily-result"><strong>Time:</strong> ${r.time} &nbsp; <strong>Moves:</strong> ${r.moves}<br><strong>Daily streak:</strong> ${r.streak}<br><strong>Median time:</strong> ${r.medianTime} &nbsp; <strong>Median moves:</strong> ${r.medianMoves}</div>`;
+      scoreLine.innerHTML='<span class="footer-details">View details</span>';
+      status.classList.add("footer-clickable");
+      scoreLine.classList.add("footer-clickable");
+    }else{
+      status.innerHTML=`Time ${formatClock(getActivePuzzleElapsedMs())} &nbsp; Moves ${dailyTotalMoves}`;
+      scoreLine.innerHTML=solved?'Tap NEXT to continue':'';
+      status.classList.remove("footer-clickable");
+      scoreLine.classList.remove("footer-clickable");
+    }
+    dailyModeBtn.classList.add("active");gameModeBtn.classList.remove("active");
+    return;
+  }
   const isFinal=solved&&puzzleIndex>=puzzles.length-1&&!DEBUG;
   status.classList.remove("footer-info");
   status.innerHTML=DEBUG?JSON.stringify(currentWords()):`Score ${formatScore(displayedTotalScore)}`;
@@ -923,6 +1493,7 @@ function updateFooterDisplay(){
   scoreLine.classList.toggle("footer-clickable",solved);
   endMessage.innerHTML=isFinal?'You have reached the final puzzle for now. Refresh your browser to check for more puzzles, or <a href="#" id="restartLink" class="restart-link">restart at level 1</a>.':'';
   endMessage.classList.toggle("visible",isFinal);
+  dailyModeBtn.classList.remove("active");gameModeBtn.classList.add("active");
 }
 function toggleFooterInfo(){return}
 function applyDisplayedReward(text){
@@ -1078,18 +1649,18 @@ function createDragProxy(t,x,y,w,h){clearDragProxy();const p=document.createElem
 function moveDragProxy(x,y){const p=$("dragProxy");if(p){p.style.left=`${x}px`;p.style.top=`${y}px`}}
 function clearDragProxy(){$("dragProxy")?.remove()}
 
-function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;if(!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
+function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;if(!isDailyMode()&&!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked))return;const f=tiles.find(t=>!t.locked&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!i.tile.locked);if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
-function useHint(){if(solved)return;stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
+function useHint(){if(solved)return;if(isDailyMode()){if(getDailyHintsAvailable()<1)return;dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
 function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${clamp(pct,0,100)}%`)}
 function clearAutoHintTimers(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null}
 function stopAutoHintTimer(){clearAutoHintTimers();autoHintDelayStartedAt=null;autoHintDelayRemainingMs=null;autoHintFillStart=null;autoHintFillElapsedMs=0;autoHintFilling=false;setHintFill(0)}
 function startAutoHintTimer(delayMs=null){
   stopAutoHintTimer();
-  if(solved||hintBtn.disabled||document.hidden)return;
+  if(isDailyMode()||solved||hintBtn.disabled||document.hidden)return;
   autoHintDelayRemainingMs=delayMs??getAutoHintDelayMs();
   if(autoHintDelayRemainingMs===null||autoHintDelayRemainingMs===undefined)return;
   autoHintDelayStartedAt=performance.now();
@@ -1097,7 +1668,7 @@ function startAutoHintTimer(delayMs=null){
 }
 function beginAutoHintFill(){clearAutoHintTimers();if(solved||hintBtn.disabled||document.hidden)return;autoHintFilling=true;autoHintFillStart=performance.now()-autoHintFillElapsedMs;const step=now=>{if(document.hidden)return;autoHintFillElapsedMs=now-autoHintFillStart;const pct=(autoHintFillElapsedMs/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint();else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)}
 function pauseAutoHintTimer(){if(!autoHintDelayTimer&&!autoHintFrame)return;if(autoHintFilling){if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintFrame=null;if(autoHintFillStart!==null)autoHintFillElapsedMs=Math.min(AUTO_HINT_FILL_MS,performance.now()-autoHintFillStart)}else{if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);autoHintDelayTimer=null;if(autoHintDelayStartedAt!==null)autoHintDelayRemainingMs=Math.max(0,autoHintDelayRemainingMs-(performance.now()-autoHintDelayStartedAt))}autoHintDelayStartedAt=null}
-function resumeAutoHintTimer(){if(solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
+function resumeAutoHintTimer(){if(isDailyMode()||solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
 
 function clearBonusTimers(){bonusTimerIds.forEach(id=>clearTimeout(id));bonusTimerIds=[]}
 function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(id));celebrationTimerIds=[];starBurst.innerHTML=""}
@@ -1108,6 +1679,8 @@ function clearInfoMessage(clearText=true){if(infoMessageTimer){clearTimeout(info
 function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();stopAutoHintTimer()}
 
 hintBtn.addEventListener("click",()=>useHint());
+dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
+gameModeBtn.addEventListener("click",()=>switchMode("game"));
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
 document.querySelector(".game").addEventListener("click",e=>{if(!solved||Date.now()<solvedToggleReadyAt||e.target.closest(".controls")||e.target.closest(".stats-panel"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();toggleSolvedStartPreview()});
@@ -1127,14 +1700,47 @@ document.addEventListener("dblclick",e=>e.preventDefault(),{passive:false});
 document.addEventListener("selectstart",e=>e.preventDefault(),{passive:false});
 document.addEventListener("contextmenu",e=>e.preventDefault(),{passive:false});
 
-document.addEventListener("visibilitychange",()=>{if(document.hidden){pausePuzzleClock();pauseAutoHintTimer();saveGameState()}else{resumePuzzleClock();resumeAutoHintTimer()}});
-window.addEventListener("pagehide",()=>{pausePuzzleClock();pauseAutoHintTimer();saveGameState()});
-window.addEventListener("pageshow",()=>{resumePuzzleClock();resumeAutoHintTimer()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){pausePuzzleClock();pauseAutoHintTimer();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else saveGameState()}else{resumePuzzleClock();if(isDailyMode())startDailyTimer();else resumeAutoHintTimer()}});
+window.addEventListener("pagehide",()=>{pausePuzzleClock();pauseAutoHintTimer();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else saveGameState()});
+window.addEventListener("pageshow",()=>{resumePuzzleClock();if(isDailyMode())startDailyTimer();else resumeAutoHintTimer()});
 window.addEventListener("orientationchange",()=>setTimeout(()=>{message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""},80));
 window.addEventListener("resize",()=>{if(solved){message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""}});
 
-function initGame(){const saved=loadSavedState();if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0})}
-initGame();
+function initDaily(){
+  activePuzzles=currentDaily().puzzles;
+  dailyStats=loadDailyStats();
+  const all=getDailyProgress();
+  const saved=all[currentDaily().id]||null;
+  const completed=dailyStats.completed[currentDaily().id]||null;
+  dailyCurrentCompleted=!!completed;
+  dailyTotalMoves=completed?.moves??(Number.isInteger(saved?.dailyTotalMoves)?Math.max(0,saved.dailyTotalMoves):0);
+  dailyHintsEarned=Number.isInteger(saved?.dailyHintsEarned)?clamp(saved.dailyHintsEarned,0,DAILY_HINT_UNLOCKS_MS.length):0;
+  dailyHintsUsed=Number.isInteger(saved?.dailyHintsUsed)?clamp(saved.dailyHintsUsed,0,DAILY_HINT_UNLOCKS_MS.length):0;
+  puzzleIndex=completed?activePuzzles.length-1:(Number.isInteger(saved?.puzzleIndex)?clamp(saved.puzzleIndex,0,activePuzzles.length-1):0);
+  setupPuzzle({
+    restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,
+    restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,
+    restoreSolved:!!completed||!!(saved&&saved.solved),
+    restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),
+    restoreCompletedWithHints:!!(saved&&saved.completedWithHints),
+    restoreAwarded:true,
+    restoreLastScore:null,
+    restoreActivePuzzleElapsedMs:completed?.timeMs??(saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0)
+  });
+  if(completed){dailyCurrentCompleted=true;solved=true;pausePuzzleClock();stopAutoHintTimer();clearDailyTimer();render()}
+}
+function initGame(){const saved=loadSavedState();activePuzzles=puzzles;if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0})}
+function initMode(){
+  clearAllTimers();clearDailyTimer();
+  const params=new URLSearchParams(location.search);
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}
+  const jumpDay=getUrlJumpDay();
+  mode=getUrlMode();
+  if(jumpDay!==null)dailyDayIndex=jumpDay-1;
+  localStorage.setItem(DAILY_MODE_KEY,mode);
+  if(mode==="daily")initDaily();else initGame();
+}
+initMode();
 </script>
 </body>
 </html>
