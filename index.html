@@ -556,7 +556,7 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let statsDetailsShown=false;
-let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficiencyBonusPoints:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
+let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
 const currentPuzzle=()=>puzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
@@ -566,7 +566,7 @@ const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(vis
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function normalizeStats(s){
-  const blank={solvedCount:Math.max(0,Number(s?.solvedCount)||0),longestStreak:Math.max(0,Number(s?.longestStreak)||0),speedBonusPoints:Math.max(0,Number(s?.speedBonusPoints)||0),efficiencyBonusPoints:Math.max(0,Number(s?.efficiencyBonusPoints)||0),byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
+  const blank={solvedCount:Math.max(0,Number(s?.solvedCount)||0),longestStreak:Math.max(0,Number(s?.longestStreak)||0),speedBonusPoints:Math.max(0,Number(s?.speedBonusPoints)||0),efficientSolves:Math.max(0,Number(s?.efficientSolves)||Number(s?.efficiencyBonusPoints)||0),byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
   [3,4,5].forEach(len=>{
     const src=s?.byLength?.[len]||{};
     blank.byLength[len]={
@@ -756,14 +756,12 @@ function awardPuzzleScoreIfNeeded(){
   }
 
   if(isEfficientSolve()){
+    stats.efficientSolves++;
     if(shields<MAX_SHIELDS){
       shields++;
-      stats.efficiencyBonusPoints+=1;
       lastBonusMessages.push("Efficiency +1 🛡️");
     }else{
-      totalScore+=EFFICIENCY_CAP_POINTS;
-      stats.efficiencyBonusPoints+=EFFICIENCY_CAP_POINTS;
-      lastBonusMessages.push(`Efficiency +${EFFICIENCY_CAP_POINTS}`);
+      lastBonusMessages.push("Efficiency +1");
     }
   }
 
@@ -863,9 +861,9 @@ function updateStatsPanel(){
         <div class="stats-summary"><span class="label">Puzzles played:</span> <strong>${stats.solvedCount||0}</strong></div>
         <div class="stats-summary"><span class="label">Clean solves:</span> <strong>${[3,4,5].reduce((sum,len)=>sum+(stats.byLength[len]?.clean||0),0)}</strong></div>
         <div class="stats-summary"><span class="label">Total score:</span> <strong>${formatScore(totalScore)}</strong></div>
-        <div class="stats-summary"><span class="label">Best streak:</span> <strong>${stats.longestStreak||0}</strong></div>
+        <div class="stats-summary"><span class="label">Efficient solves:</span> <strong>${formatScore(stats.efficientSolves||0)}</strong></div>
         <div class="stats-summary"><span class="label">Speed points:</span> <strong>${formatScore(stats.speedBonusPoints||0)}</strong></div>
-        <div class="stats-summary"><span class="label">Efficiency:</span> <strong>${formatScore(stats.efficiencyBonusPoints||0)}</strong></div>
+        <div class="stats-summary"><span class="label">Best streak:</span> <strong>${stats.longestStreak||0}</strong></div>
       </div>
       <hr>
       <table class="stats-table"><colgroup><col><col><col><col></colgroup><thead><tr><th>Clean solves</th><th></th><th class="stat-time-head">median</th><th class="stat-time-head">best</th></tr></thead><tbody>${tableRows.join("")}</tbody></table>
@@ -897,7 +895,7 @@ function applyDisplayedReward(text){
   const subtract=text.match(/^Hints? -([0-9]+)$/);
   if(subtract)displayedTotalScore=Math.max(0,displayedTotalScore-Number(subtract[1]));
   const shieldMatch=text.match(/^(?:Shield|Efficiency) \+([0-9]+)/);
-  if(shieldMatch&&/^Efficiency \+1(?:\s|$)/.test(text))displayedShields=Math.min(MAX_SHIELDS,displayedShields+1);
+  if(shieldMatch&&/^Efficiency \+1 .*🛡️/.test(text))displayedShields=Math.min(MAX_SHIELDS,displayedShields+1);
   else if(shieldMatch&&!text.startsWith("Efficiency"))displayedShields=Math.min(MAX_SHIELDS,displayedShields+Number(shieldMatch[1]));
   updateFooterDisplay();
 }
@@ -972,7 +970,7 @@ function queueRewardAnimations(){
       popMessage(text,text==="+0",i===messages.length-1);
       if(/[0-9]+-streak/.test(text))showStreakCelebration();
       else if(/Speed bonus/.test(text)||/^Efficiency [+](?!1(?: |$))[0-9]+/.test(text))showStarBurst();
-      if(/^(?:Shield) \+[0-9]+/.test(text)||/^Efficiency \+1(?:\s|$)/.test(text))showShieldBurst();
+      if(/^(?:Shield) \+[0-9]+/.test(text)||/^Efficiency \+1 .*🛡️/.test(text))showShieldBurst();
     },i*1250));
   });
 }
