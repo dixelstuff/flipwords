@@ -28,7 +28,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .start-words.daily-start{color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}
 .daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:18px 0 4px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:block;padding:12px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.daily-puzzle-row strong{color:var(--ink);font-weight:800}.daily-puzzle-num{font-weight:800;color:var(--ink);font-size:14px}.daily-puzzle-words{font-size:14px;line-height:1.35;color:var(--muted)}.daily-puzzle-words strong{color:var(--ink);font-weight:750}.tile-wrap.daily-review-tile{cursor:default}.tile-wrap.daily-review-tile .tile-face{border-color:var(--success);background:#fff}
 
-.daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:14px;font-weight:850;letter-spacing:.01em}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:14px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:18px;margin-bottom:2px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:9px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:16px;margin-bottom:1px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls{grid-template-columns:140px;gap:0}.controls.daily-complete-controls .action-slot{display:none}.hint.daily-stats-button{width:140px;color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}.hint.daily-stats-button::before{display:none}.subtitle.daily-complete-title{font-size:clamp(25px,3.2vw,34px);font-weight:850;line-height:1;color:var(--success);align-items:flex-start;padding-top:16px;letter-spacing:-.02em}.subtitle.daily-intro{font-size:clamp(17px,1.9vw,20px)!important}.daily-countdown,.daily-play-time{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:14px;font-weight:850;letter-spacing:.01em}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:14px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:18px;margin-bottom:2px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:9px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:16px;margin-bottom:1px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls{grid-template-columns:140px;gap:0}.controls.daily-complete-controls .action-slot{display:none}.hint.daily-stats-button{width:140px;color:var(--success);background:#fff;border:1.5px solid rgba(48,164,108,.42);box-shadow:0 3px 10px rgba(48,164,108,.08)}.hint.daily-stats-button::before{display:none}.subtitle.daily-complete-title{font-size:clamp(25px,3.2vw,34px);font-weight:850;line-height:1;color:var(--success);align-items:center;padding-top:0;letter-spacing:-.02em}.subtitle.daily-complete-animate{animation:daily-complete-pop .95s cubic-bezier(.18,.9,.22,1) both}.subtitle.daily-intro{font-size:clamp(17px,1.9vw,20px)!important}.daily-countdown,.daily-play-time{font-variant-numeric:tabular-nums;letter-spacing:.01em}.daily-countdown strong{font-weight:850;color:var(--ink)}@keyframes daily-complete-pop{0%{opacity:0;transform:translateY(7px) scale(.94)}55%{opacity:1;transform:translateY(0) scale(1.055)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:340px;height:47px;padding:0 22px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:24px;padding-bottom:24px}.board{gap:14px}.tile-wrap{width:clamp(72px,8.5vw,92px);height:clamp(130px,15vw,156px)}.letter{font-size:clamp(42px,4.8vw,56px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){.game{display:flex;width:min(96vw,760px);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));transform:none;justify-content:center}.title{font-size:34px}.subtitle{max-width:520px;height:35px;margin:4px auto 8px;padding:0 10px;font-size:14px;line-height:1.25}.subtitle.level-label{font-size:20px;padding-top:10px}.board-shell{padding:6px 8px 8px}.board{gap:7px;min-height:86px}.board.short-board{gap:10px}.tile-wrap{width:clamp(42px,8vw,58px);height:clamp(76px,17vw,96px)}.letter{font-size:clamp(24px,4.4vw,34px)}.feedback-area{height:24px}.message{font-size:20px}.message.info{font-size:15px}.controls{grid-template-columns:104px 104px;gap:8px;min-height:38px}button{width:104px;height:38px;font-size:14px}.action-slot{width:104px;height:38px}.status{margin-top:8px;font-size:14px;min-height:42px}.status.footer-info{padding-left:18px;padding-right:18px}.score-line{margin-top:0;font-size:14px;min-height:19px}}
@@ -1144,10 +1144,12 @@ function getDailyProgress(){try{return JSON.parse(localStorage.getItem(DAILY_PRO
 function saveDailyProgress(){if(!isDailyMode())return;const all=getDailyProgress();all[currentDaily().id]={dayIndex:dailyDayIndex,puzzleIndex,dailyTotalMoves,dailyHintsEarned,dailyHintsUsed,dailyStarted,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),solved,solvedAnswerInverted,hintsUsed,movesUsed,dailyCurrentCompleted};try{localStorage.setItem(DAILY_PROGRESS_KEY,JSON.stringify(all))}catch{}}
 function clearDailyTimer(){if(dailyTimer){clearInterval(dailyTimer);dailyTimer=null}}
 function clearDailyCountdownTimer(){if(dailyCountdownTimer){clearInterval(dailyCountdownTimer);dailyCountdownTimer=null}}
-function getNextDailyCountdownText(){const now=new Date();const next=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1);let ms=Math.max(0,next-now.getTime());const h=Math.floor(ms/(60*60*1000));ms-=h*60*60*1000;const m=Math.floor(ms/(60*1000));ms-=m*60*1000;const s=Math.floor(ms/1000);return `NEXT DAILY IN ${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function getNextDailyCountdownTime(){const now=new Date();const next=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1);let ms=Math.max(0,next-now.getTime());const h=Math.floor(ms/(60*60*1000));ms-=h*60*60*1000;const m=Math.floor(ms/(60*1000));ms-=m*60*1000;const s=Math.floor(ms/1000);return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
+function getNextDailyCountdownText(){return `NEXT DAILY IN <strong>${getNextDailyCountdownTime()}</strong>`}
 function startDailyCountdownTimer(){if(dailyCountdownTimer)return;if(!isDailyMode()||!dailyCurrentCompleted)return;dailyCountdownTimer=setInterval(updateFooterDisplay,1000)}
+function updateDailySubtitleClock(){if(!isDailyMode()||dailyCurrentCompleted||!dailyStarted||solved)return;subtitle.classList.remove("daily-complete-title","daily-complete-animate","daily-intro","level-label");subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`}
 function getDailyHintsAvailable(){return Math.min(1,Math.max(0,dailyHintsEarned-dailyHintsUsed))}
-function checkDailyHintUnlocks(){if(!isDailyMode()||solved||dailyCurrentCompleted)return;const elapsed=getActivePuzzleElapsedMs();let changed=false;while(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length&&elapsed>=DAILY_HINT_UNLOCKS_MS[dailyHintsEarned]){const before=getDailyHintsAvailable();dailyHintsEarned++;if(before>0)dailyHintsUsed++;if(getDailyHintsAvailable()>before)changed=true}if(changed){showInfoMessage("Free hint available","daily-hint");render()}else{updateFooterDisplay()}saveDailyProgress()}
+function checkDailyHintUnlocks(){if(!isDailyMode()||solved||dailyCurrentCompleted)return;const elapsed=getActivePuzzleElapsedMs();let changed=false;while(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length&&elapsed>=DAILY_HINT_UNLOCKS_MS[dailyHintsEarned]){const before=getDailyHintsAvailable();dailyHintsEarned++;if(before>0)dailyHintsUsed++;if(getDailyHintsAvailable()>before)changed=true}if(changed){showInfoMessage("Free hint available","daily-hint");render();updateDailySubtitleClock()}else{updateDailySubtitleClock();updateFooterDisplay()}saveDailyProgress()}
 function startDailyTimer(){clearDailyTimer();if(!isDailyMode()||!dailyStarted||solved||dailyCurrentCompleted||document.hidden)return;dailyTimer=setInterval(checkDailyHintUnlocks,500)}
 function pauseDailyTimer(){clearDailyTimer();checkDailyHintUnlocks()}
 function medianNumber(values){if(!values.length)return null;const sorted=[...values].sort((a,b)=>a-b),mid=Math.floor(sorted.length/2);return sorted.length%2?sorted[mid]:(sorted[mid-1]+sorted[mid])/2}
@@ -1396,13 +1398,17 @@ function checkSolved(){
       pausePuzzleClock();
       scoreAnimationShown=true;
       clearInfoMessage(false);
-      popMessage("Correct!",false,true);
       if(dailyAdvanceTimer)clearTimeout(dailyAdvanceTimer);
       if(puzzleIndex>=activePuzzles.length-1){
         completeDailyIfNeeded();
         statsDetailsShown=false;
+        message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade");
+        message.textContent="";
+        setTimeout(()=>showDailyCompleteBurst(true),80);
         startDailyCountdownTimer();
       }else{
+        popMessage("Correct!",false,true);
+        showDailyCompleteBurst(false);
         dailyAdvanceTimer=setTimeout(()=>goDailyNext(),1950);
       }
     }else{
@@ -1439,16 +1445,17 @@ function renderDailySubtitle(){
   if(dailyCurrentCompleted){
     const done=dailyStats.completed[currentDaily().id];
     subtitle.classList.remove("level-label","daily-intro");
-    subtitle.classList.add("daily-complete-title");
-    subtitle.textContent=`Completed in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())}`;
+    subtitle.classList.add("daily-complete-title","daily-complete-animate");
+    subtitle.textContent=`Complete in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())}`;
     return;
   }
-  subtitle.classList.remove("daily-complete-title");
-  const isIntro=puzzleIndex===0;
-  const useLevelLabel=dailyStarted&&puzzleIndex>0;
-  subtitle.classList.toggle("level-label",useLevelLabel);
+  subtitle.classList.remove("daily-complete-title","daily-complete-animate");
+  const isIntro=puzzleIndex===0&&!dailyStarted;
+  const showTimer=dailyStarted&&!solved;
+  subtitle.classList.toggle("level-label",false);
   subtitle.classList.toggle("daily-intro",isIntro);
-  subtitle.textContent=isIntro?"Make two new words by flipping and moving the tiles to solve.":`Daily ${puzzleIndex+1} of ${activePuzzles.length}`;
+  if(showTimer)subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`;
+  else subtitle.textContent=isIntro?"Make two new words by flipping and moving the tiles to solve.":`Daily ${puzzleIndex+1} of ${activePuzzles.length}`;
 }
 function renderGameSubtitle(){
   subtitle.classList.remove("daily-complete-title","daily-intro");
@@ -1575,7 +1582,7 @@ function updateFooterDisplay(){
       startDailyCountdownTimer();
     }else{
       clearDailyCountdownTimer();
-      status.innerHTML=dailyStarted?`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`:"Press Start when ready";
+      status.innerHTML=`Puzzle ${puzzleIndex+1} of ${activePuzzles.length}`;
       scoreLine.innerHTML="";
       status.classList.remove("footer-clickable");
       scoreLine.classList.remove("footer-clickable");
@@ -1623,6 +1630,7 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.add("score-pop");
 }
 function showStarBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
+function showDailyCompleteBurst(big=false){starBurst.innerHTML="";const pts=big?[[-180,-86,-22],[180,-86,22],[-128,-150,35],[128,-150,-35],[-205,8,-18],[205,8,18],[-118,128,24],[118,128,-24],[-48,-210,-14],[48,-210,14],[-55,192,-12],[55,192,12]]:[[-115,-55,-20],[115,-55,20],[-74,-98,28],[74,-98,-28],[-126,28,-14],[126,28,14],[-54,88,18],[54,88,-18]];pts.forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="shield-icon";s.textContent="🛡️";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function burstGlyph(char,points,className="star"){
   points.forEach(([x,y,r])=>{
