@@ -27,6 +27,8 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .mode-toggle{position:fixed;left:50%;bottom:28px;z-index:10;transform:translateX(-50%);display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.82);border:1px solid rgba(37,31,52,.10);border-radius:999px;box-shadow:0 8px 22px rgba(37,31,52,.12);backdrop-filter:blur(8px)}.mode-toggle button{width:auto;height:38px;padding:0 18px;border-radius:999px;background:transparent;color:var(--muted);font-size:15px;font-weight:800}.mode-toggle button.active{background:var(--ink);color:#fff}.daily-result{font-size:17px;line-height:1.45;color:var(--muted)}.daily-result strong{color:var(--ink)}.tile-wrap.daily-prestart{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.06)}.tile-wrap.daily-prestart .tile-face{background:#f1edf8;border-color:#ded7eb}.tile-wrap.daily-prestart .letter{color:#b9b0c8;font-weight:800;opacity:.58}.daily-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 4px}.daily-stat-box{background:#f7f5fb;border:1px solid rgba(37,31,52,.08);border-radius:18px;padding:13px 10px;text-align:center}.daily-stat-emoji{font-size:25px;line-height:1;margin-bottom:5px}.daily-stat-label{font-size:13px;color:var(--muted);font-weight:750}.daily-stat-value{font-size:24px;color:var(--ink);font-weight:800;line-height:1.15}.daily-stats-note{text-align:center;color:var(--muted);font-size:14px;line-height:1.35;margin:16px 4px 0}
 .start-words.daily-start{color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}
 .daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:16px 0 2px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:grid;grid-template-columns:56px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(37,31,52,.08)}.daily-puzzle-num{font-weight:800;color:var(--ink);font-size:14px}.daily-puzzle-words{font-size:14px;line-height:1.35;color:var(--muted)}.daily-puzzle-words strong{color:var(--ink);font-weight:750}.tile-wrap.daily-review-tile{cursor:default}.tile-wrap.daily-review-tile .tile-face{border-color:var(--success);background:#fff}
+
+.daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:14px;font-weight:850;letter-spacing:.01em}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:16px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:28px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:10px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:20px;margin-bottom:3px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls{grid-template-columns:140px;gap:0}.controls.daily-complete-controls .action-slot{display:none}.hint.daily-stats-button{width:140px;color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}.hint.daily-stats-button::before{display:none}.subtitle.daily-complete-title{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:340px;height:47px;padding:0 22px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:24px;padding-bottom:24px}.board{gap:14px}.tile-wrap{width:clamp(72px,8.5vw,92px);height:clamp(130px,15vw,156px)}.letter{font-size:clamp(42px,4.8vw,56px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){.game{display:flex;width:min(96vw,760px);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));transform:none;justify-content:center}.title{font-size:34px}.subtitle{max-width:520px;height:35px;margin:4px auto 8px;padding:0 10px;font-size:14px;line-height:1.25}.subtitle.level-label{font-size:20px;padding-top:10px}.board-shell{padding:6px 8px 8px}.board{gap:7px;min-height:86px}.board.short-board{gap:10px}.tile-wrap{width:clamp(42px,8vw,58px);height:clamp(76px,17vw,96px)}.letter{font-size:clamp(24px,4.4vw,34px)}.feedback-area{height:24px}.message{font-size:20px}.message.info{font-size:15px}.controls{grid-template-columns:104px 104px;gap:8px;min-height:38px}button{width:104px;height:38px;font-size:14px}.action-slot{width:104px;height:38px}.status{margin-top:8px;font-size:14px;min-height:42px}.status.footer-info{padding-left:18px;padding-right:18px}.score-line{margin-top:0;font-size:14px;min-height:19px}}
@@ -66,6 +68,7 @@ const SOLVED_TOGGLE_DELAY_MS=1250;
 const SCORE_POP_MS=2000;
 const FINAL_POP_MS=3000;
 const STREAK_POP_MS=9000;
+const DAILY_FINAL_MODAL_DELAY_MS=3500;
 
 const puzzleRows=[
 ["ace","yet","cat","eye",2,"","",""],
@@ -1094,7 +1097,7 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let statsDetailsShown=false;
-let mode="game",dailyDayIndex=0,dailyTotalMoves=0,dailyHintsEarned=0,dailyHintsUsed=0,dailyCurrentCompleted=false,dailyTimer=null,dailyAdvanceTimer=null,dailyStarted=false,dailyReviewIndex=2;
+let mode="game",dailyDayIndex=0,dailyTotalMoves=0,dailyHintsEarned=0,dailyHintsUsed=0,dailyCurrentCompleted=false,dailyTimer=null,dailyCountdownTimer=null,dailyAdvanceTimer=null,dailyStarted=false,dailyReviewIndex=2;
 let dailyStats={completed:{}};
 let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
@@ -1140,6 +1143,9 @@ function saveDailyStats(){try{localStorage.setItem(DAILY_STATS_KEY,JSON.stringif
 function getDailyProgress(){try{return JSON.parse(localStorage.getItem(DAILY_PROGRESS_KEY)||"{}")||{}}catch{return {}}}
 function saveDailyProgress(){if(!isDailyMode())return;const all=getDailyProgress();all[currentDaily().id]={dayIndex:dailyDayIndex,puzzleIndex,dailyTotalMoves,dailyHintsEarned,dailyHintsUsed,dailyStarted,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),solved,solvedAnswerInverted,hintsUsed,movesUsed,dailyCurrentCompleted};try{localStorage.setItem(DAILY_PROGRESS_KEY,JSON.stringify(all))}catch{}}
 function clearDailyTimer(){if(dailyTimer){clearInterval(dailyTimer);dailyTimer=null}}
+function clearDailyCountdownTimer(){if(dailyCountdownTimer){clearInterval(dailyCountdownTimer);dailyCountdownTimer=null}}
+function getNextDailyCountdownText(){const now=new Date();const next=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1);let ms=Math.max(0,next-now.getTime());const h=Math.floor(ms/(60*60*1000));ms-=h*60*60*1000;const m=Math.floor(ms/(60*1000));return `NEXT DAILY IN ${h}h:${String(m).padStart(2,"0")}m`}
+function startDailyCountdownTimer(){clearDailyCountdownTimer();if(!isDailyMode()||!dailyCurrentCompleted)return;dailyCountdownTimer=setInterval(updateFooterDisplay,30000)}
 function getDailyHintsAvailable(){return Math.min(1,Math.max(0,dailyHintsEarned-dailyHintsUsed))}
 function checkDailyHintUnlocks(){if(!isDailyMode()||solved||dailyCurrentCompleted)return;const elapsed=getActivePuzzleElapsedMs();let changed=false;while(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length&&elapsed>=DAILY_HINT_UNLOCKS_MS[dailyHintsEarned]){const before=getDailyHintsAvailable();dailyHintsEarned++;if(before>0)dailyHintsUsed++;if(getDailyHintsAvailable()>before)changed=true}if(changed){showInfoMessage("Free hint available","daily-hint");render()}else{updateFooterDisplay()}saveDailyProgress()}
 function startDailyTimer(){clearDailyTimer();if(!isDailyMode()||!dailyStarted||solved||dailyCurrentCompleted||document.hidden)return;dailyTimer=setInterval(checkDailyHintUnlocks,500)}
@@ -1385,7 +1391,7 @@ function checkSolved(){
       if(dailyAdvanceTimer)clearTimeout(dailyAdvanceTimer);
       if(puzzleIndex>=activePuzzles.length-1){
         completeDailyIfNeeded();
-        dailyAdvanceTimer=setTimeout(()=>{statsDetailsShown=true;updateStatsPanel()},1250);
+        dailyAdvanceTimer=setTimeout(()=>{statsDetailsShown=true;updateStatsPanel();startDailyCountdownTimer()},DAILY_FINAL_MODAL_DELAY_MS);
       }else{
         dailyAdvanceTimer=setTimeout(()=>goDailyNext(),1250);
       }
@@ -1421,23 +1427,25 @@ function setDailyReviewIndex(delta){
 }
 function renderDailySubtitle(){
   if(dailyCurrentCompleted){
-    const p=activePuzzles[dailyReviewIndex]||activePuzzles[activePuzzles.length-1];
-    subtitle.classList.add("level-label");
-    subtitle.innerHTML=`<span class="daily-review-nav"><button type="button" data-review-dir="-1" aria-label="Previous puzzle">‹</button><span class="daily-review-title">Daily complete<span class="daily-review-small">review ${dailyReviewIndex+1} of ${activePuzzles.length}: ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()} → ${p.answer1.toUpperCase()} / ${p.answer2.toUpperCase()}</span></span><button type="button" data-review-dir="1" aria-label="Next puzzle">›</button></span>`;
+    subtitle.classList.remove("level-label");
+    subtitle.classList.add("daily-complete-title");
+    subtitle.textContent="Daily complete";
     return;
   }
+  subtitle.classList.remove("daily-complete-title");
   const useLevelLabel=dailyStarted&&puzzleIndex>0;
   subtitle.classList.toggle("level-label",useLevelLabel);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Daily ${puzzleIndex+1} of ${activePuzzles.length}`;
 }
 function renderGameSubtitle(){
+  subtitle.classList.remove("daily-complete-title");
   subtitle.classList.toggle("level-label",puzzleIndex>0);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
 }
 function render(){
   const showDailyPrestart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
-  const showDailyReview=isDailyMode()&&dailyCurrentCompleted;
-  const renderTiles=showDailyPrestart?dailyPrestartTiles():(showDailyReview?dailyReviewTiles():(previewingStartWords?startPreviewTiles():tiles));
+  const showDailyReview=false;
+  const renderTiles=showDailyPrestart?dailyPrestartTiles():(previewingStartWords?startPreviewTiles():tiles);
   board.classList.toggle("short-board",renderTiles.length<=3);board.innerHTML="";
   renderTiles.forEach(t=>{
     const w=document.createElement("div");w.className="tile-wrap";
@@ -1453,14 +1461,19 @@ function render(){
   });
   const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=activePuzzles.length-1;
   nextBtn.classList.toggle("visible",!isDailyMode()&&solved&&!isFinal);nextBtn.textContent="Next";
-  hintBtn.disabled=solved||allLocked||(isDailyMode()&&(!dailyStarted||getDailyHintsAvailable()<1));
+  const controlsEl=document.querySelector(".controls");
+  const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
+  controlsEl.classList.toggle("daily-complete-controls",showDailyCompleteControls);
+  hintBtn.classList.toggle("daily-stats-button",showDailyCompleteControls);
+  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"STATS":"Hint";
+  hintBtn.disabled=showDailyCompleteControls?false:(solved||allLocked||(isDailyMode()&&(!dailyStarted||getDailyHintsAvailable()<1)));
   const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
   startWordsBtn.classList.toggle("daily-start",showDailyStart);
   if(showDailyStart){
     startWordsBtn.textContent="Start";
     startWordsBtn.disabled=false;
   }else{
-    startWordsBtn.textContent=hintsUsed===0&&!solved?"Reset":"Starters";
+    startWordsBtn.textContent=(!solved&&hintsUsed>0)?"Starters":"Reset";
     startWordsBtn.disabled=solved||dailyCurrentCompleted||isShowingStartingWords();
   }
   if(isDailyMode())renderDailySubtitle();else renderGameSubtitle();
@@ -1481,18 +1494,24 @@ function medianTime(times){
 function updateStatsPanel(){
   if(isDailyMode()){
     const r=getDailyFinalLines();
+    const completedCount=getDailyCompletedEntries().length;
     statsPanel.innerHTML=`
       <div class="stats-card" role="dialog" aria-modal="true" aria-label="Daily stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
         <div class="stats-title">Your daily stats</div>
-        <div class="daily-stats-grid">
-          <div class="daily-stat-box"><div class="daily-stat-emoji">⏱️</div><div class="daily-stat-label">Time</div><div class="daily-stat-value">${r.time}</div></div>
-          <div class="daily-stat-box"><div class="daily-stat-emoji">🔀</div><div class="daily-stat-label">Moves</div><div class="daily-stat-value">${r.moves}</div></div>
-          <div class="daily-stat-box"><div class="daily-stat-emoji">🔥</div><div class="daily-stat-label">Daily streak</div><div class="daily-stat-value">${r.streak}</div></div>
-          <div class="daily-stat-box"><div class="daily-stat-emoji">📊</div><div class="daily-stat-label">Median</div><div class="daily-stat-value">${r.medianTime}</div><div class="daily-stat-label">${r.medianMoves} moves</div></div>
+        <div class="daily-section-title">Today</div>
+        <div class="daily-today-grid">
+          <div class="daily-stat-box primary"><div class="daily-stat-emoji">⏱️</div><div class="daily-stat-label">Time</div><div class="daily-stat-value">${r.time}</div></div>
+          <div class="daily-stat-box primary"><div class="daily-stat-emoji">🔀</div><div class="daily-stat-label">Moves</div><div class="daily-stat-value">${r.moves}</div></div>
+        </div>
+        <div class="daily-section-title">Overall</div>
+        <div class="daily-overall-grid">
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">🔥</div><div class="daily-stat-label">Daily streak</div><div class="daily-stat-value">${r.streak}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">✅</div><div class="daily-stat-label">Days played</div><div class="daily-stat-value">${completedCount}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">📊</div><div class="daily-stat-label">Median time</div><div class="daily-stat-value">${r.medianTime}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">🎯</div><div class="daily-stat-label">Median moves</div><div class="daily-stat-value">${r.medianMoves}</div></div>
         </div>
         ${dailyPuzzleSummaryHTML()}
-        <p class="daily-stats-note">Median time and moves are based on all completed daily triplets.</p>
       </div>`;
     statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
     return
@@ -1536,10 +1555,11 @@ function updateFooterDisplay(){
     endMessage.classList.remove("visible");
     endMessage.innerHTML="";
     if(isFinal&&done){
-      status.innerHTML=`Daily complete`;
-      scoreLine.innerHTML='<span class="footer-details">View details</span>';
-      status.classList.add("footer-clickable");
-      scoreLine.classList.add("footer-clickable");
+      status.innerHTML=getNextDailyCountdownText();
+      scoreLine.innerHTML="";
+      status.classList.remove("footer-clickable");
+      scoreLine.classList.remove("footer-clickable");
+      startDailyCountdownTimer();
     }else{
       status.innerHTML=dailyStarted?`Time ${formatClock(getActivePuzzleElapsedMs())} &nbsp; Moves ${dailyTotalMoves}`:"Press Start when ready";
       scoreLine.innerHTML="";
@@ -1674,6 +1694,7 @@ function startDailyPlay(){
   saveDailyProgress();
 }
 function showStartingWords(){
+  if(isDailyMode()&&dailyCurrentCompleted){openStatsDetails();return}
   if(isDailyMode()&&!dailyStarted){startDailyPlay();return}
   if(hintsUsed===0&&!solved){resetToStartingWords();return}
   if(solved||isShowingStartingWords())return;
@@ -1726,7 +1747,7 @@ function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){cons
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked))return;const f=tiles.find(t=>!t.locked&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!i.tile.locked);if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
-function useHint(){if(solved)return;if(isDailyMode()){if(getDailyHintsAvailable()<1)return;dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
+function useHint(){if(isDailyMode()&&dailyCurrentCompleted){openStatsDetails();return}if(solved)return;if(isDailyMode()){if(getDailyHintsAvailable()<1)return;dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
 function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${clamp(pct,0,100)}%`)}
 function clearAutoHintTimers(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null}
@@ -1749,7 +1770,7 @@ function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(retur
 function clearSingleStartWordTimer(){if(singleStartWordTimer){clearTimeout(singleStartWordTimer);singleStartWordTimer=null}}
 function clearNoticeTimer(){if(noticeTimer){clearTimeout(noticeTimer);noticeTimer=null}}
 function clearInfoMessage(clearText=true){if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info");message.dataset.infoType="";if(clearText&&!solved)message.textContent=""}
-function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}stopAutoHintTimer()}
+function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();clearDailyCountdownTimer();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}stopAutoHintTimer()}
 
 hintBtn.addEventListener("click",()=>useHint());
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
@@ -1803,11 +1824,11 @@ function initDaily(){
     restoreLastScore:null,
     restoreActivePuzzleElapsedMs:completed?.timeMs??(saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0)
   });
-  if(completed){dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;solved=true;pausePuzzleClock();stopAutoHintTimer();clearDailyTimer();render()}
+  if(completed){dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;solved=true;pausePuzzleClock();stopAutoHintTimer();clearDailyTimer();render();startDailyCountdownTimer()}
 }
 function initGame(){const saved=loadSavedState();activePuzzles=puzzles;if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0})}
 function initMode(){
-  clearAllTimers();clearDailyTimer();
+  clearAllTimers();clearDailyTimer();clearDailyCountdownTimer();
   const params=new URLSearchParams(location.search);
   if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}
   const jumpDay=getUrlJumpDay();
