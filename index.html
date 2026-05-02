@@ -580,7 +580,6 @@ const puzzleRows=[
 ["heal","aura","area","haul",2,"","",""]
 ];
 
-
 const dailyTriplets = [
   {
     id: "day-001",
@@ -1136,7 +1135,7 @@ function getAutoHintSaveState(){
   return {autoHintFilling,autoHintDelayRemainingMs:remaining,autoHintFillElapsedMs:fillElapsed};
 }
 function saveGameState(){if(isDailyMode())return;try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
-function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;if(saved&&!saved.stateKind&&Number.isInteger(saved.puzzleIndex)&&saved.puzzleIndex>=puzzles.length)return null;return saved}catch{return null}}
+function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;setupPuzzle()}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
@@ -1147,6 +1146,7 @@ function clearDailyTimer(){if(dailyTimer){clearInterval(dailyTimer);dailyTimer=n
 function clearDailyCountdownTimer(){if(dailyCountdownTimer){clearInterval(dailyCountdownTimer);dailyCountdownTimer=null}}
 function getNextDailyCountdownTime(){const now=new Date();const next=Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1);let ms=Math.max(0,next-now.getTime());const h=Math.floor(ms/(60*60*1000));ms-=h*60*60*1000;const m=Math.floor(ms/(60*1000));ms-=m*60*1000;const s=Math.floor(ms/1000);return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`}
 function getNextDailyCountdownText(){return `NEXT DAILY IN <strong>${getNextDailyCountdownTime()}</strong>`}
+function getNextDailyCountdownParts(){return {label:"NEXT DAILY IN",time:getNextDailyCountdownTime()}}
 function startDailyCountdownTimer(){if(dailyCountdownTimer)return;if(!isDailyMode()||!dailyCurrentCompleted)return;dailyCountdownTimer=setInterval(updateFooterDisplay,1000)}
 function updateDailySubtitleClock(){if(!isDailyMode()||dailyCurrentCompleted||!dailyStarted||solved)return;subtitle.classList.remove("daily-complete-title","daily-complete-animate","daily-intro","level-label");subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`}
 function getDailyHintsAvailable(){return Math.min(1,Math.max(0,dailyHintsEarned-dailyHintsUsed))}
@@ -1448,7 +1448,7 @@ function renderDailySubtitle(){
     const done=dailyStats.completed[currentDaily().id];
     subtitle.classList.remove("level-label","daily-intro");
     subtitle.classList.add("daily-complete-title","daily-complete-animate");
-    subtitle.textContent=`Completed in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())} ✅`;
+    subtitle.textContent=`Completed in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())} 🎉`;
     return;
   }
   subtitle.classList.remove("daily-complete-title","daily-complete-animate");
@@ -1597,7 +1597,7 @@ function updateStatsPanel(){
 function updateFooterDisplay(){
   if(isDailyMode()){
     const done=dailyStats.completed[currentDaily().id];
-    const isFinal=solved&&puzzleIndex>=activePuzzles.length-1;
+    const isFinal=dailyCurrentCompleted||(solved&&puzzleIndex>=activePuzzles.length-1);
     status.classList.remove("footer-info");
     endMessage.classList.remove("visible");
     endMessage.innerHTML="";
@@ -1887,6 +1887,7 @@ function initMode(){
   const params=new URLSearchParams(location.search);
   if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}
   const jumpDay=getUrlJumpDay();
+  const previousMode=localStorage.getItem(DAILY_MODE_KEY)||"game";
   mode=getUrlMode();
   if(mode==="daily"){
     dailyStats=loadDailyStats();
@@ -1898,7 +1899,8 @@ function initMode(){
   }else if(jumpDay!==null){
     dailyDayIndex=jumpDay-1;
   }
-  localStorage.setItem(DAILY_MODE_KEY,mode);
+  if(jumpDay===null)localStorage.setItem(DAILY_MODE_KEY,mode);
+  else localStorage.setItem(DAILY_MODE_KEY,previousMode);
   if(mode==="daily")initDaily();else initGame();
 }
 initMode();
