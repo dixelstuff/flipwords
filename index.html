@@ -24,11 +24,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 @keyframes star-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes shield-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes info-fade{0%{opacity:0;transform:translateY(4px)}4%,92%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(4px)}}@keyframes hold-fade-down{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(8px)}}@keyframes score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}16%{opacity:1;transform:translateY(0) scale(1.05)}72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes final-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}10%{opacity:1;transform:translateY(0) scale(1.05)}68%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes streak-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1.05)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
 .controls{display:grid;grid-template-columns:126px 126px;align-items:center;justify-content:center;gap:8px;min-height:44px}button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:0 15px;width:126px;height:50px;line-height:1;font-size:16px;font-weight:700;letter-spacing:.01em;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.46;cursor:default}.start-words{color:var(--ink);background:var(--soft)}.hint{position:relative;overflow:hidden;color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint::before{content:"";position:absolute;inset:0;width:var(--hint-fill,0%);background:rgba(255,255,255,.42);pointer-events:none;transition:width .08s linear}.hint span{position:relative;z-index:1}.hint:disabled{color:var(--ink);background:var(--soft);box-shadow:none}.action-slot{position:relative;display:block;width:126px;height:50px;line-height:0}.action-slot button{position:absolute;inset:0}.next{visibility:hidden;color:#fff;background:var(--success);pointer-events:none}.next.visible{visibility:visible;pointer-events:auto}.hidden{visibility:hidden!important;pointer-events:none}
 .status{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.35;min-height:62px;display:flex;align-items:flex-end;justify-content:center;padding:0 12px;transform:translateY(-28px)}.status.footer-info{align-items:center;padding-left:28px;padding-right:28px;transform:translateY(10px)}.restart-link{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.score-line{margin-top:0;color:var(--muted);font-size:16px;line-height:1.25;min-height:22px;transform:translateY(-28px)}.stats-toggle{display:none}.end-message{display:none;position:fixed;left:18px;right:18px;bottom:12px;text-align:center;color:var(--muted);font-size:14px;line-height:1.35;z-index:2}.end-message.visible{display:block}.footer-details{display:block;margin-top:1px;color:#0a84ff;font-size:16px;line-height:1.25}.footer-clickable{cursor:pointer}.stats-panel{display:none;position:fixed;inset:0;z-index:9999;background:rgba(36,30,50,.42);align-items:center;justify-content:center;padding:22px;color:var(--muted);font-size:14px;line-height:1.45;text-align:left}.stats-panel.visible{display:flex}.stats-card{position:relative;width:min(430px,calc(100vw - 40px));background:#fff;border-radius:24px;box-shadow:0 18px 48px rgba(37,31,52,.22);padding:18px 22px 22px}.stats-x{position:absolute;right:14px;top:12px;width:34px;height:34px;background:transparent;border:none;color:var(--muted);font-size:28px;line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}.stats-explainer-title{display:none}.stats-explainer{color:var(--muted);font-size:15px;line-height:1.45;text-align:center;padding:0;margin:24px 0 0}.stats-status{display:flex;align-items:center;justify-content:center;gap:18px;margin:20px 0 0;font-size:22px;line-height:1}.stats-shields{letter-spacing:1px}.stats-shield-empty{opacity:.23;filter:grayscale(1)}.stats-fire{font-weight:800;color:var(--ink);font-size:20px}.stats-cap{display:none}.stats-card h3{display:none}.stats-card hr{border:none;border-top:1px solid rgba(37,31,52,.12);margin:18px 0}.stats-title{font-size:25px;font-weight:650;color:var(--muted);text-align:left;margin:0 34px 12px 0}.stats-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 20px;margin-bottom:4px}.stats-summary{font-size:14px;color:var(--muted);text-align:left;margin:2px 0}.stats-summary .label{font-weight:650;color:var(--ink)}.stats-summary strong{color:var(--muted);font-weight:400}.stats-subheading{font-weight:800;color:var(--ink);margin-bottom:8px}.stats-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}.stats-table col:nth-child(1){width:38%}.stats-table col:nth-child(2){width:28%}.stats-table col:nth-child(3){width:17%}.stats-table col:nth-child(4){width:17%}.stats-table th{font-weight:800;color:var(--ink);border-bottom:1px solid rgba(37,31,52,.12);padding:6px 4px}.stats-table th.stat-time-head{font-weight:400;color:var(--muted)}.stats-table td{color:var(--muted);border-bottom:1px solid rgba(37,31,52,.08);padding:8px 4px;white-space:nowrap}.stats-table th:nth-child(1),.stats-table td:nth-child(1){text-align:left}.stats-table th:nth-child(2),.stats-table td:nth-child(2),.stats-table th:nth-child(3),.stats-table td:nth-child(3),.stats-table th:nth-child(4),.stats-table td:nth-child(4){text-align:center}.stats-close{display:none}
-.mode-toggle{position:fixed;left:50%;bottom:28px;z-index:10;transform:translateX(-50%);display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.82);border:1px solid rgba(37,31,52,.10);border-radius:999px;box-shadow:0 8px 22px rgba(37,31,52,.12);backdrop-filter:blur(8px)}.mode-toggle button{width:auto;height:38px;padding:0 18px;border-radius:999px;background:transparent;color:var(--muted);font-size:15px;font-weight:800}.mode-toggle button.active{background:var(--ink);color:#fff}.daily-result{font-size:17px;line-height:1.45;color:var(--muted)}.daily-result strong{color:var(--ink)}.tile-wrap.daily-prestart{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.06)}.tile-wrap.daily-prestart .tile-face{background:#f1edf8;border-color:#ded7eb}.tile-wrap.daily-prestart .letter{color:#b9b0c8;font-weight:800;opacity:.58}.daily-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 4px}.daily-stat-box{background:#f7f5fb;border:1px solid rgba(37,31,52,.08);border-radius:18px;padding:13px 10px;text-align:center}.daily-stat-emoji{font-size:25px;line-height:1;margin-bottom:5px}.daily-stat-label{font-size:13px;color:var(--muted);font-weight:750}.daily-stat-value{font-size:24px;color:var(--ink);font-weight:800;line-height:1.15}.daily-stats-note{text-align:center;color:var(--muted);font-size:14px;line-height:1.35;margin:16px 4px 0}
+.mode-toggle{position:fixed;left:50%;bottom:28px;z-index:10;transform:translateX(-50%);display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.82);border:1px solid rgba(37,31,52,.10);border-radius:999px;box-shadow:0 8px 22px rgba(37,31,52,.12);backdrop-filter:blur(8px)}.mode-toggle button{width:auto;height:38px;padding:0 18px;border-radius:999px;background:transparent;color:var(--muted);font-size:15px;font-weight:800}.mode-toggle button.active{background:var(--ink);color:#fff}.daily-result{font-size:17px;line-height:1.45;color:var(--muted)}.daily-result strong{color:var(--ink)}.tile-wrap.daily-prestart{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.06)}.tile-wrap.daily-prestart .tile-face{background:#fff;border-color:#ded7eb}.tile-wrap.daily-prestart .letter{color:#b9b0c8;font-weight:800;opacity:.58}.daily-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 4px}.daily-stat-box{background:#f7f5fb;border:1px solid rgba(37,31,52,.08);border-radius:18px;padding:13px 10px;text-align:center}.daily-stat-emoji{font-size:25px;line-height:1;margin-bottom:5px}.daily-stat-label{font-size:13px;color:var(--muted);font-weight:750}.daily-stat-value{font-size:24px;color:var(--ink);font-weight:800;line-height:1.15}.daily-stats-note{text-align:center;color:var(--muted);font-size:14px;line-height:1.35;margin:16px 4px 0}
 .start-words.daily-start{color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}
-.daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:16px 0 2px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:grid;grid-template-columns:56px 1fr;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(37,31,52,.08)}.daily-puzzle-num{font-weight:800;color:var(--ink);font-size:14px}.daily-puzzle-words{font-size:14px;line-height:1.35;color:var(--muted)}.daily-puzzle-words strong{color:var(--ink);font-weight:750}.tile-wrap.daily-review-tile{cursor:default}.tile-wrap.daily-review-tile .tile-face{border-color:var(--success);background:#fff}
+.daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:14px 0 2px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:block;padding:8px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.daily-puzzle-row strong{color:var(--ink);font-weight:800}.daily-puzzle-num{font-weight:800;color:var(--ink);font-size:14px}.daily-puzzle-words{font-size:14px;line-height:1.35;color:var(--muted)}.daily-puzzle-words strong{color:var(--ink);font-weight:750}.tile-wrap.daily-review-tile{cursor:default}.tile-wrap.daily-review-tile .tile-face{border-color:var(--success);background:#fff}
 
-.daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:14px;font-weight:850;letter-spacing:.01em}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:16px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:28px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:10px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:20px;margin-bottom:3px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls{grid-template-columns:140px;gap:0}.controls.daily-complete-controls .action-slot{display:none}.hint.daily-stats-button{width:140px;color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}.hint.daily-stats-button::before{display:none}.subtitle.daily-complete-title{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
+.daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:14px;font-weight:850;letter-spacing:.01em}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:14px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:18px;margin-bottom:2px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:9px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:16px;margin-bottom:1px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls{grid-template-columns:140px;gap:0}.controls.daily-complete-controls .action-slot{display:none}.hint.daily-stats-button{width:140px;color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}.hint.daily-stats-button::before{display:none}.subtitle.daily-complete-title{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}.subtitle.daily-intro{font-size:clamp(17px,1.95vw,20px)}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:340px;height:47px;padding:0 22px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:24px;padding-bottom:24px}.board{gap:14px}.tile-wrap{width:clamp(72px,8.5vw,92px);height:clamp(130px,15vw,156px)}.letter{font-size:clamp(42px,4.8vw,56px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){.game{display:flex;width:min(96vw,760px);padding:max(10px,env(safe-area-inset-top)) 12px max(10px,env(safe-area-inset-bottom));transform:none;justify-content:center}.title{font-size:34px}.subtitle{max-width:520px;height:35px;margin:4px auto 8px;padding:0 10px;font-size:14px;line-height:1.25}.subtitle.level-label{font-size:20px;padding-top:10px}.board-shell{padding:6px 8px 8px}.board{gap:7px;min-height:86px}.board.short-board{gap:10px}.tile-wrap{width:clamp(42px,8vw,58px);height:clamp(76px,17vw,96px)}.letter{font-size:clamp(24px,4.4vw,34px)}.feedback-area{height:24px}.message{font-size:20px}.message.info{font-size:15px}.controls{grid-template-columns:104px 104px;gap:8px;min-height:38px}button{width:104px;height:38px;font-size:14px}.action-slot{width:104px;height:38px}.status{margin-top:8px;font-size:14px;min-height:42px}.status.footer-info{padding-left:18px;padding-right:18px}.score-line{margin-top:0;font-size:14px;min-height:19px}}
@@ -579,6 +579,7 @@ const puzzleRows=[
 ["obey","odds","body","does",2,"","",""],
 ["heal","aura","area","haul",2,"","",""]
 ];
+
 
 const dailyTriplets = [
   {
@@ -1155,6 +1156,14 @@ function formatCompactClock(ms){const total=Math.max(0,Math.round(ms/1000)),m=Ma
 function getDayNumberFromId(id){const m=String(id||"").match(/day-?(\d+)/i);return m?Number(m[1]):null}
 function getDailyCompletedEntries(){return Object.values(dailyStats.completed||{}).filter(x=>x&&typeof x.timeMs==="number"&&typeof x.moves==="number")}
 function getDailyStreak(){const done=new Set(Object.keys(dailyStats.completed||{}).map(getDayNumberFromId).filter(Boolean));let n=1,best=0,cur=0;while(n<=dailyPuzzles.length){if(done.has(n)){cur++;best=Math.max(best,cur)}else cur=0;n++}const latest=Math.max(0,...[...done]);let current=0;for(let i=latest;i>=1&&done.has(i);i--)current++;return {current,best}}
+function getHighestCompletedDailyIndex(){
+  let best=-1;
+  Object.keys(dailyStats.completed||{}).forEach(id=>{
+    const n=getDayNumberFromId(id);
+    if(Number.isFinite(n)&&n>=1&&n<=dailyPuzzles.length)best=Math.max(best,n-1);
+  });
+  return best;
+}
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
 function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade");message.textContent="";puzzleIndex=nextIndex;setupPuzzle({restoreActivePuzzleElapsedMs:getActivePuzzleElapsedMs()});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
@@ -1419,7 +1428,7 @@ function dailyReviewTiles(){
   return p.answer1.split("").map((top,i)=>({id:`daily-review-${dailyReviewIndex}-${i}`,top,bottom:p.answer2[i],flipped:false,flipAnim:"",locked:true}));
 }
 function dailyPuzzleSummaryHTML(){
-  return `<div class="daily-puzzle-summary">${activePuzzles.map((p,i)=>`<div class="daily-puzzle-row"><div class="daily-puzzle-num">${i+1} of ${activePuzzles.length}</div><div class="daily-puzzle-words"><strong>${p.word1.toUpperCase()} / ${p.word2.toUpperCase()}</strong><br>→ ${p.answer1.toUpperCase()} / ${p.answer2.toUpperCase()}</div></div>`).join("")}</div>`;
+  return `<div class="daily-puzzle-summary">${activePuzzles.map((p,i)=>`<div class="daily-puzzle-row"><strong>${i+1}.</strong> ${p.word1.toUpperCase()} / ${p.word2.toUpperCase()} → <strong>${p.answer1.toUpperCase()} / ${p.answer2.toUpperCase()}</strong></div>`).join("")}</div>`;
 }
 function setDailyReviewIndex(delta){
   if(!isDailyMode()||!dailyCurrentCompleted)return;
@@ -1429,18 +1438,20 @@ function setDailyReviewIndex(delta){
 function renderDailySubtitle(){
   if(dailyCurrentCompleted){
     const done=dailyStats.completed[currentDaily().id];
-    subtitle.classList.remove("level-label");
+    subtitle.classList.remove("level-label","daily-intro");
     subtitle.classList.add("daily-complete-title");
     subtitle.textContent=`Completed in ${formatCompactClock(done?.timeMs??getActivePuzzleElapsedMs())}`;
     return;
   }
   subtitle.classList.remove("daily-complete-title");
+  const isIntro=puzzleIndex===0;
   const useLevelLabel=dailyStarted&&puzzleIndex>0;
   subtitle.classList.toggle("level-label",useLevelLabel);
-  subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Daily ${puzzleIndex+1} of ${activePuzzles.length}`;
+  subtitle.classList.toggle("daily-intro",isIntro);
+  subtitle.textContent=isIntro?"Make two new words by flipping and moving the tiles to solve.":`Daily ${puzzleIndex+1} of ${activePuzzles.length}`;
 }
 function renderGameSubtitle(){
-  subtitle.classList.remove("daily-complete-title");
+  subtitle.classList.remove("daily-complete-title","daily-intro");
   subtitle.classList.toggle("level-label",puzzleIndex>0);
   subtitle.textContent=puzzleIndex===0?"Make two new words by flipping and moving the tiles to solve.":`Level ${puzzleIndex+1}`;
 }
@@ -1503,16 +1514,16 @@ function updateStatsPanel(){
         <div class="stats-title">Your daily stats</div>
         <div class="daily-section-title">Today</div>
         <div class="daily-today-grid">
-          <div class="daily-stat-box primary"><div class="daily-stat-label">Time</div><div class="daily-stat-value">${r.time}</div></div>
-          <div class="daily-stat-box primary"><div class="daily-stat-label">Moves</div><div class="daily-stat-value">${r.moves}</div></div>
+          <div class="daily-stat-box primary"><div class="daily-stat-emoji">⏱️</div><div class="daily-stat-label">Time</div><div class="daily-stat-value">${r.time}</div></div>
+          <div class="daily-stat-box primary"><div class="daily-stat-emoji">🔀</div><div class="daily-stat-label">Moves</div><div class="daily-stat-value">${r.moves}</div></div>
         </div>
         ${dailyPuzzleSummaryHTML()}
         <div class="daily-section-title">Overall</div>
         <div class="daily-overall-grid">
-          <div class="daily-stat-box compact"><div class="daily-stat-label">Daily streak</div><div class="daily-stat-value">${r.streak}</div></div>
-          <div class="daily-stat-box compact"><div class="daily-stat-label">Days played</div><div class="daily-stat-value">${completedCount}</div></div>
-          <div class="daily-stat-box compact"><div class="daily-stat-label">Median time</div><div class="daily-stat-value">${r.medianTime}</div></div>
-          <div class="daily-stat-box compact"><div class="daily-stat-label">Median moves</div><div class="daily-stat-value">${r.medianMoves}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">🔥</div><div class="daily-stat-label">Daily streak</div><div class="daily-stat-value">${r.streak}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">✅</div><div class="daily-stat-label">Days played</div><div class="daily-stat-value">${completedCount}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">📊</div><div class="daily-stat-label">Median time</div><div class="daily-stat-value">${r.medianTime}</div></div>
+          <div class="daily-stat-box compact"><div class="daily-stat-emoji">🎯</div><div class="daily-stat-label">Median moves</div><div class="daily-stat-value">${r.medianMoves}</div></div>
         </div>
       </div>`;
     statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
@@ -1563,7 +1574,7 @@ function updateFooterDisplay(){
       scoreLine.classList.remove("footer-clickable");
       startDailyCountdownTimer();
     }else{
-      status.innerHTML=dailyStarted?`Time ${formatClock(getActivePuzzleElapsedMs())} &nbsp; Moves ${dailyTotalMoves}`:"Press Start when ready";
+      status.innerHTML=dailyStarted?`Time ${formatClock(getActivePuzzleElapsedMs())}`:"Press Start when ready";
       scoreLine.innerHTML="";
       status.classList.remove("footer-clickable");
       scoreLine.classList.remove("footer-clickable");
@@ -1835,7 +1846,16 @@ function initMode(){
   if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY)}
   const jumpDay=getUrlJumpDay();
   mode=getUrlMode();
-  if(jumpDay!==null)dailyDayIndex=jumpDay-1;
+  if(mode==="daily"){
+    dailyStats=loadDailyStats();
+    if(jumpDay!==null)dailyDayIndex=jumpDay-1;
+    else{
+      const highestCompleted=getHighestCompletedDailyIndex();
+      if(highestCompleted>=0)dailyDayIndex=highestCompleted;
+    }
+  }else if(jumpDay!==null){
+    dailyDayIndex=jumpDay-1;
+  }
   localStorage.setItem(DAILY_MODE_KEY,mode);
   if(mode==="daily")initDaily();else initGame();
 }
