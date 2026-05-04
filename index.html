@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>FlipWords</title>
+<title>Flibs</title>
 <style>
 :root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24)}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -1403,6 +1403,12 @@ function getDailyPlayDescriptor(puzzle,result){
 function circledNumber(n){return ["①","②","③","④","⑤","⑥","⑦","⑧","⑨"][n-1]||String(n)}
 function getDailyPlayDescriptorIcon(descriptor){return {slick:"🌟",zippy:"⚡",measured:"🎯",clunky:"🪨"}[descriptor]||""}
 function getPuzzleLengthLabel(puzzle){const len=Number(puzzle?.answer1?.length)||tiles.length||0;return len?`${len}-letter`:"puzzle"}
+function getDailyPlayDescriptorLabel(puzzle,result){
+  const descriptor=getDailyPlayDescriptor(puzzle,result);
+  const icon=getDailyPlayDescriptorIcon(descriptor);
+  if(!descriptor||descriptor==="—")return "Solved!";
+  return `${descriptor.charAt(0).toUpperCase()}${descriptor.slice(1)}${icon?` ${icon}`:""}`;
+}
 
 function awardPuzzleScoreIfNeeded(){
   if(puzzleAwarded)return;
@@ -1489,7 +1495,8 @@ function checkSolved(){
         setTimeout(()=>showDailyCompleteBurst(true),80);
         startDailyCountdownTimer();
       }else{
-        popMessage("Correct!",false,true);
+        const descriptorMessage=getDailyPlayDescriptorLabel(currentPuzzle(),dailyPuzzleResults[puzzleIndex]);
+        popMessage(descriptorMessage,false,true);
         showDailyCompleteBurst(false);
         dailyAdvanceTimer=setTimeout(()=>goDailyNext(),2450);
       }
