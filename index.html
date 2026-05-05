@@ -1190,7 +1190,17 @@ function normalizeStats(s){
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
 function getUrlJumpDay(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)day([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,dailyPuzzles.length):null}
-function getUrlMode(){const q=location.search.toLowerCase();if(getUrlJumpDay()!==null||/(?:\?|&)daily(?:&|$)/.test(q))return "daily";if(/(?:\?|&)game(?:&|$)/.test(q))return "game";return localStorage.getItem(DAILY_MODE_KEY)||"game"}
+function isLocalStorageCompletelyEmpty(){
+  try{return localStorage.length===0}catch{return false}
+}
+function getUrlMode(){
+  const q=location.search.toLowerCase();
+  if(getUrlJumpDay()!==null||/(?:\?|&)daily(?:&|$)/.test(q))return "daily";
+  if(/(?:\?|&)game(?:&|$)/.test(q))return "game";
+  const savedMode=localStorage.getItem(DAILY_MODE_KEY);
+  if(savedMode==="daily"||savedMode==="game")return savedMode;
+  return isLocalStorageCompletelyEmpty()?"daily":"game";
+}
 function getAutoHintSaveState(){
   let remaining=autoHintDelayRemainingMs;
   let fillElapsed=autoHintFillElapsedMs;
