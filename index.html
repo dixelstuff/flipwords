@@ -72,1075 +72,2591 @@ const STREAK_POP_MS=9000;
 const DAILY_FINAL_MODAL_DELAY_MS=3500;
 
 const puzzleRows=[
-["ace","yet","cat","eye",2,"","",""],
-["port","ride","dirt","rope",3,"","",""],
-["fish","calm","cash","film",2,"","",""],
-["awe","gas","age","was",2,"","",""],
-["race","mild","card","lime",3,"","",""],
-["talk","cage","gate","lack",3,"","",""],
-["old","dog","log","odd",2,"","",""],
-["corn","flat","clan","fort",2,"","",""],
-["smile","heart","earth","miles",1,"","",""],
-["love","fits","five","lots",2,"","",""],
-["blue","reef","beef","rule",2,"","",""],
-["real","sofa","fare","also",4,"","",""],
-["honey","boost","ebony","shoot",2,"","",""],
-["eel","win","lie","new",3,"","",""],
-["milk","nose","link","some",3,"leon","skim",""],
-["least","cares","carts","lease",3,"","",""],
-["key","tap","yak","pet",3,"","",""],
-["frost","place","craft","slope",4,"","",""],
-["gold","mine","gone","mild",2,"","",""],
-["snap","cord","sand","crop",2,"","",""],
-["money","verge","enemy","grove",4,"","",""],
-["poke","fell","folk","peel",3,"","",""],
-["ant","ear","ran","tea",2,"","",""],
-["bowl","keen","blow","knee",1,"","",""],
-["mules","crash","clues","marsh",2,"","",""],
-["vocal","races","coral","caves",3,"","",""],
-["flat","hood","halt","food",2,"","",""],
-["naive","tests","taste","veins",4,"","","cannot be reversed"],
-["rain","loop","nail","poor",3,"","",""],
-["green","chair","grain","cheer",2,"","",""],
-["lazy","once","clay","zone",2,"","",""],
-["space","world","crowd","lapse",4,"","",""],
-["safe","date","deaf","seat",2,"","",""],
-["gel","bow","log","web",3,"","",""],
-["drawn","ridge","grand","wider",3,"","",""],
-["deep","gulf","feed","plug",4,"","",""],
-["giant","sense","genes","stain",3,"","",""],
-["jog","ate","ago","jet",2,"","",""],
-["true","been","beer","tune",3,"","",""],
-["shade","trace","react","heads",2,"","",""],
-["glue","down","lung","owed",2,"","",""],
-["canoe","rally","clean","royal",3,"","",""],
-["soft","less","self","toss",3,"","",""],
-["irk","sad","ask","rid",2,"","",""],
-["harp","epic","arch","pipe",2,"","",""],
-["guide","array","argue","diary",4,"","",""],
-["east","wind","dawn","ties",3,"","",""],
-["gnome","raven","among","never",4,"","",""],
-["slow","cord","crow","sold",2,"","",""],
-["ocean","parts","acorn","tapes",3,"","",""],
-["pony","bite","bone","pity",2,"","",""],
-["daily","scene","since","delay",2,"","",""],
-["bear","heir","bare","hire",1,"","",""],
-["fauna","dwell","awful","laden",4,"","",""],
-["blame","dream","amber","medal",4,"","",""],
-["end","how","den","who",1,"","",""],
-["thief","theft","teeth","fifth",4,"","",""],
-["count","swore","ounce","worst",2,"","",""],
-["haul","form","foul","harm",2,"","",""],
-["ghost","crews","chest","grows",2,"","",""],
-["owl","ate","eat","low",1,"","",""],
-["grit","feel","feet","girl",2,"","","cannot be reversed"],
-["spike","slain","likes","pains",2,"","",""],
-["year","amid","army","idea",3,"","",""],
-["clasp","bored","blade","corps",3,"","",""],
-["seal","nets","lean","sets",3,"sean","lets",""],
-["hey","out","the","you",2,"","",""],
-["load","grow","drag","wool",4,"","",""],
-["world","sites","slots","weird",3,"","",""],
-["clot","bout","boot","cult",2,"","",""],
-["magic","there","cream","eight",6,"","",""],
-["sore","face","cafe","rose",2,"","",""],
-["creep","saint","panic","trees",5,"","",""],
-["wave","ties","east","view",3,"","",""],
-["dance","tired","dried","enact",4,"","",""],
-["heal","pigs","leap","sigh",3,"","",""],
-["nod","dad","and","odd",2,"","","cannot be reversed"],
-["agree","short","great","horse",2,"","",""],
-["lion","flag","golf","nail",4,"","",""],
-["elder","necks","dense","clerk",5,"","",""],
-["oar","tag","ago","art",2,"","",""],
-["tuna","meat","aunt","team",2,"","",""],
-["finer","gifts","stiff","reign",4,"","",""],
-["sick","fade","cafe","disk",3,"","",""],
-["spill","chain","hills","panic",3,"spain","chill",""],
-["wood","bark","book","ward",2,"","",""],
-["wow","art","two","war",2,"","",""],
-["safe","gist","sage","fist",4,"","",""],
-["blast","tires","salts","tribe",5,"","",""],
-["farm","trip","firm","trap",3,"","",""],
-["shock","blame","block","shame",2,"","",""],
-["dice","lord","cold","ride",3,"","",""],
-["spire","radio","aides","prior",4,"","",""],
-["tilt","door","riot","told",4,"","","cannot be reversed"],
-["lemon","thank","month","ankle",4,"","",""],
-["deep","rent","peer","tend",3,"","",""],
-["sun","fix","fun","six",1,"","",""],
-["tenth","comes","meets","notch",4,"","",""],
-["river","lodge","lover","ridge",2,"","",""],
-["nude","hero","hour","need",2,"","",""],
-["false","worth","flash","wrote",2,"","",""],
-["cat","use","sue","act",1,"","",""],
-["panda","wires","award","spine",3,"","",""],
-["test","iron","nets","trio",3,"","",""],
-["mercy","bride","crime","derby",4,"","",""],
-["dull","soda","dual","sold",2,"","",""],
-["blood","peaks","baked","pools",3,"","",""],
-["plop","lots","poll","stop",4,"","",""],
-["gem","art","arm","get",1,"","",""],
-["vital","whale","wheat","villa",4,"","",""],
-["anti","hype","they","pain",3,"","",""],
-["store","items","moist","reset",4,"","",""],
-["type","math","myth","tape",1,"","",""],
-["fresh","slate","shelf","tears",4,"","",""],
-["frog","walk","flag","work",3,"","",""],
-["sheep","atlas","phase","steal",4,"","",""],
-["echo","plea","each","pole",2,"","",""],
-["opera","waste","aware","poets",5,"","",""],
-["life","zest","size","felt",4,"","",""],
-["its","eye","tie","yes",2,"","",""],
-["clone","rises","close","risen",3,"","",""],
-["snow","pest","step","owns",2,"","",""],
-["motto","fears","feast","motor",2,"","",""],
-["low","end","new","old",2,"","",""],
-["joke","salt","jolt","sake",2,"","",""],
-["glare","skies","eagle","risks",3,"","",""],
-["good","loss","dogs","solo",3,"","",""],
-["glee","sins","else","sign",3,"","",""],
-["alien","chess","seals","niche",4,"","","cannot be reversed"],
-["not","yet","ten","toy",3,"","",""],
-["vote","amen","mate","oven",3,"","",""],
-["outer","norms","tuner","rooms",3,"","",""],
-["pork","cube","buck","rope",3,"","",""],
-["soy","pet","top","yes",3,"","",""],
-["algae","spoon","loose","pagan",4,"","",""],
-["thin","flea","leaf","hint",1,"","",""],
-["koala","rifle","alike","flora",4,"","",""],
-["cash","gift","sigh","fact",4,"","",""],
-["await","trash","awash","trait",2,"","",""],
-["vent","hate","even","that",2,"","",""],
-["aid","net","din","tea",3,"","",""],
-["bulb","cook","book","club",2,"","","cannot be reversed"],
-["bagel","sales","gases","label",3,"","",""],
-["slip","fete","step","file",3,"","",""],
-["basil","smell","balls","smile",2,"","",""],
-["vast","core","acts","over",3,"","",""],
-["plush","sleep","helps","pulse",4,"","",""],
-["bare","rule","lube","rare",3,"","",""],
-["moral","seeds","model","sears",3,"","",""],
-["spot","ally","lost","play",2,"","",""],
-["ape","arc","cap","ear",2,"","",""],
-["mount","chase","chant","mouse",2,"","",""],
-["lamb","duck","dumb","lack",2,"","",""],
-["broke","birds","brisk","bored",3,"","",""],
-["one","saw","sea","own",2,"","",""],
-["fawn","slim","film","swan",2,"","",""],
-["argue","later","eager","ultra",3,"","",""],
-["free","weed","feed","were",2,"","","cannot be reversed"],
-["best","cafe","beef","cats",3,"","",""],
-["short","cutie","tours","ethic",4,"","",""],
-["dub","sir","bus","rid",3,"","",""],
-["gala","over","gave","oral",3,"","",""],
-["doubt","needs","debut","nodes",2,"","",""],
-["prod","meat","drop","team",2,"","",""],
-["wet","own","new","two",3,"","",""],
-["fresh","towel","three","flows",3,"","",""],
-["good","drum","drug","mood",4,"","",""],
-["glue","roof","goof","rule",2,"","",""],
-["reset","title","trite","steel",4,"","",""],
-["gosh","pipe","pope","sigh",3,"","",""],
-["beg","ate","age","bet",2,"","",""],
-["bang","kiss","bass","king",2,"","",""],
-["forms","trend","frond","terms",3,"","",""],
-["dump","jeep","deep","jump",1,"","",""],
-["viper","dared","paved","rider",4,"","",""],
-["clear","swamp","swear","clamp",2,"","",""],
-["cell","shoe","loch","else",4,"","",""],
-["rifle","bones","fires","noble",4,"","",""],
-["easy","sums","muse","says",3,"","",""],
-["denim","tread","dried","meant",5,"","",""],
-["mint","uses","mess","unit",2,"","",""],
-["pay","tap","yap","pat",2,"","",""],
-["disco","elect","cited","close",5,"","",""],
-["host","pact","chat","spot",2,"","",""],
-["angel","carol","along","clear",3,"","",""],
-["hot","use","out","she",2,"","",""],
-["seem","true","teem","sure",2,"","",""],
-["loyal","setup","alloy","upset",2,"","",""],
-["soup","risk","kiss","pour",3,"","",""],
-["hail","bees","bias","heel",3,"","",""],
-["make","acid","cake","amid",3,"","",""],
-["goose","cling","close","going",2,"","",""],
-["bot","nor","rob","ton",3,"","",""],
-["city","tune","cute","tiny",2,"","",""],
-["large","claws","grace","walls",4,"","",""],
-["huge","wart","wage","hurt",2,"","",""],
-["nude","yeti","unit","eyed",4,"","",""],
-["delay","start","dealt","stray",2,"","",""],
-["lack","toys","yolk","cats",4,"","",""],
-["sung","what","thaw","guns",2,"","",""],
-["viral","clips","crisp","villa",4,"","",""],
-["whip","beat","bath","wipe",2,"","",""],
-["exact","psalm","latex","camps",4,"","",""],
-["red","fun","fed","run",1,"","",""],
-["kink","deal","kind","leak",3,"","","cannot be reversed"],
-["gauge","limit","image","guilt",5,"","",""],
-["seek","term","trek","seem",2,"","",""],
-["cover","pearl","clear","prove",2,"","",""],
-["warp","yard","draw","pray",4,"","",""],
-["ashes","drift","shaft","rides",3,"","",""],
-["dark","city","rack","tidy",3,"","",""],
-["wives","lingo","swing","olive",3,"","",""],
-["deny","tick","tiny","deck",2,"","",""],
-["taco","rush","chat","sour",3,"","",""],
-["right","paced","patch","ridge",3,"","",""],
-["slow","bond","bold","snow",3,"","",""],
-["human","lever","lemur","haven",4,"","",""],
-["snip","rats","pins","star",3,"","",""],
-["dream","leave","levee","drama",2,"","",""],
-["pert","duke","kept","rude",3,"","",""],
-["stiff","hedge","fifth","edges",4,"","",""],
-["hot","gas","got","has",1,"","",""],
-["finch","bells","bench","fills",2,"","",""],
-["cheap","merit","teach","prime",4,"","",""],
-["haute","rolls","halls","route",2,"","",""],
-["full","load","loaf","dull",4,"","",""],
-["hatch","wings","hangs","witch",2,"","",""],
-["paid","user","pair","used",1,"","",""],
-["teeth","actor","teach","otter",4,"","",""],
-["surge","boost","sober","gusto",5,"","",""],
-["rap","age","are","gap",2,"","",""],
-["area","hire","aria","here",3,"","",""],
-["forge","craft","force","graft",4,"","",""],
-["nerd","meat","dean","term",3,"","",""],
-["valid","alter","dealt","rival",3,"","",""],
-["seal","ears","earl","seas",1,"","",""],
-["brain","irony","robin","rainy",2,"","",""],
-["half","lice","fill","each",4,"","",""],
-["that","hour","hurt","oath",3,"","",""],
-["paste","style","petty","seals",4,"","",""],
-["how","new","hew","now",1,"","",""],
-["hawk","eats","take","wash",3,"","",""],
-["lunar","resin","ruins","learn",2,"","",""],
-["jack","pipe","jape","pick",2,"","",""],
-["bar","row","rob","war",3,"","",""],
-["spare","plant","strap","penal",4,"","",""],
-["sofa","mode","does","foam",3,"","",""],
-["hike","were","heir","week",2,"","",""],
-["wears","glove","worse","gavel",2,"","",""],
-["dewy","nuts","duty","news",2,"","",""],
-["donor","tells","dolls","tenor",2,"","",""],
-["show","most","toss","whom",3,"","",""],
-["beds","envy","bevy","ends",2,"","",""],
-["mars","solo","lass","room",4,"","",""],
-["crane","spine","pecan","resin",3,"","",""],
-["free","tier","fire","tree",2,"","","cannot be reversed"],
-["legit","happy","apply","eight",3,"","",""],
-["halo","prey","hero","play",3,"","",""],
-["imp","era","aim","per",2,"mia","rep",""],
-["door","went","redo","town",3,"","",""],
-["meet","noun","menu","note",3,"nemo","tune","cannot be reversed"],
-["avid","idol","dial","void",3,"","",""],
-["fleet","raids","filet","reads",2,"","",""],
-["kale","case","lace","sake",3,"","",""],
-["colon","hands","canon","holds",2,"","",""],
-
-["tired","whale","where","tidal",3,"","",""],
-["plum","wars","plus","warm",1,"","",""],
-["tense","wharf","shaft","renew",4,"","",""],
-["bait","sold","bolt","said",2,"","",""],
-["tooth","brush","shout","throb",5,"","",""],
-["prism","reset","prime","rests",2,"","",""],
-["bust","coup","cusp","bout",2,"","",""],
-["slick","races","crack","isles",3,"","",""],
-["dock","size","doze","sick",2,"","",""],
-["love","wish","veil","show",3,"","",""],
-["queen","spill","quell","spine",3,"","",""],
-["tree","wind","wren","tide",3,"","",""],
-["snide","title","inlet","tides",4,"","",""],
-["evil","atom","oval","item",4,"","",""],
-["toy","yes","soy","yet",3,"","",""],
-["soul","done","loud","eons",3,"","",""],
-["chai","lens","inch","sale",3,"","","cannot be reversed"],
-
-["totem","plots","motto","slept",5,"","",""],
-["dupe","camp","cape","dump",2,"","",""],
-["good","balm","glad","boom",3,"","","cannot be reversed"],
-["corgi","spots","gross","topic",5,"","",""],
-["wet","fib","web","fit",1,"","",""],
-["ants","pigs","sang","spit",2,"","",""],
-["dyes","keep","deep","keys",2,"","","cannot be reversed"],
-["scuba","token","about","necks",5,"","",""],
-["icon","lied","iced","lion",2,"","",""],
-["cyan","deer","care","deny",3,"","",""],
-["taupe","gangs","gauge","pants",4,"","",""],
-["raven","leads","nerve","salad",3,"","",""],
-
-["peach","march","charm","cheap",3,"","",""],
-["hog","are","ago","her",2,"","",""],
-["fetal","femur","frame","flute",4,"","",""],
-["iris","debt","edit","ribs",2,"","",""],
-["photo","ships","hippo","hosts",3,"","",""],
-["maid","raid","arid","amid",1,"","",""],
-["foul","peas","soup","leaf",4,"","",""],
-["yam","dad","day","mad",3,"amy","add","cannot be reversed"],
-["peril","noted","depot","liner",3,"","",""],
-["cave","link","vale","nick",3,"","",""],
-["data","town","toad","want",3,"","",""],
-["blade","print","bride","plant",2,"","",""],
-["logo","nose","gone","solo",3,"","",""],
-
-["parks","there","spark","ether",1,"","",""],
-["wide","sofa","wife","soda",1,"","",""],
-["stew","pays","step","ways",4,"","",""],
-["cold","rest","sect","lord",3,"","",""],
-["nylon","purse","pylon","nurse",1,"","",""],
-["swam","lets","laws","stem",3,"","",""],
-["solar","frost","flora","sorts",3,"","",""],
-["fig","tax","fix","tag",1,"","",""],
-["snail","force","final","score",2,"","",""],
-["half","word","wolf","hard",2,"","",""],
-["opal","mint","into","palm",2,"","",""],
-["greed","firms","germs","fried",3,"","",""],
-["upon","rear","earn","pour",2,"","",""],
-
-["share","towel","shale","tower",3,"","",""],
-["next","tone","text","none",1,"","",""],
-["buyer","later","rebut","relay",3,"","",""],
-["ploy","heel","holy","peel",2,"","","cannot be reversed"],
-["space","cider","speed","circa",4,"","",""],
-["vast","love","save","volt",3,"","",""],
-["load","skis","idol","asks",3,"","",""],
-["boo","two","bow","too",2,"","","cannot be reversed"],
-["bend","myth","hymn","debt",3,"","",""],
-["side","cent","dice","nest",3,"","",""],
-
-["alien","wings","align","wines",1,"","",""],
-["ragu","pond","drag","upon",2,"","","cannot be reversed"],
-["sonic","based","cabin","doses",5,"","",""],
-["new","bug","web","gun",3,"","",""],
-["pearl","atoms","maple","roast",4,"","",""],
-["fire","sewn","wins","reef",3,"","",""],
-["neat","sums","mess","aunt",3,"","",""],
-["cable","arson","scale","baron",2,"","",""],
-["show","tear","rote","wash",3,"","",""],
-["drew","slow","lewd","rows",2,"","",""],
-
-["waste","scent","scene","watts",3,"","",""],
-["game","mice","mime","cage",3,"","",""],
-["dying","guilt","guild","tying",4,"","",""],
-["cap","lie","alp","ice",2,"","",""],
-["mince","prior","minor","price",2,"","",""],
-["nude","fans","nuns","fade",2,"","",""],
-["sense","goats","tease","songs",4,"","",""],
-["musk","laws","sums","walk",3,"","",""],
-["hotel","tasks","stalk","those",3,"","",""],
-["lets","plop","poll","step",4,"","",""],
-["when","deep","phew","need",3,"","",""],
-["mew","bus","sum","web",3,"","",""],
-["stern","toast","tarot","nests",4,"","",""],
-["sent","taxi","ants","exit",2,"","",""],
-["tool","dash","hood","last",4,"","",""],
-["false","diary","daisy","flare",2,"","",""],
-["sari","stem","same","stir",2,"","",""],
-["solid","tiger","roles","digit",4,"","",""],
-["pup","too","out","pop",3,"","","cannot be reversed"],
-["agile","poles","eagle","spoil",3,"","",""],
-["hilt","deep","diet","help",2,"","",""],
-["fight","troop","proof","tight",3,"","",""],
-["clamp","sheep","champ","sleep",1,"","",""],
-["great","route","trout","agree",2,"","",""],
-["kite","cave","take","vice",3,"","",""],
-["rift","tube","butt","fire",3,"","",""],
-["viola","niche","china","olive",3,"","",""],
-["big","max","bag","mix",1,"","",""],
-["safe","mole","lose","fame",3,"","",""],
-["robot","solve","boots","lover",3,"","",""],
-["look","true","lure","took",2,"","",""],
-["aced","fast","acts","fade",3,"","",""],
-["lousy","seats","souls","yeast",3,"","",""],
-["ditto","exist","idiot","texts",3,"","",""],
-["box","law","lax","bow",1,"","",""],
-["own","bit","nib","two",3,"","",""],
-["video","cover","drove","voice",5,"","",""],
-["neat","swat","want","east",2,"","",""],
-["blues","scale","clubs","lease",4,"","",""],
-["tank","clue","ante","luck",2,"","",""],
-["chef","skin","fish","neck",4,"","",""],
-["short","frank","shark","front",2,"","",""],
-["deny","code","eddy","once",2,"cody","dene",""],
-["local","banks","locks","banal",2,"","",""],
-["papal","offer","paper","offal",2,"","",""],
-["rot","how","hot","row",1,"","",""],
-["crab","rule","club","rare",3,"","",""],
-["stiff","patch","pitch","staff",3,"","",""],
-["call","time","till","came",2,"","",""],
-["thyme","error","merry","other",4,"","",""],
-["cute","name","mace","tune",3,"","",""],
-["music","ninth","cumin","hints",4,"","",""],
-["kite","gang","gate","king",2,"","",""],
-["spicy","depth","chips","typed",4,"","",""],
-["ion","war","air","own",2,"","",""],
-["short","novel","thorn","loves",3,"","",""],
-["rare","coin","rain","core",2,"","",""],
-["pasta","smell","ample","lasts",5,"","",""],
-["pink","oath","oink","path",1,"","",""],
-["peers","claim","piles","cream",3,"","",""],
-["calm","flip","clap","film",2,"","",""],
-["drift","house","fried","south",3,"","",""],
-["mite","plan","mint","plea",2,"","",""],
-["spoon","arise","piano","roses",4,"","",""],
-["pear","toss","rest","soap",4,"","",""],
-["theme","modes","modem","these",3,"","",""],
-["are","arm","mar","ear",1,"","",""],
-["basic","spell","spice","balls",3,"","",""],
-["heat","gold","goat","held",2,"","",""],
-["sushi","carol","chair","souls",4,"","",""],
-["teen","news","seen","newt",3,"","",""],
-["vegan","queue","queen","vague",4,"","",""],
-["page","risk","gear","skip",3,"","",""],
-["fear","date","fate","dear",1,"","",""],
-["knife","these","knees","thief",3,"","",""],
-["lard","time","mild","rate",4,"","",""],
-["bad","buy","bud","bay",1,"","",""],
-["nifty","tasks","fatty","sinks",4,"","",""],
-["catch","sweep","cache","swept",2,"","",""],
-["loop","beat","boot","leap",2,"","",""],
-["grape","prune","upper","anger",3,"","",""],
-["woe","yet","eye","two",2,"","",""],
-["lower","digit","towel","rigid",3,"","",""],
-["free","trim","fire","term",2,"","",""],
-["super","faith","shape","fruit",3,"","",""],
-["dull","idea","idle","dual",2,"aldi","leud",""],
-["lunch","slime","menus","chill",5,"","",""],
-["felt","hard","fart","held",2,"","",""],
-["weak","salt","seat","walk",2,"","",""],
-["seals","belch","beach","sells",1,"","",""],
-["moth","wire","more","with",2,"","",""],
-["silt","flee","else","lift",3,"","",""],
-["peak","hint","pink","heat",2,"","",""],
-["marry","stone","mayor","stern",2,"","",""],
-["raw","bee","web","ear",3,"","",""],
-["adapt","arise","apart","aside",3,"","",""],
-["neon","wolf","flew","noon",4,"","",""],
-["loud","hair","hour","laid",2,"","",""],
-["trace","poles","elope","carts",4,"","",""],
-["tint","ways","stay","twin",2,"","",""],
-["asks","lion","akin","loss",3,"","",""],
-["paste","hello","holes","petal",3,"","",""],
-["cuss","male","lace","sums",3,"","",""],
-["never","sober","verse","borne",4,"","",""],
-["sly","fix","fly","six",1,"","",""],
-["mass","step","stem","pass",4,"","",""],
-["plate","speed","pedal","steep",4,"","",""],
-["mango","waste","mates","wagon",2,"","",""],
-["drum","look","lurk","doom",3,"","",""],
-["most","open","omen","post",3,"","",""],
-["droid","valve","drove","valid",2,"","","cannot be reversed"],
-["ample","panic","manic","apple",3,"","",""],
-["like","damn","made","kiln",3,"","",""],
-["stark","drone","store","drank",2,"","",""],
-["flat","mood","malt","food",2,"","",""],
-["shear","bolts","rehab","slots",4,"","",""],
-["girl","flip","grip","fill",2,"","",""],
-["kings","spear","rings","speak",4,"","",""],
-["cafe","tart","rate","fact",3,"","",""],
-["melon","dodge","demon","lodge",3,"","","cannot be reversed"],
-["tip","ups","pup","its",2,"","",""],
-["knot","easy","okay","sent",3,"","",""],
-["curry","weave","curve","weary",2,"","",""],
-["tofu","rays","fast","your",4,"","",""],
-["area","bled","dare","able",2,"","",""],
-["steak","minds","kinds","steam",4,"","",""],
-["these","crisp","chips","trees",2,"","",""],
-["tense","goats","toast","genes",2,"","",""],
-["scone","field","fence","solid",3,"","",""],
-["spurt","shark","hurts","parks",2,"","",""],
-["singe","chair","cigar","shine",3,"","",""],
-["class","booth","boots","clash",1,"","",""],
-["peg","tag","gap","get",3,"","",""],
-["whiff","steel","stiff","wheel",2,"","","cannot be reversed"],
-["cow","but","bow","cut",1,"","",""],
-["toast","price","tract","poise",2,"","",""],
-["long","kick","king","lock",2,"","",""],
-["spare","power","swore","paper",3,"","",""],
-["owns","silk","owls","sink",1,"","",""],
-["huge","part","page","hurt",2,"","",""],
-["crush","flies","flush","cries",2,"","",""],
-["sold","logs","loss","gold",3,"","",""],
-["horse","theft","forth","sheet",4,"","",""],
-["rich","town","corn","with",4,"","",""],
-["plan","wide","wind","plea",2,"","",""],
-["spin","taxi","pint","axis",2,"","",""],
-["melt","peak","kelp","team",3,"","",""],
-["scan","mite","cans","item",1,"","",""],
-["eye","sir","ire","yes",2,"","",""],
-["claws","boost","blows","coast",2,"","",""],
-["share","lunch","harsh","uncle",2,"","",""],
-["fatty","kings","fangs","kitty",2,"","",""],
-["greet","learn","genre","later",3,"","",""],
-["dye","sad","add","yes",2,"","",""],
-["black","lakes","bleak","lacks",2,"","",""],
-["pilot","shoes","piles","shoot",2,"","",""],
-["coins","fault","count","fails",2,"","",""],
-["seat","ache","chat","ease",2,"","",""],
-["obey","odds","body","does",2,"","",""],
-["heal","aura","area","haul",2,"","",""],
-["oops","dial","aids","pool",3,"","",""],
-["photo","reads","rodeo","paths",3,"","",""],
-["lawn","risk","silk","warn",3,"","",""],
-["flats","sword","dwarf","slots",4,"","",""],
-["aside","tuned","adieu","tends",3,"","",""],
-["brute","goals","gruel","boast",3,"","",""],
-["lake","slim","elks","mail",4,"","",""],
-["ass","put","sat","ups",2,"","",""],
-["real","tiny","lint","year",3,"","",""],
-["guru","post","guts","pour",3,"","",""],
-["alarm","devil","armed","villa",4,"","",""],
-["class","talks","salts","slack",3,"","",""],
-["raw","pit","tip","war",2,"","",""],
-["busy","jars","jury","bass",2,"","",""],
-["mean","spot","tamp","nose",4,"","",""],
-["worse","amend","swore","named",1,"","",""],
-["nor","dad","don","rad",3,"dan","rod",""],
-["oral","vows","rows","oval",3,"","",""],
-["threw","daisy","white","yards",3,"","",""],
-["cue","tip","cup","tie",1,"","",""],
-["spell","space","scalp","sleep",3,"","",""],
-["safe","maps","fame","pass",3,"","",""],
-["fast","monk","mask","font",2,"","",""],
-["trust","mouse","stout","serum",4,"","",""],
-["apt","ray","art","pay",2,"","",""],
-["water","demon","deter","woman",4,"","",""],
-["brake","force","farce","broke",3,"","",""],
-["gold","spin","ping","olds",2,"","",""],
-["soda","thin","dash","into",3,"","",""],
-["boom","stat","oats","tomb",2,"","",""],
-["pro","was","asp","row",2,"","",""],
-["cab","wet","cat","web",1,"","",""],
-["ram","die","ear","mid",3,"","",""],
-["see","via","vie","sea",1,"","",""],
-["old","new","end","low",2,"","",""],
-["web","guy","bug","yew",3,"","",""],
-["law","won","wan","low",1,"","",""],
-["his","two","its","who",2,"","",""],
-["ick","odd","doc","kid",2,"","",""],
-["cup","lot","lop","cut",1,"","",""],
-["art","can","act","ran",2,"","",""],
-["hey","own","eon","why",2,"","",""],
-["jut","bet","but","jet",1,"","",""],
-["bed","one","ode","ben",2,"","",""],
-["bra","cup","arc","pub",3,"","",""],
-["dye","bad","bye","dad",1,"","",""],
-["you","ran","our","any",2,"","",""],
-["eon","rid","die","nor",3,"","",""],
-["ode","sun","don","use",2,"","",""],
-["try","cop","cry","top",1,"","",""],
-["ads","say","ass","day",2,"","",""],
-["new","one","nee","own",2,"","",""],
-["axe","art","ear","tax",2,"","",""],
-["owl","bat","lab","two",3,"","",""],
-["toy","yes","soy","yet",3,"","",""],
-["nee","arm","era","men",3,"","",""],
-["eye","tax","axe","yet",2,"","",""],
-["pug","doc","cup","god",3,"","",""],
-["axe","set","ate","sex",2,"","",""],
-["guess","error","users","roger",4,"","",""],
-["keep","loan","noel","peak",3,"","",""],
-["renew","roles","loser","newer",3,"","",""],
-["tall","bunk","tank","bull",2,"","",""],
-["belly","state","bleat","style",4,"","",""],
-["gods","pier","gird","pose",3,"","",""],
-["decay","tones","needy","coats",4,"","",""],
-["bird","cuts","curd","bits",2,"","",""],
-["great","quote","greet","quota",3,"","",""],
-["rich","page","gear","chip",3,"","",""],
-["pools","shine","phone","soils",2,"","",""],
-["grab","milk","glib","mark",3,"","",""],
-["alley","bears","belly","areas",2,"","",""],
-["math","wade","mead","what",2,"","",""],
-["dark","mess","desk","mars",2,"","",""],
-["live","rail","liar","evil",3,"","",""]
+["irk-sad","irk","sad","ask","rid",2,"","","",7],
+["ache-seat","seat","ache","chat","ease",2,"","","",7],
+["creep-saint","creep","saint","panic","trees",5,"","","",33],
+["fits-love","love","fits","five","lots",2,"","","",1],
+["blood-peaks","blood","peaks","baked","pools",3,"","","",12],
+["flip-girl","girl","flip","grip","fill",2,"","","",6],
+["greet-learn","greet","learn","genre","later",3,"","","",14],
+["date-fear","fear","date","fate","dear",1,"","","",0],
+["alien-chess","alien","chess","seals","niche",4,"","","cannot be reversed",21],
+["bad-buy","bad","buy","bud","bay",1,"","","",0],
+["adapt-arise","adapt","arise","apart","aside",3,"","","",7],
+["tint-ways","tint","ways","stay","twin",2,"","","",6],
+["craft-forge","forge","craft","force","graft",4,"","","",26],
+["gold-heat","heat","gold","goat","held",2,"","","",1],
+["canoe-rally","canoe","rally","clean","royal",3,"","","",18],
+["gas-hot","hot","gas","got","has",1,"","","",0],
+["bend-myth","bend","myth","hymn","debt",3,"","","",21],
+["drone-stark","stark","drone","store","drank",2,"","","",3],
+["flat-hood","flat","hood","halt","food",2,"","","",8],
+["donor-tells","donor","tells","dolls","tenor",2,"","","",1],
+["acid-make","make","acid","cake","amid",3,"","","",9],
+["eye-its","its","eye","tie","yes",2,"","","",7],
+["mode-sofa","sofa","mode","does","foam",3,"","","",10],
+["chase-mount","mount","chase","chant","mouse",2,"","","",1],
+["debt-iris","iris","debt","edit","ribs",2,"","","",6],
+["photo-ships","photo","ships","hippo","hosts",3,"","","",9],
+["calm-fish","fish","calm","cash","film",2,"","","",1],
+["banks-local","local","banks","locks","banal",2,"","","",1],
+["keep-loan","keep","loan","noel","peak",3,"","","",22],
+["mince-prior","mince","prior","minor","price",2,"","","",1],
+["bees-hail","hail","bees","bias","heel",3,"","","",9],
+["bed-one","bed","one","ode","ben",2,"","","",9],
+["news-teen","teen","news","seen","newt",3,"","","",22],
+["coins-fault","coins","fault","count","fails",2,"","","",3],
+["mean-spot","mean","spot","tamp","nose",4,"","","",22],
+["parks-there","parks","there","spark","ether",1,"","","",3],
+["free-tier","free","tier","fire","tree",2,"","","cannot be reversed",9],
+["alien-wings","alien","wings","align","wines",1,"","","",1],
+["pear-toss","pear","toss","rest","soap",4,"","","",26],
+["fib-wet","wet","fib","web","fit",1,"","","",0],
+["look-true","look","true","lure","took",2,"","","",8],
+["bells-finch","finch","bells","bench","fills",2,"","","",1],
+["amen-vote","vote","amen","mate","oven",3,"","","",9],
+["frank-short","short","frank","shark","front",2,"","","",3],
+["sofa-wide","wide","sofa","wife","soda",1,"","","",1],
+["eel-win","eel","win","lie","new",3,"","","",14],
+["heart-smile","smile","heart","earth","miles",1,"","","",3],
+["fade-sick","sick","fade","cafe","disk",3,"","","",9],
+["await-trash","await","trash","awash","trait",2,"","","",1],
+["host-pact","host","pact","chat","spot",2,"","","",6],
+["patch-stiff","stiff","patch","pitch","staff",3,"","","",8],
+["hey-own","hey","own","eon","why",2,"","","",6],
+["tired-whale","tired","whale","where","tidal",3,"","","",8],
+["beds-envy","beds","envy","bevy","ends",2,"","","",1],
+["fatty-kings","fatty","kings","fangs","kitty",2,"","","",1],
+["easy-sums","easy","sums","muse","says",3,"","","",10],
+["belch-seals","seals","belch","beach","sells",1,"","","",2],
+["life-zest","life","zest","size","felt",4,"","","",13],
+["booth-class","class","booth","boots","clash",1,"","","",0],
+["aura-heal","heal","aura","area","haul",2,"","","",6],
+["renew-roles","renew","roles","loser","newer",3,"","","",8],
+["half-word","half","word","wolf","hard",2,"","","",1],
+["arson-cable","cable","arson","scale","baron",2,"","","",6],
+["dub-sir","dub","sir","bus","rid",3,"","","",9],
+["gnome-raven","gnome","raven","among","never",4,"","","",14],
+["bowl-keen","bowl","keen","blow","knee",1,"","","",3],
+["niche-viola","viola","niche","china","olive",3,"","","",18],
+["face-sore","sore","face","cafe","rose",2,"","","",4],
+["money-verge","money","verge","enemy","grove",4,"","","",22],
+["are-arm","are","arm","mar","ear",1,"","","",4],
+["gauge-limit","gauge","limit","image","guilt",5,"","","",25],
+["jack-pipe","jack","pipe","jape","pick",2,"","","",1],
+["daily-scene","daily","scene","since","delay",2,"","","",7],
+["paid-user","paid","user","pair","used",1,"","","",0],
+["decay-tones","decay","tones","needy","coats",4,"","","",13],
+["gang-kite","kite","gang","gate","king",2,"","","",1],
+["clone-rises","clone","rises","close","risen",3,"","","",8],
+["calm-flip","calm","flip","clap","film",2,"","","",6],
+["pilot-shoes","pilot","shoes","piles","shoot",2,"","","",1],
+["bulb-cook","bulb","cook","book","club",2,"","","cannot be reversed",8],
+["curry-weave","curry","weave","curve","weary",2,"","","",1],
+["joke-salt","joke","salt","jolt","sake",2,"","","",1],
+["shade-trace","shade","trace","react","heads",2,"","","",19],
+["big-max","big","max","bag","mix",1,"","","",1],
+["clamp-sheep","clamp","sheep","champ","sleep",1,"","","",1],
+["pest-snow","snow","pest","step","owns",2,"","","",15],
+["droid-valve","droid","valve","drove","valid",2,"","","cannot be reversed",1],
+["anti-hype","anti","hype","they","pain",3,"","","",20],
+["colon-hands","colon","hands","canon","holds",2,"","","",2],
+["bot-nor","bot","nor","rob","ton",3,"","","",9],
+["basic-spell","basic","spell","spice","balls",3,"","","",8],
+["duck-lamb","lamb","duck","dumb","lack",2,"","","",1],
+["dance-tired","dance","tired","dried","enact",4,"","","",33],
+["bunk-tall","tall","bunk","tank","bull",2,"","","",1],
+["agree-short","agree","short","great","horse",2,"","","",6],
+["pit-raw","raw","pit","tip","war",2,"","","",5],
+["alarm-devil","alarm","devil","armed","villa",4,"","","",22],
+["bear-heir","bear","heir","bare","hire",1,"","","",3],
+["items-store","store","items","moist","reset",4,"","","",29],
+["bird-cuts","bird","cuts","curd","bits",2,"","","",1],
+["cling-goose","goose","cling","close","going",2,"","","",1],
+["ties-wave","wave","ties","east","view",3,"","","",18],
+["woe-yet","woe","yet","eye","two",2,"","","",8],
+["avid-idol","avid","idol","dial","void",3,"","","",10],
+["clear-swamp","clear","swamp","swear","clamp",2,"","","",1],
+["sari-stem","sari","stem","same","stir",2,"","","",8],
+["offer-papal","papal","offer","paper","offal",2,"","","",1],
+["lack-toys","lack","toys","yolk","cats",4,"","","",12],
+["bet-jut","jut","bet","but","jet",1,"","","",0],
+["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
+["hero-nude","nude","hero","hour","need",2,"","","",6],
+["never-sober","never","sober","verse","borne",4,"","","",21],
+["salt-weak","weak","salt","seat","walk",2,"","","",2],
+["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
+["cab-wet","cab","wet","cat","web",1,"","","",0],
+["cord-slow","slow","cord","crow","sold",2,"","","",6],
+["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
+["plum-wars","plum","wars","plus","warm",1,"","","",0],
+["novel-short","short","novel","thorn","loves",3,"","","",22],
+["mite-scan","scan","mite","cans","item",1,"","","",3],
+["music-ninth","music","ninth","cumin","hints",4,"","","",33],
+["epic-harp","harp","epic","arch","pipe",2,"","","",6],
+["snide-title","snide","title","inlet","tides",4,"","","",15],
+["boo-two","boo","two","bow","too",2,"","","cannot be reversed",7],
+["meat-nerd","nerd","meat","dean","term",3,"","","",22],
+["price-toast","toast","price","tract","poise",2,"","","",3],
+["flag-lion","lion","flag","golf","nail",4,"","","",23],
+["crews-ghost","ghost","crews","chest","grows",2,"","","",3],
+["fire-sewn","fire","sewn","wins","reef",3,"","","",18],
+["box-law","box","law","lax","bow",1,"","","",0],
+["paste-style","paste","style","petty","seals",4,"","","",24],
+["bark-wood","wood","bark","book","ward",2,"","","",2],
+["steel-whiff","whiff","steel","stiff","wheel",2,"","","cannot be reversed",1],
+["full-load","full","load","loaf","dull",4,"","","",23],
+["lodge-river","river","lodge","lover","ridge",2,"","","",1],
+["corn-flat","corn","flat","clan","fort",2,"","","",2],
+["ode-sun","ode","sun","don","use",2,"","","",7],
+["duke-pert","pert","duke","kept","rude",3,"","","",9],
+["black-lakes","black","lakes","bleak","lacks",2,"","","",4],
+["guru-post","guru","post","guts","pour",3,"","","",9],
+["haute-rolls","haute","rolls","halls","route",2,"","","",1],
+["drum-good","good","drum","drug","mood",4,"","","",23],
+["fig-tax","fig","tax","fix","tag",1,"","","",0],
+["drew-slow","drew","slow","lewd","rows",2,"","","",8],
+["blame-shock","shock","blame","block","shame",2,"","","",1],
+["crab-rule","crab","rule","club","rare",3,"","","",9],
+["chair-green","green","chair","grain","cheer",2,"","","",2],
+["easy-knot","knot","easy","okay","sent",3,"","","",10],
+["not-yet","not","yet","ten","toy",3,"","","",9],
+["glove-wears","wears","glove","worse","gavel",2,"","","",7],
+["fans-nude","nude","fans","nuns","fade",2,"","","",1],
+["class-talks","class","talks","salts","slack",3,"","","",22],
+["coin-rare","rare","coin","rain","core",2,"","","",1],
+["poles-trace","trace","poles","elope","carts",4,"","","",22],
+["oath-pink","pink","oath","oink","path",1,"","","",0],
+["dying-guilt","dying","guilt","guild","tying",4,"","","",24],
+["bust-coup","bust","coup","cusp","bout",2,"","","",2],
+["oar-tag","oar","tag","ago","art",2,"","","",7],
+["bait-sold","bait","sold","bolt","said",2,"","","",2],
+["lunar-resin","lunar","resin","ruins","learn",2,"","","",8],
+["call-time","call","time","till","came",2,"","","",1],
+["giant-sense","giant","sense","genes","stain",3,"","","",21],
+["city-tune","city","tune","cute","tiny",2,"","","",3],
+["cup-lot","cup","lot","lop","cut",1,"","","",0],
+["busy-jars","busy","jars","jury","bass",2,"","","",3],
+["marry-stone","marry","stone","mayor","stern",2,"","","",5],
+["plan-wide","plan","wide","wind","plea",2,"","","",5],
+["doubt-needs","doubt","needs","debut","nodes",2,"","","",7],
+["dull-soda","dull","soda","dual","sold",2,"","","",5],
+["arm-nee","nee","arm","era","men",3,"","","",10],
+["ears-seal","seal","ears","earl","seas",1,"","","",0],
+["brute-goals","brute","goals","gruel","boast",3,"","","",11],
+["bite-pony","pony","bite","bone","pity",2,"","","",2],
+["angel-carol","angel","carol","along","clear",3,"","","",18],
+["flea-thin","thin","flea","leaf","hint",1,"","","",3],
+["new-old","old","new","end","low",2,"","","",7],
+["gist-safe","safe","gist","sage","fist",4,"","","",13],
+["crush-flies","crush","flies","flush","cries",2,"","","",1],
+["door-tilt","tilt","door","riot","told",4,"","","cannot be reversed",26],
+["amend-worse","worse","amend","swore","named",1,"","","",3],
+["dyes-keep","dyes","keep","deep","keys",2,"","","cannot be reversed",8],
+["pay-tap","pay","tap","yap","pat",2,"","","",5],
+["bagel-sales","bagel","sales","gases","label",3,"","","",8],
+["hint-peak","peak","hint","pink","heat",2,"","","",2],
+["crisp-these","these","crisp","chips","trees",2,"","","",7],
+["maid-raid","maid","raid","arid","amid",1,"","","",3],
+["moral-seeds","moral","seeds","model","sears",3,"","","",8],
+["hot-use","hot","use","out","she",2,"","","",7],
+["lunch-share","share","lunch","harsh","uncle",2,"","","",6],
+["pond-ragu","ragu","pond","drag","upon",2,"","","cannot be reversed",7],
+["blade-print","blade","print","bride","plant",2,"","","",2],
+["mild-race","race","mild","card","lime",3,"","","",8],
+["nylon-purse","nylon","purse","pylon","nurse",1,"","","",0],
+["feel-grit","grit","feel","feet","girl",2,"","","cannot be reversed",6],
+["algae-spoon","algae","spoon","loose","pagan",4,"","","",14],
+["how-new","how","new","hew","now",1,"","","",0],
+["firms-greed","greed","firms","germs","fried",3,"","","",9],
+["huge-wart","huge","wart","wage","hurt",2,"","","",1],
+["femur-fetal","fetal","femur","frame","flute",4,"","","",22],
+["bang-kiss","bang","kiss","bass","king",2,"","","",1],
+["catch-sweep","catch","sweep","cache","swept",2,"","","",6],
+["art-can","art","can","act","ran",2,"","","",7],
+["daisy-threw","threw","daisy","white","yards",3,"","","",22],
+["cord-snap","snap","cord","sand","crop",2,"","","",6],
+["share-towel","share","towel","shale","tower",3,"","","",8],
+["next-tone","next","tone","text","none",1,"","","",0],
+["ocean-parts","ocean","parts","acorn","tapes",3,"","","",20],
+["pro-was","pro","was","asp","row",2,"","","",8],
+["iron-test","test","iron","nets","trio",3,"","","",22],
+["hatch-wings","hatch","wings","hangs","witch",2,"","","",1],
+["beat-whip","whip","beat","bath","wipe",2,"","","",7],
+["noted-peril","peril","noted","depot","liner",3,"","","",17],
+["icon-lied","icon","lied","iced","lion",2,"","","",1],
+["argue-later","argue","later","eager","ultra",3,"","","",23],
+["cop-try","try","cop","cry","top",1,"","","",0],
+["error-thyme","thyme","error","merry","other",4,"","","",25],
+["obey-odds","obey","odds","body","does",2,"","","",6],
+["shark-spurt","spurt","shark","hurts","parks",2,"","","",7],
+["hair-loud","loud","hair","hour","laid",2,"","","",2],
+["buyer-later","buyer","later","rebut","relay",3,"","","",19],
+["bout-clot","clot","bout","boot","cult",2,"","","",5],
+["goats-tense","tense","goats","toast","genes",2,"","","",8],
+["gold-mine","gold","mine","gone","mild",2,"","","",1],
+["ditto-exist","ditto","exist","idiot","texts",3,"","","",21],
+["ate-owl","owl","ate","eat","low",1,"","","",4],
+["scent-waste","waste","scent","scene","watts",3,"","","",8],
+["form-haul","haul","form","foul","harm",2,"","","",1],
+["bolts-shear","shear","bolts","rehab","slots",4,"","","",33],
+["dark-mess","dark","mess","desk","mars",2,"","","",2],
+["clips-viral","viral","clips","crisp","villa",4,"","","",22],
+["down-glue","glue","down","lung","owed",2,"","","",6],
+["bones-rifle","rifle","bones","fires","noble",4,"","","",11],
+["ran-you","you","ran","our","any",2,"","","",8],
+["most-show","show","most","toss","whom",3,"","","",23],
+["pools-shine","pools","shine","phone","soils",2,"","","",3],
+["meat-prod","prod","meat","drop","team",2,"","","",19],
+["boost-claws","claws","boost","blows","coast",2,"","","",3],
+["case-kale","kale","case","lace","sake",3,"","","",8],
+["one-saw","one","saw","sea","own",2,"","","",6],
+["deal-kink","kink","deal","kind","leak",3,"","","cannot be reversed",23],
+["dewy-nuts","dewy","nuts","duty","news",2,"","","",2],
+["cover-video","video","cover","drove","voice",5,"","","",28],
+["code-deny","deny","code","eddy","once",2,"cody","dene","",6],
+["hello-paste","paste","hello","holes","petal",3,"","","",19],
+["eye-tax","eye","tax","axe","yet",2,"","","",8],
+["gosh-pipe","gosh","pipe","pope","sigh",3,"","","",15],
+["owns-silk","owns","silk","owls","sink",1,"","","",1],
+["paced-right","right","paced","patch","ridge",3,"","","",11],
+["camp-dupe","dupe","camp","cape","dump",2,"","","",1],
+["actor-teeth","teeth","actor","teach","otter",4,"","","",20],
+["dad-nod","nod","dad","and","odd",2,"","","cannot be reversed",6],
+["date-safe","safe","date","deaf","seat",2,"","","",7],
+["queen-spill","queen","spill","quell","spine",3,"","","",8],
+["felt-hard","felt","hard","fart","held",2,"","","",2],
+["blame-dream","blame","dream","amber","medal",4,"","","",25],
+["dull-idea","dull","idea","idle","dual",2,"aldi","leud","",5],
+["bus-mew","mew","bus","sum","web",3,"","","",9],
+["soda-thin","soda","thin","dash","into",3,"","","",18],
+["kick-long","long","kick","king","lock",2,"","","",1],
+["brush-tooth","tooth","brush","shout","throb",5,"","","",29],
+["dump-jeep","dump","jeep","deep","jump",1,"","","",0],
+["dared-viper","viper","dared","paved","rider",4,"","","",12],
+["huge-part","huge","part","page","hurt",2,"","","",1],
+["nifty-tasks","nifty","tasks","fatty","sinks",4,"","","",16],
+["seek-term","seek","term","trek","seem",2,"","","",6],
+["scuba-token","scuba","token","about","necks",5,"","","",32],
+["how-rot","rot","how","hot","row",1,"","","",0],
+["races-slick","slick","races","crack","isles",3,"","","",12],
+["fast-monk","fast","monk","mask","font",2,"","","",2],
+["panda-wires","panda","wires","award","spine",3,"","","",10],
+["free-trim","free","trim","fire","term",2,"","","",5],
+["leads-raven","raven","leads","nerve","salad",3,"","","",20],
+["mite-plan","mite","plan","mint","plea",2,"","","",5],
+["plush-sleep","plush","sleep","helps","pulse",4,"","","",25],
+["awe-gas","awe","gas","age","was",2,"","","",7],
+["atoms-pearl","pearl","atoms","maple","roast",4,"","","",28],
+["math-type","type","math","myth","tape",1,"","","",1],
+["robot-solve","robot","solve","boots","lover",3,"","","",10],
+["moth-wire","moth","wire","more","with",2,"","","",1],
+["finer-gifts","finer","gifts","stiff","reign",4,"","","",29],
+["dock-size","dock","size","doze","sick",2,"","","",1],
+["goats-sense","sense","goats","tease","songs",4,"","","",25],
+["fix-sly","sly","fix","fly","six",1,"","","",0],
+["frost-solar","solar","frost","flora","sorts",3,"","","",21],
+["deep-hilt","hilt","deep","diet","help",2,"","","",3],
+["force-snail","snail","force","final","score",2,"","","",6],
+["clue-tank","tank","clue","ante","luck",2,"","","",7],
+["fresh-slate","fresh","slate","shelf","tears",4,"","","",20],
+["fun-red","red","fun","fed","run",1,"","","",0],
+["grow-load","load","grow","drag","wool",4,"","","",26],
+["beat-loop","loop","beat","boot","leap",2,"","","",2],
+["prism-reset","prism","reset","prime","rests",2,"","","",5],
+["deny-tick","deny","tick","tiny","deck",2,"","","",1],
+["chair-singe","singe","chair","cigar","shine",3,"","","",8],
+["ion-war","ion","war","air","own",2,"","","",7],
+["rats-snip","snip","rats","pins","star",3,"","","",19],
+["fleet-raids","fleet","raids","filet","reads",2,"","","",4],
+["drum-look","drum","look","lurk","doom",3,"","","",9],
+["area-bled","area","bled","dare","able",2,"","","",7],
+["races-vocal","vocal","races","coral","caves",3,"","","",7],
+["cap-lie","cap","lie","alp","ice",2,"","","",7],
+["comes-tenth","tenth","comes","meets","notch",4,"","","",17],
+["echo-plea","echo","plea","each","pole",2,"","","",7],
+["radio-spire","spire","radio","aides","prior",4,"","","",13],
+["lazy-once","lazy","once","clay","zone",2,"","","",7],
+["human-lever","human","lever","lemur","haven",4,"","","",16],
+["hey-out","hey","out","the","you",2,"","","",8],
+["mango-waste","mango","waste","mates","wagon",2,"","","",9],
+["neat-swat","neat","swat","want","east",2,"","","",7],
+["photo-reads","photo","reads","rodeo","paths",3,"","","",11],
+["mint-opal","opal","mint","into","palm",2,"","","",7],
+["frost-place","frost","place","craft","slope",4,"","","",25],
+["eye-sir","eye","sir","ire","yes",2,"","","",8],
+["chain-spill","spill","chain","hills","panic",3,"spain","chill","",11],
+["math-wade","math","wade","mead","what",2,"","","",7],
+["mouse-trust","trust","mouse","stout","serum",4,"","","",25],
+["rear-upon","upon","rear","earn","pour",2,"","","",7],
+["field-scone","scone","field","fence","solid",3,"","","",11],
+["cat-use","cat","use","sue","act",1,"","","",3],
+["free-weed","free","weed","feed","were",2,"","","cannot be reversed",8],
+["sites-world","world","sites","slots","weird",3,"","","",9],
+["hate-vent","vent","hate","even","that",2,"","","",7],
+["digit-lower","lower","digit","towel","rigid",3,"","","",22],
+["spin-taxi","spin","taxi","pint","axis",2,"","","",7],
+["faith-super","super","faith","shape","fruit",3,"","","",9],
+["but-cow","cow","but","bow","cut",1,"","","",0],
+["fete-slip","slip","fete","step","file",3,"","","",9],
+["great-quote","great","quote","greet","quota",3,"","","",8],
+["area-hire","area","hire","aria","here",3,"","","",9],
+["gold-spin","gold","spin","ping","olds",2,"","","",7],
+["exact-psalm","exact","psalm","latex","camps",4,"","","",28],
+["ass-put","ass","put","sat","ups",2,"","","",7],
+["plots-totem","totem","plots","motto","slept",5,"","","",32],
+["flat-mood","flat","mood","malt","food",2,"","","",8],
+["birds-broke","broke","birds","brisk","bored",3,"","","",19],
+["art-gem","gem","art","arm","get",1,"","","",0],
+["door-went","door","went","redo","town",3,"","","",19],
+["ample-panic","ample","panic","manic","apple",3,"","","",8],
+["boom-stat","boom","stat","oats","tomb",2,"","","",8],
+["claws-large","large","claws","grace","walls",4,"","","",22],
+["bad-dye","dye","bad","bye","dad",1,"","","",0],
+["milk-nose","milk","nose","link","some",3,"leon","skim","",8],
+["cheap-merit","cheap","merit","teach","prime",4,"","","",29],
+["most-open","most","open","omen","post",3,"","","",9],
+["eon-rid","eon","rid","die","nor",3,"","","",9],
+["alley-bears","alley","bears","belly","areas",2,"","","",6],
+["cell-shoe","cell","shoe","loch","else",4,"","","",22],
+["modes-theme","theme","modes","modem","these",3,"","","",8],
+["lets-plop","lets","plop","poll","step",4,"","","",23],
+["age-rap","rap","age","are","gap",2,"","","",7],
+["slain-spike","spike","slain","likes","pains",2,"","","",7],
+["warp-yard","warp","yard","draw","pray",4,"","","",22],
+["cares-least","least","cares","carts","lease",3,"","","",8],
+["cent-side","side","cent","dice","nest",3,"","","",8],
+["grape-prune","grape","prune","upper","anger",3,"","","",22],
+["era-imp","imp","era","aim","per",2,"mia","rep","",8],
+["asks-lion","asks","lion","akin","loss",3,"","","",9],
+["loyal-setup","loyal","setup","alloy","upset",2,"","","",14],
+["cage-talk","talk","cage","gate","lack",3,"","","",8],
+["plant-spare","spare","plant","strap","penal",4,"","","",21],
+["dye-sad","dye","sad","add","yes",2,"","","",8],
+["amid-year","year","amid","army","idea",3,"","","",19],
+["great-route","great","route","trout","agree",2,"","","",8],
+["cold-rest","cold","rest","sect","lord",3,"","","",8],
+["lingo-wives","wives","lingo","swing","olive",3,"","","",9],
+["end-how","end","how","den","who",1,"","","",4],
+["mole-safe","safe","mole","lose","fame",3,"","","",8],
+["pasta-smell","pasta","smell","ample","lasts",5,"","","",35],
+["ants-pigs","ants","pigs","sang","spit",2,"","","",8],
+["claim-peers","peers","claim","piles","cream",3,"","","",9],
+["ads-say","ads","say","ass","day",2,"","","",7],
+["dial-oops","oops","dial","aids","pool",3,"","","",8],
+["queue-vegan","vegan","queue","queen","vague",4,"","","",11],
+["tree-wind","tree","wind","wren","tide",3,"","","",9],
+["theft-thief","thief","theft","teeth","fifth",4,"","","",28],
+["see-via","see","via","vie","sea",1,"","","",0],
+["deep-gulf","deep","gulf","feed","plug",4,"","","",22],
+["diary-false","false","diary","daisy","flare",2,"","","",5],
+["nets-seal","seal","nets","lean","sets",3,"sean","lets","",23],
+["cue-tip","cue","tip","cup","tie",1,"","","",0],
+["halo-prey","halo","prey","hero","play",3,"","","",9],
+["hedge-stiff","stiff","hedge","fifth","edges",4,"","","",29],
+["been-true","true","been","beer","tune",3,"","","",10],
+["error-guess","guess","error","users","roger",4,"","","",20],
+["art-axe","axe","art","ear","tax",2,"","","",8],
+["bored-clasp","clasp","bored","blade","corps",3,"","","",10],
+["meet-noun","meet","noun","menu","note",3,"nemo","tune","cannot be reversed",9],
+["fresh-towel","fresh","towel","three","flows",3,"","","",11],
+["law-won","law","won","wan","low",1,"","","",1],
+["cuss-male","cuss","male","lace","sums",3,"","","",8],
+["tense-wharf","tense","wharf","shaft","renew",4,"","","",26],
+["cyan-deer","cyan","deer","care","deny",3,"","","",10],
+["brain-irony","brain","irony","robin","rainy",2,"","","",5],
+["lake-slim","lake","slim","elks","mail",4,"","","",26],
+["tip-ups","tip","ups","pup","its",2,"","","",7],
+["risk-soup","soup","risk","kiss","pour",3,"","","",23],
+["false-worth","false","worth","flash","wrote",2,"","","",8],
+["nude-yeti","nude","yeti","unit","eyed",4,"","","",21],
+["ape-arc","ape","arc","cap","ear",2,"","","",8],
+["denim-tread","denim","tread","dried","meant",5,"","","",32],
+["bare-rule","bare","rule","lube","rare",3,"","","",8],
+["lunch-slime","lunch","slime","menus","chill",5,"","","",28],
+["new-one","new","one","nee","own",2,"","","",6],
+["solid-tiger","solid","tiger","roles","digit",4,"","","",25],
+["cute-name","cute","name","mace","tune",3,"","","",8],
+["knife-these","knife","these","knees","thief",3,"","","",10],
+["his-two","his","two","its","who",2,"","","",7],
+["rays-tofu","tofu","rays","fast","your",4,"","","",15],
+["count-swore","count","swore","ounce","worst",2,"","","",6],
+["fell-poke","poke","fell","folk","peel",3,"","","",12],
+["end-low","low","end","new","old",2,"","","",7],
+["loop-rain","rain","loop","nail","poor",3,"","","",23],
+["delay-start","delay","start","dealt","stray",2,"","","",5],
+["chai-lens","chai","lens","inch","sale",3,"","","cannot be reversed",19],
+["apt-ray","apt","ray","art","pay",2,"","","",7],
+["depth-spicy","spicy","depth","chips","typed",4,"","","",21],
+["bond-slow","slow","bond","bold","snow",3,"","","",9],
+["demon-water","water","demon","deter","woman",4,"","","",13],
+["fix-sun","sun","fix","fun","six",1,"","","",0],
+["page-risk","page","risk","gear","skip",3,"","","",19],
+["power-spare","spare","power","swore","paper",3,"","","",8],
+["best-cafe","best","cafe","beef","cats",3,"","","",9],
+["fight-troop","fight","troop","proof","tight",3,"","","",22],
+["ace-yet","ace","yet","cat","eye",2,"","","",7],
+["lots-plop","plop","lots","poll","stop",4,"","","",23],
+["boost-honey","honey","boost","ebony","shoot",2,"","","",5],
+["atom-evil","evil","atom","oval","item",4,"","","",13],
+["dog-old","old","dog","log","odd",2,"","","",7],
+["plate-speed","plate","speed","pedal","steep",4,"","","",20],
+["eats-hawk","hawk","eats","take","wash",3,"","","",9],
+["agile-poles","agile","poles","eagle","spoil",3,"","","",10],
+["art-wow","wow","art","two","war",2,"","","",8],
+["based-sonic","sonic","based","cabin","doses",5,"","","",34],
+["maps-safe","safe","maps","fame","pass",3,"","","",8],
+["lemon-thank","lemon","thank","month","ankle",4,"","","",22],
+["ant-ear","ant","ear","ran","tea",2,"","","",8],
+["love-wish","love","wish","veil","show",3,"","","",19],
+["fears-motto","motto","fears","feast","motor",2,"","","",5],
+["good-loss","good","loss","dogs","solo",3,"","","",21],
+["ate-beg","beg","ate","age","bet",2,"","","",9],
+["magic-there","magic","there","cream","eight",6,"","","",33],
+["cave-link","cave","link","vale","nick",3,"","","",8],
+["crane-spine","crane","spine","pecan","resin",3,"","","",17],
+["frog-walk","frog","walk","flag","work",3,"","","",9],
+["naive-tests","naive","tests","taste","veins",4,"","","cannot be reversed",25],
+["axe-set","axe","set","ate","sex",2,"","","",9],
+["load-skis","load","skis","idol","asks",3,"","","",20],
+["space-spell","spell","space","scalp","sleep",3,"","","",8],
+["cave-kite","kite","cave","take","vice",3,"","","",13],
+["are-hog","hog","are","ago","her",2,"","","",9],
+["minds-steak","steak","minds","kinds","steam",4,"","","",25],
+["hour-that","that","hour","hurt","oath",3,"","","",9],
+["drawn-ridge","drawn","ridge","grand","wider",3,"","","",23],
+["bug-new","new","bug","web","gun",3,"","","",9],
+["alter-valid","valid","alter","dealt","rival",3,"","","",18],
+["blue-reef","blue","reef","beef","rule",2,"","","",8],
+["koala-rifle","koala","rifle","alike","flora",4,"","","",22],
+["ick-odd","ick","odd","doc","kid",2,"","","",9],
+["reset-title","reset","title","trite","steel",4,"","","",26],
+["lawn-risk","lawn","risk","silk","warn",3,"","","",8],
+["flats-sword","flats","sword","dwarf","slots",4,"","","",27],
+["ally-spot","spot","ally","lost","play",2,"","","",8],
+["crash-mules","mules","crash","clues","marsh",2,"","","",7],
+["dad-yam","yam","dad","day","mad",3,"amy","add","cannot be reversed",9],
+["deep-rent","deep","rent","peer","tend",3,"","","",23],
+["cover-pearl","cover","pearl","clear","prove",2,"","","",6],
+["chef-skin","chef","skin","fish","neck",4,"","","",22],
+["bra-cup","bra","cup","arc","pub",3,"","","",9],
+["array-guide","guide","array","argue","diary",4,"","","",22],
+["gods-pier","gods","pier","gird","pose",3,"","","",9],
+["atlas-sheep","sheep","atlas","phase","steal",4,"","","",28],
+["oral-vows","oral","vows","rows","oval",3,"","","",9],
+["forms-trend","forms","trend","frond","terms",3,"","","",9],
+["ate-jog","jog","ate","ago","jet",2,"","","",9],
+["half-lice","half","lice","fill","each",4,"","","",26],
+["dream-leave","dream","leave","levee","drama",2,"","","",6],
+["live-rail","live","rail","liar","evil",3,"","","",19],
+["aid-net","aid","net","din","tea",3,"","","",9],
+["bride-mercy","mercy","bride","crime","derby",4,"","","",26],
+["logs-sold","sold","logs","loss","gold",3,"","","",8],
+["basil-smell","basil","smell","balls","smile",2,"","","",7],
+["pays-stew","stew","pays","step","ways",4,"","","",23],
+["peg-tag","peg","tag","gap","get",3,"","","",9],
+["kings-spear","kings","spear","rings","speak",4,"","","",25],
+["aced-fast","aced","fast","acts","fade",3,"","","",9],
+["drift-house","drift","house","fried","south",3,"","","",22],
+["laws-musk","musk","laws","sums","walk",3,"","","",8],
+["blues-scale","blues","scale","clubs","lease",4,"","","",13],
+["bit-own","own","bit","nib","two",3,"","","",10],
+["gangs-taupe","taupe","gangs","gauge","pants",4,"","","",25],
+["seem-true","seem","true","teem","sure",2,"","","",8],
+["cider-space","space","cider","speed","circa",4,"","","",16],
+["mint-uses","mint","uses","mess","unit",2,"","","",8],
+["blast-tires","blast","tires","salts","tribe",5,"","","",32],
+["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
+["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
+["cube-pork","pork","cube","buck","rope",3,"","","",8],
+["march-peach","peach","march","charm","cheap",3,"","","",21],
+["gala-over","gala","over","gave","oral",3,"","","",9],
+["space-world","space","world","crowd","lapse",4,"","","",21],
+["flee-silt","silt","flee","else","lift",3,"","","",8],
+["toy-yes","toy","yes","soy","yet",3,"","","",14],
+["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
+["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
+["dice-lord","dice","lord","cold","ride",3,"","","",9],
+["brake-force","brake","force","farce","broke",3,"","","",8],
+["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
+["dad-nor","nor","dad","don","rad",3,"dan","rod","",10],
+["data-town","data","town","toad","want",3,"","","",18],
+["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
+["east-wind","east","wind","dawn","ties",3,"","","",19],
+["grab-milk","grab","milk","glib","mark",3,"","","",9],
+["elder-necks","elder","necks","dense","clerk",5,"","","",28],
+["hike-were","hike","were","heir","week",2,"","","",8],
+["bar-row","bar","row","rob","war",3,"","","",14],
+["glue-roof","glue","roof","goof","rule",2,"","","",8],
+["glare-skies","glare","skies","eagle","risks",3,"","","",18],
+["love-vast","vast","love","save","volt",3,"","","",8],
+["arise-spoon","spoon","arise","piano","roses",4,"","","",24],
+["rift-tube","rift","tube","butt","fire",3,"","","",8],
+["happy-legit","legit","happy","apply","eight",3,"","","",9],
+["heel-ploy","ploy","heel","holy","peel",2,"","","cannot be reversed",8],
+["key-tap","key","tap","yak","pet",3,"","","",14],
+["logo-nose","logo","nose","gone","solo",3,"","","",9],
+["aside-tuned","aside","tuned","adieu","tends",3,"","","",9],
+["game-mice","game","mice","mime","cage",3,"","","",9],
+["carol-sushi","sushi","carol","chair","souls",4,"","","",20],
+["city-dark","dark","city","rack","tidy",3,"","","",8],
+["belly-state","belly","state","bleat","style",4,"","","",23],
+["guy-web","web","guy","bug","yew",3,"","","",10],
+["glee-sins","glee","sins","else","sign",3,"","","",22],
+["damn-like","like","damn","made","kiln",3,"","","",8],
+["cutie-short","short","cutie","tours","ethic",4,"","","",33],
+["sent-taxi","sent","taxi","ants","exit",2,"","","",8],
+["opera-waste","opera","waste","aware","poets",5,"","","",26],
+["bat-owl","owl","bat","lab","two",3,"","","",10],
+["stern-toast","stern","toast","tarot","nests",4,"","","",28],
+["fawn-slim","fawn","slim","film","swan",2,"","","",8],
+["hotel-tasks","hotel","tasks","stalk","those",3,"","","",20],
+["port-ride","port","ride","dirt","rope",3,"","","",8],
+["vital-whale","vital","whale","wheat","villa",4,"","","",16],
+["bee-raw","raw","bee","web","ear",3,"","","",10],
+["real-tiny","real","tiny","lint","year",3,"","","",23],
+["lets-swam","swam","lets","laws","stem",3,"","","",9],
+["boost-surge","surge","boost","sober","gusto",5,"","","",26],
+["farm-trip","farm","trip","firm","trap",3,"","","",9],
+["disco-elect","disco","elect","cited","close",5,"","","",24],
+["die-ram","ram","die","ear","mid",3,"","","",10],
+["core-vast","vast","core","acts","over",3,"","","",20],
+["horse-theft","horse","theft","forth","sheet",4,"","","",26],
+["cash-gift","cash","gift","sigh","fact",4,"","","",13],
+["own-wet","wet","own","new","two",3,"","","",10],
+["neat-sums","neat","sums","mess","aunt",3,"","","",15],
+["lousy-seats","lousy","seats","souls","yeast",3,"","","",23],
+["mass-step","mass","step","stem","pass",4,"","","",23],
+["doc-pug","pug","doc","cup","god",3,"","","",10],
+["show-tear","show","tear","rote","wash",3,"","","",19],
+["lard-time","lard","time","mild","rate",4,"","","",12],
+["sung-what","sung","what","thaw","guns",2,"","","",19],
+["done-soul","soul","done","loud","eons",3,"","","",23],
+["rich-town","rich","town","corn","with",4,"","","",13],
+["neon-wolf","neon","wolf","flew","noon",4,"","","",23],
+["pet-soy","soy","pet","top","yes",3,"","","",14],
+["melt-peak","melt","peak","kelp","team",3,"","","",22],
+["mars-solo","mars","solo","lass","room",4,"","","",15],
+["deep-when","when","deep","phew","need",3,"","","",23],
+["less-soft","soft","less","self","toss",3,"","","",21],
+["rush-taco","taco","rush","chat","sour",3,"","","",18],
+["bow-gel","gel","bow","log","web",3,"","","",14],
+["meat-tuna","tuna","meat","aunt","team",2,"","","",19],
+["dash-tool","tool","dash","hood","last",4,"","","",23],
+["page-rich","rich","page","gear","chip",3,"","","",19],
+["foul-peas","foul","peas","soup","leaf",4,"","","",23],
+["real-sofa","real","sofa","fare","also",4,"","","",20]
 ];
 
+const dailyTriplets=[
+  {
+  id: "day-001",
+  type: "3-4-5",
+  totalDifficulty: 24,
+  maxDifficulty: 10,
+  puzzles: [
+    ["ate-jog","jog","ate","ago","jet",2,"","","",9],
+    ["dull-soda","dull","soda","dual","sold",2,"","","",5],
+    ["agile-poles","agile","poles","eagle","spoil",3,"","","",10],
+  ]
+},
+{
+  id: "day-002",
+  type: "4-4-5",
+  totalDifficulty: 35,
+  maxDifficulty: 26,
+  puzzles: [
+    ["bust-coup","bust","coup","cusp","bout",2,"","","",2],
+    ["spin-taxi","spin","taxi","pint","axis",2,"","","",7],
+    ["reset-title","reset","title","trite","steel",4,"","","",26],
+  ]
+},
+{
+  id: "day-003",
+  type: "4-4-5",
+  totalDifficulty: 19,
+  maxDifficulty: 8,
+  puzzles: [
+    ["mite-scan","scan","mite","cans","item",1,"","","",3],
+    ["hike-were","hike","were","heir","week",2,"","","",8],
+    ["bagel-sales","bagel","sales","gases","label",3,"","","",8],
+  ]
+},
+{
+  id: "day-004",
+  type: "4-4-5",
+  totalDifficulty: 31,
+  maxDifficulty: 20,
+  puzzles: [
+    ["fawn-slim","fawn","slim","film","swan",2,"","","",8],
+    ["core-vast","vast","core","acts","over",3,"","","",20],
+    ["coins-fault","coins","fault","count","fails",2,"","","",3],
+  ]
+},
+{
+  id: "day-005",
+  type: "3-5-5",
+  totalDifficulty: 13,
+  maxDifficulty: 10,
+  puzzles: [
+    ["cue-tip","cue","tip","cup","tie",1,"","","",0],
+    ["parks-there","parks","there","spark","ether",1,"","","",3],
+    ["panda-wires","panda","wires","award","spine",3,"","","",10],
+  ]
+},
+{
+  id: "day-006",
+  type: "3-5-5",
+  totalDifficulty: 25,
+  maxDifficulty: 11,
+  puzzles: [
+    ["pro-was","pro","was","asp","row",2,"","","",8],
+    ["count-swore","count","swore","ounce","worst",2,"","","",6],
+    ["bones-rifle","rifle","bones","fires","noble",4,"","","",11],
+  ]
+},
+{
+  id: "day-007",
+  type: "3-5-5",
+  totalDifficulty: 34,
+  maxDifficulty: 22,
+  puzzles: [
+    ["irk-sad","irk","sad","ask","rid",2,"","","",7],
+    ["delay-start","delay","start","dealt","stray",2,"","","",5],
+    ["digit-lower","lower","digit","towel","rigid",3,"","","",22],
+  ]
+},
+{
+  id: "day-008",
+  type: "4-5-5",
+  totalDifficulty: 10,
+  maxDifficulty: 7,
+  puzzles: [
+    ["gold-mine","gold","mine","gone","mild",2,"","","",1],
+    ["belch-seals","seals","belch","beach","sells",1,"","","",2],
+    ["daily-scene","daily","scene","since","delay",2,"","","",7],
+  ]
+},
+{
+  id: "day-009",
+  type: "4-5-5",
+  totalDifficulty: 41,
+  maxDifficulty: 19,
+  puzzles: [
+    ["amid-year","year","amid","army","idea",3,"","","",19],
+    ["diary-false","false","diary","daisy","flare",2,"","","",5],
+    ["noted-peril","peril","noted","depot","liner",3,"","","",17],
+  ]
+},
+{
+  id: "day-010",
+  type: "4-4-5",
+  totalDifficulty: 15,
+  maxDifficulty: 8,
+  puzzles: [
+    ["gang-kite","kite","gang","gate","king",2,"","","",1],
+    ["aura-heal","heal","aura","area","haul",2,"","","",6],
+    ["goats-tense","tense","goats","toast","genes",2,"","","",8],
+  ]
+},
+{
+  id: "day-011",
+  type: "3-5-5",
+  totalDifficulty: 25,
+  maxDifficulty: 11,
+  puzzles: [
+    ["end-low","low","end","new","old",2,"","","",7],
+    ["doubt-needs","doubt","needs","debut","nodes",2,"","","",7],
+    ["field-scone","scone","field","fence","solid",3,"","","",11],
+  ]
+},
+{
+  id: "day-012",
+  type: "4-4-5",
+  totalDifficulty: 32,
+  maxDifficulty: 22,
+  puzzles: [
+    ["coin-rare","rare","coin","rain","core",2,"","","",1],
+    ["gala-over","gala","over","gave","oral",3,"","","",9],
+    ["claws-large","large","claws","grace","walls",4,"","","",22],
+  ]
+},
+{
+  id: "day-013",
+  type: "3-4-5",
+  totalDifficulty: 20,
+  maxDifficulty: 10,
+  puzzles: [
+    ["pay-tap","pay","tap","yap","pat",2,"","","",5],
+    ["dull-idea","dull","idea","idle","dual",2,"aldi","leud","",5],
+    ["knife-these","knife","these","knees","thief",3,"","","",10],
+  ]
+},
+{
+  id: "day-014",
+  type: "4-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 28,
+  puzzles: [
+    ["kick-long","long","kick","king","lock",2,"","","",1],
+    ["door-tilt","tilt","door","riot","told",4,"","","cannot be reversed",26],
+    ["atoms-pearl","pearl","atoms","maple","roast",4,"","","",28],
+  ]
+},
+{
+  id: "day-015",
+  type: "3-4-5",
+  totalDifficulty: 21,
+  maxDifficulty: 9,
+  puzzles: [
+    ["are-arm","are","arm","mar","ear",1,"","","",4],
+    ["case-kale","kale","case","lace","sake",3,"","","",8],
+    ["lingo-wives","wives","lingo","swing","olive",3,"","","",9],
+  ]
+},
+{
+  id: "day-016",
+  type: "4-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 32,
+  puzzles: [
+    ["sofa-wide","wide","sofa","wife","soda",1,"","","",1],
+    ["rush-taco","taco","rush","chat","sour",3,"","","",18],
+    ["blast-tires","blast","tires","salts","tribe",5,"","","",32],
+  ]
+},
+{
+  id: "day-017",
+  type: "4-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["owns-silk","owns","silk","owls","sink",1,"","","",1],
+    ["love-vast","vast","love","save","volt",3,"","","",8],
+    ["races-vocal","vocal","races","coral","caves",3,"","","",7],
+  ]
+},
+{
+  id: "day-018",
+  type: "3-4-5",
+  totalDifficulty: 45,
+  maxDifficulty: 29,
+  puzzles: [
+    ["ass-put","ass","put","sat","ups",2,"","","",7],
+    ["asks-lion","asks","lion","akin","loss",3,"","","",9],
+    ["items-store","store","items","moist","reset",4,"","","",29],
+  ]
+},
+{
+  id: "day-019",
+  type: "3-5-5",
+  totalDifficulty: 23,
+  maxDifficulty: 10,
+  puzzles: [
+    ["dad-nod","nod","dad","and","odd",2,"","","cannot be reversed",6],
+    ["glove-wears","wears","glove","worse","gavel",2,"","","",7],
+    ["bored-clasp","clasp","bored","blade","corps",3,"","","",10],
+  ]
+},
+{
+  id: "day-020",
+  type: "3-4-5",
+  totalDifficulty: 48,
+  maxDifficulty: 21,
+  puzzles: [
+    ["art-axe","axe","art","ear","tax",2,"","","",8],
+    ["door-went","door","went","redo","town",3,"","","",19],
+    ["depth-spicy","spicy","depth","chips","typed",4,"","","",21],
+  ]
+},
+{
+  id: "day-021",
+  type: "4-4-5",
+  totalDifficulty: 15,
+  maxDifficulty: 7,
+  puzzles: [
+    ["call-time","call","time","till","came",2,"","","",1],
+    ["lazy-once","lazy","once","clay","zone",2,"","","",7],
+    ["crisp-these","these","crisp","chips","trees",2,"","","",7],
+  ]
+},
+{
+  id: "day-022",
+  type: "3-5-5",
+  totalDifficulty: 33,
+  maxDifficulty: 22,
+  puzzles: [
+    ["oar-tag","oar","tag","ago","art",2,"","","",7],
+    ["black-lakes","black","lakes","bleak","lacks",2,"","","",4],
+    ["koala-rifle","koala","rifle","alike","flora",4,"","","",22],
+  ]
+},
+{
+  id: "day-023",
+  type: "4-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 10,
+  puzzles: [
+    ["bite-pony","pony","bite","bone","pity",2,"","","",2],
+    ["easy-knot","knot","easy","okay","sent",3,"","","",10],
+    ["fleet-raids","fleet","raids","filet","reads",2,"","","",4],
+  ]
+},
+{
+  id: "day-024",
+  type: "4-5-5",
+  totalDifficulty: 11,
+  maxDifficulty: 8,
+  puzzles: [
+    ["gold-heat","heat","gold","goat","held",2,"","","",1],
+    ["colon-hands","colon","hands","canon","holds",2,"","","",2],
+    ["basic-spell","basic","spell","spice","balls",3,"","","",8],
+  ]
+},
+{
+  id: "day-025",
+  type: "4-4-5",
+  totalDifficulty: 28,
+  maxDifficulty: 18,
+  puzzles: [
+    ["deny-tick","deny","tick","tiny","deck",2,"","","",1],
+    ["farm-trip","farm","trip","firm","trap",3,"","","",9],
+    ["alter-valid","valid","alter","dealt","rival",3,"","","",18],
+  ]
+},
+{
+  id: "day-026",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 8,
+  puzzles: [
+    ["dark-mess","dark","mess","desk","mars",2,"","","",2],
+    ["boom-stat","boom","stat","oats","tomb",2,"","","",8],
+    ["renew-roles","renew","roles","loser","newer",3,"","","",8],
+  ]
+},
+{
+  id: "day-027",
+  type: "4-4-5",
+  totalDifficulty: 25,
+  maxDifficulty: 19,
+  puzzles: [
+    ["city-tune","city","tune","cute","tiny",2,"","","",3],
+    ["page-risk","page","risk","gear","skip",3,"","","",19],
+    ["crews-ghost","ghost","crews","chest","grows",2,"","","",3],
+  ]
+},
+{
+  id: "day-028",
+  type: "4-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["jack-pipe","jack","pipe","jape","pick",2,"","","",1],
+    ["hate-vent","vent","hate","even","that",2,"","","",7],
+    ["great-route","great","route","trout","agree",2,"","","",8],
+  ]
+},
+{
+  id: "day-029",
+  type: "4-4-5",
+  totalDifficulty: 50,
+  maxDifficulty: 26,
+  puzzles: [
+    ["huge-wart","huge","wart","wage","hurt",2,"","","",1],
+    ["foul-peas","foul","peas","soup","leaf",4,"","","",23],
+    ["tense-wharf","tense","wharf","shaft","renew",4,"","","",26],
+  ]
+},
+{
+  id: "day-030",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 9,
+  puzzles: [
+    ["joke-salt","joke","salt","jolt","sake",2,"","","",1],
+    ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
+    ["chair-singe","singe","chair","cigar","shine",3,"","","",8],
+  ]
+},
+{
+  id: "day-031",
+  type: "4-5-5",
+  totalDifficulty: 26,
+  maxDifficulty: 19,
+  puzzles: [
+    ["math-type","type","math","myth","tape",1,"","","",1],
+    ["cover-pearl","cover","pearl","clear","prove",2,"","","",6],
+    ["buyer-later","buyer","later","rebut","relay",3,"","","",19],
+  ]
+},
+{
+  id: "day-032",
+  type: "4-4-5",
+  totalDifficulty: 17,
+  maxDifficulty: 8,
+  puzzles: [
+    ["corn-flat","corn","flat","clan","fort",2,"","","",2],
+    ["lawn-risk","lawn","risk","silk","warn",3,"","","",8],
+    ["adapt-arise","adapt","arise","apart","aside",3,"","","",7],
+  ]
+},
+{
+  id: "day-033",
+  type: "3-4-5",
+  totalDifficulty: 53,
+  maxDifficulty: 33,
+  puzzles: [
+    ["key-tap","key","tap","yak","pet",3,"","","",14],
+    ["cord-snap","snap","cord","sand","crop",2,"","","",6],
+    ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
+  ]
+},
+{
+  id: "day-034",
+  type: "4-4-5",
+  totalDifficulty: 17,
+  maxDifficulty: 8,
+  puzzles: [
+    ["salt-weak","weak","salt","seat","walk",2,"","","",2],
+    ["sent-taxi","sent","taxi","ants","exit",2,"","","",8],
+    ["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
+  ]
+},
+{
+  id: "day-035",
+  type: "4-4-5",
+  totalDifficulty: 23,
+  maxDifficulty: 19,
+  puzzles: [
+    ["bird-cuts","bird","cuts","curd","bits",2,"","","",1],
+    ["busy-jars","busy","jars","jury","bass",2,"","","",3],
+    ["shade-trace","shade","trace","react","heads",2,"","","",19],
+  ]
+},
+{
+  id: "day-036",
+  type: "4-4-5",
+  totalDifficulty: 24,
+  maxDifficulty: 11,
+  puzzles: [
+    ["down-glue","glue","down","lung","owed",2,"","","",6],
+    ["neat-swat","neat","swat","want","east",2,"","","",7],
+    ["paced-right","right","paced","patch","ridge",3,"","","",11],
+  ]
+},
+{
+  id: "day-037",
+  type: "4-4-5",
+  totalDifficulty: 25,
+  maxDifficulty: 15,
+  puzzles: [
+    ["area-bled","area","bled","dare","able",2,"","","",7],
+    ["mars-solo","mars","solo","lass","room",4,"","","",15],
+    ["heart-smile","smile","heart","earth","miles",1,"","","",3],
+  ]
+},
+{
+  id: "day-038",
+  type: "4-4-5",
+  totalDifficulty: 13,
+  maxDifficulty: 6,
+  puzzles: [
+    ["duck-lamb","lamb","duck","dumb","lack",2,"","","",1],
+    ["cord-slow","slow","cord","crow","sold",2,"","","",6],
+    ["force-snail","snail","force","final","score",2,"","","",6],
+  ]
+},
+{
+  id: "day-039",
+  type: "4-4-5",
+  totalDifficulty: 42,
+  maxDifficulty: 25,
+  puzzles: [
+    ["dial-oops","oops","dial","aids","pool",3,"","","",8],
+    ["halo-prey","halo","prey","hero","play",3,"","","",9],
+    ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
+  ]
+},
+{
+  id: "day-040",
+  type: "3-5-5",
+  totalDifficulty: 16,
+  maxDifficulty: 9,
+  puzzles: [
+    ["fig-tax","fig","tax","fix","tag",1,"","","",0],
+    ["shark-spurt","spurt","shark","hurts","parks",2,"","","",7],
+    ["photo-ships","photo","ships","hippo","hosts",3,"","","",9],
+  ]
+},
+{
+  id: "day-041",
+  type: "3-4-5",
+  totalDifficulty: 59,
+  maxDifficulty: 32,
+  puzzles: [
+    ["bus-mew","mew","bus","sum","web",3,"","","",9],
+    ["fire-sewn","fire","sewn","wins","reef",3,"","","",18],
+    ["denim-tread","denim","tread","dried","meant",5,"","","",32],
+  ]
+},
+{
+  id: "day-042",
+  type: "4-4-5",
+  totalDifficulty: 19,
+  maxDifficulty: 9,
+  puzzles: [
+    ["beat-loop","loop","beat","boot","leap",2,"","","",2],
+    ["hour-that","that","hour","hurt","oath",3,"","","",9],
+    ["tired-whale","tired","whale","where","tidal",3,"","","",8],
+  ]
+},
+{
+  id: "day-043",
+  type: "3-5-5",
+  totalDifficulty: 28,
+  maxDifficulty: 14,
+  puzzles: [
+    ["ape-arc","ape","arc","cap","ear",2,"","","",8],
+    ["dream-leave","dream","leave","levee","drama",2,"","","",6],
+    ["algae-spoon","algae","spoon","loose","pagan",4,"","","",14],
+  ]
+},
+{
+  id: "day-044",
+  type: "4-4-5",
+  totalDifficulty: 15,
+  maxDifficulty: 11,
+  puzzles: [
+    ["half-word","half","word","wolf","hard",2,"","","",1],
+    ["deep-hilt","hilt","deep","diet","help",2,"","","",3],
+    ["fresh-towel","fresh","towel","three","flows",3,"","","",11],
+  ]
+},
+{
+  id: "day-045",
+  type: "4-4-5",
+  totalDifficulty: 32,
+  maxDifficulty: 23,
+  puzzles: [
+    ["moth-wire","moth","wire","more","with",2,"","","",1],
+    ["city-dark","dark","city","rack","tidy",3,"","","",8],
+    ["belly-state","belly","state","bleat","style",4,"","","",23],
+  ]
+},
+{
+  id: "day-046",
+  type: "4-4-5",
+  totalDifficulty: 19,
+  maxDifficulty: 10,
+  puzzles: [
+    ["dock-size","dock","size","doze","sick",2,"","","",1],
+    ["avid-idol","avid","idol","dial","void",3,"","","",10],
+    ["space-spell","spell","space","scalp","sleep",3,"","","",8],
+  ]
+},
+{
+  id: "day-047",
+  type: "4-5-5",
+  totalDifficulty: 31,
+  maxDifficulty: 22,
+  puzzles: [
+    ["gold-spin","gold","spin","ping","olds",2,"","","",7],
+    ["chair-green","green","chair","grain","cheer",2,"","","",2],
+    ["daisy-threw","threw","daisy","white","yards",3,"","","",22],
+  ]
+},
+{
+  id: "day-048",
+  type: "4-4-5",
+  totalDifficulty: 23,
+  maxDifficulty: 11,
+  puzzles: [
+    ["flea-thin","thin","flea","leaf","hint",1,"","","",3],
+    ["tree-wind","tree","wind","wren","tide",3,"","","",9],
+    ["brute-goals","brute","goals","gruel","boast",3,"","","",11],
+  ]
+},
+{
+  id: "day-049",
+  type: "4-4-5",
+  totalDifficulty: 44,
+  maxDifficulty: 22,
+  puzzles: [
+    ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
+    ["iron-test","test","iron","nets","trio",3,"","","",22],
+    ["vital-whale","vital","whale","wheat","villa",4,"","","",16],
+  ]
+},
+{
+  id: "day-050",
+  type: "4-4-5",
+  totalDifficulty: 15,
+  maxDifficulty: 8,
+  puzzles: [
+    ["icon-lied","icon","lied","iced","lion",2,"","","",1],
+    ["flee-silt","silt","flee","else","lift",3,"","","",8],
+    ["arson-cable","cable","arson","scale","baron",2,"","","",6],
+  ]
+},
+{
+  id: "day-051",
+  type: "4-4-5",
+  totalDifficulty: 37,
+  maxDifficulty: 24,
+  puzzles: [
+    ["code-deny","deny","code","eddy","once",2,"cody","dene","",6],
+    ["rear-upon","upon","rear","earn","pour",2,"","","",7],
+    ["paste-style","paste","style","petty","seals",4,"","","",24],
+  ]
+},
+{
+  id: "day-052",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 10,
+  puzzles: [
+    ["camp-dupe","dupe","camp","cape","dump",2,"","","",1],
+    ["cyan-deer","cyan","deer","care","deny",3,"","","",10],
+    ["slain-spike","spike","slain","likes","pains",2,"","","",7],
+  ]
+},
+{
+  id: "day-053",
+  type: "4-4-5",
+  totalDifficulty: 38,
+  maxDifficulty: 23,
+  puzzles: [
+    ["host-pact","host","pact","chat","spot",2,"","","",6],
+    ["duke-pert","pert","duke","kept","rude",3,"","","",9],
+    ["lousy-seats","lousy","seats","souls","yeast",3,"","","",23],
+  ]
+},
+{
+  id: "day-054",
+  type: "3-4-5",
+  totalDifficulty: 22,
+  maxDifficulty: 10,
+  puzzles: [
+    ["cat-use","cat","use","sue","act",1,"","","",3],
+    ["game-mice","game","mice","mime","cage",3,"","","",9],
+    ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
+  ]
+},
+{
+  id: "day-055",
+  type: "4-5-5",
+  totalDifficulty: 51,
+  maxDifficulty: 25,
+  puzzles: [
+    ["lets-plop","lets","plop","poll","step",4,"","","",23],
+    ["amend-worse","worse","amend","swore","named",1,"","","",3],
+    ["gauge-limit","gauge","limit","image","guilt",5,"","","",25],
+  ]
+},
+{
+  id: "day-056",
+  type: "3-4-5",
+  totalDifficulty: 5,
+  maxDifficulty: 3,
+  puzzles: [
+    ["how-new","how","new","hew","now",1,"","","",0],
+    ["hint-peak","peak","hint","pink","heat",2,"","","",2],
+    ["drone-stark","stark","drone","store","drank",2,"","","",3],
+  ]
+},
+{
+  id: "day-057",
+  type: "4-4-5",
+  totalDifficulty: 23,
+  maxDifficulty: 14,
+  puzzles: [
+    ["felt-hard","felt","hard","fart","held",2,"","","",2],
+    ["pond-ragu","ragu","pond","drag","upon",2,"","","cannot be reversed",7],
+    ["loyal-setup","loyal","setup","alloy","upset",2,"","","",14],
+  ]
+},
+{
+  id: "day-058",
+  type: "4-4-5",
+  totalDifficulty: 19,
+  maxDifficulty: 8,
+  puzzles: [
+    ["bowl-keen","bowl","keen","blow","knee",1,"","","",3],
+    ["sari-stem","sari","stem","same","stir",2,"","","",8],
+    ["false-worth","false","worth","flash","wrote",2,"","","",8],
+  ]
+},
+{
+  id: "day-059",
+  type: "4-4-5",
+  totalDifficulty: 57,
+  maxDifficulty: 28,
+  puzzles: [
+    ["laws-musk","musk","laws","sums","walk",3,"","","",8],
+    ["bend-myth","bend","myth","hymn","debt",3,"","","",21],
+    ["cover-video","video","cover","drove","voice",5,"","","",28],
+  ]
+},
+{
+  id: "day-060",
+  type: "4-4-5",
+  totalDifficulty: 14,
+  maxDifficulty: 8,
+  puzzles: [
+    ["hair-loud","loud","hair","hour","laid",2,"","","",2],
+    ["face-sore","sore","face","cafe","rose",2,"","","",4],
+    ["moral-seeds","moral","seeds","model","sears",3,"","","",8],
+  ]
+},
+{
+  id: "day-061",
+  type: "4-4-5",
+  totalDifficulty: 43,
+  maxDifficulty: 25,
+  puzzles: [
+    ["mild-race","race","mild","card","lime",3,"","","",8],
+    ["easy-sums","easy","sums","muse","says",3,"","","",10],
+    ["naive-tests","naive","tests","taste","veins",4,"","","cannot be reversed",25],
+  ]
+},
+{
+  id: "day-062",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 9,
+  puzzles: [
+    ["huge-part","huge","part","page","hurt",2,"","","",1],
+    ["rift-tube","rift","tube","butt","fire",3,"","","",8],
+    ["happy-legit","legit","happy","apply","eight",3,"","","",9],
+  ]
+},
+{
+  id: "day-063",
+  type: "4-4-5",
+  totalDifficulty: 28,
+  maxDifficulty: 20,
+  puzzles: [
+    ["obey-odds","obey","odds","body","does",2,"","","",6],
+    ["anti-hype","anti","hype","they","pain",3,"","","",20],
+    ["blade-print","blade","print","bride","plant",2,"","","",2],
+  ]
+},
+{
+  id: "day-064",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 9,
+  puzzles: [
+    ["form-haul","haul","form","foul","harm",2,"","","",1],
+    ["cold-rest","cold","rest","sect","lord",3,"","","",8],
+    ["faith-super","super","faith","shape","fruit",3,"","","",9],
+  ]
+},
+{
+  id: "day-065",
+  type: "4-4-5",
+  totalDifficulty: 41,
+  maxDifficulty: 28,
+  puzzles: [
+    ["debt-iris","iris","debt","edit","ribs",2,"","","",6],
+    ["echo-plea","echo","plea","each","pole",2,"","","",7],
+    ["lunch-slime","lunch","slime","menus","chill",5,"","","",28],
+  ]
+},
+{
+  id: "day-066",
+  type: "3-4-5",
+  totalDifficulty: 15,
+  maxDifficulty: 9,
+  puzzles: [
+    ["law-won","law","won","wan","low",1,"","","",1],
+    ["lets-swam","swam","lets","laws","stem",3,"","","",9],
+    ["boost-honey","honey","boost","ebony","shoot",2,"","","",5],
+  ]
+},
+{
+  id: "day-067",
+  type: "3-4-5",
+  totalDifficulty: 46,
+  maxDifficulty: 29,
+  puzzles: [
+    ["aid-net","aid","net","din","tea",3,"","","",9],
+    ["cent-side","side","cent","dice","nest",3,"","","",8],
+    ["cheap-merit","cheap","merit","teach","prime",4,"","","",29],
+  ]
+},
+{
+  id: "day-068",
+  type: "4-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 11,
+  puzzles: [
+    ["bark-wood","wood","bark","book","ward",2,"","","",2],
+    ["plan-wide","plan","wide","wind","plea",2,"","","",5],
+    ["chain-spill","spill","chain","hills","panic",3,"spain","chill","",11],
+  ]
+},
+{
+  id: "day-069",
+  type: "4-4-5",
+  totalDifficulty: 40,
+  maxDifficulty: 20,
+  puzzles: [
+    ["fits-love","love","fits","five","lots",2,"","","",1],
+    ["east-wind","east","wind","dawn","ties",3,"","","",19],
+    ["error-guess","guess","error","users","roger",4,"","","",20],
+  ]
+},
+{
+  id: "day-070",
+  type: "3-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["fix-sun","sun","fix","fun","six",1,"","","",0],
+    ["cage-talk","talk","cage","gate","lack",3,"","","",8],
+    ["lunar-resin","lunar","resin","ruins","learn",2,"","","",8],
+  ]
+},
+{
+  id: "day-071",
+  type: "3-5-5",
+  totalDifficulty: 22,
+  maxDifficulty: 12,
+  puzzles: [
+    ["ace-yet","ace","yet","cat","eye",2,"","","",7],
+    ["price-toast","toast","price","tract","poise",2,"","","",3],
+    ["races-slick","slick","races","crack","isles",3,"","","",12],
+  ]
+},
+{
+  id: "day-072",
+  type: "4-4-5",
+  totalDifficulty: 20,
+  maxDifficulty: 9,
+  puzzles: [
+    ["fast-monk","fast","monk","mask","font",2,"","","",2],
+    ["meet-noun","meet","noun","menu","note",3,"nemo","tune","cannot be reversed",9],
+    ["aside-tuned","aside","tuned","adieu","tends",3,"","","",9],
+  ]
+},
+{
+  id: "day-073",
+  type: "4-4-5",
+  totalDifficulty: 48,
+  maxDifficulty: 22,
+  puzzles: [
+    ["tint-ways","tint","ways","stay","twin",2,"","","",6],
+    ["deep-gulf","deep","gulf","feed","plug",4,"","","",22],
+    ["actor-teeth","teeth","actor","teach","otter",4,"","","",20],
+  ]
+},
+{
+  id: "day-074",
+  type: "3-5-5",
+  totalDifficulty: 13,
+  maxDifficulty: 10,
+  puzzles: [
+    ["how-rot","rot","how","hot","row",1,"","","",0],
+    ["pools-shine","pools","shine","phone","soils",2,"","","",3],
+    ["robot-solve","robot","solve","boots","lover",3,"","","",10],
+  ]
+},
+{
+  id: "day-075",
+  type: "3-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 28,
+  puzzles: [
+    ["dad-yam","yam","dad","day","mad",3,"amy","add","cannot be reversed",9],
+    ["data-town","data","town","toad","want",3,"","","",18],
+    ["elder-necks","elder","necks","dense","clerk",5,"","","",28],
+  ]
+},
+{
+  id: "day-076",
+  type: "4-4-5",
+  totalDifficulty: 25,
+  maxDifficulty: 9,
+  puzzles: [
+    ["date-safe","safe","date","deaf","seat",2,"","","",7],
+    ["aced-fast","aced","fast","acts","fade",3,"","","",9],
+    ["sites-world","world","sites","slots","weird",3,"","","",9],
+  ]
+},
+{
+  id: "day-077",
+  type: "3-4-5",
+  totalDifficulty: 29,
+  maxDifficulty: 13,
+  puzzles: [
+    ["hey-out","hey","out","the","you",2,"","","",8],
+    ["cube-pork","pork","cube","buck","rope",3,"","","",8],
+    ["decay-tones","decay","tones","needy","coats",4,"","","",13],
+  ]
+},
+{
+  id: "day-078",
+  type: "4-4-5",
+  totalDifficulty: 20,
+  maxDifficulty: 11,
+  puzzles: [
+    ["calm-fish","fish","calm","cash","film",2,"","","",1],
+    ["port-ride","port","ride","dirt","rope",3,"","","",8],
+    ["photo-reads","photo","reads","rodeo","paths",3,"","","",11],
+  ]
+},
+{
+  id: "day-079",
+  type: "3-5-5",
+  totalDifficulty: 35,
+  maxDifficulty: 23,
+  puzzles: [
+    ["new-one","new","one","nee","own",2,"","","",6],
+    ["lunch-share","share","lunch","harsh","uncle",2,"","","",6],
+    ["drawn-ridge","drawn","ridge","grand","wider",3,"","","",23],
+  ]
+},
+{
+  id: "day-080",
+  type: "3-4-5",
+  totalDifficulty: 11,
+  maxDifficulty: 8,
+  puzzles: [
+    ["fun-red","red","fun","fed","run",1,"","","",0],
+    ["cute-name","cute","name","mace","tune",3,"","","",8],
+    ["frank-short","short","frank","shark","front",2,"","","",3],
+  ]
+},
+{
+  id: "day-081",
+  type: "4-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 33,
+  puzzles: [
+    ["bout-clot","clot","bout","boot","cult",2,"","","",5],
+    ["life-zest","life","zest","size","felt",4,"","","",13],
+    ["creep-saint","creep","saint","panic","trees",5,"","","",33],
+  ]
+},
+{
+  id: "day-082",
+  type: "4-4-5",
+  totalDifficulty: 22,
+  maxDifficulty: 9,
+  puzzles: [
+    ["mite-plan","mite","plan","mint","plea",2,"","","",5],
+    ["bees-hail","hail","bees","bias","heel",3,"","","",9],
+    ["power-spare","spare","power","swore","paper",3,"","","",8],
+  ]
+},
+{
+  id: "day-083",
+  type: "3-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 22,
+  puzzles: [
+    ["eye-sir","eye","sir","ire","yes",2,"","","",8],
+    ["keep-loan","keep","loan","noel","peak",3,"","","",22],
+    ["ditto-exist","ditto","exist","idiot","texts",3,"","","",21],
+  ]
+},
+{
+  id: "day-084",
+  type: "4-5-5",
+  totalDifficulty: 17,
+  maxDifficulty: 9,
+  puzzles: [
+    ["bunk-tall","tall","bunk","tank","bull",2,"","","",1],
+    ["basil-smell","basil","smell","balls","smile",2,"","","",7],
+    ["claim-peers","peers","claim","piles","cream",3,"","","",9],
+  ]
+},
+{
+  id: "day-085",
+  type: "3-5-5",
+  totalDifficulty: 40,
+  maxDifficulty: 28,
+  puzzles: [
+    ["dog-old","old","dog","log","odd",2,"","","",7],
+    ["brain-irony","brain","irony","robin","rainy",2,"","","",5],
+    ["stern-toast","stern","toast","tarot","nests",4,"","","",28],
+  ]
+},
+{
+  id: "day-086",
+  type: "3-4-5",
+  totalDifficulty: 17,
+  maxDifficulty: 9,
+  puzzles: [
+    ["cab-wet","cab","wet","cat","web",1,"","","",0],
+    ["maps-safe","safe","maps","fame","pass",3,"","","",8],
+    ["mango-waste","mango","waste","mates","wagon",2,"","","",9],
+  ]
+},
+{
+  id: "day-087",
+  type: "4-4-5",
+  totalDifficulty: 62,
+  maxDifficulty: 32,
+  puzzles: [
+    ["clue-tank","tank","clue","ante","luck",2,"","","",7],
+    ["risk-soup","soup","risk","kiss","pour",3,"","","",23],
+    ["scuba-token","scuba","token","about","necks",5,"","","",32],
+  ]
+},
+{
+  id: "day-088",
+  type: "4-5-5",
+  totalDifficulty: 34,
+  maxDifficulty: 22,
+  puzzles: [
+    ["logo-nose","logo","nose","gone","solo",3,"","","",9],
+    ["boost-claws","claws","boost","blows","coast",2,"","","",3],
+    ["array-guide","guide","array","argue","diary",4,"","","",22],
+  ]
+},
+{
+  id: "day-089",
+  type: "3-5-5",
+  totalDifficulty: 20,
+  maxDifficulty: 7,
+  puzzles: [
+    ["cap-lie","cap","lie","alp","ice",2,"","","",7],
+    ["agree-short","agree","short","great","horse",2,"","","",6],
+    ["crash-mules","mules","crash","clues","marsh",2,"","","",7],
+  ]
+},
+{
+  id: "day-090",
+  type: "3-5-5",
+  totalDifficulty: 27,
+  maxDifficulty: 21,
+  puzzles: [
+    ["bad-buy","bad","buy","bud","bay",1,"","","",0],
+    ["alley-bears","alley","bears","belly","areas",2,"","","",6],
+    ["giant-sense","giant","sense","genes","stain",3,"","","",21],
+  ]
+},
+{
+  id: "day-091",
+  type: "4-4-5",
+  totalDifficulty: 31,
+  maxDifficulty: 28,
+  puzzles: [
+    ["fans-nude","nude","fans","nuns","fade",2,"","","",1],
+    ["bait-sold","bait","sold","bolt","said",2,"","","",2],
+    ["theft-thief","thief","theft","teeth","fifth",4,"","","",28],
+  ]
+},
+{
+  id: "day-092",
+  type: "4-4-5",
+  totalDifficulty: 45,
+  maxDifficulty: 21,
+  puzzles: [
+    ["milk-nose","milk","nose","link","some",3,"leon","skim","",8],
+    ["less-soft","soft","less","self","toss",3,"","","",21],
+    ["cider-space","space","cider","speed","circa",4,"","","",16],
+  ]
+},
+{
+  id: "day-093",
+  type: "4-4-5",
+  totalDifficulty: 34,
+  maxDifficulty: 25,
+  puzzles: [
+    ["dewy-nuts","dewy","nuts","duty","news",2,"","","",2],
+    ["math-wade","math","wade","mead","what",2,"","","",7],
+    ["gangs-taupe","taupe","gangs","gauge","pants",4,"","","",25],
+  ]
+},
+{
+  id: "day-094",
+  type: "4-4-5",
+  totalDifficulty: 23,
+  maxDifficulty: 13,
+  puzzles: [
+    ["bang-kiss","bang","kiss","bass","king",2,"","","",1],
+    ["drum-look","drum","look","lurk","doom",3,"","","",9],
+    ["radio-spire","spire","radio","aides","prior",4,"","","",13],
+  ]
+},
+{
+  id: "day-095",
+  type: "3-4-5",
+  totalDifficulty: 50,
+  maxDifficulty: 22,
+  puzzles: [
+    ["bra-cup","bra","cup","arc","pub",3,"","","",9],
+    ["page-rich","rich","page","gear","chip",3,"","","",19],
+    ["lemon-thank","lemon","thank","month","ankle",4,"","","",22],
+  ]
+},
+{
+  id: "day-096",
+  type: "4-4-5",
+  totalDifficulty: 42,
+  maxDifficulty: 18,
+  puzzles: [
+    ["hero-nude","nude","hero","hour","need",2,"","","",6],
+    ["ties-wave","wave","ties","east","view",3,"","","",18],
+    ["niche-viola","viola","niche","china","olive",3,"","","",18],
+  ]
+},
+{
+  id: "day-097",
+  type: "3-4-5",
+  totalDifficulty: 43,
+  maxDifficulty: 22,
+  puzzles: [
+    ["art-gem","gem","art","arm","get",1,"","","",0],
+    ["good-loss","good","loss","dogs","solo",3,"","","",21],
+    ["femur-fetal","fetal","femur","frame","flute",4,"","","",22],
+  ]
+},
+{
+  id: "day-098",
+  type: "4-5-5",
+  totalDifficulty: 35,
+  maxDifficulty: 22,
+  puzzles: [
+    ["drew-slow","drew","slow","lewd","rows",2,"","","",8],
+    ["marry-stone","marry","stone","mayor","stern",2,"","","",5],
+    ["class-talks","class","talks","salts","slack",3,"","","",22],
+  ]
+},
+{
+  id: "day-099",
+  type: "4-4-5",
+  totalDifficulty: 41,
+  maxDifficulty: 18,
+  puzzles: [
+    ["ache-seat","seat","ache","chat","ease",2,"","","",7],
+    ["soda-thin","soda","thin","dash","into",3,"","","",18],
+    ["human-lever","human","lever","lemur","haven",4,"","","",16],
+  ]
+},
+{
+  id: "day-100",
+  type: "4-4-5",
+  totalDifficulty: 56,
+  maxDifficulty: 26,
+  puzzles: [
+    ["damn-like","like","damn","made","kiln",3,"","","",8],
+    ["mean-spot","mean","spot","tamp","nose",4,"","","",22],
+    ["bride-mercy","mercy","bride","crime","derby",4,"","","",26],
+  ]
+},
+{
+  id: "day-101",
+  type: "3-4-5",
+  totalDifficulty: 48,
+  maxDifficulty: 33,
+  puzzles: [
+    ["his-two","his","two","its","who",2,"","","",7],
+    ["ally-spot","spot","ally","lost","play",2,"","","",8],
+    ["dance-tired","dance","tired","dried","enact",4,"","","",33],
+  ]
+},
+{
+  id: "day-102",
+  type: "4-4-5",
+  totalDifficulty: 42,
+  maxDifficulty: 27,
+  puzzles: [
+    ["calm-flip","calm","flip","clap","film",2,"","","",6],
+    ["guru-post","guru","post","guts","pour",3,"","","",9],
+    ["flats-sword","flats","sword","dwarf","slots",4,"","","",27],
+  ]
+},
+{
+  id: "day-103",
+  type: "4-4-5",
+  totalDifficulty: 36,
+  maxDifficulty: 21,
+  puzzles: [
+    ["beat-whip","whip","beat","bath","wipe",2,"","","",7],
+    ["cuss-male","cuss","male","lace","sums",3,"","","",8],
+    ["frost-solar","solar","frost","flora","sorts",3,"","","",21],
+  ]
+},
+{
+  id: "day-104",
+  type: "3-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 23,
+  puzzles: [
+    ["ick-odd","ick","odd","doc","kid",2,"","","",9],
+    ["done-soul","soul","done","loud","eons",3,"","","",23],
+    ["birds-broke","broke","birds","brisk","bored",3,"","","",19],
+  ]
+},
+{
+  id: "day-105",
+  type: "4-5-5",
+  totalDifficulty: 33,
+  maxDifficulty: 19,
+  puzzles: [
+    ["beds-envy","beds","envy","bevy","ends",2,"","","",1],
+    ["blues-scale","blues","scale","clubs","lease",4,"","","",13],
+    ["hello-paste","paste","hello","holes","petal",3,"","","",19],
+  ]
+},
+{
+  id: "day-106",
+  type: "4-4-5",
+  totalDifficulty: 46,
+  maxDifficulty: 25,
+  puzzles: [
+    ["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
+    ["rich-town","rich","town","corn","with",4,"","","",13],
+    ["plush-sleep","plush","sleep","helps","pulse",4,"","","",25],
+  ]
+},
+{
+  id: "day-107",
+  type: "4-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 29,
+  puzzles: [
+    ["bear-heir","bear","heir","bare","hire",1,"","","",3],
+    ["sung-what","sung","what","thaw","guns",2,"","","",19],
+    ["finer-gifts","finer","gifts","stiff","reign",4,"","","",29],
+  ]
+},
+{
+  id: "day-108",
+  type: "4-4-5",
+  totalDifficulty: 48,
+  maxDifficulty: 20,
+  puzzles: [
+    ["mint-uses","mint","uses","mess","unit",2,"","","",8],
+    ["real-sofa","real","sofa","fare","also",4,"","","",20],
+    ["fresh-slate","fresh","slate","shelf","tears",4,"","","",20],
+  ]
+},
+{
+  id: "day-109",
+  type: "4-5-5",
+  totalDifficulty: 46,
+  maxDifficulty: 28,
+  puzzles: [
+    ["flip-girl","girl","flip","grip","fill",2,"","","",6],
+    ["blood-peaks","blood","peaks","baked","pools",3,"","","",12],
+    ["exact-psalm","exact","psalm","latex","camps",4,"","","",28],
+  ]
+},
+{
+  id: "day-110",
+  type: "4-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 22,
+  puzzles: [
+    ["mint-opal","opal","mint","into","palm",2,"","","",7],
+    ["chef-skin","chef","skin","fish","neck",4,"","","",22],
+    ["clips-viral","viral","clips","crisp","villa",4,"","","",22],
+  ]
+},
+{
+  id: "day-111",
+  type: "4-4-5",
+  totalDifficulty: 54,
+  maxDifficulty: 23,
+  puzzles: [
+    ["mole-safe","safe","mole","lose","fame",3,"","","",8],
+    ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
+    ["argue-later","argue","later","eager","ultra",3,"","","",23],
+  ]
+},
+{
+  id: "day-112",
+  type: "4-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 23,
+  puzzles: [
+    ["cave-link","cave","link","vale","nick",3,"","","",8],
+    ["deep-when","when","deep","phew","need",3,"","","",23],
+    ["ocean-parts","ocean","parts","acorn","tapes",3,"","","",20],
+  ]
+},
+{
+  id: "day-113",
+  type: "4-4-5",
+  totalDifficulty: 46,
+  maxDifficulty: 25,
+  puzzles: [
+    ["ants-pigs","ants","pigs","sang","spit",2,"","","",8],
+    ["cave-kite","kite","cave","take","vice",3,"","","",13],
+    ["goats-sense","sense","goats","tease","songs",4,"","","",25],
+  ]
+},
+{
+  id: "day-114",
+  type: "4-4-5",
+  totalDifficulty: 38,
+  maxDifficulty: 24,
+  puzzles: [
+    ["free-trim","free","trim","fire","term",2,"","","",5],
+    ["best-cafe","best","cafe","beef","cats",3,"","","",9],
+    ["disco-elect","disco","elect","cited","close",5,"","","",24],
+  ]
+},
+{
+  id: "day-115",
+  type: "4-4-5",
+  totalDifficulty: 64,
+  maxDifficulty: 33,
+  puzzles: [
+    ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
+    ["live-rail","live","rail","liar","evil",3,"","","",19],
+    ["magic-there","magic","there","cream","eight",6,"","","",33],
+  ]
+},
+{
+  id: "day-116",
+  type: "3-4-5",
+  totalDifficulty: 39,
+  maxDifficulty: 15,
+  puzzles: [
+    ["eon-rid","eon","rid","die","nor",3,"","","",9],
+    ["pest-snow","snow","pest","step","owns",2,"","","",15],
+    ["snide-title","snide","title","inlet","tides",4,"","","",15],
+  ]
+},
+{
+  id: "day-117",
+  type: "4-4-5",
+  totalDifficulty: 54,
+  maxDifficulty: 23,
+  puzzles: [
+    ["frog-walk","frog","walk","flag","work",3,"","","",9],
+    ["lots-plop","plop","lots","poll","stop",4,"","","",23],
+    ["money-verge","money","verge","enemy","grove",4,"","","",22],
+  ]
+},
+{
+  id: "day-118",
+  type: "4-4-5",
+  totalDifficulty: 35,
+  maxDifficulty: 14,
+  puzzles: [
+    ["dice-lord","dice","lord","cold","ride",3,"","","",9],
+    ["lard-time","lard","time","mild","rate",4,"","","",12],
+    ["greet-learn","greet","learn","genre","later",3,"","","",14],
+  ]
+},
+{
+  id: "day-119",
+  type: "3-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 23,
+  puzzles: [
+    ["die-ram","ram","die","ear","mid",3,"","","",10],
+    ["flag-lion","lion","flag","golf","nail",4,"","","",23],
+    ["drift-house","drift","house","fried","south",3,"","","",22],
+  ]
+},
+{
+  id: "day-120",
+  type: "4-4-5",
+  totalDifficulty: 53,
+  maxDifficulty: 25,
+  puzzles: [
+    ["crab-rule","crab","rule","club","rare",3,"","","",9],
+    ["rats-snip","snip","rats","pins","star",3,"","","",19],
+    ["error-thyme","thyme","error","merry","other",4,"","","",25],
+  ]
+},
+{
+  id: "day-121",
+  type: "4-4-5",
+  totalDifficulty: 64,
+  maxDifficulty: 29,
+  puzzles: [
+    ["gods-pier","gods","pier","gird","pose",3,"","","",9],
+    ["pear-toss","pear","toss","rest","soap",4,"","","",26],
+    ["hedge-stiff","stiff","hedge","fifth","edges",4,"","","",29],
+  ]
+},
+{
+  id: "day-122",
+  type: "3-5-5",
+  totalDifficulty: 42,
+  maxDifficulty: 26,
+  puzzles: [
+    ["cop-try","try","cop","cry","top",1,"","","",0],
+    ["nifty-tasks","nifty","tasks","fatty","sinks",4,"","","",16],
+    ["boost-surge","surge","boost","sober","gusto",5,"","","",26],
+  ]
+},
+{
+  id: "day-123",
+  type: "3-5-5",
+  totalDifficulty: 56,
+  maxDifficulty: 26,
+  puzzles: [
+    ["guy-web","web","guy","bug","yew",3,"","","",10],
+    ["leads-raven","raven","leads","nerve","salad",3,"","","",20],
+    ["horse-theft","horse","theft","forth","sheet",4,"","","",26],
+  ]
+},
+{
+  id: "day-124",
+  type: "3-5-5",
+  totalDifficulty: 69,
+  maxDifficulty: 33,
+  puzzles: [
+    ["eye-tax","eye","tax","axe","yet",2,"","","",8],
+    ["atlas-sheep","sheep","atlas","phase","steal",4,"","","",28],
+    ["cutie-short","short","cutie","tours","ethic",4,"","","",33],
+  ]
+},
+{
+  id: "day-125",
+  type: "4-4-5",
+  totalDifficulty: 67,
+  maxDifficulty: 32,
+  puzzles: [
+    ["area-hire","area","hire","aria","here",3,"","","",9],
+    ["half-lice","half","lice","fill","each",4,"","","",26],
+    ["plots-totem","totem","plots","motto","slept",5,"","","",32],
+  ]
+},
+{
+  id: "day-126",
+  type: "4-4-5",
+  totalDifficulty: 52,
+  maxDifficulty: 22,
+  puzzles: [
+    ["amen-vote","vote","amen","mate","oven",3,"","","",9],
+    ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
+    ["march-peach","peach","march","charm","cheap",3,"","","",21],
+  ]
+},
+{
+  id: "day-127",
+  type: "4-4-5",
+  totalDifficulty: 65,
+  maxDifficulty: 29,
+  puzzles: [
+    ["atom-evil","evil","atom","oval","item",4,"","","",13],
+    ["neon-wolf","neon","wolf","flew","noon",4,"","","",23],
+    ["brush-tooth","tooth","brush","shout","throb",5,"","","",29],
+  ]
+},
+{
+  id: "day-128",
+  type: "3-5-5",
+  totalDifficulty: 75,
+  maxDifficulty: 34,
+  puzzles: [
+    ["dye-sad","dye","sad","add","yes",2,"","","",8],
+    ["bolts-shear","shear","bolts","rehab","slots",4,"","","",33],
+    ["based-sonic","sonic","based","cabin","doses",5,"","","",34],
+  ]
+},
+{
+  id: "day-129",
+  type: "4-4-5",
+  totalDifficulty: 53,
+  maxDifficulty: 23,
+  puzzles: [
+    ["fete-slip","slip","fete","step","file",3,"","","",9],
+    ["deep-rent","deep","rent","peer","tend",3,"","","",23],
+    ["plant-spare","spare","plant","strap","penal",4,"","","",21],
+  ]
+},
+{
+  id: "day-130",
+  type: "3-4-5",
+  totalDifficulty: 51,
+  maxDifficulty: 29,
+  puzzles: [
+    ["ion-war","ion","war","air","own",2,"","","",7],
+    ["neat-sums","neat","sums","mess","aunt",3,"","","",15],
+    ["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
+  ]
+},
+{
+  id: "day-131",
+  type: "4-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 23,
+  puzzles: [
+    ["mode-sofa","sofa","mode","does","foam",3,"","","",10],
+    ["loop-rain","rain","loop","nail","poor",3,"","","",23],
+    ["alarm-devil","alarm","devil","armed","villa",4,"","","",22],
+  ]
+},
+{
+  id: "day-132",
+  type: "3-4-5",
+  totalDifficulty: 38,
+  maxDifficulty: 22,
+  puzzles: [
+    ["age-rap","rap","age","are","gap",2,"","","",7],
+    ["bond-slow","slow","bond","bold","snow",3,"","","",9],
+    ["grape-prune","grape","prune","upper","anger",3,"","","",22],
+  ]
+},
+{
+  id: "day-133",
+  type: "4-4-5",
+  totalDifficulty: 66,
+  maxDifficulty: 24,
+  puzzles: [
+    ["meat-prod","prod","meat","drop","team",2,"","","",19],
+    ["dash-tool","tool","dash","hood","last",4,"","","",23],
+    ["arise-spoon","spoon","arise","piano","roses",4,"","","",24],
+  ]
+},
+{
+  id: "day-134",
+  type: "3-5-5",
+  totalDifficulty: 45,
+  maxDifficulty: 25,
+  puzzles: [
+    ["fib-wet","wet","fib","web","fit",1,"","","",0],
+    ["plate-speed","plate","speed","pedal","steep",4,"","","",20],
+    ["mouse-trust","trust","mouse","stout","serum",4,"","","",25],
+  ]
+},
+{
+  id: "day-135",
+  type: "4-4-5",
+  totalDifficulty: 50,
+  maxDifficulty: 21,
+  puzzles: [
+    ["eats-hawk","hawk","eats","take","wash",3,"","","",9],
+    ["nude-yeti","nude","yeti","unit","eyed",4,"","","",21],
+    ["hotel-tasks","hotel","tasks","stalk","those",3,"","","",20],
+  ]
+},
+{
+  id: "day-136",
+  type: "3-5-5",
+  totalDifficulty: 48,
+  maxDifficulty: 21,
+  puzzles: [
+    ["are-hog","hog","are","ago","her",2,"","","",9],
+    ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
+    ["never-sober","never","sober","verse","borne",4,"","","",21],
+  ]
+},
+{
+  id: "day-137",
+  type: "3-5-5",
+  totalDifficulty: 46,
+  maxDifficulty: 22,
+  puzzles: [
+    ["awe-gas","awe","gas","age","was",2,"","","",7],
+    ["crane-spine","crane","spine","pecan","resin",3,"","","",17],
+    ["novel-short","short","novel","thorn","loves",3,"","","",22],
+  ]
+},
+{
+  id: "day-138",
+  type: "3-5-5",
+  totalDifficulty: 48,
+  maxDifficulty: 21,
+  puzzles: [
+    ["dub-sir","dub","sir","bus","rid",3,"","","",9],
+    ["angel-carol","angel","carol","along","clear",3,"","","",18],
+    ["space-world","space","world","crowd","lapse",4,"","","",21],
+  ]
+},
+{
+  id: "day-139",
+  type: "4-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 21,
+  puzzles: [
+    ["rays-tofu","tofu","rays","fast","your",4,"","","",15],
+    ["love-wish","love","wish","veil","show",3,"","","",19],
+    ["alien-chess","alien","chess","seals","niche",4,"","","cannot be reversed",21],
+  ]
+},
+{
+  id: "day-140",
+  type: "3-4-5",
+  totalDifficulty: 39,
+  maxDifficulty: 17,
+  puzzles: [
+    ["tip-ups","tip","ups","pup","its",2,"","","",7],
+    ["gosh-pipe","gosh","pipe","pope","sigh",3,"","","",15],
+    ["comes-tenth","tenth","comes","meets","notch",4,"","","",17],
+  ]
+},
+{
+  id: "day-141",
+  type: "3-5-5",
+  totalDifficulty: 32,
+  maxDifficulty: 18,
+  puzzles: [
+    ["but-cow","cow","but","bow","cut",1,"","","",0],
+    ["gnome-raven","gnome","raven","among","never",4,"","","",14],
+    ["canoe-rally","canoe","rally","clean","royal",3,"","","",18],
+  ]
+},
+{
+  id: "day-142",
+  type: "3-5-5",
+  totalDifficulty: 55,
+  maxDifficulty: 25,
+  puzzles: [
+    ["ran-you","you","ran","our","any",2,"","","",8],
+    ["poles-trace","trace","poles","elope","carts",4,"","","",22],
+    ["blame-dream","blame","dream","amber","medal",4,"","","",25],
+  ]
+},
+{
+  id: "day-143",
+  type: "4-4-5",
+  totalDifficulty: 60,
+  maxDifficulty: 26,
+  puzzles: [
+    ["grab-milk","grab","milk","glib","mark",3,"","","",9],
+    ["grow-load","load","grow","drag","wool",4,"","","",26],
+    ["frost-place","frost","place","craft","slope",4,"","","",25],
+  ]
+},
+{
+  id: "day-144",
+  type: "3-5-5",
+  totalDifficulty: 54,
+  maxDifficulty: 25,
+  puzzles: [
+    ["bed-one","bed","one","ode","ben",2,"","","",9],
+    ["carol-sushi","sushi","carol","chair","souls",4,"","","",20],
+    ["solid-tiger","solid","tiger","roles","digit",4,"","","",25],
+  ]
+},
+{
+  id: "day-145",
+  type: "4-4-5",
+  totalDifficulty: 61,
+  maxDifficulty: 26,
+  puzzles: [
+    ["fell-poke","poke","fell","folk","peel",3,"","","",12],
+    ["most-show","show","most","toss","whom",3,"","","",23],
+    ["opera-waste","opera","waste","aware","poets",5,"","","",26],
+  ]
+},
+{
+  id: "day-146",
+  type: "3-4-5",
+  totalDifficulty: 39,
+  maxDifficulty: 20,
+  puzzles: [
+    ["new-old","old","new","end","low",2,"","","",7],
+    ["load-skis","load","skis","idol","asks",3,"","","",20],
+    ["dared-viper","viper","dared","paved","rider",4,"","","",12],
+  ]
+},
+{
+  id: "day-147",
+  type: "3-4-5",
+  totalDifficulty: 61,
+  maxDifficulty: 35,
+  puzzles: [
+    ["ode-sun","ode","sun","don","use",2,"","","",7],
+    ["meat-tuna","tuna","meat","aunt","team",2,"","","",19],
+    ["pasta-smell","pasta","smell","ample","lasts",5,"","","",35],
+  ]
+},
+{
+  id: "day-148",
+  type: "3-5-5",
+  totalDifficulty: 10,
+  maxDifficulty: 8,
+  puzzles: [
+    ["big-max","big","max","bag","mix",1,"","","",1],
+    ["chase-mount","mount","chase","chant","mouse",2,"","","",1],
+    ["share-towel","share","towel","shale","tower",3,"","","",8],
+  ]
+},
+{
+  id: "day-149",
+  type: "4-4-5",
+  totalDifficulty: 30,
+  maxDifficulty: 22,
+  puzzles: [
+    ["heel-ploy","ploy","heel","holy","peel",2,"","","cannot be reversed",8],
+    ["glee-sins","glee","sins","else","sign",3,"","","",22],
+    ["booth-class","class","booth","boots","clash",1,"","","",0],
+  ]
+},
+{
+  id: "day-150",
+  type: "3-4-5",
+  totalDifficulty: 10,
+  maxDifficulty: 9,
+  puzzles: [
+    ["cup-lot","cup","lot","lop","cut",1,"","","",0],
+    ["fade-sick","sick","fade","cafe","disk",3,"","","",9],
+    ["cling-goose","goose","cling","close","going",2,"","","",1],
+  ]
+},
+{
+  id: "day-151",
+  type: "4-4-5",
+  totalDifficulty: 39,
+  maxDifficulty: 26,
+  puzzles: [
+    ["look-true","look","true","lure","took",2,"","","",8],
+    ["lake-slim","lake","slim","elks","mail",4,"","","",26],
+    ["prism-reset","prism","reset","prime","rests",2,"","","",5],
+  ]
+},
+{
+  id: "day-152",
+  type: "4-5-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["plum-wars","plum","wars","plus","warm",1,"","","",0],
+    ["haute-rolls","haute","rolls","halls","route",2,"","","",1],
+    ["great-quote","great","quote","greet","quota",3,"","","",8],
+  ]
+},
+{
+  id: "day-153",
+  type: "3-5-5",
+  totalDifficulty: 23,
+  maxDifficulty: 14,
+  puzzles: [
+    ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
+    ["nylon-purse","nylon","purse","pylon","nurse",1,"","","",0],
+    ["forms-trend","forms","trend","frond","terms",3,"","","",9],
+  ]
+},
+{
+  id: "day-154",
+  type: "4-4-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["date-fear","fear","date","fate","dear",1,"","","",0],
+    ["flat-mood","flat","mood","malt","food",2,"","","",8],
+    ["steel-whiff","whiff","steel","stiff","wheel",2,"","","cannot be reversed",1],
+  ]
+},
+{
+  id: "day-155",
+  type: "4-5-5",
+  totalDifficulty: 19,
+  maxDifficulty: 9,
+  puzzles: [
+    ["most-open","most","open","omen","post",3,"","","",9],
+    ["alien-wings","alien","wings","align","wines",1,"","","",1],
+    ["firms-greed","greed","firms","germs","fried",3,"","","",9],
+  ]
+},
+{
+  id: "day-156",
+  type: "4-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["ears-seal","seal","ears","earl","seas",1,"","","",0],
+    ["seem-true","seem","true","teem","sure",2,"","","",8],
+    ["scent-waste","waste","scent","scene","watts",3,"","","",8],
+  ]
+},
+{
+  id: "day-157",
+  type: "3-5-5",
+  totalDifficulty: 23,
+  maxDifficulty: 14,
+  puzzles: [
+    ["eel-win","eel","win","lie","new",3,"","","",14],
+    ["donor-tells","donor","tells","dolls","tenor",2,"","","",1],
+    ["queen-spill","queen","spill","quell","spine",3,"","","",8],
+  ]
+},
+{
+  id: "day-158",
+  type: "3-4-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["box-law","box","law","lax","bow",1,"","","",0],
+    ["logs-sold","sold","logs","loss","gold",3,"","","",8],
+    ["await-trash","await","trash","awash","trait",2,"","","",1],
+  ]
+},
+{
+  id: "day-159",
+  type: "4-4-5",
+  totalDifficulty: 32,
+  maxDifficulty: 22,
+  puzzles: [
+    ["free-tier","free","tier","fire","tree",2,"","","cannot be reversed",9],
+    ["warp-yard","warp","yard","draw","pray",4,"","","",22],
+    ["banks-local","local","banks","locks","banal",2,"","","",1],
+  ]
+},
+{
+  id: "day-160",
+  type: "4-4-5",
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["oath-pink","pink","oath","oink","path",1,"","","",0],
+    ["bulb-cook","bulb","cook","book","club",2,"","","cannot be reversed",8],
+    ["patch-stiff","stiff","patch","pitch","staff",3,"","","",8],
+  ]
+},
+{
+  id: "day-161",
+  type: "3-4-5",
+  totalDifficulty: 33,
+  maxDifficulty: 23,
+  puzzles: [
+    ["not-yet","not","yet","ten","toy",3,"","","",9],
+    ["deal-kink","kink","deal","kind","leak",3,"","","cannot be reversed",23],
+    ["clamp-sheep","clamp","sheep","champ","sleep",1,"","","",1],
+  ]
+},
+{
+  id: "day-162",
+  type: "3-4-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["bad-dye","dye","bad","bye","dad",1,"","","",0],
+    ["free-weed","free","weed","feed","were",2,"","","cannot be reversed",8],
+    ["lodge-river","river","lodge","lover","ridge",2,"","","",1],
+  ]
+},
+{
+  id: "day-163",
+  type: "4-4-5",
+  totalDifficulty: 56,
+  maxDifficulty: 25,
+  puzzles: [
+    ["dyes-keep","dyes","keep","deep","keys",2,"","","cannot be reversed",8],
+    ["drum-good","good","drum","drug","mood",4,"","","",23],
+    ["kings-spear","kings","spear","rings","speak",4,"","","",25],
+  ]
+},
+{
+  id: "day-164",
+  type: "4-4-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["paid-user","paid","user","pair","used",1,"","","",0],
+    ["glue-roof","glue","roof","goof","rule",2,"","","",8],
+    ["fatty-kings","fatty","kings","fangs","kitty",2,"","","",1],
+  ]
+},
+{
+  id: "day-165",
+  type: "3-4-5",
+  totalDifficulty: 35,
+  maxDifficulty: 22,
+  puzzles: [
+    ["art-can","art","can","act","ran",2,"","","",7],
+    ["news-teen","teen","news","seen","newt",3,"","","",22],
+    ["catch-sweep","catch","sweep","cache","swept",2,"","","",6],
+  ]
+},
+{
+  id: "day-166",
+  type: "4-4-5",
+  totalDifficulty: 11,
+  maxDifficulty: 8,
+  puzzles: [
+    ["next-tone","next","tone","text","none",1,"","","",0],
+    ["maid-raid","maid","raid","arid","amid",1,"","","",3],
+    ["ample-panic","ample","panic","manic","apple",3,"","","",8],
+  ]
+},
+{
+  id: "day-167",
+  type: "4-4-5",
+  totalDifficulty: 41,
+  maxDifficulty: 23,
+  puzzles: [
+    ["cash-gift","cash","gift","sigh","fact",4,"","","",13],
+    ["nets-seal","seal","nets","lean","sets",3,"sean","lets","",23],
+    ["fears-motto","motto","fears","feast","motor",2,"","","",5],
+  ]
+},
+{
+  id: "day-168",
+  type: "4-4-5",
+  totalDifficulty: 14,
+  maxDifficulty: 8,
+  puzzles: [
+    ["dump-jeep","dump","jeep","deep","jump",1,"","","",0],
+    ["feel-grit","grit","feel","feet","girl",2,"","","cannot be reversed",6],
+    ["modes-theme","theme","modes","modem","these",3,"","","",8],
+  ]
+},
+{
+  id: "day-169",
+  type: "4-4-5",
+  totalDifficulty: 47,
+  maxDifficulty: 23,
+  puzzles: [
+    ["mass-step","mass","step","stem","pass",4,"","","",23],
+    ["pays-stew","stew","pays","step","ways",4,"","","",23],
+    ["clear-swamp","clear","swamp","swear","clamp",2,"","","",1],
+  ]
+},
+{
+  id: "day-170",
+  type: "4-4-5",
+  totalDifficulty: 25,
+  maxDifficulty: 11,
+  puzzles: [
+    ["seek-term","seek","term","trek","seem",2,"","","",6],
+    ["flat-hood","flat","hood","halt","food",2,"","","",8],
+    ["queue-vegan","vegan","queue","queen","vague",4,"","","",11],
+  ]
+},
+{
+  id: "day-171",
+  type: "3-4-5",
+  totalDifficulty: 28,
+  maxDifficulty: 14,
+  puzzles: [
+    ["pet-soy","soy","pet","top","yes",3,"","","",14],
+    ["gist-safe","safe","gist","sage","fist",4,"","","",13],
+    ["hatch-wings","hatch","wings","hangs","witch",2,"","","",1],
+  ]
+},
+{
+  id: "day-172",
+  type: "3-4-5",
+  totalDifficulty: 18,
+  maxDifficulty: 10,
+  puzzles: [
+    ["see-via","see","via","vie","sea",1,"","","",0],
+    ["been-true","true","been","beer","tune",3,"","","",10],
+    ["brake-force","brake","force","farce","broke",3,"","","",8],
+  ]
+},
+{
+  id: "day-173",
+  type: "4-4-5",
+  totalDifficulty: 35,
+  maxDifficulty: 19,
+  puzzles: [
+    ["blue-reef","blue","reef","beef","rule",2,"","","",8],
+    ["chai-lens","chai","lens","inch","sale",3,"","","cannot be reversed",19],
+    ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
+  ]
+},
+{
+  id: "day-174",
+  type: "4-4-5",
+  totalDifficulty: 19,
+  maxDifficulty: 9,
+  puzzles: [
+    ["acid-make","make","acid","cake","amid",3,"","","",9],
+    ["oral-vows","oral","vows","rows","oval",3,"","","",9],
+    ["droid-valve","droid","valve","drove","valid",2,"","","cannot be reversed",1],
+  ]
+},
+{
+  id: "day-175",
+  type: "3-4-5",
+  totalDifficulty: 47,
+  maxDifficulty: 25,
+  puzzles: [
+    ["gas-hot","hot","gas","got","has",1,"","","",0],
+    ["melt-peak","melt","peak","kelp","team",3,"","","",22],
+    ["minds-steak","steak","minds","kinds","steam",4,"","","",25],
+  ]
+},
+{
+  id: "day-176",
+  type: "3-5-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["bet-jut","jut","bet","but","jet",1,"","","",0],
+    ["curry-weave","curry","weave","curve","weary",2,"","","",1],
+    ["clone-rises","clone","rises","close","risen",3,"","","",8],
+  ]
+},
+{
+  id: "day-177",
+  type: "4-4-5",
+  totalDifficulty: 55,
+  maxDifficulty: 24,
+  puzzles: [
+    ["bare-rule","bare","rule","lube","rare",3,"","","",8],
+    ["full-load","full","load","loaf","dull",4,"","","",23],
+    ["dying-guilt","dying","guilt","guild","tying",4,"","","",24],
+  ]
+},
+{
+  id: "day-178",
+  type: "4-5-5",
+  totalDifficulty: 46,
+  maxDifficulty: 23,
+  puzzles: [
+    ["real-tiny","real","tiny","lint","year",3,"","","",23],
+    ["bells-finch","finch","bells","bench","fills",2,"","","",1],
+    ["fight-troop","fight","troop","proof","tight",3,"","","",22],
+  ]
+},
+{
+  id: "day-179",
+  type: "4-4-5",
+  totalDifficulty: 42,
+  maxDifficulty: 22,
+  puzzles: [
+    ["show-tear","show","tear","rote","wash",3,"","","",19],
+    ["cell-shoe","cell","shoe","loch","else",4,"","","",22],
+    ["crush-flies","crush","flies","flush","cries",2,"","","",1],
+  ]
+},
+{
+  id: "day-180",
+  type: "3-5-5",
+  totalDifficulty: 9,
+  maxDifficulty: 8,
+  puzzles: [
+    ["fix-sly","sly","fix","fly","six",1,"","","",0],
+    ["blame-shock","shock","blame","block","shame",2,"","","",1],
+    ["cares-least","least","cares","carts","lease",3,"","","",8],
+  ]
+},
+{
+  id: "day-181",
+  type: "3-5-5",
+  totalDifficulty: 18,
+  maxDifficulty: 13,
+  puzzles: [
+    ["end-how","end","how","den","who",1,"","","",4],
+    ["offer-papal","papal","offer","paper","offal",2,"","","",1],
+    ["demon-water","water","demon","deter","woman",4,"","","",13],
+  ]
+},
+{
+  id: "day-182",
+  type: "3-5-5",
+  totalDifficulty: 34,
+  maxDifficulty: 26,
+  puzzles: [
+    ["hot-use","hot","use","out","she",2,"","","",7],
+    ["mince-prior","mince","prior","minor","price",2,"","","",1],
+    ["craft-forge","forge","craft","force","graft",4,"","","",26],
+  ]
+}
 
-const dailyTriplets = [
-  {
-    id: "day-001",
-    puzzles: [
-      ["old","new","end","low",2,"","",""],
-      ["wood","bark","book","ward",2,"","",""],
-      ["false","worth","flash","wrote",2,"","",""]
-    ]
-  },
-  {
-    id: "day-002",
-    puzzles: [
-      ["cab","wet","cat","web",1,"","",""],
-      ["glue","down","lung","owed",2,"","",""],
-      ["loyal","setup","alloy","upset",2,"","",""]
-    ]
-  },
-  {
-    id: "day-003",
-    puzzles: [
-      ["pony","bite","bone","pity",2,"","",""],
-      ["neon","wolf","flew","noon",4,"","",""],
-      ["class","booth","boots","clash",1,"","",""]
-    ]
-  },
-  {
-    id: "day-004",
-    puzzles: [
-      ["pro","was","asp","row",2,"","",""],
-      ["fish","calm","cash","film",2,"","",""],
-      ["honey","boost","ebony","shoot",2,"","",""]
-    ]
-  },
-  {
-    id: "day-005",
-    puzzles: [
-      ["flat","hood","halt","food",2,"","",""],
-      ["tool","dash","hood","last",4,"","",""],
-      ["catch","sweep","cache","swept",2,"","",""]
-    ]
-  },
-  {
-    id: "day-006",
-    puzzles: [
-      ["heat","gold","goat","held",2,"","",""],
-      ["prism","reset","prime","rests",2,"","",""],
-      ["right","paced","patch","ridge",3,"","",""]
-    ]
-  },
-  {
-    id: "day-007",
-    puzzles: [
-      ["slow","cord","crow","sold",2,"","",""],
-      ["mass","step","stem","pass",4,"","",""],
-      ["stark","drone","store","drank",2,"","",""]
-    ]
-  },
-  {
-    id: "day-008",
-    puzzles: [
-      ["art","can","act","ran",2,"","",""],
-      ["echo","plea","each","pole",2,"","",""],
-      ["green","chair","grain","cheer",2,"","",""]
-    ]
-  },
-  {
-    id: "day-009",
-    puzzles: [
-      ["sore","face","cafe","rose",2,"","",""],
-      ["lion","flag","golf","nail",4,"","",""],
-      ["short","frank","shark","front",2,"","",""]
-    ]
-  },
-  {
-    id: "day-010",
-    puzzles: [
-      ["sun","fix","fun","six",1,"","",""],
-      ["tank","clue","ante","luck",2,"","",""],
-      ["river","lodge","lover","ridge",2,"","",""]
-    ]
-  },
-  {
-    id: "day-011",
-    puzzles: [
-      ["sung","what","thaw","guns",2,"","",""],
-      ["cable","arson","scale","baron",2,"","",""],
-      ["waste","scent","scene","watts",3,"","",""]
-    ]
-  },
-  {
-    id: "day-012",
-    puzzles: [
-      ["bowl","keen","blow","knee",1,"","",""],
-      ["love","fits","five","lots",2,"","",""],
-      ["vocal","races","coral","caves",3,"","",""]
-    ]
-  },
-  {
-    id: "day-013",
-    puzzles: [
-      ["paid","user","pair","used",1,"","",""],
-      ["deep","gulf","feed","plug",4,"","",""],
-      ["droid","valve","drove","valid",2,"","","cannot be reversed"]
-    ]
-  },
-  {
-    id: "day-014",
-    puzzles: [
-      ["end","how","den","who",1,"","",""],
-      ["blue","reef","beef","rule",2,"","",""],
-      ["least","cares","carts","lease",3,"","",""]
-    ]
-  },
-  {
-    id: "day-015",
-    puzzles: [
-      ["city","tune","cute","tiny",2,"","",""],
-      ["vast","core","acts","over",3,"","",""],
-      ["forms","trend","frond","terms",3,"","",""]
-    ]
-  },
-  {
-    id: "day-016",
-    puzzles: [
-      ["try","cop","cry","top",1,"","",""],
-      ["mince","prior","minor","price",2,"","",""],
-      ["peril","noted","depot","liner",3,"","",""]
-    ]
-  },
-  {
-    id: "day-017",
-    puzzles: [
-      ["gold","mine","gone","mild",2,"","",""],
-      ["stew","pays","step","ways",4,"","",""],
-      ["pilot","shoes","piles","shoot",2,"","",""]
-    ]
-  },
-  {
-    id: "day-018",
-    puzzles: [
-      ["law","won","wan","low",1,"","",""],
-      ["loop","beat","boot","leap",2,"","",""],
-      ["shock","blame","block","shame",2,"","",""]
-    ]
-  },
-  {
-    id: "day-019",
-    puzzles: [
-      ["host","pact","chat","spot",2,"","",""],
-      ["swam","lets","laws","stem",3,"","",""],
-      ["raven","leads","nerve","salad",3,"","",""]
-    ]
-  },
-  {
-    id: "day-020",
-    puzzles: [
-      ["his","two","its","who",2,"","",""],
-      ["joke","salt","jolt","sake",2,"","",""],
-      ["spike","slain","likes","pains",2,"","",""]
-    ]
-  },
-  {
-    id: "day-021",
-    puzzles: [
-      ["next","tone","text","none",1,"","",""],
-      ["tilt","door","riot","told",4,"","","cannot be reversed"],
-      ["motto","fears","feast","motor",2,"","",""]
-    ]
-  },
-  {
-    id: "day-022",
-    puzzles: [
-      ["fawn","slim","film","swan",2,"","",""],
-      ["frog","walk","flag","work",3,"","",""],
-      ["drawn","ridge","grand","wider",3,"","",""]
-    ]
-  },
-  {
-    id: "day-023",
-    puzzles: [
-      ["oar","tag","ago","art",2,"","",""],
-      ["heal","pigs","leap","sigh",3,"","",""],
-      ["giant","sense","genes","stain",3,"","",""]
-    ]
-  },
-  {
-    id: "day-024",
-    puzzles: [
-      ["dye","bad","bye","dad",1,"","",""],
-      ["iris","debt","edit","ribs",2,"","",""],
-      ["snail","force","final","score",2,"","",""]
-    ]
-  },
-  {
-    id: "day-025",
-    puzzles: [
-      ["nude","hero","hour","need",2,"","",""],
-      ["life","zest","size","felt",4,"","",""],
-      ["colon","hands","canon","holds",2,"","",""]
-    ]
-  },
-  {
-    id: "day-026",
-    puzzles: [
-      ["east","wind","dawn","ties",3,"","",""],
-      ["lazy","once","clay","zone",2,"","",""],
-      ["money","verge","enemy","grove",4,"","",""]
-    ]
-  },
-  {
-    id: "day-027",
-    puzzles: [
-      ["see","via","vie","sea",1,"","",""],
-      ["glue","roof","goof","rule",2,"","",""],
-      ["outer","norms","tuner","rooms",3,"","",""]
-    ]
-  },
-  {
-    id: "day-028",
-    puzzles: [
-      ["bulb","cook","book","club",2,"","","cannot be reversed"],
-      ["milk","nose","link","some",3,"leon","skim",""],
-      ["frost","place","craft","slope",4,"","",""]
-    ]
-  },
-  {
-    id: "day-029",
-    puzzles: [
-      ["plan","wide","wind","plea",2,"","",""],
-      ["toast","price","tract","poise",2,"","",""],
-      ["share","towel","shale","tower",3,"","",""]
-    ]
-  },
-  {
-    id: "day-030",
-    puzzles: [
-      ["rain","loop","nail","poor",3,"","",""],
-      ["safe","date","deaf","seat",2,"","",""],
-      ["spill","chain","hills","panic",3,"spain","chill",""]
-    ]
-  },
-  {
-    id: "day-031",
-    puzzles: [
-      ["web","guy","bug","yew",3,"","",""],
-      ["bust","coup","cusp","bout",2,"","",""],
-      ["daily","scene","since","delay",2,"","",""]
-    ]
-  },
-  {
-    id: "day-032",
-    puzzles: [
-      ["gel","bow","log","web",3,"","",""],
-      ["race","mild","card","lime",3,"","",""],
-      ["guide","array","argue","diary",4,"","",""]
-    ]
-  },
-  {
-    id: "day-033",
-    puzzles: [
-      ["tuna","meat","aunt","team",2,"","",""],
-      ["warp","yard","draw","pray",4,"","",""],
-      ["local","banks","locks","banal",2,"","",""]
-    ]
-  },
-  {
-    id: "day-034",
-    puzzles: [
-      ["true","been","beer","tune",3,"","",""],
-      ["spot","ally","lost","play",2,"","",""],
-      ["glare","skies","eagle","risks",3,"","",""]
-    ]
-  },
-  {
-    id: "day-035",
-    puzzles: [
-      ["owns","silk","owls","sink",1,"","",""],
-      ["full","load","loaf","dull",4,"","",""],
-      ["goose","cling","close","going",2,"","",""]
-    ]
-  },
-  {
-    id: "day-036",
-    puzzles: [
-      ["seal","nets","lean","sets",3,"sean","lets",""],
-      ["test","iron","nets","trio",3,"","",""],
-      ["ocean","parts","acorn","tapes",3,"","",""]
-    ]
-  },
-  {
-    id: "day-037",
-    puzzles: [
-      ["bang","kiss","bass","king",2,"","",""],
-      ["cave","link","vale","nick",3,"","",""],
-      ["peach","march","charm","cheap",3,"","",""]
-    ]
-  },
-  {
-    id: "day-038",
-    puzzles: [
-      ["snap","cord","sand","crop",2,"","",""],
-      ["foul","peas","soup","leaf",4,"","",""],
-      ["finch","bells","bench","fills",2,"","",""]
-    ]
-  },
-  {
-    id: "day-039",
-    puzzles: [
-      ["bear","heir","bare","hire",1,"","",""],
-      ["real","sofa","fare","also",4,"","",""],
-      ["mount","chase","chant","mouse",2,"","",""]
-    ]
-  },
-  {
-    id: "day-040",
-    puzzles: [
-      ["jog","ate","ago","jet",2,"","",""],
-      ["poke","fell","folk","peel",3,"","",""],
-      ["gnome","raven","among","never",4,"","",""]
-    ]
-  },
-  {
-    id: "day-041",
-    puzzles: [
-      ["hike","were","heir","week",2,"","",""],
-      ["call","time","till","came",2,"","",""],
-      ["lower","digit","towel","rigid",3,"","",""]
-    ]
-  },
-  {
-    id: "day-042",
-    puzzles: [
-      ["old","dog","log","odd",2,"","",""],
-      ["soft","less","self","toss",3,"","",""],
-      ["naive","tests","taste","veins",4,"","","cannot be reversed"]
-    ]
-  },
-  {
-    id: "day-043",
-    puzzles: [
-      ["free","weed","feed","were",2,"","","cannot be reversed"],
-      ["gala","over","gave","oral",3,"","",""],
-      ["clasp","bored","blade","corps",3,"","",""]
-    ]
-  },
-  {
-    id: "day-044",
-    puzzles: [
-      ["nod","dad","and","odd",2,"","","cannot be reversed"],
-      ["talk","cage","gate","lack",3,"","",""],
-      ["space","world","crowd","lapse",4,"","",""]
-    ]
-  },
-  {
-    id: "day-045",
-    puzzles: [
-      ["moth","wire","more","with",2,"","",""],
-      ["mite","plan","mint","plea",2,"","",""],
-      ["grape","prune","upper","anger",3,"","",""]
-    ]
-  },
-  {
-    id: "day-046",
-    puzzles: [
-      ["ram","die","ear","mid",3,"","",""],
-      ["farm","trip","firm","trap",3,"","",""],
-      ["mules","crash","clues","marsh",2,"","",""]
-    ]
-  },
-  {
-    id: "day-047",
-    puzzles: [
-      ["vent","hate","even","that",2,"","",""],
-      ["lard","time","mild","rate",4,"","",""],
-      ["coins","fault","count","fails",2,"","",""]
-    ]
-  },
-  {
-    id: "day-048",
-    puzzles: [
-      ["cup","lot","lop","cut",1,"","",""],
-      ["doubt","needs","debut","nodes",2,"","",""],
-      ["agile","poles","eagle","spoil",3,"","",""]
-    ]
-  },
-  {
-    id: "day-049",
-    puzzles: [
-      ["huge","wart","wage","hurt",2,"","",""],
-      ["fire","sewn","wins","reef",3,"","",""],
-      ["solar","frost","flora","sorts",3,"","",""]
-    ]
-  },
-  {
-    id: "day-050",
-    puzzles: [
-      ["scan","mite","cans","item",1,"","",""],
-      ["safe","gist","sage","fist",4,"","",""],
-      ["brain","irony","robin","rainy",2,"","",""]
-    ]
-  },
-  {
-    id: "day-051",
-    puzzles: [
-      ["clot","bout","boot","cult",2,"","",""],
-      ["lack","toys","yolk","cats",4,"","",""],
-      ["papal","offer","paper","offal",2,"","",""]
-    ]
-  },
-  {
-    id: "day-052",
-    puzzles: [
-      ["maid","raid","arid","amid",1,"","",""],
-      ["load","grow","drag","wool",4,"","",""],
-      ["clear","swamp","swear","clamp",2,"","",""]
-    ]
-  },
-  {
-    id: "day-053",
-    puzzles: [
-      ["axe","art","ear","tax",2,"","",""],
-      ["black","lakes","bleak","lacks",2,"","",""],
-      ["donor","tells","dolls","tenor",2,"","",""]
-    ]
-  },
-  {
-    id: "day-054",
-    puzzles: [
-      ["mint","uses","mess","unit",2,"","",""],
-      ["data","town","toad","want",3,"","",""],
-      ["queen","spill","quell","spine",3,"","",""]
-    ]
-  },
-  {
-    id: "day-055",
-    puzzles: [
-      ["snow","pest","step","owns",2,"","",""],
-      ["rich","town","corn","with",4,"","",""],
-      ["crush","flies","flush","cries",2,"","",""]
-    ]
-  },
-  {
-    id: "day-056",
-    puzzles: [
-      ["pink","oath","oink","path",1,"","",""],
-      ["nude","yeti","unit","eyed",4,"","",""],
-      ["agree","short","great","horse",2,"","",""]
-    ]
-  },
-  {
-    id: "day-057",
-    puzzles: [
-      ["seek","term","trek","seem",2,"","",""],
-      ["dull","soda","dual","sold",2,"","",""],
-      ["moral","seeds","model","sears",3,"","",""]
-    ]
-  },
-  {
-    id: "day-058",
-    puzzles: [
-      ["lamb","duck","dumb","lack",2,"","",""],
-      ["pear","toss","rest","soap",4,"","",""],
-      ["spurt","shark","hurts","parks",2,"","",""]
-    ]
-  },
-  {
-    id: "day-059",
-    puzzles: [
-      ["wow","art","two","war",2,"","",""],
-      ["deep","rent","peer","tend",3,"","",""],
-      ["thief","theft","teeth","fifth",4,"","",""]
-    ]
-  },
-  {
-    id: "day-060",
-    puzzles: [
-      ["harp","epic","arch","pipe",2,"","",""],
-      ["evil","atom","oval","item",4,"","",""],
-      ["mango","waste","mates","wagon",2,"","",""]
-    ]
-  }
 ];
 
-const makePuzzle=([word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus])=>({word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus});
+const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty])=>({
+  id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty
+});
 const puzzles=puzzleRows.map(makePuzzle);
 const dailyPuzzles=dailyTriplets.map(day=>({...day,puzzles:day.puzzles.map(makePuzzle)}));
 let activePuzzles=puzzles;
