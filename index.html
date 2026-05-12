@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,253,244,.68)}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -2678,6 +2678,26 @@ const horizontalRows=[
 ["solve-stool-h2","solve","stool","loves","tools",2,"","","cannot be reversed",8,"h2"]
 ];
 
+const lockedPuzzleRows=[
+["loops-relay-L5","relay","loops","alloy","pores",4,"","","",21,"L5"],
+["salad-style-L2","style","salad","steal","sadly",3,"","","",9,"L2"],
+["creek-shade-L3","creek","shade","creed","shake",3,"","","",9,"L3"],
+["alone-bless-L5","bless","alone","seals","noble",3,"","","",18,"L5"],
+["lakes-spelt-L4","spelt","lakes","spell","takes",4,"","","",23,"L4"],
+["ships-trout-L3","trout","ships","shout","trips",2,"","","",1,"L3"],
+["firms-pride-L3","pride","firms","prism","fired",3,"","","",9,"L3"],
+["angel-stare-L3","angel","stare","anger","stale",3,"","","",9,"L3"],
+["blank-great-L2","blank","great","bleak","grant",2,"","","",2,"L2"],
+["snail-sword-L3","snail","sword","draws","lions",3,"","","",19,"L3"],
+["chest-grows-L5","chest","grows","ghost","crews",2,"","","",3,"L5"],
+["laser-olive-L3","laser","olive","loser","alive",3,"","","",9,"L3"],
+["blend-jolly-L5","blend","jolly","blond","jelly",3,"","","",9,"L5"],
+["comet-resin-L4","comet","resin","meter","sonic",4,"","","",14,"L4"],
+["gnome-raven-L3","gnome","raven","among","never",3,"","","",11,"L3"],
+["orbit-rated-L5","orbit","rated","trait","bored",2,"","","",9,"L5"],
+["piece-shard-L2","shard","piece","cheap","rides",3,"","","",19,"L2"]
+];
+
 const allWordsRows=[
 ["bucks-layer","layer","bucks","buyer","lacks",2,"","","",1,11,"backs|brace|clear|clues|cruel|cubes|early|laces|relay|scale|slack"],
 ["fluff-state","fluff","state","flute","staff",2,"","","",1,17,"false|fates|feast|feats|fetal|fetus|flats|fleas|fuels|least|slate|stale|steal|stuff|tales|taste|tufts"],
@@ -2693,6 +2713,7 @@ const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,rev
 });
 const puzzles=puzzleRows.map(makePuzzle);
 const horizontalPuzzles=horizontalRows.map(makePuzzle);
+const lockedPuzzles=lockedPuzzleRows.map(makePuzzle);
 const dailyPuzzles=dailyTriplets.map(day=>({...day,puzzles:day.puzzles.map(makePuzzle)}));
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
 let activePuzzles=puzzles;
@@ -2735,6 +2756,9 @@ const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(vis
 const tileSpan=t=>isHorizontalTile(t)?2:1;
 const puzzleVisualLength=()=>currentPuzzle()?.word1?.length||tiles.reduce((n,t)=>n+tileSpan(t),0);
 const isHorizontalPuzzle=p=>/^h\d+$/.test(String(p?.layout||""));
+const lockedIndexFromPuzzle=p=>{const m=String(p?.layout||"").match(/^L([1-5])$/);return m?Number(m[1])-1:null};
+const isLockedStartTile=t=>!!(t&&t.lockedFromStart);
+const playableTileCount=()=>tiles.filter(t=>!isLockedStartTile(t)).length||tiles.length;
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function normalizeStats(s){
@@ -2775,8 +2799,8 @@ function getAutoHintSaveState(){
   return {autoHintFilling,autoHintDelayRemainingMs:remaining,autoHintFillElapsedMs:fillElapsed};
 }
 function saveGameState(){if(isDailyMode()||isAllWordsMode())return;if(isNewMode()){saveNewModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
-function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped})}
-function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:!!st.locked,flipAnim:""})});if(next.length===tiles.length)tiles=next}
+function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,lockedFromStart:!!t.lockedFromStart,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped})}
+function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:isLockedStartTile(t)?true:!!st.locked,lockedFromStart:!!t.lockedFromStart,flipAnim:""})});if(next.length===tiles.length)tiles=next}
 function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
@@ -2935,6 +2959,17 @@ function setupPuzzle(opts={}){
     const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
     tiles=assignTargetSlots(base.map(t=>({...t,...mapById.get(t.id)})));
   }
+  const lockedIndex=lockedIndexFromPuzzle(p);
+  if(lockedIndex!==null&&!isHorizontalPuzzle(p)){
+    const lockedTile=tiles.find(t=>(t.targetIndex??t.startSlot)===lockedIndex);
+    if(lockedTile){
+      lockedTile.locked=true;
+      lockedTile.lockedFromStart=true;
+      lockedTile.targetSlot=lockedIndex;
+      if(!isHorizontalTile(lockedTile)&&lockedTile.top!==lockedTile.bottom)lockedTile.flipped=!!lockedTile.targetFlipped;
+    }
+    tiles=tiles.sort((a,b)=>(a.targetSlot??a.targetIndex??a.startSlot??0)-(b.targetSlot??b.targetIndex??b.startSlot??0));
+  }
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;solvedAnswerInverted=false;statsDetailsShown=false;shieldUsedThisLevel=false;
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
@@ -2973,8 +3008,8 @@ function isSolved(){const p=currentPuzzle(),w=currentWords();return(w.top===p.an
 function isBlockedProperNounSolution(){const p=currentPuzzle(),w=currentWords();return!!(p.blocked1&&p.blocked2&&((w.top===p.blocked1&&w.bottom===p.blocked2)||(w.top===p.blocked2&&w.bottom===p.blocked1)))}
 function getSingleStartWordMatch(){const p=currentPuzzle(),w=currentWords(),starts=[p.word1,p.word2];const matches=[w.top,w.bottom].filter(word=>starts.includes(word));return matches.length===1?matches[0]:null}
 function scoreByHintsRemaining(n){return SCORE_BY_HINTS_REMAINING[Math.max(0,Math.min(6,n))]??0}
-function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(currentPuzzle().word1.length)}
-function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,currentPuzzle().word1.length-hintsUsed))}
+function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(playableTileCount())}
+function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,playableTileCount()-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function isStreakMilestone(streak){
   const milestones=[5,10,15,20,30,40,50,75,100,125,150];
@@ -2984,7 +3019,7 @@ function getStreakBonus(streak){return isStreakMilestone(streak)?{label:`${strea
 function updateStatsForSolvedPuzzle(elapsedMs){
   stats.solvedCount++;
   stats.longestStreak=Math.max(stats.longestStreak,noHintStreak);
-  const plen=currentPuzzle().word1.length;
+  const plen=playableTileCount();
   if(plen<3||plen>5)return;
   const row=stats.byLength[plen];
   row.solved++;
@@ -2998,7 +3033,7 @@ function updateStatsForSolvedPuzzle(elapsedMs){
   }
 }
 function getAutoHintDelayForTileCount(n){return AUTO_HINT_DELAY_BY_UNLOCKED_TILES_MS[n]??null}
-function getSpeedBonusLimitMs(){return (getAutoHintDelayForTileCount(tiles.length)||0)*SPEED_BONUS_WINDOW_FACTOR}
+function getSpeedBonusLimitMs(){return (getAutoHintDelayForTileCount(playableTileCount())||0)*SPEED_BONUS_WINDOW_FACTOR}
 function roundToNearestFive(n){return Math.round(n/5)*5}
 function getActivePuzzleElapsedMs(){
   if(activePuzzleStartedAt===null)return activePuzzleElapsedMs;
@@ -3032,13 +3067,14 @@ function getAutoHintDelayMs(){
 }
 function getEfficiencyMoveLimit(){
   const minMoves=Number(currentPuzzle().minMoves);
+  const count=playableTileCount();
   if(!Number.isFinite(minMoves)||minMoves<=0)return null;
   if(minMoves===1)return 1;
-  if(tiles.length===3)return minMoves;
-  if(tiles.length===4)return minMoves+Math.floor(minMoves*.7)+1;
-  if(tiles.length===5)return minMoves+Math.floor(minMoves*1)+(minMoves>=3?2:1);
-  if(tiles.length===6)return minMoves+Math.floor(minMoves*1.75);
-  const factor=EFFICIENCY_ALLOWANCE_FACTOR_BY_LENGTH[tiles.length]??EFFICIENCY_ALLOWANCE_FACTOR_BY_LENGTH[6];
+  if(count===3)return minMoves;
+  if(count===4)return minMoves+Math.floor(minMoves*.7)+1;
+  if(count===5)return minMoves+Math.floor(minMoves*1)+(minMoves>=3?2:1);
+  if(count===6)return minMoves+Math.floor(minMoves*1.75);
+  const factor=EFFICIENCY_ALLOWANCE_FACTOR_BY_LENGTH[count]??EFFICIENCY_ALLOWANCE_FACTOR_BY_LENGTH[6];
   return minMoves+Math.floor(minMoves*factor);
 }
 function isEfficientSolve(){
@@ -3389,6 +3425,7 @@ function render(){
     if(showAllWords&&allWordsFlash.top)w.classList.add("aw-top-flash");
     if(showAllWords&&allWordsFlash.bottom)w.classList.add("aw-bottom-flash");
     if(t.locked)w.classList.add("locked");
+    if(isLockedStartTile(t)&&!solved&&!previewingStartWords)w.classList.add("locked-from-start");
     if(solved&&!previewingStartWords&&!showAllWords)w.classList.add("solved-tile");
     if(dragState?.tileId===t.id)w.classList.add("dragging");
     w.dataset.id=t.id;w.dataset.locked=(t.locked||horizontalMoveLocked(t))?"1":"0";w.innerHTML=makeTileHTML(t);
@@ -3700,7 +3737,7 @@ function resetToStartingWords(){
     .sort((a,b)=>(Number.isFinite(Number(a.startSlot))?Number(a.startSlot):Number(a.targetSlot??a.targetIndex??0))-(Number.isFinite(Number(b.startSlot))?Number(b.startSlot):Number(b.targetSlot??b.targetIndex??0)))
     .map(t=>isHorizontalTile(t)
       ? {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,lockedTop:false,lockedBottom:false,locked:false}
-      : {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,flipped:false,flipAnim:"",locked:false}
+      : {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,flipped:isLockedStartTile(t)?!!t.targetFlipped:false,flipAnim:"",locked:isLockedStartTile(t),lockedFromStart:!!t.lockedFromStart}
     );
   returnedToStartNoticeShown=true;
   clearReturnedToStartTimer();
@@ -4029,10 +4066,10 @@ function initAllWords(){
   saveAllWordsProgress();
 }
 function initNewMode(){
-  updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=horizontalPuzzles;
+  updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=lockedPuzzles;
   let saved=loadNewModeProgress();
   if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;}
-  if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,horizontalPuzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}
+  if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,lockedPuzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}
   setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!(!saved&&gameStartDeferred)})
   if(saved&&Array.isArray(saved.tiles)){restoreTilesFromSave(saved.tiles);render();saveNewModeProgress()}
 }
