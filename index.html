@@ -5,21 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FlipWords</title>
 <style>
-:root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24)}
+:root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24);--grid-scale:1;--tile-w-base:84px;--base-tile-h-base:142px;--tile-gap-base:10px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:50px;--tile-radius-base:18px;--tile-border-w:1.5px;--divider:1px;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
 html,body{touch-action:manipulation;height:100%;overflow:hidden;touch-action:manipulation}
 body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overscroll-behavior:none;-webkit-text-size-adjust:100%}
 .game{width:min(94vw,560px);height:100vh;height:100dvh;padding:22px 18px 24px;text-align:center;display:flex;flex-direction:column;justify-content:center;transform:translateY(-8vh);overflow:hidden;touch-action:manipulation}
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
-.board-shell{padding:18px 14px 20px;border-radius:24px}.board{display:flex;justify-content:center;gap:10px;min-height:112px;touch-action:none}.board.short-board{gap:14px}
-.tile-wrap{width:clamp(54px,12.5vw,84px);height:clamp(100px,21.5vw,142px);cursor:grab;touch-action:none;border-radius:18px;box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1)}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}
+.board-shell{padding:18px 14px 20px;border-radius:24px}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
+.tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}
 .tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
-.tile-stage{width:100%;height:100%;perspective:700px;border-radius:18px}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:18px;transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
-.tile-face{position:absolute;inset:0;display:grid;grid-template-rows:1fr 1px 1fr;align-items:center;background:var(--tile-bg);border:1.5px solid var(--tile-border);border-radius:18px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
-.letter{display:grid;place-items:center;font-size:clamp(30px,6.4vw,50px);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{width:100%;height:1px;background:var(--tile-border)}
+.tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
+.tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
+.letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
 .tile-wrap.flip-feedback{animation:flip-lift .34s ease-out}.tile-wrap.flip-feedback .letter{animation:flip-letter-fade .34s linear}.tile-wrap.anim-flip-down .tile{animation:flip-down .34s cubic-bezier(.18,.8,.22,1)}.tile-wrap.anim-flip-up .tile{animation:flip-up .34s cubic-bezier(.18,.8,.22,1)}
 @keyframes flip-lift{0%{transform:scale(1)}35%{transform:scale(1.055)}100%{transform:scale(1)}}@keyframes flip-down{0%{transform:rotateX(0)}48%{transform:rotateX(88deg)}52%{transform:rotateX(92deg)}100%{transform:rotateX(180.01deg)}}@keyframes flip-up{0%{transform:rotateX(180deg)}48%{transform:rotateX(268deg)}52%{transform:rotateX(272deg)}100%{transform:rotateX(360.01deg)}}@keyframes flip-letter-fade{0%,32%,68%,100%{opacity:1}46%,54%{opacity:0}}
-.drag-proxy{position:fixed;z-index:999;width:clamp(46px,14vw,64px);height:clamp(86px,24vw,108px);pointer-events:none;transform:translate(-50%,-50%) scale(1.05);opacity:.96;border-radius:18px;box-shadow:var(--tile-shadow-lift)}.drag-proxy .tile-stage{perspective:700px}
+.drag-proxy{position:fixed;z-index:999;width:var(--tile-w);height:var(--tile-h);pointer-events:none;transform:translate(-50%,-50%) scale(1.05);opacity:.96;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow-lift)}.drag-proxy.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none}.drag-proxy .tile-stage{perspective:700px}
 .feedback-area{position:relative;height:32px;display:flex;align-items:flex-start;justify-content:center;margin:0 0 2px}.message{pointer-events:none;min-height:24px;margin-top:-5px;color:var(--success);font-weight:800;font-size:24px;opacity:0;pointer-events:none}.message.info{color:var(--muted);font-size:19px;font-weight:750;animation:info-fade 4s ease-out forwards}.message.score-pop{animation:score-pop 2s ease-out forwards}.message.quick-pop{animation-duration:2.7s}.message.score-zero{color:var(--muted)}.message.quick-pop,.message.streak-pop,.message.shield-pop,.message.accounting-pop,.message.penalty-pop{font-size:23px}.message.penalty-pop{color:#737475}.message.shield-pop{color:#737475}.message.final-pop{animation:final-score-pop 3s ease-out forwards}.message.streak-pop{animation:streak-score-pop 7.6s ease-out forwards}.message.hold-score{opacity:1;color:var(--muted);font-size:16px;font-weight:650;animation:none}.message.hold-fade{opacity:1;color:var(--muted);font-size:16px;font-weight:650;animation:hold-fade-down .45s ease-out forwards}.message.hold-score{opacity:1;transform:translateY(0) scale(1);animation:none}.star-burst{pointer-events:none;position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center}.star-burst.grid-burst{position:fixed;inset:auto;left:var(--burst-left,50vw);top:var(--burst-top,50vh);width:0;height:0;z-index:40;display:block}.star-burst.grid-burst .star{left:0;top:0}.star{pointer-events:none;position:absolute;color:#d7a829;font-size:19px;font-weight:900;opacity:0;animation:star-burst 1.15s cubic-bezier(.18,.75,.2,1) forwards}.star.big-star{font-size:27px;animation-duration:1.35s}.streak-star{font-size:22px}.star.flame{font-size:22px}.message.streak-pop{font-size:23px}.shield-icon{pointer-events:none;position:absolute;font-size:19px;opacity:0;animation:shield-burst 1.15s cubic-bezier(.18,.75,.2,1) forwards}
 @keyframes star-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes shield-burst{0%{opacity:0;transform:translate(0,0) scale(.35) rotate(0deg)}18%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.15) rotate(var(--r))}}@keyframes info-fade{0%{opacity:0;transform:translateY(4px)}4%,92%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(4px)}}@keyframes hold-fade-down{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(8px)}}@keyframes score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}16%{opacity:1;transform:translateY(0) scale(1.05)}72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes final-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}10%{opacity:1;transform:translateY(0) scale(1.05)}68%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}@keyframes streak-score-pop{0%{opacity:0;transform:translateY(8px) scale(.96)}8%{opacity:1;transform:translateY(0) scale(1.05)}88%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.98)}}
 .controls{display:grid;grid-template-columns:126px 126px;align-items:center;justify-content:center;gap:8px;min-height:44px}button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:0 15px;width:126px;height:50px;line-height:1;font-size:16px;font-weight:700;letter-spacing:.01em;cursor:pointer;touch-action:manipulation}button:disabled{opacity:.46;cursor:default}.start-words{color:var(--ink);background:var(--soft)}.hint{position:relative;overflow:hidden;color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint::before{content:"";position:absolute;inset:0;width:var(--hint-fill,0%);background:rgba(255,255,255,.42);pointer-events:none;transition:width .08s linear}.hint span{position:relative;z-index:1}.hint:disabled{color:var(--ink);background:var(--soft);box-shadow:none}.action-slot{position:relative;display:block;width:126px;height:50px;line-height:0}.action-slot button{position:absolute;inset:0}.next{visibility:hidden;color:#fff;background:var(--success);pointer-events:none}.next.visible{visibility:visible;pointer-events:auto}.hidden{visibility:hidden!important;pointer-events:none}
@@ -33,6 +33,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 @keyframes daily-complete-pop{0%{opacity:0;transform:translateY(9px) scale(.90)}38%{opacity:1;transform:translateY(0) scale(1.075)}58%{opacity:1;transform:translateY(1px) scale(.985)}78%{opacity:1;transform:translateY(0) scale(1.035)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.controls.aw-score-controls{min-height:70px}.score-line.aw-score-line{min-height:62px}.aw-score-panel{gap:5px}.aw-ranges{gap:5px}.aw-range{font-size:11px;padding:5px 7px}.status.aw-word-list{padding:0 18px;min-height:108px;margin-top:14px}.aw-word-grid{gap:2px 10px}.aw-word-slot{height:17px;line-height:17px;font-size:12px}.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:372px;height:50px;padding:0 10px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.intro-copy{font-size:clamp(18.5px,5vw,20.5px);line-height:1.32}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:8px}.board.short-board{gap:12px}.status{margin-top:34px}.tile-wrap{width:clamp(52px,15.2vw,64px);height:clamp(96px,27vw,114px)}.letter{font-size:clamp(29px,8vw,40px)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:20px;padding-bottom:20px}.board{gap:12px}.tile-wrap{width:clamp(61px,7.2vw,78px);height:clamp(111px,12.75vw,133px)}.letter{font-size:clamp(36px,4.1vw,48px)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}.subtitle.daily-complete-title{font-size:clamp(22px,2.7vw,29px)}.daily-complete-moves{font-size:clamp(17px,2.1vw,22px)}}
+
+@media (hover:none) and (pointer:coarse) and (orientation:portrait){.board.len-5{--grid-scale:.94}.board.len-6{--grid-scale:.84}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}}
+@media (max-width:390px){.board.len-5{--grid-scale:.88}.board.len-6{--grid-scale:.76}}
+@media (min-width:760px) and (min-height:650px) and (hover:hover){.board{--tile-w-base:78px;--base-tile-h-base:133px;--tile-gap-base:12px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:48px}.board.len-6{--grid-scale:.96}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){body::before{content:"Oops! Please turn your device into portrait view so we can fit everything in for you.";position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:28px;text-align:center;background:var(--bg);color:var(--ink);font-size:22px;font-weight:750;line-height:1.35}.game{visibility:hidden;pointer-events:none}}
 </style>
 </head>
@@ -55,6 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:v1";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2657,6 +2662,16 @@ const dailyTriplets=[
 
 ];
 
+const horizontalRows=[
+["mantra-silent-h5","silent","mantra","mental","strain",4,"","","",13,"h5"],
+["nails-steam-h4","nails","steam","mates","slain",4,"","","",15,"h4"],
+["bruise-clouds-h5","bruise","clouds","builds","course",3,"","","",5,"h5"],
+["better-castle-h5","castle","better","secret","tablet",6,"","","",15,"h5"],
+["please-staple-h2","please","staple","asleep","plates",3,"","","",11,"h2"],
+["carrot-lenses-h5","carrot","lenses","carton","lesser",4,"","","",9,"h5"],
+["kindly-peeled-h2","kindly","peeled","deeply","linked",4,"","","",8,"h2"]
+];
+
 const allWordsRows=[
 ["bucks-layer","layer","bucks","buyer","lacks",2,"","","",1,11,"backs|brace|clear|clues|cruel|cubes|early|laces|relay|scale|slack"],
 ["fluff-state","fluff","state","flute","staff",2,"","","",1,17,"false|fates|feast|feats|fetal|fetus|flats|fleas|fuels|least|slate|stale|steal|stuff|tales|taste|tufts"],
@@ -2667,10 +2682,11 @@ const makeAllWordsPuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,bloc
   id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,totalWordCount:Number(totalWordCount)||0,allWordsString:String(allWordsString||"")
 });
 
-const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty])=>({
-  id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty
+const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout])=>({
+  id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout:String(layout||"")
 });
 const puzzles=puzzleRows.map(makePuzzle);
+const horizontalPuzzles=horizontalRows.map(makePuzzle);
 const dailyPuzzles=dailyTriplets.map(day=>({...day,puzzles:day.puzzles.map(makePuzzle)}));
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
 let activePuzzles=puzzles;
@@ -2697,13 +2713,19 @@ let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,by
 
 const isDailyMode=()=>mode==="daily";
 const isAllWordsMode=()=>mode==="allWords";
-function updateModeToggle(){dailyModeBtn.classList.toggle("active",mode==="daily");gameModeBtn.classList.toggle("active",mode==="game");allWordsModeBtn.classList.toggle("active",mode==="allWords");}
+const isNewMode=()=>mode==="new";
+function updateModeToggle(){dailyModeBtn.classList.toggle("active",mode==="daily");gameModeBtn.classList.toggle("active",mode==="game");allWordsModeBtn.classList.toggle("active",mode==="new"||mode==="allWords");}
 const currentDaily=()=>dailyPuzzles[dailyDayIndex];
 const currentPuzzle=()=>activePuzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
-const visibleTop=t=>t.flipped?t.bottom:t.top;
-const visibleBottom=t=>t.flipped?t.top:t.bottom;
+const reverseString=s=>String(s||"").split("").reverse().join("");
+const isHorizontalTile=t=>t&&t.kind==="h";
+const visibleTop=t=>isHorizontalTile(t)?t.top:(t.flipped?t.bottom:t.top);
+const visibleBottom=t=>isHorizontalTile(t)?t.bottom:(t.flipped?t.top:t.bottom);
 const currentWords=()=>({top:tiles.map(visibleTop).join(""),bottom:tiles.map(visibleBottom).join("")});
+const tileSpan=t=>isHorizontalTile(t)?2:1;
+const puzzleVisualLength=()=>currentPuzzle()?.word1?.length||tiles.reduce((n,t)=>n+tileSpan(t),0);
+const isHorizontalPuzzle=p=>/^h\d+$/.test(String(p?.layout||""));
 
 function clamp(n,min,max){return Math.max(min,Math.min(max,n))}
 function normalizeStats(s){
@@ -2730,9 +2752,10 @@ function getUrlMode(){
   const q=location.search.toLowerCase();
   if(getUrlJumpDay()!==null||/(?:\?|&)daily(?:&|$)/.test(q))return "daily";
   if(getUrlJumpAllWords()!==null||/(?:\?|&)allwords(?:&|$)/.test(q))return "allWords";
+  if(/(?:\?|&)new(?:&|$)/.test(q))return "new";
   if(/(?:\?|&)game(?:&|$)/.test(q))return "game";
   const savedMode=localStorage.getItem(DAILY_MODE_KEY);
-  if(savedMode==="daily"||savedMode==="game"||savedMode==="allWords")return savedMode;
+  if(savedMode==="daily"||savedMode==="game"||savedMode==="allWords"||savedMode==="new")return savedMode;
   return isLocalStorageCompletelyEmpty()?"daily":"game";
 }
 function getAutoHintSaveState(){
@@ -2742,9 +2765,13 @@ function getAutoHintSaveState(){
   else if(autoHintDelayTimer&&autoHintDelayStartedAt!==null&&remaining!==null&&remaining!==undefined)remaining=Math.max(0,remaining-(performance.now()-autoHintDelayStartedAt));
   return {autoHintFilling,autoHintDelayRemainingMs:remaining,autoHintFillElapsedMs:fillElapsed};
 }
-function saveGameState(){if(isDailyMode()||isAllWordsMode())return;try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
+function saveGameState(){if(isDailyMode()||isAllWordsMode())return;if(isNewMode()){saveNewModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
+function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,targetIndex:t.targetIndex,targetFlipped:t.targetFlipped})}
+function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||st.lockedTop||st.lockedBottom)})}else next.push({...t,flipped:!!st.flipped,locked:!!st.locked,flipAnim:""})});if(next.length===tiles.length)tiles=next}
+function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
+function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
-function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
+function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
@@ -2787,12 +2814,12 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,puzzleResults:dailyPuzzleResults,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
 function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade");message.textContent="";const elapsed=getActivePuzzleElapsedMs();puzzleIndex=nextIndex;dailyPuzzleStartElapsedMs=elapsed;dailyPuzzleStartMoves=dailyTotalMoves;setupPuzzle({restoreActivePuzzleElapsedMs:elapsed});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
-function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
+function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveNewModeProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
 
 function goNext(){
   if(isDailyMode()){goDailyNext();return}
   const nextIndex=puzzleIndex+1;
-  if(nextIndex>=puzzles.length)return;
+  if(nextIndex>=activePuzzles.length)return;
   previewingStartWords=false;
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score");
   message.textContent="";
@@ -2808,8 +2835,16 @@ function restartAtLevelOnePreservingProgress(){
   setupPuzzle();
 }
 
+function transformedHorizontalStates(t){
+  const top0=String(t.top||""),bottom0=String(t.bottom||"");
+  const tops=[top0,reverseString(top0)],bottoms=[bottom0,reverseString(bottom0)];
+  const states=[];
+  for(const a of tops)for(const b of bottoms){states.push({top:a,bottom:b});states.push({top:b,bottom:a})}
+  const seen=new Set();
+  return states.filter(s=>{const k=s.top+"|"+s.bottom;if(seen.has(k))return false;seen.add(k);return true})
+}
 function computeCanonicalMapping(p,tileIds){
-  const originals=p.word1.split("").map((top,i)=>({id:tileIds[i],top,bottom:p.word2[i],code:pairCode(top,p.word2[i])}));
+  const originals=p.word1.split("").map((top,i)=>({id:tileIds[i],kind:"v",span:1,top,bottom:p.word2[i],code:pairCode(top,p.word2[i])}));
   const targets=p.answer1.split("").map((top,i)=>({index:i,top,bottom:p.answer2[i],code:pairCode(top,p.answer2[i])}));
   const used=new Set(),mapping=[];
   function backtrack(pos){
@@ -2830,7 +2865,41 @@ function computeCanonicalMapping(p,tileIds){
   if(!backtrack(0))throw Error("Could not compute puzzle mapping");
   return mapping;
 }
-function buildHintOrder(list){return[...list].sort((a,b)=>a.targetIndex-b.targetIndex).map(t=>t.id)}
+function computeSegmentMapping(p,segments){
+  const n=p.answer1.length;
+  const occupied=Array(n).fill(false),mapping=[];
+  function canPlace(pos,span){if(pos<0||pos+span>n)return false;for(let i=pos;i<pos+span;i++)if(occupied[i])return false;return true}
+  function setOcc(pos,span,val){for(let i=pos;i<pos+span;i++)occupied[i]=val}
+  function backtrack(i){
+    if(i===segments.length)return true;
+    const seg=segments[i],span=tileSpan(seg);
+    for(let pos=0;pos<=n-span;pos++){
+      if(!canPlace(pos,span))continue;
+      if(isHorizontalTile(seg)){
+        const wantTop=p.answer1.slice(pos,pos+2),wantBottom=p.answer2.slice(pos,pos+2);
+        const state=transformedHorizontalStates(seg).find(s=>s.top===wantTop&&s.bottom===wantBottom);
+        if(!state)continue;
+        setOcc(pos,span,true);mapping.push({id:seg.id,targetIndex:pos,targetTop:wantTop,targetBottom:wantBottom});
+        if(backtrack(i+1))return true;
+        mapping.pop();setOcc(pos,span,false);
+      }else{
+        const target={top:p.answer1[pos],bottom:p.answer2[pos],code:pairCode(p.answer1[pos],p.answer2[pos])};
+        if(pairCode(seg.top,seg.bottom)!==target.code)continue;
+        let flipped=null;
+        if(seg.top===target.top&&seg.bottom===target.bottom)flipped=false;
+        else if(seg.top===target.bottom&&seg.bottom===target.top)flipped=true;
+        else continue;
+        setOcc(pos,span,true);mapping.push({id:seg.id,targetIndex:pos,targetFlipped:flipped});
+        if(backtrack(i+1))return true;
+        mapping.pop();setOcc(pos,span,false);
+      }
+    }
+    return false;
+  }
+  if(!backtrack(0))throw Error("Could not compute segment mapping");
+  return mapping;
+}
+function buildHintOrder(list){const hints=[];[...list].sort((a,b)=>a.targetIndex-b.targetIndex).forEach(t=>{if(isHorizontalTile(t)){hints.push(`${t.id}:top`,`${t.id}:bottom`)}else hints.push(t.id)});return hints}
 function setupPuzzle(opts={}){
   footerInfoShown=false;
   clearAllTimers();
@@ -2838,9 +2907,21 @@ function setupPuzzle(opts={}){
   displayedNoHintStreak=noHintStreak;
   displayedShields=shields;
   const p=currentPuzzle(),restoreHints=Number(opts.restoreHints||0);
-  const base=p.word1.split("").map((top,i)=>({id:`${isDailyMode()?currentDaily().id:(isAllWordsMode()?"allwords":"game")}-${puzzleIndex}-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
-  const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
-  tiles=base.map(t=>({...t,...mapById.get(t.id)}));
+  const prefix=isDailyMode()?currentDaily().id:(isAllWordsMode()?"allwords":(isNewMode()?"new":"game"));
+  let base=[];
+  if(isHorizontalPuzzle(p)){
+    const start=clamp((Number(String(p.layout).replace(/^h/i,""))||1)-1,0,p.word1.length-2);
+    for(let i=0;i<p.word1.length;i++){
+      if(i===start){base.push({id:`${prefix}-${puzzleIndex}-h${start+1}`,kind:"h",top:p.word1.slice(i,i+2),bottom:p.word2.slice(i,i+2),lockedTop:false,lockedBottom:false,locked:false,targetIndex:null,targetTop:null,targetBottom:null});i++}
+      else base.push({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",top:p.word1[i],bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false});
+    }
+    const mapById=new Map(computeSegmentMapping(p,base).map(m=>[m.id,m]));
+    tiles=base.map(t=>({...t,...mapById.get(t.id)}));
+  }else{
+    base=p.word1.split("").map((top,i)=>({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
+    const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
+    tiles=base.map(t=>({...t,...mapById.get(t.id)}));
+  }
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;solvedAnswerInverted=false;statsDetailsShown=false;shieldUsedThisLevel=false;
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
@@ -2879,7 +2960,7 @@ function isSolved(){const p=currentPuzzle(),w=currentWords();return(w.top===p.an
 function isBlockedProperNounSolution(){const p=currentPuzzle(),w=currentWords();return!!(p.blocked1&&p.blocked2&&((w.top===p.blocked1&&w.bottom===p.blocked2)||(w.top===p.blocked2&&w.bottom===p.blocked1)))}
 function getSingleStartWordMatch(){const p=currentPuzzle(),w=currentWords(),starts=[p.word1,p.word2];const matches=[w.top,w.bottom].filter(word=>starts.includes(word));return matches.length===1?matches[0]:null}
 function scoreByHintsRemaining(n){return SCORE_BY_HINTS_REMAINING[Math.max(0,Math.min(6,n))]??0}
-function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(tiles.length)}
+function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(currentPuzzle().word1.length)}
 function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function isStreakMilestone(streak){
@@ -2890,8 +2971,9 @@ function getStreakBonus(streak){return isStreakMilestone(streak)?{label:`${strea
 function updateStatsForSolvedPuzzle(elapsedMs){
   stats.solvedCount++;
   stats.longestStreak=Math.max(stats.longestStreak,noHintStreak);
-  if(tiles.length<3||tiles.length>5)return;
-  const row=stats.byLength[tiles.length];
+  const plen=currentPuzzle().word1.length;
+  if(plen<3||plen>5)return;
+  const row=stats.byLength[plen];
   row.solved++;
   if(hintsUsed===0){
     row.clean++;
@@ -3203,8 +3285,8 @@ function checkSolved(){
   if(isDailyMode())saveDailyProgress();else if(isAllWordsMode())saveAllWordsProgress();else saveGameState();
 }
 
-function makeTileHTML(t){return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
-function startPreviewTiles(){const p=currentPuzzle();return p.word1.split("").map((top,i)=>({id:`preview-${i}`,top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
+function makeTileHTML(t){if(isHorizontalTile(t))return`<div class="hpair"><div class="htile ${t.lockedTop?"locked":""}" data-hrow="top"><div class="letter">${t.top[0]||""}</div><div class="h-divider"></div><div class="letter">${t.top[1]||""}</div></div><div></div><div class="htile ${t.lockedBottom?"locked":""}" data-hrow="bottom"><div class="letter">${t.bottom[0]||""}</div><div class="h-divider"></div><div class="letter">${t.bottom[1]||""}</div></div></div>`;return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
+function startPreviewTiles(){const p=currentPuzzle();if(isHorizontalPuzzle(p)){const start=clamp((Number(String(p.layout).replace(/^h/i,""))||1)-1,0,p.word1.length-2),out=[];for(let i=0;i<p.word1.length;i++){if(i===start){out.push({id:`preview-h${i}`,kind:"h",top:p.word1.slice(i,i+2),bottom:p.word2.slice(i,i+2),locked:false,lockedTop:false,lockedBottom:false});i++}else out.push({id:`preview-${i}`,kind:"v",top:p.word1[i],bottom:p.word2[i],flipped:false,flipAnim:"",locked:false})}return out}return p.word1.split("").map((top,i)=>({id:`preview-${i}`,kind:"v",top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false}))}
 function dailyPrestartTiles(){const n=3;const phrases=[["GET","SET"],["LET","RIP"],["CUE","FUN"],["YES","NOW"],["BIG","FUN"],["WOW","BAM"],["WHY","NOT"]];const phrase=phrases[dailyDayIndex%phrases.length]||phrases[0];const top=phrase[0],bottom=phrase[1];return Array.from({length:n},(_,i)=>({id:`prestart-${i}`,top:top[i%top.length],bottom:bottom[i%bottom.length],flipped:false,flipAnim:"",locked:false}))}
 function dailyReviewTiles(){
   const p=activePuzzles[clamp(dailyReviewIndex,0,activePuzzles.length-1)]||currentPuzzle();
@@ -3257,9 +3339,12 @@ function render(){
   const showDailyReview=false;
   const showAllWords=isAllWordsMode();
   const renderTiles=showDailyPrestart?dailyPrestartTiles():(previewingStartWords?startPreviewTiles():tiles);
-  board.classList.toggle("short-board",renderTiles.length<=3);board.innerHTML="";
-  renderTiles.forEach(t=>{
+  const visualLen=renderTiles.reduce((sum,t)=>sum+tileSpan(t),0);
+  board.className=`board len-${visualLen}`;
+  board.classList.toggle("short-board",visualLen<=3);board.innerHTML="";
+  renderTiles.forEach((t,idx)=>{
     const w=document.createElement("div");w.className="tile-wrap";
+    if(isHorizontalTile(t))w.classList.add("horizontal-wrap");
     if(showDailyPrestart)w.classList.add("daily-prestart");
     if(showDailyReview)w.classList.add("daily-review-tile","solved-tile");
     if(t.flipped)w.classList.add("flipped");
@@ -3271,9 +3356,10 @@ function render(){
     if(dragState?.tileId===t.id)w.classList.add("dragging");
     w.dataset.id=t.id;w.dataset.locked=t.locked?"1":"0";w.innerHTML=makeTileHTML(t);
     if(!showDailyPrestart&&!showDailyReview)w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w);
+    if(idx<renderTiles.length-1){const gap=document.createElement("div");gap.className=(isHorizontalTile(t)||isHorizontalTile(renderTiles[idx+1]))?"tile-gap-mixed":"tile-gap-normal";board.appendChild(gap)}
   });
   board.classList.toggle("aw-grid-flash",showAllWords&&allWordsFlash.grid);
-  const allLocked=tiles.every(t=>t.locked),isFinal=puzzleIndex>=activePuzzles.length-1;
+  const allLocked=tiles.every(t=>t.locked||((t.lockedTop&&t.lockedBottom))),isFinal=puzzleIndex>=activePuzzles.length-1;
   nextBtn.classList.toggle("visible",!isDailyMode()&&!isAllWordsMode()&&solved&&!isFinal);nextBtn.textContent="Next";
   const controlsEl=document.querySelector(".controls");
   const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
@@ -3630,22 +3716,68 @@ function hideSolvedStartPreview(fade=false){
 function toggleSolvedStartPreview(){if(!solved)return;previewingStartWords?hideSolvedStartPreview():showSolvedStartPreview()}
 
 function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDeferred||solved)return;gameStartDeferred=false;resumePuzzleClock();startAutoHintTimer();saveGameState()}
-function handlePointerDown(e,id){if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;const t=tiles.find(x=>x.id===id);if(!t||t.locked)return;ensureGameStarted();const r=e.currentTarget.getBoundingClientRect();dragState={tileId:id,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,lastX:e.clientX,hasDragged:false,startOrder:tiles.map(t=>t.id).join("|"),width:r.width,height:r.height,tileSnapshot:{...t}};e.currentTarget.setPointerCapture(e.pointerId);document.addEventListener("pointermove",handlePointerMove);document.addEventListener("pointerup",handlePointerUp);document.addEventListener("pointercancel",handlePointerCancel)}
-function handlePointerMove(e){if(!dragState||e.pointerId!==dragState.pointerId)return;dragState.x=e.clientX;dragState.y=e.clientY;const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}}
-function handlePointerUp(e){if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();if(!s.hasDragged){const t=tiles.find(x=>x.id===s.tileId);if(t){t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return}}if(s.hasDragged&&s.startOrder!==tiles.map(t=>t.id).join("|")){recordMove();noteInteraction();}dragState=null;clearDragProxy();render();maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()}
+function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDeferred||solved)return;gameStartDeferred=false;resumePuzzleClock();startAutoHintTimer();saveGameState()}
+function handlePointerDown(e,id){
+  if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
+  const t=tiles.find(x=>x.id===id);if(!t)return;
+  const hrow=e.target?.closest?.(".htile")?.dataset?.hrow||null;
+  if(isHorizontalTile(t)){if((hrow==="top"&&t.lockedTop)||(hrow==="bottom"&&t.lockedBottom))return}else if(t.locked)return;
+  ensureGameStarted();const r=e.currentTarget.getBoundingClientRect();
+  dragState={tileId:id,hrow,pointerId:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,lastX:e.clientX,hasDragged:false,dragMode:null,verticalSwap:false,startOrder:tiles.map(t=>t.id).join("|"),width:r.width,height:r.height,tileSnapshot:{...t}};
+  e.currentTarget.setPointerCapture(e.pointerId);document.addEventListener("pointermove",handlePointerMove);document.addEventListener("pointerup",handlePointerUp);document.addEventListener("pointercancel",handlePointerCancel)
+}
+function horizontalMoveLocked(t){return !!(t.locked||t.lockedTop||t.lockedBottom)}
+function handlePointerMove(e){
+  if(!dragState||e.pointerId!==dragState.pointerId)return;dragState.x=e.clientX;dragState.y=e.clientY;
+  const dx=e.clientX-dragState.startX,dy=e.clientY-dragState.startY;
+  const t=tiles.find(x=>x.id===dragState.tileId);
+  if(!t)return;
+  if(isHorizontalTile(t)){
+    const lockedMove=horizontalMoveLocked(t);
+    if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){
+      dragState.hasDragged=true;
+      if(!lockedMove&&Math.abs(dx)>=Math.abs(dy)){dragState.dragMode="move";createDragProxy(t,dragState.x,dragState.y,dragState.width,dragState.height)}
+      else if(!lockedMove){dragState.dragMode="swap";createDragProxy({...t,kind:"h",top:dragState.hrow==="bottom"?t.bottom:t.top,bottom:""},dragState.x,dragState.y,dragState.width,dragState.height/2)}
+      else dragState.dragMode="locked";
+      render();
+    }
+    if(dragState.hasDragged){
+      if(!lockedMove&&dragState.dragMode==="move"){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}
+      else if(!lockedMove&&dragState.dragMode==="swap"){moveDragProxy(dragState.x,dragState.y);if(Math.abs(dy)>dragState.height*.28)dragState.verticalSwap=true}
+    }
+    return;
+  }
+  if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}
+  if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}
+}
+function reverseHorizontalRow(t,row){if(row==="bottom")t.bottom=reverseString(t.bottom);else t.top=reverseString(t.top)}
+function handlePointerUp(e){
+  if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();const t=tiles.find(x=>x.id===s.tileId);
+  if(!s.hasDragged){
+    if(t){
+      if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
+      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
+    }
+  }
+  let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
+  if(t&&isHorizontalTile(t)&&s.dragMode==="swap"&&s.verticalSwap&&!horizontalMoveLocked(t)){[t.top,t.bottom]=[t.bottom,t.top];changed=true}
+  if(s.hasDragged&&changed){recordMove();noteInteraction()}
+  dragState=null;clearDragProxy();render();maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()
+}
 function handlePointerCancel(e){if(!dragState||e.pointerId!==dragState.pointerId)return;cleanupPointerListeners();dragState=null;clearDragProxy();render()}
 function cleanupPointerListeners(){document.removeEventListener("pointermove",handlePointerMove);document.removeEventListener("pointerup",handlePointerUp);document.removeEventListener("pointercancel",handlePointerCancel)}
-function liveReorderFromX(x,id){const dragged=tiles.find(t=>t.id===id);if(!dragged||dragged.locked||!dragState)return;const others=tiles.filter(t=>!t.locked&&t.id!==id),els=[...board.querySelectorAll(".tile-wrap")].filter(el=>el.dataset.id!==id&&el.dataset.locked!=="1");let insertAt=tiles.filter(t=>!t.locked).findIndex(t=>t.id===id);if(x>dragState.lastX){for(let i=0;i<els.length;i++){const r=els[i].getBoundingClientRect();if(x>r.left+r.width*.33)insertAt=i+1}}else if(x<dragState.lastX){for(let i=els.length-1;i>=0;i--){const r=els[i].getBoundingClientRect();if(x<r.right-r.width*.33)insertAt=i}}insertAt=clamp(insertAt,0,others.length);const next=[...others];next.splice(insertAt,0,dragged);const rebuilt=rebuildWithLockedTiles(next);if(!sameOrder(rebuilt,tiles)){tiles=rebuilt;render();moveDragProxy(dragState.x,dragState.y)}dragState.lastX=x}
+function liveReorderFromX(x,id){const dragged=tiles.find(t=>t.id===id);if(!dragged||dragged.locked||horizontalMoveLocked(dragged)||!dragState)return;const others=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)&&t.id!==id),els=[...board.querySelectorAll(".tile-wrap")].filter(el=>el.dataset.id!==id&&el.dataset.locked!=="1");let insertAt=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)).findIndex(t=>t.id===id);if(x>dragState.lastX){for(let i=0;i<els.length;i++){const r=els[i].getBoundingClientRect();if(x>r.left+r.width*.33)insertAt=i+1}}else if(x<dragState.lastX){for(let i=els.length-1;i>=0;i--){const r=els[i].getBoundingClientRect();if(x<r.right-r.width*.33)insertAt=i}}insertAt=clamp(insertAt,0,others.length);const next=[...others];next.splice(insertAt,0,dragged);const rebuilt=rebuildWithLockedTiles(next);if(!sameOrder(rebuilt,tiles)){tiles=rebuilt;render();moveDragProxy(dragState.x,dragState.y)}dragState.lastX=x}
 function sameOrder(a,b){return a.length===b.length&&a.every((t,i)=>t.id===b[i].id)}
-function rebuildWithLockedTiles(unlocked){const res=Array(tiles.length).fill(null);tiles.forEach(t=>{if(t.locked)res[t.targetIndex]=t});let c=0;for(let i=0;i<res.length;i++)if(!res[i])res[i]=unlocked[c++];return res}
-function createDragProxy(t,x,y,w,h){clearDragProxy();const p=document.createElement("div");p.id="dragProxy";p.className="drag-proxy";if(t.flipped)p.classList.add("flipped");p.style.width=`${w}px`;p.style.height=`${h}px`;p.innerHTML=makeTileHTML(t);document.body.appendChild(p);moveDragProxy(x,y)}
+function rebuildWithLockedTiles(unlocked){const res=Array(tiles.length).fill(null);tiles.forEach(t=>{if(t.locked||horizontalMoveLocked(t))res[Math.min(t.targetIndex??0,res.length-1)]=t});let c=0;for(let i=0;i<res.length;i++)if(!res[i])res[i]=unlocked[c++];return res.filter(Boolean)}
+function createDragProxy(t,x,y,w,h){clearDragProxy();const p=document.createElement("div");p.id="dragProxy";p.className="drag-proxy";if(isHorizontalTile(t))p.classList.add("horizontal-wrap");if(t.flipped)p.classList.add("flipped");p.style.width=`${w}px`;p.style.height=`${h}px`;p.innerHTML=makeTileHTML(t);document.body.appendChild(p);moveDragProxy(x,y)}
 function moveDragProxy(x,y){const p=$("dragProxy");if(p){p.style.left=`${x}px`;p.style.top=`${y}px`}}
 function clearDragProxy(){$("dragProxy")?.remove()}
 
-function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const id=hintOrder[hintCursor++],t=tiles.find(x=>x.id===id);if(!t||t.locked)continue;const first=hintsUsed===0;if(!isDailyMode()&&!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim="";hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!t.locked));forceNonSolvedStateIfNeeded();return true}return false}
+
+function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const rawId=hintOrder[hintCursor++],parts=String(rawId).split(":"),id=parts[0],row=parts[1]||null,t=tiles.find(x=>x.id===id);if(!t)continue;if(isHorizontalTile(t)){if((row==="top"&&t.lockedTop)||(row==="bottom"&&t.lockedBottom))continue}else if(t.locked)continue;const first=hintsUsed===0;if(!isDailyMode()&&!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}if(isHorizontalTile(t)){if(row==="bottom"){t.bottom=t.targetBottom;t.lockedBottom=true}else{t.top=t.targetTop;t.lockedTop=true}t.locked=!!(t.lockedTop||t.lockedBottom)}else{t.locked=true;if(first){if(t.top!==t.bottom)hintOrientationInverted=t.flipped!==t.targetFlipped}else if(t.top!==t.bottom){if(hintOrientationInverted===null)hintOrientationInverted=t.flipped!==t.targetFlipped;t.flipped=t.targetFlipped!==hintOrientationInverted}t.flipAnim=""}hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!(t.locked||horizontalMoveLocked(t))));forceNonSolvedStateIfNeeded();return true}return false}
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
-function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}
-function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked))return;const f=tiles.find(t=>!t.locked&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!i.tile.locked);if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
+function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{if(isHorizontalTile(t)){t.locked=true;t.lockedTop=true;t.lockedBottom=true;const top=inverted?t.targetBottom:t.targetTop,bottom=inverted?t.targetTop:t.targetBottom;t.top=top;t.bottom=bottom}else{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped}});tiles=[...tiles].sort((a,b)=>a.targetIndex-b.targetIndex)}
+function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked||horizontalMoveLocked(t)))return;const f=tiles.find(t=>!t.locked&&!isHorizontalTile(t)&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const h=tiles.find(t=>isHorizontalTile(t)&&!t.lockedTop&&t.top.length===2);if(h){h.top=reverseString(h.top);return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!(i.tile.locked||horizontalMoveLocked(i.tile)));if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
 function useHint(){if(isAllWordsMode())return;if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
 function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${clamp(pct,0,100)}%`)}
@@ -3700,7 +3832,7 @@ board.addEventListener("click",e=>{
 hintBtn.addEventListener("click",()=>useHint());
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
-allWordsModeBtn.addEventListener("click",()=>switchMode("allWords"));
+allWordsModeBtn.addEventListener("click",()=>switchMode("new"));
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
@@ -3799,6 +3931,14 @@ function initAllWords(){
   if(!hasJump&&saved&&Array.isArray(saved.tiles)){restoreAllWordsTiles(saved.tiles);render()}
   saveAllWordsProgress();
 }
+function initNewMode(){
+  updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=horizontalPuzzles;
+  let saved=loadNewModeProgress();
+  if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;}
+  if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,horizontalPuzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}
+  setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!(!saved&&gameStartDeferred)})
+  if(saved&&Array.isArray(saved.tiles)){restoreTilesFromSave(saved.tiles);render();saveNewModeProgress()}
+}
 function initGame(){updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=puzzles;let saved=loadSavedState()||cachedGameState;if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;}if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){gameStartDeferred=!!saved.gameStartDeferred;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!((!saved&&gameStartDeferred)||(saved&&saved.gameStartDeferred))})}
 function initMode(){
   clearAllTimers();clearDailyTimer();clearDailyCountdownTimer();
@@ -3829,7 +3969,7 @@ function initMode(){
   }
   if(jumpDay===null)localStorage.setItem(DAILY_MODE_KEY,mode);
   else localStorage.setItem(DAILY_MODE_KEY,previousMode);
-  if(mode==="daily")initDaily();else if(mode==="allWords")initAllWords();else initGame();
+  if(mode==="daily")initDaily();else if(mode==="allWords")initAllWords();else if(mode==="new")initNewMode();else initGame();
 }
 initMode();
 </script>
