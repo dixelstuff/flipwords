@@ -2663,13 +2663,10 @@ const dailyTriplets=[
 ];
 
 const horizontalRows=[
-["mantra-silent-h5","silent","mantra","mental","strain",4,"","","",13,"h5"],
-["nails-steam-h4","nails","steam","mates","slain",4,"","","",15,"h4"],
-["bruise-clouds-h5","bruise","clouds","builds","course",3,"","","",5,"h5"],
-["better-castle-h5","castle","better","secret","tablet",6,"","","",15,"h5"],
-["please-staple-h2","please","staple","asleep","plates",3,"","","",11,"h2"],
-["carrot-lenses-h5","carrot","lenses","carton","lesser",4,"","","",9,"h5"],
-["kindly-peeled-h2","kindly","peeled","deeply","linked",4,"","","",8,"h2"]
+["flora-meals-h4","meals","flora","false","moral",2,"","","",7,"h4"],
+["plant-tries-h2","plant","tries","print","tales",2,"","","cannot be reversed",2,"h2"],
+["crane-great-h3","great","crane","range","react",2,"","","",6,"h3"],
+["solve-stool-h2","solve","stool","loves","tools",2,"","","cannot be reversed",8,"h2"]
 ];
 
 const allWordsRows=[
@@ -2775,7 +2772,7 @@ function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JS
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
-function resetGame(startIndex=0){localStorage.removeItem(STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
+function resetGame(startIndex=0){localStorage.removeItem(isNewMode()?NEW_MODE_PROGRESS_KEY:STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
 function saveDailyStats(){try{localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(dailyStats))}catch{}}
@@ -2919,13 +2916,13 @@ function setupPuzzle(opts={}){
   if(isHorizontalPuzzle(p)){
     const start=clamp((Number(String(p.layout).replace(/^h/i,""))||1)-1,0,p.word1.length-2);
     for(let i=0;i<p.word1.length;i++){
-      if(i===start){base.push({id:`${prefix}-${puzzleIndex}-h${start+1}`,kind:"h",top:p.word1.slice(i,i+2),bottom:p.word2.slice(i,i+2),lockedTop:false,lockedBottom:false,locked:false,targetIndex:null,targetTop:null,targetBottom:null});i++}
-      else base.push({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",top:p.word1[i],bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false});
+      if(i===start){base.push({id:`${prefix}-${puzzleIndex}-h${start+1}`,kind:"h",startSlot:base.length,startTop:p.word1.slice(i,i+2),startBottom:p.word2.slice(i,i+2),top:p.word1.slice(i,i+2),bottom:p.word2.slice(i,i+2),lockedTop:false,lockedBottom:false,locked:false,targetIndex:null,targetTop:null,targetBottom:null});i++}
+      else base.push({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",startSlot:base.length,startTop:p.word1[i],startBottom:p.word2[i],top:p.word1[i],bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false});
     }
     const mapById=new Map(computeSegmentMapping(p,base).map(m=>[m.id,m]));
     tiles=assignTargetSlots(base.map(t=>({...t,...mapById.get(t.id)})));
   }else{
-    base=p.word1.split("").map((top,i)=>({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
+    base=p.word1.split("").map((top,i)=>({id:`${prefix}-${puzzleIndex}-${i}`,kind:"v",startSlot:i,startTop:top,startBottom:p.word2[i],top,bottom:p.word2[i],flipped:false,flipAnim:"",locked:false,targetIndex:null,targetFlipped:false}));
     const mapById=new Map(computeCanonicalMapping(p,base.map(t=>t.id)).map(m=>[m.id,m]));
     tiles=assignTargetSlots(base.map(t=>({...t,...mapById.get(t.id)})));
   }
@@ -2968,7 +2965,7 @@ function isBlockedProperNounSolution(){const p=currentPuzzle(),w=currentWords();
 function getSingleStartWordMatch(){const p=currentPuzzle(),w=currentWords(),starts=[p.word1,p.word2];const matches=[w.top,w.bottom].filter(word=>starts.includes(word));return matches.length===1?matches[0]:null}
 function scoreByHintsRemaining(n){return SCORE_BY_HINTS_REMAINING[Math.max(0,Math.min(6,n))]??0}
 function grossScoreForCurrentPuzzle(){return scoreByHintsRemaining(currentPuzzle().word1.length)}
-function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,tiles.length-hintsUsed))}
+function scoreForCurrentPuzzle(){return scoreByHintsRemaining(Math.max(0,currentPuzzle().word1.length-hintsUsed))}
 function hintPenaltyForCurrentPuzzle(){return Math.max(0,grossScoreForCurrentPuzzle()-scoreForCurrentPuzzle())}
 function isStreakMilestone(streak){
   const milestones=[5,10,15,20,30,40,50,75,100,125,150];
@@ -3254,7 +3251,7 @@ function checkSolved(){
     if(!wasSolved){const w=currentWords();solvedAnswerInverted=w.top===currentPuzzle().answer2&&w.bottom===currentPuzzle().answer1}
     solved=true;
     if(!wasSolved)solvedToggleReadyAt=Infinity;
-    completedWithHints=hintsUsed>=tiles.length;
+    completedWithHints=hintOrder.length>0&&hintsUsed>=hintOrder.length;
     stopAutoHintTimer();
     if(isDailyMode()){
       recordDailyPuzzleResult();
@@ -3690,7 +3687,12 @@ function resetToStartingWords(){
   if(solved||hintsUsed>0)return;
   clearDragProxy();
   dragState=null;
-  tiles=[...tiles].sort((a,b)=>Number(a.id.split("-").pop())-Number(b.id.split("-").pop())).map(t=>({...t,flipped:false,flipAnim:"",locked:false}));
+  tiles=[...tiles]
+    .sort((a,b)=>(Number.isFinite(Number(a.startSlot))?Number(a.startSlot):Number(a.targetSlot??a.targetIndex??0))-(Number.isFinite(Number(b.startSlot))?Number(b.startSlot):Number(b.targetSlot??b.targetIndex??0)))
+    .map(t=>isHorizontalTile(t)
+      ? {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,lockedTop:false,lockedBottom:false,locked:false}
+      : {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,flipped:false,flipAnim:"",locked:false}
+    );
   returnedToStartNoticeShown=true;
   clearReturnedToStartTimer();
   clearSingleStartWordTimer();
