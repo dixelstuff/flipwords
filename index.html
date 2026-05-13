@@ -2961,14 +2961,13 @@ function setupPuzzle(opts={}){
   }
   const lockedIndex=lockedIndexFromPuzzle(p);
   if(lockedIndex!==null&&!isHorizontalPuzzle(p)){
-    const lockedTile=tiles.find(t=>(t.targetIndex??t.startSlot)===lockedIndex);
+    const lockedTile=tiles.find(t=>t.startSlot===lockedIndex);
     if(lockedTile){
       lockedTile.locked=true;
       lockedTile.lockedFromStart=true;
       lockedTile.targetSlot=lockedIndex;
       if(!isHorizontalTile(lockedTile)&&lockedTile.top!==lockedTile.bottom)lockedTile.flipped=!!lockedTile.targetFlipped;
     }
-    tiles=tiles.sort((a,b)=>(a.targetSlot??a.targetIndex??a.startSlot??0)-(b.targetSlot??b.targetIndex??b.startSlot??0));
   }
   hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;solvedAnswerInverted=false;statsDetailsShown=false;shieldUsedThisLevel=false;
@@ -3061,8 +3060,15 @@ function getSpeedBonusPoints(){
   const rounded=roundToNearestFive(raw);
   return rounded<MIN_SPEED_BONUS?0:clamp(rounded,MIN_SPEED_BONUS,MAX_SPEED_BONUS);
 }
+function getAutoHintUnlockedCount(){
+  return tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)).length;
+}
+function canAutoHintRevealAnotherTile(){
+  return getAutoHintUnlockedCount()>1;
+}
 function getAutoHintDelayMs(){
-  const unlocked=tiles.filter(t=>!t.locked).length;
+  const unlocked=getAutoHintUnlockedCount();
+  if(unlocked<=1)return null;
   return getAutoHintDelayForTileCount(unlocked);
 }
 function getEfficiencyMoveLimit(){
@@ -3912,7 +3918,7 @@ function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){cons
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{if(isHorizontalTile(t)){t.locked=true;t.lockedTop=true;t.lockedBottom=true;const top=inverted?t.targetBottom:t.targetTop,bottom=inverted?t.targetTop:t.targetBottom;t.top=top;t.bottom=bottom}else{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped}});tiles=[...tiles].sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0))}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked||horizontalMoveLocked(t)))return;const f=tiles.find(t=>!t.locked&&!isHorizontalTile(t)&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const h=tiles.find(t=>isHorizontalTile(t)&&!t.lockedTop&&t.top.length===2);if(h){h.top=reverseString(h.top);return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!(i.tile.locked||horizontalMoveLocked(i.tile)));if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
-function useHint(){if(isAllWordsMode())return;if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
+function useHint(opts={}){if(isAllWordsMode())return;if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(opts.auto&&!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
 function setHintFill(pct){hintBtn.style.setProperty("--hint-fill",`${clamp(pct,0,100)}%`)}
 function clearAutoHintTimers(){if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintDelayTimer=null;autoHintFrame=null}
@@ -3925,7 +3931,7 @@ function startAutoHintTimer(delayMs=null){
   autoHintDelayStartedAt=performance.now();
   autoHintDelayTimer=setTimeout(beginAutoHintFill,autoHintDelayRemainingMs);
 }
-function beginAutoHintFill(){clearAutoHintTimers();if(solved||hintBtn.disabled||document.hidden)return;autoHintFilling=true;autoHintFillStart=performance.now()-autoHintFillElapsedMs;const step=now=>{if(document.hidden)return;autoHintFillElapsedMs=now-autoHintFillStart;const pct=(autoHintFillElapsedMs/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint();else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)}
+function beginAutoHintFill(){clearAutoHintTimers();if(solved||hintBtn.disabled||document.hidden||!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}autoHintFilling=true;autoHintFillStart=performance.now()-autoHintFillElapsedMs;const step=now=>{if(document.hidden)return;if(!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}autoHintFillElapsedMs=now-autoHintFillStart;const pct=(autoHintFillElapsedMs/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint({auto:true});else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)}
 function pauseAutoHintTimer(){if(!autoHintDelayTimer&&!autoHintFrame)return;if(autoHintFilling){if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintFrame=null;if(autoHintFillStart!==null)autoHintFillElapsedMs=Math.min(AUTO_HINT_FILL_MS,performance.now()-autoHintFillStart)}else{if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);autoHintDelayTimer=null;if(autoHintDelayStartedAt!==null)autoHintDelayRemainingMs=Math.max(0,autoHintDelayRemainingMs-(performance.now()-autoHintDelayStartedAt))}autoHintDelayStartedAt=null}
 function resumeAutoHintTimer(){if(isDailyMode()||isAllWordsMode()||gameStartDeferred||solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
 
