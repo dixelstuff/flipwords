@@ -2812,8 +2812,8 @@ function getAutoHintSaveState(){
 }
 function saveGameState(){if(isDailyMode()||isAllWordsMode())return;if(isNewMode()){saveNewModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
 function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,lockedFromStart:!!t.lockedFromStart,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped})}
-function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:isLockedStartTile(t)?true:!!st.locked,lockedFromStart:!!t.lockedFromStart,flipAnim:""})});if(next.length===tiles.length)tiles=next}
-function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
+function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:!!st.locked,lockedFromStart:!!t.lockedFromStart,flipAnim:""})});if(next.length===tiles.length)tiles=next}
+function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,hintOrientationInverted,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
@@ -2948,7 +2948,7 @@ function assignTargetSlots(list){
   [...list].sort((a,b)=>(a.targetIndex??0)-(b.targetIndex??0)).forEach((t,i)=>{t.targetSlot=i});
   return list;
 }
-function buildHintOrder(list){const hints=[];[...list].sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0)).forEach(t=>{if(isHorizontalTile(t)){hints.push(`${t.id}:top`,`${t.id}:bottom`)}else hints.push(t.id)});return hints}
+function buildHintOrder(list){const hints=[];[...list].sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0)).forEach(t=>{if(isLockedStartTile(t))return;if(isHorizontalTile(t)){hints.push(`${t.id}:top`,`${t.id}:bottom`)}else hints.push(t.id)});return hints}
 function setupPuzzle(opts={}){
   footerInfoShown=false;
   clearAllTimers();
@@ -2975,13 +2975,16 @@ function setupPuzzle(opts={}){
   if(lockedIndex!==null&&!isHorizontalPuzzle(p)){
     const lockedTile=tiles.find(t=>t.startSlot===lockedIndex);
     if(lockedTile){
-      lockedTile.locked=true;
+      // Locked-mode tiles are position-locked from the start, but remain
+      // flippable until the first hint. The first hint commits whichever
+      // top/bottom answer orientation the player has chosen for this tile.
+      lockedTile.locked=false;
       lockedTile.lockedFromStart=true;
       lockedTile.targetSlot=lockedIndex;
-      if(!isHorizontalTile(lockedTile)&&lockedTile.top!==lockedTile.bottom)lockedTile.flipped=!!lockedTile.targetFlipped;
+      if(!isHorizontalTile(lockedTile))lockedTile.flipped=false;
     }
   }
-  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=lockedStartTileOrientationInverted();
+  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;solvedAnswerInverted=false;statsDetailsShown=false;shieldUsedThisLevel=false;
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
@@ -3446,7 +3449,7 @@ function render(){
     if(isLockedStartTile(t)&&!solved&&!previewingStartWords)w.classList.add("locked-from-start");
     if(solved&&!previewingStartWords&&!showAllWords)w.classList.add("solved-tile");
     if(dragState?.tileId===t.id)w.classList.add("dragging");
-    w.dataset.id=t.id;w.dataset.locked=(t.locked||horizontalMoveLocked(t))?"1":"0";w.innerHTML=makeTileHTML(t);
+    w.dataset.id=t.id;w.dataset.locked=(t.locked||horizontalMoveLocked(t)||isLockedStartTile(t))?"1":"0";w.innerHTML=makeTileHTML(t);
     if(!showDailyPrestart&&!showDailyReview)w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w);
     if(idx<renderTiles.length-1){const gap=document.createElement("div");gap.className=(isHorizontalTile(t)||isHorizontalTile(renderTiles[idx+1]))?"tile-gap-mixed":"tile-gap-normal";board.appendChild(gap)}
   });
@@ -3755,7 +3758,7 @@ function resetToStartingWords(){
     .sort((a,b)=>(Number.isFinite(Number(a.startSlot))?Number(a.startSlot):Number(a.targetSlot??a.targetIndex??0))-(Number.isFinite(Number(b.startSlot))?Number(b.startSlot):Number(b.targetSlot??b.targetIndex??0)))
     .map(t=>isHorizontalTile(t)
       ? {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,lockedTop:false,lockedBottom:false,locked:false}
-      : {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,flipped:isLockedStartTile(t)?!!t.targetFlipped:false,flipAnim:"",locked:isLockedStartTile(t),lockedFromStart:!!t.lockedFromStart}
+      : {...t,top:t.startTop||t.top,bottom:t.startBottom||t.bottom,flipped:false,flipAnim:"",locked:false,lockedFromStart:!!t.lockedFromStart}
     );
   returnedToStartNoticeShown=true;
   clearReturnedToStartTimer();
@@ -3869,6 +3872,7 @@ function handlePointerMove(e){
     }
     return;
   }
+  if(isLockedStartTile(t)){return}
   if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}
   if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}
 }
@@ -3888,10 +3892,10 @@ function handlePointerUp(e){
 }
 function handlePointerCancel(e){if(!dragState||e.pointerId!==dragState.pointerId)return;cleanupPointerListeners();dragState=null;clearDragProxy();render()}
 function cleanupPointerListeners(){document.removeEventListener("pointermove",handlePointerMove);document.removeEventListener("pointerup",handlePointerUp);document.removeEventListener("pointercancel",handlePointerCancel)}
-function liveReorderFromX(x,id){const dragged=tiles.find(t=>t.id===id);if(!dragged||dragged.locked||horizontalMoveLocked(dragged)||!dragState)return;const others=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)&&t.id!==id),els=[...board.querySelectorAll(".tile-wrap")].filter(el=>el.dataset.id!==id&&el.dataset.locked!=="1");let insertAt=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)).findIndex(t=>t.id===id);if(x>dragState.lastX){for(let i=0;i<els.length;i++){const r=els[i].getBoundingClientRect();if(x>r.left+r.width*.33)insertAt=i+1}}else if(x<dragState.lastX){for(let i=els.length-1;i>=0;i--){const r=els[i].getBoundingClientRect();if(x<r.right-r.width*.33)insertAt=i}}insertAt=clamp(insertAt,0,others.length);const next=[...others];next.splice(insertAt,0,dragged);const rebuilt=rebuildWithLockedTiles(next);if(!sameOrder(rebuilt,tiles)){tiles=rebuilt;render();moveDragProxy(dragState.x,dragState.y)}dragState.lastX=x}
+function liveReorderFromX(x,id){const dragged=tiles.find(t=>t.id===id);if(!dragged||dragged.locked||horizontalMoveLocked(dragged)||isLockedStartTile(dragged)||!dragState)return;const others=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)&&!isLockedStartTile(t)&&t.id!==id),els=[...board.querySelectorAll(".tile-wrap")].filter(el=>el.dataset.id!==id&&el.dataset.locked!=="1");let insertAt=tiles.filter(t=>!t.locked&&!horizontalMoveLocked(t)&&!isLockedStartTile(t)).findIndex(t=>t.id===id);if(x>dragState.lastX){for(let i=0;i<els.length;i++){const r=els[i].getBoundingClientRect();if(x>r.left+r.width*.33)insertAt=i+1}}else if(x<dragState.lastX){for(let i=els.length-1;i>=0;i--){const r=els[i].getBoundingClientRect();if(x<r.right-r.width*.33)insertAt=i}}insertAt=clamp(insertAt,0,others.length);const next=[...others];next.splice(insertAt,0,dragged);const rebuilt=rebuildWithLockedTiles(next);if(!sameOrder(rebuilt,tiles)){tiles=rebuilt;render();moveDragProxy(dragState.x,dragState.y)}dragState.lastX=x}
 function sameOrder(a,b){return a.length===b.length&&a.every((t,i)=>t.id===b[i].id)}
 function rebuildWithLockedTiles(unlocked){
-  const locked=tiles.filter(t=>t.locked||horizontalMoveLocked(t)).sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0));
+  const locked=tiles.filter(t=>t.locked||horizontalMoveLocked(t)||isLockedStartTile(t)).sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0));
   const free=[...unlocked];
   const res=[];
   for(let slot=0;slot<tiles.length;slot++){
@@ -3905,7 +3909,15 @@ function moveDragProxy(x,y){const p=$("dragProxy");if(p){p.style.left=`${x}px`;p
 function clearDragProxy(){$("dragProxy")?.remove()}
 
 
-function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const rawId=hintOrder[hintCursor++],parts=String(rawId).split(":"),id=parts[0],row=parts[1]||null,t=tiles.find(x=>x.id===id);if(!t)continue;if(isHorizontalTile(t)){if((row==="top"&&t.lockedTop)||(row==="bottom"&&t.lockedBottom))continue}else if(t.locked)continue;const first=hintsUsed===0;if(!isDailyMode()&&!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}if(isHorizontalTile(t)){
+function commitLockedStartTileForHints(){
+  const locked=tiles.find(t=>isLockedStartTile(t)&&!isHorizontalTile(t));
+  if(!locked||locked.locked)return;
+  const inv=lockedStartTileOrientationInverted();
+  if(inv!==null)hintOrientationInverted=inv;
+  locked.locked=true;
+  locked.flipAnim="";
+}
+function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){const rawId=hintOrder[hintCursor++],parts=String(rawId).split(":"),id=parts[0],row=parts[1]||null,t=tiles.find(x=>x.id===id);if(!t)continue;if(isHorizontalTile(t)){if((row==="top"&&t.lockedTop)||(row==="bottom"&&t.lockedBottom))continue}else if(t.locked||isLockedStartTile(t))continue;const first=hintsUsed===0;if(first)commitLockedStartTileForHints();if(!isDailyMode()&&!silent&&first&&!shieldUsedThisLevel&&shields>0){shields--;displayedShields=shields;shieldUsedThisLevel=true;showInfoMessage("🛡️ Streak shield used","shield-used");updateFooterDisplay()}if(isHorizontalTile(t)){
   // Horizontal hints must respect the same global row inversion established by
   // the first hint. Otherwise mixed puzzles can lock vertical tiles into one
   // row orientation and horizontal tiles into the opposite orientation.
@@ -4089,6 +4101,7 @@ function initNewMode(){
   if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;}
   if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,lockedPuzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}
   setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!(!saved&&gameStartDeferred)})
+  if(saved&&typeof saved.hintOrientationInverted==="boolean")hintOrientationInverted=saved.hintOrientationInverted;
   if(saved&&Array.isArray(saved.tiles)){restoreTilesFromSave(saved.tiles);render();saveNewModeProgress()}
 }
 function initGame(){updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=puzzles;let saved=loadSavedState()||cachedGameState;if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;}if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){gameStartDeferred=!!saved.gameStartDeferred;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!((!saved&&gameStartDeferred)||(saved&&saved.gameStartDeferred))})}
