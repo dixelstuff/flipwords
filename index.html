@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child,.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.58);box-shadow:none;animation:none}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child,.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.62);box-shadow:none;animation:none}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.hint.vowels-mode{color:var(--ink);background:var(--soft);box-shadow:none}.hint.vowels-mode::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:v9";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:v10";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -78,7 +78,7 @@ const SCORE_POP_MS=2000;
 const FINAL_POP_MS=3000;
 const STREAK_POP_MS=9000;
 const DAILY_FINAL_MODAL_DELAY_MS=3500;
-const VOWELS_UNLOCK_MS=60000;
+const VOWELS_UNLOCK_MS=10000;
 const VOWELS_REVEAL_MS=6000;
 
 const puzzleRows=[
@@ -3476,6 +3476,7 @@ function render(){
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
   const newModeVowels=isNewMode();
   const vowelsUnavailable=newModeVowels&&!solved&&!showDailyCompleteControls&&!isVowelsAvailable();
+  hintBtn.classList.toggle("vowels-mode",newModeVowels&&!showDailyCompleteControls);
   hintBtn.classList.toggle("vowels-unavailable",vowelsUnavailable);
   hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(newModeVowels?"Vowels":"Hint");
   hintBtn.disabled=showDailyCompleteControls?false:(newModeVowels?solved:(isDailyMode()?(!dailyStarted||solved||allLocked):(solved||allLocked)));
@@ -3998,8 +3999,8 @@ function chooseClosestAnswerOrientation(){
 }
 function commitVowelOrientation(){
   if(hintOrientationInverted===null)hintOrientationInverted=chooseClosestAnswerOrientation();
-  const locked=tiles.find(t=>isLockedStartTile(t)&&!isHorizontalTile(t));
-  if(locked&&!locked.locked){locked.locked=true;locked.flipAnim=""}
+  // In Vowels mode, the position-locked tile remains flippable throughout.
+  // The vowel overlay orientation is only a visual hint, not a hard lock.
 }
 function vowelAt(slot,topRow=true){
   const p=currentPuzzle();
@@ -4025,7 +4026,7 @@ function hideVowelReveal(renderNow=true){
 function showVowels(){
   if(!isNewMode()||solved)return;
   ensureGameStarted();
-  if(!isVowelsAvailable()){showInfoMessage("Vowels available at 1:00","vowels-waiting");return}
+  if(!isVowelsAvailable()){showInfoMessage("Vowels available at 0:10","vowels-waiting");return}
   if(vowelRevealActive){hideVowelReveal(true);saveNewModeProgress();return}
   commitVowelOrientation();
   vowelRevealActive=true;
