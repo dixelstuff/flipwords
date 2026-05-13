@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v3";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v5";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -3674,9 +3674,10 @@ function render(){
   hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
   const newModeClue=isNewMode();
-  const clueUnavailable=newModeClue&&!showDailyCompleteControls&&(solved||!isClueAvailable());
-  hintBtn.classList.toggle("vowels-mode",newModeClue&&!showDailyCompleteControls&&!clueUnavailable);
-  hintBtn.classList.toggle("vowels-unavailable",clueUnavailable);
+  const clueUnlocked=newModeClue&&!showDailyCompleteControls&&!solved&&isClueAvailable();
+  const clueMuted=newModeClue&&!showDailyCompleteControls&&(solved||!clueUnlocked);
+  hintBtn.classList.toggle("vowels-mode",newModeClue&&!showDailyCompleteControls&&clueUnlocked);
+  hintBtn.classList.toggle("vowels-unavailable",clueMuted);
   hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(newModeClue?"Clue":"Hint");
   hintBtn.disabled=showDailyCompleteControls?false:(newModeClue?false:(isDailyMode()?(!dailyStarted||solved||allLocked):(solved||allLocked)));
   const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
@@ -4212,16 +4213,20 @@ function startClueAvailabilityTimer(){
 }
 function showClue(){
   if(!isNewMode())return;
-  if(!solved){
-    ensureGameStarted();
-    if(!isClueAvailable()){
-      showClueCountdownMessage();
-      return;
-    }
+  const p=currentPuzzle();
+  const clue=puzzleClues[p&&p.id]||"";
+  if(!clue){showInfoMessage("No clue for this puzzle","clue-missing");return}
+  if(solved){
+    clearClueCountdownMessage();
+    showInfoMessage(clue,"clue-shown",20000);
+    return;
+  }
+  ensureGameStarted();
+  if(!isClueAvailable()){
+    showClueCountdownMessage();
+    return;
   }
   clearClueCountdownMessage();
-  const clue=puzzleClues[currentPuzzle()?.id]||"";
-  if(!clue){showInfoMessage("No clue for this puzzle","clue-missing");return}
   showInfoMessage(clue,"clue-shown",20000);
   saveNewModeProgress();
 }
