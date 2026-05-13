@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.hint.vowels-mode{color:var(--ink);background:var(--soft);box-shadow:none}.hint.vowels-mode::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -2702,6 +2702,64 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles=[
+  ["bolts-shear","shear","bolts","rehab","slots",4,"","","",33],
+  ["dark-mess","dark","mess","desk","mars",2,"","","",2],
+  ["clips-viral","viral","clips","crisp","villa",4,"","","",22],
+  ["down-glue","glue","down","lung","owed",2,"","","",6],
+  ["bones-rifle","rifle","bones","fires","noble",4,"","","",11],
+  ["most-show","show","most","toss","whom",3,"","","",23],
+  ["pools-shine","pools","shine","phone","soils",2,"","","",3],
+  ["meat-prod","prod","meat","drop","team",2,"","","",19],
+  ["boost-claws","claws","boost","blows","coast",2,"","","",3],
+  ["case-kale","kale","case","lace","sake",3,"","","",8],
+  ["deal-kink","kink","deal","kind","leak",3,"","","cannot be reversed",23],
+  ["dewy-nuts","dewy","nuts","duty","news",2,"","","",2],
+  ["cover-video","video","cover","drove","voice",5,"","","",28],
+  ["code-deny","deny","code","eddy","once",2,"cody","dene","",6],
+  ["hello-paste","paste","hello","holes","petal",3,"","","",19],
+  ["gosh-pipe","gosh","pipe","pope","sigh",3,"","","",15],
+  ["owns-silk","owns","silk","owls","sink",1,"","","",1],
+  ["paced-right","right","paced","patch","ridge",3,"","","",11],
+  ["camp-dupe","dupe","camp","cape","dump",2,"","","",1],
+  ["actor-teeth","teeth","actor","teach","otter",4,"","","",20],
+  ["date-safe","safe","date","deaf","seat",2,"","","",7],
+  ["queen-spill","queen","spill","quell","spine",3,"","","",8],
+  ["felt-hard","felt","hard","fart","held",2,"","","",2],
+  ["blame-dream","blame","dream","amber","medal",4,"","","",25],
+  ["dull-idea","dull","idea","idle","dual",2,"aldi","leud","",5],
+  ["soda-thin","soda","thin","dash","into",3,"","","",18],
+  ["kick-long","long","kick","king","lock",2,"","","",1],
+  ["brush-tooth","tooth","brush","shout","throb",5,"","","",29],
+  ["dump-jeep","dump","jeep","deep","jump",1,"","","",0],
+  ["dared-viper","viper","dared","paved","rider",4,"","","",12],
+  ["huge-part","huge","part","page","hurt",2,"","","",1],
+  ["nifty-tasks","nifty","tasks","fatty","sinks",4,"","","",16],
+  ["seek-term","seek","term","trek","seem",2,"","","",6],
+  ["scuba-token","scuba","token","about","necks",5,"","","",32],
+  ["races-slick","slick","races","crack","isles",3,"","","",12],
+  ["fast-monk","fast","monk","mask","font",2,"","","",2],
+  ["panda-wires","panda","wires","award","spine",3,"","","",10],
+  ["free-trim","free","trim","fire","term",2,"","","",5],
+  ["leads-raven","raven","leads","nerve","salad",3,"","","",20],
+  ["mite-plan","mite","plan","mint","plea",2,"","","",5],
+  ["plush-sleep","plush","sleep","helps","pulse",4,"","","",25],
+  ["atoms-pearl","pearl","atoms","maple","roast",4,"","","",28],
+  ["math-type","type","math","myth","tape",1,"","","",1],
+  ["robot-solve","robot","solve","boots","lover",3,"","","",10],
+  ["moth-wire","moth","wire","more","with",2,"","","",1],
+  ["finer-gifts","finer","gifts","stiff","reign",4,"","","",29],
+  ["dock-size","dock","size","doze","sick",2,"","","",1],
+  ["goats-sense","sense","goats","tease","songs",4,"","","",25],
+  ["frost-solar","solar","frost","flora","sorts",3,"","","",21],
+  ["deep-hilt","hilt","deep","diet","help",2,"","","",3],
+  ["force-snail","snail","force","final","score",2,"","","",6],
+  ["clue-tank","tank","clue","ante","luck",2,"","","",7],
+  ["fresh-slate","fresh","slate","shelf","tears",4,"","","",20],
+  ["grow-load","load","grow","drag","wool",4,"","","",26],
+  ["beat-loop","loop","beat","boot","leap",2,"","","",2],
+  ["prism-reset","prism","reset","prime","rests",2,"","","",5],
+  ["deny-tick","deny","tick","tiny","deck",2,"","","",1],
+  ["chair-singe","singe","chair","cigar","shine",3,"","","",8],
   ["tired-whale","tired","whale","where","tidal",3,"","","",8],
   ["beds-envy","beds","envy","bevy","ends",2,"","","",1],
   ["fatty-kings","fatty","kings","fangs","kitty",2,"","","",1],
@@ -2742,6 +2800,64 @@ const clueTestPuzzles=[
 ];
 
 const puzzleClues={
+  "bolts-shear":"recovery project · narrow openings",
+  "dark-mess":"work surface · red planet",
+  "clips-viral":"sharp bite · holiday house",
+  "down-glue":"breathing bag · unpaid but due",
+  "bones-rifle":"shoots off · high-born",
+  "most-show":"fling away · mystery person",
+  "pools-shine":"pocket caller · garden dirt",
+  "meat-prod":"sudden fall · working group",
+  "boost-claws":"windy strikes · seaside edge",
+  "case-kale":"delicate thread · rice drink",
+  "deal-kink":"nice sort · little drip",
+  "dewy-nuts":"should do · fresh reports",
+  "cover-video":"car journey · spoken sound",
+  "code-deny":"little whirlpool · one time",
+  "hello-paste":"gaps and burrows · flower part",
+  "gosh-pipe":"holy figure · breathy regret",
+  "owns-silk":"night birds · goes under",
+  "paced-right":"repair square · rocky edge",
+  "camp-dupe":"headland · big fall",
+  "actor-teeth":"passes on knowledge · river swimmer",
+  "date-safe":"can’t hear · sitting place",
+  "queen-spill":"quiet down · back ridge",
+  "felt-hard":"rude little blast · kept close",
+  "blame-dream":"warm jewel · award disc",
+  "dull-idea":"still waiting · two-in-one",
+  "soda-thin":"quick line · inside direction",
+  "kick-long":"royal piece · shut tight",
+  "brush-tooth":"loud call · chest thump",
+  "dump-jeep":"not shallow · sudden rise",
+  "dared-viper":"laid down stones · rider on two wheels",
+  "huge-part":"printed leaf · sore feeling",
+  "nifty-tasks":"greasy word · goes down",
+  "seek-term":"mountain walk · looks likely",
+  "scuba-token":"roughly speaking · collar zones",
+  "races-slick":"hard break · little islands",
+  "fast-monk":"face cover · printed style",
+  "panda-wires":"prize word · back ridge",
+  "free-trim":"small blaze · school stretch",
+  "leads-raven":"sensitive line · picnic green",
+  "mite-plan":"fresh flavour · humble request",
+  "plush-sleep":"lends a hand · heartbeat feeling",
+  "atoms-pearl":"sweet tree · Sunday dinner",
+  "math-type":"old story · sticky strip",
+  "robot-solve":"footwear · sweetheart",
+  "moth-wire":"extra bit · together with",
+  "finer-gifts":"rigid fabric · royal rule",
+  "dock-size":"almost sleep · feeling ill",
+  "goats-sense":"gentle bait · radio tracks",
+  "frost-solar":"plant life · neat categories",
+  "deep-hilt":"food plan · give aid",
+  "force-snail":"last round · game tally",
+  "clue-tank":"poker payment · good fortune",
+  "fresh-slate":"wall ledge · salty drops",
+  "grow-load":"pulling drag · sheep coat",
+  "beat-loop":"shoe shape · jump away",
+  "prism-reset":"top number · takes a break",
+  "deny-tick":"small thing · card stack",
+  "chair-singe":"smoky roll · bright surface",
   "tired-whale":"location question · moon-pulled",
   "beds-envy":"group of beauties · finishes",
   "fatty-kings":"vampire teeth · catty cutie",
@@ -3846,7 +3962,7 @@ function noteInteraction(){interactionCount++;returnedToStartNoticeShown=false;b
 function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved&&!isAllWordsMode())||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
 function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if((solved&&!isAllWordsMode())||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if((!solved||isAllWordsMode())&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAllWordsMode())||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
-function showInfoMessage(text,type="info"){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info");message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},4000)}
+function showInfoMessage(text,type="info",duration=4000){if(infoMessageTimer)clearTimeout(infoMessageTimer);message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info");message.style.animationDuration="";message.textContent=text;message.dataset.infoType=type;void message.offsetWidth;if(duration!==4000)message.style.animationDuration=`${duration}ms`;message.classList.add("info");infoMessageTimer=setTimeout(()=>{message.classList.remove("info");message.style.animationDuration="";message.dataset.infoType="";if(!solved)message.textContent="";infoMessageTimer=null},duration)}
 function resetToStartingWords(){
   if(solved||hintsUsed>0)return;
   clearDragProxy();
@@ -4049,45 +4165,42 @@ function useHint(opts={}){if(isNewMode()){showClue();return}if(isAllWordsMode())
 
 
 
+function formatClueCountdown(ms){
+  const seconds=Math.max(0,Math.ceil(ms/1000));
+  const mins=Math.floor(seconds/60);
+  const secs=seconds%60;
+  return `${mins}:${String(secs).padStart(2,"0")}`;
+}
 function isClueAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=CLUE_UNLOCK_MS}
 function startClueAvailabilityTimer(){
   if(!isNewMode()||solved||gameStartDeferred)return;
   if(vowelAvailabilityTimer){clearTimeout(vowelAvailabilityTimer);vowelAvailabilityTimer=null}
   const remaining=CLUE_UNLOCK_MS-getActivePuzzleElapsedMs();
   if(remaining<=0){
-    if(!vowelAvailableNotified){vowelAvailableNotified=true;showInfoMessage("Free clue now active","clue-available")}
+    if(!vowelAvailableNotified){vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available")}
     render();saveNewModeProgress();return;
   }
   vowelAvailabilityTimer=setTimeout(()=>{
     vowelAvailabilityTimer=null;
-    if(isNewMode()&&!solved&&!gameStartDeferred){vowelAvailableNotified=true;showInfoMessage("Free clue now active","clue-available");render();saveNewModeProgress()}
+    if(isNewMode()&&!solved&&!gameStartDeferred){vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");render();saveNewModeProgress()}
   },remaining);
 }
 function showClue(){
   if(!isNewMode()||solved)return;
   ensureGameStarted();
-  if(!isClueAvailable()){showInfoMessage("Clue available at 0:10","clue-waiting");return}
+  if(!isClueAvailable()){
+    const remaining=CLUE_UNLOCK_MS-getActivePuzzleElapsedMs();
+    showInfoMessage(`Clue available in ${formatClueCountdown(remaining)}`,"clue-waiting");
+    return;
+  }
   const clue=puzzleClues[currentPuzzle()?.id]||"";
   if(!clue){showInfoMessage("No clue for this puzzle","clue-missing");return}
-  showInfoMessage(`Clue: ${clue}`,"clue-shown");
+  showInfoMessage(clue,"clue-shown",10000);
   saveNewModeProgress();
 }
 
-function isVowelsAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=VOWELS_UNLOCK_MS}
+function isVowelsAvailable(){return false}
 function clearVowelTimers(){if(vowelRevealTimer){clearTimeout(vowelRevealTimer);vowelRevealTimer=null}if(vowelAvailabilityTimer){clearTimeout(vowelAvailabilityTimer);vowelAvailabilityTimer=null}}
-function startClueAvailabilityTimer(){
-  if(!isNewMode()||solved||gameStartDeferred)return;
-  if(vowelAvailabilityTimer){clearTimeout(vowelAvailabilityTimer);vowelAvailabilityTimer=null}
-  const remaining=VOWELS_UNLOCK_MS-getActivePuzzleElapsedMs();
-  if(remaining<=0){
-    if(!vowelAvailableNotified){vowelAvailableNotified=true;showInfoMessage("Vowel positions available","vowels-available")}
-    render();saveNewModeProgress();return;
-  }
-  vowelAvailabilityTimer=setTimeout(()=>{
-    vowelAvailabilityTimer=null;
-    if(isNewMode()&&!solved&&!gameStartDeferred){vowelAvailableNotified=true;showInfoMessage("Vowel positions available","vowels-available");render();saveNewModeProgress()}
-  },remaining);
-}
 function currentOrientationScore(inverted=false){
   const p=currentPuzzle(),w=currentWords();
   const topTarget=inverted?p.answer2:p.answer1,bottomTarget=inverted?p.answer1:p.answer2;
