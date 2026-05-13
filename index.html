@@ -3872,7 +3872,13 @@ function handlePointerMove(e){
     }
     return;
   }
-  if(isLockedStartTile(t)){return}
+  if(isLockedStartTile(t)){
+    if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){
+      dragState.hasDragged=true;
+      dragState.dragMode="locked-start";
+    }
+    return;
+  }
   if(!dragState.hasDragged&&Math.hypot(dx,dy)>7){dragState.hasDragged=true;createDragProxy(dragState.tileSnapshot,dragState.x,dragState.y,dragState.width,dragState.height);render()}
   if(dragState.hasDragged){moveDragProxy(dragState.x,dragState.y);liveReorderFromX(e.clientX,dragState.tileId)}
 }
