@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.clue-inactive-yellow{opacity:.56;box-shadow:0 2px 8px rgba(122,93,0,.06)}.hint.clue-inactive-yellow::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v11";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v12";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -81,6 +81,10 @@ const DAILY_FINAL_MODAL_DELAY_MS=3500;
 const CLUE_FIRST_UNLOCK_MS=30000;
 const CLUE_SECOND_UNLOCK_MS=60000;
 const CLUE_UNLOCK_MS=CLUE_FIRST_UNLOCK_MS;
+const CLUE_DOUBLE_TAP_MS=450;
+const CLUE_SKIP_HELPER_TEXT="Double tap Clue to skip wait";
+const CLUE_TIME_TRAVEL_TEXT="Clue unlocked via time travel";
+const CLUE_HELP_SESSION_KEY="flipwords:clueSkipHelpSeen:v1";
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
 const VOWELS_REVEAL_MS=6000; // dormant old experiment
 
@@ -2704,95 +2708,94 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["data-town","data","town","toad","want",3,"","","",18],
-  ["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
-  ["east-wind","east","wind","dawn","ties",3,"","","",19],
-  ["grab-milk","grab","milk","glib","mark",3,"","","",9],
-  ["elder-necks","elder","necks","dense","clerk",5,"","","",28],
-  ["hike-were","hike","were","heir","week",2,"","","",8],
-  ["bar-row","bar","row","rob","war",3,"","","",14],
-  ["glue-roof","glue","roof","goof","rule",2,"","","",8],
-  ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
-  ["love-vast","vast","love","save","volt",3,"","","",8],
-  ["arise-spoon","spoon","arise","piano","roses",4,"","","",24],
-  ["rift-tube","rift","tube","butt","fire",3,"","","",8],
-  ["happy-legit","legit","happy","apply","eight",3,"","","",9],
-  ["heel-ploy","ploy","heel","holy","peel",2,"","","cannot be reversed",8],
-  ["key-tap","key","tap","yak","pet",3,"","","",14],
-  ["logo-nose","logo","nose","gone","solo",3,"","","",9],
-  ["aside-tuned","aside","tuned","adieu","tends",3,"","","",9],
-  ["game-mice","game","mice","mime","cage",3,"","","",9],
-  ["carol-sushi","sushi","carol","chair","souls",4,"","","",20],
-  ["city-dark","dark","city","rack","tidy",3,"","","",8],
-  ["belly-state","belly","state","bleat","style",4,"","","",23],
-  ["blues-scale","blues","scale","clubs","lease",4,"","","",13],
-  ["bit-own","own","bit","nib","two",3,"","","",10],
-  ["gangs-taupe","taupe","gangs","gauge","pants",4,"","","",25],
-  ["seem-true","seem","true","teem","sure",2,"","","",8],
-  ["cider-space","space","cider","speed","circa",4,"","","",16],
-  ["mint-uses","mint","uses","mess","unit",2,"","","",8],
-  ["blast-tires","blast","tires","salts","tribe",5,"","","",32],
-  ["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
-  ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
-  ["cube-pork","pork","cube","buck","rope",3,"","","",8],
-  ["march-peach","peach","march","charm","cheap",3,"","","",21],
-  ["gala-over","gala","over","gave","oral",3,"","","",9],
-  ["space-world","space","world","crowd","lapse",4,"","","",21],
-  ["flee-silt","silt","flee","else","lift",3,"","","",8],
-  ["toy-yes","toy","yes","soy","yet",3,"","","",14],
-  ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
-  ["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
-  ["dice-lord","dice","lord","cold","ride",3,"","","",9],
-  ["brake-force","brake","force","farce","broke",3,"","","",8],
-  ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
-  ["dad-nor","nor","dad","don","rad",3,"dan","rod","",10]
+  ["cutie-short","short","cutie","tours","ethic",4,"","","",33],
+  ["sent-taxi","sent","taxi","ants","exit",2,"","","",8],
+  ["opera-waste","opera","waste","aware","poets",5,"","","",26],
+  ["bat-owl","owl","bat","lab","two",3,"","","",10],
+  ["stern-toast","stern","toast","tarot","nests",4,"","","",28],
+  ["fawn-slim","fawn","slim","film","swan",2,"","","",8],
+  ["hotel-tasks","hotel","tasks","stalk","those",3,"","","",20],
+  ["port-ride","port","ride","dirt","rope",3,"","","",8],
+  ["vital-whale","vital","whale","wheat","villa",4,"","","",16],
+  ["bee-raw","raw","bee","web","ear",3,"","","",10],
+  ["real-tiny","real","tiny","lint","year",3,"","","",23],
+  ["lets-swam","swam","lets","laws","stem",3,"","","",9],
+  ["boost-surge","surge","boost","sober","gusto",5,"","","",26],
+  ["farm-trip","farm","trip","firm","trap",3,"","","",9],
+  ["disco-elect","disco","elect","cited","close",5,"","","",24],
+  ["die-ram","ram","die","ear","mid",3,"","","",10],
+  ["core-vast","vast","core","acts","over",3,"","","",20],
+  ["horse-theft","horse","theft","forth","sheet",4,"","","",26],
+  ["cash-gift","cash","gift","sigh","fact",4,"","","",13],
+  ["own-wet","wet","own","new","two",3,"","","",10],
+  ["neat-sums","neat","sums","mess","aunt",3,"","","",15],
+  ["lousy-seats","lousy","seats","souls","yeast",3,"","","",23],
+  ["mass-step","mass","step","stem","pass",4,"","","",23],
+  ["doc-pug","pug","doc","cup","god",3,"","","",10],
+  ["show-tear","show","tear","rote","wash",3,"","","",19],
+  ["lard-time","lard","time","mild","rate",4,"","","",12],
+  ["sung-what","sung","what","thaw","guns",2,"","","",19],
+  ["done-soul","soul","done","loud","eons",3,"","","",23],
+  ["rich-town","rich","town","corn","with",4,"","","",13],
+  ["neon-wolf","neon","wolf","flew","noon",4,"","","",23],
+  ["pet-soy","soy","pet","top","yes",3,"","","",14],
+  ["melt-peak","melt","peak","kelp","team",3,"","","",22],
+  ["mars-solo","mars","solo","lass","room",4,"","","",15],
+  ["deep-when","when","deep","phew","need",3,"","","",23],
+  ["less-soft","soft","less","self","toss",3,"","","",21],
+  ["rush-taco","taco","rush","chat","sour",3,"","","",18],
+  ["bow-gel","gel","bow","log","web",3,"","","",14],
+  ["meat-tuna","tuna","meat","aunt","team",2,"","","",19],
+  ["dash-tool","tool","dash","hood","last",4,"","","",23],
+  ["page-rich","rich","page","gear","chip",3,"","","",19],
+  ["foul-peas","foul","peas","soup","leaf",4,"","","",23],
+  ["real-sofa","real","sofa","fare","also",4,"","","",20]
 ];
 
-  const puzzleClues = {
-  "data-town": "pond hopper · strong desire",
-  "norms-outer": "radio adjuster · living spaces",
-  "east-wind": "first light · neckwear",
-  "grab-milk": "slick talk · leave a mark",
-  "elder-necks": "packed closely · office worker",
-  "hike-were": "family successor · calendar block",
-  "bar-row": "steal roughly · open conflict",
-  "glue-roof": "silly mistake · guiding principle",
-  "glare-skies": "soaring hunter · dangerous chances",
-  "love-vast": "rescue act · electric measure",
-  "arise-spoon": "keyboard music · garden blooms",
-  "rift-tube": "rear end · open flame",
-  "happy-legit": "put to use · after seven",
-  "heel-ploy": "sacred feeling · outer layer",
-  "key-tap": "hairy ox · small animal",
-  "logo-nose": "vanished away · single act",
-  "aside-tuned": "vowel run · leans toward",
-  "game-mice": "silent acting · animal pen",
-  "carol-sushi": "seat support · departed spirits",
-  "city-dark": "storage frame · neat order",
-  "belly-state": "sheep sound · personal manner",
-  "blues-scale": "nightclub gear · temporary hold",
-  "bit-own": "small bite · number pair",
-  "gangs-taupe": "measuring face · leg covers",
-  "seem-true": "gather thickly · quite certain",
-  "cider-space": "fast motion · around then",
-  "mint-uses": "untidy scene · single thing",
-  "blast-tires": "seasoning grains · clan group",
-  "cafe-tart": "going price · true detail",
-  "pup-too": "not inside · loud burst",
-  "cube-pork": "male deer · climbing line",
-  "march-peach": "winning quality · low-cost",
-  "gala-over": "handed over · spoken test",
-  "space-world": "gathered people · brief failure",
-  "flee-silt": "otherwise · upward pull",
-  "toy-yes": "bean sauce · still now",
-  "balm-good": "pleased feeling · deep sound",
-  "corgi-spots": "plain awful · discussion point",
-  "dice-lord": "low temperature · horseback trip",
-  "brake-force": "comic pretence · no longer whole",
-  "heal-pigs": "spring forward · weary sound",
-  "dad-nor": "not do · rebellious cool"
+const puzzleClues = {
+  "cutie-short": "guided visits · moral code",
+  "sent-taxi": "picnic invaders · way out",
+  "opera-waste": "quietly knowing · verse makers",
+  "bat-owl": "science room · number pair",
+  "stern-toast": "card reader’s deck · hidden homes",
+  "fawn-slim": "screen story · lake bird",
+  "hotel-tasks": "follows too closely · those ones",
+  "port-ride": "earthy mess · climbing line",
+  "vital-whale": "bread grain · holiday house",
+  "bee-raw": "spider’s work · listening bit",
+  "real-tiny": "pocket fluff · calendar stretch",
+  "lets-swam": "rules of land · plant middle",
+  "boost-surge": "clear-headed · bold spirit",
+  "farm-trip": "solid business · hidden snare",
+  "disco-elect": "named as proof · draw near",
+  "die-ram": "listening bit · halfway point",
+  "core-vast": "small deeds · finished with",
+  "horse-theft": "onward direction · bed linen",
+  "cash-gift": "tired breath · true detail",
+  "own-wet": "freshly made · number pair",
+  "neat-sums": "untidy scene · family elder",
+  "lousy-seats": "departed spirits · baker’s helper",
+  "mass-step": "plant middle · permission slip",
+  "doc-pug": "drinking vessel · higher power",
+  "show-tear": "learned by heart · rinse clean",
+  "lard-time": "gentle weather · going price",
+  "sung-what": "winter melt · weapons",
+  "done-soul": "turned up loud · long ages",
+  "rich-town": "cob treasure · together with",
+  "neon-wolf": "took wing · midday",
+  "pet-soy": "highest point · agreement word",
+  "melt-peak": "sea tangle · working group",
+  "mars-solo": "young woman · private chamber",
+  "deep-when": "relief sound · pressing want",
+  "less-soft": "inner person · thrown away",
+  "rush-taco": "small talk · sharp taste",
+  "bow-gel": "fallen timber · spider’s work",
+  "meat-tuna": "family elder · working group",
+  "dash-tool": "covering top · final one",
+  "page-rich": "turning wheels · tiny circuit",
+  "foul-peas": "warm bowl · tree page",
+  "real-sofa": "travel price · as well"
 };
-
 
 const allWordsRows=[
 ["bucks-layer","layer","bucks","buyer","lacks",2,"","","",1,11,"backs|brace|clear|clues|cruel|cubes|early|laces|relay|scale|slack"],
@@ -2829,8 +2832,8 @@ let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAw
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
-let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,vowelAvailableNotified=false;
-let clueRevealStage=0,clueFirstAvailableNotified=false,clueSecondAvailableNotified=false;
+let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueTimeTravelRevealTimer=null,vowelAvailableNotified=false;
+let clueRevealStage=0,clueFirstAvailableNotified=false,clueSecondAvailableNotified=false,lastClueTapAt=0;
 let statsDetailsShown=false,dailyModalMode="stats";
 let cachedGameState=null;
 let gameStartDeferred=false;
@@ -3573,9 +3576,11 @@ function render(){
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
   const newModeClue=isNewMode();
   const clueUnlocked=newModeClue&&!showDailyCompleteControls&&!solved&&isClueAvailable();
-  const clueMuted=newModeClue&&!showDailyCompleteControls&&(solved||!clueUnlocked);
-  hintBtn.classList.toggle("vowels-mode",newModeClue&&!showDailyCompleteControls&&clueUnlocked);
-  hintBtn.classList.toggle("vowels-unavailable",clueMuted);
+  const clueSoftMuted=newModeClue&&!showDailyCompleteControls&&solved;
+  const clueInactiveYellow=newModeClue&&!showDailyCompleteControls&&!solved&&!clueUnlocked;
+  hintBtn.classList.toggle("vowels-mode",newModeClue&&!showDailyCompleteControls&&!solved);
+  hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
+  hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
   hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(newModeClue?"Clue":"Hint");
   hintBtn.disabled=showDailyCompleteControls?false:(newModeClue?false:(isDailyMode()?(!dailyStarted||solved||allLocked):(solved||allLocked)));
   const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
@@ -3879,13 +3884,14 @@ function showInfoMessage(text,type="info",duration=4000){
 }
 function clearStaticMessage(){
   clearClueCountdownMessage();
+  clearClueSkipHelperTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
   message.classList.remove("info","clue-static","fadeout");
   message.dataset.infoType="";
   message.style.animationDuration="";
   message.textContent="";
 }
-function showStaticInfoMessage(text,type="info",duration=7000){
+function showStaticInfoMessage(text,type="info",duration=7000,opts={}){
   clearClueCountdownMessage();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
   message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","fadeout");
@@ -3898,10 +3904,12 @@ function showStaticInfoMessage(text,type="info",duration=7000){
   infoMessageTimer=setTimeout(()=>{
     message.classList.add("fadeout");
     infoMessageTimer=setTimeout(()=>{
+      const wasType=message.dataset.infoType;
       message.classList.remove("clue-static","fadeout");
       message.dataset.infoType="";
       if(!solved)message.textContent="";
       infoMessageTimer=null;
+      if(opts&&opts.offerSkipHelpAfter&&wasType==="clue-shown")maybeQueueClueSkipHelper(180);
     },480);
   },duration);
 }
@@ -4128,9 +4136,65 @@ function currentSplitClue(){
 function firstClueAvailable(){return isNewMode()&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=CLUE_FIRST_UNLOCK_MS}
 function secondClueAvailable(){return isNewMode()&&!gameStartDeferred&&currentSplitClue().hasTwo&&getActivePuzzleElapsedMs()>=CLUE_SECOND_UNLOCK_MS}
 function isClueAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&firstClueAvailable()}
+function clueSkipHelpSeen(){try{return sessionStorage.getItem(CLUE_HELP_SESSION_KEY)==="1"}catch{return true}}
+function markClueSkipHelpSeen(){try{sessionStorage.setItem(CLUE_HELP_SESSION_KEY,"1")}catch{}}
+function clearClueSkipHelperTimer(){
+  if(clueSkipHelperTimer){clearTimeout(clueSkipHelperTimer);clueSkipHelperTimer=null}
+}
 function clearClueCountdownMessage(){
   if(clueCountdownTimer){clearInterval(clueCountdownTimer);clueCountdownTimer=null}
   if(clueCountdownHideTimer){clearTimeout(clueCountdownHideTimer);clueCountdownHideTimer=null}
+}
+function getNextClueSkipTargetMs(){
+  if(!isNewMode()||solved||gameStartDeferred)return null;
+  const c=currentSplitClue();
+  if(!firstClueAvailable())return CLUE_FIRST_UNLOCK_MS;
+  if(clueRevealStage>=1&&c.hasTwo&&!secondClueAvailable())return CLUE_SECOND_UNLOCK_MS;
+  return null;
+}
+function maybeQueueClueSkipHelper(delay=0){
+  clearClueSkipHelperTimer();
+  if(clueSkipHelpSeen())return;
+  clueSkipHelperTimer=setTimeout(()=>{
+    clueSkipHelperTimer=null;
+    if(clueSkipHelpSeen()||!isNewMode()||solved||gameStartDeferred)return;
+    const target=getNextClueSkipTargetMs();
+    if(target===null)return;
+    const remaining=target-getActivePuzzleElapsedMs();
+    if(remaining<=10000)return;
+    markClueSkipHelpSeen();
+    showStaticInfoMessage(CLUE_SKIP_HELPER_TEXT,"clue-skip-help",3500,{allowHelper:false});
+  },delay);
+}
+function jumpActivePuzzleElapsedTo(targetMs){
+  const now=performance.now();
+  if(getActivePuzzleElapsedMs()>=targetMs)return;
+  activePuzzleElapsedMs=targetMs;
+  if(activePuzzleStartedAt!==null)activePuzzleStartedAt=now;
+}
+function revealClueAfterTimeTravel(targetMs){
+  if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}
+  clearClueCountdownMessage();
+  clearClueSkipHelperTimer();
+  jumpActivePuzzleElapsedTo(targetMs);
+  if(targetMs>=CLUE_FIRST_UNLOCK_MS){
+    clueFirstAvailableNotified=true;
+    vowelAvailableNotified=true;
+    clueRevealStage=Math.max(clueRevealStage,1);
+  }
+  if(targetMs>=CLUE_SECOND_UNLOCK_MS&&currentSplitClue().hasTwo){
+    clueSecondAvailableNotified=true;
+    clueRevealStage=2;
+  }
+  render();
+  saveNewModeProgress();
+  showInfoMessage(CLUE_TIME_TRAVEL_TEXT,"clue-time-travel",900);
+  clueTimeTravelRevealTimer=setTimeout(()=>{
+    clueTimeTravelRevealTimer=null;
+    if(!isNewMode()||solved)return;
+    showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000);
+    startClueAvailabilityTimer();
+  },950);
 }
 function showClueCountdownMessage(){
   if(message.dataset.infoType==="clue-waiting"){
@@ -4138,7 +4202,9 @@ function showClueCountdownMessage(){
     return;
   }
   clearClueCountdownMessage();
+  clearClueSkipHelperTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
+  const remainingAtStart=CLUE_FIRST_UNLOCK_MS-getActivePuzzleElapsedMs();
   message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-static","fadeout");
   message.dataset.infoType="clue-waiting";
   message.style.animationDuration="";
@@ -4167,6 +4233,7 @@ function showClueCountdownMessage(){
           message.classList.remove("clue-static","fadeout");
           message.dataset.infoType="";
           if(!solved)message.textContent="";
+          if(remainingAtStart>10000)maybeQueueClueSkipHelper(180);
         }
         infoMessageTimer=null;
       },480);
@@ -4211,9 +4278,20 @@ function getClueDisplayText(forceFull=false){
 }
 function showClue(){
   if(!isNewMode())return;
+  const now=performance.now();
+  const isDoubleTap=now-lastClueTapAt<=CLUE_DOUBLE_TAP_MS;
+  lastClueTapAt=now;
   const p=currentPuzzle();
   const raw=puzzleClues[p&&p.id]||"";
   if(!raw){showInfoMessage("No clue for this puzzle","clue-missing");return}
+  if(!solved&&isDoubleTap){
+    const target=getNextClueSkipTargetMs();
+    if(target!==null){
+      ensureGameStarted();
+      revealClueAfterTimeTravel(target);
+      return;
+    }
+  }
   if(message.dataset.infoType==="clue-shown"){
     clearStaticMessage();
     return;
@@ -4228,6 +4306,7 @@ function showClue(){
     return;
   }
   clearClueCountdownMessage();
+  clearClueSkipHelperTimer();
   if(secondClueAvailable()){
     clueRevealStage=2;
     clueSecondAvailableNotified=true;
@@ -4236,7 +4315,9 @@ function showClue(){
   }
   clueFirstAvailableNotified=true;
   vowelAvailableNotified=true;
-  showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000);
+  const target=getNextClueSkipTargetMs();
+  const shouldOfferSkip=target!==null&&(target-getActivePuzzleElapsedMs()>10000);
+  showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000,{offerSkipHelpAfter:shouldOfferSkip});
   saveNewModeProgress();
   startClueAvailabilityTimer();
 }
@@ -4319,8 +4400,8 @@ function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(i
 function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(returnedToStartTimer);returnedToStartTimer=null}}
 function clearSingleStartWordTimer(){if(singleStartWordTimer){clearTimeout(singleStartWordTimer);singleStartWordTimer=null}}
 function clearNoticeTimer(){if(noticeTimer){clearTimeout(noticeTimer);noticeTimer=null}}
-function clearInfoMessage(clearText=true){clearClueCountdownMessage();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info","clue-static","fadeout");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved)message.textContent=""}
-function clearAllTimers(){clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();hideVowelReveal(false);clearVowelTimers();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();clearDailyCountdownTimer();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}stopAutoHintTimer()}
+function clearInfoMessage(clearText=true){clearClueCountdownMessage();clearClueSkipHelperTimer();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info","clue-static","fadeout");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved)message.textContent=""}
+function clearAllTimers(){clearClueSkipHelperTimer();if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();hideVowelReveal(false);clearVowelTimers();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();clearDailyCountdownTimer();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}stopAutoHintTimer()}
 
 function jumpToNextDailyForTesting(){
   if(!isDailyMode()||!dailyCurrentCompleted)return false;
