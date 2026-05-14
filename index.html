@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.clue-time-pop{position:fixed;z-index:100001;left:0;top:0;pointer-events:none;color:var(--muted);font-size:15px;font-weight:850;line-height:1;transform:translate(-50%,-50%);animation:clue-time-pop 1.25s ease-out forwards;text-shadow:0 1px 0 rgba(255,255,255,.65)}@keyframes clue-time-pop{0%{opacity:0;transform:translate(-50%,-15%) scale(.92)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}100%{opacity:0;transform:translate(-50%,-185%) scale(1)}}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.clue-inactive-yellow{opacity:.56;box-shadow:0 2px 8px rgba(122,93,0,.06)}.hint.clue-inactive-yellow::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.message.clue-fadeout-in-place{animation:clue-fadeout-in-place .34s ease-out forwards}.message.clue-fadein-in-place{animation:clue-fadein-in-place .34s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.clue-time-pop{position:fixed;z-index:100001;left:0;top:0;pointer-events:none;color:#5c4700;background:var(--hint);border:1.5px solid var(--hint-border);border-radius:999px;padding:7px 11px;font-size:20px;font-weight:950;line-height:1;transform:translate(-50%,-50%);animation:clue-time-pop 1.55s cubic-bezier(.18,.9,.22,1) forwards;box-shadow:0 10px 24px rgba(122,93,0,.22),0 0 0 4px rgba(244,223,138,.42);text-shadow:0 1px 0 rgba(255,255,255,.65);letter-spacing:.01em}@keyframes clue-fadeout-in-place{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(0)}}@keyframes clue-fadein-in-place{0%{opacity:0;transform:translateY(0)}100%{opacity:1;transform:translateY(0)}}@keyframes clue-time-pop{0%{opacity:0;transform:translate(-50%,10%) scale(.72) rotate(-3deg)}14%{opacity:1;transform:translate(-50%,-45%) scale(1.24) rotate(2deg)}30%{opacity:1;transform:translate(-50%,-62%) scale(1) rotate(0deg)}76%{opacity:1;transform:translate(-50%,-150%) scale(1)}100%{opacity:0;transform:translate(-50%,-245%) scale(.92)}}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.clue-inactive-yellow{opacity:.56;box-shadow:0 2px 8px rgba(122,93,0,.06)}.hint.clue-inactive-yellow::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v15";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v16";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2706,51 +2706,51 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["glove-wears","wears","glove","worse","gavel",2,"","","",7],
-  ["fans-nude","nude","fans","nuns","fade",2,"","","",1],
-  ["class-talks","class","talks","salts","slack",3,"","","",22],
-  ["coin-rare","rare","coin","rain","core",2,"","","",1],
-  ["poles-trace","trace","poles","elope","carts",4,"","","",22],
-  ["oath-pink","pink","oath","oink","path",1,"","","",0],
-  ["dying-guilt","dying","guilt","guild","tying",4,"","","",24],
-  ["bust-coup","bust","coup","cusp","bout",2,"","","",2],
-  ["oar-tag","oar","tag","ago","art",2,"","","",7],
-  ["bait-sold","bait","sold","bolt","said",2,"","","",2],
-  ["lunar-resin","lunar","resin","ruins","learn",2,"","","",8],
-  ["call-time","call","time","till","came",2,"","","",1],
-  ["giant-sense","giant","sense","genes","stain",3,"","","",21],
-  ["city-tune","city","tune","cute","tiny",2,"","","",3],
-  ["cup-lot","cup","lot","lop","cut",1,"","","",0],
-  ["busy-jars","busy","jars","jury","bass",2,"","","",3],
-  ["marry-stone","marry","stone","mayor","stern",2,"","","",5],
   ["plan-wide","plan","wide","wind","plea",2,"","","",5],
   ["doubt-needs","doubt","needs","debut","nodes",2,"","","",7],
   ["dull-soda","dull","soda","dual","sold",2,"","","",5],
   ["arm-nee","nee","arm","era","men",3,"","","",10],
+  ["ears-seal","seal","ears","earl","seas",1,"","","",0],
+  ["brute-goals","brute","goals","gruel","boast",3,"","","",11],
+  ["bite-pony","pony","bite","bone","pity",2,"","","",2],
+  ["angel-carol","angel","carol","along","clear",3,"","","",18],
+  ["flea-thin","thin","flea","leaf","hint",1,"","","",3],
+  ["new-old","old","new","end","low",2,"","","",7],
+  ["gist-safe","safe","gist","sage","fist",4,"","","",13],
+  ["crush-flies","crush","flies","flush","cries",2,"","","",1],
+  ["door-tilt","tilt","door","riot","told",4,"","","cannot be reversed",26],
+  ["amend-worse","worse","amend","swore","named",1,"","","",3],
+  ["dyes-keep","dyes","keep","deep","keys",2,"","","cannot be reversed",8],
+  ["pay-tap","pay","tap","yap","pat",2,"","","",5],
+  ["bagel-sales","bagel","sales","gases","label",3,"","","",8],
+  ["hint-peak","peak","hint","pink","heat",2,"","","",2],
+  ["crisp-these","these","crisp","chips","trees",2,"","","",7],
+  ["maid-raid","maid","raid","arid","amid",1,"","","",3],
+  ["moral-seeds","moral","seeds","model","sears",3,"","","",8],
 ];
 
   const puzzleClues = {
-  "glove-wears": "judge’s hammer · turn sour",
-  "fans-nude": "convent crowd · lose colour",
-  "class-talks": "table crystals · loose line",
-  "coin-rare": "storm gift · inner part",
-  "poles-trace": "secret wedding · shopping wheels",
-  "oath-pink": "piglet sound · walking line",
-  "dying-guilt": "craft circle · making knots",
-  "bust-coup": "sharp corner · short fight",
-  "oar-tag": "back then · gallery stuff",
-  "bait-sold": "lightning fastener · spoken claim",
-  "lunar-resin": "fallen remains · take in knowledge",
-  "call-time": "up to now · arrived before",
-  "giant-sense": "family code · lasting mark",
-  "city-tune": "small charm · very small",
-  "cup-lot": "cut off · sharp slice",
-  "busy-jars": "courtroom panel · low notes",
-  "marry-stone": "town leader · hard-faced",
-  "plan-wide": "moving air · humble request",
-  "doubt-needs": "first appearance · network points",
-  "dull-soda": "two-sided · went at auction",
-  "arm-nee": "past age · grown males"
+  "plan-wide": "invisible shove · mercy request",
+  "doubt-needs": "opening night · network knots",
+  "dull-soda": "double nature · auction gone",
+  "arm-nee": "history slice · grown fellows",
+  "ears-seal": "ranked gent · rolling blue",
+  "brute-goals": "thin punishment · self trumpet",
+  "bite-pony": "skeleton piece · soft mercy",
+  "angel-carol": "by the way · cloudless",
+  "flea-thin": "tree page · quiet nudge",
+  "new-old": "closing edge · down below",
+  "gist-safe": "wise one · knuckle bundle",
+  "crush-flies": "sudden red · tear signals",
+  "door-tilt": "crowd chaos · passed along",
+  "amend-worse": "oath made · called out",
+  "dyes-keep": "far below · lock answers",
+  "pay-tap": "small bark · gentle touch",
+  "bagel-sales": "invisible fumes · suitcase tag",
+  "hint-peak": "soft red · rising warmth",
+  "crisp-these": "snack shards · forest columns",
+  "maid-raid": "rain-starved · in the middle",
+  "moral-seeds": "runway figure · scorches"
 };
   
 const allWordsRows=[
@@ -3861,7 +3861,7 @@ function showStaticInfoMessage(text,type="info",duration=7000,opts={}){
     message.classList.add("fadeout");
     infoMessageTimer=setTimeout(()=>{
       const wasType=message.dataset.infoType;
-      message.classList.remove("clue-static","fadeout");
+      message.classList.remove("clue-static","fadeout","clue-fadein-in-place","clue-fadeout-in-place");
       message.dataset.infoType="";
       if(!solved)message.textContent="";
       infoMessageTimer=null;
@@ -4120,7 +4120,7 @@ function maybeQueueClueSkipHelper(delay=0){
     if(target===null)return;
     const remaining=target-getActivePuzzleElapsedMs();
     if(remaining<=10000)return;
-    showStaticInfoMessage(CLUE_SKIP_HELPER_TEXT,"clue-skip-help",3500,{allowHelper:false});
+    showStaticInfoMessage(CLUE_SKIP_HELPER_TEXT,"clue-skip-help",5200,{allowHelper:false});
   },delay);
 }
 function jumpActivePuzzleElapsedTo(targetMs){
@@ -4141,7 +4141,7 @@ function showClueTimeAddedPop(addedMs){
   el.style.left=`${r.left+r.width/2}px`;
   el.style.top=`${r.top+r.height*0.52}px`;
   document.body.appendChild(el);
-  setTimeout(()=>{el.remove()},1350);
+  setTimeout(()=>{el.remove()},1700);
 }
 function getClueDisplayText(forceFull=false){
   const c=currentSplitClue();
@@ -4174,7 +4174,7 @@ function showClueCountdownMessage(){
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
   const unlockMs=getClueUnlockMs();
   const remainingAtStart=unlockMs-getActivePuzzleElapsedMs();
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-static","fadeout");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-static","fadeout","clue-fadein-in-place","clue-fadeout-in-place");
   message.dataset.infoType="clue-waiting";
   message.style.animationDuration="";
   void message.offsetWidth;
@@ -4196,16 +4196,41 @@ function showClueCountdownMessage(){
     clueCountdownHideTimer=null;
     if(message.dataset.infoType==="clue-waiting"){
       clearClueCountdownMessage();
-      message.classList.add("fadeout");
+      message.classList.remove("fadeout","clue-fadein-in-place","clue-fadeout-in-place");
+      void message.offsetWidth;
+      message.classList.add("clue-fadeout-in-place");
       infoMessageTimer=setTimeout(()=>{
         if(message.dataset.infoType==="clue-waiting"){
-          message.classList.remove("clue-static","fadeout");
-          message.dataset.infoType="";
-          if(!solved)message.textContent="";
-          if(remainingAtStart>10000)maybeQueueClueSkipHelper(180);
+          const shouldShowHelper=!solved && (unlockMs-getActivePuzzleElapsedMs()>10000);
+          if(shouldShowHelper){
+            message.classList.remove("clue-fadeout-in-place");
+            message.textContent=CLUE_SKIP_HELPER_TEXT;
+            message.dataset.infoType="clue-skip-help";
+            void message.offsetWidth;
+            message.classList.add("clue-static","clue-fadein-in-place");
+            infoMessageTimer=setTimeout(()=>{
+              if(message.dataset.infoType==="clue-skip-help"){
+                message.classList.remove("clue-fadein-in-place");
+                void message.offsetWidth;
+                message.classList.add("clue-fadeout-in-place");
+                infoMessageTimer=setTimeout(()=>{
+                  if(message.dataset.infoType==="clue-skip-help"){
+                    message.classList.remove("clue-static","clue-fadein-in-place","clue-fadeout-in-place");
+                    message.dataset.infoType="";
+                    if(!solved)message.textContent="";
+                  }
+                  infoMessageTimer=null;
+                },380);
+              }
+            },5600);
+          }else{
+            message.classList.remove("clue-static","clue-fadeout-in-place");
+            message.dataset.infoType="";
+            if(!solved)message.textContent="";
+          }
         }
         infoMessageTimer=null;
-      },480);
+      },360);
     }
   },3500);
 }
