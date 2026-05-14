@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v16";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v18";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -80,7 +80,7 @@ const STREAK_POP_MS=9000;
 const DAILY_FINAL_MODAL_DELAY_MS=3500;
 const CLUE_UNLOCK_BY_LENGTH_MS={3:60000,4:120000,5:180000};
 const CLUE_DEFAULT_UNLOCK_MS=180000;
-const CLUE_DOUBLE_TAP_MS=450;
+const CLUE_DOUBLE_TAP_MS=340;
 const CLUE_SINGLE_TAP_DELAY_MS=CLUE_DOUBLE_TAP_MS;
 const CLUE_SKIP_HELPER_TEXT="Double tap Clue to skip wait";
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
@@ -2730,27 +2730,27 @@ const clueTestPuzzles = [
 ];
 
   const puzzleClues = {
-  "plan-wide": "invisible shove · mercy request",
-  "doubt-needs": "opening night · network knots",
-  "dull-soda": "double nature · auction gone",
-  "arm-nee": "history slice · grown fellows",
-  "ears-seal": "ranked gent · rolling blue",
-  "brute-goals": "thin punishment · self trumpet",
-  "bite-pony": "skeleton piece · soft mercy",
-  "angel-carol": "by the way · cloudless",
-  "flea-thin": "tree page · quiet nudge",
-  "new-old": "closing edge · down below",
-  "gist-safe": "wise one · knuckle bundle",
-  "crush-flies": "sudden red · tear signals",
-  "door-tilt": "crowd chaos · passed along",
-  "amend-worse": "oath made · called out",
-  "dyes-keep": "far below · lock answers",
-  "pay-tap": "small bark · gentle touch",
-  "bagel-sales": "invisible fumes · suitcase tag",
-  "hint-peak": "soft red · rising warmth",
-  "crisp-these": "snack shards · forest columns",
-  "maid-raid": "rain-starved · in the middle",
-  "moral-seeds": "runway figure · scorches"
+  "plan-wide": "moving air · mercy request",
+"doubt-needs": "first showing · network knots",
+"dull-soda": "two-sided · auction gone",
+"arm-nee": "time period · grown fellows",
+"ears-seal": "minor noble · rolling blue",
+"brute-goals": "thin meal · self trumpet",
+"bite-pony": "skeleton piece · soft mercy",
+"angel-carol": "side by side · easy to see",
+"flea-thin": "tree page · quiet nudge",
+"new-old": "final point · down below",
+"gist-safe": "wise one · clenched hand",
+"crush-flies": "sudden red · sad sounds",
+"door-tilt": "street chaos · passed along",
+"amend-worse": "courtroom promise · identified",
+"dyes-keep": "far below · lock answers",
+"pay-tap": "small bark · gentle touch",
+"bagel-sales": "invisible fumes · suitcase tag",
+"hint-peak": "soft red · rising warmth",
+"crisp-these": "snack shards · forest columns",
+"maid-raid": "rain-starved · in the middle",
+"moral-seeds": "test version · burns lightly"
 };
   
 const allWordsRows=[
@@ -4137,9 +4137,11 @@ function showClueTimeAddedPop(addedMs){
   const el=document.createElement("span");
   el.className="clue-time-pop";
   el.textContent=text;
-  const r=hintBtn.getBoundingClientRect();
-  el.style.left=`${r.left+r.width/2}px`;
-  el.style.top=`${r.top+r.height*0.52}px`;
+  const r=board.getBoundingClientRect();
+  const cx=r.left+r.width/2;
+  const cy=r.top+r.height*0.48;
+  el.style.left=`${cx}px`;
+  el.style.top=`${cy}px`;
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1700);
 }
@@ -4222,7 +4224,7 @@ function showClueCountdownMessage(){
                   infoMessageTimer=null;
                 },380);
               }
-            },5600);
+            },4800);
           }else{
             message.classList.remove("clue-static","clue-fadeout-in-place");
             message.dataset.infoType="";
@@ -4232,7 +4234,7 @@ function showClueCountdownMessage(){
         infoMessageTimer=null;
       },360);
     }
-  },3500);
+  },3900);
 }
 function startClueAvailabilityTimer(){
   if(!isNewMode()||solved||gameStartDeferred)return;
