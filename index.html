@@ -13,7 +13,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .title{margin:0;font-size:clamp(38px,6.4vw,64px);letter-spacing:-.045em;font-weight:800}.subtitle{margin:10px auto 34px;max-width:460px;height:52px;padding:0 14px;color:var(--muted);font-size:clamp(16px,1.7vw,19px);line-height:1.38;display:flex;align-items:center;justify-content:center}.subtitle.level-label{font-size:clamp(22px,2.7vw,29px);font-weight:400;line-height:1;color:var(--muted);align-items:flex-start;padding-top:18px}
 .board-shell{width:100%;max-width:100%;padding:18px 14px 20px;border-radius:24px;overflow:visible}.board{display:flex;justify-content:center;align-items:flex-start;gap:0;min-height:calc(var(--tile-h) + 2px);touch-action:none;width:max-content;max-width:none;margin:0 auto;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}.board.short-board{gap:0}.board.len-3{--grid-scale:1}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.94}.tile-gap-normal{width:var(--tile-gap);flex:0 0 var(--tile-gap)}.tile-gap-mixed{width:var(--mixed-gap);flex:0 0 var(--mixed-gap)}
 .tile-wrap{width:var(--tile-w);height:var(--tile-h);cursor:grab;touch-action:none;border-radius:var(--tile-radius);box-shadow:var(--tile-shadow);transition:transform .15s ease,opacity .15s ease,box-shadow .18s ease;transform:scale(1);flex:0 0 auto}.tile-wrap:active{cursor:grabbing}.tile-wrap.dragging{opacity:.14;transform:scale(.94)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h);box-shadow:none;background:transparent;border-radius:0}.tile-wrap.horizontal-wrap.dragging{opacity:.20}.tile-wrap.horizontal-wrap.h-single-drag{opacity:1;transform:none}.tile-wrap.horizontal-wrap.h-single-drag .htile{transition:transform .16s cubic-bezier(.2,.8,.2,1),opacity .12s ease,border-color .18s ease,background .18s ease}.tile-wrap.horizontal-wrap.h-single-drag-top .htile[data-hrow="top"],.tile-wrap.horizontal-wrap.h-single-drag-bottom .htile[data-hrow="bottom"]{opacity:0}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-top .htile[data-hrow="bottom"]{transform:translateY(calc(-1 * (var(--letter-row-h) + var(--middle-band))))}.tile-wrap.horizontal-wrap.h-swap-preview.h-single-drag-bottom .htile[data-hrow="top"]{transform:translateY(calc(var(--letter-row-h) + var(--middle-band)))}.tile-wrap.horizontal-wrap.locked{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile{box-shadow:none}.tile-wrap.horizontal-wrap.solved-tile .htile{border-color:var(--success);background:#fff;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.horizontal-wrap.solved-tile .h-divider{background:rgba(48,164,108,.45)}
-.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.clue-time-pop{position:fixed;z-index:100001;left:0;top:0;pointer-events:none;color:#5c4700;background:var(--hint);border:1.5px solid var(--hint-border);border-radius:999px;padding:7px 11px;font-size:20px;font-weight:950;line-height:1;transform:translate(-50%,-50%);animation:clue-time-pop 1.55s cubic-bezier(.18,.9,.22,1) forwards;box-shadow:0 10px 24px rgba(122,93,0,.22),0 0 0 4px rgba(244,223,138,.42);text-shadow:0 1px 0 rgba(255,255,255,.65);letter-spacing:.01em}@keyframes clue-time-pop{0%{opacity:0;transform:translate(-50%,10%) scale(.72) rotate(-3deg)}14%{opacity:1;transform:translate(-50%,-45%) scale(1.24) rotate(2deg)}30%{opacity:1;transform:translate(-50%,-62%) scale(1) rotate(0deg)}76%{opacity:1;transform:translate(-50%,-150%) scale(1)}100%{opacity:0;transform:translate(-50%,-245%) scale(.92)}}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.clue-inactive-yellow{opacity:.56;box-shadow:0 2px 8px rgba(122,93,0,.06)}.hint.clue-inactive-yellow::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
+.tile-wrap.locked{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 3px var(--hint-glow)}.tile-wrap.locked .tile-face{border-color:var(--hint-border);background:#fffdf4}.tile-wrap.locked-from-start{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.10),0 0 0 2px rgba(212,167,44,.16)}.tile-wrap.locked-from-start .tile-face{border-color:rgba(212,167,44,.56);background:rgba(255,255,255,.96)}.board.vowel-reveal .tile-face{align-items:stretch}.board.vowel-reveal .letter{color:transparent!important;text-shadow:none!important;width:100%;height:100%;align-self:stretch;justify-self:stretch}.board.vowel-reveal .tile-wrap.vowel-top .tile-face .letter:first-child{background:rgba(48,164,108,.68);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.68);animation:none}.board.vowel-reveal .tile-wrap.vowel-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.68);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.68);animation:none}.tile-wrap.vowel-memory-top .tile-face,.tile-wrap.vowel-memory-bottom .tile-face{align-items:stretch}.tile-wrap.vowel-memory-top .tile-face .letter,.tile-wrap.vowel-memory-bottom .tile-face .letter{width:100%;height:100%;align-self:stretch;justify-self:stretch}.tile-wrap.vowel-memory-top .tile-face .letter:first-child{background:rgba(48,164,108,.08);border-top-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-top-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/2) 0 rgba(48,164,108,.08)}.tile-wrap.vowel-memory-bottom .tile-face .letter:last-child{background:rgba(48,164,108,.08);border-bottom-left-radius:calc(var(--tile-radius) - var(--tile-border-w));border-bottom-right-radius:calc(var(--tile-radius) - var(--tile-border-w));box-shadow:0 calc(var(--middle-band)/-2) 0 rgba(48,164,108,.08)}.board.vowel-reveal .tile-wrap.locked-from-start,.board.vowel-reveal .tile-wrap.locked{box-shadow:var(--tile-shadow)}.board.vowel-reveal .tile-wrap.locked-from-start .tile-face,.board.vowel-reveal .tile-wrap.locked .tile-face{border-color:var(--tile-border);background:var(--tile-bg)}.message.vowel-reveal-msg{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static{opacity:1;color:var(--muted);font-size:19px;font-weight:750;animation:none}.message.clue-static.fadeout{animation:hold-fade-down .45s ease-out forwards}.clue-countdown-clock{display:inline-block;width:4ch;text-align:left;font-variant-numeric:tabular-nums}.clue-time-pop{position:fixed;z-index:100001;left:0;top:0;pointer-events:none;color:var(--muted);font-size:15px;font-weight:850;line-height:1;transform:translate(-50%,-50%);animation:clue-time-pop 1.25s ease-out forwards;text-shadow:0 1px 0 rgba(255,255,255,.65)}@keyframes clue-time-pop{0%{opacity:0;transform:translate(-50%,-15%) scale(.92)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.04)}100%{opacity:0;transform:translate(-50%,-185%) scale(1)}}.hint.vowels-mode{color:#5c4700;background:var(--hint);box-shadow:0 2px 8px rgba(122,93,0,.08)}.hint.vowels-mode::before{display:block}.hint.clue-inactive-yellow{opacity:.56;box-shadow:0 2px 8px rgba(122,93,0,.06)}.hint.clue-inactive-yellow::before{display:none}.hint.vowels-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.vowels-unavailable::before{display:none}.tile-wrap.solved-tile{cursor:default;box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.18)}.tile-wrap.solved-tile .tile-face{border-color:var(--success);background:#fff}
 .tile-stage{width:100%;height:100%;perspective:700px;border-radius:var(--tile-radius)}.tile{position:relative;width:100%;height:100%;transform-style:preserve-3d;-webkit-transform-style:preserve-3d;border-radius:var(--tile-radius);transition:transform .22s cubic-bezier(.2,.8,.2,1);will-change:transform}.tile-wrap.flipped .tile,.drag-proxy.flipped .tile{transform:rotateX(180.01deg)}
 .tile-face{position:absolute;inset:0;display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h);align-items:center;background:var(--tile-bg);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:translateZ(.2px);-webkit-transform:translateZ(.2px);transition:border-color .18s ease,background .18s ease;will-change:transform,opacity}.tile-face.back{transform:rotateX(180.01deg) translateZ(.2px);-webkit-transform:rotateX(180.01deg) translateZ(.2px)}
 .letter{display:grid;place-items:center;font-size:var(--letter-size);font-weight:780;line-height:1;text-transform:uppercase;opacity:1}.divider{position:relative;width:100%;height:var(--middle-band)}.divider::before{content:"";position:absolute;left:0;right:0;top:50%;height:var(--divider);background:var(--tile-border);transform:translateY(-50%)}.hpair{width:var(--h-tile-w);height:var(--tile-h);display:grid;grid-template-rows:var(--letter-row-h) var(--middle-band) var(--letter-row-h)}.htile{width:var(--h-tile-w);height:var(--letter-row-h);border:var(--tile-border-w) solid var(--tile-border);border-radius:var(--tile-radius);background:var(--tile-bg);box-shadow:var(--tile-shadow);overflow:hidden;display:grid;grid-template-columns:1fr var(--divider) 1fr;transition:border-color .18s ease,background .18s ease}.htile.locked{border-color:var(--hint-border);background:#fffdf4}.htile.solved-tile{border-color:var(--success);background:#fff}.h-divider{width:var(--divider);height:100%;background:var(--tile-border)}
@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v14";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v15";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -78,13 +78,11 @@ const SCORE_POP_MS=2000;
 const FINAL_POP_MS=3000;
 const STREAK_POP_MS=9000;
 const DAILY_FINAL_MODAL_DELAY_MS=3500;
-const CLUE_FIRST_UNLOCK_MS=30000;
-const CLUE_SECOND_UNLOCK_MS=60000;
-const CLUE_UNLOCK_MS=CLUE_FIRST_UNLOCK_MS;
+const CLUE_UNLOCK_BY_LENGTH_MS={3:60000,4:120000,5:180000};
+const CLUE_DEFAULT_UNLOCK_MS=180000;
 const CLUE_DOUBLE_TAP_MS=450;
 const CLUE_SINGLE_TAP_DELAY_MS=CLUE_DOUBLE_TAP_MS;
 const CLUE_SKIP_HELPER_TEXT="Double tap Clue to skip wait";
-const CLUE_HELP_SESSION_KEY="flipwords:clueSkipHelpSeen:v1";
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
 const VOWELS_REVEAL_MS=6000; // dormant old experiment
 
@@ -2708,51 +2706,51 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["offer-papal","papal","offer","paper","offal",2,"","","",1],
-  ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
-  ["bet-jut","jut","bet","but","jet",1,"","","",0],
-  ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
-  ["hero-nude","nude","hero","hour","need",2,"","","",6],
-  ["never-sober","never","sober","verse","borne",4,"","","",21],
-  ["salt-weak","weak","salt","seat","walk",2,"","","",2],
-  ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
-  ["cab-wet","cab","wet","cat","web",1,"","","",0],
-  ["cord-slow","slow","cord","crow","sold",2,"","","",6],
-  ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
-  ["plum-wars","plum","wars","plus","warm",1,"","","",0],
-  ["novel-short","short","novel","thorn","loves",3,"","","",22],
-  ["mite-scan","scan","mite","cans","item",1,"","","",3],
-  ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
-  ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
-  ["snide-title","snide","title","inlet","tides",4,"","","",15],
-  ["boo-two","boo","two","bow","too",2,"","","cannot be reversed",7],
-  ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
-  ["price-toast","toast","price","tract","poise",2,"","","",3],
-  ["flag-lion","lion","flag","golf","nail",4,"","","",23],
+  ["glove-wears","wears","glove","worse","gavel",2,"","","",7],
+  ["fans-nude","nude","fans","nuns","fade",2,"","","",1],
+  ["class-talks","class","talks","salts","slack",3,"","","",22],
+  ["coin-rare","rare","coin","rain","core",2,"","","",1],
+  ["poles-trace","trace","poles","elope","carts",4,"","","",22],
+  ["oath-pink","pink","oath","oink","path",1,"","","",0],
+  ["dying-guilt","dying","guilt","guild","tying",4,"","","",24],
+  ["bust-coup","bust","coup","cusp","bout",2,"","","",2],
+  ["oar-tag","oar","tag","ago","art",2,"","","",7],
+  ["bait-sold","bait","sold","bolt","said",2,"","","",2],
+  ["lunar-resin","lunar","resin","ruins","learn",2,"","","",8],
+  ["call-time","call","time","till","came",2,"","","",1],
+  ["giant-sense","giant","sense","genes","stain",3,"","","",21],
+  ["city-tune","city","tune","cute","tiny",2,"","","",3],
+  ["cup-lot","cup","lot","lop","cut",1,"","","",0],
+  ["busy-jars","busy","jars","jury","bass",2,"","","",3],
+  ["marry-stone","marry","stone","mayor","stern",2,"","","",5],
+  ["plan-wide","plan","wide","wind","plea",2,"","","",5],
+  ["doubt-needs","doubt","needs","debut","nodes",2,"","","",7],
+  ["dull-soda","dull","soda","dual","sold",2,"","","",5],
+  ["arm-nee","nee","arm","era","men",3,"","","",10],
 ];
 
-const puzzleClues = {
-  "offer-papal": "butcher scraps · office sheets",
-  "lack-toys": "egg middle · house pets",
-  "bet-jut": "except · fast plane",
-  "dodge-melon": "evil spirit · mountain inn",
-  "hero-nude": "clock stretch · pressing want",
-  "never-sober": "carried along · poetic line",
-  "salt-weak": "chair spot · move on foot",
-  "ashes-drift": "mine tunnel · fairground turns",
-  "cab-wet": "purring hunter · spider net",
-  "cord-slow": "black bird · gone at auction",
-  "dwell-fauna": "heavily loaded · dreadful",
-  "plum-wars": "added bonus · pleasantly heated",
-  "novel-short": "rose hazard · adores",
-  "mite-scan": "tin containers · single object",
-  "music-ninth": "spice seed · gentle clues",
-  "epic-harp": "curved span · smoking tube",
-  "snide-title": "coastal opening · moon-pulled waters",
-  "boo-two": "looped knot · also",
-  "meat-nerd": "faculty boss · school stretch",
-  "price-toast": "land strip · balanced calm",
-  "flag-lion": "course game · finger tip"
+  const puzzleClues = {
+  "glove-wears": "judge’s hammer · turn sour",
+  "fans-nude": "convent crowd · lose colour",
+  "class-talks": "table crystals · loose line",
+  "coin-rare": "storm gift · inner part",
+  "poles-trace": "secret wedding · shopping wheels",
+  "oath-pink": "piglet sound · walking line",
+  "dying-guilt": "craft circle · making knots",
+  "bust-coup": "sharp corner · short fight",
+  "oar-tag": "back then · gallery stuff",
+  "bait-sold": "lightning fastener · spoken claim",
+  "lunar-resin": "fallen remains · take in knowledge",
+  "call-time": "up to now · arrived before",
+  "giant-sense": "family code · lasting mark",
+  "city-tune": "small charm · very small",
+  "cup-lot": "cut off · sharp slice",
+  "busy-jars": "courtroom panel · low notes",
+  "marry-stone": "town leader · hard-faced",
+  "plan-wide": "moving air · humble request",
+  "doubt-needs": "first appearance · network points",
+  "dull-soda": "two-sided · went at auction",
+  "arm-nee": "past age · grown males"
 };
   
 const allWordsRows=[
@@ -2876,7 +2874,7 @@ function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedT
 function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,hintOrientationInverted,vowelAvailableNotified,clueRevealStage,clueFirstAvailableNotified,clueSecondAvailableNotified,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
-function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
+function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(isNewMode()?NEW_MODE_PROGRESS_KEY:STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;clueRevealStage=0;clueFirstAvailableNotified=false;clueSecondAvailableNotified=false;hideVowelReveal(false);puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
@@ -4091,11 +4089,14 @@ function currentSplitClue(){
   const p=currentPuzzle();
   return splitClueText(puzzleClues[p&&p.id]||"");
 }
-function firstClueAvailable(){return isNewMode()&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=CLUE_FIRST_UNLOCK_MS}
-function secondClueAvailable(){return isNewMode()&&!gameStartDeferred&&currentSplitClue().hasTwo&&getActivePuzzleElapsedMs()>=CLUE_SECOND_UNLOCK_MS}
+function getClueUnlockMs(){
+  const p=currentPuzzle();
+  const len=(p&&String(p.answer1||p.word1||"").length)||0;
+  return CLUE_UNLOCK_BY_LENGTH_MS[len]||CLUE_DEFAULT_UNLOCK_MS;
+}
+function firstClueAvailable(){return isNewMode()&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=getClueUnlockMs()}
+function secondClueAvailable(){return false}
 function isClueAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&firstClueAvailable()}
-function clueSkipHelpSeen(){try{return sessionStorage.getItem(CLUE_HELP_SESSION_KEY)==="1"}catch{return true}}
-function markClueSkipHelpSeen(){try{sessionStorage.setItem(CLUE_HELP_SESSION_KEY,"1")}catch{}}
 function clearClueTapDelayTimer(){
   if(clueTapDelayTimer){clearTimeout(clueTapDelayTimer);clueTapDelayTimer=null}
 }
@@ -4108,22 +4109,17 @@ function clearClueCountdownMessage(){
 }
 function getNextClueSkipTargetMs(){
   if(!isNewMode()||solved||gameStartDeferred)return null;
-  const c=currentSplitClue();
-  if(!firstClueAvailable())return CLUE_FIRST_UNLOCK_MS;
-  if(clueRevealStage>=1&&c.hasTwo&&!secondClueAvailable())return CLUE_SECOND_UNLOCK_MS;
-  return null;
+  return firstClueAvailable()?null:getClueUnlockMs();
 }
 function maybeQueueClueSkipHelper(delay=0){
   clearClueSkipHelperTimer();
-  if(clueSkipHelpSeen())return;
   clueSkipHelperTimer=setTimeout(()=>{
     clueSkipHelperTimer=null;
-    if(clueSkipHelpSeen()||!isNewMode()||solved||gameStartDeferred)return;
+    if(!isNewMode()||solved||gameStartDeferred)return;
     const target=getNextClueSkipTargetMs();
     if(target===null)return;
     const remaining=target-getActivePuzzleElapsedMs();
     if(remaining<=10000)return;
-    markClueSkipHelpSeen();
     showStaticInfoMessage(CLUE_SKIP_HELPER_TEXT,"clue-skip-help",3500,{allowHelper:false});
   },delay);
 }
@@ -4147,6 +4143,10 @@ function showClueTimeAddedPop(addedMs){
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1350);
 }
+function getClueDisplayText(forceFull=false){
+  const c=currentSplitClue();
+  return c.full||c.subtle||"";
+}
 function revealClueAfterTimeTravel(targetMs){
   if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}
   clearClueCountdownMessage();
@@ -4154,19 +4154,14 @@ function revealClueAfterTimeTravel(targetMs){
   const before=getActivePuzzleElapsedMs();
   const added=Math.max(0,targetMs-before);
   jumpActivePuzzleElapsedTo(targetMs);
-  if(targetMs>=CLUE_FIRST_UNLOCK_MS){
-    clueFirstAvailableNotified=true;
-    vowelAvailableNotified=true;
-    clueRevealStage=Math.max(clueRevealStage,1);
-  }
-  if(targetMs>=CLUE_SECOND_UNLOCK_MS&&currentSplitClue().hasTwo){
-    clueSecondAvailableNotified=true;
-    clueRevealStage=2;
-  }
+  clueFirstAvailableNotified=true;
+  clueSecondAvailableNotified=false;
+  vowelAvailableNotified=true;
+  clueRevealStage=1;
   render();
   saveNewModeProgress();
   if(added>0)showClueTimeAddedPop(added);
-  showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000);
+  showStaticInfoMessage(getClueDisplayText(true),"clue-shown",40000);
   startClueAvailabilityTimer();
 }
 function showClueCountdownMessage(){
@@ -4177,7 +4172,8 @@ function showClueCountdownMessage(){
   clearClueCountdownMessage();
   clearClueSkipHelperTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  const remainingAtStart=CLUE_FIRST_UNLOCK_MS-getActivePuzzleElapsedMs();
+  const unlockMs=getClueUnlockMs();
+  const remainingAtStart=unlockMs-getActivePuzzleElapsedMs();
   message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-static","fadeout");
   message.dataset.infoType="clue-waiting";
   message.style.animationDuration="";
@@ -4185,7 +4181,7 @@ function showClueCountdownMessage(){
   message.classList.add("clue-static");
   const update=()=>{
     if(!isNewMode()||solved||gameStartDeferred){clearStaticMessage();return}
-    const remaining=CLUE_FIRST_UNLOCK_MS-getActivePuzzleElapsedMs();
+    const remaining=unlockMs-getActivePuzzleElapsedMs();
     if(remaining<=0){
       clearClueCountdownMessage();
       if(!clueFirstAvailableNotified){clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available")}
@@ -4217,37 +4213,22 @@ function startClueAvailabilityTimer(){
   if(!isNewMode()||solved||gameStartDeferred)return;
   if(vowelAvailabilityTimer){clearTimeout(vowelAvailabilityTimer);vowelAvailabilityTimer=null}
   const elapsed=getActivePuzzleElapsedMs();
-  const hasSecond=currentSplitClue().hasTwo;
-  if(elapsed>=CLUE_FIRST_UNLOCK_MS&&!clueFirstAvailableNotified){
+  const target=getClueUnlockMs();
+  if(elapsed>=target&&!clueFirstAvailableNotified){
     clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");render();saveNewModeProgress();
-  }
-  if(hasSecond&&elapsed>=CLUE_SECOND_UNLOCK_MS&&!clueSecondAvailableNotified){
-    clueSecondAvailableNotified=true;showInfoMessage("Second clue available","clue-available");render();saveNewModeProgress();
     return;
   }
-  let target=null;
-  if(!clueFirstAvailableNotified)target=CLUE_FIRST_UNLOCK_MS;
-  else if(hasSecond&&!clueSecondAvailableNotified)target=CLUE_SECOND_UNLOCK_MS;
-  if(target===null)return;
+  if(clueFirstAvailableNotified)return;
   const remaining=Math.max(0,target-elapsed);
   vowelAvailabilityTimer=setTimeout(()=>{
     vowelAvailabilityTimer=null;
     clearClueCountdownMessage();
     if(!isNewMode()||solved||gameStartDeferred)return;
-    if(target===CLUE_FIRST_UNLOCK_MS&&!clueFirstAvailableNotified){
+    if(!clueFirstAvailableNotified){
       clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");
-    }else if(target===CLUE_SECOND_UNLOCK_MS&&!clueSecondAvailableNotified){
-      clueSecondAvailableNotified=true;showInfoMessage("Second clue available","clue-available");
     }
     render();saveNewModeProgress();startClueAvailabilityTimer();
   },remaining);
-}
-function getClueDisplayText(forceFull=false){
-  const c=currentSplitClue();
-  if(!c.subtle)return "";
-  if(!c.hasTwo)return c.subtle;
-  if(forceFull||clueRevealStage>=2||secondClueAvailable())return c.full;
-  return c.subtle;
 }
 function performClueSingleTap(){
   const p=currentPuzzle();
@@ -4268,17 +4249,11 @@ function performClueSingleTap(){
   }
   clearClueCountdownMessage();
   clearClueSkipHelperTimer();
-  if(secondClueAvailable()){
-    clueRevealStage=2;
-    clueSecondAvailableNotified=true;
-  }else if(clueRevealStage<1){
-    clueRevealStage=1;
-  }
+  clueRevealStage=1;
   clueFirstAvailableNotified=true;
+  clueSecondAvailableNotified=false;
   vowelAvailableNotified=true;
-  const target=getNextClueSkipTargetMs();
-  const shouldOfferSkip=target!==null&&(target-getActivePuzzleElapsedMs()>10000);
-  showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000,{offerSkipHelpAfter:shouldOfferSkip});
+  showStaticInfoMessage(getClueDisplayText(true),"clue-shown",40000);
   saveNewModeProgress();
   startClueAvailabilityTimer();
 }
@@ -4299,7 +4274,6 @@ function performClueDoubleTap(){
 function showClue(){
   if(!isNewMode())return;
   if(solved){
-    clearClueTapDelayTimer();
     performClueSingleTap();
     return;
   }
@@ -4548,7 +4522,7 @@ function initMode(){
   const jumpAllWords=getUrlJumpAllWords();
   const hasDayJump=jumpDay!==null;
   window.__jumpAllWords=jumpAllWords!==null?jumpAllWords-1:null;
-  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
   if(hasDayJump){
     cachedGameState=readStoredGameState();
     window.__forceFreshStart=false;
