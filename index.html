@@ -59,7 +59,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v7";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v11";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -78,7 +78,9 @@ const SCORE_POP_MS=2000;
 const FINAL_POP_MS=3000;
 const STREAK_POP_MS=9000;
 const DAILY_FINAL_MODAL_DELAY_MS=3500;
-const CLUE_UNLOCK_MS=30000;
+const CLUE_FIRST_UNLOCK_MS=30000;
+const CLUE_SECOND_UNLOCK_MS=60000;
+const CLUE_UNLOCK_MS=CLUE_FIRST_UNLOCK_MS;
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
 const VOWELS_REVEAL_MS=6000; // dormant old experiment
 
@@ -2791,6 +2793,7 @@ const clueTestPuzzles = [
   "dad-nor": "not do · rebellious cool"
 };
 
+
 const allWordsRows=[
 ["bucks-layer","layer","bucks","buyer","lacks",2,"","","",1,11,"backs|brace|clear|clues|cruel|cubes|early|laces|relay|scale|slack"],
 ["fluff-state","fluff","state","flute","staff",2,"","","",1,17,"false|fates|feast|feats|fetal|fetus|flats|fleas|fuels|least|slate|stale|steal|stuff|tales|taste|tufts"],
@@ -2827,6 +2830,7 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,vowelAvailableNotified=false;
+let clueRevealStage=0,clueFirstAvailableNotified=false,clueSecondAvailableNotified=false;
 let statsDetailsShown=false,dailyModalMode="stats";
 let cachedGameState=null;
 let gameStartDeferred=false;
@@ -2908,11 +2912,11 @@ function getAutoHintSaveState(){
 function saveGameState(){if(isDailyMode()||isAllWordsMode())return;if(isNewMode()){saveNewModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
 function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,lockedFromStart:!!t.lockedFromStart,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped})}
 function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:!!st.locked,lockedFromStart:!!t.lockedFromStart,flipAnim:""})});if(next.length===tiles.length)tiles=next}
-function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,hintOrientationInverted,vowelAvailableNotified,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
+function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,hintOrientationInverted,vowelAvailableNotified,clueRevealStage,clueFirstAvailableNotified,clueSecondAvailableNotified,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
-function resetGame(startIndex=0){localStorage.removeItem(isNewMode()?NEW_MODE_PROGRESS_KEY:STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;hideVowelReveal(false);puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
+function resetGame(startIndex=0){localStorage.removeItem(isNewMode()?NEW_MODE_PROGRESS_KEY:STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;clueRevealStage=0;clueFirstAvailableNotified=false;clueSecondAvailableNotified=false;hideVowelReveal(false);puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=true;setupPuzzle({deferGameStart:true})}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
 function saveDailyStats(){try{localStorage.setItem(DAILY_STATS_KEY,JSON.stringify(dailyStats))}catch{}}
@@ -3079,7 +3083,7 @@ function setupPuzzle(opts={}){
       if(!isHorizontalTile(lockedTile))lockedTile.flipped=false;
     }
   }
-  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;vowelRevealActive=false;vowelAvailableNotified=false;clearVowelTimers();
+  hintOrder=buildHintOrder(tiles);hintCursor=0;hintsUsed=0;movesUsed=0;hintOrientationInverted=null;vowelRevealActive=false;vowelAvailableNotified=false;clueRevealStage=0;clueFirstAvailableNotified=false;clueSecondAvailableNotified=false;clearVowelTimers();
   solved=false;completedWithHints=false;dragState=null;previewingStartWords=false;solvedToggleReadyAt=0;solvedAnswerInverted=false;statsDetailsShown=false;shieldUsedThisLevel=false;
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
@@ -4109,7 +4113,21 @@ function formatClueCountdown(ms){
   const secs=seconds%60;
   return `${mins}:${String(secs).padStart(2,"0")}`;
 }
-function isClueAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=CLUE_UNLOCK_MS}
+function splitClueText(raw){
+  const text=String(raw||"").trim();
+  const parts=text.split("·").map(s=>s.trim()).filter(Boolean);
+  if(parts.length<2)return {subtle:text,clearer:"",hasTwo:false,full:text};
+  const subtle=parts[0];
+  const clearer=parts.slice(1).join(" · ");
+  return {subtle,clearer,hasTwo:true,full:`${clearer} · ${subtle}`};
+}
+function currentSplitClue(){
+  const p=currentPuzzle();
+  return splitClueText(puzzleClues[p&&p.id]||"");
+}
+function firstClueAvailable(){return isNewMode()&&!gameStartDeferred&&getActivePuzzleElapsedMs()>=CLUE_FIRST_UNLOCK_MS}
+function secondClueAvailable(){return isNewMode()&&!gameStartDeferred&&currentSplitClue().hasTwo&&getActivePuzzleElapsedMs()>=CLUE_SECOND_UNLOCK_MS}
+function isClueAvailable(){return isNewMode()&&!solved&&!gameStartDeferred&&firstClueAvailable()}
 function clearClueCountdownMessage(){
   if(clueCountdownTimer){clearInterval(clueCountdownTimer);clueCountdownTimer=null}
   if(clueCountdownHideTimer){clearTimeout(clueCountdownHideTimer);clueCountdownHideTimer=null}
@@ -4128,10 +4146,10 @@ function showClueCountdownMessage(){
   message.classList.add("clue-static");
   const update=()=>{
     if(!isNewMode()||solved||gameStartDeferred){clearStaticMessage();return}
-    const remaining=CLUE_UNLOCK_MS-getActivePuzzleElapsedMs();
+    const remaining=CLUE_FIRST_UNLOCK_MS-getActivePuzzleElapsedMs();
     if(remaining<=0){
       clearClueCountdownMessage();
-      if(!vowelAvailableNotified){vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available")}
+      if(!clueFirstAvailableNotified){clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available")}
       render();saveNewModeProgress();
       return;
     }
@@ -4158,37 +4176,69 @@ function showClueCountdownMessage(){
 function startClueAvailabilityTimer(){
   if(!isNewMode()||solved||gameStartDeferred)return;
   if(vowelAvailabilityTimer){clearTimeout(vowelAvailabilityTimer);vowelAvailabilityTimer=null}
-  const remaining=CLUE_UNLOCK_MS-getActivePuzzleElapsedMs();
-  if(remaining<=0){
-    if(!vowelAvailableNotified){vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available")}
-    render();saveNewModeProgress();return;
+  const elapsed=getActivePuzzleElapsedMs();
+  const hasSecond=currentSplitClue().hasTwo;
+  if(elapsed>=CLUE_FIRST_UNLOCK_MS&&!clueFirstAvailableNotified){
+    clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");render();saveNewModeProgress();
   }
+  if(hasSecond&&elapsed>=CLUE_SECOND_UNLOCK_MS&&!clueSecondAvailableNotified){
+    clueSecondAvailableNotified=true;showInfoMessage("Second clue available","clue-available");render();saveNewModeProgress();
+    return;
+  }
+  let target=null;
+  if(!clueFirstAvailableNotified)target=CLUE_FIRST_UNLOCK_MS;
+  else if(hasSecond&&!clueSecondAvailableNotified)target=CLUE_SECOND_UNLOCK_MS;
+  if(target===null)return;
+  const remaining=Math.max(0,target-elapsed);
   vowelAvailabilityTimer=setTimeout(()=>{
     vowelAvailabilityTimer=null;
     clearClueCountdownMessage();
-    if(isNewMode()&&!solved&&!gameStartDeferred){vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");render();saveNewModeProgress()}
+    if(!isNewMode()||solved||gameStartDeferred)return;
+    if(target===CLUE_FIRST_UNLOCK_MS&&!clueFirstAvailableNotified){
+      clueFirstAvailableNotified=true;vowelAvailableNotified=true;showInfoMessage("Clue now available","clue-available");
+    }else if(target===CLUE_SECOND_UNLOCK_MS&&!clueSecondAvailableNotified){
+      clueSecondAvailableNotified=true;showInfoMessage("Second clue available","clue-available");
+    }
+    render();saveNewModeProgress();startClueAvailabilityTimer();
   },remaining);
+}
+function getClueDisplayText(forceFull=false){
+  const c=currentSplitClue();
+  if(!c.subtle)return "";
+  if(!c.hasTwo)return c.subtle;
+  if(forceFull||clueRevealStage>=2||secondClueAvailable())return c.full;
+  return c.subtle;
 }
 function showClue(){
   if(!isNewMode())return;
   const p=currentPuzzle();
-  const clue=puzzleClues[p&&p.id]||"";
-  if(!clue){showInfoMessage("No clue for this puzzle","clue-missing");return}
+  const raw=puzzleClues[p&&p.id]||"";
+  if(!raw){showInfoMessage("No clue for this puzzle","clue-missing");return}
   if(message.dataset.infoType==="clue-shown"){
     clearStaticMessage();
     return;
   }
   if(solved){
-    showStaticInfoMessage(clue,"clue-shown",null);
+    showStaticInfoMessage(getClueDisplayText(true),"clue-shown",null);
     return;
   }
   ensureGameStarted();
-  if(!isClueAvailable()){
+  if(!firstClueAvailable()){
     showClueCountdownMessage();
     return;
   }
-  showStaticInfoMessage(clue,"clue-shown",40000);
+  clearClueCountdownMessage();
+  if(secondClueAvailable()){
+    clueRevealStage=2;
+    clueSecondAvailableNotified=true;
+  }else if(clueRevealStage<1){
+    clueRevealStage=1;
+  }
+  clueFirstAvailableNotified=true;
+  vowelAvailableNotified=true;
+  showStaticInfoMessage(getClueDisplayText(false),"clue-shown",40000);
   saveNewModeProgress();
+  startClueAvailabilityTimer();
 }
 
 function isVowelsAvailable(){return false}
@@ -4410,6 +4460,10 @@ function initNewMode(){
   setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!(!saved&&gameStartDeferred)})
   if(saved&&typeof saved.hintOrientationInverted==="boolean")hintOrientationInverted=saved.hintOrientationInverted;
   if(saved&&typeof saved.vowelAvailableNotified==="boolean")vowelAvailableNotified=saved.vowelAvailableNotified;
+  if(saved&&Number.isInteger(saved.clueRevealStage))clueRevealStage=clamp(saved.clueRevealStage,0,2);
+  if(saved&&typeof saved.clueFirstAvailableNotified==="boolean")clueFirstAvailableNotified=saved.clueFirstAvailableNotified;
+  else clueFirstAvailableNotified=!!vowelAvailableNotified;
+  if(saved&&typeof saved.clueSecondAvailableNotified==="boolean")clueSecondAvailableNotified=saved.clueSecondAvailableNotified;
   if(saved&&Array.isArray(saved.tiles)){restoreTilesFromSave(saved.tiles);render();saveNewModeProgress()}
 }
 function initGame(){updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=puzzles;let saved=loadSavedState()||cachedGameState;if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;}if(window.__forceFreshStart){resetGame(window.__jumpLevel!==undefined&&window.__jumpLevel!==null?window.__jumpLevel-1:0);return}if(saved){gameStartDeferred=!!saved.gameStartDeferred;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);if(typeof saved.totalScore==="number"&&Number.isFinite(saved.totalScore))totalScore=Math.max(0,saved.totalScore);displayedTotalScore=totalScore;if(Number.isInteger(saved.noHintStreak))noHintStreak=Math.max(0,saved.noHintStreak);displayedNoHintStreak=noHintStreak;if(saved.stats)stats=normalizeStats(saved.stats);if(Number.isInteger(saved.shields))shields=clamp(saved.shields,0,MAX_SHIELDS);displayedShields=shields;shieldUsedThisLevel=!!saved.shieldUsedThisLevel}setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:!!(saved&&saved.shieldUsedThisLevel),restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,deferGameStart:!!((!saved&&gameStartDeferred)||(saved&&saved.gameStartDeferred))})}
