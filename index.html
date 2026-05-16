@@ -66,6 +66,27 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-length-pct{color:rgba(118,111,130,.58);font-weight:560;margin-left:3px}
 @media (max-width:380px){.subtitle.level-with-meta .level-main{font-size:24px}.subtitle.level-with-meta .level-meta{font-size:13px}.clue-length-lines{gap:4px 8px}.clue-length-line{font-size:13px}}
 
+
+/* v30 clue scoring layout refinements */
+.subtitle.level-with-meta{flex-direction:row;align-items:flex-start;justify-content:center;gap:0;padding-top:18px;line-height:1}
+.subtitle.level-with-meta .level-main{font-size:clamp(22px,2.7vw,29px);font-weight:400;color:var(--muted);line-height:1}
+.subtitle.level-with-meta .level-meta{display:none!important}
+.clue-current-summary{margin:4px 0 12px;border-top:1px solid rgba(37,31,52,.10)}
+.clue-current-row{display:block;padding:11px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.32;color:var(--muted);text-align:left}
+.clue-current-words{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clue-current-result{display:block;margin-top:4px;color:var(--muted);font-weight:750;font-variant-numeric:tabular-nums}
+.clue-current-result strong{color:var(--ink);font-weight:850}
+.clue-current-meta{color:rgba(118,111,130,.78);font-weight:600;margin-left:8px}
+.clue-length-card{padding:11px 13px 12px}
+.clue-length-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:0}
+.clue-length-meta{display:inline-flex;align-items:center;gap:8px;color:rgba(118,111,130,.78);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:0}
+.clue-length-rule{border:none;border-top:1px solid rgba(37,31,52,.10);margin:7px 0 8px}
+.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.clue-length-line{font-size:14px;line-height:1.24;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.clue-length-count{color:var(--muted);font-weight:700}
+.clue-length-pct{color:rgba(118,111,130,.58);font-weight:560;margin-left:3px}
+@media (max-width:380px){.clue-length-title{display:block}.clue-length-meta{margin-top:3px}.clue-length-lines{gap:4px 8px}.clue-length-line{font-size:13px}.clue-current-meta{display:block;margin-left:0;margin-top:2px}}
+
 </style>
 </head>
 <body>
@@ -87,7 +108,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v29";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v30";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2930,19 +2951,26 @@ function recordClueResult(result){if(!result||!result.puzzleId)return;clueStats.
 function clueMedianForLength(len,field){const vals=getClueResults().filter(r=>r.length===len).map(r=>Number(r[field])).filter(Number.isFinite);return medianNumber(vals)}
 function clueRatingText(rating){return ({perfect:"perfect",great:"great",good:"good",clunky:"clunky"})[rating]||"clunky"}
 function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/10)}
+function currentCluePuzzleSummaryHTML(){
+  const p=currentPuzzle(),r=currentClueResult();
+  if(!p||!r)return "";
+  const resultText=r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)} +${r.score}`;
+  const meta=`${formatClock(r.timeMs)} | Moves ${r.moves}`;
+  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span><span class="clue-current-result"><strong>${resultText}</strong><span class="clue-current-meta">${meta}</span></span></div></div>`;
+}
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=`<div class="clue-length-meta"><span>${medTime===null?"—":formatClock(medTime)}</span> <span aria-hidden="true">|</span> <span>${formatClueMedianMoves(medMoves)} moves</span></div>`;
+  const meta=`<span class="clue-length-meta"><span>${medTime===null?"—":formatClock(medTime)}</span><span>${formatClueMedianMoves(medMoves)} moves</span></span>`;
   const lines=CLUE_RATING_ORDER.map(rating=>{
     const count=rows.filter(r=>r.rating===rating).length;
     if(!count)return "";
     const pct=Math.round((count/rows.length)*100);
     return `<div class="clue-length-line"><span class="clue-length-count">${count}</span> <span>${clueRatingText(rating)}</span> <span class="clue-length-pct">${pct}%</span></div>`;
   }).filter(Boolean).join("");
-  return `<div class="clue-length-card"><div class="clue-length-title">${len}-letters</div><hr class="clue-length-rule">${meta}<div class="clue-length-lines">${lines}</div></div>`;
+  return `<div class="clue-length-card"><div class="clue-length-title"><span>${len}-letters</span>${meta}</div><hr class="clue-length-rule"><div class="clue-length-lines">${lines}</div></div>`;
 }
 function clueLengthStatsHTML(){
   const html=[3,4,5].map(clueLengthCardHTML).filter(Boolean).join("");
@@ -3591,14 +3619,8 @@ function renderGameSubtitle(){
     return;
   }
   subtitle.classList.remove("intro-copy");
-  if(isNewMode()){
-    subtitle.classList.remove("level-label");
-    subtitle.classList.add("level-with-meta");
-    subtitle.innerHTML=`<span class="level-main">Level ${puzzleIndex+1}</span>${clueLevelMetaHTML()}`;
-  }else{
-    subtitle.classList.add("level-label");
-    subtitle.textContent=`Level ${puzzleIndex+1}`;
-  }
+  subtitle.classList.add("level-label");
+  subtitle.textContent=`Level ${puzzleIndex+1}`;
 }
 function fitBoardToViewport(){
   if(!board||!boardShell)return;
@@ -3775,6 +3797,7 @@ function updateStatsPanel(){
       <div class="stats-card" role="dialog" aria-modal="true" aria-label="Clue stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
         <div class="stats-title">Your clue stats</div>
+        ${currentCluePuzzleSummaryHTML()}
         <div class="clue-stats-grid">
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">🧩</div><div class="daily-stat-label">Played</div><div class="daily-stat-value">${cs.played}</div></div>
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">⏱️</div><div class="daily-stat-label">Median time</div><div class="daily-stat-value">${cs.medianTime}</div></div>
@@ -4846,7 +4869,7 @@ function initMode(){
   const jumpAllWords=getUrlJumpAllWords();
   const hasDayJump=jumpDay!==null;
   window.__jumpAllWords=jumpAllWords!==null?jumpAllWords-1:null;
-  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
   if(hasDayJump){
     cachedGameState=readStoredGameState();
     window.__forceFreshStart=false;
