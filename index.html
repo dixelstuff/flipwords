@@ -44,7 +44,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-length-card{border:1px solid rgba(37,31,52,.08);background:#f7f5fb;border-radius:16px;padding:11px 13px;text-align:left}
 .clue-length-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:7px}
 .clue-length-meta{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
-.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}
 .clue-length-line{font-size:14px;line-height:1.24;color:var(--muted);font-weight:730;font-variant-numeric:tabular-nums;white-space:nowrap}
 .clue-length-count{color:var(--ink);font-weight:850}
 .clue-length-pct{color:rgba(118,111,130,.62);font-weight:600;margin-left:2px}
@@ -58,10 +58,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .subtitle.level-with-meta .level-moves{display:inline-block;min-width:7ch;text-align:left}
 .clue-length-card{padding:11px 13px 12px}
 .clue-length-title{display:block;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:0}
-.clue-length-rule{border:none;border-top:1px solid rgba(37,31,52,.10);margin:7px 0 7px}
+.clue-length-rule{border:none;border-top:1px solid rgba(37,31,52,.10);margin:4px 0 5px}
 .clue-length-meta{display:block;color:rgba(118,111,130,.78);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:7px}
-.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
-.clue-length-line{font-size:14px;line-height:1.24;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}
+.clue-length-line{font-size:14px;line-height:1.16;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .clue-length-count{color:var(--muted);font-weight:700}
 .clue-length-pct{color:rgba(118,111,130,.58);font-weight:560;margin-left:3px}
 @media (max-width:380px){.subtitle.level-with-meta .level-main{font-size:24px}.subtitle.level-with-meta .level-meta{font-size:13px}.clue-length-lines{gap:4px 8px}.clue-length-line{font-size:13px}}
@@ -80,13 +80,17 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-length-card{padding:11px 13px 12px}
 .clue-length-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:0}
 .clue-length-meta{display:inline-flex;align-items:center;gap:8px;color:rgba(118,111,130,.78);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;margin-bottom:0}
-.clue-length-rule{border:none;border-top:1px solid rgba(37,31,52,.10);margin:7px 0 8px}
-.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
-.clue-length-line{font-size:14px;line-height:1.24;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.clue-length-rule{border:none;border-top:1px solid rgba(37,31,52,.10);margin:4px 0 5px}
+.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}
+.clue-length-line{font-size:14px;line-height:1.16;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
 .clue-length-count{color:var(--muted);font-weight:700}
 .clue-length-pct{color:rgba(118,111,130,.58);font-weight:560;margin-left:3px}
 @media (max-width:380px){.clue-length-title{display:block}.clue-length-meta{margin-top:3px}.clue-length-lines{gap:4px 8px}.clue-length-line{font-size:13px}.clue-current-meta{display:block;margin-left:0;margin-top:2px}}
 
+
+.clue-length-line{display:flex;align-items:baseline;gap:5px;color:var(--muted);font-weight:700}
+.clue-length-label,.clue-length-count{color:var(--muted);font-weight:700}
+.clue-length-pct{color:rgba(118,111,130,.54);font-weight:500;margin-left:3px}
 </style>
 </head>
 <body>
@@ -108,7 +112,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v30";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v32";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2949,7 +2953,7 @@ function calculateClueScoreResult({p=currentPuzzle(),elapsedMs=getActivePuzzleEl
 }
 function recordClueResult(result){if(!result||!result.puzzleId)return;clueStats.results[result.puzzleId]=result;totalScore=getClueTotalScore();displayedTotalScore=totalScore}
 function clueMedianForLength(len,field){const vals=getClueResults().filter(r=>r.length===len).map(r=>Number(r[field])).filter(Number.isFinite);return medianNumber(vals)}
-function clueRatingText(rating){return ({perfect:"perfect",great:"great",good:"good",clunky:"clunky"})[rating]||"clunky"}
+function clueRatingText(rating){return ({perfect:"Perfect",great:"Great",good:"Good",clunky:"Clunky"})[rating]||"Clunky"}
 function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/10)}
 function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
@@ -2968,7 +2972,7 @@ function clueLengthCardHTML(len){
     const count=rows.filter(r=>r.rating===rating).length;
     if(!count)return "";
     const pct=Math.round((count/rows.length)*100);
-    return `<div class="clue-length-line"><span class="clue-length-count">${count}</span> <span>${clueRatingText(rating)}</span> <span class="clue-length-pct">${pct}%</span></div>`;
+    return `<div class="clue-length-line"><span class="clue-length-label">${clueRatingText(rating)}</span> <span class="clue-length-count">${count}</span> <span class="clue-length-pct">${pct}%</span></div>`;
   }).filter(Boolean).join("");
   return `<div class="clue-length-card"><div class="clue-length-title"><span>${len}-letters</span>${meta}</div><hr class="clue-length-rule"><div class="clue-length-lines">${lines}</div></div>`;
 }
@@ -3803,7 +3807,6 @@ function updateStatsPanel(){
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">⏱️</div><div class="daily-stat-label">Median time</div><div class="daily-stat-value">${cs.medianTime}</div></div>
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">🎯</div><div class="daily-stat-label">Median moves</div><div class="daily-stat-value">${cs.medianMoves}</div></div>
         </div>
-        <div class="daily-section-title">By puzzle length</div>
         <div class="clue-length-list">${clueLengthStatsHTML()}</div>
       </div>`;
     statsToggle.classList.remove("visible");
