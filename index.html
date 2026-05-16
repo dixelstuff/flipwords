@@ -151,6 +151,36 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-current-clues{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (max-width:380px){.clue-current-main{display:block}.clue-current-meta{display:flex;margin-left:0;margin-top:3px}.clue-current-rating-icon{margin-right:4px}}
 
+
+/* v41: smoother persistent award + left-aligned current puzzle stats */
+.message.score-pop.solved-award-persist{
+  color:var(--success);
+  font-size:22px;
+  font-weight:800;
+  animation:clue-award-settle-v41 2.35s cubic-bezier(.18,.8,.22,1) forwards;
+}
+.message.hold-score.solved-award-persist{
+  opacity:1;
+  color:var(--success);
+  font-size:22px;
+  font-weight:800;
+  transform:translateY(0) scale(1);
+  animation:none;
+}
+@keyframes clue-award-settle-v41{
+  0%{opacity:0;transform:translateY(8px) scale(.96)}
+  14%{opacity:1;transform:translateY(0) scale(1.08)}
+  45%{opacity:1;transform:translateY(0) scale(1.02)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.clue-current-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clue-current-rating-icon{display:inline-block;margin-right:5px}
+.clue-current-words{display:inline;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.clue-current-meta{display:none}
+.clue-current-detail{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.clue-current-clues{display:none}
+@media (max-width:380px){.clue-current-rating-icon{margin-right:4px}.clue-current-detail{margin-top:4px}}
+
 </style>
 </head>
 <body>
@@ -2829,51 +2859,51 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["offer-papal","papal","offer","paper","offal",2,"","","",1],
-  ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
-  ["bet-jut","jut","bet","but","jet",1,"","","",0],
-  ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
-  ["hero-nude","nude","hero","hour","need",2,"","","",6],
-  ["never-sober","never","sober","verse","borne",4,"","","",21],
-  ["salt-weak","weak","salt","seat","walk",2,"","","",2],
-  ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
-  ["cab-wet","cab","wet","cat","web",1,"","","",0],
-  ["cord-slow","slow","cord","crow","sold",2,"","","",6],
-  ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
-  ["plum-wars","plum","wars","plus","warm",1,"","","",0],
-  ["novel-short","short","novel","thorn","loves",3,"","","",22],
-  ["mite-scan","scan","mite","cans","item",1,"","","",3],
-  ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
-  ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
-  ["snide-title","snide","title","inlet","tides",4,"","","",15],
-  ["boo-two","boo","two","bow","too",2,"","","cannot be reversed",7],
-  ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
-  ["price-toast","toast","price","tract","poise",2,"","","",3],
-  ["flag-lion","lion","flag","golf","nail",4,"","","",23],
+  ["array-guide","guide","array","argue","diary",4,"","","",22],
+  ["gods-pier","gods","pier","gird","pose",3,"","","",9],
+  ["atlas-sheep","sheep","atlas","phase","steal",4,"","","",28],
+  ["oral-vows","oral","vows","rows","oval",3,"","","",9],
+  ["forms-trend","forms","trend","frond","terms",3,"","","",9],
+  ["ate-jog","jog","ate","ago","jet",2,"","","",9],
+  ["half-lice","half","lice","fill","each",4,"","","",26],
+  ["dream-leave","dream","leave","levee","drama",2,"","","",6],
+  ["live-rail","live","rail","liar","evil",3,"","","",19],
+  ["aid-net","aid","net","din","tea",3,"","","",9],
+  ["bride-mercy","mercy","bride","crime","derby",4,"","","",26],
+  ["logs-sold","sold","logs","loss","gold",3,"","","",8],
+  ["basil-smell","basil","smell","balls","smile",2,"","","",7],
+  ["pays-stew","stew","pays","step","ways",4,"","","",23],
+  ["peg-tag","peg","tag","gap","get",3,"","","",9],
+  ["kings-spear","kings","spear","rings","speak",4,"","","",25],
+  ["aced-fast","aced","fast","acts","fade",3,"","","",9],
+  ["drift-house","drift","house","fried","south",3,"","","",22],
+  ["laws-musk","musk","laws","sums","walk",3,"","","",8],
+  ["blues-scale","blues","scale","clubs","lease",4,"","","",13],
+  ["bit-own","own","bit","nib","two",3,"","","",10],
 ];
-
+  
 const puzzleClues = {
-  "offer-papal": "butcher scraps · office sheets",
-  "lack-toys": "egg middle · house pets",
-  "bet-jut": "except · fast plane",
-  "dodge-melon": "evil spirit · mountain inn",
-  "hero-nude": "clock stretch · pressing want",
-  "never-sober": "carried along · poetic line",
-  "salt-weak": "chair spot · move on foot",
-  "ashes-drift": "mine tunnel · fairground turns",
-  "cab-wet": "purring hunter · spider net",
-  "cord-slow": "black bird · gone at auction",
-  "dwell-fauna": "heavily loaded · dreadful",
-  "plum-wars": "added bonus · pleasantly heated",
-  "novel-short": "rose hazard · adores",
-  "mite-scan": "tin containers · single object",
-  "music-ninth": "spice seed · gentle clues",
-  "epic-harp": "curved span · smoking tube",
-  "snide-title": "coastal opening · moon-pulled waters",
-  "boo-two": "looped knot · also",
-  "meat-nerd": "faculty boss · school stretch",
-  "price-toast": "land strip · balanced calm",
-  "flag-lion": "course game · finger tip"
+  "array-guide": "heated debate · private pages",
+  "gods-pier": "tighten belt · camera stance",
+  "atlas-sheep": "passing stage · light-fingered",
+  "oral-vows": "garden lines · egg shape",
+  "forms-trend": "leafy spray · small print",
+  "ate-jog": "before now · runway leap",
+  "half-lice": "top up · every one",
+  "dream-leave": "flood bank · theatre trouble",
+  "live-rail": "truth dodger · dark force",
+  "aid-net": "kitchen clatter · cuppa",
+  "bride-mercy": "police matter · horse race",
+  "logs-sold": "something missing · shiny prize",
+  "basil-smell": "playground spheres · happy curve",
+  "pays-stew": "stair action · possible routes",
+  "peg-tag": "missing space · obtain",
+  "kings-spear": "jewellery circles · give voice",
+  "aced-fast": "stage moves · grows faint",
+  "drift-house": "pan victim · compass quarter",
+  "laws-musk": "adding totals · travel on foot",
+  "blues-scale": "nightspot gear · temporary hold",
+  "bit-own": "tiny bite · number pair"
 };
   
 const allWordsRows=[
@@ -3021,10 +3051,12 @@ function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
   if(!p||!r)return "";
   const icon=r.gaveUp?"":(getClueRatingLabel(r.rating).split(" ")[0]||"");
-  const meta=`<span>${formatClock(r.timeMs)}</span><span>Moves ${r.moves}</span>`;
   const c=currentSplitClue();
   const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
-  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-rating-icon">${icon}</span><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span><span class="clue-current-meta">${meta}</span></div>${clueText?`<div class="clue-current-clues">${clueText}</div>`:""}</div></div>`;
+  const detailParts=[formatClock(r.timeMs),`Moves ${r.moves}`];
+  if(clueText)detailParts.push(clueText);
+  const detail=detailParts.join(" · ");
+  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-rating-icon">${icon}</span><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span></div><div class="clue-current-detail">${detail}</div></div></div>`;
 }
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
