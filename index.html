@@ -107,6 +107,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .message.clue-static.clue-solved{color:rgba(118,111,130,.66);font-weight:700}
 @media (max-width:380px){.clue-current-meta{display:flex;margin-left:0;margin-top:2px;gap:9px}}
 
+
+/* v36: override generic stats-card hr rule and soften solved clue */
+.stats-card .clue-length-rule{margin:1px 0 3px;border:none;border-top:1px solid rgba(37,31,52,.10)}
+.message.clue-static.clue-solved{color:rgba(118,111,130,.58);font-weight:600}
+
 </style>
 </head>
 <body>
