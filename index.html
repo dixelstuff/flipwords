@@ -116,6 +116,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 /* v37 display tweaks */
 .stats-card .clue-length-rule{margin:3px 0 5px;border:none;border-top:1px solid rgba(37,31,52,.10)}
 .message.clue-static.clue-solved{color:var(--muted);font-weight:500}
+
+/* v38 display tweaks: footer emoji removed, current-result moves normalized, letter-card rule spacing */
+.stats-card .clue-length-card .clue-length-rule{margin:8px 0 9px;border:none;border-top:1px solid rgba(37,31,52,.10)}
+
 </style>
 </head>
 <body>
@@ -2986,7 +2990,7 @@ function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
   if(!p||!r)return "";
   const resultText=r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)} +${r.score}`;
-  const meta=`<span>${formatClock(r.timeMs)}</span><span>Moves ${r.moves}</span>`;
+  const meta=`<span>${formatClock(r.timeMs)}</span><span>moves ${r.moves}</span>`;
   return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span><span class="clue-current-result"><strong>${resultText}</strong><span class="clue-current-meta">${meta}</span></span></div></div>`;
 }
 function clueLengthCardHTML(len){
@@ -3011,7 +3015,7 @@ function getOverallClueStats(){const rows=getClueResults(),medTime=medianNumber(
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
 function clueLevelMetaHTML(){return `<span class="level-meta"><span class="level-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="level-moves">Moves ${movesUsed}</span></span>`}
 function currentClueResult(){const p=currentPuzzle();return p&&clueStats&&clueStats.results?clueStats.results[p.id]||null:null}
-function currentClueFooterResultHTML(){const r=currentClueResult();if(!r)return lastAccountingMessages&&lastAccountingMessages.length?lastAccountingMessages[lastAccountingMessages.length-1]:"";return r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)} +${r.score}`}
+function currentClueFooterResultHTML(){const r=currentClueResult();if(!r)return lastAccountingMessages&&lastAccountingMessages.length?lastAccountingMessages[lastAccountingMessages.length-1]:"";return r.gaveUp?"Revealed +0":`${getClueFooterRatingLabel(r.rating)} +${r.score}`}
 function getClueEarlySkipPenaltyForTarget(targetMs,p=currentPuzzle()){const len=getCluePuzzleLength(p);if(targetMs===getClueFirstUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue1[len]||0;if(targetMs===getClueSecondUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue2[len]||0;if(targetMs===getClueMaximumUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.max[len]||0;return 0}
 function clearClueFooterTimer(){if(clueFooterTimer){clearInterval(clueFooterTimer);clueFooterTimer=null}}
 function startClueFooterTimer(){if(clueFooterTimer||!isNewMode()||solved||gameStartDeferred)return;clueFooterTimer=setInterval(()=>{if(!isNewMode()||solved||gameStartDeferred){clearClueFooterTimer();return}renderGameSubtitle();updateFooterDisplay()},1000)}
