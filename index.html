@@ -208,6 +208,36 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .stats-card .clue-current-detail{margin-top:5px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 .stats-card .clue-current-clue-text{display:none!important}
 @media (max-width:380px){.stats-card .clue-current-rating{margin-left:7px}.stats-card .clue-current-detail{margin-top:4px}}
+
+/* v47 clue stats proportional grade strips */
+:root{
+  --clue-perfect:#2f9464;
+  --clue-great:#6b75d6;
+  --clue-good:#c79532;
+  --clue-clunky:#8a8492;
+}
+.stats-card .clue-current-rating.is-perfect{color:var(--clue-perfect)}
+.stats-card .clue-current-rating.is-great{color:var(--clue-great)}
+.stats-card .clue-current-rating.is-good{color:var(--clue-good)}
+.stats-card .clue-current-rating.is-clunky{color:var(--clue-clunky)}
+.clue-grade-legend{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px 0 9px;font-size:12px;font-weight:800;line-height:1;white-space:nowrap}
+.clue-grade-perfect{color:var(--clue-perfect)}
+.clue-grade-great{color:var(--clue-great)}
+.clue-grade-good{color:var(--clue-good)}
+.clue-grade-clunky{color:var(--clue-clunky)}
+.clue-grade-strip{display:flex;width:100%;height:9px;border-radius:999px;overflow:hidden;background:rgba(37,31,52,.07);box-shadow:inset 0 0 0 1px rgba(37,31,52,.035);margin:7px 0 8px}
+.clue-grade-strip-segment{display:block;min-width:0;height:100%}
+.clue-grade-strip-segment + .clue-grade-strip-segment{box-shadow:inset 1px 0 0 rgba(255,255,255,.72)}
+.clue-grade-strip-segment.is-perfect{background:var(--clue-perfect)}
+.clue-grade-strip-segment.is-great{background:var(--clue-great)}
+.clue-grade-strip-segment.is-good{background:var(--clue-good)}
+.clue-grade-strip-segment.is-clunky{background:var(--clue-clunky)}
+.stats-card .clue-length-card{padding:11px 13px 12px}
+.stats-card .clue-length-title{display:block;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:0}
+.stats-card .clue-length-meta{display:block;color:rgba(118,111,130,.78);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap;margin:0}
+.stats-card .clue-length-list{gap:9px;margin-top:7px}
+@media (max-width:380px){.clue-grade-legend{gap:9px;font-size:11px}.clue-grade-strip{height:8px}}
+
 </style>
 </head>
 <body>
@@ -3088,23 +3118,31 @@ function currentCluePuzzleSummaryHTML(){
   const detail=[formatClock(r.timeMs),`Moves ${r.moves}`,`Clues ${cluesShown}`].join(" · ");
   return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span> <span class="daily-puzzle-descriptor clue-current-rating is-${ratingClass}">${ratingText}</span></div><div class="clue-current-detail">${detail}</div></div></div>`;
 }
+function clueGradeLegendHTML(){
+  return `<div class="clue-grade-legend" aria-label="Grade colours"><span class="clue-grade-perfect">Perfect</span><span class="clue-grade-great">Great</span><span class="clue-grade-good">Good</span><span class="clue-grade-clunky">Clunky</span></div>`;
+}
+function clueGradeStripHTML(rows){
+  const total=rows.length;
+  if(!total)return "";
+  const parts=CLUE_RATING_ORDER.map(rating=>{
+    const count=rows.filter(r=>r.rating===rating).length;
+    if(!count)return "";
+    const label=`${clueRatingText(rating)} ${count} of ${total}`;
+    return `<span class="clue-grade-strip-segment is-${rating}" style="flex:${count} 1 0" title="${label}" aria-label="${label}"></span>`;
+  }).filter(Boolean).join("");
+  return `<div class="clue-grade-strip" role="img" aria-label="Rating distribution">${parts}</div>`;
+}
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=`<span class="clue-length-meta"><span>${medTime===null?"—":formatClock(medTime)}</span><span>Moves ${formatClueMedianMoves(medMoves)}</span></span>`;
-  const lines=CLUE_RATING_ORDER.map(rating=>{
-    const count=rows.filter(r=>r.rating===rating).length;
-    if(!count)return "";
-    const pct=Math.round((count/rows.length)*100);
-    return `<div class="clue-length-line"><span class="clue-length-label">${clueRatingText(rating)}</span> <span class="clue-length-count">${count}</span> <span class="clue-length-pct">${pct}%</span></div>`;
-  }).filter(Boolean).join("");
-  return `<div class="clue-length-card"><div class="clue-length-title"><span>${len}-letters</span>${meta}</div><hr class="clue-length-rule"><div class="clue-length-lines">${lines}</div></div>`;
+  const meta=[`Played ${rows.length}`,medTime===null?"—":formatClock(medTime),`Moves ${formatClueMedianMoves(medMoves)}`].join(" · ");
+  return `<div class="clue-length-card"><div class="clue-length-title">${len}-letters</div>${clueGradeStripHTML(rows)}<div class="clue-length-meta">${meta}</div></div>`;
 }
 function clueLengthStatsHTML(){
   const html=[3,4,5].map(clueLengthCardHTML).filter(Boolean).join("");
-  return html||`<div class="clue-no-stats">No clue stats yet.</div>`;
+  return html?`${clueGradeLegendHTML()}${html}`:`<div class="clue-no-stats">No clue stats yet.</div>`;
 }
 function getOverallClueStats(){const rows=getClueResults(),medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite)),medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));return {played:rows.length,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:formatClueMedianMoves(medMoves),totalScore:getClueTotalScore()}}
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
