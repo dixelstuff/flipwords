@@ -38,6 +38,17 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 @media (max-width:520px){.board{gap:0!important;--tile-w-base:64px;--base-tile-h-base:114px;--tile-gap-base:8px;--mixed-gap-base:7px;--middle-band-base:8px;--bump-base:13px;--h-width-trim-base:6px;--letter-size-base:40px}.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.90}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}}@media (max-width:390px){.board.len-4{--grid-scale:1}.board.len-5{--grid-scale:1}.board.len-6{--grid-scale:.84}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.board{gap:0!important;--tile-w-base:78px;--base-tile-h-base:133px;--tile-gap-base:12px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:48px}.board.len-6{--grid-scale:.96}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.tile-wrap.horizontal-wrap{width:var(--h-tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}}
 @media (hover:none) and (pointer:coarse) and (orientation:landscape){body::before{content:"Oops! Please turn your device into portrait view so we can fit everything in for you.";position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;padding:28px;text-align:center;background:var(--bg);color:var(--ink);font-size:22px;font-weight:750;line-height:1.35}.game{visibility:hidden;pointer-events:none}}
+
+/* v28 clue stats compact length cards */
+.clue-length-list{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+.clue-length-card{border:1px solid rgba(37,31,52,.08);background:#f7f5fb;border-radius:16px;padding:11px 13px;text-align:left}
+.clue-length-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:850;color:var(--ink);margin-bottom:7px}
+.clue-length-meta{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:12px;font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
+.clue-length-lines{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.clue-length-line{font-size:14px;line-height:1.24;color:var(--muted);font-weight:730;font-variant-numeric:tabular-nums;white-space:nowrap}
+.clue-length-count{color:var(--ink);font-weight:850}
+.clue-length-pct{color:rgba(118,111,130,.62);font-weight:600;margin-left:2px}
+@media (max-width:380px){.clue-length-title{display:block}.clue-length-meta{margin-top:2px}.clue-length-lines{gap:4px 8px}.clue-length-line{font-size:13px}}
 </style>
 </head>
 <body>
@@ -59,7 +70,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v27";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v28";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2901,22 +2912,26 @@ function calculateClueScoreResult({p=currentPuzzle(),elapsedMs=getActivePuzzleEl
 function recordClueResult(result){if(!result||!result.puzzleId)return;clueStats.results[result.puzzleId]=result;totalScore=getClueTotalScore();displayedTotalScore=totalScore}
 function clueMedianForLength(len,field){const vals=getClueResults().filter(r=>r.length===len).map(r=>Number(r[field])).filter(Number.isFinite);return medianNumber(vals)}
 function clueRatingText(rating){return ({perfect:"perfect",great:"great",good:"good",clunky:"clunky"})[rating]||"clunky"}
+function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/10)}
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
   if(!rows.length)return "";
+  const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
+  const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
+  const meta=`<span class="clue-length-meta"><span>${medTime===null?"—":formatClock(medTime)}</span><span aria-hidden="true">|</span><span>${formatClueMedianMoves(medMoves)} moves</span></span>`;
   const lines=CLUE_RATING_ORDER.map(rating=>{
     const count=rows.filter(r=>r.rating===rating).length;
     if(!count)return "";
     const pct=Math.round((count/rows.length)*100);
-    return `<div class="clue-length-line">${count} ${clueRatingText(rating)} (${pct}%)</div>`;
+    return `<div class="clue-length-line"><span class="clue-length-count">${count}</span> <span>${clueRatingText(rating)}</span> <span class="clue-length-pct">${pct}%</span></div>`;
   }).filter(Boolean).join("");
-  return `<div class="clue-length-card"><div class="clue-length-title">${len}-letters</div><div class="clue-length-lines">${lines}</div></div>`;
+  return `<div class="clue-length-card"><div class="clue-length-title"><span>${len} letters</span>${meta}</div><div class="clue-length-lines">${lines}</div></div>`;
 }
 function clueLengthStatsHTML(){
   const html=[3,4,5].map(clueLengthCardHTML).filter(Boolean).join("");
   return html||`<div class="clue-no-stats">No clue stats yet.</div>`;
 }
-function getOverallClueStats(){const rows=getClueResults(),medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite)),medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));return {played:rows.length,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10),totalScore:getClueTotalScore()}}
+function getOverallClueStats(){const rows=getClueResults(),medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite)),medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));return {played:rows.length,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:formatClueMedianMoves(medMoves),totalScore:getClueTotalScore()}}
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
 function getClueEarlySkipPenaltyForTarget(targetMs,p=currentPuzzle()){const len=getCluePuzzleLength(p);if(targetMs===getClueFirstUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue1[len]||0;if(targetMs===getClueSecondUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue2[len]||0;if(targetMs===getClueMaximumUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.max[len]||0;return 0}
 function clearClueFooterTimer(){if(clueFooterTimer){clearInterval(clueFooterTimer);clueFooterTimer=null}}
@@ -4347,6 +4362,7 @@ function revealClueAfterTimeTravel(targetMs){
   if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}
   clearClueCountdownMessage();
   clearClueSkipHelperTimer();
+  const p=currentPuzzle();
   const before=getActivePuzzleElapsedMs();
   const added=Math.max(0,targetMs-before);
   if(added>0)clueEarlySkipPenaltyPoints+=getClueEarlySkipPenaltyForTarget(targetMs,p);
