@@ -112,6 +112,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .stats-card .clue-length-rule{margin:1px 0 3px;border:none;border-top:1px solid rgba(37,31,52,.10)}
 .message.clue-static.clue-solved{color:rgba(118,111,130,.58);font-weight:600}
 
+
+/* v37 display tweaks */
+.stats-card .clue-length-rule{margin:3px 0 5px;border:none;border-top:1px solid rgba(37,31,52,.10)}
+.message.clue-static.clue-solved{color:var(--muted);font-weight:500}
 </style>
 </head>
 <body>
@@ -164,7 +168,7 @@ const CLUE_HELP_SESSION_KEY="flipwords:clueSkipHelpSeen:v1";
 const CLUE_MAX_SCORE_BY_LENGTH={3:105,4:130,5:150};
 const CLUE_MIN_SOLVE_SCORE_BY_LENGTH={3:10,4:15,5:20};
 const CLUE_EARLY_SKIP_SCORE_PENALTY={clue1:{3:25,4:35,5:45},clue2:{3:15,4:25,5:35},max:{3:0,4:0,5:0}};
-const CLUE_RATING_LABELS={perfect:"🌟 Perfect",great:"🎯 Great",good:"👍 Good",clunky:"🪨 Clunky"};
+const CLUE_RATING_LABELS={perfect:"🌟 Perfect",great:"💎 Great",good:"👍 Good",clunky:"🪨 Clunky"};
 const CLUE_RATING_FOOTER_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Clunky"};
 const CLUE_RATING_ORDER=["perfect","great","good","clunky"];
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
