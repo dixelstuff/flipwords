@@ -123,6 +123,34 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 
 /* v39 solve-screen result polish */
 .message.hold-score.solved-award-persist{opacity:1;color:var(--muted);font-size:19px;font-weight:650;animation:none}
+
+/* v40: persistent award remains green; current clue-result row with clues */
+.message.score-pop.solved-award-persist{
+  color:var(--success);
+  animation:clue-award-settle 2.2s ease-out forwards;
+}
+.message.hold-score.solved-award-persist{
+  opacity:1;
+  color:var(--success);
+  font-size:19px;
+  font-weight:800;
+  animation:none;
+}
+@keyframes clue-award-settle{
+  0%{opacity:0;transform:translateY(8px) scale(.96)}
+  14%{opacity:1;transform:translateY(0) scale(1.05)}
+  62%{opacity:1;transform:translateY(0) scale(1)}
+  100%{opacity:1;transform:translateY(0) scale(.86)}
+}
+.clue-current-summary{margin:8px 0 14px}
+.clue-current-row{padding:13px 0 12px}
+.clue-current-main{display:flex;align-items:baseline;gap:8px;min-width:0;white-space:nowrap;overflow:hidden}
+.clue-current-rating-icon{flex:0 0 auto}
+.clue-current-words{display:inline;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.clue-current-meta{flex:0 0 auto;display:inline-flex;align-items:baseline;gap:12px;margin-left:auto;color:rgba(118,111,130,.78);font-weight:600;font-variant-numeric:tabular-nums}
+.clue-current-clues{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:380px){.clue-current-main{display:block}.clue-current-meta{display:flex;margin-left:0;margin-top:3px}.clue-current-rating-icon{margin-right:4px}}
+
 </style>
 </head>
 <body>
@@ -2992,9 +3020,11 @@ function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/
 function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
   if(!p||!r)return "";
-  const resultText=r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)} +${r.score}`;
+  const icon=r.gaveUp?"":(getClueRatingLabel(r.rating).split(" ")[0]||"");
   const meta=`<span>${formatClock(r.timeMs)}</span><span>Moves ${r.moves}</span>`;
-  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span><span class="clue-current-result"><strong>${resultText}</strong><span class="clue-current-meta">${meta}</span></span></div></div>`;
+  const c=currentSplitClue();
+  const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
+  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-rating-icon">${icon}</span><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span><span class="clue-current-meta">${meta}</span></div>${clueText?`<div class="clue-current-clues">${clueText}</div>`:""}</div></div>`;
 }
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
@@ -3970,7 +4000,8 @@ function popMessage(text,isZero=false,isFinal=false){
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
   message.classList.toggle("penalty-pop",/^Hints? -[0-9]+$/.test(text));
   message.classList.toggle("shield-pop",isShieldReward||isStreakIncrement);
-  message.classList.toggle("final-pop",isFinal&&!isStreakMessage);
+  message.classList.toggle("final-pop",isFinal&&!isStreakMessage&&!isNewMode());
+  message.classList.toggle("solved-award-persist",!!(isNewMode()&&isFinal));
   message.textContent=text;
   void message.offsetWidth;
   message.classList.add("score-pop");
@@ -4038,19 +4069,18 @@ function showSolvedClueAfterRewards(immediate=false){
 function showPersistentSolvedAwardAfterRewards(immediate=false){
   clearSolvedClueTimer();
   if(!isNewMode()||!solved)return;
-  const show=()=>{
+  const settle=()=>{
     if(!isNewMode()||!solved)return;
-    const text=currentClueAwardResultHTML();
-    if(!text)return;
     if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-    message.classList.remove("info","score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","clue-static","clue-solved","fadeout");
-    message.textContent=text;
+    const text=currentClueAwardResultHTML();
+    if(text&&message.textContent!==text)message.textContent=text;
     message.dataset.infoType="solved-award";
+    message.classList.remove("info","score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","clue-static","clue-solved","fadeout");
     message.classList.add("hold-score","solved-award-persist");
   };
-  if(immediate){show();return}
-  const delay=Math.max(120,solvedToggleReadyAt-Date.now()+120);
-  solvedClueTimer=setTimeout(show,delay);
+  if(immediate){settle();return}
+  const delay=Math.max(2200,solvedToggleReadyAt-Date.now()+120);
+  solvedClueTimer=setTimeout(settle,delay);
 }
 function queueRewardAnimations(){
   clearBonusTimers();
@@ -4794,7 +4824,7 @@ allWordsModeBtn.addEventListener("click",()=>switchMode("new"));
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("click",goNext);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
-document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();toggleSolvedStartPreview()});
+document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
 function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";statsDetailsShown=true;updateStatsPanel()}
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;if(!isAllWordsMode())openStatsDetails()});
 endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="nextAllWordsLink"){e.preventDefault();goNextAllWords();return}if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
