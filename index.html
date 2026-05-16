@@ -2886,57 +2886,51 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["blast-tires","blast","tires","salts","tribe",5,"","","",32],
-  ["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
-  ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
-  ["cube-pork","pork","cube","buck","rope",3,"","","",8],
-  ["march-peach","peach","march","charm","cheap",3,"","","",21],
-  ["gala-over","gala","over","gave","oral",3,"","","",9],
-  ["space-world","space","world","crowd","lapse",4,"","","",21],
-  ["flee-silt","silt","flee","else","lift",3,"","","",8],
-  ["toy-yes","toy","yes","soy","yet",3,"","","",14],
-  ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
-  ["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
-  ["dice-lord","dice","lord","cold","ride",3,"","","",9],
-  ["brake-force","brake","force","farce","broke",3,"","","",8],
-  ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
-  ["dad-nor","nor","dad","don","rad",3,"dan","rod","",10],
-  ["data-town","data","town","toad","want",3,"","","",18],
-  ["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
-  ["east-wind","east","wind","dawn","ties",3,"","","",19],
-  ["grab-milk","grab","milk","glib","mark",3,"","","",9],
-  ["elder-necks","elder","necks","dense","clerk",5,"","","",28],
-  ["hike-were","hike","were","heir","week",2,"","","",8],
-  ["bar-row","bar","row","rob","war",3,"","","",14],
-  ["glue-roof","glue","roof","goof","rule",2,"","","",8],
-  ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
+  ["offer-papal","papal","offer","paper","offal",2,"","","",1],
+  ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
+  ["bet-jut","jut","bet","but","jet",1,"","","",0],
+  ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
+  ["hero-nude","nude","hero","hour","need",2,"","","",6],
+  ["never-sober","never","sober","verse","borne",4,"","","",21],
+  ["salt-weak","weak","salt","seat","walk",2,"","","",2],
+  ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
+  ["cab-wet","cab","wet","cat","web",1,"","","",0],
+  ["cord-slow","slow","cord","crow","sold",2,"","","",6],
+  ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
+  ["plum-wars","plum","wars","plus","warm",1,"","","",0],
+  ["novel-short","short","novel","thorn","loves",3,"","","",22],
+  ["mite-scan","scan","mite","cans","item",1,"","","",3],
+  ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
+  ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
+  ["snide-title","snide","title","inlet","tides",4,"","","",15],
+  ["boo-two","boo","two","bow","too",2,"","","cannot be reversed",7],
+  ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
+  ["price-toast","toast","price","tract","poise",2,"","","",3],
+  ["flag-lion","lion","flag","golf","nail",4,"","","",23],
 ];
 
 const puzzleClues = {
-  "blast-tires": "preserved grains · clan circle",
-  "cafe-tart": "going price · stubborn truth",
-  "pup-too": "outside now · cork sound",
-  "cube-pork": "leaping deer · climbing line",
-  "march-peach": "easy on the wallet · winning spell",
-  "gala-over": "handed across · spoken test",
-  "space-world": "gathered bodies · brief failure",
-  "flee-silt": "other option · upward pull",
-  "toy-yes": "bean sauce · still now",
-  "balm-good": "pleased heart · thunder note",
-  "corgi-spots": "plain awful · talking point",
-  "dice-lord": "winter bite · saddle trip",
-  "brake-force": "comic pretence · no longer whole",
-  "heal-pigs": "spring forward · tired breath",
-  "dad-nor": "small payment · old-school cool",
-  "data-town": "pond hopper · strong desire",
-  "norms-outer": "radio adjuster · living spaces",
-  "east-wind": "first light · neckwear",
-  "grab-milk": "slick talk · killer’s target",
-  "elder-necks": "packed closely · office worker",
-  "hike-were": "family successor · calendar block",
-  "bar-row": "take by force · open conflict",
-  "glue-roof": "silly mistake · guiding principle",
-  "glare-skies": "soaring hunter · dangerous chances"
+  "offer-papal": "butcher scraps · office sheets",
+  "lack-toys": "egg middle · house pets",
+  "bet-jut": "except · fast plane",
+  "dodge-melon": "evil spirit · mountain inn",
+  "hero-nude": "clock stretch · pressing want",
+  "never-sober": "carried along · poetic line",
+  "salt-weak": "chair spot · move on foot",
+  "ashes-drift": "mine tunnel · fairground turns",
+  "cab-wet": "purring hunter · spider net",
+  "cord-slow": "black bird · gone at auction",
+  "dwell-fauna": "heavily loaded · dreadful",
+  "plum-wars": "added bonus · pleasantly heated",
+  "novel-short": "rose hazard · adores",
+  "mite-scan": "tin containers · single object",
+  "music-ninth": "spice seed · gentle clues",
+  "epic-harp": "curved span · smoking tube",
+  "snide-title": "coastal opening · moon-pulled waters",
+  "boo-two": "looped knot · also",
+  "meat-nerd": "faculty boss · school stretch",
+  "price-toast": "land strip · balanced calm",
+  "flag-lion": "course game · finger tip"
 };
   
 const allWordsRows=[
@@ -2967,6 +2961,7 @@ let fitBoardRAF=0;
 document.body.appendChild(statsPanel);
 
 let puzzleIndex=0,tiles=[],solved=false,completedWithHints=false,dragState=null,previewingStartWords=false,solvedToggleReadyAt=0,solvedAnswerInverted=false;
+let lastNextButtonAt=0,lastStatsButtonAt=0;
 let hintOrder=[],hintCursor=0,hintsUsed=0,hintOrientationInverted=null,movesUsed=0;
 let totalScore=0,displayedTotalScore=0,noHintStreak=0,displayedNoHintStreak=0,shields=0,displayedShields=0,shieldUsedThisLevel=false;
 let activePuzzleElapsedMs=0,activePuzzleStartedAt=null;
@@ -4877,18 +4872,34 @@ function jumpToNextDailyForTesting(){
   initDaily();
   return true;
 }
+function runNextButtonAction(e){
+  if(e){e.preventDefault();e.stopPropagation()}
+  const now=Date.now();
+  if(now-lastNextButtonAt<450)return;
+  lastNextButtonAt=now;
+  goNext();
+}
+function runSolvedStatsButtonAction(e){
+  if(e){e.preventDefault();e.stopPropagation()}
+  const now=Date.now();
+  if(now-lastStatsButtonAt<350)return;
+  lastStatsButtonAt=now;
+  openStatsDetails();
+}
 board.addEventListener("click",e=>{
   if(isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted){
     e.preventDefault();
     startDailyPlay();
   }
 });
-hintBtn.addEventListener("click",()=>useHint());
+hintBtn.addEventListener("pointerup",e=>{if(isNewMode()&&solved)runSolvedStatsButtonAction(e)});
+hintBtn.addEventListener("click",e=>{if(isNewMode()&&solved){runSolvedStatsButtonAction(e);return}useHint()});
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
 allWordsModeBtn.addEventListener("click",()=>switchMode("new"));
 startWordsBtn.addEventListener("click",showStartingWords);
-nextBtn.addEventListener("click",goNext);
+nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsMode())runNextButtonAction(e)});
+nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
 document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
 function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";statsDetailsShown=true;updateStatsPanel()}
