@@ -193,6 +193,21 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-current-detail{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 .clue-current-clue-text{margin-top:2px;color:rgba(118,111,130,.64);font-size:13px;font-weight:500;line-height:1.24;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
+
+/* v45 current puzzle stats: match daily row style and remove clue-text line */
+.stats-card .clue-current-summary{margin:18px 0 14px;border-top:1px solid rgba(37,31,52,.10)}
+.stats-card .clue-current-row{display:block;padding:12px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.25;color:var(--muted);text-align:left;white-space:normal}
+.stats-card .clue-current-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stats-card .clue-current-words{display:inline;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+.stats-card .clue-current-words strong{color:var(--ink);font-weight:800}
+.stats-card .clue-current-rating{font-weight:850;margin-left:10px;text-transform:none}
+.stats-card .clue-current-rating.is-perfect{color:#2f9464}
+.stats-card .clue-current-rating.is-great{color:#61a875}
+.stats-card .clue-current-rating.is-good{color:#6aa56f}
+.stats-card .clue-current-rating.is-clunky{color:#8a8492}
+.stats-card .clue-current-detail{margin-top:5px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
+.stats-card .clue-current-clue-text{display:none!important}
+@media (max-width:380px){.stats-card .clue-current-rating{margin-left:7px}.stats-card .clue-current-detail{margin-top:4px}}
 </style>
 </head>
 <body>
@@ -214,7 +229,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v44";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v45";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2871,51 +2886,57 @@ const lockedPuzzleRows=[
 ];
 
 const clueTestPuzzles = [
-  ["offer-papal","papal","offer","paper","offal",2,"","","",1],
-  ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
-  ["bet-jut","jut","bet","but","jet",1,"","","",0],
-  ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
-  ["hero-nude","nude","hero","hour","need",2,"","","",6],
-  ["never-sober","never","sober","verse","borne",4,"","","",21],
-  ["salt-weak","weak","salt","seat","walk",2,"","","",2],
-  ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
-  ["cab-wet","cab","wet","cat","web",1,"","","",0],
-  ["cord-slow","slow","cord","crow","sold",2,"","","",6],
-  ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
-  ["plum-wars","plum","wars","plus","warm",1,"","","",0],
-  ["novel-short","short","novel","thorn","loves",3,"","","",22],
-  ["mite-scan","scan","mite","cans","item",1,"","","",3],
-  ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
-  ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
-  ["snide-title","snide","title","inlet","tides",4,"","","",15],
-  ["boo-two","boo","two","bow","too",2,"","","cannot be reversed",7],
-  ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
-  ["price-toast","toast","price","tract","poise",2,"","","",3],
-  ["flag-lion","lion","flag","golf","nail",4,"","","",23],
+  ["blast-tires","blast","tires","salts","tribe",5,"","","",32],
+  ["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
+  ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
+  ["cube-pork","pork","cube","buck","rope",3,"","","",8],
+  ["march-peach","peach","march","charm","cheap",3,"","","",21],
+  ["gala-over","gala","over","gave","oral",3,"","","",9],
+  ["space-world","space","world","crowd","lapse",4,"","","",21],
+  ["flee-silt","silt","flee","else","lift",3,"","","",8],
+  ["toy-yes","toy","yes","soy","yet",3,"","","",14],
+  ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
+  ["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
+  ["dice-lord","dice","lord","cold","ride",3,"","","",9],
+  ["brake-force","brake","force","farce","broke",3,"","","",8],
+  ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
+  ["dad-nor","nor","dad","don","rad",3,"dan","rod","",10],
+  ["data-town","data","town","toad","want",3,"","","",18],
+  ["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
+  ["east-wind","east","wind","dawn","ties",3,"","","",19],
+  ["grab-milk","grab","milk","glib","mark",3,"","","",9],
+  ["elder-necks","elder","necks","dense","clerk",5,"","","",28],
+  ["hike-were","hike","were","heir","week",2,"","","",8],
+  ["bar-row","bar","row","rob","war",3,"","","",14],
+  ["glue-roof","glue","roof","goof","rule",2,"","","",8],
+  ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
 ];
 
 const puzzleClues = {
-  "offer-papal": "butcher scraps · office sheets",
-  "lack-toys": "egg middle · house pets",
-  "bet-jut": "except · fast plane",
-  "dodge-melon": "evil spirit · mountain inn",
-  "hero-nude": "clock stretch · pressing want",
-  "never-sober": "carried along · poetic line",
-  "salt-weak": "chair spot · move on foot",
-  "ashes-drift": "mine tunnel · fairground turns",
-  "cab-wet": "purring hunter · spider net",
-  "cord-slow": "black bird · gone at auction",
-  "dwell-fauna": "heavily loaded · dreadful",
-  "plum-wars": "added bonus · pleasantly heated",
-  "novel-short": "rose hazard · adores",
-  "mite-scan": "tin containers · single object",
-  "music-ninth": "spice seed · gentle clues",
-  "epic-harp": "curved span · smoking tube",
-  "snide-title": "coastal opening · moon-pulled waters",
-  "boo-two": "looped knot · also",
-  "meat-nerd": "faculty boss · school stretch",
-  "price-toast": "land strip · balanced calm",
-  "flag-lion": "course game · finger tip"
+  "blast-tires": "preserved grains · clan circle",
+  "cafe-tart": "going price · stubborn truth",
+  "pup-too": "outside now · cork sound",
+  "cube-pork": "leaping deer · climbing line",
+  "march-peach": "easy on the wallet · winning spell",
+  "gala-over": "handed across · spoken test",
+  "space-world": "gathered bodies · brief failure",
+  "flee-silt": "other option · upward pull",
+  "toy-yes": "bean sauce · still now",
+  "balm-good": "pleased heart · thunder note",
+  "corgi-spots": "plain awful · talking point",
+  "dice-lord": "winter bite · saddle trip",
+  "brake-force": "comic pretence · no longer whole",
+  "heal-pigs": "spring forward · tired breath",
+  "dad-nor": "small payment · old-school cool",
+  "data-town": "pond hopper · strong desire",
+  "norms-outer": "radio adjuster · living spaces",
+  "east-wind": "first light · neckwear",
+  "grab-milk": "slick talk · killer’s target",
+  "elder-necks": "packed closely · office worker",
+  "hike-were": "family successor · calendar block",
+  "bar-row": "take by force · open conflict",
+  "glue-roof": "silly mistake · guiding principle",
+  "glare-skies": "soaring hunter · dangerous chances"
 };
   
 const allWordsRows=[
@@ -3066,13 +3087,11 @@ function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/
 function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
   if(!p||!r)return "";
-  const c=currentSplitClue();
-  const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
-  const ratingText=r.gaveUp?"Gave up":getClueFooterRatingLabel(r.rating);
   const cluesShown=clamp(Math.round(Number(r.cluesShown)||0),0,2);
-  const detail=[ratingText,formatClock(r.timeMs),`Moves ${r.moves}`,`Clues ${cluesShown}`].join(" · ");
-  const clueLine=clueText?`<div class="clue-current-clue-text">${clueText}</div>`:"";
-  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span></div><div class="clue-current-detail">${detail}</div>${clueLine}</div></div>`;
+  const ratingClass=r.gaveUp?"clunky":(r.rating||"clunky");
+  const ratingText=r.gaveUp?"Gave up":getClueRatingLabel(r.rating);
+  const detail=[formatClock(r.timeMs),`Moves ${r.moves}`,`Clues ${cluesShown}`].join(" · ");
+  return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span> <span class="daily-puzzle-descriptor clue-current-rating is-${ratingClass}">${ratingText}</span></div><div class="clue-current-detail">${detail}</div></div></div>`;
 }
 function clueLengthCardHTML(len){
   const rows=getClueResults().filter(r=>r.length===len);
@@ -4996,7 +5015,7 @@ function initMode(){
   const jumpAllWords=getUrlJumpAllWords();
   const hasDayJump=jumpDay!==null;
   window.__jumpAllWords=jumpAllWords!==null?jumpAllWords-1:null;
-  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");localStorage.removeItem("flipwords:newModeProgress:clues-v43");localStorage.removeItem("flipwords:newModeProgress:clues-v44");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
   if(hasDayJump){
     cachedGameState=readStoredGameState();
     window.__forceFreshStart=false;
