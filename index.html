@@ -360,7 +360,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 
 
-/* v61: stable Clue footer timer and subtle timer-linked time penalty */
+/* v62: stable Clue footer timer and smoother text-only timer penalty */
 .clue-footer-time{
   position:relative;
   display:inline-flex;
@@ -387,25 +387,25 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   left:0;
   top:0;
   pointer-events:none;
-  color:#7d6308;
-  background:rgba(244,223,138,.92);
-  border:1px solid rgba(122,93,0,.12);
-  border-radius:999px;
-  padding:3px 7px 4px;
-  font-size:14px;
-  font-weight:820;
+  color:#9a7400;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:0;
+  font-size:15px;
+  font-weight:800;
   line-height:1;
-  transform:translate(-50%,-100%);
-  box-shadow:0 5px 14px rgba(122,93,0,.12);
-  animation:clue-time-pop-v61 1.15s cubic-bezier(.16,.9,.2,1) forwards;
-  text-shadow:none;
+  transform:translate3d(-50%,-95%,0);
+  animation:clue-time-pop-v62 1.35s cubic-bezier(.22,.75,.22,1) forwards;
+  text-shadow:0 1px 0 rgba(255,255,255,.62);
+  will-change:transform,opacity;
 }
-@keyframes clue-time-pop-v61{
-  0%{opacity:0;transform:translate(-50%,-55%) scale(.92)}
-  14%{opacity:1;transform:translate(-50%,-112%) scale(1.05)}
-  40%{opacity:1;transform:translate(-50%,-130%) scale(1)}
-  78%{opacity:1;transform:translate(-50%,-158%) scale(1)}
-  100%{opacity:0;transform:translate(-50%,-195%) scale(.98)}
+@keyframes clue-time-pop-v62{
+  0%{opacity:0;transform:translate3d(-50%,-78%,0) scale(.985)}
+  16%{opacity:1;transform:translate3d(-50%,-108%,0) scale(1.02)}
+  34%{opacity:1;transform:translate3d(-50%,-118%,0) scale(1)}
+  76%{opacity:1;transform:translate3d(-50%,-138%,0) scale(1)}
+  100%{opacity:0;transform:translate3d(-50%,-160%,0) scale(1)}
 }
 
 </style>
@@ -4802,6 +4802,7 @@ function showPersistentClue(forceFull=false){
   }
   updatePersistentClueDisplay(fullVisible);
   clearClueInlineCountdownTimer();
+  render(); // v62: update the Clue/Give-up button immediately after a clue is taken
   saveNewModeProgress();
 }
 function hidePersistentClue(){
