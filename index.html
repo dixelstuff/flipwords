@@ -351,6 +351,63 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   color:var(--clue-clunky)!important;
 }
 
+
+/* v60: slightly larger/heavier settled award text */
+.message.score-pop.clue-award-pop,
+.message.hold-score.solved-award-persist.clue-award-pop{
+  font-size:22px!important;
+  font-weight:735!important;
+}
+
+
+/* v61: stable Clue footer timer and subtle timer-linked time penalty */
+.clue-footer-time{
+  position:relative;
+  display:inline-flex;
+  align-items:baseline;
+  justify-content:center;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+  min-width:9.3ch;
+}
+.clue-footer-label{
+  display:inline-block;
+  width:4.3ch;
+  text-align:right;
+  margin-right:.45ch;
+}
+.clue-footer-clock{
+  display:inline-block;
+  width:4.6ch;
+  text-align:left;
+}
+.clue-time-pop{
+  position:fixed;
+  z-index:100001;
+  left:0;
+  top:0;
+  pointer-events:none;
+  color:#7d6308;
+  background:rgba(244,223,138,.92);
+  border:1px solid rgba(122,93,0,.12);
+  border-radius:999px;
+  padding:3px 7px 4px;
+  font-size:14px;
+  font-weight:820;
+  line-height:1;
+  transform:translate(-50%,-100%);
+  box-shadow:0 5px 14px rgba(122,93,0,.12);
+  animation:clue-time-pop-v61 1.15s cubic-bezier(.16,.9,.2,1) forwards;
+  text-shadow:none;
+}
+@keyframes clue-time-pop-v61{
+  0%{opacity:0;transform:translate(-50%,-55%) scale(.92)}
+  14%{opacity:1;transform:translate(-50%,-112%) scale(1.05)}
+  40%{opacity:1;transform:translate(-50%,-130%) scale(1)}
+  78%{opacity:1;transform:translate(-50%,-158%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-195%) scale(.98)}
+}
+
 </style>
 </head>
 <body>
@@ -3271,6 +3328,7 @@ function clueLengthStatsHTML(){
 function getOverallClueStats(){const rows=getClueResults(),medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite)),medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));return {played:rows.length,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:formatClueMedianMoves(medMoves),totalScore:getClueTotalScore()}}
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
 function clueLevelMetaHTML(){return `<span class="level-meta"><span class="level-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="level-moves">Moves ${movesUsed}</span></span>`}
+function clueFooterTimeHTML(){return `<span class="clue-footer-time"><span class="clue-footer-label">Time</span><span class="clue-footer-clock">${formatClock(getActivePuzzleElapsedMs())}</span></span>`}
 function currentClueResult(){const p=currentPuzzle();return p&&clueStats&&clueStats.results?clueStats.results[p.id]||null:null}
 function currentClueFooterResultHTML(){const r=currentClueResult();if(!r)return lastAccountingMessages&&lastAccountingMessages.length?lastAccountingMessages[lastAccountingMessages.length-1]:"";return r.gaveUp?"Revealed +0":`${getClueFooterRatingLabel(r.rating)} +${r.score}`}
 function currentClueAwardResultHTML(){const r=currentClueResult();if(r)return r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)}! +${r.score}`;return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
@@ -4182,7 +4240,7 @@ function updateFooterDisplay(){
   const isFinal=solved&&puzzleIndex>=activePuzzles.length-1&&!DEBUG;
   status.classList.remove("footer-info");
   if(isNewMode()){
-    status.innerHTML=DEBUG?JSON.stringify(currentWords()):(solved?`Score ${formatScore(displayedTotalScore)}`:`Time ${formatClock(getActivePuzzleElapsedMs())}`);
+    status.innerHTML=DEBUG?JSON.stringify(currentWords()):(solved?`Score ${formatScore(displayedTotalScore)}`:clueFooterTimeHTML());
     scoreLine.innerHTML="&nbsp;";
     if(!solved&&!gameStartDeferred)startClueFooterTimer();else clearClueFooterTimer();
     status.classList.toggle("footer-clickable",solved);
@@ -4703,11 +4761,12 @@ function showClueTimeAddedPop(addedMs){
   const el=document.createElement("span");
   el.className="clue-time-pop";
   el.textContent=text;
-  const r=board.getBoundingClientRect();
+  const target=document.querySelector(".clue-footer-clock")||document.querySelector(".clue-footer-time")||status;
+  const r=target.getBoundingClientRect();
   el.style.left=`${r.left+r.width/2}px`;
-  el.style.top=`${r.top+r.height*0.48}px`;
+  el.style.top=`${r.top-2}px`;
   document.body.appendChild(el);
-  setTimeout(()=>{el.remove()},1700);
+  setTimeout(()=>{el.remove()},1250);
 }
 function updatePersistentClueDisplay(forceFull=false){
   if(!isNewMode())return;
