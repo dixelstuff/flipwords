@@ -461,6 +461,19 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   background:#fbfffd;
 }
 
+
+/* v73: slightly longer bonus-word row flash */
+.tile-wrap.clue-bonus-top-flash .tile-face,
+.tile-wrap.clue-bonus-bottom-flash .tile-face,
+.tile-wrap.clue-bonus-top-flash .htile[data-hrow="top"],
+.tile-wrap.clue-bonus-bottom-flash .htile[data-hrow="bottom"],
+.tile-wrap.clue-bonus-top-flash .letter:first-child,
+.tile-wrap.clue-bonus-bottom-flash .letter:last-child,
+.tile-wrap.clue-bonus-top-flash .htile[data-hrow="top"] .letter,
+.tile-wrap.clue-bonus-bottom-flash .htile[data-hrow="bottom"] .letter{
+  transition:background .18s ease,border-color .18s ease,color .18s ease,text-shadow .18s ease;
+}
+
 </style>
 </head>
 <body>
@@ -482,7 +495,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v72";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v73";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -3595,18 +3608,37 @@ function getClueSpeedDecayExponent(p=currentPuzzle()){
 function getClueRatingForScore(score,maxScore){const ratio=maxScore>0?score/maxScore:0;if(ratio>=.9)return "perfect";if(ratio>=.55)return "great";if(ratio>=.32)return "good";return "clunky"}
 function getClueRatingLabel(rating){return CLUE_RATING_LABELS[rating]||CLUE_RATING_LABELS.clunky}
 function getClueFooterRatingLabel(rating){return CLUE_RATING_FOOTER_LABELS[rating]||CLUE_RATING_FOOTER_LABELS.clunky}
+function getClueScoreAtElapsedMs(elapsedMs,p=currentPuzzle()){
+  const maxScore=getClueMaxScoreForPuzzle(p);
+  const floor=getClueMinSolveScoreForPuzzle(p);
+  const t0=0;
+  const t1=getClueFirstUnlockMs(p);
+  const t2=getClueSecondUnlockMs(p);
+  const t3=getClueMaximumUnlockMs(p);
+  const s0=maxScore;
+  const s1=maxScore*0.50;
+  const s2=maxScore*0.33;
+  const s3=floor;
+  const elapsed=clamp(Math.max(0,Number(elapsedMs)||0),0,t3);
+  const lerp=(x,a,b,ya,yb)=>{
+    if(b<=a)return yb;
+    const u=clamp((x-a)/(b-a),0,1);
+    return ya+(yb-ya)*u;
+  };
+  if(elapsed<=t1)return lerp(elapsed,t0,t1,s0,s1);
+  if(elapsed<=t2)return lerp(elapsed,t1,t2,s1,s2);
+  return lerp(elapsed,t2,t3,s2,s3);
+}
 function calculateClueScoreResult({p=currentPuzzle(),elapsedMs=getActivePuzzleElapsedMs(),moves=movesUsed,gaveUp=false,earlySkipPenaltyPoints=clueEarlySkipPenaltyPoints,cluesShown=cluesShownCount}={}){
   const len=getCluePuzzleLength(p),minMoves=Number(p&&p.minMoves)||0;
-  const penalty=Math.max(0,Number(earlySkipPenaltyPoints)||0);
+  const penalty=0; // v73: clues and bonus words affect the clock only; no hidden point penalty.
   const shown=gaveUp?2:clamp(Math.round(Number(cluesShown)||0),0,2);
   if(gaveUp)return {puzzleId:p.id,length:len,minMoves,timeMs:Math.max(0,elapsedMs),moves:Math.max(0,moves),score:0,rating:"clunky",gaveUp:true,cluesShown:shown,earlySkipPenaltyPoints:penalty,wordCreditMs:Math.max(0,Number(clueWordCreditMs)||0),bonusWords:Array.isArray(clueFoundBonusWords)?[...clueFoundBonusWords]:[],displayText:"Revealed +0",completedAt:Date.now()};
   const maxScore=getClueMaxScoreForPuzzle(p);
-  const scoreTimeLimitMs=getClueScoreTimeLimitMs(p);
-  const timeRatio=Math.max(0,elapsedMs)/scoreTimeLimitMs;
-  const speedRatio=clamp(1-Math.pow(timeRatio,getClueSpeedDecayExponent(p)),0,1);
-  // v69: score is time-only. Moves are still recorded for stats,
-  // but no longer reduce points, so grid exploration is encouraged.
-  const raw=(maxScore*speedRatio)-penalty;
+  // v73: explicit anchor-based time-only scoring.
+  // Score is max at 0:00, about half at clue 1, about one-third at clue 2,
+  // and the solve floor at maximum time. Moves are stats-only.
+  const raw=getClueScoreAtElapsedMs(elapsedMs,p)-penalty;
   const floor=getClueMinSolveScoreForPuzzle(p);
   const score=clamp(Math.max(floor,roundToNearestFive(raw)),floor,maxScore);
   const rating=getClueRatingForScore(score,maxScore);
@@ -5147,9 +5179,13 @@ function normalizeBonusWordList(value){
 }
 function getClueBonusWordSet(p=currentPuzzle()){
   if(!p)return new Set();
+  // v73: bonus words include generated non-solution allWords plus the two
+  // answer words when they appear on only one row. This avoids leaking that
+  // a single row is an answer word before the companion row is solved.
   const extras=normalizeBonusWordList(clueBonusWords[p.id]);
-  const blocked=new Set([p.word1,p.word2,p.answer1,p.answer2,p.blocked1,p.blocked2].map(w=>String(w||"").toLowerCase()).filter(Boolean));
-  return new Set(extras.filter(w=>w&&!blocked.has(w)));
+  const answerWords=[p.answer1,p.answer2].map(w=>String(w||"").toLowerCase()).filter(Boolean);
+  const blocked=new Set([p.word1,p.word2,p.blocked1,p.blocked2].map(w=>String(w||"").toLowerCase()).filter(Boolean));
+  return new Set([...extras,...answerWords].filter(w=>w&&!blocked.has(w)));
 }
 function flashClueBonusRow(row){
   if(row!=="top"&&row!=="bottom")return;
@@ -5158,7 +5194,7 @@ function flashClueBonusRow(row){
   setTimeout(()=>{
     clueBonusFlashRows={...clueBonusFlashRows,[row]:false};
     if(isNewMode()&&!solved)render();
-  },260);
+  },520);
 }
 function applyClueWordCredit(word,row){
   word=String(word||"").toLowerCase();
@@ -5177,10 +5213,16 @@ function checkClueBonusWords(){
   if(!isNewMode()||solved||gameStartDeferred)return false;
   const allowed=getClueBonusWordSet();
   if(!allowed.size)return false;
+  const p=currentPuzzle();
   const w=currentWords();
+  const solvedNow=isSolved();
+  const answerSet=new Set([p.answer1,p.answer2].map(x=>String(x||"").toLowerCase()).filter(Boolean));
   let credited=false;
   [[w.top,"top"],[w.bottom,"bottom"]].forEach(([raw,row])=>{
     const word=String(raw||"").toLowerCase();
+    // Credit a lone answer word, but do not award answer-word credits for the
+    // final solved state itself.
+    if(solvedNow&&answerSet.has(word))return;
     if(allowed.has(word))credited=applyClueWordCredit(word,row)||credited;
   });
   return credited;
