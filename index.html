@@ -360,7 +360,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 
 
-/* v62: stable Clue footer timer and smoother text-only timer penalty */
+/* v63: timer penalty nudged left, plain text only */
 .clue-footer-time{
   position:relative;
   display:inline-flex;
@@ -388,24 +388,26 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   top:0;
   pointer-events:none;
   color:#9a7400;
-  background:transparent;
-  border:0;
-  border-radius:0;
-  padding:0;
+  background:transparent!important;
+  border:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+  padding:0!important;
   font-size:15px;
   font-weight:800;
   line-height:1;
-  transform:translate3d(-50%,-95%,0);
-  animation:clue-time-pop-v62 1.35s cubic-bezier(.22,.75,.22,1) forwards;
+  transform:translate3d(-68%,-95%,0);
+  animation:clue-time-pop-v63 1.35s cubic-bezier(.22,.75,.22,1) forwards;
   text-shadow:0 1px 0 rgba(255,255,255,.62);
   will-change:transform,opacity;
 }
-@keyframes clue-time-pop-v62{
-  0%{opacity:0;transform:translate3d(-50%,-78%,0) scale(.985)}
-  16%{opacity:1;transform:translate3d(-50%,-108%,0) scale(1.02)}
-  34%{opacity:1;transform:translate3d(-50%,-118%,0) scale(1)}
-  76%{opacity:1;transform:translate3d(-50%,-138%,0) scale(1)}
-  100%{opacity:0;transform:translate3d(-50%,-160%,0) scale(1)}
+@keyframes clue-time-pop-v63{
+  0%{opacity:0;transform:translate3d(-68%,-76%,0) scale(.985)}
+  16%{opacity:1;transform:translate3d(-68%,-106%,0) scale(1.018)}
+  34%{opacity:1;transform:translate3d(-68%,-116%,0) scale(1)}
+  76%{opacity:1;transform:translate3d(-68%,-136%,0) scale(1)}
+  100%{opacity:0;transform:translate3d(-68%,-158%,0) scale(1)}
 }
 
 </style>
@@ -4811,7 +4813,7 @@ function showClueTimeAddedPop(addedMs){
   el.textContent=text;
   const target=document.querySelector(".clue-footer-clock")||document.querySelector(".clue-footer-time")||status;
   const r=target.getBoundingClientRect();
-  el.style.left=`${r.left+r.width/2}px`;
+  el.style.left=`${r.left+r.width*.42}px`;
   el.style.top=`${r.top-2}px`;
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1250);
