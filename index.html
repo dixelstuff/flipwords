@@ -426,6 +426,19 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   100%{transform:translate3d(-50%,-148%,0)}
 }
 
+
+/* v68: centred timer penalty starts just above the footer timer, with a tiny size boost */
+.clue-time-pop{
+  font-size:17px;
+  transform:translate3d(-50%,-62%,0);
+  animation:clue-time-pop-move-v68 1.45s cubic-bezier(.12,.78,.18,1) forwards,
+            clue-time-pop-fade-v66 1.45s linear forwards;
+}
+@keyframes clue-time-pop-move-v68{
+  0%{transform:translate3d(-50%,-62%,0)}
+  100%{transform:translate3d(-50%,-132%,0)}
+}
+
 </style>
 </head>
 <body>
@@ -4871,10 +4884,12 @@ function showClueTimeAddedPop(addedMs){
   const el=document.createElement("span");
   el.className="clue-time-pop";
   el.textContent=text;
-  const target=status||document.querySelector(".status")||document.querySelector(".game");
-  const r=target.getBoundingClientRect();
-  el.style.left=`${r.left+r.width/2}px`;
-  el.style.top=`${r.top-2}px`;
+  const footer=status||document.querySelector(".status")||document.querySelector(".game");
+  const timer=document.querySelector(".clue-footer-time")||footer;
+  const footerRect=footer.getBoundingClientRect();
+  const timerRect=timer.getBoundingClientRect();
+  el.style.left=`${footerRect.left+footerRect.width/2}px`;
+  el.style.top=`${timerRect.top+2}px`;
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1500);
 }
