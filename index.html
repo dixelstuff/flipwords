@@ -414,6 +414,18 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   100%{opacity:0}
 }
 
+
+/* v67: centre the timer penalty over the footer area rather than the clock */
+.clue-time-pop{
+  transform:translate3d(-50%,-78%,0);
+  animation:clue-time-pop-move-v67 1.45s cubic-bezier(.12,.78,.18,1) forwards,
+            clue-time-pop-fade-v66 1.45s linear forwards;
+}
+@keyframes clue-time-pop-move-v67{
+  0%{transform:translate3d(-50%,-78%,0)}
+  100%{transform:translate3d(-50%,-148%,0)}
+}
+
 </style>
 </head>
 <body>
@@ -3135,7 +3147,29 @@ const clueTestPuzzles = [
   ["hike-were","hike","were","heir","week",2,"","","",8],
   ["bar-row","bar","row","rob","war",3,"","","",14],
   ["glue-roof","glue","roof","goof","rule",2,"","","",8],
-  ["glare-skies","glare","skies","eagle","risks",3,"","","",18]
+  ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
+  ["false-plugs","false","plugs","flags","pulse",3,"","","",9],
+  ["lunch-share","share","lunch","harsh","uncle",2,"","","",6],
+  ["pond-ragu","ragu","pond","drag","upon",2,"","","cannot be reversed",7],
+  ["blade-print","blade","print","bride","plant",2,"","","",2],
+  ["mild-race","race","mild","card","lime",3,"","","",8],
+  ["nylon-purse","nylon","purse","pylon","nurse",1,"","","",0],
+  ["feel-grit","grit","feel","feet","girl",2,"","","cannot be reversed",6],
+  ["algae-spoon","algae","spoon","loose","pagan",4,"","","",14],
+  ["how-new","how","new","hew","now",1,"","","",0],
+  ["firms-greed","greed","firms","germs","fried",3,"","","",9],
+  ["huge-wart","huge","wart","wage","hurt",2,"","","",1],
+  ["femur-fetal","fetal","femur","frame","flute",4,"","","",22],
+  ["bang-kiss","bang","kiss","bass","king",2,"","","",1],
+  ["catch-sweep","catch","sweep","cache","swept",2,"","","",6],
+  ["art-can","art","can","act","ran",2,"","","",7],
+  ["daisy-threw","threw","daisy","white","yards",3,"","","",22],
+  ["cord-snap","snap","cord","sand","crop",2,"","","",6],
+  ["share-towel","share","towel","shale","tower",3,"","","",8],
+  ["next-tone","next","tone","text","none",1,"","","",0],
+  ["ocean-parts","ocean","parts","acorn","tapes",3,"","","",20],
+  ["pro-was","pro","was","asp","row",2,"","","",8],
+  ["iron-test","test","iron","nets","trio",3,"","","",22]
 ];
 
 const puzzleClues = {
@@ -3177,7 +3211,29 @@ const puzzleClues = {
   "hike-were": "family successor · calendar block",
   "bar-row": "take by force · open conflict",
   "glue-roof": "silly mistake · guiding principle",
-  "glare-skies": "soaring hunter · dangerous chances"
+  "glare-skies": "soaring hunter · dangerous chances”,
+  "false-plugs": "waving signals · living beat",
+  "lunch-share": "sharp weather · family elder",
+  "pond-ragu": "pull along · resting on",
+  "blade-print": "aisle partner · garden growth",
+  "mild-race": "playing rectangle · citrus twist",
+  "nylon-purse": "power pole · ward helper",
+  "feel-grit": "little steps · young woman",
+  "algae-spoon": "not tight · old believer",
+  "how-new": "chop lightly · right away",
+  "firms-greed": "unwanted bugs · pan victim",
+  "huge-wart": "pay packet · wounded pride",
+  "femur-fetal": "picture edge · woodwind breath",
+  "bang-kiss": "low notes · crowned one",
+  "catch-sweep": "hidden store · broom’s past",
+  "art-can": "stage move · took off",
+  "daisy-threw": "blank flag · back lots",
+  "cord-snap": "farmer’s cut · beach grains",
+  "share-towel": "rocky layer · lookout height",
+  "next-tone": "message body · zero amount",
+  "ocean-parts": "oak beginning · sticky strips",
+  "pro-was": "garden snake · boat line",
+  "iron-test": "goal traps · three-piece group"
 };
   
 const allWordsRows=[
@@ -4815,9 +4871,9 @@ function showClueTimeAddedPop(addedMs){
   const el=document.createElement("span");
   el.className="clue-time-pop";
   el.textContent=text;
-  const target=document.querySelector(".clue-footer-clock")||document.querySelector(".clue-footer-time")||status;
+  const target=status||document.querySelector(".status")||document.querySelector(".game");
   const r=target.getBoundingClientRect();
-  el.style.left=`${r.left+r.width*.44}px`;
+  el.style.left=`${r.left+r.width/2}px`;
   el.style.top=`${r.top-2}px`;
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1500);
