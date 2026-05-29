@@ -269,6 +269,21 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   100%{opacity:1;transform:translateY(0) scale(1)}
 }
 
+
+/* v55: keep solved Clue award visible after the pop animation */
+.message.hold-score.solved-award-persist.clue-award-pop{
+  opacity:1;
+  color:var(--success);
+  font-size:20.5px;
+  font-weight:820;
+  transform:translateY(0) scale(1);
+  animation:none!important;
+}
+.message.hold-score.solved-award-persist.clue-award-pop.score-zero{
+  color:var(--muted);
+  font-weight:760;
+}
+
 </style>
 </head>
 <body>
@@ -4217,15 +4232,21 @@ function showSolvedClueAfterRewards(immediate=false){
 function showPersistentSolvedAwardAfterRewards(immediate=false){
   clearSolvedClueTimer();
   if(!isNewMode()||!solved)return;
-  const clearAward=()=>{
+  const persistAward=()=>{
     if(!isNewMode()||!solved)return;
-    message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist");
-    message.textContent="";
+    const text=currentClueAwardResultHTML();
+    if(!text)return;
+    const isZero=/^(?:Revealed \+0|\+0)$/.test(text);
+    message.classList.remove("info","score-pop","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-fade","clue-static","clue-solved","fadeout");
+    message.classList.add("hold-score","solved-award-persist","clue-award-pop");
+    message.classList.toggle("score-zero",isZero);
+    message.style.animationDuration="";
     message.dataset.infoType="";
+    message.textContent=text;
   };
-  if(immediate){clearAward();return}
-  const delay=Math.max(3300,solvedToggleReadyAt-Date.now()+260);
-  solvedClueTimer=setTimeout(clearAward,delay);
+  if(immediate){persistAward();return}
+  const delay=Math.max(1250,solvedToggleReadyAt-Date.now()+120);
+  solvedClueTimer=setTimeout(persistAward,delay);
 }
 function queueRewardAnimations(){
   clearBonusTimers();
