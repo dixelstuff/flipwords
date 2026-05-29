@@ -315,6 +315,29 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   animation:none!important;
 }
 
+
+/* v58: no emoji award text; grade-coloured award throughout; slightly lighter weight */
+.message.score-pop.clue-award-pop{
+  font-size:21px;
+  font-weight:760;
+  animation:clue-award-settle-v58 1.05s cubic-bezier(.16,.92,.2,1) forwards!important;
+}
+.message.score-pop.clue-award-pop.score-zero,
+.message.hold-score.solved-award-persist.clue-award-pop.score-zero{color:var(--clue-clunky)}
+@keyframes clue-award-settle-v58{
+  0%{opacity:0;transform:translateY(6px) scale(.92)}
+  18%{opacity:1;transform:translateY(-4px) scale(1.065)}
+  38%{opacity:1;transform:translateY(-3px) scale(1.006)}
+  100%{opacity:1;transform:translateY(-3px) scale(1)}
+}
+.message.hold-score.solved-award-persist.clue-award-pop{
+  opacity:1;
+  font-size:21px;
+  font-weight:760;
+  transform:translateY(-3px) scale(1);
+  animation:none!important;
+}
+
 </style>
 </head>
 <body>
@@ -372,7 +395,7 @@ const CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH={3:1.75,4:2.05,5:2.35};
 const CLUE_MOVE_ALLOWANCE_FACTOR_BY_LENGTH={3:3.2,4:4.2,5:5.6};
 const CLUE_MOVE_ALLOWANCE_EXTRA_BY_LENGTH={3:3,4:4,5:6};
 const CLUE_EARLY_SKIP_SCORE_PENALTY={clue1:{3:25,4:35,5:45},clue2:{3:15,4:25,5:35},max:{3:0,4:0,5:0}};
-const CLUE_RATING_LABELS={perfect:"🌟 Perfect",great:"💎 Great",good:"👍 Good",clunky:"🪨 Rough"};
+const CLUE_RATING_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough"};
 const CLUE_RATING_FOOTER_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough"};
 const CLUE_RATING_ORDER=["perfect","great","good","clunky"];
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
@@ -4175,7 +4198,7 @@ function getClueAwardClassFromText(text){
   if(/Perfect/.test(t))return "award-perfect";
   if(/Great/.test(t))return "award-great";
   if(/Good/.test(t))return "award-good";
-  if(/Rough|Clunky/.test(t))return "award-clunky";
+  if(/Rough|Clunky|Revealed/.test(t))return "award-clunky";
   return "";
 }
 function applyDisplayedReward(text){
@@ -4195,7 +4218,7 @@ function popMessage(text,isZero=false,isFinal=false){
   const isStreakIncrement=/^Streak \+1/.test(text);
   const isStreakMessage=/[0-9]+-streak/.test(text);
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");
-  message.classList.toggle("score-zero",isZero);
+  message.classList.toggle("score-zero",isZero||/^Revealed \+0$/.test(text));
   message.classList.toggle("streak-pop",isStreakMessage);
   message.classList.toggle("quick-pop",/Speed bonus|^Efficiency [+](?!1(?: |$))[0-9]+/.test(text));
   message.classList.toggle("accounting-pop",/^Solved \+[0-9]+$/.test(text));
@@ -4282,8 +4305,8 @@ function showPersistentSolvedAwardAfterRewards(immediate=false){
     if(!text)return;
     const isZero=/^(?:Revealed \+0|\+0)$/.test(text);
     message.classList.remove("info","score-pop","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-fade","clue-static","clue-solved","fadeout","award-perfect","award-great","award-good","award-clunky");
-    message.classList.add("hold-score","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");
-    message.classList.toggle("score-zero",isZero);
+    message.classList.add("hold-score","solved-award-persist","clue-award-pop");
+    message.classList.toggle("score-zero",isZero||/^Revealed \+0$/.test(text));
     const awardClass=getClueAwardClassFromText(text);
     if(awardClass)message.classList.add(awardClass);
     message.style.animationDuration="";
@@ -4308,7 +4331,7 @@ function queueRewardAnimations(){
   messages.forEach((text,i)=>{
     bonusTimerIds.push(setTimeout(()=>{
       applyDisplayedReward(text);
-      popMessage(text,text==="+0",i===messages.length-1);
+      popMessage(text,text==="+0"||/^Revealed \+0$/.test(text),i===messages.length-1);
       if(isNewMode()&&!/^Revealed/.test(text))showDailyCompleteBurst(false);
       if(/[0-9]+-streak/.test(text))showStreakCelebration();
       else if(/Speed bonus/.test(text)||/^Efficiency [+](?!1(?: |$))[0-9]+/.test(text))showStarBurst();
