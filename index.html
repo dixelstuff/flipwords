@@ -254,21 +254,19 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 /* v49: snappier Clue award animation with a single star burst */
 .message.score-pop.clue-award-pop{
   color:var(--success);
-  font-size:25px;
-  font-weight:900;
-  animation:clue-award-pop-v49 3.05s cubic-bezier(.16,.92,.2,1) forwards!important;
+  font-size:22.5px;
+  font-weight:850;
+  animation:clue-award-settle-v54 1.05s cubic-bezier(.16,.92,.2,1) forwards!important;
 }
 .message.score-pop.clue-award-pop.score-zero{
   color:var(--muted);
-  font-weight:850;
+  font-weight:800;
 }
-@keyframes clue-award-pop-v49{
-  0%{opacity:0;transform:translateY(9px) scale(.86)}
-  7%{opacity:1;transform:translateY(-1px) scale(1.18)}
-  15%{opacity:1;transform:translateY(0) scale(1.03)}
-  24%{opacity:1;transform:translateY(0) scale(1.08)}
-  70%{opacity:1;transform:translateY(0) scale(1.02)}
-  100%{opacity:0;transform:translateY(-8px) scale(1)}
+@keyframes clue-award-settle-v54{
+  0%{opacity:0;transform:translateY(7px) scale(.92)}
+  18%{opacity:1;transform:translateY(-1px) scale(1.08)}
+  38%{opacity:1;transform:translateY(0) scale(1.01)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
 }
 
 </style>
@@ -292,7 +290,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v53";
+const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v54";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -321,12 +319,12 @@ const CLUE_SINGLE_TAP_DELAY_MS=340;
 const CLUE_SKIP_HELPER_TEXT="Double tap Clue to skip wait";
 const CLUE_HELP_SESSION_KEY="flipwords:clueSkipHelpSeen:v1";
 const CLUE_AUTO_SHOW_TOLERANCE_MS=1000;
-const CLUE_MAX_SCORE_BY_LENGTH={3:105,4:130,5:150};
-const CLUE_MIN_SOLVE_SCORE_BY_LENGTH={3:10,4:15,5:20};
-const CLUE_SCORE_TIME_LIMIT_FACTOR_BY_LENGTH={3:1.35,4:1.65,5:2.05};
-const CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH={3:1.45,4:1.70,5:2.00};
-const CLUE_MOVE_ALLOWANCE_FACTOR_BY_LENGTH={3:2.4,4:3.1,5:4.2};
-const CLUE_MOVE_ALLOWANCE_EXTRA_BY_LENGTH={3:2,4:3,5:4};
+const CLUE_MAX_SCORE_BY_LENGTH={3:120,4:150,5:180};
+const CLUE_MIN_SOLVE_SCORE_BY_LENGTH={3:15,4:25,5:35};
+const CLUE_SCORE_TIME_LIMIT_FACTOR_BY_LENGTH={3:1.65,4:2.10,5:2.70};
+const CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH={3:1.75,4:2.05,5:2.35};
+const CLUE_MOVE_ALLOWANCE_FACTOR_BY_LENGTH={3:3.2,4:4.2,5:5.6};
+const CLUE_MOVE_ALLOWANCE_EXTRA_BY_LENGTH={3:3,4:4,5:6};
 const CLUE_EARLY_SKIP_SCORE_PENALTY={clue1:{3:25,4:35,5:45},clue2:{3:15,4:25,5:35},max:{3:0,4:0,5:0}};
 const CLUE_RATING_LABELS={perfect:"🌟 Perfect",great:"💎 Great",good:"👍 Good",clunky:"🪨 Rough"};
 const CLUE_RATING_FOOTER_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough"};
@@ -3123,7 +3121,7 @@ function getClueSpeedDecayExponent(p=currentPuzzle()){
   const len=getCluePuzzleLength(p);
   return CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH[len]||CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH[5];
 }
-function getClueRatingForScore(score,maxScore){const ratio=maxScore>0?score/maxScore:0;if(ratio>=.9)return "perfect";if(ratio>=.6)return "great";if(ratio>=.4)return "good";return "clunky"}
+function getClueRatingForScore(score,maxScore){const ratio=maxScore>0?score/maxScore:0;if(ratio>=.9)return "perfect";if(ratio>=.55)return "great";if(ratio>=.32)return "good";return "clunky"}
 function getClueRatingLabel(rating){return CLUE_RATING_LABELS[rating]||CLUE_RATING_LABELS.clunky}
 function getClueFooterRatingLabel(rating){return CLUE_RATING_FOOTER_LABELS[rating]||CLUE_RATING_FOOTER_LABELS.clunky}
 function calculateClueScoreResult({p=currentPuzzle(),elapsedMs=getActivePuzzleElapsedMs(),moves=movesUsed,gaveUp=false,earlySkipPenaltyPoints=clueEarlySkipPenaltyPoints,cluesShown=cluesShownCount}={}){
