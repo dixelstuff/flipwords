@@ -2671,7 +2671,7 @@ function render(){
   const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
   controlsEl.style.display=isAllWordsMode()?"flex":"grid";
   controlsEl.classList.toggle("aw-score-controls",isAllWordsMode());
-  const dailyHintUnavailable=isDailyMode()&&dailyStarted&&!dailyCurrentCompleted&&!solved&&!allLocked&&getDailyHintsAvailable()<1;
+  const dailyHintUnavailable=false; // v79: old Daily hint-muted state is obsolete; Clue should stay yellow once Daily starts
   controlsEl.classList.toggle("daily-complete-controls",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
