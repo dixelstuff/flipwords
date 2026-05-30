@@ -505,11 +505,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v76";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v77";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v76";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v77";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -1835,14 +1835,23 @@ const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,rev
   id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout:String(layout||"")
 });
 const puzzles=puzzleRows.map(makePuzzle);
-const puzzleById=new Map(puzzles.map(p=>[p.id,p]));
 const horizontalPuzzles=horizontalRows.map(makePuzzle);
 const lockedPuzzles=lockedPuzzleRows.map(makePuzzle);
 const cluePuzzles=clueTestPuzzles.map(makePuzzle);
-const dailyPuzzles=dailyTriplets.map(day=>({
-  ...day,
-  puzzles:(day.puzzleIds||[]).map(id=>puzzleById.get(id)).filter(Boolean)
-}));
+// v77: Daily can reference either canonical puzzleRows or clueTestPuzzles.
+// It also tolerates the old dailyTriplets format with full puzzle rows,
+// converting those rows to ids on load so newly pasted daily sets do not break.
+const puzzleById=new Map([...puzzles,...cluePuzzles].map(p=>[p.id,p]));
+function dailyPuzzleIdsForDay(day){
+  if(Array.isArray(day.puzzleIds))return day.puzzleIds;
+  if(Array.isArray(day.puzzles))return day.puzzles.map(p=>Array.isArray(p)?p[0]:p).filter(Boolean);
+  return [];
+}
+const dailyPuzzles=dailyTriplets.map(day=>{
+  const puzzleIds=dailyPuzzleIdsForDay(day);
+  const resolved=puzzleIds.map(id=>puzzleById.get(id)).filter(Boolean);
+  return {...day,puzzleIds,puzzles:resolved};
+});
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
 let activePuzzles=cluePuzzles;
 
