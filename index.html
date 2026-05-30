@@ -518,11 +518,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v85";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v86";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v85";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v86";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -1126,7 +1126,7 @@ const dailyPuzzles=dailyTriplets.map(day=>{
   return {...day,puzzleIds,puzzles:resolved};
 });
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
-let activePuzzles=cluePuzzles;
+let activePuzzles=puzzles;
 
 const $=id=>document.getElementById(id);
 const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
