@@ -500,7 +500,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <button id="statsToggle" class="stats-toggle" type="button">View details</button>
 <div id="endMessage" class="end-message"></div>
 <div id="statsPanel" class="stats-panel"></div>
-<div id="modeToggle" class="mode-toggle" aria-label="Mode"><button id="dailyModeBtn" type="button">daily</button><button id="gameModeBtn" type="button">game</button><button id="allWordsModeBtn" type="button">new</button></div>
+<div id="modeToggle" class="mode-toggle" aria-label="Mode"><button id="dailyModeBtn" type="button">daily</button><button id="gameModeBtn" type="button">game</button></div>
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
@@ -508,7 +508,7 @@ const DAILY_PROGRESS_KEY="flipwords:dailyProgress:v1";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:newModeProgress:clues-v73";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v75";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -1134,2002 +1134,1274 @@ const dailyTriplets=[
   type: "3-4-5",
   totalDifficulty: 24,
   maxDifficulty: 10,
-  puzzles: [
-    ["ate-jog","jog","ate","ago","jet",2,"","","",9],
-    ["dull-soda","dull","soda","dual","sold",2,"","","",5],
-    ["agile-poles","agile","poles","eagle","spoil",3,"","","",10],
-  ]
+  puzzleIds: ["ate-jog", "dull-soda", "agile-poles"]
 },
 {
   id: "day-002",
   type: "4-4-5",
   totalDifficulty: 35,
   maxDifficulty: 26,
-  puzzles: [
-    ["bust-coup","bust","coup","cusp","bout",2,"","","",2],
-    ["spin-taxi","spin","taxi","pint","axis",2,"","","",7],
-    ["reset-title","reset","title","trite","steel",4,"","","",26],
-  ]
+  puzzleIds: ["bust-coup", "spin-taxi", "reset-title"]
 },
 {
   id: "day-003",
   type: "4-4-5",
   totalDifficulty: 19,
   maxDifficulty: 8,
-  puzzles: [
-    ["mite-scan","scan","mite","cans","item",1,"","","",3],
-    ["hike-were","hike","were","heir","week",2,"","","",8],
-    ["bagel-sales","bagel","sales","gases","label",3,"","","",8],
-  ]
+  puzzleIds: ["mite-scan", "hike-were", "bagel-sales"]
 },
 {
   id: "day-004",
   type: "4-4-5",
   totalDifficulty: 31,
   maxDifficulty: 20,
-  puzzles: [
-    ["fawn-slim","fawn","slim","film","swan",2,"","","",8],
-    ["core-vast","vast","core","acts","over",3,"","","",20],
-    ["coins-fault","coins","fault","count","fails",2,"","","",3],
-  ]
+  puzzleIds: ["fawn-slim", "core-vast", "coins-fault"]
 },
 {
   id: "day-005",
   type: "3-5-5",
   totalDifficulty: 13,
   maxDifficulty: 10,
-  puzzles: [
-    ["cue-tip","cue","tip","cup","tie",1,"","","",0],
-    ["parks-there","parks","there","spark","ether",1,"","","",3],
-    ["panda-wires","panda","wires","award","spine",3,"","","",10],
-  ]
+  puzzleIds: ["cue-tip", "parks-there", "panda-wires"]
 },
 {
   id: "day-006",
   type: "3-5-5",
   totalDifficulty: 25,
   maxDifficulty: 11,
-  puzzles: [
-    ["pro-was","pro","was","asp","row",2,"","","",8],
-    ["count-swore","count","swore","ounce","worst",2,"","","",6],
-    ["bones-rifle","rifle","bones","fires","noble",4,"","","",11],
-  ]
+  puzzleIds: ["pro-was", "count-swore", "bones-rifle"]
 },
 {
   id: "day-007",
   type: "3-5-5",
   totalDifficulty: 34,
   maxDifficulty: 22,
-  puzzles: [
-    ["irk-sad","irk","sad","ask","rid",2,"","","",7],
-    ["delay-start","delay","start","dealt","stray",2,"","","",5],
-    ["digit-lower","lower","digit","towel","rigid",3,"","","",22],
-  ]
+  puzzleIds: ["irk-sad", "delay-start", "digit-lower"]
 },
 {
   id: "day-008",
   type: "4-5-5",
   totalDifficulty: 10,
   maxDifficulty: 7,
-  puzzles: [
-    ["gold-mine","gold","mine","gone","mild",2,"","","",1],
-    ["belch-seals","seals","belch","beach","sells",1,"","","",2],
-    ["daily-scene","daily","scene","since","delay",2,"","","",7],
-  ]
+  puzzleIds: ["gold-mine", "belch-seals", "daily-scene"]
 },
 {
   id: "day-009",
   type: "4-5-5",
   totalDifficulty: 41,
   maxDifficulty: 19,
-  puzzles: [
-    ["amid-year","year","amid","army","idea",3,"","","",19],
-    ["diary-false","false","diary","daisy","flare",2,"","","",5],
-    ["noted-peril","peril","noted","depot","liner",3,"","","",17],
-  ]
+  puzzleIds: ["amid-year", "diary-false", "noted-peril"]
 },
 {
   id: "day-010",
   type: "4-4-5",
   totalDifficulty: 15,
   maxDifficulty: 8,
-  puzzles: [
-    ["gang-kite","kite","gang","gate","king",2,"","","",1],
-    ["aura-heal","heal","aura","area","haul",2,"","","",6],
-    ["goats-tense","tense","goats","toast","genes",2,"","","",8],
-  ]
+  puzzleIds: ["gang-kite", "aura-heal", "goats-tense"]
 },
 {
   id: "day-011",
   type: "3-5-5",
   totalDifficulty: 25,
   maxDifficulty: 11,
-  puzzles: [
-    ["end-low","low","end","new","old",2,"","","",7],
-    ["doubt-needs","doubt","needs","debut","nodes",2,"","","",7],
-    ["field-scone","scone","field","fence","solid",3,"","","",11],
-  ]
+  puzzleIds: ["end-low", "doubt-needs", "field-scone"]
 },
 {
   id: "day-012",
   type: "4-4-5",
   totalDifficulty: 32,
   maxDifficulty: 22,
-  puzzles: [
-    ["coin-rare","rare","coin","rain","core",2,"","","",1],
-    ["gala-over","gala","over","gave","oral",3,"","","",9],
-    ["claws-large","large","claws","grace","walls",4,"","","",22],
-  ]
+  puzzleIds: ["coin-rare", "gala-over", "claws-large"]
 },
 {
   id: "day-013",
   type: "3-4-5",
   totalDifficulty: 20,
   maxDifficulty: 10,
-  puzzles: [
-    ["pay-tap","pay","tap","yap","pat",2,"","","",5],
-    ["dull-idea","dull","idea","idle","dual",2,"aldi","leud","",5],
-    ["knife-these","knife","these","knees","thief",3,"","","",10],
-  ]
+  puzzleIds: ["pay-tap", "dull-idea", "knife-these"]
 },
 {
   id: "day-014",
   type: "4-4-5",
   totalDifficulty: 55,
   maxDifficulty: 28,
-  puzzles: [
-    ["kick-long","long","kick","king","lock",2,"","","",1],
-    ["door-tilt","tilt","door","riot","told",4,"","","cannot be reversed",26],
-    ["atoms-pearl","pearl","atoms","maple","roast",4,"","","",28],
-  ]
+  puzzleIds: ["kick-long", "door-tilt", "atoms-pearl"]
 },
 {
   id: "day-015",
   type: "3-4-5",
   totalDifficulty: 21,
   maxDifficulty: 9,
-  puzzles: [
-    ["are-arm","are","arm","mar","ear",1,"","","",4],
-    ["case-kale","kale","case","lace","sake",3,"","","",8],
-    ["lingo-wives","wives","lingo","swing","olive",3,"","","",9],
-  ]
+  puzzleIds: ["are-arm", "case-kale", "lingo-wives"]
 },
 {
   id: "day-016",
   type: "4-4-5",
   totalDifficulty: 51,
   maxDifficulty: 32,
-  puzzles: [
-    ["sofa-wide","wide","sofa","wife","soda",1,"","","",1],
-    ["rush-taco","taco","rush","chat","sour",3,"","","",18],
-    ["blast-tires","blast","tires","salts","tribe",5,"","","",32],
-  ]
+  puzzleIds: ["sofa-wide", "rush-taco", "blast-tires"]
 },
 {
   id: "day-017",
   type: "4-4-5",
   totalDifficulty: 16,
   maxDifficulty: 8,
-  puzzles: [
-    ["owns-silk","owns","silk","owls","sink",1,"","","",1],
-    ["love-vast","vast","love","save","volt",3,"","","",8],
-    ["races-vocal","vocal","races","coral","caves",3,"","","",7],
-  ]
+  puzzleIds: ["owns-silk", "love-vast", "races-vocal"]
 },
 {
   id: "day-018",
   type: "3-4-5",
   totalDifficulty: 45,
   maxDifficulty: 29,
-  puzzles: [
-    ["ass-put","ass","put","sat","ups",2,"","","",7],
-    ["asks-lion","asks","lion","akin","loss",3,"","","",9],
-    ["items-store","store","items","moist","reset",4,"","","",29],
-  ]
+  puzzleIds: ["ass-put", "asks-lion", "items-store"]
 },
 {
   id: "day-019",
   type: "3-5-5",
   totalDifficulty: 23,
   maxDifficulty: 10,
-  puzzles: [
-    ["dad-nod","nod","dad","and","odd",2,"","","cannot be reversed",6],
-    ["glove-wears","wears","glove","worse","gavel",2,"","","",7],
-    ["bored-clasp","clasp","bored","blade","corps",3,"","","",10],
-  ]
+  puzzleIds: ["dad-nod", "glove-wears", "bored-clasp"]
 },
 {
   id: "day-020",
   type: "3-4-5",
   totalDifficulty: 48,
   maxDifficulty: 21,
-  puzzles: [
-    ["art-axe","axe","art","ear","tax",2,"","","",8],
-    ["door-went","door","went","redo","town",3,"","","",19],
-    ["depth-spicy","spicy","depth","chips","typed",4,"","","",21],
-  ]
+  puzzleIds: ["art-axe", "door-went", "depth-spicy"]
 },
 {
   id: "day-021",
   type: "4-4-5",
   totalDifficulty: 15,
   maxDifficulty: 7,
-  puzzles: [
-    ["call-time","call","time","till","came",2,"","","",1],
-    ["lazy-once","lazy","once","clay","zone",2,"","","",7],
-    ["crisp-these","these","crisp","chips","trees",2,"","","",7],
-  ]
+  puzzleIds: ["call-time", "lazy-once", "crisp-these"]
 },
 {
   id: "day-022",
   type: "3-5-5",
   totalDifficulty: 33,
   maxDifficulty: 22,
-  puzzles: [
-    ["oar-tag","oar","tag","ago","art",2,"","","",7],
-    ["black-lakes","black","lakes","bleak","lacks",2,"","","",4],
-    ["koala-rifle","koala","rifle","alike","flora",4,"","","",22],
-  ]
+  puzzleIds: ["oar-tag", "black-lakes", "koala-rifle"]
 },
 {
   id: "day-023",
   type: "4-4-5",
   totalDifficulty: 16,
   maxDifficulty: 10,
-  puzzles: [
-    ["bite-pony","pony","bite","bone","pity",2,"","","",2],
-    ["easy-knot","knot","easy","okay","sent",3,"","","",10],
-    ["fleet-raids","fleet","raids","filet","reads",2,"","","",4],
-  ]
+  puzzleIds: ["bite-pony", "easy-knot", "fleet-raids"]
 },
 {
   id: "day-024",
   type: "4-5-5",
   totalDifficulty: 11,
   maxDifficulty: 8,
-  puzzles: [
-    ["gold-heat","heat","gold","goat","held",2,"","","",1],
-    ["colon-hands","colon","hands","canon","holds",2,"","","",2],
-    ["basic-spell","basic","spell","spice","balls",3,"","","",8],
-  ]
+  puzzleIds: ["gold-heat", "colon-hands", "basic-spell"]
 },
 {
   id: "day-025",
   type: "4-4-5",
   totalDifficulty: 28,
   maxDifficulty: 18,
-  puzzles: [
-    ["deny-tick","deny","tick","tiny","deck",2,"","","",1],
-    ["farm-trip","farm","trip","firm","trap",3,"","","",9],
-    ["alter-valid","valid","alter","dealt","rival",3,"","","",18],
-  ]
+  puzzleIds: ["deny-tick", "farm-trip", "alter-valid"]
 },
 {
   id: "day-026",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 8,
-  puzzles: [
-    ["dark-mess","dark","mess","desk","mars",2,"","","",2],
-    ["boom-stat","boom","stat","oats","tomb",2,"","","",8],
-    ["renew-roles","renew","roles","loser","newer",3,"","","",8],
-  ]
+  puzzleIds: ["dark-mess", "boom-stat", "renew-roles"]
 },
 {
   id: "day-027",
   type: "4-4-5",
   totalDifficulty: 25,
   maxDifficulty: 19,
-  puzzles: [
-    ["city-tune","city","tune","cute","tiny",2,"","","",3],
-    ["page-risk","page","risk","gear","skip",3,"","","",19],
-    ["crews-ghost","ghost","crews","chest","grows",2,"","","",3],
-  ]
+  puzzleIds: ["city-tune", "page-risk", "crews-ghost"]
 },
 {
   id: "day-028",
   type: "4-4-5",
   totalDifficulty: 16,
   maxDifficulty: 8,
-  puzzles: [
-    ["jack-pipe","jack","pipe","jape","pick",2,"","","",1],
-    ["hate-vent","vent","hate","even","that",2,"","","",7],
-    ["great-route","great","route","trout","agree",2,"","","",8],
-  ]
+  puzzleIds: ["jack-pipe", "hate-vent", "great-route"]
 },
 {
   id: "day-029",
   type: "4-4-5",
   totalDifficulty: 50,
   maxDifficulty: 26,
-  puzzles: [
-    ["huge-wart","huge","wart","wage","hurt",2,"","","",1],
-    ["foul-peas","foul","peas","soup","leaf",4,"","","",23],
-    ["tense-wharf","tense","wharf","shaft","renew",4,"","","",26],
-  ]
+  puzzleIds: ["huge-wart", "foul-peas", "tense-wharf"]
 },
 {
   id: "day-030",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 9,
-  puzzles: [
-    ["joke-salt","joke","salt","jolt","sake",2,"","","",1],
-    ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9],
-    ["chair-singe","singe","chair","cigar","shine",3,"","","",8],
-  ]
+  puzzleIds: ["joke-salt", "balm-good", "chair-singe"]
 },
 {
   id: "day-031",
   type: "4-5-5",
   totalDifficulty: 26,
   maxDifficulty: 19,
-  puzzles: [
-    ["math-type","type","math","myth","tape",1,"","","",1],
-    ["cover-pearl","cover","pearl","clear","prove",2,"","","",6],
-    ["buyer-later","buyer","later","rebut","relay",3,"","","",19],
-  ]
+  puzzleIds: ["math-type", "cover-pearl", "buyer-later"]
 },
 {
   id: "day-032",
   type: "4-4-5",
   totalDifficulty: 17,
   maxDifficulty: 8,
-  puzzles: [
-    ["corn-flat","corn","flat","clan","fort",2,"","","",2],
-    ["lawn-risk","lawn","risk","silk","warn",3,"","","",8],
-    ["adapt-arise","adapt","arise","apart","aside",3,"","","",7],
-  ]
+  puzzleIds: ["corn-flat", "lawn-risk", "adapt-arise"]
 },
 {
   id: "day-033",
   type: "3-4-5",
   totalDifficulty: 53,
   maxDifficulty: 33,
-  puzzles: [
-    ["key-tap","key","tap","yak","pet",3,"","","",14],
-    ["cord-snap","snap","cord","sand","crop",2,"","","",6],
-    ["music-ninth","music","ninth","cumin","hints",4,"","","",33],
-  ]
+  puzzleIds: ["key-tap", "cord-snap", "music-ninth"]
 },
 {
   id: "day-034",
   type: "4-4-5",
   totalDifficulty: 17,
   maxDifficulty: 8,
-  puzzles: [
-    ["salt-weak","weak","salt","seat","walk",2,"","","",2],
-    ["sent-taxi","sent","taxi","ants","exit",2,"","","",8],
-    ["norms-outer","outer","norms","tuner","rooms",3,"","","",7],
-  ]
+  puzzleIds: ["salt-weak", "sent-taxi", "norms-outer"]
 },
 {
   id: "day-035",
   type: "4-4-5",
   totalDifficulty: 23,
   maxDifficulty: 19,
-  puzzles: [
-    ["bird-cuts","bird","cuts","curd","bits",2,"","","",1],
-    ["busy-jars","busy","jars","jury","bass",2,"","","",3],
-    ["shade-trace","shade","trace","react","heads",2,"","","",19],
-  ]
+  puzzleIds: ["bird-cuts", "busy-jars", "shade-trace"]
 },
 {
   id: "day-036",
   type: "4-4-5",
   totalDifficulty: 24,
   maxDifficulty: 11,
-  puzzles: [
-    ["down-glue","glue","down","lung","owed",2,"","","",6],
-    ["neat-swat","neat","swat","want","east",2,"","","",7],
-    ["paced-right","right","paced","patch","ridge",3,"","","",11],
-  ]
+  puzzleIds: ["down-glue", "neat-swat", "paced-right"]
 },
 {
   id: "day-037",
   type: "4-4-5",
   totalDifficulty: 25,
   maxDifficulty: 15,
-  puzzles: [
-    ["area-bled","area","bled","dare","able",2,"","","",7],
-    ["mars-solo","mars","solo","lass","room",4,"","","",15],
-    ["heart-smile","smile","heart","earth","miles",1,"","","",3],
-  ]
+  puzzleIds: ["area-bled", "mars-solo", "heart-smile"]
 },
 {
   id: "day-038",
   type: "4-4-5",
   totalDifficulty: 13,
   maxDifficulty: 6,
-  puzzles: [
-    ["duck-lamb","lamb","duck","dumb","lack",2,"","","",1],
-    ["cord-slow","slow","cord","crow","sold",2,"","","",6],
-    ["force-snail","snail","force","final","score",2,"","","",6],
-  ]
+  puzzleIds: ["duck-lamb", "cord-slow", "force-snail"]
 },
 {
   id: "day-039",
   type: "4-4-5",
   totalDifficulty: 42,
   maxDifficulty: 25,
-  puzzles: [
-    ["dial-oops","oops","dial","aids","pool",3,"","","",8],
-    ["halo-prey","halo","prey","hero","play",3,"","","",9],
-    ["dwell-fauna","fauna","dwell","awful","laden",4,"","","",25],
-  ]
+  puzzleIds: ["dial-oops", "halo-prey", "dwell-fauna"]
 },
 {
   id: "day-040",
   type: "3-5-5",
   totalDifficulty: 16,
   maxDifficulty: 9,
-  puzzles: [
-    ["fig-tax","fig","tax","fix","tag",1,"","","",0],
-    ["shark-spurt","spurt","shark","hurts","parks",2,"","","",7],
-    ["photo-ships","photo","ships","hippo","hosts",3,"","","",9],
-  ]
+  puzzleIds: ["fig-tax", "shark-spurt", "photo-ships"]
 },
 {
   id: "day-041",
   type: "3-4-5",
   totalDifficulty: 59,
   maxDifficulty: 32,
-  puzzles: [
-    ["bus-mew","mew","bus","sum","web",3,"","","",9],
-    ["fire-sewn","fire","sewn","wins","reef",3,"","","",18],
-    ["denim-tread","denim","tread","dried","meant",5,"","","",32],
-  ]
+  puzzleIds: ["bus-mew", "fire-sewn", "denim-tread"]
 },
 {
   id: "day-042",
   type: "4-4-5",
   totalDifficulty: 19,
   maxDifficulty: 9,
-  puzzles: [
-    ["beat-loop","loop","beat","boot","leap",2,"","","",2],
-    ["hour-that","that","hour","hurt","oath",3,"","","",9],
-    ["tired-whale","tired","whale","where","tidal",3,"","","",8],
-  ]
+  puzzleIds: ["beat-loop", "hour-that", "tired-whale"]
 },
 {
   id: "day-043",
   type: "3-5-5",
   totalDifficulty: 28,
   maxDifficulty: 14,
-  puzzles: [
-    ["ape-arc","ape","arc","cap","ear",2,"","","",8],
-    ["dream-leave","dream","leave","levee","drama",2,"","","",6],
-    ["algae-spoon","algae","spoon","loose","pagan",4,"","","",14],
-  ]
+  puzzleIds: ["ape-arc", "dream-leave", "algae-spoon"]
 },
 {
   id: "day-044",
   type: "4-4-5",
   totalDifficulty: 15,
   maxDifficulty: 11,
-  puzzles: [
-    ["half-word","half","word","wolf","hard",2,"","","",1],
-    ["deep-hilt","hilt","deep","diet","help",2,"","","",3],
-    ["fresh-towel","fresh","towel","three","flows",3,"","","",11],
-  ]
+  puzzleIds: ["half-word", "deep-hilt", "fresh-towel"]
 },
 {
   id: "day-045",
   type: "4-4-5",
   totalDifficulty: 32,
   maxDifficulty: 23,
-  puzzles: [
-    ["moth-wire","moth","wire","more","with",2,"","","",1],
-    ["city-dark","dark","city","rack","tidy",3,"","","",8],
-    ["belly-state","belly","state","bleat","style",4,"","","",23],
-  ]
+  puzzleIds: ["moth-wire", "city-dark", "belly-state"]
 },
 {
   id: "day-046",
   type: "4-4-5",
   totalDifficulty: 19,
   maxDifficulty: 10,
-  puzzles: [
-    ["dock-size","dock","size","doze","sick",2,"","","",1],
-    ["avid-idol","avid","idol","dial","void",3,"","","",10],
-    ["space-spell","spell","space","scalp","sleep",3,"","","",8],
-  ]
+  puzzleIds: ["dock-size", "avid-idol", "space-spell"]
 },
 {
   id: "day-047",
   type: "4-5-5",
   totalDifficulty: 31,
   maxDifficulty: 22,
-  puzzles: [
-    ["gold-spin","gold","spin","ping","olds",2,"","","",7],
-    ["chair-green","green","chair","grain","cheer",2,"","","",2],
-    ["daisy-threw","threw","daisy","white","yards",3,"","","",22],
-  ]
+  puzzleIds: ["gold-spin", "chair-green", "daisy-threw"]
 },
 {
   id: "day-048",
   type: "4-4-5",
   totalDifficulty: 23,
   maxDifficulty: 11,
-  puzzles: [
-    ["flea-thin","thin","flea","leaf","hint",1,"","","",3],
-    ["tree-wind","tree","wind","wren","tide",3,"","","",9],
-    ["brute-goals","brute","goals","gruel","boast",3,"","","",11],
-  ]
+  puzzleIds: ["flea-thin", "tree-wind", "brute-goals"]
 },
 {
   id: "day-049",
   type: "4-4-5",
   totalDifficulty: 44,
   maxDifficulty: 22,
-  puzzles: [
-    ["epic-harp","harp","epic","arch","pipe",2,"","","",6],
-    ["iron-test","test","iron","nets","trio",3,"","","",22],
-    ["vital-whale","vital","whale","wheat","villa",4,"","","",16],
-  ]
+  puzzleIds: ["epic-harp", "iron-test", "vital-whale"]
 },
 {
   id: "day-050",
   type: "4-4-5",
   totalDifficulty: 15,
   maxDifficulty: 8,
-  puzzles: [
-    ["icon-lied","icon","lied","iced","lion",2,"","","",1],
-    ["flee-silt","silt","flee","else","lift",3,"","","",8],
-    ["arson-cable","cable","arson","scale","baron",2,"","","",6],
-  ]
+  puzzleIds: ["icon-lied", "flee-silt", "arson-cable"]
 },
 {
   id: "day-051",
   type: "4-4-5",
   totalDifficulty: 37,
   maxDifficulty: 24,
-  puzzles: [
-    ["code-deny","deny","code","eddy","once",2,"cody","dene","",6],
-    ["rear-upon","upon","rear","earn","pour",2,"","","",7],
-    ["paste-style","paste","style","petty","seals",4,"","","",24],
-  ]
+  puzzleIds: ["code-deny", "rear-upon", "paste-style"]
 },
 {
   id: "day-052",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 10,
-  puzzles: [
-    ["camp-dupe","dupe","camp","cape","dump",2,"","","",1],
-    ["cyan-deer","cyan","deer","care","deny",3,"","","",10],
-    ["slain-spike","spike","slain","likes","pains",2,"","","",7],
-  ]
+  puzzleIds: ["camp-dupe", "cyan-deer", "slain-spike"]
 },
 {
   id: "day-053",
   type: "4-4-5",
   totalDifficulty: 38,
   maxDifficulty: 23,
-  puzzles: [
-    ["host-pact","host","pact","chat","spot",2,"","","",6],
-    ["duke-pert","pert","duke","kept","rude",3,"","","",9],
-    ["lousy-seats","lousy","seats","souls","yeast",3,"","","",23],
-  ]
+  puzzleIds: ["host-pact", "duke-pert", "lousy-seats"]
 },
 {
   id: "day-054",
   type: "3-4-5",
   totalDifficulty: 22,
   maxDifficulty: 10,
-  puzzles: [
-    ["cat-use","cat","use","sue","act",1,"","","",3],
-    ["game-mice","game","mice","mime","cage",3,"","","",9],
-    ["ashes-drift","ashes","drift","shaft","rides",3,"","","",10],
-  ]
+  puzzleIds: ["cat-use", "game-mice", "ashes-drift"]
 },
 {
   id: "day-055",
   type: "4-5-5",
   totalDifficulty: 51,
   maxDifficulty: 25,
-  puzzles: [
-    ["lets-plop","lets","plop","poll","step",4,"","","",23],
-    ["amend-worse","worse","amend","swore","named",1,"","","",3],
-    ["gauge-limit","gauge","limit","image","guilt",5,"","","",25],
-  ]
+  puzzleIds: ["lets-plop", "amend-worse", "gauge-limit"]
 },
 {
   id: "day-056",
   type: "3-4-5",
   totalDifficulty: 5,
   maxDifficulty: 3,
-  puzzles: [
-    ["how-new","how","new","hew","now",1,"","","",0],
-    ["hint-peak","peak","hint","pink","heat",2,"","","",2],
-    ["drone-stark","stark","drone","store","drank",2,"","","",3],
-  ]
+  puzzleIds: ["how-new", "hint-peak", "drone-stark"]
 },
 {
   id: "day-057",
   type: "4-4-5",
   totalDifficulty: 23,
   maxDifficulty: 14,
-  puzzles: [
-    ["felt-hard","felt","hard","fart","held",2,"","","",2],
-    ["pond-ragu","ragu","pond","drag","upon",2,"","","cannot be reversed",7],
-    ["loyal-setup","loyal","setup","alloy","upset",2,"","","",14],
-  ]
+  puzzleIds: ["felt-hard", "pond-ragu", "loyal-setup"]
 },
 {
   id: "day-058",
   type: "4-4-5",
   totalDifficulty: 19,
   maxDifficulty: 8,
-  puzzles: [
-    ["bowl-keen","bowl","keen","blow","knee",1,"","","",3],
-    ["sari-stem","sari","stem","same","stir",2,"","","",8],
-    ["false-worth","false","worth","flash","wrote",2,"","","",8],
-  ]
+  puzzleIds: ["bowl-keen", "sari-stem", "false-worth"]
 },
 {
   id: "day-059",
   type: "4-4-5",
   totalDifficulty: 57,
   maxDifficulty: 28,
-  puzzles: [
-    ["laws-musk","musk","laws","sums","walk",3,"","","",8],
-    ["bend-myth","bend","myth","hymn","debt",3,"","","",21],
-    ["cover-video","video","cover","drove","voice",5,"","","",28],
-  ]
+  puzzleIds: ["laws-musk", "bend-myth", "cover-video"]
 },
 {
   id: "day-060",
   type: "4-4-5",
   totalDifficulty: 14,
   maxDifficulty: 8,
-  puzzles: [
-    ["hair-loud","loud","hair","hour","laid",2,"","","",2],
-    ["face-sore","sore","face","cafe","rose",2,"","","",4],
-    ["moral-seeds","moral","seeds","model","sears",3,"","","",8],
-  ]
+  puzzleIds: ["hair-loud", "face-sore", "moral-seeds"]
 },
 {
   id: "day-061",
   type: "4-4-5",
   totalDifficulty: 43,
   maxDifficulty: 25,
-  puzzles: [
-    ["mild-race","race","mild","card","lime",3,"","","",8],
-    ["easy-sums","easy","sums","muse","says",3,"","","",10],
-    ["naive-tests","naive","tests","taste","veins",4,"","","cannot be reversed",25],
-  ]
+  puzzleIds: ["mild-race", "easy-sums", "naive-tests"]
 },
 {
   id: "day-062",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 9,
-  puzzles: [
-    ["huge-part","huge","part","page","hurt",2,"","","",1],
-    ["rift-tube","rift","tube","butt","fire",3,"","","",8],
-    ["happy-legit","legit","happy","apply","eight",3,"","","",9],
-  ]
+  puzzleIds: ["huge-part", "rift-tube", "happy-legit"]
 },
 {
   id: "day-063",
   type: "4-4-5",
   totalDifficulty: 28,
   maxDifficulty: 20,
-  puzzles: [
-    ["obey-odds","obey","odds","body","does",2,"","","",6],
-    ["anti-hype","anti","hype","they","pain",3,"","","",20],
-    ["blade-print","blade","print","bride","plant",2,"","","",2],
-  ]
+  puzzleIds: ["obey-odds", "anti-hype", "blade-print"]
 },
 {
   id: "day-064",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 9,
-  puzzles: [
-    ["form-haul","haul","form","foul","harm",2,"","","",1],
-    ["cold-rest","cold","rest","sect","lord",3,"","","",8],
-    ["faith-super","super","faith","shape","fruit",3,"","","",9],
-  ]
+  puzzleIds: ["form-haul", "cold-rest", "faith-super"]
 },
 {
   id: "day-065",
   type: "4-4-5",
   totalDifficulty: 41,
   maxDifficulty: 28,
-  puzzles: [
-    ["debt-iris","iris","debt","edit","ribs",2,"","","",6],
-    ["echo-plea","echo","plea","each","pole",2,"","","",7],
-    ["lunch-slime","lunch","slime","menus","chill",5,"","","",28],
-  ]
+  puzzleIds: ["debt-iris", "echo-plea", "lunch-slime"]
 },
 {
   id: "day-066",
   type: "3-4-5",
   totalDifficulty: 15,
   maxDifficulty: 9,
-  puzzles: [
-    ["law-won","law","won","wan","low",1,"","","",1],
-    ["lets-swam","swam","lets","laws","stem",3,"","","",9],
-    ["boost-honey","honey","boost","ebony","shoot",2,"","","",5],
-  ]
+  puzzleIds: ["law-won", "lets-swam", "boost-honey"]
 },
 {
   id: "day-067",
   type: "3-4-5",
   totalDifficulty: 46,
   maxDifficulty: 29,
-  puzzles: [
-    ["aid-net","aid","net","din","tea",3,"","","",9],
-    ["cent-side","side","cent","dice","nest",3,"","","",8],
-    ["cheap-merit","cheap","merit","teach","prime",4,"","","",29],
-  ]
+  puzzleIds: ["aid-net", "cent-side", "cheap-merit"]
 },
 {
   id: "day-068",
   type: "4-4-5",
   totalDifficulty: 18,
   maxDifficulty: 11,
-  puzzles: [
-    ["bark-wood","wood","bark","book","ward",2,"","","",2],
-    ["plan-wide","plan","wide","wind","plea",2,"","","",5],
-    ["chain-spill","spill","chain","hills","panic",3,"spain","chill","",11],
-  ]
+  puzzleIds: ["bark-wood", "plan-wide", "chain-spill"]
 },
 {
   id: "day-069",
   type: "4-4-5",
   totalDifficulty: 40,
   maxDifficulty: 20,
-  puzzles: [
-    ["fits-love","love","fits","five","lots",2,"","","",1],
-    ["east-wind","east","wind","dawn","ties",3,"","","",19],
-    ["error-guess","guess","error","users","roger",4,"","","",20],
-  ]
+  puzzleIds: ["fits-love", "east-wind", "error-guess"]
 },
 {
   id: "day-070",
   type: "3-4-5",
   totalDifficulty: 16,
   maxDifficulty: 8,
-  puzzles: [
-    ["fix-sun","sun","fix","fun","six",1,"","","",0],
-    ["cage-talk","talk","cage","gate","lack",3,"","","",8],
-    ["lunar-resin","lunar","resin","ruins","learn",2,"","","",8],
-  ]
+  puzzleIds: ["fix-sun", "cage-talk", "lunar-resin"]
 },
 {
   id: "day-071",
   type: "3-5-5",
   totalDifficulty: 22,
   maxDifficulty: 12,
-  puzzles: [
-    ["ace-yet","ace","yet","cat","eye",2,"","","",7],
-    ["price-toast","toast","price","tract","poise",2,"","","",3],
-    ["races-slick","slick","races","crack","isles",3,"","","",12],
-  ]
+  puzzleIds: ["ace-yet", "price-toast", "races-slick"]
 },
 {
   id: "day-072",
   type: "4-4-5",
   totalDifficulty: 20,
   maxDifficulty: 9,
-  puzzles: [
-    ["fast-monk","fast","monk","mask","font",2,"","","",2],
-    ["meet-noun","meet","noun","menu","note",3,"nemo","tune","cannot be reversed",9],
-    ["aside-tuned","aside","tuned","adieu","tends",3,"","","",9],
-  ]
+  puzzleIds: ["fast-monk", "meet-noun", "aside-tuned"]
 },
 {
   id: "day-073",
   type: "4-4-5",
   totalDifficulty: 48,
   maxDifficulty: 22,
-  puzzles: [
-    ["tint-ways","tint","ways","stay","twin",2,"","","",6],
-    ["deep-gulf","deep","gulf","feed","plug",4,"","","",22],
-    ["actor-teeth","teeth","actor","teach","otter",4,"","","",20],
-  ]
+  puzzleIds: ["tint-ways", "deep-gulf", "actor-teeth"]
 },
 {
   id: "day-074",
   type: "3-5-5",
   totalDifficulty: 13,
   maxDifficulty: 10,
-  puzzles: [
-    ["how-rot","rot","how","hot","row",1,"","","",0],
-    ["pools-shine","pools","shine","phone","soils",2,"","","",3],
-    ["robot-solve","robot","solve","boots","lover",3,"","","",10],
-  ]
+  puzzleIds: ["how-rot", "pools-shine", "robot-solve"]
 },
 {
   id: "day-075",
   type: "3-4-5",
   totalDifficulty: 55,
   maxDifficulty: 28,
-  puzzles: [
-    ["dad-yam","yam","dad","day","mad",3,"amy","add","cannot be reversed",9],
-    ["data-town","data","town","toad","want",3,"","","",18],
-    ["elder-necks","elder","necks","dense","clerk",5,"","","",28],
-  ]
+  puzzleIds: ["dad-yam", "data-town", "elder-necks"]
 },
 {
   id: "day-076",
   type: "4-4-5",
   totalDifficulty: 25,
   maxDifficulty: 9,
-  puzzles: [
-    ["date-safe","safe","date","deaf","seat",2,"","","",7],
-    ["aced-fast","aced","fast","acts","fade",3,"","","",9],
-    ["sites-world","world","sites","slots","weird",3,"","","",9],
-  ]
+  puzzleIds: ["date-safe", "aced-fast", "sites-world"]
 },
 {
   id: "day-077",
   type: "3-4-5",
   totalDifficulty: 29,
   maxDifficulty: 13,
-  puzzles: [
-    ["hey-out","hey","out","the","you",2,"","","",8],
-    ["cube-pork","pork","cube","buck","rope",3,"","","",8],
-    ["decay-tones","decay","tones","needy","coats",4,"","","",13],
-  ]
+  puzzleIds: ["hey-out", "cube-pork", "decay-tones"]
 },
 {
   id: "day-078",
   type: "4-4-5",
   totalDifficulty: 20,
   maxDifficulty: 11,
-  puzzles: [
-    ["calm-fish","fish","calm","cash","film",2,"","","",1],
-    ["port-ride","port","ride","dirt","rope",3,"","","",8],
-    ["photo-reads","photo","reads","rodeo","paths",3,"","","",11],
-  ]
+  puzzleIds: ["calm-fish", "port-ride", "photo-reads"]
 },
 {
   id: "day-079",
   type: "3-5-5",
   totalDifficulty: 35,
   maxDifficulty: 23,
-  puzzles: [
-    ["new-one","new","one","nee","own",2,"","","",6],
-    ["lunch-share","share","lunch","harsh","uncle",2,"","","",6],
-    ["drawn-ridge","drawn","ridge","grand","wider",3,"","","",23],
-  ]
+  puzzleIds: ["new-one", "lunch-share", "drawn-ridge"]
 },
 {
   id: "day-080",
   type: "3-4-5",
   totalDifficulty: 11,
   maxDifficulty: 8,
-  puzzles: [
-    ["fun-red","red","fun","fed","run",1,"","","",0],
-    ["cute-name","cute","name","mace","tune",3,"","","",8],
-    ["frank-short","short","frank","shark","front",2,"","","",3],
-  ]
+  puzzleIds: ["fun-red", "cute-name", "frank-short"]
 },
 {
   id: "day-081",
   type: "4-4-5",
   totalDifficulty: 51,
   maxDifficulty: 33,
-  puzzles: [
-    ["bout-clot","clot","bout","boot","cult",2,"","","",5],
-    ["life-zest","life","zest","size","felt",4,"","","",13],
-    ["creep-saint","creep","saint","panic","trees",5,"","","",33],
-  ]
+  puzzleIds: ["bout-clot", "life-zest", "creep-saint"]
 },
 {
   id: "day-082",
   type: "4-4-5",
   totalDifficulty: 22,
   maxDifficulty: 9,
-  puzzles: [
-    ["mite-plan","mite","plan","mint","plea",2,"","","",5],
-    ["bees-hail","hail","bees","bias","heel",3,"","","",9],
-    ["power-spare","spare","power","swore","paper",3,"","","",8],
-  ]
+  puzzleIds: ["mite-plan", "bees-hail", "power-spare"]
 },
 {
   id: "day-083",
   type: "3-4-5",
   totalDifficulty: 51,
   maxDifficulty: 22,
-  puzzles: [
-    ["eye-sir","eye","sir","ire","yes",2,"","","",8],
-    ["keep-loan","keep","loan","noel","peak",3,"","","",22],
-    ["ditto-exist","ditto","exist","idiot","texts",3,"","","",21],
-  ]
+  puzzleIds: ["eye-sir", "keep-loan", "ditto-exist"]
 },
 {
   id: "day-084",
   type: "4-5-5",
   totalDifficulty: 17,
   maxDifficulty: 9,
-  puzzles: [
-    ["bunk-tall","tall","bunk","tank","bull",2,"","","",1],
-    ["basil-smell","basil","smell","balls","smile",2,"","","",7],
-    ["claim-peers","peers","claim","piles","cream",3,"","","",9],
-  ]
+  puzzleIds: ["bunk-tall", "basil-smell", "claim-peers"]
 },
 {
   id: "day-085",
   type: "3-5-5",
   totalDifficulty: 40,
   maxDifficulty: 28,
-  puzzles: [
-    ["dog-old","old","dog","log","odd",2,"","","",7],
-    ["brain-irony","brain","irony","robin","rainy",2,"","","",5],
-    ["stern-toast","stern","toast","tarot","nests",4,"","","",28],
-  ]
+  puzzleIds: ["dog-old", "brain-irony", "stern-toast"]
 },
 {
   id: "day-086",
   type: "3-4-5",
   totalDifficulty: 17,
   maxDifficulty: 9,
-  puzzles: [
-    ["cab-wet","cab","wet","cat","web",1,"","","",0],
-    ["maps-safe","safe","maps","fame","pass",3,"","","",8],
-    ["mango-waste","mango","waste","mates","wagon",2,"","","",9],
-  ]
+  puzzleIds: ["cab-wet", "maps-safe", "mango-waste"]
 },
 {
   id: "day-087",
   type: "4-4-5",
   totalDifficulty: 62,
   maxDifficulty: 32,
-  puzzles: [
-    ["clue-tank","tank","clue","ante","luck",2,"","","",7],
-    ["risk-soup","soup","risk","kiss","pour",3,"","","",23],
-    ["scuba-token","scuba","token","about","necks",5,"","","",32],
-  ]
+  puzzleIds: ["clue-tank", "risk-soup", "scuba-token"]
 },
 {
   id: "day-088",
   type: "4-5-5",
   totalDifficulty: 34,
   maxDifficulty: 22,
-  puzzles: [
-    ["logo-nose","logo","nose","gone","solo",3,"","","",9],
-    ["boost-claws","claws","boost","blows","coast",2,"","","",3],
-    ["array-guide","guide","array","argue","diary",4,"","","",22],
-  ]
+  puzzleIds: ["logo-nose", "boost-claws", "array-guide"]
 },
 {
   id: "day-089",
   type: "3-5-5",
   totalDifficulty: 20,
   maxDifficulty: 7,
-  puzzles: [
-    ["cap-lie","cap","lie","alp","ice",2,"","","",7],
-    ["agree-short","agree","short","great","horse",2,"","","",6],
-    ["crash-mules","mules","crash","clues","marsh",2,"","","",7],
-  ]
+  puzzleIds: ["cap-lie", "agree-short", "crash-mules"]
 },
 {
   id: "day-090",
   type: "3-5-5",
   totalDifficulty: 27,
   maxDifficulty: 21,
-  puzzles: [
-    ["bad-buy","bad","buy","bud","bay",1,"","","",0],
-    ["alley-bears","alley","bears","belly","areas",2,"","","",6],
-    ["giant-sense","giant","sense","genes","stain",3,"","","",21],
-  ]
+  puzzleIds: ["bad-buy", "alley-bears", "giant-sense"]
 },
 {
   id: "day-091",
   type: "4-4-5",
   totalDifficulty: 31,
   maxDifficulty: 28,
-  puzzles: [
-    ["fans-nude","nude","fans","nuns","fade",2,"","","",1],
-    ["bait-sold","bait","sold","bolt","said",2,"","","",2],
-    ["theft-thief","thief","theft","teeth","fifth",4,"","","",28],
-  ]
+  puzzleIds: ["fans-nude", "bait-sold", "theft-thief"]
 },
 {
   id: "day-092",
   type: "4-4-5",
   totalDifficulty: 45,
   maxDifficulty: 21,
-  puzzles: [
-    ["milk-nose","milk","nose","link","some",3,"leon","skim","",8],
-    ["less-soft","soft","less","self","toss",3,"","","",21],
-    ["cider-space","space","cider","speed","circa",4,"","","",16],
-  ]
+  puzzleIds: ["milk-nose", "less-soft", "cider-space"]
 },
 {
   id: "day-093",
   type: "4-4-5",
   totalDifficulty: 34,
   maxDifficulty: 25,
-  puzzles: [
-    ["dewy-nuts","dewy","nuts","duty","news",2,"","","",2],
-    ["math-wade","math","wade","mead","what",2,"","","",7],
-    ["gangs-taupe","taupe","gangs","gauge","pants",4,"","","",25],
-  ]
+  puzzleIds: ["dewy-nuts", "math-wade", "gangs-taupe"]
 },
 {
   id: "day-094",
   type: "4-4-5",
   totalDifficulty: 23,
   maxDifficulty: 13,
-  puzzles: [
-    ["bang-kiss","bang","kiss","bass","king",2,"","","",1],
-    ["drum-look","drum","look","lurk","doom",3,"","","",9],
-    ["radio-spire","spire","radio","aides","prior",4,"","","",13],
-  ]
+  puzzleIds: ["bang-kiss", "drum-look", "radio-spire"]
 },
 {
   id: "day-095",
   type: "3-4-5",
   totalDifficulty: 50,
   maxDifficulty: 22,
-  puzzles: [
-    ["bra-cup","bra","cup","arc","pub",3,"","","",9],
-    ["page-rich","rich","page","gear","chip",3,"","","",19],
-    ["lemon-thank","lemon","thank","month","ankle",4,"","","",22],
-  ]
+  puzzleIds: ["bra-cup", "page-rich", "lemon-thank"]
 },
 {
   id: "day-096",
   type: "4-4-5",
   totalDifficulty: 42,
   maxDifficulty: 18,
-  puzzles: [
-    ["hero-nude","nude","hero","hour","need",2,"","","",6],
-    ["ties-wave","wave","ties","east","view",3,"","","",18],
-    ["niche-viola","viola","niche","china","olive",3,"","","",18],
-  ]
+  puzzleIds: ["hero-nude", "ties-wave", "niche-viola"]
 },
 {
   id: "day-097",
   type: "3-4-5",
   totalDifficulty: 43,
   maxDifficulty: 22,
-  puzzles: [
-    ["art-gem","gem","art","arm","get",1,"","","",0],
-    ["good-loss","good","loss","dogs","solo",3,"","","",21],
-    ["femur-fetal","fetal","femur","frame","flute",4,"","","",22],
-  ]
+  puzzleIds: ["art-gem", "good-loss", "femur-fetal"]
 },
 {
   id: "day-098",
   type: "4-5-5",
   totalDifficulty: 35,
   maxDifficulty: 22,
-  puzzles: [
-    ["drew-slow","drew","slow","lewd","rows",2,"","","",8],
-    ["marry-stone","marry","stone","mayor","stern",2,"","","",5],
-    ["class-talks","class","talks","salts","slack",3,"","","",22],
-  ]
+  puzzleIds: ["drew-slow", "marry-stone", "class-talks"]
 },
 {
   id: "day-099",
   type: "4-4-5",
   totalDifficulty: 41,
   maxDifficulty: 18,
-  puzzles: [
-    ["ache-seat","seat","ache","chat","ease",2,"","","",7],
-    ["soda-thin","soda","thin","dash","into",3,"","","",18],
-    ["human-lever","human","lever","lemur","haven",4,"","","",16],
-  ]
+  puzzleIds: ["ache-seat", "soda-thin", "human-lever"]
 },
 {
   id: "day-100",
   type: "4-4-5",
   totalDifficulty: 56,
   maxDifficulty: 26,
-  puzzles: [
-    ["damn-like","like","damn","made","kiln",3,"","","",8],
-    ["mean-spot","mean","spot","tamp","nose",4,"","","",22],
-    ["bride-mercy","mercy","bride","crime","derby",4,"","","",26],
-  ]
+  puzzleIds: ["damn-like", "mean-spot", "bride-mercy"]
 },
 {
   id: "day-101",
   type: "3-4-5",
   totalDifficulty: 48,
   maxDifficulty: 33,
-  puzzles: [
-    ["his-two","his","two","its","who",2,"","","",7],
-    ["ally-spot","spot","ally","lost","play",2,"","","",8],
-    ["dance-tired","dance","tired","dried","enact",4,"","","",33],
-  ]
+  puzzleIds: ["his-two", "ally-spot", "dance-tired"]
 },
 {
   id: "day-102",
   type: "4-4-5",
   totalDifficulty: 42,
   maxDifficulty: 27,
-  puzzles: [
-    ["calm-flip","calm","flip","clap","film",2,"","","",6],
-    ["guru-post","guru","post","guts","pour",3,"","","",9],
-    ["flats-sword","flats","sword","dwarf","slots",4,"","","",27],
-  ]
+  puzzleIds: ["calm-flip", "guru-post", "flats-sword"]
 },
 {
   id: "day-103",
   type: "4-4-5",
   totalDifficulty: 36,
   maxDifficulty: 21,
-  puzzles: [
-    ["beat-whip","whip","beat","bath","wipe",2,"","","",7],
-    ["cuss-male","cuss","male","lace","sums",3,"","","",8],
-    ["frost-solar","solar","frost","flora","sorts",3,"","","",21],
-  ]
+  puzzleIds: ["beat-whip", "cuss-male", "frost-solar"]
 },
 {
   id: "day-104",
   type: "3-4-5",
   totalDifficulty: 51,
   maxDifficulty: 23,
-  puzzles: [
-    ["ick-odd","ick","odd","doc","kid",2,"","","",9],
-    ["done-soul","soul","done","loud","eons",3,"","","",23],
-    ["birds-broke","broke","birds","brisk","bored",3,"","","",19],
-  ]
+  puzzleIds: ["ick-odd", "done-soul", "birds-broke"]
 },
 {
   id: "day-105",
   type: "4-5-5",
   totalDifficulty: 33,
   maxDifficulty: 19,
-  puzzles: [
-    ["beds-envy","beds","envy","bevy","ends",2,"","","",1],
-    ["blues-scale","blues","scale","clubs","lease",4,"","","",13],
-    ["hello-paste","paste","hello","holes","petal",3,"","","",19],
-  ]
+  puzzleIds: ["beds-envy", "blues-scale", "hello-paste"]
 },
 {
   id: "day-106",
   type: "4-4-5",
   totalDifficulty: 46,
   maxDifficulty: 25,
-  puzzles: [
-    ["cafe-tart","cafe","tart","rate","fact",3,"","","",8],
-    ["rich-town","rich","town","corn","with",4,"","","",13],
-    ["plush-sleep","plush","sleep","helps","pulse",4,"","","",25],
-  ]
+  puzzleIds: ["cafe-tart", "rich-town", "plush-sleep"]
 },
 {
   id: "day-107",
   type: "4-4-5",
   totalDifficulty: 51,
   maxDifficulty: 29,
-  puzzles: [
-    ["bear-heir","bear","heir","bare","hire",1,"","","",3],
-    ["sung-what","sung","what","thaw","guns",2,"","","",19],
-    ["finer-gifts","finer","gifts","stiff","reign",4,"","","",29],
-  ]
+  puzzleIds: ["bear-heir", "sung-what", "finer-gifts"]
 },
 {
   id: "day-108",
   type: "4-4-5",
   totalDifficulty: 48,
   maxDifficulty: 20,
-  puzzles: [
-    ["mint-uses","mint","uses","mess","unit",2,"","","",8],
-    ["real-sofa","real","sofa","fare","also",4,"","","",20],
-    ["fresh-slate","fresh","slate","shelf","tears",4,"","","",20],
-  ]
+  puzzleIds: ["mint-uses", "real-sofa", "fresh-slate"]
 },
 {
   id: "day-109",
   type: "4-5-5",
   totalDifficulty: 46,
   maxDifficulty: 28,
-  puzzles: [
-    ["flip-girl","girl","flip","grip","fill",2,"","","",6],
-    ["blood-peaks","blood","peaks","baked","pools",3,"","","",12],
-    ["exact-psalm","exact","psalm","latex","camps",4,"","","",28],
-  ]
+  puzzleIds: ["flip-girl", "blood-peaks", "exact-psalm"]
 },
 {
   id: "day-110",
   type: "4-4-5",
   totalDifficulty: 51,
   maxDifficulty: 22,
-  puzzles: [
-    ["mint-opal","opal","mint","into","palm",2,"","","",7],
-    ["chef-skin","chef","skin","fish","neck",4,"","","",22],
-    ["clips-viral","viral","clips","crisp","villa",4,"","","",22],
-  ]
+  puzzleIds: ["mint-opal", "chef-skin", "clips-viral"]
 },
 {
   id: "day-111",
   type: "4-4-5",
   totalDifficulty: 54,
   maxDifficulty: 23,
-  puzzles: [
-    ["mole-safe","safe","mole","lose","fame",3,"","","",8],
-    ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23],
-    ["argue-later","argue","later","eager","ultra",3,"","","",23],
-  ]
+  puzzleIds: ["mole-safe", "heal-pigs", "argue-later"]
 },
 {
   id: "day-112",
   type: "4-4-5",
   totalDifficulty: 51,
   maxDifficulty: 23,
-  puzzles: [
-    ["cave-link","cave","link","vale","nick",3,"","","",8],
-    ["deep-when","when","deep","phew","need",3,"","","",23],
-    ["ocean-parts","ocean","parts","acorn","tapes",3,"","","",20],
-  ]
+  puzzleIds: ["cave-link", "deep-when", "ocean-parts"]
 },
 {
   id: "day-113",
   type: "4-4-5",
   totalDifficulty: 46,
   maxDifficulty: 25,
-  puzzles: [
-    ["ants-pigs","ants","pigs","sang","spit",2,"","","",8],
-    ["cave-kite","kite","cave","take","vice",3,"","","",13],
-    ["goats-sense","sense","goats","tease","songs",4,"","","",25],
-  ]
+  puzzleIds: ["ants-pigs", "cave-kite", "goats-sense"]
 },
 {
   id: "day-114",
   type: "4-4-5",
   totalDifficulty: 38,
   maxDifficulty: 24,
-  puzzles: [
-    ["free-trim","free","trim","fire","term",2,"","","",5],
-    ["best-cafe","best","cafe","beef","cats",3,"","","",9],
-    ["disco-elect","disco","elect","cited","close",5,"","","",24],
-  ]
+  puzzleIds: ["free-trim", "best-cafe", "disco-elect"]
 },
 {
   id: "day-115",
   type: "4-4-5",
   totalDifficulty: 64,
   maxDifficulty: 33,
-  puzzles: [
-    ["lack-toys","lack","toys","yolk","cats",4,"","","",12],
-    ["live-rail","live","rail","liar","evil",3,"","","",19],
-    ["magic-there","magic","there","cream","eight",6,"","","",33],
-  ]
+  puzzleIds: ["lack-toys", "live-rail", "magic-there"]
 },
 {
   id: "day-116",
   type: "3-4-5",
   totalDifficulty: 39,
   maxDifficulty: 15,
-  puzzles: [
-    ["eon-rid","eon","rid","die","nor",3,"","","",9],
-    ["pest-snow","snow","pest","step","owns",2,"","","",15],
-    ["snide-title","snide","title","inlet","tides",4,"","","",15],
-  ]
+  puzzleIds: ["eon-rid", "pest-snow", "snide-title"]
 },
 {
   id: "day-117",
   type: "4-4-5",
   totalDifficulty: 54,
   maxDifficulty: 23,
-  puzzles: [
-    ["frog-walk","frog","walk","flag","work",3,"","","",9],
-    ["lots-plop","plop","lots","poll","stop",4,"","","",23],
-    ["money-verge","money","verge","enemy","grove",4,"","","",22],
-  ]
+  puzzleIds: ["frog-walk", "lots-plop", "money-verge"]
 },
 {
   id: "day-118",
   type: "4-4-5",
   totalDifficulty: 35,
   maxDifficulty: 14,
-  puzzles: [
-    ["dice-lord","dice","lord","cold","ride",3,"","","",9],
-    ["lard-time","lard","time","mild","rate",4,"","","",12],
-    ["greet-learn","greet","learn","genre","later",3,"","","",14],
-  ]
+  puzzleIds: ["dice-lord", "lard-time", "greet-learn"]
 },
 {
   id: "day-119",
   type: "3-4-5",
   totalDifficulty: 55,
   maxDifficulty: 23,
-  puzzles: [
-    ["die-ram","ram","die","ear","mid",3,"","","",10],
-    ["flag-lion","lion","flag","golf","nail",4,"","","",23],
-    ["drift-house","drift","house","fried","south",3,"","","",22],
-  ]
+  puzzleIds: ["die-ram", "flag-lion", "drift-house"]
 },
 {
   id: "day-120",
   type: "4-4-5",
   totalDifficulty: 53,
   maxDifficulty: 25,
-  puzzles: [
-    ["crab-rule","crab","rule","club","rare",3,"","","",9],
-    ["rats-snip","snip","rats","pins","star",3,"","","",19],
-    ["error-thyme","thyme","error","merry","other",4,"","","",25],
-  ]
+  puzzleIds: ["crab-rule", "rats-snip", "error-thyme"]
 },
 {
   id: "day-121",
   type: "4-4-5",
   totalDifficulty: 64,
   maxDifficulty: 29,
-  puzzles: [
-    ["gods-pier","gods","pier","gird","pose",3,"","","",9],
-    ["pear-toss","pear","toss","rest","soap",4,"","","",26],
-    ["hedge-stiff","stiff","hedge","fifth","edges",4,"","","",29],
-  ]
+  puzzleIds: ["gods-pier", "pear-toss", "hedge-stiff"]
 },
 {
   id: "day-122",
   type: "3-5-5",
   totalDifficulty: 42,
   maxDifficulty: 26,
-  puzzles: [
-    ["cop-try","try","cop","cry","top",1,"","","",0],
-    ["nifty-tasks","nifty","tasks","fatty","sinks",4,"","","",16],
-    ["boost-surge","surge","boost","sober","gusto",5,"","","",26],
-  ]
+  puzzleIds: ["cop-try", "nifty-tasks", "boost-surge"]
 },
 {
   id: "day-123",
   type: "3-5-5",
   totalDifficulty: 56,
   maxDifficulty: 26,
-  puzzles: [
-    ["guy-web","web","guy","bug","yew",3,"","","",10],
-    ["leads-raven","raven","leads","nerve","salad",3,"","","",20],
-    ["horse-theft","horse","theft","forth","sheet",4,"","","",26],
-  ]
+  puzzleIds: ["guy-web", "leads-raven", "horse-theft"]
 },
 {
   id: "day-124",
   type: "3-5-5",
   totalDifficulty: 69,
   maxDifficulty: 33,
-  puzzles: [
-    ["eye-tax","eye","tax","axe","yet",2,"","","",8],
-    ["atlas-sheep","sheep","atlas","phase","steal",4,"","","",28],
-    ["cutie-short","short","cutie","tours","ethic",4,"","","",33],
-  ]
+  puzzleIds: ["eye-tax", "atlas-sheep", "cutie-short"]
 },
 {
   id: "day-125",
   type: "4-4-5",
   totalDifficulty: 67,
   maxDifficulty: 32,
-  puzzles: [
-    ["area-hire","area","hire","aria","here",3,"","","",9],
-    ["half-lice","half","lice","fill","each",4,"","","",26],
-    ["plots-totem","totem","plots","motto","slept",5,"","","",32],
-  ]
+  puzzleIds: ["area-hire", "half-lice", "plots-totem"]
 },
 {
   id: "day-126",
   type: "4-4-5",
   totalDifficulty: 52,
   maxDifficulty: 22,
-  puzzles: [
-    ["amen-vote","vote","amen","mate","oven",3,"","","",9],
-    ["meat-nerd","nerd","meat","dean","term",3,"","","",22],
-    ["march-peach","peach","march","charm","cheap",3,"","","",21],
-  ]
+  puzzleIds: ["amen-vote", "meat-nerd", "march-peach"]
 },
 {
   id: "day-127",
   type: "4-4-5",
   totalDifficulty: 65,
   maxDifficulty: 29,
-  puzzles: [
-    ["atom-evil","evil","atom","oval","item",4,"","","",13],
-    ["neon-wolf","neon","wolf","flew","noon",4,"","","",23],
-    ["brush-tooth","tooth","brush","shout","throb",5,"","","",29],
-  ]
+  puzzleIds: ["atom-evil", "neon-wolf", "brush-tooth"]
 },
 {
   id: "day-128",
   type: "3-5-5",
   totalDifficulty: 75,
   maxDifficulty: 34,
-  puzzles: [
-    ["dye-sad","dye","sad","add","yes",2,"","","",8],
-    ["bolts-shear","shear","bolts","rehab","slots",4,"","","",33],
-    ["based-sonic","sonic","based","cabin","doses",5,"","","",34],
-  ]
+  puzzleIds: ["dye-sad", "bolts-shear", "based-sonic"]
 },
 {
   id: "day-129",
   type: "4-4-5",
   totalDifficulty: 53,
   maxDifficulty: 23,
-  puzzles: [
-    ["fete-slip","slip","fete","step","file",3,"","","",9],
-    ["deep-rent","deep","rent","peer","tend",3,"","","",23],
-    ["plant-spare","spare","plant","strap","penal",4,"","","",21],
-  ]
+  puzzleIds: ["fete-slip", "deep-rent", "plant-spare"]
 },
 {
   id: "day-130",
   type: "3-4-5",
   totalDifficulty: 51,
   maxDifficulty: 29,
-  puzzles: [
-    ["ion-war","ion","war","air","own",2,"","","",7],
-    ["neat-sums","neat","sums","mess","aunt",3,"","","",15],
-    ["corgi-spots","corgi","spots","gross","topic",5,"","","",29],
-  ]
+  puzzleIds: ["ion-war", "neat-sums", "corgi-spots"]
 },
 {
   id: "day-131",
   type: "4-4-5",
   totalDifficulty: 55,
   maxDifficulty: 23,
-  puzzles: [
-    ["mode-sofa","sofa","mode","does","foam",3,"","","",10],
-    ["loop-rain","rain","loop","nail","poor",3,"","","",23],
-    ["alarm-devil","alarm","devil","armed","villa",4,"","","",22],
-  ]
+  puzzleIds: ["mode-sofa", "loop-rain", "alarm-devil"]
 },
 {
   id: "day-132",
   type: "3-4-5",
   totalDifficulty: 38,
   maxDifficulty: 22,
-  puzzles: [
-    ["age-rap","rap","age","are","gap",2,"","","",7],
-    ["bond-slow","slow","bond","bold","snow",3,"","","",9],
-    ["grape-prune","grape","prune","upper","anger",3,"","","",22],
-  ]
+  puzzleIds: ["age-rap", "bond-slow", "grape-prune"]
 },
 {
   id: "day-133",
   type: "4-4-5",
   totalDifficulty: 66,
   maxDifficulty: 24,
-  puzzles: [
-    ["meat-prod","prod","meat","drop","team",2,"","","",19],
-    ["dash-tool","tool","dash","hood","last",4,"","","",23],
-    ["arise-spoon","spoon","arise","piano","roses",4,"","","",24],
-  ]
+  puzzleIds: ["meat-prod", "dash-tool", "arise-spoon"]
 },
 {
   id: "day-134",
   type: "3-5-5",
   totalDifficulty: 45,
   maxDifficulty: 25,
-  puzzles: [
-    ["fib-wet","wet","fib","web","fit",1,"","","",0],
-    ["plate-speed","plate","speed","pedal","steep",4,"","","",20],
-    ["mouse-trust","trust","mouse","stout","serum",4,"","","",25],
-  ]
+  puzzleIds: ["fib-wet", "plate-speed", "mouse-trust"]
 },
 {
   id: "day-135",
   type: "4-4-5",
   totalDifficulty: 50,
   maxDifficulty: 21,
-  puzzles: [
-    ["eats-hawk","hawk","eats","take","wash",3,"","","",9],
-    ["nude-yeti","nude","yeti","unit","eyed",4,"","","",21],
-    ["hotel-tasks","hotel","tasks","stalk","those",3,"","","",20],
-  ]
+  puzzleIds: ["eats-hawk", "nude-yeti", "hotel-tasks"]
 },
 {
   id: "day-136",
   type: "3-5-5",
   totalDifficulty: 48,
   maxDifficulty: 21,
-  puzzles: [
-    ["are-hog","hog","are","ago","her",2,"","","",9],
-    ["glare-skies","glare","skies","eagle","risks",3,"","","",18],
-    ["never-sober","never","sober","verse","borne",4,"","","",21],
-  ]
+  puzzleIds: ["are-hog", "glare-skies", "never-sober"]
 },
 {
   id: "day-137",
   type: "3-5-5",
   totalDifficulty: 46,
   maxDifficulty: 22,
-  puzzles: [
-    ["awe-gas","awe","gas","age","was",2,"","","",7],
-    ["crane-spine","crane","spine","pecan","resin",3,"","","",17],
-    ["novel-short","short","novel","thorn","loves",3,"","","",22],
-  ]
+  puzzleIds: ["awe-gas", "crane-spine", "novel-short"]
 },
 {
   id: "day-138",
   type: "3-5-5",
   totalDifficulty: 48,
   maxDifficulty: 21,
-  puzzles: [
-    ["dub-sir","dub","sir","bus","rid",3,"","","",9],
-    ["angel-carol","angel","carol","along","clear",3,"","","",18],
-    ["space-world","space","world","crowd","lapse",4,"","","",21],
-  ]
+  puzzleIds: ["dub-sir", "angel-carol", "space-world"]
 },
 {
   id: "day-139",
   type: "4-4-5",
   totalDifficulty: 55,
   maxDifficulty: 21,
-  puzzles: [
-    ["rays-tofu","tofu","rays","fast","your",4,"","","",15],
-    ["love-wish","love","wish","veil","show",3,"","","",19],
-    ["alien-chess","alien","chess","seals","niche",4,"","","cannot be reversed",21],
-  ]
+  puzzleIds: ["rays-tofu", "love-wish", "alien-chess"]
 },
 {
   id: "day-140",
   type: "3-4-5",
   totalDifficulty: 39,
   maxDifficulty: 17,
-  puzzles: [
-    ["tip-ups","tip","ups","pup","its",2,"","","",7],
-    ["gosh-pipe","gosh","pipe","pope","sigh",3,"","","",15],
-    ["comes-tenth","tenth","comes","meets","notch",4,"","","",17],
-  ]
+  puzzleIds: ["tip-ups", "gosh-pipe", "comes-tenth"]
 },
 {
   id: "day-141",
   type: "3-5-5",
   totalDifficulty: 32,
   maxDifficulty: 18,
-  puzzles: [
-    ["but-cow","cow","but","bow","cut",1,"","","",0],
-    ["gnome-raven","gnome","raven","among","never",4,"","","",14],
-    ["canoe-rally","canoe","rally","clean","royal",3,"","","",18],
-  ]
+  puzzleIds: ["but-cow", "gnome-raven", "canoe-rally"]
 },
 {
   id: "day-142",
   type: "3-5-5",
   totalDifficulty: 55,
   maxDifficulty: 25,
-  puzzles: [
-    ["ran-you","you","ran","our","any",2,"","","",8],
-    ["poles-trace","trace","poles","elope","carts",4,"","","",22],
-    ["blame-dream","blame","dream","amber","medal",4,"","","",25],
-  ]
+  puzzleIds: ["ran-you", "poles-trace", "blame-dream"]
 },
 {
   id: "day-143",
   type: "4-4-5",
   totalDifficulty: 60,
   maxDifficulty: 26,
-  puzzles: [
-    ["grab-milk","grab","milk","glib","mark",3,"","","",9],
-    ["grow-load","load","grow","drag","wool",4,"","","",26],
-    ["frost-place","frost","place","craft","slope",4,"","","",25],
-  ]
+  puzzleIds: ["grab-milk", "grow-load", "frost-place"]
 },
 {
   id: "day-144",
   type: "3-5-5",
   totalDifficulty: 54,
   maxDifficulty: 25,
-  puzzles: [
-    ["bed-one","bed","one","ode","ben",2,"","","",9],
-    ["carol-sushi","sushi","carol","chair","souls",4,"","","",20],
-    ["solid-tiger","solid","tiger","roles","digit",4,"","","",25],
-  ]
+  puzzleIds: ["bed-one", "carol-sushi", "solid-tiger"]
 },
 {
   id: "day-145",
   type: "4-4-5",
   totalDifficulty: 61,
   maxDifficulty: 26,
-  puzzles: [
-    ["fell-poke","poke","fell","folk","peel",3,"","","",12],
-    ["most-show","show","most","toss","whom",3,"","","",23],
-    ["opera-waste","opera","waste","aware","poets",5,"","","",26],
-  ]
+  puzzleIds: ["fell-poke", "most-show", "opera-waste"]
 },
 {
   id: "day-146",
   type: "3-4-5",
   totalDifficulty: 39,
   maxDifficulty: 20,
-  puzzles: [
-    ["new-old","old","new","end","low",2,"","","",7],
-    ["load-skis","load","skis","idol","asks",3,"","","",20],
-    ["dared-viper","viper","dared","paved","rider",4,"","","",12],
-  ]
+  puzzleIds: ["new-old", "load-skis", "dared-viper"]
 },
 {
   id: "day-147",
   type: "3-4-5",
   totalDifficulty: 61,
   maxDifficulty: 35,
-  puzzles: [
-    ["ode-sun","ode","sun","don","use",2,"","","",7],
-    ["meat-tuna","tuna","meat","aunt","team",2,"","","",19],
-    ["pasta-smell","pasta","smell","ample","lasts",5,"","","",35],
-  ]
+  puzzleIds: ["ode-sun", "meat-tuna", "pasta-smell"]
 },
 {
   id: "day-148",
   type: "3-5-5",
   totalDifficulty: 10,
   maxDifficulty: 8,
-  puzzles: [
-    ["big-max","big","max","bag","mix",1,"","","",1],
-    ["chase-mount","mount","chase","chant","mouse",2,"","","",1],
-    ["share-towel","share","towel","shale","tower",3,"","","",8],
-  ]
+  puzzleIds: ["big-max", "chase-mount", "share-towel"]
 },
 {
   id: "day-149",
   type: "4-4-5",
   totalDifficulty: 30,
   maxDifficulty: 22,
-  puzzles: [
-    ["heel-ploy","ploy","heel","holy","peel",2,"","","cannot be reversed",8],
-    ["glee-sins","glee","sins","else","sign",3,"","","",22],
-    ["booth-class","class","booth","boots","clash",1,"","","",0],
-  ]
+  puzzleIds: ["heel-ploy", "glee-sins", "booth-class"]
 },
 {
   id: "day-150",
   type: "3-4-5",
   totalDifficulty: 10,
   maxDifficulty: 9,
-  puzzles: [
-    ["cup-lot","cup","lot","lop","cut",1,"","","",0],
-    ["fade-sick","sick","fade","cafe","disk",3,"","","",9],
-    ["cling-goose","goose","cling","close","going",2,"","","",1],
-  ]
+  puzzleIds: ["cup-lot", "fade-sick", "cling-goose"]
 },
 {
   id: "day-151",
   type: "4-4-5",
   totalDifficulty: 39,
   maxDifficulty: 26,
-  puzzles: [
-    ["look-true","look","true","lure","took",2,"","","",8],
-    ["lake-slim","lake","slim","elks","mail",4,"","","",26],
-    ["prism-reset","prism","reset","prime","rests",2,"","","",5],
-  ]
+  puzzleIds: ["look-true", "lake-slim", "prism-reset"]
 },
 {
   id: "day-152",
   type: "4-5-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["plum-wars","plum","wars","plus","warm",1,"","","",0],
-    ["haute-rolls","haute","rolls","halls","route",2,"","","",1],
-    ["great-quote","great","quote","greet","quota",3,"","","",8],
-  ]
+  puzzleIds: ["plum-wars", "haute-rolls", "great-quote"]
 },
 {
   id: "day-153",
   type: "3-5-5",
   totalDifficulty: 23,
   maxDifficulty: 14,
-  puzzles: [
-    ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14],
-    ["nylon-purse","nylon","purse","pylon","nurse",1,"","","",0],
-    ["forms-trend","forms","trend","frond","terms",3,"","","",9],
-  ]
+  puzzleIds: ["pup-too", "nylon-purse", "forms-trend"]
 },
 {
   id: "day-154",
   type: "4-4-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["date-fear","fear","date","fate","dear",1,"","","",0],
-    ["flat-mood","flat","mood","malt","food",2,"","","",8],
-    ["steel-whiff","whiff","steel","stiff","wheel",2,"","","cannot be reversed",1],
-  ]
+  puzzleIds: ["date-fear", "flat-mood", "steel-whiff"]
 },
 {
   id: "day-155",
   type: "4-5-5",
   totalDifficulty: 19,
   maxDifficulty: 9,
-  puzzles: [
-    ["most-open","most","open","omen","post",3,"","","",9],
-    ["alien-wings","alien","wings","align","wines",1,"","","",1],
-    ["firms-greed","greed","firms","germs","fried",3,"","","",9],
-  ]
+  puzzleIds: ["most-open", "alien-wings", "firms-greed"]
 },
 {
   id: "day-156",
   type: "4-4-5",
   totalDifficulty: 16,
   maxDifficulty: 8,
-  puzzles: [
-    ["ears-seal","seal","ears","earl","seas",1,"","","",0],
-    ["seem-true","seem","true","teem","sure",2,"","","",8],
-    ["scent-waste","waste","scent","scene","watts",3,"","","",8],
-  ]
+  puzzleIds: ["ears-seal", "seem-true", "scent-waste"]
 },
 {
   id: "day-157",
   type: "3-5-5",
   totalDifficulty: 23,
   maxDifficulty: 14,
-  puzzles: [
-    ["eel-win","eel","win","lie","new",3,"","","",14],
-    ["donor-tells","donor","tells","dolls","tenor",2,"","","",1],
-    ["queen-spill","queen","spill","quell","spine",3,"","","",8],
-  ]
+  puzzleIds: ["eel-win", "donor-tells", "queen-spill"]
 },
 {
   id: "day-158",
   type: "3-4-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["box-law","box","law","lax","bow",1,"","","",0],
-    ["logs-sold","sold","logs","loss","gold",3,"","","",8],
-    ["await-trash","await","trash","awash","trait",2,"","","",1],
-  ]
+  puzzleIds: ["box-law", "logs-sold", "await-trash"]
 },
 {
   id: "day-159",
   type: "4-4-5",
   totalDifficulty: 32,
   maxDifficulty: 22,
-  puzzles: [
-    ["free-tier","free","tier","fire","tree",2,"","","cannot be reversed",9],
-    ["warp-yard","warp","yard","draw","pray",4,"","","",22],
-    ["banks-local","local","banks","locks","banal",2,"","","",1],
-  ]
+  puzzleIds: ["free-tier", "warp-yard", "banks-local"]
 },
 {
   id: "day-160",
   type: "4-4-5",
   totalDifficulty: 16,
   maxDifficulty: 8,
-  puzzles: [
-    ["oath-pink","pink","oath","oink","path",1,"","","",0],
-    ["bulb-cook","bulb","cook","book","club",2,"","","cannot be reversed",8],
-    ["patch-stiff","stiff","patch","pitch","staff",3,"","","",8],
-  ]
+  puzzleIds: ["oath-pink", "bulb-cook", "patch-stiff"]
 },
 {
   id: "day-161",
   type: "3-4-5",
   totalDifficulty: 33,
   maxDifficulty: 23,
-  puzzles: [
-    ["not-yet","not","yet","ten","toy",3,"","","",9],
-    ["deal-kink","kink","deal","kind","leak",3,"","","cannot be reversed",23],
-    ["clamp-sheep","clamp","sheep","champ","sleep",1,"","","",1],
-  ]
+  puzzleIds: ["not-yet", "deal-kink", "clamp-sheep"]
 },
 {
   id: "day-162",
   type: "3-4-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["bad-dye","dye","bad","bye","dad",1,"","","",0],
-    ["free-weed","free","weed","feed","were",2,"","","cannot be reversed",8],
-    ["lodge-river","river","lodge","lover","ridge",2,"","","",1],
-  ]
+  puzzleIds: ["bad-dye", "free-weed", "lodge-river"]
 },
 {
   id: "day-163",
   type: "4-4-5",
   totalDifficulty: 56,
   maxDifficulty: 25,
-  puzzles: [
-    ["dyes-keep","dyes","keep","deep","keys",2,"","","cannot be reversed",8],
-    ["drum-good","good","drum","drug","mood",4,"","","",23],
-    ["kings-spear","kings","spear","rings","speak",4,"","","",25],
-  ]
+  puzzleIds: ["dyes-keep", "drum-good", "kings-spear"]
 },
 {
   id: "day-164",
   type: "4-4-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["paid-user","paid","user","pair","used",1,"","","",0],
-    ["glue-roof","glue","roof","goof","rule",2,"","","",8],
-    ["fatty-kings","fatty","kings","fangs","kitty",2,"","","",1],
-  ]
+  puzzleIds: ["paid-user", "glue-roof", "fatty-kings"]
 },
 {
   id: "day-165",
   type: "3-4-5",
   totalDifficulty: 35,
   maxDifficulty: 22,
-  puzzles: [
-    ["art-can","art","can","act","ran",2,"","","",7],
-    ["news-teen","teen","news","seen","newt",3,"","","",22],
-    ["catch-sweep","catch","sweep","cache","swept",2,"","","",6],
-  ]
+  puzzleIds: ["art-can", "news-teen", "catch-sweep"]
 },
 {
   id: "day-166",
   type: "4-4-5",
   totalDifficulty: 11,
   maxDifficulty: 8,
-  puzzles: [
-    ["next-tone","next","tone","text","none",1,"","","",0],
-    ["maid-raid","maid","raid","arid","amid",1,"","","",3],
-    ["ample-panic","ample","panic","manic","apple",3,"","","",8],
-  ]
+  puzzleIds: ["next-tone", "maid-raid", "ample-panic"]
 },
 {
   id: "day-167",
   type: "4-4-5",
   totalDifficulty: 41,
   maxDifficulty: 23,
-  puzzles: [
-    ["cash-gift","cash","gift","sigh","fact",4,"","","",13],
-    ["nets-seal","seal","nets","lean","sets",3,"sean","lets","",23],
-    ["fears-motto","motto","fears","feast","motor",2,"","","",5],
-  ]
+  puzzleIds: ["cash-gift", "nets-seal", "fears-motto"]
 },
 {
   id: "day-168",
   type: "4-4-5",
   totalDifficulty: 14,
   maxDifficulty: 8,
-  puzzles: [
-    ["dump-jeep","dump","jeep","deep","jump",1,"","","",0],
-    ["feel-grit","grit","feel","feet","girl",2,"","","cannot be reversed",6],
-    ["modes-theme","theme","modes","modem","these",3,"","","",8],
-  ]
+  puzzleIds: ["dump-jeep", "feel-grit", "modes-theme"]
 },
 {
   id: "day-169",
   type: "4-4-5",
   totalDifficulty: 47,
   maxDifficulty: 23,
-  puzzles: [
-    ["mass-step","mass","step","stem","pass",4,"","","",23],
-    ["pays-stew","stew","pays","step","ways",4,"","","",23],
-    ["clear-swamp","clear","swamp","swear","clamp",2,"","","",1],
-  ]
+  puzzleIds: ["mass-step", "pays-stew", "clear-swamp"]
 },
 {
   id: "day-170",
   type: "4-4-5",
   totalDifficulty: 25,
   maxDifficulty: 11,
-  puzzles: [
-    ["seek-term","seek","term","trek","seem",2,"","","",6],
-    ["flat-hood","flat","hood","halt","food",2,"","","",8],
-    ["queue-vegan","vegan","queue","queen","vague",4,"","","",11],
-  ]
+  puzzleIds: ["seek-term", "flat-hood", "queue-vegan"]
 },
 {
   id: "day-171",
   type: "3-4-5",
   totalDifficulty: 28,
   maxDifficulty: 14,
-  puzzles: [
-    ["pet-soy","soy","pet","top","yes",3,"","","",14],
-    ["gist-safe","safe","gist","sage","fist",4,"","","",13],
-    ["hatch-wings","hatch","wings","hangs","witch",2,"","","",1],
-  ]
+  puzzleIds: ["pet-soy", "gist-safe", "hatch-wings"]
 },
 {
   id: "day-172",
   type: "3-4-5",
   totalDifficulty: 18,
   maxDifficulty: 10,
-  puzzles: [
-    ["see-via","see","via","vie","sea",1,"","","",0],
-    ["been-true","true","been","beer","tune",3,"","","",10],
-    ["brake-force","brake","force","farce","broke",3,"","","",8],
-  ]
+  puzzleIds: ["see-via", "been-true", "brake-force"]
 },
 {
   id: "day-173",
   type: "4-4-5",
   totalDifficulty: 35,
   maxDifficulty: 19,
-  puzzles: [
-    ["blue-reef","blue","reef","beef","rule",2,"","","",8],
-    ["chai-lens","chai","lens","inch","sale",3,"","","cannot be reversed",19],
-    ["dodge-melon","melon","dodge","demon","lodge",3,"","","cannot be reversed",8],
-  ]
+  puzzleIds: ["blue-reef", "chai-lens", "dodge-melon"]
 },
 {
   id: "day-174",
   type: "4-4-5",
   totalDifficulty: 19,
   maxDifficulty: 9,
-  puzzles: [
-    ["acid-make","make","acid","cake","amid",3,"","","",9],
-    ["oral-vows","oral","vows","rows","oval",3,"","","",9],
-    ["droid-valve","droid","valve","drove","valid",2,"","","cannot be reversed",1],
-  ]
+  puzzleIds: ["acid-make", "oral-vows", "droid-valve"]
 },
 {
   id: "day-175",
   type: "3-4-5",
   totalDifficulty: 47,
   maxDifficulty: 25,
-  puzzles: [
-    ["gas-hot","hot","gas","got","has",1,"","","",0],
-    ["melt-peak","melt","peak","kelp","team",3,"","","",22],
-    ["minds-steak","steak","minds","kinds","steam",4,"","","",25],
-  ]
+  puzzleIds: ["gas-hot", "melt-peak", "minds-steak"]
 },
 {
   id: "day-176",
   type: "3-5-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["bet-jut","jut","bet","but","jet",1,"","","",0],
-    ["curry-weave","curry","weave","curve","weary",2,"","","",1],
-    ["clone-rises","clone","rises","close","risen",3,"","","",8],
-  ]
+  puzzleIds: ["bet-jut", "curry-weave", "clone-rises"]
 },
 {
   id: "day-177",
   type: "4-4-5",
   totalDifficulty: 55,
   maxDifficulty: 24,
-  puzzles: [
-    ["bare-rule","bare","rule","lube","rare",3,"","","",8],
-    ["full-load","full","load","loaf","dull",4,"","","",23],
-    ["dying-guilt","dying","guilt","guild","tying",4,"","","",24],
-  ]
+  puzzleIds: ["bare-rule", "full-load", "dying-guilt"]
 },
 {
   id: "day-178",
   type: "4-5-5",
   totalDifficulty: 46,
   maxDifficulty: 23,
-  puzzles: [
-    ["real-tiny","real","tiny","lint","year",3,"","","",23],
-    ["bells-finch","finch","bells","bench","fills",2,"","","",1],
-    ["fight-troop","fight","troop","proof","tight",3,"","","",22],
-  ]
+  puzzleIds: ["real-tiny", "bells-finch", "fight-troop"]
 },
 {
   id: "day-179",
   type: "4-4-5",
   totalDifficulty: 42,
   maxDifficulty: 22,
-  puzzles: [
-    ["show-tear","show","tear","rote","wash",3,"","","",19],
-    ["cell-shoe","cell","shoe","loch","else",4,"","","",22],
-    ["crush-flies","crush","flies","flush","cries",2,"","","",1],
-  ]
+  puzzleIds: ["show-tear", "cell-shoe", "crush-flies"]
 },
 {
   id: "day-180",
   type: "3-5-5",
   totalDifficulty: 9,
   maxDifficulty: 8,
-  puzzles: [
-    ["fix-sly","sly","fix","fly","six",1,"","","",0],
-    ["blame-shock","shock","blame","block","shame",2,"","","",1],
-    ["cares-least","least","cares","carts","lease",3,"","","",8],
-  ]
+  puzzleIds: ["fix-sly", "blame-shock", "cares-least"]
 },
 {
   id: "day-181",
   type: "3-5-5",
   totalDifficulty: 18,
   maxDifficulty: 13,
-  puzzles: [
-    ["end-how","end","how","den","who",1,"","","",4],
-    ["offer-papal","papal","offer","paper","offal",2,"","","",1],
-    ["demon-water","water","demon","deter","woman",4,"","","",13],
-  ]
+  puzzleIds: ["end-how", "offer-papal", "demon-water"]
 },
 {
   id: "day-182",
   type: "3-5-5",
   totalDifficulty: 34,
   maxDifficulty: 26,
-  puzzles: [
-    ["hot-use","hot","use","out","she",2,"","","",7],
-    ["mince-prior","mince","prior","minor","price",2,"","","",1],
-    ["craft-forge","forge","craft","force","graft",4,"","","",26],
-  ]
+  puzzleIds: ["hot-use", "mince-prior", "craft-forge"]
 }
 
 ];
@@ -3495,15 +2767,19 @@ const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,rev
   id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout:String(layout||"")
 });
 const puzzles=puzzleRows.map(makePuzzle);
+const puzzleById=new Map(puzzles.map(p=>[p.id,p]));
 const horizontalPuzzles=horizontalRows.map(makePuzzle);
 const lockedPuzzles=lockedPuzzleRows.map(makePuzzle);
 const cluePuzzles=clueTestPuzzles.map(makePuzzle);
-const dailyPuzzles=dailyTriplets.map(day=>({...day,puzzles:day.puzzles.map(makePuzzle)}));
+const dailyPuzzles=dailyTriplets.map(day=>({
+  ...day,
+  puzzles:(day.puzzleIds||[]).map(id=>puzzleById.get(id)).filter(Boolean)
+}));
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
-let activePuzzles=puzzles;
+let activePuzzles=cluePuzzles;
 
 const $=id=>document.getElementById(id);
-const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn"),allWordsModeBtn=$("allWordsModeBtn");
+const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
 const boardShell=board.parentElement;
 let fitBoardRAF=0;
 document.body.appendChild(statsPanel);
@@ -3530,9 +2806,9 @@ let allWordsIndex=0,allWordsScore=0,allWordsFound=[],allWordsFlibFound=false,all
 let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
 const isDailyMode=()=>mode==="daily";
-const isAllWordsMode=()=>mode==="allWords";
-const isNewMode=()=>mode==="new";
-function updateModeToggle(){dailyModeBtn.classList.toggle("active",mode==="daily");gameModeBtn.classList.toggle("active",mode==="game");allWordsModeBtn.classList.toggle("active",mode==="new"||mode==="allWords");}
+const isAllWordsMode=()=>false;
+const isNewMode=()=>mode==="game";
+function updateModeToggle(){dailyModeBtn.classList.toggle("active",mode==="daily");gameModeBtn.classList.toggle("active",mode==="game");}
 const currentDaily=()=>dailyPuzzles[dailyDayIndex];
 const currentPuzzle=()=>activePuzzles[puzzleIndex];
 const pairCode=(a,b)=>[a,b].sort().join("");
@@ -3722,11 +2998,10 @@ function isLocalStorageCompletelyEmpty(){
 function getUrlMode(){
   const q=location.search.toLowerCase();
   if(getUrlJumpDay()!==null||/(?:\?|&)daily(?:&|$)/.test(q))return "daily";
-  if(getUrlJumpAllWords()!==null||/(?:\?|&)allwords(?:&|$)/.test(q))return "allWords";
-  if(/(?:\?|&)new(?:&|$)/.test(q))return "new";
-  if(/(?:\?|&)game(?:&|$)/.test(q))return "game";
+  // ?levelN and ?game now open the timed clue-style Game mode. ?new is no longer used.
+  if(getUrlJumpLevel()!==null||/(?:\?|&)game(?:&|$)/.test(q))return "game";
   const savedMode=localStorage.getItem(DAILY_MODE_KEY);
-  if(savedMode==="daily"||savedMode==="game"||savedMode==="allWords"||savedMode==="new")return savedMode;
+  if(savedMode==="daily"||savedMode==="game")return savedMode;
   return isLocalStorageCompletelyEmpty()?"daily":"game";
 }
 function getAutoHintSaveState(){
@@ -5627,7 +4902,6 @@ hintBtn.addEventListener("pointerup",e=>{if(isNewMode()&&solved)runSolvedStatsBu
 hintBtn.addEventListener("click",e=>{if(isNewMode()&&solved){runSolvedStatsButtonAction(e);return}useHint()});
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
-allWordsModeBtn.addEventListener("click",()=>switchMode("new"));
 startWordsBtn.addEventListener("click",showStartingWords);
 nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsMode())runNextButtonAction(e)});
 nextBtn.addEventListener("click",runNextButtonAction);
@@ -5754,11 +5028,13 @@ function initGame(){updateModeToggle();clearDailyTimer();clearDailyCountdownTime
 function initMode(){
   clearAllTimers();clearDailyTimer();clearDailyCountdownTimer();
   const params=new URLSearchParams(location.search);
+  // Old pre-refactor Game progress is incompatible with the timed clue-style Game mode.
+  localStorage.removeItem(STORAGE_KEY);
   const jumpDay=getUrlJumpDay();
-  const jumpAllWords=getUrlJumpAllWords();
+  const jumpLevel=getUrlJumpLevel();
   const hasDayJump=jumpDay!==null;
-  window.__jumpAllWords=jumpAllWords!==null?jumpAllWords-1:null;
-  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");localStorage.removeItem("flipwords:newModeProgress:clues-v43");localStorage.removeItem("flipwords:newModeProgress:clues-v44");localStorage.removeItem("flipwords:newModeProgress:clues-v45");localStorage.removeItem("flipwords:newModeProgress:clues-v46");localStorage.removeItem("flipwords:newModeProgress:clues-v47");localStorage.removeItem("flipwords:newModeProgress:clues-v48");localStorage.removeItem("flipwords:newModeProgress:clues-v49");localStorage.removeItem("flipwords:newModeProgress:clues-v50");localStorage.removeItem("flipwords:newModeProgress:clues-v51");localStorage.removeItem("flipwords:newModeProgress:clues-v52");localStorage.removeItem("flipwords:newModeProgress:clues-v53");localStorage.removeItem("flipwords:newModeProgress:clues-v54");localStorage.removeItem("flipwords:newModeProgress:clues-v55");localStorage.removeItem("flipwords:newModeProgress:clues-v56");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v69");localStorage.removeItem("flipwords:newModeProgress:clues-v70");localStorage.removeItem("flipwords:newModeProgress:clues-v71");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v58");localStorage.removeItem("flipwords:newModeProgress:clues-v59");localStorage.removeItem("flipwords:newModeProgress:clues-v60");localStorage.removeItem("flipwords:newModeProgress:clues-v61");localStorage.removeItem("flipwords:newModeProgress:clues-v62");localStorage.removeItem("flipwords:newModeProgress:clues-v63");localStorage.removeItem("flipwords:newModeProgress:clues-v64");localStorage.removeItem("flipwords:newModeProgress:clues-v65");localStorage.removeItem("flipwords:newModeProgress:clues-v66");localStorage.removeItem("flipwords:newModeProgress:clues-v67");localStorage.removeItem("flipwords:newModeProgress:clues-v68");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
+  window.__jumpLevel=jumpLevel!==null?jumpLevel:null;
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");localStorage.removeItem("flipwords:newModeProgress:clues-v43");localStorage.removeItem("flipwords:newModeProgress:clues-v44");localStorage.removeItem("flipwords:newModeProgress:clues-v45");localStorage.removeItem("flipwords:newModeProgress:clues-v46");localStorage.removeItem("flipwords:newModeProgress:clues-v47");localStorage.removeItem("flipwords:newModeProgress:clues-v48");localStorage.removeItem("flipwords:newModeProgress:clues-v49");localStorage.removeItem("flipwords:newModeProgress:clues-v50");localStorage.removeItem("flipwords:newModeProgress:clues-v51");localStorage.removeItem("flipwords:newModeProgress:clues-v52");localStorage.removeItem("flipwords:newModeProgress:clues-v53");localStorage.removeItem("flipwords:newModeProgress:clues-v54");localStorage.removeItem("flipwords:newModeProgress:clues-v55");localStorage.removeItem("flipwords:newModeProgress:clues-v56");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v69");localStorage.removeItem("flipwords:newModeProgress:clues-v70");localStorage.removeItem("flipwords:newModeProgress:clues-v71");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v58");localStorage.removeItem("flipwords:newModeProgress:clues-v59");localStorage.removeItem("flipwords:newModeProgress:clues-v60");localStorage.removeItem("flipwords:newModeProgress:clues-v61");localStorage.removeItem("flipwords:newModeProgress:clues-v62");localStorage.removeItem("flipwords:newModeProgress:clues-v63");localStorage.removeItem("flipwords:newModeProgress:clues-v64");localStorage.removeItem("flipwords:newModeProgress:clues-v65");localStorage.removeItem("flipwords:newModeProgress:clues-v66");localStorage.removeItem("flipwords:newModeProgress:clues-v67");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v72");localStorage.removeItem("flipwords:newModeProgress:clues-v73");localStorage.removeItem("flipwords:newModeProgress:clues-v74");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
   if(hasDayJump){
     cachedGameState=readStoredGameState();
     window.__forceFreshStart=false;
@@ -5773,14 +5049,12 @@ function initMode(){
       const highestCompleted=getHighestCompletedDailyIndex();
       if(highestCompleted>=0)dailyDayIndex=highestCompleted;
     }
-  }else if(mode==="allWords"){
-    if(jumpAllWords!==null)allWordsIndex=jumpAllWords-1;
   }else if(jumpDay!==null){
     dailyDayIndex=jumpDay-1;
   }
   if(jumpDay===null)localStorage.setItem(DAILY_MODE_KEY,mode);
   else localStorage.setItem(DAILY_MODE_KEY,previousMode);
-  if(mode==="daily")initDaily();else if(mode==="allWords")initAllWords();else if(mode==="new")initNewMode();else initGame();
+  if(mode==="daily")initDaily();else initNewMode();
 }
 initMode();
 </script>
