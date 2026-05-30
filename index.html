@@ -1130,1279 +1130,346 @@ const puzzleRows=[
 ];
 
 const dailyTriplets=[
-  {
+{
   id: "day-001",
-  type: "3-4-5",
-  totalDifficulty: 24,
-  maxDifficulty: 10,
-  puzzleIds: ["ate-jog", "dull-soda", "agile-poles"]
+  type: "3-5-5",
+  totalDifficulty: 41,
+  maxDifficulty: 25,
+  puzzles: [
+    ["bar-row","bar","row","rob","war",3,"","","",14], // allWords 1: raw
+    ["finds-woody","woody","finds","foods","windy",2,"","","",2], // allWords 3: downs|winds|woods
+    ["giddy-sense","giddy","sense","dying","seeds",4,"","","",25], // allWords 8: deeds|dense|edged|edges|genes|needs|sided|sides
+  ]
 },
 {
   id: "day-002",
-  type: "4-4-5",
-  totalDifficulty: 35,
-  maxDifficulty: 26,
-  puzzleIds: ["bust-coup", "spin-taxi", "reset-title"]
+  type: "3-5-5",
+  totalDifficulty: 22,
+  maxDifficulty: 11,
+  puzzles: [
+    ["bug-new","new","bug","web","gun",3,"","","",9], // allWords 0
+    ["blade-print","blade","print","bride","plant",2,"","","",2], // allWords 11: beard|bread|padre|panel|pedal|penal|piled|plane|plead|pride|raped
+    ["binge-pasta","binge","pasta","bites","pagan",3,"","","",11], // allWords 12: bates|beast|beats|began|begin|being|inept|pages|paint|paste|spite|tapes
+  ]
 },
 {
   id: "day-003",
   type: "4-4-5",
-  totalDifficulty: 19,
-  maxDifficulty: 8,
-  puzzleIds: ["mite-scan", "hike-were", "bagel-sales"]
+  totalDifficulty: 30,
+  maxDifficulty: 20,
+  puzzles: [
+    ["huge-wart","huge","wart","wage","hurt",2,"","","",1], // allWords 4: hart|hear|thru|wear
+    ["nuts-pyre","pyre","nuts","runs","type",3,"","","",9], // allWords 4: prey|pure|puts|tune
+    ["hello-slash","slash","hello","holes","shall",3,"","","",20], // allWords 8: ashes|halls|heals|leash|loses|shale|shell|soles
+  ]
 },
 {
   id: "day-004",
   type: "4-4-5",
-  totalDifficulty: 31,
-  maxDifficulty: 20,
-  puzzleIds: ["fawn-slim", "core-vast", "coins-fault"]
+  totalDifficulty: 17,
+  maxDifficulty: 8,
+  puzzles: [
+    ["bang-kiss","bang","kiss","bass","king",2,"","","",1], // allWords 5: asks|bags|sank|sink|skin
+    ["lawn-risk","lawn","risk","silk","warn",3,"","","",8], // allWords 1: walk
+    ["gayly-sorts","gayly","sorts","glory","stays",3,"","","",8], // allWords 4: stars|story|stray|trays
+  ]
 },
 {
   id: "day-005",
-  type: "3-5-5",
-  totalDifficulty: 13,
-  maxDifficulty: 10,
-  puzzleIds: ["cue-tip", "parks-there", "panda-wires"]
+  type: "3-4-5",
+  totalDifficulty: 52,
+  maxDifficulty: 22,
+  puzzles: [
+    ["dad-nor","nor","dad","don","rad",3,"dan","rod","",10], // allWords 3: add|and|ran
+    ["iron-test","test","iron","nets","trio",3,"","","",22], // allWords 10: nest|note|riot|sent|site|stir|tens|ties|tone|torn
+    ["ocean-parts","ocean","parts","acorn","tapes",3,"","","",20], // allWords 9: canoe|conte|paces|paste|roast|scrap|space|strap|traps
+  ]
 },
 {
   id: "day-006",
-  type: "3-5-5",
-  totalDifficulty: 25,
+  type: "4-4-5",
+  totalDifficulty: 22,
   maxDifficulty: 11,
-  puzzleIds: ["pro-was", "count-swore", "bones-rifle"]
+  puzzles: [
+    ["boss-cart","cart","boss","bars","cost",2,"","","",2], // allWords 8: acts|bass|bats|cars|cast|cats|scar|stab
+    ["apex-meal","apex","meal","exam","plea",3,"","","",11], // allWords 6: lame|lamp|leap|male|pale|palm
+    ["genre-vague","genre","vague","gauge","nerve",3,"","","",9], // allWords 8: anger|grave|green|never|range|raven|venue|verge
+  ]
 },
 {
   id: "day-007",
-  type: "3-5-5",
-  totalDifficulty: 34,
-  maxDifficulty: 22,
-  puzzleIds: ["irk-sad", "delay-start", "digit-lower"]
+  type: "3-4-5",
+  totalDifficulty: 52,
+  maxDifficulty: 23,
+  puzzles: [
+    ["art-can","art","can","act","ran",2,"","","",7], // allWords 1: cat
+    ["heal-pigs","heal","pigs","leap","sigh",3,"","","",23], // allWords 3: hail|pale|plea
+    ["doors-tanks","tanks","doors","knots","roads",4,"","","",22], // allWords 4: roast|roots|torso|trans
+  ]
 },
 {
   id: "day-008",
-  type: "4-5-5",
-  totalDifficulty: 10,
-  maxDifficulty: 7,
-  puzzleIds: ["gold-mine", "belch-seals", "daily-scene"]
+  type: "4-4-5",
+  totalDifficulty: 22,
+  maxDifficulty: 8,
+  puzzles: [
+    ["cord-snap","snap","cord","sand","crop",2,"","","",6], // allWords 4: pros|soap|soda|span
+    ["mild-race","race","mild","card","lime",3,"","","",8], // allWords 11: acre|came|care|earl|lame|male|meal|mice|mile|real|rice
+    ["ether-nosey","nosey","ether","honey","steer",3,"","","",8], // allWords 6: rents|reset|stern|there|three|trees
+  ]
 },
 {
   id: "day-009",
-  type: "4-5-5",
-  totalDifficulty: 41,
-  maxDifficulty: 19,
-  puzzleIds: ["amid-year", "diary-false", "noted-peril"]
+  type: "4-4-5",
+  totalDifficulty: 48,
+  maxDifficulty: 31,
+  puzzles: [
+    ["cube-pork","pork","cube","buck","rope",3,"","","",8], // allWords 5: core|cork|cure|pure|rock
+    ["dice-lord","dice","lord","cold","ride",3,"","","",9], // allWords 4: code|cole|rode|role
+    ["moths-salsa","moths","salsa","atoms","slash",5,"","","",31], // allWords 2: hosts|shots
+  ]
 },
 {
   id: "day-010",
   type: "4-4-5",
-  totalDifficulty: 15,
-  maxDifficulty: 8,
-  puzzleIds: ["gang-kite", "aura-heal", "goats-tense"]
+  totalDifficulty: 25,
+  maxDifficulty: 9,
+  puzzles: [
+    ["pond-ragu","ragu","pond","drag","upon",2,"","","cannot be reversed",7], // allWords 1: rand
+    ["balm-good","good","balm","glad","boom",3,"","","cannot be reversed",9], // allWords 4: bald|bold|gold|lamb
+    ["barge-wreak","wreak","barge","brake","wager",2,"","","",9], // allWords 4: awake|aware|baker|break
+  ]
 },
 {
   id: "day-011",
-  type: "3-5-5",
-  totalDifficulty: 25,
-  maxDifficulty: 11,
-  puzzleIds: ["end-low", "doubt-needs", "field-scone"]
+  type: "4-4-5",
+  totalDifficulty: 53,
+  maxDifficulty: 23,
+  puzzles: [
+    ["cafe-tart","cafe","tart","rate","fact",3,"","","",8], // allWords 8: acre|care|cart|face|fate|feat|race|tear
+    ["deep-rent","deep","rent","peer","tend",3,"","","",23], // allWords 1: tree
+    ["claws-large","claws","large","grace","walls",4,"","","",22], // allWords 4: algae|glare|legal|regal
+  ]
 },
 {
   id: "day-012",
   type: "4-4-5",
-  totalDifficulty: 32,
-  maxDifficulty: 22,
-  puzzleIds: ["coin-rare", "gala-over", "claws-large"]
+  totalDifficulty: 28,
+  maxDifficulty: 14,
+  puzzles: [
+    ["fire-term","fire","term","free","trim",2,"","","",6], // allWords 5: firm|reef|tier|tire|tree
+    ["flee-silt","silt","flee","else","lift",3,"","","",8], // allWords 13: feel|fell|felt|file|isle|left|lets|lies|life|list|sell|site|ties
+    ["algae-spoon","algae","spoon","loose","pagan",4,"","","",14], // allWords 5: along|loans|pages|salon|slang
+  ]
 },
 {
   id: "day-013",
   type: "3-4-5",
-  totalDifficulty: 20,
-  maxDifficulty: 10,
-  puzzleIds: ["pay-tap", "dull-idea", "knife-these"]
+  totalDifficulty: 16,
+  maxDifficulty: 8,
+  puzzles: [
+    ["how-new","how","new","hew","now",1,"","","",0], // allWords 3: own|who|won
+    ["ally-spot","spot","ally","lost","play",2,"","","",8], // allWords 7: lots|post|pots|slot|stop|tall|tops
+    ["space-spell","spell","space","scalp","sleep",3,"","","",8], // allWords 5: clasp|lapse|leaps|paces|pleas
+  ]
 },
 {
   id: "day-014",
-  type: "4-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 28,
-  puzzleIds: ["kick-long", "door-tilt", "atoms-pearl"]
+  type: "4-5-5",
+  totalDifficulty: 35,
+  maxDifficulty: 21,
+  puzzles: [
+    ["hike-were","hike","were","heir","week",2,"","","",8], // allWords 3: here|hire|wire
+    ["dwell-snake","dwell","snake","naked","wells",2,"","","",6], // allWords 10: knees|laden|lanes|leans|sneak|swell|wakes|walks|walls|weeks
+    ["beast-sides","sides","beast","asses","debit",4,"","","",21], // allWords 12: asset|bases|basis|bates|beats|debts|diets|edits|seats|seeds|tease|tides
+  ]
 },
 {
   id: "day-015",
   type: "3-4-5",
-  totalDifficulty: 21,
+  totalDifficulty: 17,
   maxDifficulty: 9,
-  puzzleIds: ["are-arm", "case-kale", "lingo-wives"]
+  puzzles: [
+    ["big-due","big","due","bug","die",1,"","","",1], // allWords 0
+    ["gala-over","gala","over","gave","oral",3,"","","",9], // allWords 3: gear|oval|rage
+    ["crash-mules","mules","crash","clues","marsh",2,"","","",7], // allWords 13: acres|amuse|cares|cause|harem|harms|races|reach|sauce|scare|scars|slums|smear
+  ]
 },
 {
   id: "day-016",
-  type: "4-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 32,
-  puzzleIds: ["sofa-wide", "rush-taco", "blast-tires"]
+  type: "4-5-5",
+  totalDifficulty: 57,
+  maxDifficulty: 29,
+  puzzles: [
+    ["chef-skin","chef","skin","fish","neck",4,"","","",22], // allWords 4: chin|inch|nick|sink
+    ["lunch-share","share","lunch","harsh","uncle",2,"","","",6], // allWords 8: aches|cause|chase|hears|leach|nurse|sauce|shear
+    ["corgi-spots","corgi","spots","gross","topic",5,"","","",29], // allWords 8: grips|optic|posts|riots|sorts|stops|strip|trips
+  ]
 },
 {
   id: "day-017",
-  type: "4-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 8,
-  puzzleIds: ["owns-silk", "love-vast", "races-vocal"]
+  type: "3-4-5",
+  totalDifficulty: 37,
+  maxDifficulty: 21,
+  puzzles: [
+    ["age-tap","age","tap","ate","gap",2,"","","",7], // allWords 3: eat|get|tea
+    ["acid-they","they","acid","city","head",3,"","","",9], // allWords 1: yeah
+    ["birds-cease","cease","birds","basis","creed",4,"","","",21], // allWords 12: abide|acids|based|bases|beads|beers|breed|bride|cases|cider|cried|cries
+  ]
 },
 {
   id: "day-018",
-  type: "3-4-5",
-  totalDifficulty: 45,
-  maxDifficulty: 29,
-  puzzleIds: ["ass-put", "asks-lion", "items-store"]
+  type: "3-5-5",
+  totalDifficulty: 35,
+  maxDifficulty: 20,
+  puzzles: [
+    ["bra-cup","bra","cup","arc","pub",3,"","","",9], // allWords 2: bar|car
+    ["cover-pearl","cover","pearl","clear","prove",2,"","","",6], // allWords 3: coral|opera|polar
+    ["artsy-skirt","artsy","skirt","risky","start",3,"","","",20], // allWords 3: stair|stray|trays
+  ]
 },
 {
   id: "day-019",
   type: "3-5-5",
-  totalDifficulty: 23,
-  maxDifficulty: 10,
-  puzzleIds: ["dad-nod", "glove-wears", "bored-clasp"]
+  totalDifficulty: 48,
+  maxDifficulty: 32,
+  puzzles: [
+    ["ick-odd","ick","odd","doc","kid",2,"","","",9], // allWords 1: did
+    ["norms-outer","outer","norms","tuner","rooms",3,"","","",7], // allWords 13: moors|motor|notes|nurse|onset|rouse|route|rumor|stone|tenor|tones|tumor|tunes
+    ["blast-tires","blast","tires","salts","tribe",5,"","","",32], // allWords 12: basis|lasts|least|rites|slabs|slate|stale|steal|table|tales|tiers|tries
+  ]
 },
 {
   id: "day-020",
-  type: "3-4-5",
-  totalDifficulty: 48,
-  maxDifficulty: 21,
-  puzzleIds: ["art-axe", "door-went", "depth-spicy"]
+  type: "4-4-5",
+  totalDifficulty: 56,
+  maxDifficulty: 26,
+  puzzles: [
+    ["howl-lads","howl","lads","doll","wash",4,"","","",15], // allWords 9: dash|hold|laws|olds|shaw|show|slow|sold|wall
+    ["desk-sins","sins","desk","kiss","send",4,"","","",26], // allWords 6: disk|ends|kids|kind|sink|skin
+    ["start-whelp","whelp","start","slept","wrath",4,"","","",15], // allWords 9: helps|parts|shalt|sharp|spelt|strap|threw|traps|trash
+  ]
 },
 {
   id: "day-021",
   type: "4-4-5",
-  totalDifficulty: 15,
-  maxDifficulty: 7,
-  puzzleIds: ["call-time", "lazy-once", "crisp-these"]
+  totalDifficulty: 56,
+  maxDifficulty: 28,
+  puzzles: [
+    ["grab-milk","grab","milk","glib","mark",3,"","","",9], // allWords 1: limb
+    ["pool-rats","pool","rats","loop","star",3,"","","",19], // allWords 12: arts|oral|past|plot|polo|post|pots|soap|sort|spot|stop|tops
+    ["elder-necks","elder","necks","dense","clerk",5,"","","",28], // allWords 4: creek|lends|needs|scene
+  ]
 },
 {
   id: "day-022",
-  type: "3-5-5",
-  totalDifficulty: 33,
+  type: "4-5-5",
+  totalDifficulty: 49,
   maxDifficulty: 22,
-  puzzleIds: ["oar-tag", "black-lakes", "koala-rifle"]
+  puzzles: [
+    ["hour-that","that","hour","hurt","oath",3,"","","",9], // allWords 4: hart|thou|thru|tour
+    ["alter-valid","valid","alter","dealt","rival",3,"","","",18], // allWords 8: alert|avert|delta|later|tidal|trail|trial|viral
+    ["aging-filth","filth","aging","align","fight",4,"","","",22], // allWords 2: fling|liang
+  ]
 },
 {
   id: "day-023",
-  type: "4-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 10,
-  puzzleIds: ["bite-pony", "easy-knot", "fleet-raids"]
+  type: "4-5-5",
+  totalDifficulty: 60,
+  maxDifficulty: 25,
+  puzzles: [
+    ["cave-kite","kite","cave","take","vice",3,"","","",13], // allWords 0
+    ["gland-heats","gland","heats","death","slang",3,"","","",22], // allWords 7: gated|gates|haste|hated|hates|shalt|stage
+    ["comfy-reads","comfy","reads","decay","forms",4,"","","",25], // allWords 8: cafes|dares|faces|fares|fears|ready|roads|safer
+  ]
 },
 {
   id: "day-024",
-  type: "4-5-5",
-  totalDifficulty: 11,
-  maxDifficulty: 8,
-  puzzleIds: ["gold-heat", "colon-hands", "basic-spell"]
+  type: "4-4-5",
+  totalDifficulty: 64,
+  maxDifficulty: 23,
+  puzzles: [
+    ["data-town","data","town","toad","want",3,"","","",18], // allWords 3: dawn|down|wont
+    ["lets-plot","plot","lets","step","toll",4,"","","",23], // allWords 6: lose|pets|poet|pose|sept|sole
+    ["drawn-ridge","drawn","ridge","grand","wider",3,"","","",23], // allWords 5: grade|grain|grind|weird|wired
+  ]
 },
 {
   id: "day-025",
   type: "4-4-5",
-  totalDifficulty: 28,
-  maxDifficulty: 18,
-  puzzleIds: ["deny-tick", "farm-trip", "alter-valid"]
+  totalDifficulty: 15,
+  maxDifficulty: 9,
+  puzzles: [
+    ["next-tone","next","tone","text","none",1,"","","",0], // allWords 3: note|teen|tent
+    ["feel-grit","grit","feel","feet","girl",2,"","","cannot be reversed",6], // allWords 3: file|flee|life
+    ["false-plugs","false","plugs","flags","pulse",3,"","","",9], // allWords 7: fleas|fuels|lapse|leaps|pause|pleas|spell
+  ]
 },
 {
   id: "day-026",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 8,
-  puzzleIds: ["dark-mess", "boom-stat", "renew-roles"]
+  type: "3-4-5",
+  totalDifficulty: 57,
+  maxDifficulty: 29,
+  puzzles: [
+    ["dad-yam","yam","dad","day","mad",3,"amy","add","cannot be reversed",9], // allWords 2: add|may
+    ["east-wind","east","wind","dawn","ties",3,"","","",19], // allWords 9: dean|dies|eats|neat|seat|side|site|twin|want
+    ["globe-write","globe","write","bowel","tiger",4,"","","",29], // allWords 5: below|elbow|towel|tower|wrote
+  ]
 },
 {
   id: "day-027",
   type: "4-4-5",
-  totalDifficulty: 25,
-  maxDifficulty: 19,
-  puzzleIds: ["city-tune", "page-risk", "crews-ghost"]
+  totalDifficulty: 27,
+  maxDifficulty: 11,
+  puzzles: [
+    ["blue-reef","blue","reef","beef","rule",2,"","","",8], // allWords 1: free
+    ["glue-roof","glue","roof","goof","rule",2,"","","",8], // allWords 5: euro|four|golf|gulf|role
+    ["party-tepid","tepid","party","petty","rapid",4,"","","",11], // allWords 5: patty|pride|tired|triad|tried
+  ]
 },
 {
   id: "day-028",
-  type: "4-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 8,
-  puzzleIds: ["jack-pipe", "hate-vent", "great-route"]
+  type: "3-5-5",
+  totalDifficulty: 62,
+  maxDifficulty: 27,
+  puzzles: [
+    ["are-hog","hog","are","ago","her",2,"","","",9], // allWords 1: era
+    ["reset-title","reset","title","trite","steel",4,"","","",26], // allWords 10: liter|litre|reels|rites|steer|tiers|tiles|tires|trees|tries
+    ["flats-sword","flats","sword","dwarf","slots",4,"","","",27], // allWords 6: draws|lasts|lords|salts|wards|words
+  ]
 },
 {
   id: "day-029",
-  type: "4-4-5",
-  totalDifficulty: 50,
-  maxDifficulty: 26,
-  puzzleIds: ["huge-wart", "foul-peas", "tense-wharf"]
+  type: "3-5-5",
+  totalDifficulty: 48,
+  maxDifficulty: 22,
+  puzzles: [
+    ["pro-was","pro","was","asp","row",2,"","","",8], // allWords 1: saw
+    ["glare-skies","glare","skies","eagle","risks",3,"","","",18], // allWords 8: girls|isles|large|laser|lease|regal|sales|seals
+    ["femur-fetal","fetal","femur","frame","flute",4,"","","",22], // allWords 2: after|flame
+  ]
 },
 {
   id: "day-030",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 9,
-  puzzleIds: ["joke-salt", "balm-good", "chair-singe"]
+  type: "3-5-5",
+  totalDifficulty: 60,
+  maxDifficulty: 25,
+  puzzles: [
+    ["pup-too","pup","too","out","pop",3,"","","cannot be reversed",14], // allWords 2: put|top
+    ["space-world","space","world","crowd","lapse",4,"","","",21], // allWords 11: cords|cores|leaps|loads|lords|loser|lower|paces|pleas|roles|score
+    ["scene-smash","scene","smash","chess","means",4,"","","",25], // allWords 7: canes|cases|masse|names|seams|seems|semen
+  ]
 },
 {
   id: "day-031",
-  type: "4-5-5",
-  totalDifficulty: 26,
-  maxDifficulty: 19,
-  puzzleIds: ["math-type", "cover-pearl", "buyer-later"]
-},
-{
-  id: "day-032",
-  type: "4-4-5",
-  totalDifficulty: 17,
-  maxDifficulty: 8,
-  puzzleIds: ["corn-flat", "lawn-risk", "adapt-arise"]
-},
-{
-  id: "day-033",
-  type: "3-4-5",
-  totalDifficulty: 53,
-  maxDifficulty: 33,
-  puzzleIds: ["key-tap", "cord-snap", "music-ninth"]
-},
-{
-  id: "day-034",
-  type: "4-4-5",
-  totalDifficulty: 17,
-  maxDifficulty: 8,
-  puzzleIds: ["salt-weak", "sent-taxi", "norms-outer"]
-},
-{
-  id: "day-035",
-  type: "4-4-5",
-  totalDifficulty: 23,
-  maxDifficulty: 19,
-  puzzleIds: ["bird-cuts", "busy-jars", "shade-trace"]
-},
-{
-  id: "day-036",
-  type: "4-4-5",
-  totalDifficulty: 24,
-  maxDifficulty: 11,
-  puzzleIds: ["down-glue", "neat-swat", "paced-right"]
-},
-{
-  id: "day-037",
-  type: "4-4-5",
-  totalDifficulty: 25,
-  maxDifficulty: 15,
-  puzzleIds: ["area-bled", "mars-solo", "heart-smile"]
-},
-{
-  id: "day-038",
-  type: "4-4-5",
-  totalDifficulty: 13,
-  maxDifficulty: 6,
-  puzzleIds: ["duck-lamb", "cord-slow", "force-snail"]
-},
-{
-  id: "day-039",
-  type: "4-4-5",
-  totalDifficulty: 42,
-  maxDifficulty: 25,
-  puzzleIds: ["dial-oops", "halo-prey", "dwell-fauna"]
-},
-{
-  id: "day-040",
   type: "3-5-5",
-  totalDifficulty: 16,
-  maxDifficulty: 9,
-  puzzleIds: ["fig-tax", "shark-spurt", "photo-ships"]
-},
-{
-  id: "day-041",
-  type: "3-4-5",
-  totalDifficulty: 59,
-  maxDifficulty: 32,
-  puzzleIds: ["bus-mew", "fire-sewn", "denim-tread"]
-},
-{
-  id: "day-042",
-  type: "4-4-5",
-  totalDifficulty: 19,
-  maxDifficulty: 9,
-  puzzleIds: ["beat-loop", "hour-that", "tired-whale"]
-},
-{
-  id: "day-043",
-  type: "3-5-5",
-  totalDifficulty: 28,
-  maxDifficulty: 14,
-  puzzleIds: ["ape-arc", "dream-leave", "algae-spoon"]
-},
-{
-  id: "day-044",
-  type: "4-4-5",
-  totalDifficulty: 15,
-  maxDifficulty: 11,
-  puzzleIds: ["half-word", "deep-hilt", "fresh-towel"]
-},
-{
-  id: "day-045",
-  type: "4-4-5",
-  totalDifficulty: 32,
-  maxDifficulty: 23,
-  puzzleIds: ["moth-wire", "city-dark", "belly-state"]
-},
-{
-  id: "day-046",
-  type: "4-4-5",
-  totalDifficulty: 19,
-  maxDifficulty: 10,
-  puzzleIds: ["dock-size", "avid-idol", "space-spell"]
-},
-{
-  id: "day-047",
-  type: "4-5-5",
-  totalDifficulty: 31,
-  maxDifficulty: 22,
-  puzzleIds: ["gold-spin", "chair-green", "daisy-threw"]
-},
-{
-  id: "day-048",
-  type: "4-4-5",
-  totalDifficulty: 23,
-  maxDifficulty: 11,
-  puzzleIds: ["flea-thin", "tree-wind", "brute-goals"]
-},
-{
-  id: "day-049",
-  type: "4-4-5",
-  totalDifficulty: 44,
-  maxDifficulty: 22,
-  puzzleIds: ["epic-harp", "iron-test", "vital-whale"]
-},
-{
-  id: "day-050",
-  type: "4-4-5",
-  totalDifficulty: 15,
-  maxDifficulty: 8,
-  puzzleIds: ["icon-lied", "flee-silt", "arson-cable"]
-},
-{
-  id: "day-051",
-  type: "4-4-5",
-  totalDifficulty: 37,
-  maxDifficulty: 24,
-  puzzleIds: ["code-deny", "rear-upon", "paste-style"]
-},
-{
-  id: "day-052",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 10,
-  puzzleIds: ["camp-dupe", "cyan-deer", "slain-spike"]
-},
-{
-  id: "day-053",
-  type: "4-4-5",
-  totalDifficulty: 38,
-  maxDifficulty: 23,
-  puzzleIds: ["host-pact", "duke-pert", "lousy-seats"]
-},
-{
-  id: "day-054",
-  type: "3-4-5",
-  totalDifficulty: 22,
-  maxDifficulty: 10,
-  puzzleIds: ["cat-use", "game-mice", "ashes-drift"]
-},
-{
-  id: "day-055",
-  type: "4-5-5",
-  totalDifficulty: 51,
-  maxDifficulty: 25,
-  puzzleIds: ["lets-plop", "amend-worse", "gauge-limit"]
-},
-{
-  id: "day-056",
-  type: "3-4-5",
-  totalDifficulty: 5,
-  maxDifficulty: 3,
-  puzzleIds: ["how-new", "hint-peak", "drone-stark"]
-},
-{
-  id: "day-057",
-  type: "4-4-5",
-  totalDifficulty: 23,
-  maxDifficulty: 14,
-  puzzleIds: ["felt-hard", "pond-ragu", "loyal-setup"]
-},
-{
-  id: "day-058",
-  type: "4-4-5",
-  totalDifficulty: 19,
-  maxDifficulty: 8,
-  puzzleIds: ["bowl-keen", "sari-stem", "false-worth"]
-},
-{
-  id: "day-059",
-  type: "4-4-5",
   totalDifficulty: 57,
-  maxDifficulty: 28,
-  puzzleIds: ["laws-musk", "bend-myth", "cover-video"]
-},
-{
-  id: "day-060",
-  type: "4-4-5",
-  totalDifficulty: 14,
-  maxDifficulty: 8,
-  puzzleIds: ["hair-loud", "face-sore", "moral-seeds"]
-},
-{
-  id: "day-061",
-  type: "4-4-5",
-  totalDifficulty: 43,
-  maxDifficulty: 25,
-  puzzleIds: ["mild-race", "easy-sums", "naive-tests"]
-},
-{
-  id: "day-062",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 9,
-  puzzleIds: ["huge-part", "rift-tube", "happy-legit"]
-},
-{
-  id: "day-063",
-  type: "4-4-5",
-  totalDifficulty: 28,
-  maxDifficulty: 20,
-  puzzleIds: ["obey-odds", "anti-hype", "blade-print"]
-},
-{
-  id: "day-064",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 9,
-  puzzleIds: ["form-haul", "cold-rest", "faith-super"]
-},
-{
-  id: "day-065",
-  type: "4-4-5",
-  totalDifficulty: 41,
-  maxDifficulty: 28,
-  puzzleIds: ["debt-iris", "echo-plea", "lunch-slime"]
-},
-{
-  id: "day-066",
-  type: "3-4-5",
-  totalDifficulty: 15,
-  maxDifficulty: 9,
-  puzzleIds: ["law-won", "lets-swam", "boost-honey"]
-},
-{
-  id: "day-067",
-  type: "3-4-5",
-  totalDifficulty: 46,
-  maxDifficulty: 29,
-  puzzleIds: ["aid-net", "cent-side", "cheap-merit"]
-},
-{
-  id: "day-068",
-  type: "4-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 11,
-  puzzleIds: ["bark-wood", "plan-wide", "chain-spill"]
-},
-{
-  id: "day-069",
-  type: "4-4-5",
-  totalDifficulty: 40,
-  maxDifficulty: 20,
-  puzzleIds: ["fits-love", "east-wind", "error-guess"]
-},
-{
-  id: "day-070",
-  type: "3-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 8,
-  puzzleIds: ["fix-sun", "cage-talk", "lunar-resin"]
-},
-{
-  id: "day-071",
-  type: "3-5-5",
-  totalDifficulty: 22,
-  maxDifficulty: 12,
-  puzzleIds: ["ace-yet", "price-toast", "races-slick"]
-},
-{
-  id: "day-072",
-  type: "4-4-5",
-  totalDifficulty: 20,
-  maxDifficulty: 9,
-  puzzleIds: ["fast-monk", "meet-noun", "aside-tuned"]
-},
-{
-  id: "day-073",
-  type: "4-4-5",
-  totalDifficulty: 48,
   maxDifficulty: 22,
-  puzzleIds: ["tint-ways", "deep-gulf", "actor-teeth"]
-},
-{
-  id: "day-074",
-  type: "3-5-5",
-  totalDifficulty: 13,
-  maxDifficulty: 10,
-  puzzleIds: ["how-rot", "pools-shine", "robot-solve"]
-},
-{
-  id: "day-075",
-  type: "3-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 28,
-  puzzleIds: ["dad-yam", "data-town", "elder-necks"]
-},
-{
-  id: "day-076",
-  type: "4-4-5",
-  totalDifficulty: 25,
-  maxDifficulty: 9,
-  puzzleIds: ["date-safe", "aced-fast", "sites-world"]
-},
-{
-  id: "day-077",
-  type: "3-4-5",
-  totalDifficulty: 29,
-  maxDifficulty: 13,
-  puzzleIds: ["hey-out", "cube-pork", "decay-tones"]
-},
-{
-  id: "day-078",
-  type: "4-4-5",
-  totalDifficulty: 20,
-  maxDifficulty: 11,
-  puzzleIds: ["calm-fish", "port-ride", "photo-reads"]
-},
-{
-  id: "day-079",
-  type: "3-5-5",
-  totalDifficulty: 35,
-  maxDifficulty: 23,
-  puzzleIds: ["new-one", "lunch-share", "drawn-ridge"]
-},
-{
-  id: "day-080",
-  type: "3-4-5",
-  totalDifficulty: 11,
-  maxDifficulty: 8,
-  puzzleIds: ["fun-red", "cute-name", "frank-short"]
-},
-{
-  id: "day-081",
-  type: "4-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 33,
-  puzzleIds: ["bout-clot", "life-zest", "creep-saint"]
-},
-{
-  id: "day-082",
-  type: "4-4-5",
-  totalDifficulty: 22,
-  maxDifficulty: 9,
-  puzzleIds: ["mite-plan", "bees-hail", "power-spare"]
-},
-{
-  id: "day-083",
-  type: "3-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 22,
-  puzzleIds: ["eye-sir", "keep-loan", "ditto-exist"]
-},
-{
-  id: "day-084",
-  type: "4-5-5",
-  totalDifficulty: 17,
-  maxDifficulty: 9,
-  puzzleIds: ["bunk-tall", "basil-smell", "claim-peers"]
-},
-{
-  id: "day-085",
-  type: "3-5-5",
-  totalDifficulty: 40,
-  maxDifficulty: 28,
-  puzzleIds: ["dog-old", "brain-irony", "stern-toast"]
-},
-{
-  id: "day-086",
-  type: "3-4-5",
-  totalDifficulty: 17,
-  maxDifficulty: 9,
-  puzzleIds: ["cab-wet", "maps-safe", "mango-waste"]
-},
-{
-  id: "day-087",
-  type: "4-4-5",
-  totalDifficulty: 62,
-  maxDifficulty: 32,
-  puzzleIds: ["clue-tank", "risk-soup", "scuba-token"]
-},
-{
-  id: "day-088",
-  type: "4-5-5",
-  totalDifficulty: 34,
-  maxDifficulty: 22,
-  puzzleIds: ["logo-nose", "boost-claws", "array-guide"]
-},
-{
-  id: "day-089",
-  type: "3-5-5",
-  totalDifficulty: 20,
-  maxDifficulty: 7,
-  puzzleIds: ["cap-lie", "agree-short", "crash-mules"]
-},
-{
-  id: "day-090",
-  type: "3-5-5",
-  totalDifficulty: 27,
-  maxDifficulty: 21,
-  puzzleIds: ["bad-buy", "alley-bears", "giant-sense"]
-},
-{
-  id: "day-091",
-  type: "4-4-5",
-  totalDifficulty: 31,
-  maxDifficulty: 28,
-  puzzleIds: ["fans-nude", "bait-sold", "theft-thief"]
-},
-{
-  id: "day-092",
-  type: "4-4-5",
-  totalDifficulty: 45,
-  maxDifficulty: 21,
-  puzzleIds: ["milk-nose", "less-soft", "cider-space"]
-},
-{
-  id: "day-093",
-  type: "4-4-5",
-  totalDifficulty: 34,
-  maxDifficulty: 25,
-  puzzleIds: ["dewy-nuts", "math-wade", "gangs-taupe"]
-},
-{
-  id: "day-094",
-  type: "4-4-5",
-  totalDifficulty: 23,
-  maxDifficulty: 13,
-  puzzleIds: ["bang-kiss", "drum-look", "radio-spire"]
-},
-{
-  id: "day-095",
-  type: "3-4-5",
-  totalDifficulty: 50,
-  maxDifficulty: 22,
-  puzzleIds: ["bra-cup", "page-rich", "lemon-thank"]
-},
-{
-  id: "day-096",
-  type: "4-4-5",
-  totalDifficulty: 42,
-  maxDifficulty: 18,
-  puzzleIds: ["hero-nude", "ties-wave", "niche-viola"]
-},
-{
-  id: "day-097",
-  type: "3-4-5",
-  totalDifficulty: 43,
-  maxDifficulty: 22,
-  puzzleIds: ["art-gem", "good-loss", "femur-fetal"]
-},
-{
-  id: "day-098",
-  type: "4-5-5",
-  totalDifficulty: 35,
-  maxDifficulty: 22,
-  puzzleIds: ["drew-slow", "marry-stone", "class-talks"]
-},
-{
-  id: "day-099",
-  type: "4-4-5",
-  totalDifficulty: 41,
-  maxDifficulty: 18,
-  puzzleIds: ["ache-seat", "soda-thin", "human-lever"]
-},
-{
-  id: "day-100",
-  type: "4-4-5",
-  totalDifficulty: 56,
-  maxDifficulty: 26,
-  puzzleIds: ["damn-like", "mean-spot", "bride-mercy"]
-},
-{
-  id: "day-101",
-  type: "3-4-5",
-  totalDifficulty: 48,
-  maxDifficulty: 33,
-  puzzleIds: ["his-two", "ally-spot", "dance-tired"]
-},
-{
-  id: "day-102",
-  type: "4-4-5",
-  totalDifficulty: 42,
-  maxDifficulty: 27,
-  puzzleIds: ["calm-flip", "guru-post", "flats-sword"]
-},
-{
-  id: "day-103",
-  type: "4-4-5",
-  totalDifficulty: 36,
-  maxDifficulty: 21,
-  puzzleIds: ["beat-whip", "cuss-male", "frost-solar"]
-},
-{
-  id: "day-104",
-  type: "3-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 23,
-  puzzleIds: ["ick-odd", "done-soul", "birds-broke"]
-},
-{
-  id: "day-105",
-  type: "4-5-5",
-  totalDifficulty: 33,
-  maxDifficulty: 19,
-  puzzleIds: ["beds-envy", "blues-scale", "hello-paste"]
-},
-{
-  id: "day-106",
-  type: "4-4-5",
-  totalDifficulty: 46,
-  maxDifficulty: 25,
-  puzzleIds: ["cafe-tart", "rich-town", "plush-sleep"]
-},
-{
-  id: "day-107",
-  type: "4-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 29,
-  puzzleIds: ["bear-heir", "sung-what", "finer-gifts"]
-},
-{
-  id: "day-108",
-  type: "4-4-5",
-  totalDifficulty: 48,
-  maxDifficulty: 20,
-  puzzleIds: ["mint-uses", "real-sofa", "fresh-slate"]
-},
-{
-  id: "day-109",
-  type: "4-5-5",
-  totalDifficulty: 46,
-  maxDifficulty: 28,
-  puzzleIds: ["flip-girl", "blood-peaks", "exact-psalm"]
-},
-{
-  id: "day-110",
-  type: "4-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 22,
-  puzzleIds: ["mint-opal", "chef-skin", "clips-viral"]
-},
-{
-  id: "day-111",
-  type: "4-4-5",
-  totalDifficulty: 54,
-  maxDifficulty: 23,
-  puzzleIds: ["mole-safe", "heal-pigs", "argue-later"]
-},
-{
-  id: "day-112",
-  type: "4-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 23,
-  puzzleIds: ["cave-link", "deep-when", "ocean-parts"]
-},
-{
-  id: "day-113",
-  type: "4-4-5",
-  totalDifficulty: 46,
-  maxDifficulty: 25,
-  puzzleIds: ["ants-pigs", "cave-kite", "goats-sense"]
-},
-{
-  id: "day-114",
-  type: "4-4-5",
-  totalDifficulty: 38,
-  maxDifficulty: 24,
-  puzzleIds: ["free-trim", "best-cafe", "disco-elect"]
-},
-{
-  id: "day-115",
-  type: "4-4-5",
-  totalDifficulty: 64,
-  maxDifficulty: 33,
-  puzzleIds: ["lack-toys", "live-rail", "magic-there"]
-},
-{
-  id: "day-116",
-  type: "3-4-5",
-  totalDifficulty: 39,
-  maxDifficulty: 15,
-  puzzleIds: ["eon-rid", "pest-snow", "snide-title"]
-},
-{
-  id: "day-117",
-  type: "4-4-5",
-  totalDifficulty: 54,
-  maxDifficulty: 23,
-  puzzleIds: ["frog-walk", "lots-plop", "money-verge"]
-},
-{
-  id: "day-118",
-  type: "4-4-5",
-  totalDifficulty: 35,
-  maxDifficulty: 14,
-  puzzleIds: ["dice-lord", "lard-time", "greet-learn"]
-},
-{
-  id: "day-119",
-  type: "3-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 23,
-  puzzleIds: ["die-ram", "flag-lion", "drift-house"]
-},
-{
-  id: "day-120",
-  type: "4-4-5",
-  totalDifficulty: 53,
-  maxDifficulty: 25,
-  puzzleIds: ["crab-rule", "rats-snip", "error-thyme"]
-},
-{
-  id: "day-121",
-  type: "4-4-5",
-  totalDifficulty: 64,
-  maxDifficulty: 29,
-  puzzleIds: ["gods-pier", "pear-toss", "hedge-stiff"]
-},
-{
-  id: "day-122",
-  type: "3-5-5",
-  totalDifficulty: 42,
-  maxDifficulty: 26,
-  puzzleIds: ["cop-try", "nifty-tasks", "boost-surge"]
-},
-{
-  id: "day-123",
-  type: "3-5-5",
-  totalDifficulty: 56,
-  maxDifficulty: 26,
-  puzzleIds: ["guy-web", "leads-raven", "horse-theft"]
-},
-{
-  id: "day-124",
-  type: "3-5-5",
-  totalDifficulty: 69,
-  maxDifficulty: 33,
-  puzzleIds: ["eye-tax", "atlas-sheep", "cutie-short"]
-},
-{
-  id: "day-125",
-  type: "4-4-5",
-  totalDifficulty: 67,
-  maxDifficulty: 32,
-  puzzleIds: ["area-hire", "half-lice", "plots-totem"]
-},
-{
-  id: "day-126",
-  type: "4-4-5",
-  totalDifficulty: 52,
-  maxDifficulty: 22,
-  puzzleIds: ["amen-vote", "meat-nerd", "march-peach"]
-},
-{
-  id: "day-127",
-  type: "4-4-5",
-  totalDifficulty: 65,
-  maxDifficulty: 29,
-  puzzleIds: ["atom-evil", "neon-wolf", "brush-tooth"]
-},
-{
-  id: "day-128",
-  type: "3-5-5",
-  totalDifficulty: 75,
-  maxDifficulty: 34,
-  puzzleIds: ["dye-sad", "bolts-shear", "based-sonic"]
-},
-{
-  id: "day-129",
-  type: "4-4-5",
-  totalDifficulty: 53,
-  maxDifficulty: 23,
-  puzzleIds: ["fete-slip", "deep-rent", "plant-spare"]
-},
-{
-  id: "day-130",
-  type: "3-4-5",
-  totalDifficulty: 51,
-  maxDifficulty: 29,
-  puzzleIds: ["ion-war", "neat-sums", "corgi-spots"]
-},
-{
-  id: "day-131",
-  type: "4-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 23,
-  puzzleIds: ["mode-sofa", "loop-rain", "alarm-devil"]
-},
-{
-  id: "day-132",
-  type: "3-4-5",
-  totalDifficulty: 38,
-  maxDifficulty: 22,
-  puzzleIds: ["age-rap", "bond-slow", "grape-prune"]
-},
-{
-  id: "day-133",
-  type: "4-4-5",
-  totalDifficulty: 66,
-  maxDifficulty: 24,
-  puzzleIds: ["meat-prod", "dash-tool", "arise-spoon"]
-},
-{
-  id: "day-134",
-  type: "3-5-5",
-  totalDifficulty: 45,
-  maxDifficulty: 25,
-  puzzleIds: ["fib-wet", "plate-speed", "mouse-trust"]
-},
-{
-  id: "day-135",
-  type: "4-4-5",
-  totalDifficulty: 50,
-  maxDifficulty: 21,
-  puzzleIds: ["eats-hawk", "nude-yeti", "hotel-tasks"]
-},
-{
-  id: "day-136",
-  type: "3-5-5",
-  totalDifficulty: 48,
-  maxDifficulty: 21,
-  puzzleIds: ["are-hog", "glare-skies", "never-sober"]
-},
-{
-  id: "day-137",
-  type: "3-5-5",
-  totalDifficulty: 46,
-  maxDifficulty: 22,
-  puzzleIds: ["awe-gas", "crane-spine", "novel-short"]
-},
-{
-  id: "day-138",
-  type: "3-5-5",
-  totalDifficulty: 48,
-  maxDifficulty: 21,
-  puzzleIds: ["dub-sir", "angel-carol", "space-world"]
-},
-{
-  id: "day-139",
-  type: "4-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 21,
-  puzzleIds: ["rays-tofu", "love-wish", "alien-chess"]
-},
-{
-  id: "day-140",
-  type: "3-4-5",
-  totalDifficulty: 39,
-  maxDifficulty: 17,
-  puzzleIds: ["tip-ups", "gosh-pipe", "comes-tenth"]
-},
-{
-  id: "day-141",
-  type: "3-5-5",
-  totalDifficulty: 32,
-  maxDifficulty: 18,
-  puzzleIds: ["but-cow", "gnome-raven", "canoe-rally"]
-},
-{
-  id: "day-142",
-  type: "3-5-5",
-  totalDifficulty: 55,
-  maxDifficulty: 25,
-  puzzleIds: ["ran-you", "poles-trace", "blame-dream"]
-},
-{
-  id: "day-143",
-  type: "4-4-5",
-  totalDifficulty: 60,
-  maxDifficulty: 26,
-  puzzleIds: ["grab-milk", "grow-load", "frost-place"]
-},
-{
-  id: "day-144",
-  type: "3-5-5",
-  totalDifficulty: 54,
-  maxDifficulty: 25,
-  puzzleIds: ["bed-one", "carol-sushi", "solid-tiger"]
-},
-{
-  id: "day-145",
-  type: "4-4-5",
-  totalDifficulty: 61,
-  maxDifficulty: 26,
-  puzzleIds: ["fell-poke", "most-show", "opera-waste"]
-},
-{
-  id: "day-146",
-  type: "3-4-5",
-  totalDifficulty: 39,
-  maxDifficulty: 20,
-  puzzleIds: ["new-old", "load-skis", "dared-viper"]
-},
-{
-  id: "day-147",
-  type: "3-4-5",
-  totalDifficulty: 61,
-  maxDifficulty: 35,
-  puzzleIds: ["ode-sun", "meat-tuna", "pasta-smell"]
-},
-{
-  id: "day-148",
-  type: "3-5-5",
-  totalDifficulty: 10,
-  maxDifficulty: 8,
-  puzzleIds: ["big-max", "chase-mount", "share-towel"]
-},
-{
-  id: "day-149",
-  type: "4-4-5",
-  totalDifficulty: 30,
-  maxDifficulty: 22,
-  puzzleIds: ["heel-ploy", "glee-sins", "booth-class"]
-},
-{
-  id: "day-150",
-  type: "3-4-5",
-  totalDifficulty: 10,
-  maxDifficulty: 9,
-  puzzleIds: ["cup-lot", "fade-sick", "cling-goose"]
-},
-{
-  id: "day-151",
-  type: "4-4-5",
-  totalDifficulty: 39,
-  maxDifficulty: 26,
-  puzzleIds: ["look-true", "lake-slim", "prism-reset"]
-},
-{
-  id: "day-152",
-  type: "4-5-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["plum-wars", "haute-rolls", "great-quote"]
-},
-{
-  id: "day-153",
-  type: "3-5-5",
-  totalDifficulty: 23,
-  maxDifficulty: 14,
-  puzzleIds: ["pup-too", "nylon-purse", "forms-trend"]
-},
-{
-  id: "day-154",
-  type: "4-4-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["date-fear", "flat-mood", "steel-whiff"]
-},
-{
-  id: "day-155",
-  type: "4-5-5",
-  totalDifficulty: 19,
-  maxDifficulty: 9,
-  puzzleIds: ["most-open", "alien-wings", "firms-greed"]
-},
-{
-  id: "day-156",
-  type: "4-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 8,
-  puzzleIds: ["ears-seal", "seem-true", "scent-waste"]
-},
-{
-  id: "day-157",
-  type: "3-5-5",
-  totalDifficulty: 23,
-  maxDifficulty: 14,
-  puzzleIds: ["eel-win", "donor-tells", "queen-spill"]
-},
-{
-  id: "day-158",
-  type: "3-4-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["box-law", "logs-sold", "await-trash"]
-},
-{
-  id: "day-159",
-  type: "4-4-5",
-  totalDifficulty: 32,
-  maxDifficulty: 22,
-  puzzleIds: ["free-tier", "warp-yard", "banks-local"]
-},
-{
-  id: "day-160",
-  type: "4-4-5",
-  totalDifficulty: 16,
-  maxDifficulty: 8,
-  puzzleIds: ["oath-pink", "bulb-cook", "patch-stiff"]
-},
-{
-  id: "day-161",
-  type: "3-4-5",
-  totalDifficulty: 33,
-  maxDifficulty: 23,
-  puzzleIds: ["not-yet", "deal-kink", "clamp-sheep"]
-},
-{
-  id: "day-162",
-  type: "3-4-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["bad-dye", "free-weed", "lodge-river"]
-},
-{
-  id: "day-163",
-  type: "4-4-5",
-  totalDifficulty: 56,
-  maxDifficulty: 25,
-  puzzleIds: ["dyes-keep", "drum-good", "kings-spear"]
-},
-{
-  id: "day-164",
-  type: "4-4-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["paid-user", "glue-roof", "fatty-kings"]
-},
-{
-  id: "day-165",
-  type: "3-4-5",
-  totalDifficulty: 35,
-  maxDifficulty: 22,
-  puzzleIds: ["art-can", "news-teen", "catch-sweep"]
-},
-{
-  id: "day-166",
-  type: "4-4-5",
-  totalDifficulty: 11,
-  maxDifficulty: 8,
-  puzzleIds: ["next-tone", "maid-raid", "ample-panic"]
-},
-{
-  id: "day-167",
-  type: "4-4-5",
-  totalDifficulty: 41,
-  maxDifficulty: 23,
-  puzzleIds: ["cash-gift", "nets-seal", "fears-motto"]
-},
-{
-  id: "day-168",
-  type: "4-4-5",
-  totalDifficulty: 14,
-  maxDifficulty: 8,
-  puzzleIds: ["dump-jeep", "feel-grit", "modes-theme"]
-},
-{
-  id: "day-169",
-  type: "4-4-5",
-  totalDifficulty: 47,
-  maxDifficulty: 23,
-  puzzleIds: ["mass-step", "pays-stew", "clear-swamp"]
-},
-{
-  id: "day-170",
-  type: "4-4-5",
-  totalDifficulty: 25,
-  maxDifficulty: 11,
-  puzzleIds: ["seek-term", "flat-hood", "queue-vegan"]
-},
-{
-  id: "day-171",
-  type: "3-4-5",
-  totalDifficulty: 28,
-  maxDifficulty: 14,
-  puzzleIds: ["pet-soy", "gist-safe", "hatch-wings"]
-},
-{
-  id: "day-172",
-  type: "3-4-5",
-  totalDifficulty: 18,
-  maxDifficulty: 10,
-  puzzleIds: ["see-via", "been-true", "brake-force"]
-},
-{
-  id: "day-173",
-  type: "4-4-5",
-  totalDifficulty: 35,
-  maxDifficulty: 19,
-  puzzleIds: ["blue-reef", "chai-lens", "dodge-melon"]
-},
-{
-  id: "day-174",
-  type: "4-4-5",
-  totalDifficulty: 19,
-  maxDifficulty: 9,
-  puzzleIds: ["acid-make", "oral-vows", "droid-valve"]
-},
-{
-  id: "day-175",
-  type: "3-4-5",
-  totalDifficulty: 47,
-  maxDifficulty: 25,
-  puzzleIds: ["gas-hot", "melt-peak", "minds-steak"]
-},
-{
-  id: "day-176",
-  type: "3-5-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["bet-jut", "curry-weave", "clone-rises"]
-},
-{
-  id: "day-177",
-  type: "4-4-5",
-  totalDifficulty: 55,
-  maxDifficulty: 24,
-  puzzleIds: ["bare-rule", "full-load", "dying-guilt"]
-},
-{
-  id: "day-178",
-  type: "4-5-5",
-  totalDifficulty: 46,
-  maxDifficulty: 23,
-  puzzleIds: ["real-tiny", "bells-finch", "fight-troop"]
-},
-{
-  id: "day-179",
-  type: "4-4-5",
-  totalDifficulty: 42,
-  maxDifficulty: 22,
-  puzzleIds: ["show-tear", "cell-shoe", "crush-flies"]
-},
-{
-  id: "day-180",
-  type: "3-5-5",
-  totalDifficulty: 9,
-  maxDifficulty: 8,
-  puzzleIds: ["fix-sly", "blame-shock", "cares-least"]
-},
-{
-  id: "day-181",
-  type: "3-5-5",
-  totalDifficulty: 18,
-  maxDifficulty: 13,
-  puzzleIds: ["end-how", "offer-papal", "demon-water"]
-},
-{
-  id: "day-182",
-  type: "3-5-5",
-  totalDifficulty: 34,
-  maxDifficulty: 26,
-  puzzleIds: ["hot-use", "mince-prior", "craft-forge"]
+  puzzles: [
+    ["toy-yes","toy","yes","soy","yet",3,"","","",14], // allWords 1: set
+    ["march-peach","peach","march","charm","cheap",3,"","","",21], // allWords 1: perch
+    ["koala-rifle","koala","rifle","alike","flora",4,"","","",22], // allWords 2: flair|frail
+  ]
 }
 
 ];
