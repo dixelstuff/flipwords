@@ -518,11 +518,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v78";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v85";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v78";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v85";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -891,6 +891,108 @@ const dailyTriplets=[
 
 ];
 
+const clueBonusWords = {
+  "genre-vague": ["anger","grave","green","never","range","raven","venue","verge"],
+  "birds-cease": ["abide","acids","based","bases","beads","beers","breed","bride","cases","cider","cried","cries"],
+  "props-stray": ["parts","party","posts","stars","stops","strap","traps","trays"],
+  "scene-smash": ["canes","cases","masse","names","seams","seems","semen"],
+  "artsy-skirt": ["stair","stray","trays"],
+  "party-tepid": ["patty","pride","tired","triad","tried"],
+  "doors-tanks": ["roast","roots","torso","trans"],
+  "start-whelp": ["helps","parts","shalt","sharp","spelt","strap","threw","traps","trash"],
+  "finds-woody": ["downs","winds","woods"],
+  "barge-wreak": ["awake","aware","baker","break"],
+  "gayly-sorts": ["stars","story","stray","trays"],
+  "giddy-sense": ["deeds","dense","edged","edges","genes","needs","sided","sides"],
+  "gland-heats": ["gated","gates","haste","hated","hates","shalt","stage"],
+  "globe-write": ["below","elbow","towel","tower","wrote"],
+  "binge-pasta": ["bates","beast","beats","began","begin","being","inept","pages","paint","paste","spite","tapes"],
+  "blast-tires": ["basis","lasts","least","rites","slabs","slate","stale","steal","table","tales","tiers","tries"],
+  "cafe-tart": ["acre","care","cart","face","fate","feat","race","tear"],
+  "pup-too": ["put","top"],
+  "cube-pork": ["core","cork","cure","pure","rock"],
+  "march-peach": ["perch"],
+  "gala-over": ["gear","oval","rage"],
+  "space-world": ["cords","cores","leaps","loads","lords","loser","lower","paces","pleas","roles","score"],
+  "flee-silt": ["feel","fell","felt","file","isle","left","lets","lies","life","list","sell","site","ties"],
+  "toy-yes": ["set"],
+  "balm-good": ["bald","bold","gold","lamb"],
+  "corgi-spots": ["grips","optic","posts","riots","sorts","stops","strip","trips"],
+  "dice-lord": ["code","cole","rode","role"],
+  "brake-force": ["baker","brace","break","freak"],
+  "heal-pigs": ["hail","pale","plea"],
+  "dad-nor": ["add","and","ran"],
+  "data-town": ["dawn","down","wont"],
+  "norms-outer": ["moors","motor","notes","nurse","onset","rouse","route","rumor","stone","tenor","tones","tumor","tunes"],
+  "east-wind": ["dean","dies","eats","neat","seat","side","site","twin","want"],
+  "grab-milk": ["limb"],
+  "elder-necks": ["creek","lends","needs","scene"],
+  "hike-were": ["here","hire","wire"],
+  "bar-row": ["raw"],
+  "glue-roof": ["euro","four","golf","gulf","role"],
+  "glare-skies": ["girls","isles","large","laser","lease","regal","sales","seals"],
+  "false-plugs": ["fleas","fuels","lapse","leaps","pause","pleas","spell"],
+  "lunch-share": ["aches","cause","chase","hears","leach","nurse","sauce","shear"],
+  "pond-ragu": ["rand"],
+  "blade-print": ["beard","bread","padre","panel","pedal","penal","piled","plane","plead","pride","raped"],
+  "mild-race": ["acre","came","care","earl","lame","male","meal","mice","mile","real","rice"],
+  "nylon-purse": ["pulse","super"],
+  "feel-grit": ["file","flee","life"],
+  "algae-spoon": ["along","loans","pages","salon","slang"],
+  "how-new": ["own","who","won"],
+  "firms-greed": ["defer","fired","fires","freed","frees","fries","reefs","ridge","serge","siege"],
+  "huge-wart": ["hart","hear","thru","wear"],
+  "femur-fetal": ["after","flame"],
+  "bang-kiss": ["asks","bags","sank","sink","skin"],
+  "catch-sweep": ["aches","chase","cheat","haste","hates","heats","paces","paste","peace","space","tapes","teach"],
+  "art-can": ["cat"],
+  "daisy-threw": ["draws","ready","straw","stray","trays","waist","waits","wards","water"],
+  "cord-snap": ["pros","soap","soda","span"],
+  "share-towel": ["arose","earth","heals","hears","heart","leash","shear","solar","swore","threw","welsh","worse","wrote"],
+  "next-tone": ["note","teen","tent"],
+  "ocean-parts": ["canoe","conte","paces","paste","roast","scrap","space","strap","traps"],
+  "pro-was": ["saw"],
+  "iron-test": ["nest","note","riot","sent","site","stir","tens","ties","tone","torn"],
+  "space-spell": ["clasp","lapse","leaps","paces","pleas"],
+  "are-hog": ["era"],
+  "minds-steak": ["asset","mains","mates","meats","seats","sides","skate","stake","takes","tanks","teams"],
+  "hour-that": ["hart","thou","thru","tour"],
+  "drawn-ridge": ["grade","grain","grind","weird","wired"],
+  "alter-valid": ["alert","avert","delta","later","tidal","trail","trial","viral"],
+  "blue-reef": ["free"],
+  "koala-rifle": ["flair","frail"],
+  "ick-odd": ["did"],
+  "reset-title": ["liter","litre","reels","rites","steer","tiers","tiles","tires","trees","tries"],
+  "lawn-risk": ["walk"],
+  "flats-sword": ["draws","lasts","lords","salts","wards","words"],
+  "ally-spot": ["lots","post","pots","slot","stop","tall","tops"],
+  "crash-mules": ["acres","amuse","cares","cause","harem","harms","races","reach","sauce","scare","scars","slums","smear"],
+  "dad-yam": ["may"],
+  "deep-rent": ["tree"],
+  "cover-pearl": ["coral","opera","polar"],
+  "chef-skin": ["chin","inch","nick","sink"],
+  "bra-cup": ["bar","car"],
+  "comfy-reads": ["cafes","dares","faces","fares","fears","ready","roads","safer"],
+  "boss-cart": ["acts","bass","bats","cars","cast","cats","scar","stab"],
+  "acid-they": ["yeah"],
+  "claws-large": ["algae","glare","legal","regal"],
+  "aging-filth": ["fling","liang"],
+  "age-tap": ["eat","get","tea"],
+  "pool-rats": ["arts","oral","past","plot","polo","post","pots","soap","sort","spot","stop","tops"],
+  "hello-slash": ["ashes","halls","heals","leash","loses","shale","shell","soles"],
+  "desk-sins": ["disk","ends","kids","kind","sink","skin"],
+  "ether-nosey": ["rents","reset","stern","there","three","trees"],
+  "beast-sides": ["asset","bases","basis","bates","beats","debts","diets","edits","seats","seeds","tease","tides"],
+  "lets-plot": ["lose","pets","poet","pose","sept","sole"],
+  "dwell-snake": ["knees","laden","lanes","leans","sneak","swell","wakes","walks","walls","weeks"],
+  "nuts-pyre": ["prey","pure","puts","tune"],
+  "moths-salsa": ["hosts","shots"],
+  "apex-meal": ["lame","lamp","leap","male","pale","palm"],
+  "fire-term": ["firm","reef","tier","tire","tree"],
+  "comes-tenth": ["cents","cones","hence","notes","onset","scene","scent","stone","teens","tense","tents","theme","tones"],
+  "howl-lads": ["dash","hold","laws","olds","shaw","show","slow","sold","wall"]
+};
+
 const puzzleClues = {
   "genre-vague": "measuring face · raw courage",
   "birds-cease": "starting point · belief code",
@@ -1009,8 +1111,9 @@ const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,rev
   id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout:String(layout||"")
 });
 const puzzles=puzzleRows.map(makePuzzle);
-// v84: canonical puzzleRows now contains the clue/game puzzle pool.
-// Daily still tolerates old-style full rows, converting those rows to ids on load.
+// v85: puzzleRows is now the canonical Game/Daily puzzle pool.
+// Daily still tolerates the old dailyTriplets format with full puzzle rows,
+// converting those rows to ids on load so newly pasted daily sets do not break.
 const puzzleById=new Map(puzzles.map(p=>[p.id,p]));
 function dailyPuzzleIdsForDay(day){
   if(Array.isArray(day.puzzleIds))return day.puzzleIds;
@@ -1023,7 +1126,7 @@ const dailyPuzzles=dailyTriplets.map(day=>{
   return {...day,puzzleIds,puzzles:resolved};
 });
 const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
-let activePuzzles=puzzles;
+let activePuzzles=cluePuzzles;
 
 const $=id=>document.getElementById(id);
 const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
@@ -3317,7 +3420,7 @@ function initNewMode(){
   updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=puzzles;
   let saved=loadNewModeProgress();
   if(!saved){gameStartDeferred=true;puzzleIndex=0;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);clueStats=normalizeClueStats(null);statsDetailsShown=false;footerInfoShown=false;activePuzzleElapsedMs=0;activePuzzleStartedAt=null;hintsUsed=0;movesUsed=0;solved=false;completedWithHints=false;lastPuzzleScore=null;puzzleAwarded=false;autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;clueRevealStage=0;cluesShownCount=0;clueSecondAutoShownAt=0;clueAutoRevealingSecond=false;clueMaximumAvailableNotified=false;clueEarlySkipPenaltyPoints=0;clueFoundBonusWords=[];clueWordCreditMs=0;}
-  if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,cluePuzzles.length-1);clueStats=normalizeClueStats(saved.clueStats);totalScore=getClueTotalScore();displayedTotalScore=totalScore;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null)}
+  if(saved){gameStartDeferred=false;if(Number.isInteger(saved.puzzleIndex))puzzleIndex=clamp(saved.puzzleIndex,0,puzzles.length-1);clueStats=normalizeClueStats(saved.clueStats);totalScore=getClueTotalScore();displayedTotalScore=totalScore;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null)}
   setupPuzzle({restoreHints:saved&&Number.isInteger(saved.hintsUsed)?Math.max(0,saved.hintsUsed):0,restoreMovesUsed:saved&&Number.isInteger(saved.movesUsed)?Math.max(0,saved.movesUsed):0,restoreSolved:!!(saved&&saved.solved),restoreSolvedAnswerInverted:!!(saved&&saved.solvedAnswerInverted),restoreCompletedWithHints:!!(saved&&saved.completedWithHints),restoreAwarded:!!(saved&&saved.puzzleAwarded),restoreShieldUsedThisLevel:false,restoreLastScore:saved&&typeof saved.lastPuzzleScore==="number"?saved.lastPuzzleScore:null,restoreStartTime:saved&&typeof saved.puzzleStartTime==="number"?saved.puzzleStartTime:Date.now(),restoreActivePuzzleElapsedMs:saved&&typeof saved.activePuzzleElapsedMs==="number"?saved.activePuzzleElapsedMs:0,restoreAutoHintFilling:!!(saved&&saved.autoHintFilling),restoreAutoHintDelayRemainingMs:saved&&typeof saved.autoHintDelayRemainingMs==="number"?saved.autoHintDelayRemainingMs:null,restoreAutoHintFillElapsedMs:saved&&typeof saved.autoHintFillElapsedMs==="number"?saved.autoHintFillElapsedMs:0,restoreClueEarlySkipPenaltyPoints:saved&&typeof saved.clueEarlySkipPenaltyPoints==="number"?saved.clueEarlySkipPenaltyPoints:0,restoreClueFoundBonusWords:saved&&Array.isArray(saved.clueFoundBonusWords)?saved.clueFoundBonusWords:[],restoreClueWordCreditMs:saved&&typeof saved.clueWordCreditMs==="number"?saved.clueWordCreditMs:0,restoreCluesShownCount:saved&&typeof saved.cluesShownCount==="number"?saved.cluesShownCount:(saved&&Number.isInteger(saved.clueRevealStage)?saved.clueRevealStage:0),deferGameStart:!!(!saved&&gameStartDeferred)})
   if(saved&&typeof saved.hintOrientationInverted==="boolean")hintOrientationInverted=saved.hintOrientationInverted;
   if(saved&&typeof saved.vowelAvailableNotified==="boolean")vowelAvailableNotified=saved.vowelAvailableNotified;
