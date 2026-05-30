@@ -26,10 +26,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .status{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.35;min-height:62px;display:flex;align-items:flex-end;justify-content:center;padding:0 12px;transform:translateY(-28px)}.status.footer-info{align-items:center;padding-left:28px;padding-right:28px;transform:translateY(10px)}.restart-link{color:var(--ink);font-weight:800;text-decoration:underline;text-underline-offset:2px;cursor:pointer}.score-line{margin-top:0;color:var(--muted);font-size:16px;line-height:1.25;min-height:22px;transform:translateY(-28px)}.stats-toggle{display:none}.end-message{display:none;position:fixed;left:18px;right:18px;bottom:12px;text-align:center;color:var(--muted);font-size:14px;line-height:1.35;z-index:2}.end-message.visible{display:block}.footer-details{display:none!important}.footer-clickable{cursor:pointer}.stats-panel{display:none;position:fixed;inset:0;z-index:9999;background:rgba(36,30,50,.42);align-items:center;justify-content:center;padding:22px;color:var(--muted);font-size:14px;line-height:1.45;text-align:left}.stats-panel.visible{display:flex}.stats-card{position:relative;width:min(430px,calc(100vw - 40px));background:#fff;border-radius:24px;box-shadow:0 18px 48px rgba(37,31,52,.22);padding:18px 22px 22px}.stats-x{position:absolute;right:14px;top:12px;width:34px;height:34px;background:transparent;border:none;color:var(--muted);font-size:28px;line-height:1;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}.stats-explainer-title{display:none}.stats-explainer{color:var(--muted);font-size:15px;line-height:1.45;text-align:center;padding:0;margin:24px 0 0}.stats-status{display:flex;align-items:center;justify-content:center;gap:18px;margin:20px 0 0;font-size:22px;line-height:1}.stats-shields{letter-spacing:1px}.stats-shield-empty{opacity:.23;filter:grayscale(1)}.stats-fire{font-weight:800;color:var(--ink);font-size:20px}.stats-cap{display:none}.stats-card h3{display:none}.stats-card hr{border:none;border-top:1px solid rgba(37,31,52,.12);margin:18px 0}.stats-title{font-size:25px;font-weight:650;color:var(--muted);text-align:left;margin:0 34px 12px 0}.stats-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px 20px;margin-bottom:4px}.stats-summary{font-size:14px;color:var(--muted);text-align:left;margin:2px 0}.stats-summary .label{font-weight:650;color:var(--ink)}.stats-summary strong{color:var(--muted);font-weight:400}.stats-subheading{font-weight:800;color:var(--ink);margin-bottom:8px}.stats-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:14px}.stats-table col:nth-child(1){width:38%}.stats-table col:nth-child(2){width:28%}.stats-table col:nth-child(3){width:17%}.stats-table col:nth-child(4){width:17%}.stats-table th{font-weight:800;color:var(--ink);border-bottom:1px solid rgba(37,31,52,.12);padding:6px 4px}.stats-table th.stat-time-head{font-weight:400;color:var(--muted)}.stats-table td{color:var(--muted);border-bottom:1px solid rgba(37,31,52,.08);padding:8px 4px;white-space:nowrap}.stats-table th:nth-child(1),.stats-table td:nth-child(1){text-align:left}.stats-table th:nth-child(2),.stats-table td:nth-child(2),.stats-table th:nth-child(3),.stats-table td:nth-child(3),.stats-table th:nth-child(4),.stats-table td:nth-child(4){text-align:center}.stats-close{display:none}
 .mode-toggle{position:fixed;left:50%;bottom:28px;z-index:10;transform:translateX(-50%);display:flex;gap:4px;padding:4px;background:rgba(255,255,255,.82);border:1px solid rgba(37,31,52,.10);border-radius:999px;box-shadow:0 8px 22px rgba(37,31,52,.12);backdrop-filter:blur(8px)}.mode-toggle button{width:auto;height:38px;padding:0 18px;border-radius:999px;background:transparent;color:var(--muted);font-size:15px;font-weight:800}.mode-toggle button.active{background:var(--ink);color:#fff}.daily-result{font-size:17px;line-height:1.45;color:var(--muted)}.daily-result strong{color:var(--ink)}.tile-wrap.daily-prestart{cursor:default;box-shadow:0 8px 20px rgba(39,32,51,.06)}.tile-wrap.daily-prestart .tile-face{background:#fefcff;border-color:#ded7eb}.tile-wrap.daily-prestart .letter{color:#8f849f;font-weight:800;opacity:.56}.daily-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 4px}.daily-stat-box{background:#f7f5fb;border:1px solid rgba(37,31,52,.08);border-radius:18px;padding:13px 10px;text-align:center}.daily-stat-emoji{font-size:25px;line-height:1;margin-bottom:5px}.daily-stat-label{font-size:13px;color:var(--muted);font-weight:750}.daily-stat-value{font-size:24px;color:var(--ink);font-weight:800;line-height:1.15}.daily-stats-note{text-align:center;color:var(--muted);font-size:14px;line-height:1.35;margin:16px 4px 0}
 .start-words.daily-start{color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}
-.daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:18px 0 4px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:block;padding:12px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.daily-puzzle-meta{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:400;margin-left:10px}.daily-puzzle-descriptor{font-weight:850;margin-left:10px;text-transform:lowercase}.daily-puzzle-descriptor.is-slick{color:#2f9464}.daily-puzzle-descriptor.is-zippy{color:#61a875}.daily-puzzle-descriptor.is-measured{color:#6aa56f}.daily-puzzle-descriptor.is-clunky{color:#8a8492}.daily-puzzle-descriptor.is-perfect{color:#2f9464}.daily-puzzle-descriptor.is-great{color:#6b75d6}.daily-puzzle-descriptor.is-good{color:#6aa56f}.daily-puzzle-descriptor.is-revealed{color:#8a8492}
+.daily-review-nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px}.daily-review-nav button{width:42px;height:38px;padding:0;background:transparent;color:var(--muted);font-size:30px;font-weight:500;line-height:1;border-radius:999px}.daily-review-nav button:active{background:rgba(37,31,52,.06)}.daily-review-title{flex:1;text-align:center}.daily-review-small{display:block;margin-top:4px;font-size:13px;color:var(--muted);font-weight:600;line-height:1.2}.daily-puzzle-summary{margin:18px 0 4px;border-top:1px solid rgba(37,31,52,.10)}.daily-puzzle-row{display:block;padding:12px 0;border-bottom:1px solid rgba(37,31,52,.08);font-size:14px;line-height:1.25;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.daily-puzzle-meta{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:400;margin-left:10px}.daily-puzzle-descriptor{font-weight:850;margin-left:10px;text-transform:lowercase}.daily-puzzle-descriptor.is-slick{color:#2f9464}.daily-puzzle-descriptor.is-zippy{color:#61a875}.daily-puzzle-descriptor.is-measured{color:#6aa56f}.daily-puzzle-descriptor.is-clunky{color:#8a8492}.daily-puzzle-descriptor.is-perfect{color:#2f9464}.daily-puzzle-descriptor.is-great{color:#6b75d6}.daily-puzzle-descriptor.is-good{color:var(--clue-good)}.daily-puzzle-descriptor.is-revealed{color:#8a8492}
 .clue-length-row td{vertical-align:top}.clue-score-cell{font-weight:850;color:var(--ink)}.clue-live-line{font-variant-numeric:tabular-nums;white-space:nowrap}.clue-live-time{display:inline-block;width:4.5ch;text-align:right}.clue-live-moves{display:inline-block;min-width:7ch;text-align:left}.clue-stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0 12px}.clue-stats-grid .daily-stat-box.compact{padding:10px 7px}.clue-stats-grid .daily-stat-emoji{font-size:17px}.clue-stats-grid .daily-stat-label{font-size:12px}.clue-stats-grid .daily-stat-value{font-size:20px}.clue-perfect-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px}.clue-perfect-card{border:1px solid rgba(37,31,52,.08);background:#f7f5fb;border-radius:16px;padding:11px 8px;text-align:center}.clue-perfect-len{font-size:13px;font-weight:850;color:var(--ink);margin-bottom:4px}.clue-perfect-rate{font-size:24px;font-weight:850;color:var(--ink);line-height:1.05;font-variant-numeric:tabular-nums}.clue-perfect-label{font-size:12px;color:var(--muted);font-weight:750;margin-top:3px}.clue-length-list{display:grid;grid-template-columns:1fr;gap:9px;margin-top:8px}.clue-length-card{border:1px solid rgba(37,31,52,.08);background:#f7f5fb;border-radius:16px;padding:12px 14px;text-align:left}.clue-length-title{font-size:15px;font-weight:850;color:var(--ink);margin-bottom:7px}.clue-length-lines{display:grid;gap:3px}.clue-length-line{font-size:14px;line-height:1.28;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}.clue-no-stats{font-size:14px;color:var(--muted);text-align:center;margin:12px 0 2px}.clue-live-line{font-variant-numeric:tabular-nums;white-space:nowrap}.clue-live-time{display:inline-block;width:4.5ch;text-align:right}.clue-live-moves{display:inline-block;min-width:7ch;text-align:left}.daily-puzzle-time{font-variant-numeric:tabular-nums;color:var(--muted);font-weight:400;margin-left:10px}.daily-puzzle-moves{color:var(--muted);font-weight:400;margin-left:2px}.daily-puzzle-row strong{color:var(--ink);font-weight:800}.daily-puzzle-num{font-weight:800;color:var(--ink);font-size:14px}.daily-puzzle-words{font-size:14px;line-height:1.35;color:var(--muted)}.daily-puzzle-words strong{color:var(--ink);font-weight:750}.tile-wrap.daily-review-tile{cursor:default}.tile-wrap.daily-review-tile .tile-face{border-color:var(--success);background:#fff}
 
 .daily-section-title{margin:14px 0 8px;color:var(--ink);font-size:15px;font-weight:850;letter-spacing:.01em}.daily-section-meta{color:var(--muted);font-weight:400}.daily-section-title:first-of-type{margin-top:4px}.daily-today-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 6px}.daily-overall-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:8px 0 4px}.daily-stat-box.primary{padding:14px 10px}.daily-stat-box.primary .daily-stat-emoji{font-size:18px;margin-bottom:2px}.daily-stat-box.primary .daily-stat-value{font-size:28px}.daily-stat-box.compact{padding:9px 8px}.daily-stat-box.compact .daily-stat-emoji{font-size:16px;margin-bottom:1px}.daily-stat-box.compact .daily-stat-value{font-size:20px}.controls.daily-complete-controls .action-slot{display:block}.hint.daily-share-button{color:var(--ink);background:var(--soft);border:0;box-shadow:none}.hint.daily-share-button::before{display:none}.start-words.daily-end-stats{color:#fff;background:var(--success);box-shadow:0 3px 10px rgba(48,164,108,.18)}.hint.daily-hint-unavailable{color:var(--ink);background:var(--soft);box-shadow:none;opacity:.46}.hint.daily-hint-unavailable::before{display:none}.subtitle.daily-complete-title{font-size:clamp(25px,3.2vw,34px);font-weight:850;line-height:1;color:var(--success);align-items:center;flex-direction:column;gap:2px;padding-top:2px;letter-spacing:-.02em}.daily-complete-moves{font-size:clamp(20px,2.6vw,27px);font-weight:700;color:var(--muted);letter-spacing:0}.subtitle.daily-complete-animate{animation:daily-complete-pop .95s cubic-bezier(.18,.9,.22,1) both}.subtitle.intro-copy{font-size:clamp(18px,2.05vw,21.5px);line-height:1.34}.daily-countdown,.daily-play-time{font-variant-numeric:tabular-nums;letter-spacing:.01em}.subtitle .daily-play-time{font-size:clamp(20px,2.7vw,28px);font-weight:720;color:var(--muted)}.daily-countdown strong{font-weight:850;color:var(--ink)}.daily-share-text{width:100%;min-height:190px;border:1px solid rgba(37,31,52,.14);border-radius:14px;padding:10px 12px;font:inherit;color:var(--ink);background:#f7f5fb;resize:none;user-select:text!important;-webkit-user-select:text!important;-webkit-touch-callout:default;touch-action:auto}.daily-share-url{margin-top:10px;padding:9px 11px;border-radius:12px;background:#f7f5fb;color:var(--muted);font-size:13px;line-height:1.3;word-break:break-all;user-select:text;-webkit-user-select:text}.daily-copy-button{display:flex;width:126px;height:40px;margin:10px auto 0;color:var(--ink);background:var(--soft);box-shadow:none}.daily-copy-button.copied{color:#fff;background:#272033}.daily-share-note{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.35;text-align:center}.daily-start-footer{display:inline-block;text-align:center;line-height:1.15;letter-spacing:.01em}.daily-start-footer small{display:block;margin-top:2px;font-size:.78em;letter-spacing:.08em;color:var(--muted)}
+.controls.aw-score-controls{display:flex!important;grid-template-columns:none;min-height:74px;margin-top:0}.controls.aw-score-controls>button,.controls.aw-score-controls>.action-slot{display:none!important}.controls.aw-score-controls .score-line.aw-score-line{min-height:64px;transform:none;margin-top:0;display:flex;align-items:center;justify-content:center;width:min(470px,100%)}.score-line.aw-score-line{min-height:64px;transform:none;margin-top:0;display:flex;align-items:center;justify-content:center}.aw-score-panel{display:flex;flex-direction:column;align-items:center;gap:7px;min-height:58px}.aw-score-main{font-size:20px;font-weight:850;color:var(--ink);line-height:1}.aw-ranges{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}.aw-range{padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.58);border:1px solid rgba(37,31,52,.08);color:var(--muted);font-size:12px;font-weight:850;line-height:1;white-space:nowrap}.aw-range.active{background:#fff;color:var(--success);border-color:rgba(48,164,108,.30);box-shadow:0 3px 10px rgba(48,164,108,.10)}.status.aw-word-list{display:block;min-height:118px;margin-top:16px;padding:0 22px;transform:none;text-align:center}.aw-word-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 16px;width:min(430px,100%);margin:0 auto}.aw-word-slot{height:18px;font-size:13px;line-height:18px;font-weight:750;color:var(--ink);text-align:center;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:999px;transition:background .18s ease,color .18s ease,box-shadow .18s ease}.aw-word-slot.empty{color:transparent}.aw-word-slot.starter{color:#a39aad;font-weight:700}.aw-word-slot.flib{color:var(--success);font-weight:900}.aw-word-slot.pulse{background:#fff;box-shadow:0 0 0 2px rgba(48,164,108,.22);color:var(--success);text-decoration:underline;text-underline-offset:3px}.tile-wrap.aw-top-flash .tile-face .letter:first-child,.tile-wrap.aw-bottom-flash .tile-face .letter:last-child{color:var(--success);text-shadow:0 0 14px rgba(48,164,108,.30)}.tile-wrap.aw-top-flash .tile-face,.tile-wrap.aw-bottom-flash .tile-face{border-color:rgba(48,164,108,.55);background:#fbfffd}.board.aw-grid-flash .tile-wrap{box-shadow:0 8px 20px rgba(48,164,108,.18),0 0 0 3px rgba(48,164,108,.22)}.end-message.aw-next-link{display:block;bottom:112px;font-size:13px}.end-message.aw-next-link a{color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-weight:750}
 @keyframes daily-complete-pop{0%{opacity:0;transform:translateY(9px) scale(.90)}38%{opacity:1;transform:translateY(0) scale(1.075)}58%{opacity:1;transform:translateY(1px) scale(.985)}78%{opacity:1;transform:translateY(0) scale(1.035)}100%{opacity:1;transform:translateY(0) scale(1)}}
 @media (hover:none) and (pointer:coarse) and (orientation:portrait){.controls.aw-score-controls{min-height:70px}.score-line.aw-score-line{min-height:62px}.aw-score-panel{gap:5px}.aw-ranges{gap:5px}.aw-range{font-size:11px;padding:5px 7px}.status.aw-word-list{padding:0 18px;min-height:108px;margin-top:14px}.aw-word-grid{gap:2px 10px}.aw-word-slot{height:17px;line-height:17px;font-size:12px}.game{width:min(94vw,560px);padding:max(80px,env(safe-area-inset-top)) 10px 20px;transform:none;justify-content:flex-start}.title{font-size:48px}.subtitle{max-width:372px;height:50px;padding:0 10px;margin:6px auto 22px;font-size:17px;line-height:1.36}.subtitle.intro-copy{font-size:clamp(18.5px,5vw,20.5px);line-height:1.32}.subtitle.level-label{font-size:24px;padding-top:15px}.board-shell{padding-left:8px;padding-right:8px}.board{gap:0}.board.short-board{gap:0}.status{margin-top:34px}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}.controls{grid-template-columns:122px 122px}button{width:122px;height:48px;font-size:16px}.action-slot{width:122px;height:48px}}
 @media (min-width:760px) and (min-height:650px) and (hover:hover){.game{width:min(92vw,680px);transform:translateY(-11.5vh)}.subtitle{margin-bottom:44px}.board-shell{padding-top:20px;padding-bottom:20px}.board{gap:0}.tile-wrap{width:var(--tile-w);height:var(--tile-h)}.letter{font-size:var(--letter-size)}.controls{grid-template-columns:140px 140px;gap:10px}button{width:140px;height:52px;font-size:16px}.action-slot{width:140px;height:52px}.message{font-size:25px;margin-top:2px}.status,.score-line{font-size:18px}.status{margin-top:32px}.subtitle.daily-complete-title{font-size:clamp(22px,2.7vw,29px)}.daily-complete-moves{font-size:clamp(17px,2.1vw,22px)}}
@@ -510,12 +511,12 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="modeToggle" class="mode-toggle" aria-label="Mode"><button id="dailyModeBtn" type="button">daily</button><button id="gameModeBtn" type="button">game</button></div>
 </main>
 <script>
-// v80 cleanup: removed dead AllWords mode data/functions and unused demo puzzle-row pools.
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v80";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v78";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v80";
+const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v78";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -1356,7 +1357,41 @@ const dailyTriplets=[
 
 ];
 
+const horizontalRows=[
+["devil-sinks-h2","devil","sinks","lived","skins",4,"","","",13,"h2"],
+["bliss-tutor-h2","bliss","tutor","lists","turbo",4,"","","",12,"h2"],
+["lift-such-h2","such","lift","cult","fish",4,"","","",9,"h2"],
+["fake-seem-h1","fake","seem","fame","seek",2,"","","",5,"h1"],
+["blast-roses-h3","blast","roses","bless","roast",3,"","","",3,"h3"],
+["flee-mast-h2","mast","flee","left","same",3,"","","",8,"h2"],
+["bride-clink-h4","clink","bride","blink","cried",2,"","","",3,"h4"],
+["fetch-risks-h4","fetch","risks","chefs","skirt",4,"","","",15,"h4"],
+["base-toil-h3","toil","base","bail","toes",2,"bali","toes","",2,"h3"],
+["flora-meals-h4","meals","flora","false","moral",2,"","","",7,"h4"],
+["plant-tries-h2","plant","tries","print","tales",2,"","","cannot be reversed",2,"h2"],
+["crane-great-h3","great","crane","range","react",2,"","","",6,"h3"],
+["solve-stool-h2","solve","stool","loves","tools",2,"","","cannot be reversed",8,"h2"]
+];
 
+const lockedPuzzleRows=[
+["loops-relay-L5","relay","loops","alloy","pores",4,"","","",21,"L5"],
+["salad-style-L2","style","salad","steal","sadly",3,"","","",9,"L2"],
+["creek-shade-L3","creek","shade","creed","shake",3,"","","",9,"L3"],
+["alone-bless-L5","bless","alone","seals","noble",3,"","","",18,"L5"],
+["lakes-spelt-L4","spelt","lakes","spell","takes",4,"","","",23,"L4"],
+["ships-trout-L3","trout","ships","shout","trips",2,"","","",1,"L3"],
+["firms-pride-L3","pride","firms","prism","fired",3,"","","",9,"L3"],
+["angel-stare-L3","angel","stare","anger","stale",3,"","","",9,"L3"],
+["blank-great-L2","blank","great","bleak","grant",2,"","","",2,"L2"],
+["snail-sword-L3","snail","sword","draws","lions",3,"","","",19,"L3"],
+["chest-grows-L5","chest","grows","ghost","crews",2,"","","",3,"L5"],
+["laser-olive-L3","laser","olive","loser","alive",3,"","","",9,"L3"],
+["blend-jolly-L5","blend","jolly","blond","jelly",3,"","","",9,"L5"],
+["comet-resin-L4","comet","resin","meter","sonic",4,"","","",14,"L4"],
+["gnome-raven-L3","gnome","raven","among","never",3,"","","",11,"L3"],
+["orbit-rated-L5","orbit","rated","trait","bored",2,"","","",9,"L5"],
+["piece-shard-L2","shard","piece","cheap","rides",3,"","","",19,"L2"]
+];
 
 const clueTestPuzzles = [
   ["genre-vague","genre","vague","gauge","nerve",3,"","","",9],
@@ -1669,12 +1704,22 @@ const puzzleClues = {
   "comes-tenth": "social crossings · carved dip",
   "howl-lads": "toy figure · rinse clean"
 };
+const allWordsRows=[
+["bucks-layer","layer","bucks","buyer","lacks",2,"","","",1,11,"backs|brace|clear|clues|cruel|cubes|early|laces|relay|scale|slack"],
+["fluff-state","fluff","state","flute","staff",2,"","","",1,17,"false|fates|feast|feats|fetal|fetus|flats|fleas|fuels|least|slate|stale|steal|stuff|tales|taste|tufts"],
+["halls-yeast","yeast","halls","leash","salty",4,"","","",25,15,"ashes|assay|essay|haste|hates|heals|heats|shale|shall|shalt|shell|slash|style|tally|yells"],
+];
 
+const makeAllWordsPuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,totalWordCount,allWordsString])=>({
+  id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,totalWordCount:Number(totalWordCount)||0,allWordsString:String(allWordsString||"")
+});
 
 const makePuzzle=([id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout])=>({
   id,word1,word2,answer1,answer2,minMoves,blocked1,blocked2,reverseStatus,difficulty,layout:String(layout||"")
 });
 const puzzles=puzzleRows.map(makePuzzle);
+const horizontalPuzzles=horizontalRows.map(makePuzzle);
+const lockedPuzzles=lockedPuzzleRows.map(makePuzzle);
 const cluePuzzles=clueTestPuzzles.map(makePuzzle);
 // v77: Daily can reference either canonical puzzleRows or clueTestPuzzles.
 // It also tolerates the old dailyTriplets format with full puzzle rows,
@@ -1690,6 +1735,7 @@ const dailyPuzzles=dailyTriplets.map(day=>{
   const resolved=puzzleIds.map(id=>puzzleById.get(id)).filter(Boolean);
   return {...day,puzzleIds,puzzles:resolved};
 });
+const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
 let activePuzzles=cluePuzzles;
 
 const $=id=>document.getElementById(id);
@@ -1716,9 +1762,11 @@ let gameStartDeferred=false;
 let mode="game",dailyDayIndex=0,dailyTotalMoves=0,dailyHintsEarned=0,dailyHintsUsed=0,dailyCurrentCompleted=false,dailyTimer=null,dailyCountdownTimer=null,dailyAdvanceTimer=null,dailyStarted=false,dailyReviewIndex=2,dailyPuzzleResults=[],dailyPuzzleStartElapsedMs=0,dailyPuzzleStartMoves=0;
 let dailyStats={completed:{}};
 let clueStats={results:{}};
+let allWordsIndex=0,allWordsScore=0,allWordsFound=[],allWordsFlibFound=false,allWordsRankHit={good:false,great:false,genius:false},allWordsFlash={top:false,bottom:false,grid:false},allWordsPulseWord="";
 let stats={solvedCount:0,longestStreak:0,speedBonusPoints:0,efficientSolves:0,byLength:{3:{solved:0,clean:0,cleanTimes:[],fastest:null},4:{solved:0,clean:0,cleanTimes:[],fastest:null},5:{solved:0,clean:0,cleanTimes:[],fastest:null}}};
 
 const isDailyMode=()=>mode==="daily";
+const isAllWordsMode=()=>false;
 const isNewMode=()=>mode==="game";
 const isTimedClueMode=()=>isNewMode()||(isDailyMode()&&dailyStarted&&!dailyCurrentCompleted);
 function getClueElapsedMs(){
@@ -1921,6 +1969,7 @@ function startClueFooterTimer(){if(clueFooterTimer||!isNewMode()||solved||gameSt
 function clearQueryString(){history?.replaceState?.({},document.title,location.pathname)}
 function getUrlJumpLevel(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)level([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,puzzles.length):null}
 function getUrlJumpDay(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)day([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,dailyPuzzles.length):null}
+function getUrlJumpAllWords(){const m=location.search.replace(/^\?/,"").match(/(?:^|&)allwords([0-9]+)(?:&|$)/i);return m?clamp(Number(m[1])||1,1,allWordsPuzzles.length):null}
 function isLocalStorageCompletelyEmpty(){
   try{return localStorage.length===0}catch{return false}
 }
@@ -1940,13 +1989,13 @@ function getAutoHintSaveState(){
   else if(autoHintDelayTimer&&autoHintDelayStartedAt!==null&&remaining!==null&&remaining!==undefined)remaining=Math.max(0,remaining-(performance.now()-autoHintDelayStartedAt));
   return {autoHintFilling,autoHintDelayRemainingMs:remaining,autoHintFillElapsedMs:fillElapsed};
 }
-function saveGameState(){if(isDailyMode())return;if(isNewMode()){saveActiveModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
+function saveGameState(){if(isDailyMode()||isAllWordsMode())return;if(isNewMode()){saveActiveModeProgress();return}try{localStorage.setItem(STORAGE_KEY,JSON.stringify({stateKind:"game",gameStartDeferred,puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,noHintStreak,shields,shieldUsedThisLevel,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),stats,...getAutoHintSaveState()}))}catch{}}
 function serializeTilesForSave(){return tiles.map(t=>isHorizontalTile(t)?{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,lockedTop:!!t.lockedTop,lockedBottom:!!t.lockedBottom,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot}:{id:t.id,kind:t.kind,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,lockedFromStart:!!t.lockedFromStart,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped})}
 function restoreTilesFromSave(savedTiles){if(!Array.isArray(savedTiles)||!savedTiles.length)return;const byId=new Map(tiles.map(t=>[t.id,t]));const next=[];savedTiles.forEach(st=>{const t=byId.get(st.id);if(!t)return;if(isHorizontalTile(t)){next.push({...t,top:String(st.top||t.top),bottom:String(st.bottom||t.bottom),lockedTop:!!st.lockedTop,lockedBottom:!!st.lockedBottom,locked:!!(st.locked||(st.lockedTop&&st.lockedBottom))})}else next.push({...t,flipped:!!st.flipped,locked:!!st.locked,lockedFromStart:!!t.lockedFromStart,flipAnim:""})});if(next.length===tiles.length)tiles=next}
 function saveNewModeProgress(){try{localStorage.setItem(NEW_MODE_PROGRESS_KEY,JSON.stringify({stateKind:"new",puzzleIndex,totalScore,hintsUsed,movesUsed,solved,completedWithHints,solvedAnswerInverted,lastPuzzleScore,puzzleAwarded,clueStats,hintOrientationInverted,vowelAvailableNotified,clueRevealStage,cluesShownCount,clueSecondAutoShownAt,clueFirstAvailableNotified,clueSecondAvailableNotified,clueMaximumAvailableNotified,clueVisible:solved?false:clueVisible,clueEarlySkipPenaltyPoints,clueFoundBonusWords,clueWordCreditMs,puzzleStartTime,activePuzzleElapsedMs:getActivePuzzleElapsedMs(),tiles:serializeTilesForSave(),...getAutoHintSaveState()}))}catch{}}
 function loadNewModeProgress(){try{const raw=localStorage.getItem(NEW_MODE_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="new"?saved:null}catch{return null}}
 function readStoredGameState(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
-function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
+function loadSavedState(){const params=new URLSearchParams(location.search),jumpLevel=getUrlJumpLevel();if(params.has("reset")||jumpLevel!==null){localStorage.removeItem(STORAGE_KEY);if(params.has("reset")){localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY)}window.__jumpLevel=jumpLevel;window.__forceFreshStart=true;clearQueryString();return null}try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return null;const saved=JSON.parse(raw);if(saved&&saved.stateKind&&saved.stateKind!=="game")return null;return saved}catch{return null}}
 function resetGame(startIndex=0){localStorage.removeItem(isNewMode()?NEW_MODE_PROGRESS_KEY:STORAGE_KEY);clearAllTimers();puzzleIndex=startIndex;totalScore=0;displayedTotalScore=0;noHintStreak=0;displayedNoHintStreak=0;shields=0;displayedShields=0;shieldUsedThisLevel=false;stats=normalizeStats(null);statsDetailsShown=false;footerInfoShown=false;if(footerInfoTimer){clearTimeout(footerInfoTimer);footerInfoTimer=null}autoHintDelayRemainingMs=null;autoHintFillElapsedMs=0;autoHintFilling=false;autoHintDelayStartedAt=null;autoHintFillStart=null;vowelAvailableNotified=false;clueRevealStage=0;cluesShownCount=0;clueSecondAutoShownAt=0;clueAutoRevealingSecond=false;clueFirstAvailableNotified=false;clueSecondAvailableNotified=false;clueMaximumAvailableNotified=false;clueVisible=false;clueEarlySkipPenaltyPoints=0;clueFoundBonusWords=[];clueWordCreditMs=0;hideVowelReveal(false);puzzleStartTime=Date.now();activePuzzleElapsedMs=0;activePuzzleStartedAt=null;gameStartDeferred=startIndex===0;setupPuzzle({deferGameStart:gameStartDeferred})}
 function normalizeDailyStats(s){return {completed:(s&&typeof s.completed==="object"&&s.completed)?s.completed:{}}}
 function loadDailyStats(){try{return normalizeDailyStats(JSON.parse(localStorage.getItem(DAILY_STATS_KEY)||"null"))}catch{return normalizeDailyStats(null)}}
@@ -1989,7 +2038,7 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,puzzleResults:dailyPuzzleResults,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
 function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");message.textContent="";const elapsed=getActivePuzzleElapsedMs();puzzleIndex=nextIndex;dailyPuzzleStartElapsedMs=elapsed;dailyPuzzleStartMoves=dailyTotalMoves;setupPuzzle({restoreActivePuzzleElapsedMs:elapsed});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
-function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();hideVowelReveal(false);clearVowelTimers();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveActiveModeProgress();else if(!false){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
+function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();hideVowelReveal(false);clearVowelTimers();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveActiveModeProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
 
 function goNext(){
   if(isDailyMode()){goDailyNext();return}
@@ -2086,7 +2135,7 @@ function setupPuzzle(opts={}){
   displayedNoHintStreak=noHintStreak;
   displayedShields=shields;
   const p=currentPuzzle(),restoreHints=Number(opts.restoreHints||0);
-  const prefix=isDailyMode()?currentDaily().id:(false?"allwords":(isNewMode()?"new":"game"));
+  const prefix=isDailyMode()?currentDaily().id:(isAllWordsMode()?"allwords":(isNewMode()?"new":"game"));
   let base=[];
   if(isHorizontalPuzzle(p)){
     const start=clamp((Number(String(p.layout).replace(/^h/i,""))||1)-1,0,p.word1.length-2);
@@ -2119,7 +2168,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;lastAccountingMessages=[];lastBonusMessages=[];
   interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
-  activePuzzleStartedAt=(solved||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
+  activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
   if(restoreHints>0)applyHintsSilently(Math.min(restoreHints,hintOrder.length));
   movesUsed=Number.isInteger(opts.restoreMovesUsed)?Math.max(0,opts.restoreMovesUsed):0;
@@ -2129,8 +2178,8 @@ function setupPuzzle(opts={}){
     lastPuzzleScore=typeof opts.restoreLastScore==="number"?opts.restoreLastScore:null;scoreAnimationShown=true;
   }
   render();
-  if(isDailyMode())saveDailyProgress();else saveGameState();
-  if(!solved){
+  if(isDailyMode())saveDailyProgress();else if(isAllWordsMode())saveAllWordsProgress();else saveGameState();
+  if(!solved&&!isAllWordsMode()){
     if(isDailyMode()){
       stopAutoHintTimer();
       startDailyTimer();
@@ -2193,7 +2242,7 @@ function pausePuzzleClock(){
   }
 }
 function resumePuzzleClock(){
-  
+  if(isAllWordsMode())return;
   if(isDailyMode()&&!dailyStarted)return;
   if(!isDailyMode()&&gameStartDeferred)return;
   if(!solved&&activePuzzleStartedAt===null)activePuzzleStartedAt=performance.now();
@@ -2261,7 +2310,7 @@ function getDailyPlayDescriptor(puzzle,result){
   return result.rating||"—";
 }
 function circledNumber(n){return ["①","②","③","④","⑤","⑥","⑦","⑧","⑨"][n-1]||String(n)}
-function getDailyPlayDescriptorIcon(descriptor){return {perfect:"🌟",great:"💎",good:"👍",clunky:"🪨",revealed:"👀"}[descriptor]||""}
+function getDailyPlayDescriptorIcon(descriptor){return {perfect:"🌟",great:"💎",good:"✨",clunky:"🪨",revealed:"👀"}[descriptor]||""}
 function getDailyPlayDescriptorText(descriptor){return {perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough",revealed:"Revealed"}[descriptor]||""}
 function getPuzzleLengthLabel(puzzle){const len=Number(puzzle?.answer1?.length)||tiles.length||0;return len?`${len}-letter`:"puzzle"}
 function getDailyPlayDescriptorLabel(puzzle,result){
@@ -2269,7 +2318,7 @@ function getDailyPlayDescriptorLabel(puzzle,result){
   const icon=getDailyPlayDescriptorIcon(descriptor);
   const label=getDailyPlayDescriptorText(descriptor);
   if(!label)return "Solved!";
-  return `${label}${icon?` ${icon}`:""}`;
+  return `${icon?`${icon} `:""}${label}`;
 }
 
 function awardPuzzleScoreIfNeeded(){
@@ -2348,7 +2397,114 @@ function recordDailyPuzzleResult(gaveUp=false){
   const result=calculateClueScoreResult({elapsedMs:elapsed,moves:localMoves,gaveUp:!!gaveUp,cluesShown:getCluesShownForRecordedResult(!!gaveUp)});
   dailyPuzzleResults[puzzleIndex]={puzzleId:currentPuzzle().id,timeMs:Math.max(0,elapsed),moves:localMoves,rating:gaveUp?"revealed":result.rating,gaveUp:!!gaveUp,cluesShown:result.cluesShown,bonusWords:Array.isArray(clueFoundBonusWords)?[...clueFoundBonusWords]:[],wordCreditMs:Math.max(0,Number(clueWordCreditMs)||0)};
 }
+function getAllWordsPuzzle(){return allWordsPuzzles[allWordsIndex]||allWordsPuzzles[0]}
+function allWordsMaxScore(){const p=currentPuzzle();return (Number(p?.totalWordCount)||0)+5}
+function allWordsThresholds(){const max=allWordsMaxScore();const good=Math.max(1,Math.ceil(max*.25));const great=Math.max(good+1,Math.ceil(max*.55));return {good,great,genius:max}}
+function allWordsAllowedSet(){const p=currentPuzzle();return new Set([...(p.allWordsString?p.allWordsString.split("|"):[]),p.answer1,p.answer2].map(w=>String(w||"").toLowerCase()).filter(Boolean))}
+function allWordsFoundEntry(word){word=String(word||"").toLowerCase();return allWordsFound.find(e=>e.word===word)}
+function allWordsAddStarterWords(){const p=currentPuzzle();allWordsFound=[p.word1,p.word2].map(word=>({word:String(word).toLowerCase(),starter:true,flib:false}))}
+function allWordsDisplayWordCount(){const p=currentPuzzle();return 2+(Number(p.totalWordCount)||0)+2}
+function allWordsRankForScore(){const t=allWordsThresholds();if(allWordsScore>=t.genius)return "genius";if(allWordsScore>=t.great)return "great";if(allWordsScore>=t.good)return "good";return ""}
+function allWordsScoreHTML(){const t=allWordsThresholds(),rank=allWordsRankForScore();return `<div class="aw-score-panel"><div class="aw-score-main">Score: ${allWordsScore}</div><div class="aw-ranges"><span class="aw-range ${rank==='good'?'active':''}">Good ${t.good}–${t.great-1}</span><span class="aw-range ${rank==='great'?'active':''}">Great ${t.great}–${t.genius-1}</span><span class="aw-range ${rank==='genius'?'active':''}">Genius ${t.genius}</span></div></div>`}
+function allWordsListHTML(){
+  const total=allWordsDisplayWordCount();
+  const slots=Array.from({length:total},(_,i)=>allWordsFound[i]||null);
+  const rows=Math.ceil(total/3);
+  const ordered=[];
+  for(let r=0;r<rows;r++)for(let c=0;c<3;c++){const idx=c*rows+r;if(idx<total)ordered.push(slots[idx])}
+  return `<div class="aw-word-grid">${ordered.map(e=>e?`<div class="aw-word-slot ${e.starter?'starter':''} ${e.flib?'flib':''} ${e.word===allWordsPulseWord?'pulse':''}">${e.word}</div>`:`<div class="aw-word-slot empty">&nbsp;</div>`).join("")}</div>`;
+}
+function placeScoreLineForAllWords(){
+  const controlsEl=document.querySelector(".controls");
+  controlsEl.classList.add("aw-score-controls");
+  controlsEl.appendChild(scoreLine);
+}
+function restoreScoreLineAfterStatus(){
+  const controlsEl=document.querySelector(".controls");
+  controlsEl.classList.remove("aw-score-controls");
+  if(scoreLine.previousElementSibling!==status)status.after(scoreLine);
+}
+function updateAllWordsDisplay(){placeScoreLineForAllWords();scoreLine.innerHTML=allWordsScoreHTML();scoreLine.classList.add("aw-score-line");status.innerHTML=allWordsListHTML();status.classList.add("aw-word-list");scoreLine.classList.remove("footer-clickable");status.classList.remove("footer-clickable")}
+function serializeAllWordsTiles(){return tiles.map(t=>({id:t.id,top:t.top,bottom:t.bottom,flipped:!!t.flipped,locked:!!t.locked,targetIndex:t.targetIndex,targetSlot:t.targetSlot,targetFlipped:t.targetFlipped}))}
+function restoreAllWordsTiles(savedTiles){
+  if(!Array.isArray(savedTiles)||!savedTiles.length)return;
+  const byId=new Map(tiles.map(t=>[t.id,t]));
+  const next=[];
+  savedTiles.forEach(st=>{const t=byId.get(st.id);if(t)next.push({...t,flipped:!!st.flipped,flipAnim:"",locked:!!st.locked})});
+  if(next.length===tiles.length)tiles=next;
+}
+function saveAllWordsProgress(){
+  if(!isAllWordsMode())return;
+  try{localStorage.setItem(ALL_WORDS_PROGRESS_KEY,JSON.stringify({stateKind:"allWords",allWordsIndex,puzzleIndex:allWordsIndex,allWordsScore,allWordsFound,allWordsFlibFound,allWordsRankHit,tiles:serializeAllWordsTiles()}))}catch{}
+}
+function loadAllWordsProgress(){try{const raw=localStorage.getItem(ALL_WORDS_PROGRESS_KEY);if(!raw)return null;const saved=JSON.parse(raw);return saved&&saved.stateKind==="allWords"?saved:null}catch{return null}}
+function pulseAllWordsListWord(word){
+  allWordsPulseWord=String(word||"").toLowerCase();
+  render();
+  setTimeout(()=>{if(allWordsPulseWord===String(word||"").toLowerCase()){allWordsPulseWord="";render()}},900);
+}
+function goNextAllWords(){
+  if(!isAllWordsMode())return;
+  clearBonusTimers();
+  allWordsIndex=(allWordsIndex+1)%allWordsPuzzles.length;
+  localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);
+  window.__jumpAllWords=null;
+  initAllWords();
+}
+function flashAllWords(kind,ms=850){allWordsFlash[kind]=true;render();setTimeout(()=>{allWordsFlash[kind]=false;render()},ms)}
+function allWordsPopSequence(items){
+  clearBonusTimers();
+  items.forEach((item,i)=>{
+    bonusTimerIds.push(setTimeout(()=>{
+      if(item.apply)item.apply();
+      popMessage(item.text,false,item.big);
+      if(item.flash)flashAllWords(item.flash,item.flash==='grid'?1150:850);
+      if(item.burst)showDailyCompleteBurst(item.burst==='big');
+      saveAllWordsProgress();
+      render();
+    },i*900));
+  });
+}
+function checkAllWordsRanks(queue){
+  const t=allWordsThresholds();
+  if(allWordsScore>=t.good&&!allWordsRankHit.good){allWordsRankHit.good=true;queue.push({text:"GOOD!",burst:"small"})}
+  if(allWordsScore>=t.great&&!allWordsRankHit.great){allWordsRankHit.great=true;queue.push({text:"GREAT!",burst:"small"})}
+  if(allWordsScore>=t.genius&&!allWordsRankHit.genius){allWordsRankHit.genius=true;queue.push({text:"GENIUS!",burst:"big",flash:"grid",big:true})}
+}
+function checkAllWords(){
+  if(!isAllWordsMode())return false;
+  const p=currentPuzzle(),w=currentWords(),allowed=allWordsAllowedSet(),starts=new Set([p.word1,p.word2].map(x=>String(x).toLowerCase()));
+  if(isBlockedProperNounSolution()){maybeShowBlockedProperNounNotice();return true}
+  const queue=[];
+  [[w.top,'top'],[w.bottom,'bottom']].forEach(([raw,row])=>{
+    const word=String(raw||"").toLowerCase();
+    if(!word)return;
+    if(starts.has(word))return;
+    if(!allowed.has(word))return;
+    const existing=allWordsFoundEntry(word);
+    if(existing){
+      pulseAllWordsListWord(word);
+      return;
+    }
+    allWordsFound.push({word,starter:false,flib:false});
+    allWordsScore++;
+    queue.push({text:`${word.toUpperCase()} +1`,flash:row,apply:()=>{}});
+    checkAllWordsRanks(queue);
+  });
+  if(isSolved()&&!allWordsFlibFound){
+    allWordsFlibFound=true;
+    allWordsScore+=3;
+    queue.push({text:"FLIB! +3",flash:"grid",burst:"big",big:true,apply:()=>{[p.answer1,p.answer2].forEach(ans=>{const e=allWordsFoundEntry(ans);if(e)e.flib=true})}});
+    checkAllWordsRanks(queue);
+  }
+  saveAllWordsProgress();
+  if(queue.length)allWordsPopSequence(queue);
+  else render();
+  return true;
+}
+
 function checkSolved(){
+  if(isAllWordsMode()){checkAllWords();return}
   if(isTimedClueMode()&&!solved)checkClueBonusWords();
   if(isSolved()){
     const wasSolved=solved;
@@ -2393,7 +2549,7 @@ function checkSolved(){
     footerInfoShown=false;
   }
   render();
-  if(isDailyMode())saveDailyProgress();else saveGameState();
+  if(isDailyMode())saveDailyProgress();else if(isAllWordsMode())saveAllWordsProgress();else saveGameState();
 }
 
 function makeTileHTML(t){if(isHorizontalTile(t))return`<div class="hpair"><div class="htile ${t.lockedTop?"locked":""}" data-hrow="top"><div class="letter">${t.top[0]||""}</div><div class="h-divider"></div><div class="letter">${t.top[1]||""}</div></div><div></div><div class="htile ${t.lockedBottom?"locked":""}" data-hrow="bottom"><div class="letter">${t.bottom[0]||""}</div><div class="h-divider"></div><div class="letter">${t.bottom[1]||""}</div></div></div>`;return`<div class="tile-stage"><div class="tile"><div class="tile-face front"><div class="letter">${t.top}</div><div class="divider"></div><div class="letter">${t.bottom}</div></div><div class="tile-face back"><div class="letter">${t.bottom}</div><div class="divider"></div><div class="letter">${t.top}</div></div></div></div>`}
@@ -2478,6 +2634,7 @@ function fitBoardToViewport(){
 function render(){
   const showDailyPrestart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
   const showDailyReview=false;
+  const showAllWords=isAllWordsMode();
   const renderTiles=showDailyPrestart?dailyPrestartTiles():(previewingStartWords?startPreviewTiles():tiles);
   const visualLen=renderTiles.reduce((sum,t)=>sum+tileSpan(t),0);
   board.className=`board len-${visualLen}`;
@@ -2492,24 +2649,28 @@ function render(){
     if(showDailyReview)w.classList.add("daily-review-tile","solved-tile");
     if(t.flipped)w.classList.add("flipped");
     if(t.flipAnim)w.classList.add("flip-feedback",t.flipAnim);
-    if(isNewMode()&&clueBonusFlashRows.top)w.classList.add("clue-bonus-top-flash");
-    if(isNewMode()&&clueBonusFlashRows.bottom)w.classList.add("clue-bonus-bottom-flash");
+    if(showAllWords&&allWordsFlash.top)w.classList.add("aw-top-flash");
+    if(showAllWords&&allWordsFlash.bottom)w.classList.add("aw-bottom-flash");
+    if(isTimedClueMode()&&clueBonusFlashRows.top)w.classList.add("clue-bonus-top-flash");
+    if(isTimedClueMode()&&clueBonusFlashRows.bottom)w.classList.add("clue-bonus-bottom-flash");
     if(t.locked&&!(vowelRevealActive&&isLockedStartTile(t)))w.classList.add("locked");
     if(isLockedStartTile(t)&&!solved&&!previewingStartWords&&!vowelRevealActive)w.classList.add("locked-from-start");
-    if(vowelRevealActive&&!previewingStartWords&&!showDailyPrestart&&!showDailyReview){if(vowelAt(slotForTile,true))w.classList.add("vowel-top");if(vowelAt(slotForTile,false))w.classList.add("vowel-bottom")}
-    if(isNewMode()&&hintOrientationInverted!==null&&!vowelRevealActive&&!solved&&!previewingStartWords&&!showDailyPrestart&&!showDailyReview){if(vowelAt(slotForTile,true))w.classList.add("vowel-memory-top");if(vowelAt(slotForTile,false))w.classList.add("vowel-memory-bottom")}
-    if(solved&&!previewingStartWords)w.classList.add("solved-tile");
+    if(vowelRevealActive&&!showAllWords&&!previewingStartWords&&!showDailyPrestart&&!showDailyReview){if(vowelAt(slotForTile,true))w.classList.add("vowel-top");if(vowelAt(slotForTile,false))w.classList.add("vowel-bottom")}
+    if(isNewMode()&&hintOrientationInverted!==null&&!vowelRevealActive&&!solved&&!showAllWords&&!previewingStartWords&&!showDailyPrestart&&!showDailyReview){if(vowelAt(slotForTile,true))w.classList.add("vowel-memory-top");if(vowelAt(slotForTile,false))w.classList.add("vowel-memory-bottom")}
+    if(solved&&!previewingStartWords&&!showAllWords)w.classList.add("solved-tile");
     if(dragState?.tileId===t.id)w.classList.add("dragging");
     w.dataset.id=t.id;w.dataset.locked=(t.locked||horizontalMoveLocked(t)||isLockedStartTile(t))?"1":"0";w.innerHTML=makeTileHTML(t);
     if(!showDailyPrestart&&!showDailyReview)w.addEventListener("pointerdown",e=>handlePointerDown(e,t.id));board.appendChild(w);
     if(idx<renderTiles.length-1){const gap=document.createElement("div");gap.className=(isHorizontalTile(t)||isHorizontalTile(renderTiles[idx+1]))?"tile-gap-mixed":"tile-gap-normal";board.appendChild(gap)}
   });
+  board.classList.toggle("aw-grid-flash",showAllWords&&allWordsFlash.grid);
   board.classList.toggle("vowel-reveal",!!vowelRevealActive);
   const allLocked=hintOrder.length>0&&hintCursor>=hintOrder.length,isFinal=puzzleIndex>=activePuzzles.length-1;
-  nextBtn.classList.toggle("visible",!isDailyMode()&&solved&&!isFinal);nextBtn.textContent="Next";
+  nextBtn.classList.toggle("visible",!isDailyMode()&&!isAllWordsMode()&&solved&&!isFinal);nextBtn.textContent="Next";
   const controlsEl=document.querySelector(".controls");
   const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
-  controlsEl.style.display="grid";
+  controlsEl.style.display=isAllWordsMode()?"flex":"grid";
+  controlsEl.classList.toggle("aw-score-controls",isAllWordsMode());
   const dailyHintUnavailable=false; // v79: old Daily hint-muted state is obsolete; Clue should stay yellow once Daily starts
   controlsEl.classList.toggle("daily-complete-controls",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls);
@@ -2539,7 +2700,7 @@ function render(){
     startWordsBtn.textContent=(!solved&&hintsUsed>0)?"Starters":"Reset";
     startWordsBtn.disabled=solved||dailyCurrentCompleted||isShowingStartingWords();
   }
-  if(isDailyMode())renderDailySubtitle();else renderGameSubtitle();
+  if(isAllWordsMode()){subtitle.classList.remove("daily-complete-title","daily-complete-animate","level-label");subtitle.classList.add("intro-copy");subtitle.textContent="Make all new words by flipping and moving the tiles to solve.";}else if(isDailyMode())renderDailySubtitle();else renderGameSubtitle();
   if(solved&&lastPuzzleScore!==null&&!scoreAnimationShown){clearInfoMessage(false);scoreAnimationShown=true;queueRewardAnimations()}
   else if(!message.classList.contains("info")&&!message.classList.contains("vowel-reveal-msg")&&!message.classList.contains("score-pop")&&!message.classList.contains("hold-score")&&!message.classList.contains("hold-fade")&&!message.classList.contains("clue-static")){
     if(!restorePersistentClueIfNeeded()){
@@ -2676,11 +2837,11 @@ function updateStatsPanel(){
 function updateFooterDisplay(){
   if(isDailyMode()){
     restoreScoreLineAfterStatus();
-    
+    status.classList.remove("aw-word-list");scoreLine.classList.remove("aw-score-line");
     const done=dailyStats.completed[currentDaily().id];
     const isFinal=dailyCurrentCompleted||(solved&&puzzleIndex>=activePuzzles.length-1);
     status.classList.remove("footer-info");
-    endMessage.classList.remove("visible");
+    endMessage.classList.remove("visible","aw-next-link");
     endMessage.innerHTML="";
     if(isFinal&&done){
       const cd=getNextDailyCountdownParts();
@@ -2700,9 +2861,17 @@ function updateFooterDisplay(){
     modeToggle.classList.toggle("hidden",dailyStarted&&!dailyCurrentCompleted);
     return;
   }
+  if(isAllWordsMode()){
+    endMessage.classList.add("visible","aw-next-link");
+    endMessage.innerHTML=`<a href="#" id="nextAllWordsLink">next new puzzle</a>`;
+    updateAllWordsDisplay();
+    updateModeToggle();
+    modeToggle.classList.remove("hidden");
+    return;
+  }
   restoreScoreLineAfterStatus();
-  
-  
+  status.classList.remove("aw-word-list");
+  scoreLine.classList.remove("aw-score-line");
   const isFinal=solved&&puzzleIndex>=activePuzzles.length-1&&!DEBUG;
   status.classList.remove("footer-info");
   if(isNewMode()){
@@ -2711,7 +2880,7 @@ function updateFooterDisplay(){
     if(!solved&&!gameStartDeferred)startClueFooterTimer();else clearClueFooterTimer();
     status.classList.toggle("footer-clickable",solved);
     scoreLine.classList.toggle("footer-clickable",solved);
-    
+    endMessage.classList.remove("aw-next-link");
     endMessage.innerHTML=isFinal?'You have reached the final clue puzzle for now. Refresh your browser to check for more puzzles, or <a href="#" id="restartLink" class="restart-link">restart at puzzle 1</a>.':'';
     endMessage.classList.toggle("visible",isFinal);
     updateModeToggle();
@@ -2722,7 +2891,7 @@ function updateFooterDisplay(){
   scoreLine.innerHTML=`Streak ${displayedNoHintStreak} | Shields ${displayedShields}`;
   status.classList.toggle("footer-clickable",solved);
   scoreLine.classList.toggle("footer-clickable",solved);
-  
+  endMessage.classList.remove("aw-next-link");
   endMessage.innerHTML=isFinal?'You have reached the final puzzle for now. Refresh your browser to check for more puzzles, or <a href="#" id="restartLink" class="restart-link">restart at level 1</a>.':'';
   endMessage.classList.toggle("visible",isFinal);
   updateModeToggle();
@@ -2879,9 +3048,9 @@ function queueRewardAnimations(){
 }
 
 function noteInteraction(){interactionCount++;returnedToStartNoticeShown=false;blockedNoticeShown=false;clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();if(message.classList.contains("info")&&(message.dataset.infoType==="returned-start"||message.dataset.infoType==="blocked-proper"||message.dataset.infoType==="single-start-word"))clearInfoMessage()}
-function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if(solved||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if(!solved&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
-function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if(solved||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if(!solved&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
-function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if(solved||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if(!solved&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
+function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved&&!isAllWordsMode())||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
+function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if((solved&&!isAllWordsMode())||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if((!solved||isAllWordsMode())&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
+function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAllWordsMode())||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info",duration=4000){
   if(infoMessageTimer)clearTimeout(infoMessageTimer);
   message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info","clue-static","clue-solved","fadeout");
@@ -3000,10 +3169,10 @@ function hideSolvedStartPreview(fade=false){
 }
 function toggleSolvedStartPreview(){if(!solved)return;previewingStartWords?hideSolvedStartPreview():showSolvedStartPreview()}
 
-function ensureGameStarted(){if(isDailyMode()||!gameStartDeferred||solved)return;gameStartDeferred=false;resumePuzzleClock();if(isNewMode()){renderGameSubtitle();updateFooterDisplay();startClueAvailabilityTimer();}else startAutoHintTimer();saveGameState()}
+function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDeferred||solved)return;gameStartDeferred=false;resumePuzzleClock();if(isNewMode()){renderGameSubtitle();updateFooterDisplay();startClueAvailabilityTimer();}else startAutoHintTimer();saveGameState()}
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
-  if(solved||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
+  if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
   const hrow=hTileEl?.dataset?.hrow||null;
@@ -3132,7 +3301,7 @@ function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){cons
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{if(isHorizontalTile(t)){t.locked=true;t.lockedTop=true;t.lockedBottom=true;const top=inverted?t.targetBottom:t.targetTop,bottom=inverted?t.targetTop:t.targetBottom;t.top=top;t.bottom=bottom}else{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped}});tiles=[...tiles].sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0))}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked||horizontalMoveLocked(t)))return;const f=tiles.find(t=>!t.locked&&!isHorizontalTile(t)&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const h=tiles.find(t=>isHorizontalTile(t)&&!t.lockedTop&&t.top.length===2);if(h){h.top=reverseString(h.top);return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!(i.tile.locked||horizontalMoveLocked(i.tile)));if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
-function useHint(opts={}){if(isTimedClueMode()){showClue();return}if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(opts.auto&&!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
+function useHint(opts={}){if(isTimedClueMode()){showClue();return}if(isAllWordsMode())return;if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(opts.auto&&!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
 
 
@@ -3231,7 +3400,7 @@ function positionClueTimePop(el){
     const anchor=board||document.querySelector(".board")||gameEl;
     const r=anchor.getBoundingClientRect();
     el.style.left=`${r.left+r.width/2}px`;
-    el.style.top=`${r.top-8}px`;
+    el.style.top=`${r.top-30}px`;
     return;
   }
   const footer=status||document.querySelector(".status")||gameEl;
@@ -3685,7 +3854,7 @@ function clearAutoHintTimers(){if(autoHintDelayTimer)clearTimeout(autoHintDelayT
 function stopAutoHintTimer(){clearAutoHintTimers();autoHintDelayStartedAt=null;autoHintDelayRemainingMs=null;autoHintFillStart=null;autoHintFillElapsedMs=0;autoHintFilling=false;setHintFill(0)}
 function startAutoHintTimer(delayMs=null){
   stopAutoHintTimer();
-  if(isDailyMode()||isNewMode()||solved||hintBtn.disabled||document.hidden)return;
+  if(isDailyMode()||isAllWordsMode()||isNewMode()||solved||hintBtn.disabled||document.hidden)return;
   autoHintDelayRemainingMs=delayMs??getAutoHintDelayMs();
   if(autoHintDelayRemainingMs===null||autoHintDelayRemainingMs===undefined)return;
   autoHintDelayStartedAt=performance.now();
@@ -3693,7 +3862,7 @@ function startAutoHintTimer(delayMs=null){
 }
 function beginAutoHintFill(){clearAutoHintTimers();if(solved||hintBtn.disabled||document.hidden||!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}autoHintFilling=true;autoHintFillStart=performance.now()-autoHintFillElapsedMs;const step=now=>{if(document.hidden)return;if(!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}autoHintFillElapsedMs=now-autoHintFillStart;const pct=(autoHintFillElapsedMs/AUTO_HINT_FILL_MS)*100;setHintFill(pct);if(pct>=100)useHint({auto:true});else autoHintFrame=requestAnimationFrame(step)};autoHintFrame=requestAnimationFrame(step)}
 function pauseAutoHintTimer(){if(!autoHintDelayTimer&&!autoHintFrame)return;if(autoHintFilling){if(autoHintFrame)cancelAnimationFrame(autoHintFrame);autoHintFrame=null;if(autoHintFillStart!==null)autoHintFillElapsedMs=Math.min(AUTO_HINT_FILL_MS,performance.now()-autoHintFillStart)}else{if(autoHintDelayTimer)clearTimeout(autoHintDelayTimer);autoHintDelayTimer=null;if(autoHintDelayStartedAt!==null)autoHintDelayRemainingMs=Math.max(0,autoHintDelayRemainingMs-(performance.now()-autoHintDelayStartedAt))}autoHintDelayStartedAt=null}
-function resumeAutoHintTimer(){if(isDailyMode()||isNewMode()||gameStartDeferred||solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
+function resumeAutoHintTimer(){if(isDailyMode()||isAllWordsMode()||isNewMode()||gameStartDeferred||solved||hintBtn.disabled||document.hidden)return;if(autoHintFilling)beginAutoHintFill();else startAutoHintTimer(autoHintDelayRemainingMs??getAutoHintDelayMs())}
 
 function clearBonusTimers(){bonusTimerIds.forEach(id=>clearTimeout(id));bonusTimerIds=[]}
 function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(id));celebrationTimerIds=[];starBurst.innerHTML=""}
@@ -3748,14 +3917,14 @@ hintBtn.addEventListener("click",e=>{if(isNewMode()&&solved){runSolvedStatsButto
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
 startWordsBtn.addEventListener("click",showStartingWords);
-nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode())runNextButtonAction(e)});
+nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsMode())runNextButtonAction(e)});
 nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
-document.querySelector(".game").addEventListener("click",e=>{if(!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
+document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
 function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";statsDetailsShown=true;updateStatsPanel()}
-status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;openStatsDetails()});
-endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
-scoreLine.addEventListener("click",()=>{openStatsDetails()});
+status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;if(!isAllWordsMode())openStatsDetails()});
+endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="nextAllWordsLink"){e.preventDefault();goNextAllWords();return}if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
+scoreLine.addEventListener("click",()=>{if(!isAllWordsMode())openStatsDetails()});
 statsToggle.addEventListener("click",openStatsDetails);
 statsPanel.addEventListener("click",e=>{
   e.stopPropagation();
@@ -3773,9 +3942,9 @@ document.addEventListener("selectstart",e=>{if(e.target&&e.target.closest&&e.tar
 document.addEventListener("contextmenu",e=>e.preventDefault(),{passive:false});
 
 function clearStaleClueCountdownIfNeeded(){if(message.dataset.infoType==="clue-waiting")clearStaticMessage()}
-document.addEventListener("visibilitychange",()=>{if(document.hidden){pausePuzzleClock();pauseAutoHintTimer();clearVowelTimers();clearStaleClueCountdownIfNeeded();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(!false)saveGameState()}else{clearStaleClueCountdownIfNeeded();resumePuzzleClock();if(isDailyMode())startDailyTimer();else if(isNewMode())startClueAvailabilityTimer();else if(!false)resumeAutoHintTimer()}});
-window.addEventListener("pagehide",()=>{pausePuzzleClock();pauseAutoHintTimer();clearVowelTimers();clearStaleClueCountdownIfNeeded();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(!false)saveGameState()});
-window.addEventListener("pageshow",()=>{clearStaleClueCountdownIfNeeded();resumePuzzleClock();if(isDailyMode())startDailyTimer();else if(isNewMode())startClueAvailabilityTimer();else if(!false)resumeAutoHintTimer()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){pausePuzzleClock();pauseAutoHintTimer();clearVowelTimers();clearStaleClueCountdownIfNeeded();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(!isAllWordsMode())saveGameState()}else{clearStaleClueCountdownIfNeeded();resumePuzzleClock();if(isDailyMode())startDailyTimer();else if(isNewMode())startClueAvailabilityTimer();else if(!isAllWordsMode())resumeAutoHintTimer()}});
+window.addEventListener("pagehide",()=>{pausePuzzleClock();pauseAutoHintTimer();clearVowelTimers();clearStaleClueCountdownIfNeeded();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(!isAllWordsMode())saveGameState()});
+window.addEventListener("pageshow",()=>{clearStaleClueCountdownIfNeeded();resumePuzzleClock();if(isDailyMode())startDailyTimer();else if(isNewMode())startClueAvailabilityTimer();else if(!isAllWordsMode())resumeAutoHintTimer()});
 window.addEventListener("focus",()=>{clearStaleClueCountdownIfNeeded();if(isNewMode()&&!solved&&!gameStartDeferred)startClueAvailabilityTimer()});
 window.addEventListener("orientationchange",()=>setTimeout(()=>{message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent="";fitBoardToViewport()},80));
 window.addEventListener("resize",()=>{if(solved){message.classList.remove("score-pop","score-zero");if(!message.classList.contains("info"))message.textContent=""}fitBoardToViewport();});
@@ -3824,6 +3993,39 @@ function initDaily(){
   if(completed){dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;solved=true;pausePuzzleClock();stopAutoHintTimer();clearDailyTimer();render();startDailyCountdownTimer()}
   else if(dailyStarted&&!solved){resumePuzzleClock();startDailyTimer();if(clueVisible)setTimeout(()=>showPersistentClue(clueRevealStage>=2),60)}
 }
+function initAllWords(){
+  updateModeToggle();
+  clearDailyTimer();
+  clearDailyCountdownTimer();
+  dailyCurrentCompleted=false;
+  dailyStarted=false;
+  dailyReviewIndex=2;
+  dailyModalMode="stats";
+  statsDetailsShown=false;
+  activePuzzles=allWordsPuzzles;
+  const saved=loadAllWordsProgress();
+  const hasJump=window.__jumpAllWords!==undefined&&window.__jumpAllWords!==null;
+  allWordsIndex=hasJump?clamp(window.__jumpAllWords,0,allWordsPuzzles.length-1):(saved&&Number.isInteger(saved.allWordsIndex)?clamp(saved.allWordsIndex,0,allWordsPuzzles.length-1):clamp(allWordsIndex,0,allWordsPuzzles.length-1));
+  puzzleIndex=allWordsIndex;
+  allWordsScore=(!hasJump&&saved&&typeof saved.allWordsScore==="number")?Math.max(0,saved.allWordsScore):0;
+  allWordsFlibFound=!hasJump&&!!(saved&&saved.allWordsFlibFound);
+  allWordsRankHit=(!hasJump&&saved&&saved.allWordsRankHit)?{good:!!saved.allWordsRankHit.good,great:!!saved.allWordsRankHit.great,genius:!!saved.allWordsRankHit.genius}:{good:false,great:false,genius:false};
+  allWordsFlash={top:false,bottom:false,grid:false};
+  allWordsPulseWord="";
+  if(!hasJump&&saved&&Array.isArray(saved.allWordsFound))allWordsFound=saved.allWordsFound.map(e=>({word:String(e.word||"").toLowerCase(),starter:!!e.starter,flib:!!e.flib})).filter(e=>e.word);
+  else allWordsAddStarterWords();
+  solved=false;
+  completedWithHints=false;
+  hintsUsed=0;
+  movesUsed=0;
+  footerInfoShown=false;
+  scoreLine.innerHTML="";
+  endMessage.classList.remove("visible","aw-next-link");
+  endMessage.innerHTML="";
+  setupPuzzle();
+  if(!hasJump&&saved&&Array.isArray(saved.tiles)){restoreAllWordsTiles(saved.tiles);render()}
+  saveAllWordsProgress();
+}
 function initNewMode(){
   updateModeToggle();clearDailyTimer();clearDailyCountdownTimer();dailyCurrentCompleted=false;dailyStarted=false;dailyReviewIndex=2;dailyModalMode="stats";activePuzzles=cluePuzzles;
   let saved=loadNewModeProgress();
@@ -3855,7 +4057,7 @@ function initMode(){
   const jumpLevel=getUrlJumpLevel();
   const hasDayJump=jumpDay!==null;
   window.__jumpLevel=jumpLevel!==null?jumpLevel:null;
-  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");localStorage.removeItem("flipwords:newModeProgress:clues-v43");localStorage.removeItem("flipwords:newModeProgress:clues-v44");localStorage.removeItem("flipwords:newModeProgress:clues-v45");localStorage.removeItem("flipwords:newModeProgress:clues-v46");localStorage.removeItem("flipwords:newModeProgress:clues-v47");localStorage.removeItem("flipwords:newModeProgress:clues-v48");localStorage.removeItem("flipwords:newModeProgress:clues-v49");localStorage.removeItem("flipwords:newModeProgress:clues-v50");localStorage.removeItem("flipwords:newModeProgress:clues-v51");localStorage.removeItem("flipwords:newModeProgress:clues-v52");localStorage.removeItem("flipwords:newModeProgress:clues-v53");localStorage.removeItem("flipwords:newModeProgress:clues-v54");localStorage.removeItem("flipwords:newModeProgress:clues-v55");localStorage.removeItem("flipwords:newModeProgress:clues-v56");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v69");localStorage.removeItem("flipwords:newModeProgress:clues-v70");localStorage.removeItem("flipwords:newModeProgress:clues-v71");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v58");localStorage.removeItem("flipwords:newModeProgress:clues-v59");localStorage.removeItem("flipwords:newModeProgress:clues-v60");localStorage.removeItem("flipwords:newModeProgress:clues-v61");localStorage.removeItem("flipwords:newModeProgress:clues-v62");localStorage.removeItem("flipwords:newModeProgress:clues-v63");localStorage.removeItem("flipwords:newModeProgress:clues-v64");localStorage.removeItem("flipwords:newModeProgress:clues-v65");localStorage.removeItem("flipwords:newModeProgress:clues-v66");localStorage.removeItem("flipwords:newModeProgress:clues-v67");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v72");localStorage.removeItem("flipwords:newModeProgress:clues-v73");localStorage.removeItem("flipwords:newModeProgress:clues-v74");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
+  if(params.has("reset")){localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(DAILY_PROGRESS_KEY);localStorage.removeItem(DAILY_STATS_KEY);localStorage.removeItem(ALL_WORDS_PROGRESS_KEY);localStorage.removeItem(NEW_MODE_PROGRESS_KEY);localStorage.removeItem("flipwords:newModeProgress:clues-v22");localStorage.removeItem("flipwords:newModeProgress:clues-v23");localStorage.removeItem("flipwords:newModeProgress:clues-v24");localStorage.removeItem("flipwords:newModeProgress:clues-v25");localStorage.removeItem("flipwords:newModeProgress:clues-v26");localStorage.removeItem("flipwords:newModeProgress:clues-v27");localStorage.removeItem("flipwords:newModeProgress:clues-v28");localStorage.removeItem("flipwords:newModeProgress:clues-v29");localStorage.removeItem("flipwords:newModeProgress:clues-v30");localStorage.removeItem("flipwords:newModeProgress:clues-v31");localStorage.removeItem("flipwords:newModeProgress:clues-v32");localStorage.removeItem("flipwords:newModeProgress:clues-v33");localStorage.removeItem("flipwords:newModeProgress:clues-v34");localStorage.removeItem("flipwords:newModeProgress:clues-v35");localStorage.removeItem("flipwords:newModeProgress:clues-v36");localStorage.removeItem("flipwords:newModeProgress:clues-v37");localStorage.removeItem("flipwords:newModeProgress:clues-v38");localStorage.removeItem("flipwords:newModeProgress:clues-v39");localStorage.removeItem("flipwords:newModeProgress:clues-v40");localStorage.removeItem("flipwords:newModeProgress:clues-v41");localStorage.removeItem("flipwords:newModeProgress:clues-v42");localStorage.removeItem("flipwords:newModeProgress:clues-v43");localStorage.removeItem("flipwords:newModeProgress:clues-v44");localStorage.removeItem("flipwords:newModeProgress:clues-v45");localStorage.removeItem("flipwords:newModeProgress:clues-v46");localStorage.removeItem("flipwords:newModeProgress:clues-v47");localStorage.removeItem("flipwords:newModeProgress:clues-v48");localStorage.removeItem("flipwords:newModeProgress:clues-v49");localStorage.removeItem("flipwords:newModeProgress:clues-v50");localStorage.removeItem("flipwords:newModeProgress:clues-v51");localStorage.removeItem("flipwords:newModeProgress:clues-v52");localStorage.removeItem("flipwords:newModeProgress:clues-v53");localStorage.removeItem("flipwords:newModeProgress:clues-v54");localStorage.removeItem("flipwords:newModeProgress:clues-v55");localStorage.removeItem("flipwords:newModeProgress:clues-v56");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v69");localStorage.removeItem("flipwords:newModeProgress:clues-v70");localStorage.removeItem("flipwords:newModeProgress:clues-v71");localStorage.removeItem("flipwords:newModeProgress:clues-v57");localStorage.removeItem("flipwords:newModeProgress:clues-v58");localStorage.removeItem("flipwords:newModeProgress:clues-v59");localStorage.removeItem("flipwords:newModeProgress:clues-v60");localStorage.removeItem("flipwords:newModeProgress:clues-v61");localStorage.removeItem("flipwords:newModeProgress:clues-v62");localStorage.removeItem("flipwords:newModeProgress:clues-v63");localStorage.removeItem("flipwords:newModeProgress:clues-v64");localStorage.removeItem("flipwords:newModeProgress:clues-v65");localStorage.removeItem("flipwords:newModeProgress:clues-v66");localStorage.removeItem("flipwords:newModeProgress:clues-v67");localStorage.removeItem("flipwords:newModeProgress:clues-v68");localStorage.removeItem("flipwords:newModeProgress:clues-v72");localStorage.removeItem("flipwords:newModeProgress:clues-v73");localStorage.removeItem("flipwords:newModeProgress:clues-v74");try{sessionStorage.removeItem(CLUE_HELP_SESSION_KEY)}catch{}cachedGameState=null;window.__forceFreshStart=false;window.__jumpLevel=null;clearQueryString()}
   if(hasDayJump){
     cachedGameState=readStoredGameState();
     window.__forceFreshStart=false;
