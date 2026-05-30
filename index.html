@@ -488,6 +488,13 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   font-weight:800;
 }
 
+
+/* v78: Daily clue-grade descriptor colours */
+.daily-puzzle-descriptor.is-perfect{color:var(--clue-perfect)}
+.daily-puzzle-descriptor.is-great{color:var(--clue-great)}
+.daily-puzzle-descriptor.is-good{color:var(--clue-good)}
+.daily-puzzle-descriptor.is-clunky,.daily-puzzle-descriptor.is-rough,.daily-puzzle-descriptor.is-revealed{color:var(--clue-clunky)}
+
 </style>
 </head>
 <body>
@@ -505,11 +512,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v77";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v78";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v77";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v78";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -2792,17 +2799,18 @@ function render(){
   controlsEl.classList.toggle("daily-complete-controls",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls);
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
-  const newModeClue=isTimedClueMode();
-  const clueStatsMuted=newModeClue&&!showDailyCompleteControls&&solved;
+  const dailySolvedTransition=isDailyMode()&&dailyStarted&&solved&&!dailyCurrentCompleted;
+  const clueStatsMuted=isNewMode()&&!showDailyCompleteControls&&solved;
   const clueSoftMuted=false;
   const clueInactiveYellow=false;
-  const clueGiveUpReady=newModeClue&&!showDailyCompleteControls&&!solved&&clueRevealStage>=2;
-  hintBtn.classList.toggle("vowels-mode",newModeClue&&!showDailyCompleteControls);
+  const clueGiveUpReady=isTimedClueMode()&&!showDailyCompleteControls&&!solved&&clueRevealStage>=2;
+  const clueButtonYellow=(isNewMode()&&!showDailyCompleteControls)||(isDailyMode()&&dailyStarted&&!dailyCurrentCompleted);
+  hintBtn.classList.toggle("vowels-mode",clueButtonYellow);
   hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
-  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(newModeClue?(solved?"Stats":(clueGiveUpReady?"Give-up":"Clue")):"Hint");
-  hintBtn.disabled=showDailyCompleteControls?false:(newModeClue?false:(isDailyMode()?(!dailyStarted||solved||allLocked):(solved||allLocked)));
+  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"Stats":(clueGiveUpReady?"Give-up":"Clue")):"Hint"));
+  hintBtn.disabled=showDailyCompleteControls?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
   const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
   startWordsBtn.classList.toggle("daily-start",showDailyStart);
   startWordsBtn.classList.toggle("daily-end-stats",showDailyCompleteControls);
@@ -3510,6 +3518,22 @@ function jumpActivePuzzleElapsedTo(targetMs){
   activePuzzleElapsedMs=targetMs;
   if(activePuzzleStartedAt!==null)activePuzzleStartedAt=now;
 }
+function positionClueTimePop(el){
+  const gameEl=document.querySelector(".game")||document.body;
+  if(isDailyMode()){
+    const anchor=board||document.querySelector(".board")||gameEl;
+    const r=anchor.getBoundingClientRect();
+    el.style.left=`${r.left+r.width/2}px`;
+    el.style.top=`${r.top-8}px`;
+    return;
+  }
+  const footer=status||document.querySelector(".status")||gameEl;
+  const timer=document.querySelector(".clue-footer-time")||footer;
+  const footerRect=footer.getBoundingClientRect();
+  const timerRect=timer.getBoundingClientRect();
+  el.style.left=`${footerRect.left+footerRect.width/2}px`;
+  el.style.top=`${timerRect.top+2}px`;
+}
 function showClueTimeAddedPop(addedMs){
   const seconds=Math.max(1,Math.round(addedMs/1000));
   const mins=Math.floor(seconds/60);
@@ -3518,12 +3542,7 @@ function showClueTimeAddedPop(addedMs){
   const el=document.createElement("span");
   el.className="clue-time-pop";
   el.textContent=text;
-  const footer=status||document.querySelector(".status")||document.querySelector(".game");
-  const timer=document.querySelector(".clue-footer-time")||footer;
-  const footerRect=footer.getBoundingClientRect();
-  const timerRect=timer.getBoundingClientRect();
-  el.style.left=`${footerRect.left+footerRect.width/2}px`;
-  el.style.top=`${timerRect.top+2}px`;
+  positionClueTimePop(el);
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1500);
 }
@@ -3549,12 +3568,7 @@ function showClueTimeCreditPop(creditMs){
   const el=document.createElement("span");
   el.className="clue-time-pop clue-time-credit";
   el.textContent=text;
-  const footer=status||document.querySelector(".status")||document.querySelector(".game");
-  const timer=document.querySelector(".clue-footer-time")||footer;
-  const footerRect=footer.getBoundingClientRect();
-  const timerRect=timer.getBoundingClientRect();
-  el.style.left=`${footerRect.left+footerRect.width/2}px`;
-  el.style.top=`${timerRect.top+2}px`;
+  positionClueTimePop(el);
   document.body.appendChild(el);
   setTimeout(()=>{el.remove()},1500);
 }
@@ -3830,7 +3844,6 @@ function giveUpNewModePuzzle(){
       completeDailyIfNeeded();
       statsDetailsShown=false;
       dailyModalMode="stats";
-      setTimeout(()=>showDailyCompleteBurst(true),80);
       startDailyCountdownTimer();
     }else{
       showDailyCompleteBurst(false);
@@ -3894,7 +3907,11 @@ function performClueDoubleTap(){
 }
 function showClue(){
   if(!isTimedClueMode())return;
-  if(solved){openStatsDetails();return}
+  if(solved){
+    if(isDailyMode()&&!dailyCurrentCompleted)return;
+    openStatsDetails();
+    return;
+  }
   performClueSingleTap();
 }
 
