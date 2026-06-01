@@ -547,11 +547,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 </main>
 <script>
 const STORAGE_KEY="flipwords:gameState:v3";
-const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v86";
+const DAILY_PROGRESS_KEY="flipwords:dailyProgress:clue-v87";
 const DAILY_STATS_KEY="flipwords:dailyStats:v1";
 const DAILY_MODE_KEY="flipwords:mode:v1";
 const ALL_WORDS_PROGRESS_KEY="flipwords:allWordsProgress:v1";
-const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v86";
+const NEW_MODE_PROGRESS_KEY="flipwords:gameProgress:timed-v87";
 const INTRO_COPY="Make two new words by flipping and moving the tiles to solve.";
 const DAILY_HINT_UNLOCKS_MS=[4*60*1000,6*60*1000];
 const DEBUG=false;
@@ -1447,7 +1447,7 @@ let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMes
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
 let clueRevealStage=0,cluesShownCount=0,clueSecondAutoShownAt=0,clueAutoRevealingSecond=false,clueFirstAvailableNotified=false,clueSecondAvailableNotified=false,clueMaximumAvailableNotified=false,clueVisible=false,lastClueTapAt=0,clueTapLockedUntil=0,clueFirstRevealedAtMs=0,clueCreditAtFirstRevealMs=0,clueEarlySkipPenaltyPoints=0,clueFoundBonusWords=[],clueWordCreditMs=0;
-let clueBonusFlashRows={top:false,bottom:false},clueBonusRepeatFlashRows={top:false,bottom:false},clueBonusRepeatTimers={top:null,bottom:null},clueBonusRepeatLastSeen={top:"",bottom:""};
+let clueBonusFlashRows={top:false,bottom:false};
 let statsDetailsShown=false,dailyModalMode="stats";
 let cachedGameState=null;
 let gameStartDeferred=false;
@@ -2345,8 +2345,6 @@ function render(){
     if(showAllWords&&allWordsFlash.bottom)w.classList.add("aw-bottom-flash");
     if(isTimedClueMode()&&clueBonusFlashRows.top)w.classList.add("clue-bonus-top-flash");
     if(isTimedClueMode()&&clueBonusFlashRows.bottom)w.classList.add("clue-bonus-bottom-flash");
-    if(isTimedClueMode()&&clueBonusRepeatFlashRows.top)w.classList.add("clue-bonus-repeat-top-flash");
-    if(isTimedClueMode()&&clueBonusRepeatFlashRows.bottom)w.classList.add("clue-bonus-repeat-bottom-flash");
     if(t.locked&&!(vowelRevealActive&&isLockedStartTile(t)))w.classList.add("locked");
     if(isLockedStartTile(t)&&!solved&&!previewingStartWords&&!vowelRevealActive)w.classList.add("locked-from-start");
     if(vowelRevealActive&&!showAllWords&&!previewingStartWords&&!showDailyPrestart&&!showDailyReview){if(vowelAt(slotForTile,true))w.classList.add("vowel-top");if(vowelAt(slotForTile,false))w.classList.add("vowel-bottom")}
@@ -2867,7 +2865,6 @@ function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDefer
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
   if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
-  clearClueBonusRepeatFeedback(false);
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
   const hrow=hTileEl?.dataset?.hrow||null;
@@ -3180,65 +3177,15 @@ function flashClueBonusRow(row){
     if(isTimedClueMode()&&!solved)render();
   },520);
 }
-function clearClueBonusRepeatTimer(row){
-  if(row!=="top"&&row!=="bottom")return;
-  if(clueBonusRepeatTimers[row]){
-    clearTimeout(clueBonusRepeatTimers[row]);
-    clueBonusRepeatTimers[row]=null;
-  }
-}
-function clearClueBonusRepeatFlashClassesFromDOM(){
-  if(!board)return;
-  board.querySelectorAll(".clue-bonus-repeat-top-flash,.clue-bonus-repeat-bottom-flash").forEach(el=>{
-    el.classList.remove("clue-bonus-repeat-top-flash","clue-bonus-repeat-bottom-flash");
-  });
-}
-function resetClueBonusRepeatFeedback(doRender=false){
-  clearClueBonusRepeatTimer("top");
-  clearClueBonusRepeatTimer("bottom");
-  const hadFlash=!!(clueBonusRepeatFlashRows.top||clueBonusRepeatFlashRows.bottom);
-  clueBonusRepeatFlashRows={top:false,bottom:false};
-  clueBonusRepeatLastSeen={top:"",bottom:""};
-  // Do not re-render from pointerdown. Re-rendering there replaces the tile
-  // element before setPointerCapture runs, which can break drag/flip input.
-  // For the immediate clear-on-engage effect, strip the classes directly.
-  if(hadFlash)clearClueBonusRepeatFlashClassesFromDOM();
-  if(doRender&&hadFlash&&isTimedClueMode()&&!solved&&!dragState)render();
-}
-function markClueBonusRepeatSeen(word,row){
-  word=String(word||"").toLowerCase();
-  if((row!=="top"&&row!=="bottom")||!word)return;
-  clueBonusRepeatLastSeen[row]=`${row}:${word}`;
-}
-function flashClueBonusRepeatRow(row){
-  if(row!=="top"&&row!=="bottom")return;
-  clueBonusRepeatFlashRows={...clueBonusRepeatFlashRows,[row]:true};
-  render();
-}
-function scheduleClueBonusRepeatFlash(word,row){
-  word=String(word||"").toLowerCase();
-  if((row!=="top"&&row!=="bottom")||!word)return;
-  const key=`${row}:${word}`;
-  if(clueBonusRepeatLastSeen[row]===key)return;
-  clueBonusRepeatLastSeen[row]=key;
-  clearClueBonusRepeatTimer(row);
-  if(!isTimedClueMode()||solved||gameStartDeferred)return;
-  const current=String(currentWords()[row]||"").toLowerCase();
-  if(current!==word){
-    clueBonusRepeatLastSeen[row]="";
-    return;
-  }
-  flashClueBonusRepeatRow(row);
+function resetClueBonusRepeatFeedback(){
+  // v87: repeat-word feedback disabled after it interfered with shared tile input.
+  // First-time bonus-word feedback remains unchanged.
 }
 function applyClueWordCredit(word,row){
   word=String(word||"").toLowerCase();
   if(!word)return false;
-  if(clueFoundBonusWords.includes(word)){
-    scheduleClueBonusRepeatFlash(word,row);
-    return false;
-  }
+  if(clueFoundBonusWords.includes(word))return false;
   clueFoundBonusWords.push(word);
-  markClueBonusRepeatSeen(word,row);
   if(clueRevealStage<2){
     clueWordCreditMs+=CLUE_BONUS_WORD_CREDIT_MS;
     showClueTimeCreditPop(CLUE_BONUS_WORD_CREDIT_MS);
@@ -3260,12 +3207,6 @@ function checkClueBonusWords(){
   let credited=false;
   [[w.top,"top"],[w.bottom,"bottom"]].forEach(([raw,row])=>{
     const word=String(raw||"").toLowerCase();
-    const repeatKey=word?`${row}:${word}`:"";
-    if(clueBonusRepeatLastSeen[row]&&clueBonusRepeatLastSeen[row]!==repeatKey){
-      clearClueBonusRepeatTimer(row);
-      clueBonusRepeatLastSeen[row]="";
-      clueBonusRepeatFlashRows={...clueBonusRepeatFlashRows,[row]:false};
-    }
     // Credit a lone answer word, but do not award answer-word credits for the
     // final solved state itself.
     if(solvedNow&&answerSet.has(word))return;
