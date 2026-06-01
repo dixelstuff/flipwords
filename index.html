@@ -2332,9 +2332,9 @@ function updateStatsPanel(){
   if(isNewMode()){
     const cs=getOverallClueStats();
     statsPanel.innerHTML=`
-      <div class="stats-card" role="dialog" aria-modal="true" aria-label="Clue stats">
+      <div class="stats-card" role="dialog" aria-modal="true" aria-label="Game stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
-        <div class="stats-title">Your clue stats</div>
+        <div class="stats-title">Your game stats</div>
         ${currentCluePuzzleSummaryHTML()}
         <div class="clue-summary-card">
           <div class="clue-summary-row"><span class="clue-summary-emoji">🧩</span><span class="clue-summary-label">Levels solved:</span><strong class="clue-summary-value">${cs.played}</strong></div>
