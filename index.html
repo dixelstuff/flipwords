@@ -477,19 +477,31 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 
 
 
-/* v87: delayed, soft repeat cue for already-found bonus words.
-   First-time bonus flash is untouched; this only animates repeated words. */
-@keyframes clue-bonus-repeat-soft-green{
-  0%{color:inherit;text-shadow:none}
-  42%{color:rgba(48,164,108,.52);text-shadow:0 0 7px rgba(48,164,108,.12)}
-  78%{color:rgba(48,164,108,.52);text-shadow:0 0 7px rgba(48,164,108,.12)}
-  100%{color:inherit;text-shadow:none}
-}
+/* v88: immediate grey repeat cue for already-found bonus words.
+   First-time bonus flash is untouched; repeats clear as soon as the grid is engaged. */
 .tile-wrap.clue-bonus-repeat-top-flash .tile-face .letter:first-child,
 .tile-wrap.clue-bonus-repeat-bottom-flash .tile-face .letter:last-child,
 .tile-wrap.clue-bonus-repeat-top-flash .htile[data-hrow="top"] .letter,
 .tile-wrap.clue-bonus-repeat-bottom-flash .htile[data-hrow="bottom"] .letter{
-  animation:clue-bonus-repeat-soft-green 1.85s ease-in-out both;
+  color:rgba(118,111,130,.74);
+  text-shadow:0 0 12px rgba(118,111,130,.18);
+}
+.tile-wrap.clue-bonus-repeat-top-flash .tile-face,
+.tile-wrap.clue-bonus-repeat-bottom-flash .tile-face,
+.tile-wrap.clue-bonus-repeat-top-flash .htile[data-hrow="top"],
+.tile-wrap.clue-bonus-repeat-bottom-flash .htile[data-hrow="bottom"]{
+  border-color:rgba(118,111,130,.34);
+  background:#f8f6fb;
+}
+.tile-wrap.clue-bonus-repeat-top-flash .tile-face,
+.tile-wrap.clue-bonus-repeat-bottom-flash .tile-face,
+.tile-wrap.clue-bonus-repeat-top-flash .htile[data-hrow="top"],
+.tile-wrap.clue-bonus-repeat-bottom-flash .htile[data-hrow="bottom"],
+.tile-wrap.clue-bonus-repeat-top-flash .letter:first-child,
+.tile-wrap.clue-bonus-repeat-bottom-flash .letter:last-child,
+.tile-wrap.clue-bonus-repeat-top-flash .htile[data-hrow="top"] .letter,
+.tile-wrap.clue-bonus-repeat-bottom-flash .htile[data-hrow="bottom"] .letter{
+  transition:background .18s ease,border-color .18s ease,color .18s ease,text-shadow .18s ease;
 }
 
 
@@ -1163,8 +1175,6 @@ const clueBonusWords = {
   "egg-tea": ["ate","eat","tag"],
   "alone-zones": ["leans","loans","oozes","salon"],
 };
-
-
 
 
 const dailyTriplets=[
@@ -2473,7 +2483,7 @@ function updateStatsPanel(){
     statsPanel.innerHTML=`
       <div class="stats-card" role="dialog" aria-modal="true" aria-label="Clue stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
-        <div class="stats-title">Your clue stats</div>
+        <div class="stats-title">Your game stats</div>
         ${currentCluePuzzleSummaryHTML()}
         <div class="clue-stats-grid">
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">🧩</div><div class="daily-stat-label">Played</div><div class="daily-stat-value">${cs.played}</div></div>
@@ -2857,6 +2867,7 @@ function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDefer
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
   if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
+  clearClueBonusRepeatFeedback(true);
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
   const hrow=hTileEl?.dataset?.hrow||null;
@@ -3176,11 +3187,13 @@ function clearClueBonusRepeatTimer(row){
     clueBonusRepeatTimers[row]=null;
   }
 }
-function resetClueBonusRepeatFeedback(){
+function resetClueBonusRepeatFeedback(doRender=false){
   clearClueBonusRepeatTimer("top");
   clearClueBonusRepeatTimer("bottom");
+  const hadFlash=!!(clueBonusRepeatFlashRows.top||clueBonusRepeatFlashRows.bottom);
   clueBonusRepeatFlashRows={top:false,bottom:false};
   clueBonusRepeatLastSeen={top:"",bottom:""};
+  if(doRender&&hadFlash&&isTimedClueMode()&&!solved)render();
 }
 function markClueBonusRepeatSeen(word,row){
   word=String(word||"").toLowerCase();
@@ -3191,10 +3204,6 @@ function flashClueBonusRepeatRow(row){
   if(row!=="top"&&row!=="bottom")return;
   clueBonusRepeatFlashRows={...clueBonusRepeatFlashRows,[row]:true};
   render();
-  setTimeout(()=>{
-    clueBonusRepeatFlashRows={...clueBonusRepeatFlashRows,[row]:false};
-    if(isTimedClueMode()&&!solved)render();
-  },1850);
 }
 function scheduleClueBonusRepeatFlash(word,row){
   word=String(word||"").toLowerCase();
@@ -3203,16 +3212,13 @@ function scheduleClueBonusRepeatFlash(word,row){
   if(clueBonusRepeatLastSeen[row]===key)return;
   clueBonusRepeatLastSeen[row]=key;
   clearClueBonusRepeatTimer(row);
-  clueBonusRepeatTimers[row]=setTimeout(()=>{
-    clueBonusRepeatTimers[row]=null;
-    if(!isTimedClueMode()||solved||gameStartDeferred)return;
-    const current=String(currentWords()[row]||"").toLowerCase();
-    if(current!==word){
-      clueBonusRepeatLastSeen[row]="";
-      return;
-    }
-    flashClueBonusRepeatRow(row);
-  },1000);
+  if(!isTimedClueMode()||solved||gameStartDeferred)return;
+  const current=String(currentWords()[row]||"").toLowerCase();
+  if(current!==word){
+    clueBonusRepeatLastSeen[row]="";
+    return;
+  }
+  flashClueBonusRepeatRow(row);
 }
 function applyClueWordCredit(word,row){
   word=String(word||"").toLowerCase();
@@ -3248,6 +3254,7 @@ function checkClueBonusWords(){
     if(clueBonusRepeatLastSeen[row]&&clueBonusRepeatLastSeen[row]!==repeatKey){
       clearClueBonusRepeatTimer(row);
       clueBonusRepeatLastSeen[row]="";
+      clueBonusRepeatFlashRows={...clueBonusRepeatFlashRows,[row]:false};
     }
     // Credit a lone answer word, but do not award answer-word credits for the
     // final solved state itself.
