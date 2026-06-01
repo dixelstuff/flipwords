@@ -251,6 +251,14 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .stats-card .clue-current-detail .clue-detail-rating.is-clunky{color:var(--clue-clunky)}
 @media (max-width:380px){.stats-card .clue-current-main{font-size:14.5px}.stats-card .clue-current-detail{font-size:13px}}
 
+/* v7 stats modal clue toggle */
+.stats-card .clue-current-detail{white-space:normal;overflow:visible;text-overflow:clip}
+.clue-current-toggle{display:inline;background:transparent;border:0;padding:0;margin:0;width:auto;height:auto;color:rgba(118,111,130,.82);font:inherit;font-weight:650;text-decoration:underline;text-underline-offset:3px;cursor:pointer;vertical-align:baseline}
+.clue-current-toggle:hover{color:var(--ink)}
+.clue-current-toggle:active{color:var(--ink)}
+.clue-current-clue-list{color:rgba(118,111,130,.82);font-weight:650}
+@media (max-width:380px){.stats-card .clue-current-detail{font-size:12.8px}}
+
 
 /* v49: snappier Clue award animation with a single star burst */
 .message.score-pop.clue-award-pop{
@@ -1224,7 +1232,7 @@ let clueRevealStage=0,cluesShownCount=0,clueSecondAutoShownAt=0,clueAutoRevealin
 let clueBonusFlashRows={top:false,bottom:false};
 let clueBonusRepeatFlashRows={top:false,bottom:false};
 let perfectStreak=0,bestPerfectStreak=0,rewardedBestPerfectStreak=0;
-let statsDetailsShown=false,dailyModalMode="stats";
+let statsDetailsShown=false,dailyModalMode="stats",clueStatsShowCurrentClues=false;
 let cachedGameState=null;
 let gameStartDeferred=false;
 let mode="game",dailyDayIndex=0,dailyTotalMoves=0,dailyHintsEarned=0,dailyHintsUsed=0,dailyCurrentCompleted=false,dailyTimer=null,dailyCountdownTimer=null,dailyAdvanceTimer=null,dailyStarted=false,dailyReviewIndex=2,dailyPuzzleResults=[],dailyPuzzleStartElapsedMs=0,dailyPuzzleStartMoves=0;
@@ -1466,10 +1474,16 @@ function formatClueMedianMoves(v){return v===null?"—":String(Math.round(v*10)/
 function currentCluePuzzleSummaryHTML(){
   const p=currentPuzzle(),r=currentClueResult();
   if(!p||!r)return "";
-  const cluesShown=clamp(Math.round(Number(r.cluesShown)||0),0,2);
   const ratingClass=r.gaveUp?"clunky":(r.rating||"clunky");
   const ratingText=r.gaveUp?"Gave up":getClueFooterRatingLabel(r.rating);
-  const detail=`<span class="clue-detail-rating is-${ratingClass}">${ratingText}</span> · ${formatClock(r.timeMs)} · Moves ${r.moves} · Clues ${cluesShown}`;
+  const c=splitClueText(puzzleClues[p&&p.id]||"");
+  const hasClue=!!c.subtle;
+  const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
+  const toggleText=clueStatsShowCurrentClues?"hide clues":"show clues";
+  const toggleHTML=hasClue?` · <button type="button" class="clue-current-toggle" data-clue-current-toggle="1">${toggleText}</button>`:"";
+  const detail=clueStatsShowCurrentClues&&hasClue
+    ? `<span class="clue-current-clue-list">${clueText}</span>${toggleHTML}`
+    : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}</span> · ${formatClock(r.timeMs)}${toggleHTML}`;
   return `<div class="daily-puzzle-summary clue-current-summary"><div class="clue-current-row"><div class="clue-current-main"><span class="clue-current-words">${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; <strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></span></div><div class="clue-current-detail">${detail}</div></div></div>`;
 }
 function clueGradeLegendHTML(){
@@ -3521,7 +3535,7 @@ nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsM
 nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
 document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
-function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";statsDetailsShown=true;updateStatsPanel()}
+function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";else clueStatsShowCurrentClues=false;statsDetailsShown=true;updateStatsPanel()}
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;if(!isAllWordsMode())openStatsDetails()});
 endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="nextAllWordsLink"){e.preventDefault();goNextAllWords();return}if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
 scoreLine.addEventListener("click",()=>{if(!isAllWordsMode())openStatsDetails()});
@@ -3530,6 +3544,12 @@ statsPanel.addEventListener("click",e=>{
   e.stopPropagation();
   if(e.target&&e.target.id==="dailyCopyBtn"){
     copyDailyShareText();
+    return;
+  }
+  if(e.target&&e.target.closest&&e.target.closest("[data-clue-current-toggle]")){
+    e.preventDefault();
+    clueStatsShowCurrentClues=!clueStatsShowCurrentClues;
+    updateStatsPanel();
     return;
   }
   if(e.target===statsPanel||e.target.id==="statsClose"||e.target.id==="statsCloseX"){
