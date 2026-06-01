@@ -2867,7 +2867,7 @@ function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDefer
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
   if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
-  clearClueBonusRepeatFeedback(true);
+  clearClueBonusRepeatFeedback(false);
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
   const hrow=hTileEl?.dataset?.hrow||null;
@@ -3187,13 +3187,23 @@ function clearClueBonusRepeatTimer(row){
     clueBonusRepeatTimers[row]=null;
   }
 }
+function clearClueBonusRepeatFlashClassesFromDOM(){
+  if(!board)return;
+  board.querySelectorAll(".clue-bonus-repeat-top-flash,.clue-bonus-repeat-bottom-flash").forEach(el=>{
+    el.classList.remove("clue-bonus-repeat-top-flash","clue-bonus-repeat-bottom-flash");
+  });
+}
 function resetClueBonusRepeatFeedback(doRender=false){
   clearClueBonusRepeatTimer("top");
   clearClueBonusRepeatTimer("bottom");
   const hadFlash=!!(clueBonusRepeatFlashRows.top||clueBonusRepeatFlashRows.bottom);
   clueBonusRepeatFlashRows={top:false,bottom:false};
   clueBonusRepeatLastSeen={top:"",bottom:""};
-  if(doRender&&hadFlash&&isTimedClueMode()&&!solved)render();
+  // Do not re-render from pointerdown. Re-rendering there replaces the tile
+  // element before setPointerCapture runs, which can break drag/flip input.
+  // For the immediate clear-on-engage effect, strip the classes directly.
+  if(hadFlash)clearClueBonusRepeatFlashClassesFromDOM();
+  if(doRender&&hadFlash&&isTimedClueMode()&&!solved&&!dragState)render();
 }
 function markClueBonusRepeatSeen(word,row){
   word=String(word||"").toLowerCase();
