@@ -659,6 +659,56 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .clue-length-rowmeta{text-align:left;margin-top:2px;white-space:normal}
 }
 
+
+/* v12: modal tabs at top, fixed current puzzle header underneath */
+.stats-card.game-stats-card{max-height:min(95vh,680px)}
+.game-stats-tabs{
+  padding:0 42px 10px 0;
+  border-bottom:0;
+}
+.game-stats-header{
+  padding:0 38px 10px 0;
+  border-bottom:1px solid rgba(37,31,52,.10);
+}
+.game-stats-header-detail .clue-detail-rating.is-perfect{color:var(--clue-perfect)}
+.game-stats-header-detail .clue-detail-rating.is-great{color:var(--clue-great)}
+.game-stats-header-detail .clue-detail-rating.is-good{color:var(--clue-good)}
+.game-stats-header-detail .clue-detail-rating.is-clunky{color:var(--clue-clunky)}
+.game-stats-body{padding-top:11px}
+.game-stats-one-card{
+  background:#f7f5fb;
+  border:1px solid rgba(37,31,52,.08);
+  border-radius:18px;
+  padding:12px 14px 13px;
+}
+.game-stats-one-card .clue-summary-card.compact-list{
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  border-radius:0;
+}
+.game-stats-one-card .clue-length-shared-card{
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:11px 0 0;
+  margin:11px 0 0;
+  border-top:1px solid rgba(37,31,52,.10);
+}
+.game-stats-one-card .clue-length-shared-title{margin-bottom:7px}
+.game-stats-one-card .clue-length-shared-title + .clue-length-block{border-top:0;padding-top:0}
+.game-stats-one-card .clue-grade-legend{
+  margin:8px 0 0;
+  padding-top:8px;
+  border-top:1px solid rgba(37,31,52,.10);
+}
+.game-stats-one-card .clue-length-block{padding:7px 0 8px}
+.game-stats-one-card .clue-length-block:last-of-type{padding-bottom:0}
+@media (max-width:380px){
+  .game-stats-tabs{gap:17px;padding-right:42px}
+}
+
 </style>
 </head>
 <body>
@@ -1742,7 +1792,6 @@ function getPerfectStreakBonus(streak){
 }
 function getScore100RunBonus(run){
   run=Math.max(0,Math.round(Number(run)||0));
-  if(run===5)return 50;
   if(run===10)return 150;
   if(run===20)return 500;
   if(run>20&&run%20===0)return 500;
@@ -1945,13 +1994,13 @@ function clueLengthBlockHTML(len){
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=[`Played ${rows.length}`,medTime===null?"—":formatClock(medTime),`Moves ${formatClueMedianMoves(medMoves)}`].join(" · ");
+  const meta=[`${rows.length}`,medTime===null?"—":formatClock(medTime),`${formatClueMedianMoves(medMoves)} moves`].join(" · ");
   return `<div class="clue-length-block"><div class="clue-length-rowhead"><span class="clue-length-label-main">${len}-letter</span><span class="clue-length-rowmeta">${meta}</span></div>${clueGradeStripHTML(rows)}</div>`;
 }
 function clueLengthStatsHTML(){
   const blocks=[3,4,5].map(clueLengthBlockHTML).filter(Boolean).join("");
   if(!blocks)return `<div class="clue-no-stats">No clue stats yet.</div>`;
-  return `${clueGradeLegendHTML()}<div class="clue-length-shared-card"><div class="clue-length-shared-title">By puzzle length</div>${blocks}</div>`;
+  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title">By puzzle length</div>${blocks}${clueGradeLegendHTML()}</div>`;
 }
 function getOverallClueStats(){
   const rows=getClueResults();
@@ -1978,7 +2027,7 @@ function gameStatsTabsHTML(){
 function gameStatsSummaryHTML(cs){
   return `<div class="clue-summary-card compact-list">
     <div class="clue-summary-row"><span class="clue-summary-emoji">🧩</span><span class="clue-summary-label">Levels solved:</span><strong class="clue-summary-value">${cs.played}</strong></div>
-    <div class="clue-summary-row"><span class="clue-summary-emoji">⏱️</span><span class="clue-summary-label">Median time:</span><strong class="clue-summary-value">${cs.medianTime}</strong></div>
+    <div class="clue-summary-row"><span class="clue-summary-emoji">🏆</span><span class="clue-summary-label">Total score:</span><strong class="clue-summary-value">${cs.totalScore}</strong></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">💯</span><span class="clue-summary-label">Scores 100+:</span><strong class="clue-summary-value">${cs.scores100}</strong><span class="clue-summary-pct">${cs.scores100Pct}</span></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🌟</span><span class="clue-summary-label">Perfects:</span><strong class="clue-summary-value">${cs.perfects}</strong><span class="clue-summary-pct">${cs.perfectsPct}</span></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🔎</span><span class="clue-summary-label">Extra words found:</span><strong class="clue-summary-value">${cs.extraWords}</strong></div>
@@ -1989,7 +2038,7 @@ function gameStatsTabContentHTML(){
   if(clueStatsModalTab==="improve")return `<div class="clue-tab-placeholder"><strong>Improve</strong><br>This section will hold strategy and improvement notes.</div>`;
   if(clueStatsModalTab==="contact")return `<div class="clue-tab-placeholder"><strong>Contact</strong><br>This section will hold feedback and support details.</div>`;
   const cs=getOverallClueStats();
-  return `${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}`;
+  return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
 }
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
 function clueLevelMetaHTML(){return `<span class="level-meta"><span class="level-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="level-moves">Moves ${movesUsed}</span></span>`}
@@ -2832,8 +2881,8 @@ function updateStatsPanel(){
     statsPanel.innerHTML=`
       <div class="stats-card game-stats-card" role="dialog" aria-modal="true" aria-label="Game stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
-        ${currentCluePuzzleSummaryHTML()}
         ${gameStatsTabsHTML()}
+        ${currentCluePuzzleSummaryHTML()}
         <div class="game-stats-body">${gameStatsTabContentHTML()}</div>
       </div>`;
     statsToggle.classList.remove("visible");
