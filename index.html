@@ -709,6 +709,54 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .game-stats-tabs{gap:17px;padding-right:42px}
 }
 
+
+/* v13: modal spacing, current score, and compact stats polish */
+.game-stats-tabs{
+  gap:24px;
+  padding:0 42px 12px 0;
+  border-bottom:1px solid rgba(37,31,52,.10);
+}
+.game-stats-tab{
+  font-size:17px;
+  font-weight:780;
+}
+.game-stats-tab.active{font-weight:920}
+.game-stats-header{
+  margin-top:10px;
+  padding:10px 38px 12px 0;
+  border-bottom:1px solid rgba(37,31,52,.10);
+}
+.game-stats-header-main{font-weight:760}
+.game-stats-header-main span{
+  color:var(--muted);
+  font-weight:520;
+}
+.game-stats-header-main strong{font-weight:850}
+.game-stats-header-detail{
+  margin-top:7px;
+  font-size:14.5px;
+}
+.game-stats-body{padding-top:14px}
+.game-stats-one-card{padding:13px 14px 14px}
+.game-stats-one-card .clue-length-shared-card{
+  padding:12px 0 0;
+  margin:12px 0 0;
+}
+.game-stats-one-card .clue-length-block{padding:7px 0 8px}
+.game-stats-one-card .clue-grade-legend{
+  margin:11px 0 0;
+  padding-top:0;
+  border-top:0;
+  font-size:14px;
+  gap:15px;
+}
+@media (max-width:380px){
+  .game-stats-tabs{gap:18px;padding-right:42px}
+  .game-stats-tab{font-size:16px}
+  .game-stats-header{margin-top:9px;padding-top:9px}
+  .game-stats-one-card .clue-grade-legend{font-size:13px;gap:10px}
+}
+
 </style>
 </head>
 <body>
@@ -1970,9 +2018,10 @@ function currentCluePuzzleSummaryHTML(){
   const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
   const toggleText=clueStatsShowCurrentClues?"hide clues":"show clues";
   const toggleHTML=hasClue?` · <button type="button" class="clue-current-toggle" data-clue-current-toggle="1">${toggleText}</button>`:"";
+  const scorePart=Number.isFinite(Number(r.score))?` · +${formatScore(Number(r.score)||0)}`:"";
   const detail=clueStatsShowCurrentClues&&hasClue
     ? `<span class="clue-current-clue-list">${clueText}</span>${toggleHTML}`
-    : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}</span> · ${formatClock(r.timeMs)}${toggleHTML}`;
+    : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}</span> · ${formatClock(r.timeMs)}${scorePart}${toggleHTML}`;
   return `<div class="game-stats-header"><div class="game-stats-header-main"><span>${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; </span><strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></div><div class="game-stats-header-detail">${detail}</div></div>`;
 }
 function clueGradeLegendHTML(){
@@ -1994,7 +2043,7 @@ function clueLengthBlockHTML(len){
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=[`${rows.length}`,medTime===null?"—":formatClock(medTime),`${formatClueMedianMoves(medMoves)} moves`].join(" · ");
+  const meta=[`Played ${rows.length}`,medTime===null?"—":formatClock(medTime),`Moves ${formatClueMedianMoves(medMoves)}`].join(" · ");
   return `<div class="clue-length-block"><div class="clue-length-rowhead"><span class="clue-length-label-main">${len}-letter</span><span class="clue-length-rowmeta">${meta}</span></div>${clueGradeStripHTML(rows)}</div>`;
 }
 function clueLengthStatsHTML(){
@@ -2027,7 +2076,7 @@ function gameStatsTabsHTML(){
 function gameStatsSummaryHTML(cs){
   return `<div class="clue-summary-card compact-list">
     <div class="clue-summary-row"><span class="clue-summary-emoji">🧩</span><span class="clue-summary-label">Levels solved:</span><strong class="clue-summary-value">${cs.played}</strong></div>
-    <div class="clue-summary-row"><span class="clue-summary-emoji">🏆</span><span class="clue-summary-label">Total score:</span><strong class="clue-summary-value">${cs.totalScore}</strong></div>
+    <div class="clue-summary-row"><span class="clue-summary-emoji">🏆</span><span class="clue-summary-label">Total score:</span><strong class="clue-summary-value">${formatScore(cs.totalScore)}</strong></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">💯</span><span class="clue-summary-label">Scores 100+:</span><strong class="clue-summary-value">${cs.scores100}</strong><span class="clue-summary-pct">${cs.scores100Pct}</span></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🌟</span><span class="clue-summary-label">Perfects:</span><strong class="clue-summary-value">${cs.perfects}</strong><span class="clue-summary-pct">${cs.perfectsPct}</span></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🔎</span><span class="clue-summary-label">Extra words found:</span><strong class="clue-summary-value">${cs.extraWords}</strong></div>
