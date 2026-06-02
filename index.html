@@ -757,6 +757,82 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .game-stats-one-card .clue-grade-legend{font-size:13px;gap:10px}
 }
 
+
+/* v14: modal spacing, two-tab header, puzzle summary rhythm */
+.stats-card.game-stats-card{
+  padding-top:18px;
+}
+.stats-card.game-stats-card .stats-x{
+  top:11px;
+}
+.game-stats-tabs{
+  gap:25px;
+  padding:7px 42px 15px 0;
+  border-bottom:1px solid rgba(37,31,52,.10);
+}
+.game-stats-tab{
+  font-size:18.5px;
+  font-weight:780;
+  line-height:1.16;
+}
+.game-stats-tab.active{font-weight:920}
+.game-stats-header{
+  margin-top:0;
+  padding:14px 38px 17px 0;
+  border-bottom:1px solid rgba(37,31,52,.10);
+}
+.game-stats-header-main{
+  font-size:16.5px;
+}
+.game-stats-header-detail{
+  margin-top:8px;
+  font-size:14.75px;
+}
+.game-stats-body{
+  padding-top:19px;
+  min-height:420px;
+}
+.game-stats-one-card{
+  padding:13px 14px 14px;
+}
+.game-stats-one-card .clue-length-shared-card{
+  padding-top:12px;
+  margin-top:12px;
+}
+.clue-length-shared-title{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:10px;
+}
+.clue-length-title-key{
+  color:rgba(118,111,130,.66);
+  font-size:12px;
+  font-weight:650;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.game-stats-one-card .clue-grade-legend{
+  margin:12px 0 0;
+  font-size:14.25px;
+  gap:15px;
+}
+.game-stats-contact{
+  margin-top:10px;
+  color:rgba(118,111,130,.62);
+  font-size:12.75px;
+  font-weight:600;
+  line-height:1.2;
+  text-align:center;
+}
+@media (max-width:380px){
+  .game-stats-tabs{gap:20px;padding-right:42px;padding-top:7px;padding-bottom:14px}
+  .game-stats-tab{font-size:17px}
+  .game-stats-header{padding-top:13px;padding-bottom:16px}
+  .game-stats-body{min-height:395px;padding-top:17px}
+  .clue-length-title-key{font-size:11.5px}
+}
+
 </style>
 </head>
 <body>
@@ -2018,10 +2094,10 @@ function currentCluePuzzleSummaryHTML(){
   const clueText=c.hasTwo?`${escapeHtml(c.subtle)} · ${escapeHtml(c.clearer)}`:escapeHtml(c.subtle||"");
   const toggleText=clueStatsShowCurrentClues?"hide clues":"show clues";
   const toggleHTML=hasClue?` · <button type="button" class="clue-current-toggle" data-clue-current-toggle="1">${toggleText}</button>`:"";
-  const scorePart=Number.isFinite(Number(r.score))?` · +${formatScore(Number(r.score)||0)}`:"";
+  const scoreText=Number.isFinite(Number(r.score))?` +${formatScore(Number(r.score)||0)}`:"";
   const detail=clueStatsShowCurrentClues&&hasClue
     ? `<span class="clue-current-clue-list">${clueText}</span>${toggleHTML}`
-    : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}</span> · ${formatClock(r.timeMs)}${scorePart}${toggleHTML}`;
+    : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}${scoreText}</span> · ${formatClock(r.timeMs)}${toggleHTML}`;
   return `<div class="game-stats-header"><div class="game-stats-header-main"><span>${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; </span><strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></div><div class="game-stats-header-detail">${detail}</div></div>`;
 }
 function clueGradeLegendHTML(){
@@ -2043,13 +2119,13 @@ function clueLengthBlockHTML(len){
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=[`Played ${rows.length}`,medTime===null?"—":formatClock(medTime),`Moves ${formatClueMedianMoves(medMoves)}`].join(" · ");
+  const meta=[rows.length,medTime===null?"—":formatClock(medTime),formatClueMedianMoves(medMoves)].join(" · ");
   return `<div class="clue-length-block"><div class="clue-length-rowhead"><span class="clue-length-label-main">${len}-letter</span><span class="clue-length-rowmeta">${meta}</span></div>${clueGradeStripHTML(rows)}</div>`;
 }
 function clueLengthStatsHTML(){
   const blocks=[3,4,5].map(clueLengthBlockHTML).filter(Boolean).join("");
   if(!blocks)return `<div class="clue-no-stats">No clue stats yet.</div>`;
-  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title">By puzzle length</div>${blocks}${clueGradeLegendHTML()}</div>`;
+  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title"><span>By puzzle length</span><span class="clue-length-title-key">solved · time · moves</span></div>${blocks}${clueGradeLegendHTML()}</div>`;
 }
 function getOverallClueStats(){
   const rows=getClueResults();
@@ -2071,7 +2147,9 @@ function getOverallClueStats(){
   };
 }
 function gameStatsTabsHTML(){
-  return `<div class="game-stats-tabs" role="tablist" aria-label="Game stats sections">${["stats","improve","contact"].map(tab=>`<button type="button" class="game-stats-tab ${clueStatsModalTab===tab?"active":""}" data-game-stats-tab="${tab}" role="tab" aria-selected="${clueStatsModalTab===tab?"true":"false"}">${tab[0].toUpperCase()+tab.slice(1)}</button>`).join("")}</div>`;
+  if(!["stats","tips"].includes(clueStatsModalTab))clueStatsModalTab="stats";
+  const tabs=[{id:"stats",label:"Stats"},{id:"tips",label:"Playing tips"}];
+  return `<div class="game-stats-tabs" role="tablist" aria-label="Game stats sections">${tabs.map(tab=>`<button type="button" class="game-stats-tab ${clueStatsModalTab===tab.id?"active":""}" data-game-stats-tab="${tab.id}" role="tab" aria-selected="${clueStatsModalTab===tab.id?"true":"false"}">${tab.label}</button>`).join("")}</div>`;
 }
 function gameStatsSummaryHTML(cs){
   return `<div class="clue-summary-card compact-list">
@@ -2084,8 +2162,7 @@ function gameStatsSummaryHTML(cs){
   </div>`;
 }
 function gameStatsTabContentHTML(){
-  if(clueStatsModalTab==="improve")return `<div class="clue-tab-placeholder"><strong>Improve</strong><br>This section will hold strategy and improvement notes.</div>`;
-  if(clueStatsModalTab==="contact")return `<div class="clue-tab-placeholder"><strong>Contact</strong><br>This section will hold feedback and support details.</div>`;
+  if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder"><strong>Playing tips</strong><br>This section will hold strategy and improvement notes.</div>`;
   const cs=getOverallClueStats();
   return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
 }
@@ -2933,6 +3010,7 @@ function updateStatsPanel(){
         ${gameStatsTabsHTML()}
         ${currentCluePuzzleSummaryHTML()}
         <div class="game-stats-body">${gameStatsTabContentHTML()}</div>
+        <div class="game-stats-contact">contact: flipwords@gmail.com</div>
       </div>`;
     statsToggle.classList.remove("visible");
     statsToggle.textContent="View details";
