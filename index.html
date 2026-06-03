@@ -968,6 +968,45 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .game-stats-tabs{gap:22px;padding-top:9px;padding-bottom:15px}
 }
 
+
+/* v17: modal spacing and tap-state refinements */
+.stats-card.game-stats-card{
+  padding-top:16px;
+}
+.stats-card.game-stats-card .stats-x{
+  top:10px;
+}
+.game-stats-tabs{
+  padding-top:6px;
+  padding-bottom:15px;
+}
+.game-stats-header{
+  padding-top:15px;
+  padding-bottom:18px;
+}
+.game-stats-body{
+  padding-top:20px;
+  min-height:440px;
+}
+.clue-current-toggle,
+.clue-current-toggle:hover,
+.clue-current-toggle:focus,
+.clue-current-toggle:focus-visible,
+.clue-current-toggle:active{
+  color:rgba(118,111,130,.82)!important;
+  font-weight:560!important;
+  outline:none!important;
+  box-shadow:none!important;
+  background:transparent!important;
+}
+@media (max-width:380px){
+  .stats-card.game-stats-card{padding-top:15px}
+  .stats-card.game-stats-card .stats-x{top:9px}
+  .game-stats-tabs{padding-top:5px;padding-bottom:14px}
+  .game-stats-header{padding-top:14px;padding-bottom:17px}
+  .game-stats-body{padding-top:19px;min-height:425px}
+}
+
 </style>
 </head>
 <body>
@@ -4354,6 +4393,8 @@ statsPanel.addEventListener("click",e=>{
   }
   if(e.target&&e.target.closest&&e.target.closest("[data-clue-current-toggle]")){
     e.preventDefault();
+    const btn=e.target.closest("[data-clue-current-toggle]");
+    if(btn&&btn.blur)btn.blur();
     clueStatsShowCurrentClues=!clueStatsShowCurrentClues;
     updateStatsPanel();
     return;
