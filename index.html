@@ -1583,7 +1583,7 @@ function normalizeClueStats(s){
     const score=Number(r.score),timeMs=Number(r.timeMs),moves=Number(r.moves);
     const safeScore=Number.isFinite(score)?Math.max(0,score):0;
     const bonusScore=Math.max(0,Number(r.bonusScore)||0);
-    const rating=r.gaveUp?"clunky":getClueRatingForScore(safeScore,CLUE_MAX_SCORE_BY_LENGTH[len]||CLUE_MAX_SCORE_BY_LENGTH[5],{answer1:"x".repeat(len)});
+    const rating=r.gaveUp?"clunky":getClueRatingForScore(safeScore,CLUE_MAX_SCORE_BY_LENGTH[len]||CLUE_MAX_SCORE_BY_LENGTH[5]);
     const rawCluesShown=Number(r.cluesShown);
     const cluesShown=Number.isFinite(rawCluesShown)?clamp(Math.round(rawCluesShown),0,2):(r.gaveUp?2:0);
     out.results.push({attemptId:String(r.attemptId||`${r.puzzleId||"puzzle"}-${i}-${Date.now()}`),puzzleId:String(r.puzzleId||""),length:len,minMoves:Number(r.minMoves)||0,timeMs:Number.isFinite(timeMs)?Math.max(0,timeMs):0,moves:Number.isFinite(moves)?Math.max(0,moves):0,score:safeScore,bonusScore,rating,gaveUp:!!r.gaveUp,cluesShown,earlySkipPenaltyPoints:Math.max(0,Number(r.earlySkipPenaltyPoints)||0),wordCreditMs:Math.max(0,Number(r.wordCreditMs)||0),bonusWords:Array.isArray(r.bonusWords)?r.bonusWords.map(w=>String(w||"").toLowerCase()).filter(Boolean):[],completedAt:Number(r.completedAt)||Date.now()});
@@ -1681,11 +1681,7 @@ function getClueSpeedDecayExponent(p=currentPuzzle()){
   const len=getCluePuzzleLength(p);
   return CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH[len]||CLUE_SPEED_DECAY_EXPONENT_BY_LENGTH[5];
 }
-function getCluePerfectRatioForPuzzle(p=currentPuzzle()){
-  const len=getCluePuzzleLength(p);
-  return len===5?.89:.9;
-}
-function getClueRatingForScore(score,maxScore,p=currentPuzzle()){const ratio=maxScore>0?score/maxScore:0;if(ratio>=getCluePerfectRatioForPuzzle(p))return "perfect";if(ratio>=.55)return "great";if(ratio>=.32)return "good";return "clunky"}
+function getClueRatingForScore(score,maxScore){const ratio=maxScore>0?score/maxScore:0;const perfectThreshold=(Number(maxScore)===Number(CLUE_MAX_SCORE_BY_LENGTH[5]))?.89:.9;if(ratio>=perfectThreshold)return "perfect";if(ratio>=.55)return "great";if(ratio>=.32)return "good";return "clunky"}
 function getClueRatingLabel(rating){return CLUE_RATING_LABELS[rating]||CLUE_RATING_LABELS.clunky}
 function getClueFooterRatingLabel(rating){return CLUE_RATING_FOOTER_LABELS[rating]||CLUE_RATING_FOOTER_LABELS.clunky}
 function getClueScoreAtElapsedMs(elapsedMs,p=currentPuzzle()){
@@ -1721,7 +1717,7 @@ function calculateClueScoreResult({p=currentPuzzle(),elapsedMs=getActivePuzzleEl
   const raw=getClueScoreAtElapsedMs(elapsedMs,p)-penalty;
   const floor=getClueMinSolveScoreForPuzzle(p);
   const score=clamp(Math.max(floor,roundToNearestFive(raw)),floor,maxScore);
-  const rating=getClueRatingForScore(score,maxScore,p);
+  const rating=getClueRatingForScore(score,maxScore);
   return {puzzleId:p.id,length:len,minMoves,timeMs:Math.max(0,elapsedMs),moves:Math.max(0,moves),score,rating,gaveUp:false,cluesShown:shown,earlySkipPenaltyPoints:penalty,wordCreditMs:Math.max(0,Number(clueWordCreditMs)||0),bonusWords:Array.isArray(clueFoundBonusWords)?[...clueFoundBonusWords]:[],displayText:`${getClueRatingLabel(rating)}! +${score}`,completedAt:Date.now()};
 }
 function getCluesShownForRecordedResult(gaveUp=false){
