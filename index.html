@@ -1075,15 +1075,58 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .stats-card.game-stats-card .game-stats-tab,
   .stats-card.game-stats-card .game-stats-tab.active{font-size:19px;}
 }
+
+/* v27: tab hierarchy, answer tone, uppercase solved controls, and no-load flash */
+.game.app-loading #subtitle,
+.game.app-loading .controls button{
+  visibility:hidden;
+}
+.stats-card.game-stats-card .game-stats-tabs{
+  gap:24px;
+}
+.stats-card.game-stats-card .game-stats-tab,
+.stats-card.game-stats-card .game-stats-tab.active{
+  font-size:22px;
+  font-weight:520;
+  line-height:1.1;
+  letter-spacing:-.018em;
+  color:rgba(96,89,108,.70);
+}
+.stats-card.game-stats-card .game-stats-tab.active{
+  color:rgba(39,32,51,.96);
+}
+.stats-card.game-stats-card .game-stats-tab:hover,
+.stats-card.game-stats-card .game-stats-tab:active,
+.stats-card.game-stats-card .game-stats-tab:focus,
+.stats-card.game-stats-card .game-stats-tab:focus-visible{
+  color:rgba(39,32,51,.96);
+  font-weight:520;
+}
+.stats-card.game-stats-card .game-stats-tab.active::after{
+  background:rgba(39,32,51,.32);
+}
+.game-stats-header-main span{
+  color:rgba(118,111,130,.72)!important;
+  font-weight:460!important;
+}
+.game-stats-header-main strong{
+  color:rgba(63,56,75,.86)!important;
+  font-weight:820!important;
+}
+@media (max-width:380px){
+  .stats-card.game-stats-card .game-stats-tab,
+  .stats-card.game-stats-card .game-stats-tab.active{font-size:20.5px;}
+}
+
 </style>
 </head>
 <body>
-<main class="game">
+<main class="game app-loading">
 <h1 class="title">FlipWords</h1>
-<p id="subtitle" class="subtitle intro-copy">Make two new words by flipping and moving the tiles to solve.</p>
+<p id="subtitle" class="subtitle intro-copy"></p>
 <section class="board-shell" aria-label="Puzzle board"><div id="board" class="board"></div></section>
 <div class="feedback-area"><div id="message" class="message" aria-live="polite"></div><div id="starBurst" class="star-burst" aria-hidden="true"></div></div>
-<div class="controls"><button id="hintBtn" class="hint" type="button"><span>Hint</span></button><span class="action-slot"><button id="startWordsBtn" class="start-words" type="button">Starters</button><button id="nextBtn" class="next" type="button">Next</button></span></div>
+<div class="controls"><button id="hintBtn" class="hint" type="button"><span></span></button><span class="action-slot"><button id="startWordsBtn" class="start-words" type="button"></button><button id="nextBtn" class="next" type="button">NEXT</button></span></div>
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 <button id="statsToggle" class="stats-toggle" type="button">View details</button>
 <div id="endMessage" class="end-message"></div>
@@ -2308,7 +2351,7 @@ function render(){
   board.classList.toggle("aw-grid-flash",showAllWords&&allWordsFlash.grid);
   board.classList.toggle("vowel-reveal",!!vowelRevealActive);
   const allLocked=hintOrder.length>0&&hintCursor>=hintOrder.length,isFinal=puzzleIndex>=activePuzzles.length-1;
-  nextBtn.classList.toggle("visible",!isDailyMode()&&!isAllWordsMode()&&solved&&!isFinal);nextBtn.textContent="Next";
+  nextBtn.classList.toggle("visible",!isDailyMode()&&!isAllWordsMode()&&solved&&!isFinal);nextBtn.textContent="NEXT";
   const controlsEl=document.querySelector(".controls");
   const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
   controlsEl.style.display=isAllWordsMode()?"flex":"grid";
@@ -2327,7 +2370,7 @@ function render(){
   hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
-  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"Stats":(clueGiveUpReady?"Give-up":"Clue")):"Hint"));
+  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(clueGiveUpReady?"Give-up":"Clue")):"Hint"));
   hintBtn.disabled=showDailyCompleteControls?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
   const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
   startWordsBtn.classList.toggle("daily-start",showDailyStart);
@@ -3856,7 +3899,7 @@ function initMode(){
   else localStorage.setItem(DAILY_MODE_KEY,previousMode);
   if(mode==="daily")initDaily();else initNewMode();
 }
-loadDailyTriplets().then(initMode);
+loadDailyTriplets().then(()=>{document.querySelector(".game")?.classList.remove("app-loading");initMode();});
 </script>
 </body>
 </html>
