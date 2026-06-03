@@ -576,7 +576,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   line-height:1.2;
   cursor:pointer;
 }
-.game-stats-tab.active{color:var(--ink);font-weight:900}
+.game-stats-tab.active{color:rgba(117,92,154,.92);font-weight:760}
 .game-stats-body{
   min-height:455px;
   overflow:auto;
@@ -904,8 +904,8 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   border-bottom:0;
 }
 .game-stats-tab.active{
-  color:var(--ink);
-  font-weight:600;
+  color:rgba(117,92,154,.92);
+  font-weight:580;
   text-decoration:none!important;
 }
 .game-stats-tab.active::after{
@@ -916,7 +916,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   bottom:-5px;
   height:1.5px;
   border-radius:999px;
-  background:rgba(39,32,51,.72);
+  background:rgba(117,92,154,.68);
 }
 .game-stats-header{
   padding-top:16px;
@@ -1487,7 +1487,7 @@ function clueLengthBlockHTML(len){
 function clueLengthStatsHTML(){
   const blocks=[3,4,5].map(clueLengthBlockHTML).filter(Boolean).join("");
   if(!blocks)return `<div class="clue-no-stats">No clue stats yet.</div>`;
-  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title"><span>By puzzle length</span><span class="clue-length-shared-meta">median</span></div>${blocks}${clueGradeLegendHTML()}</div>`;
+  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title"><span>By puzzle length</span></div>${blocks}${clueGradeLegendHTML()}</div>`;
 }
 function getOverallClueStats(){
   const rows=getClueResults();
