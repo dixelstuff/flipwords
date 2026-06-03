@@ -1157,6 +1157,46 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .playing-tips-list{gap:7px;padding-left:17px}
 }
 
+
+/* v29: fixed game modal height + tighter playing tips */
+.stats-card.game-stats-card{
+  height:min(95vh,680px);
+  max-height:min(95vh,680px);
+  display:flex;
+  flex-direction:column;
+}
+.stats-card.game-stats-card .stats-x{
+  flex:0 0 auto;
+}
+.stats-card.game-stats-card .game-stats-tabs{
+  flex:0 0 auto;
+}
+.stats-card.game-stats-card .game-stats-header{
+  flex:0 0 auto;
+}
+.stats-card.game-stats-card .game-stats-body{
+  flex:1 1 auto;
+  min-height:0!important;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.stats-card.game-stats-card .game-stats-contact{
+  flex:0 0 auto;
+}
+.playing-tips-panel{
+  padding:15px 16px 14px;
+}
+.playing-tips-list{
+  gap:7px;
+}
+.playing-tips-list li{
+  line-height:1.36;
+}
+@media (max-width:380px){
+  .stats-card.game-stats-card{height:min(95vh,660px);max-height:min(95vh,660px)}
+  .playing-tips-list{gap:6px}
+}
+
 </style>
 </head>
 <body>
@@ -1670,13 +1710,12 @@ function gameStatsTabContentHTML(){
   if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder playing-tips-panel">
     <div class="playing-tips-title">Playing tips</div>
     <ul class="playing-tips-list">
-      <li><strong>Start with the odd letters.</strong> Rare letters like X, V, K or J often narrow the word search quickly.</li>
-      <li><strong>Make one word first.</strong> Spotting both answers at once is hard. Any valid extra word can bring the free clue closer, helping you solve sooner and score more.</li>
-      <li><strong>Use one answer to find the other.</strong> Once one row looks like a word, the remaining row is usually much easier to read.</li>
-      <li><strong>Watch repeated letters.</strong> If you make a valid word but the puzzle does not solve, swapping two identical letters may complete the other word.</li>
-      <li><strong>Look for anchors.</strong> Start and end consonants, middle vowels, and common endings are useful — but vowel-starting words can hide in plain sight.</li>
-      <li><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Many puzzles, even five-letter ones, are only a few moves from the start.</li>
-      <li><strong>Save the clue button.</strong> Tapping clue costs time. If you can, wait for the free clue — and when it arrives, read it, because it is usually a strong nudge.</li>
+      <li><strong>Notice rare letters.</strong> X, V, K, J and other unusual letters can narrow the search quickly.</li>
+      <li><strong>Make any word first.</strong> Finding both answers at once is hard. Extra words bring the free clue closer, so they can help you solve sooner and score more.</li>
+      <li><strong>Watch for repeated letters.</strong> If you make a word but the puzzle does not solve, swapping two identical letters may complete the other word.</li>
+      <li><strong>Look for anchors.</strong> Start/end consonants, middle vowels and common endings help. But words starting with vowels are easy to miss, because the first letter may not look like a “start”.</li>
+      <li><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Most puzzles are only a few moves from start to solve.</li>
+      <li><strong>Wait for the free clue.</strong> Tapping Clue costs time. When the free clue appears, read it — it is usually a strong nudge.</li>
     </ul>
   </div>`;
   const cs=getOverallClueStats();
@@ -2524,7 +2563,7 @@ function updateStatsPanel(){
       <div class="stats-card game-stats-card" role="dialog" aria-modal="true" aria-label="Game stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
         ${gameStatsTabsHTML()}
-        ${currentCluePuzzleSummaryHTML()}
+        ${clueStatsModalTab==="stats"?currentCluePuzzleSummaryHTML():""}
         <div class="game-stats-body">${gameStatsTabContentHTML()}</div>
         <div class="game-stats-contact"><span>flipwords</span><span>@</span><span>gmail.com</span></div>
       </div>`;
