@@ -1118,6 +1118,45 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .stats-card.game-stats-card .game-stats-tab.active{font-size:20.5px;}
 }
 
+
+/* v28: black active tab + polished playing tips */
+.stats-card.game-stats-card .game-stats-tab.active{
+  color:var(--ink)!important;
+}
+.stats-card.game-stats-card .game-stats-tab:hover,
+.stats-card.game-stats-card .game-stats-tab:active,
+.stats-card.game-stats-card .game-stats-tab:focus,
+.stats-card.game-stats-card .game-stats-tab:focus-visible{
+  color:var(--ink)!important;
+}
+.playing-tips-panel{
+  padding:16px 16px 15px;
+}
+.playing-tips-title{
+  color:var(--ink);
+  font-size:16px;
+  font-weight:780;
+  line-height:1.15;
+  margin:0 0 10px;
+}
+.playing-tips-list{
+  margin:0;
+  padding-left:18px;
+  display:grid;
+  gap:8px;
+}
+.playing-tips-list li{
+  padding-left:2px;
+}
+.playing-tips-list strong{
+  color:rgba(63,56,75,.92);
+  font-weight:800;
+}
+@media (max-width:380px){
+  .playing-tips-panel{padding:14px 14px 13px}
+  .playing-tips-list{gap:7px;padding-left:17px}
+}
+
 </style>
 </head>
 <body>
@@ -1628,7 +1667,18 @@ function gameStatsSummaryHTML(cs){
   </div>`;
 }
 function gameStatsTabContentHTML(){
-  if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder"><strong>Playing tips</strong><br>This section will hold strategy and improvement notes.</div>`;
+  if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder playing-tips-panel">
+    <div class="playing-tips-title">Playing tips</div>
+    <ul class="playing-tips-list">
+      <li><strong>Start with the odd letters.</strong> Rare letters like X, V, K or J often narrow the word search quickly.</li>
+      <li><strong>Make one word first.</strong> Spotting both answers at once is hard. Any valid extra word can bring the free clue closer, helping you solve sooner and score more.</li>
+      <li><strong>Use one answer to find the other.</strong> Once one row looks like a word, the remaining row is usually much easier to read.</li>
+      <li><strong>Watch repeated letters.</strong> If you make a valid word but the puzzle does not solve, swapping two identical letters may complete the other word.</li>
+      <li><strong>Look for anchors.</strong> Start and end consonants, middle vowels, and common endings are useful — but vowel-starting words can hide in plain sight.</li>
+      <li><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Many puzzles, even five-letter ones, are only a few moves from the start.</li>
+      <li><strong>Save the clue button.</strong> Tapping clue costs time. If you can, wait for the free clue — and when it arrives, read it, because it is usually a strong nudge.</li>
+    </ul>
+  </div>`;
   const cs=getOverallClueStats();
   return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
 }
