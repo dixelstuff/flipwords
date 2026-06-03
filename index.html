@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="format-detection" content="telephone=no,email=no,address=no" />
 <title>FlipWords</title>
 <style>
 :root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24);--grid-scale:1;--tile-w-base:84px;--base-tile-h-base:142px;--tile-gap-base:10px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:50px;--tile-radius-base:18px;--tile-border-w:1.5px;--divider:1px;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}
@@ -876,6 +877,95 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-length-title-key{display:none!important;}
 @media (max-width:380px){
   .game-stats-tab{font-size:18.5px;}
+}
+
+
+
+/* v16: modal polish: tab sizing/underline, spacing, and no stray link underlines */
+.stats-card.game-stats-card{
+  padding-top:20px;
+}
+.stats-card.game-stats-card .stats-x{
+  top:13px;
+}
+.game-stats-tabs{
+  gap:27px;
+  padding:10px 42px 16px 0;
+  align-items:center;
+}
+.game-stats-tab{
+  position:relative;
+  font-size:22px;
+  font-weight:520;
+  color:rgba(118,111,130,.74);
+  text-decoration:none!important;
+  border-bottom:0;
+}
+.game-stats-tab.active{
+  color:var(--ink);
+  font-weight:600;
+  text-decoration:none!important;
+}
+.game-stats-tab.active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-5px;
+  height:1.5px;
+  border-radius:999px;
+  background:rgba(39,32,51,.72);
+}
+.game-stats-header{
+  padding-top:16px;
+  padding-bottom:21px;
+}
+.game-stats-header-main span{
+  font-weight:460;
+}
+.game-stats-body{
+  padding-top:22px;
+}
+.game-stats-one-card{
+  padding-top:17px;
+  padding-bottom:15px;
+}
+.game-stats-one-card .clue-summary-card.compact-list{
+  margin-top:0;
+  margin-bottom:0;
+}
+.game-stats-one-card .clue-length-shared-card{
+  margin-top:16px;
+  padding-top:16px;
+}
+.game-stats-contact,
+.game-stats-contact *,
+.game-stats-contact a,
+.game-stats-contact a:link,
+.game-stats-contact a:visited,
+.clue-grade-legend,
+.clue-grade-legend *,
+.clue-grade-legend a{
+  text-decoration:none!important;
+  border-bottom:0!important;
+  -webkit-text-decoration-line:none!important;
+  text-decoration-line:none!important;
+}
+.game-stats-contact{
+  margin-top:11px;
+  user-select:text;
+  -webkit-user-select:text;
+}
+.clue-current-toggle,
+.clue-current-toggle:focus,
+.clue-current-toggle:focus-visible,
+.clue-current-toggle:active{
+  font-weight:560!important;
+}
+@media (max-width:380px){
+  .game-stats-tab{font-size:20px;font-weight:510}
+  .game-stats-tab.active{font-weight:590}
+  .game-stats-tabs{gap:22px;padding-top:9px;padding-bottom:15px}
 }
 
 </style>
@@ -2143,7 +2233,7 @@ function currentCluePuzzleSummaryHTML(){
   const detail=clueStatsShowCurrentClues&&hasClue
     ? `<span class="clue-current-clue-list">${clueText}</span>${toggleHTML}`
     : `<span class="clue-detail-rating is-${ratingClass}">${ratingText}${scoreText}</span> · ${formatClock(r.timeMs)}${toggleHTML}`;
-  return `<div class="game-stats-header"><div class="game-stats-header-main"><span>${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &gt; </span><strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></div><div class="game-stats-header-detail">${detail}</div></div>`;
+  return `<div class="game-stats-header"><div class="game-stats-header-main"><span>${p.word1.toUpperCase()} ${p.word2.toUpperCase()} &nbsp;&gt;&nbsp; </span><strong>${p.answer1.toUpperCase()} ${p.answer2.toUpperCase()}</strong></div><div class="game-stats-header-detail">${detail}</div></div>`;
 }
 function clueGradeLegendHTML(){
   return `<div class="clue-grade-legend" aria-label="Grade colours"><span class="clue-grade-perfect">Perfect</span><span class="clue-grade-great">Great</span><span class="clue-grade-good">Good</span><span class="clue-grade-clunky">Rough</span></div>`;
@@ -3055,7 +3145,7 @@ function updateStatsPanel(){
         ${gameStatsTabsHTML()}
         ${currentCluePuzzleSummaryHTML()}
         <div class="game-stats-body">${gameStatsTabContentHTML()}</div>
-        <div class="game-stats-contact">flipwords@gmail.com</div>
+        <div class="game-stats-contact"><span>flipwords</span><span>@</span><span>gmail.com</span></div>
       </div>`;
     statsToggle.classList.remove("visible");
     statsToggle.textContent="View details";
