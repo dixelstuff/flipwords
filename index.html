@@ -1013,6 +1013,68 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 /* v23 external-data modal tweaks */
 .game-stats-one-card .clue-length-shared-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
 .game-stats-one-card .clue-length-shared-meta{font-size:12px;font-weight:650;color:rgba(118,111,130,.68);text-transform:lowercase;white-space:nowrap}
+
+
+/* v26 neutral tab styling: no purple, no layout wobble */
+.stats-card.game-stats-card .game-stats-tabs{
+  align-items:center;
+  gap:22px;
+}
+.stats-card.game-stats-card .game-stats-tab,
+.stats-card.game-stats-card .game-stats-tab.active{
+  position:relative;
+  width:auto;
+  height:auto;
+  padding:0 0 5px;
+  margin:0;
+  border:0;
+  background:transparent;
+  color:rgba(84,78,94,.78);
+  font-size:20px;
+  font-weight:520;
+  line-height:1.12;
+  letter-spacing:-.015em;
+  text-decoration:none!important;
+  box-shadow:none!important;
+  transform:none!important;
+  outline:none!important;
+  -webkit-tap-highlight-color:transparent;
+}
+.stats-card.game-stats-card .game-stats-tab.active{
+  color:rgba(45,39,55,.88);
+  font-weight:520;
+}
+.stats-card.game-stats-card .game-stats-tab::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  border-radius:999px;
+  background:transparent;
+  transform:none;
+}
+.stats-card.game-stats-card .game-stats-tab.active::after{
+  background:rgba(45,39,55,.30);
+}
+.stats-card.game-stats-card .game-stats-tab:hover,
+.stats-card.game-stats-card .game-stats-tab:active,
+.stats-card.game-stats-card .game-stats-tab:focus,
+.stats-card.game-stats-card .game-stats-tab:focus-visible{
+  color:rgba(45,39,55,.88);
+  font-weight:520;
+  text-decoration:none!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+.stats-card.game-stats-card .game-stats-tab:active{
+  transform:none!important;
+}
+@media (max-width:380px){
+  .stats-card.game-stats-card .game-stats-tab,
+  .stats-card.game-stats-card .game-stats-tab.active{font-size:19px;}
+}
 </style>
 </head>
 <body>
