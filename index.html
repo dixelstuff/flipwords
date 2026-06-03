@@ -1307,6 +1307,42 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   }
 }
 
+
+
+/* v34: stable tab-height modal using overlaid panels, plus footer spacing */
+.stats-card.game-stats-card .game-stats-body{
+  display:grid!important;
+  grid-template-columns:1fr;
+  align-items:start;
+  height:auto!important;
+  min-height:0!important;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  max-height:calc(95vh - 112px);
+}
+.stats-card.game-stats-card .game-tab-panel{
+  grid-area:1 / 1;
+  min-width:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.stats-card.game-stats-card .game-tab-panel.active{
+  visibility:visible;
+  pointer-events:auto;
+}
+.stats-card.game-stats-card .game-stats-contact{
+  margin-top:20px!important;
+}
+@media (max-width:520px){
+  .stats-card.game-stats-card .game-stats-body{
+    max-height:calc(100vh - 152px);
+    max-height:calc(100dvh - 152px);
+  }
+  .stats-card.game-stats-card .game-stats-contact{
+    margin-top:19px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1816,8 +1852,12 @@ function gameStatsSummaryHTML(cs){
     <div class="clue-summary-row"><span class="clue-summary-emoji">🔥</span><span class="clue-summary-label">Best perfect streak:</span><strong class="clue-summary-value">${cs.bestPerfectStreak||0}</strong></div>
   </div>`;
 }
-function gameStatsTabContentHTML(){
-  if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder playing-tips-panel">
+function gameStatsStatsPanelHTML(){
+  const cs=getOverallClueStats();
+  return `<div class="game-tab-panel ${clueStatsModalTab==="stats"?"active":""}" data-game-tab-panel="stats">${currentCluePuzzleSummaryHTML()}<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div></div>`;
+}
+function gameStatsTipsPanelHTML(){
+  return `<div class="game-tab-panel ${clueStatsModalTab==="tips"?"active":""}" data-game-tab-panel="tips"><div class="clue-tab-placeholder playing-tips-panel">
     <div class="playing-tips-list">
       <p><strong>Notice distinctive letters.</strong> X, V, K, J and other less common letters can quickly narrow your word retrieval.</p>
       <p><strong>Just make any words.</strong> Finding both answers at once is hard. Make any word you can; if it is not the solve, that is fine — it still gets you closer to earning a free clue and a faster solve.</p>
@@ -1826,9 +1866,10 @@ function gameStatsTabContentHTML(){
       <p><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Most puzzles are only a few moves from start to solve.</p>
       <p><strong>Wait for the free clue.</strong> Tapping Clue costs time and therefore points. When a free clue appears, read it — it is usually a strong nudge.</p>
     </div>
-  </div>`;
-  const cs=getOverallClueStats();
-  return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
+  </div></div>`;
+}
+function gameStatsTabContentHTML(){
+  return `${gameStatsStatsPanelHTML()}${gameStatsTipsPanelHTML()}`;
 }
 
 function gameStatsTabContentHTMLFor(tab){
@@ -2705,7 +2746,6 @@ function updateStatsPanel(){
       <div class="stats-card game-stats-card" role="dialog" aria-modal="true" aria-label="Game stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
         ${gameStatsTabsHTML()}
-        ${clueStatsModalTab==="stats"?currentCluePuzzleSummaryHTML():""}
         <div class="game-stats-body">${gameStatsTabContentHTML()}</div>
         <div class="game-stats-contact"><span>flipwords</span><span>@</span><span>gmail.com</span></div>
       </div>`;
