@@ -699,6 +699,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   border-top:1px solid rgba(37,31,52,.10);
 }
 .game-stats-one-card .clue-length-shared-title{margin-bottom:7px}
+.game-stats-one-card .clue-length-shared-meta{font-size:12px;font-weight:650;color:rgba(118,111,130,.70);text-transform:lowercase}
 .game-stats-one-card .clue-length-shared-title + .clue-length-block{border-top:0;padding-top:0}
 .game-stats-one-card .clue-grade-legend{
   margin:8px 0 0;
@@ -1008,6 +1009,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .game-stats-body{padding-top:19px;min-height:425px}
 }
 
+
+/* v23 external-data modal tweaks */
+.game-stats-one-card .clue-length-shared-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.game-stats-one-card .clue-length-shared-meta{font-size:12px;font-weight:650;color:rgba(118,111,130,.68);text-transform:lowercase;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1272,6 +1277,7 @@ function getPerfectStreakBonus(streak){
 }
 function getScore100RunBonus(run){
   run=Math.max(0,Math.round(Number(run)||0));
+  if(run===5)return 50;
   if(run===10)return 150;
   if(run===20)return 500;
   if(run>20&&run%20===0)return 500;
@@ -1475,13 +1481,13 @@ function clueLengthBlockHTML(len){
   if(!rows.length)return "";
   const medTime=medianNumber(rows.map(r=>r.timeMs).filter(Number.isFinite));
   const medMoves=medianNumber(rows.map(r=>r.moves).filter(Number.isFinite));
-  const meta=`Played ${rows.length} · ${medTime===null?"—":formatClock(medTime)} · Moves ${formatClueMedianMoves(medMoves)}`;
+  const meta=`Time ${medTime===null?"—":formatClock(medTime)} · Moves ${formatClueMedianMoves(medMoves)}`;
   return `<div class="clue-length-block"><div class="clue-length-rowhead"><span class="clue-length-label-main">${len}-letter</span><span class="clue-length-rowmeta">${meta}</span></div>${clueGradeStripHTML(rows)}</div>`;
 }
 function clueLengthStatsHTML(){
   const blocks=[3,4,5].map(clueLengthBlockHTML).filter(Boolean).join("");
   if(!blocks)return `<div class="clue-no-stats">No clue stats yet.</div>`;
-  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title"><span>By puzzle length</span></div>${blocks}${clueGradeLegendHTML()}</div>`;
+  return `<div class="clue-length-shared-card"><div class="clue-length-shared-title"><span>By puzzle length</span><span class="clue-length-shared-meta">median</span></div>${blocks}${clueGradeLegendHTML()}</div>`;
 }
 function getOverallClueStats(){
   const rows=getClueResults();
@@ -1504,16 +1510,15 @@ function getOverallClueStats(){
 }
 function gameStatsTabsHTML(){
   if(!["stats","tips"].includes(clueStatsModalTab))clueStatsModalTab="stats";
-  const tabs=[{id:"stats",label:"Stats"},{id:"tips",label:"Playing tips"}];
+  const tabs=[{id:"stats",label:"Game stats"},{id:"tips",label:"Playing tips"}];
   return `<div class="game-stats-tabs" role="tablist" aria-label="Game stats sections">${tabs.map(tab=>`<button type="button" class="game-stats-tab ${clueStatsModalTab===tab.id?"active":""}" data-game-stats-tab="${tab.id}" role="tab" aria-selected="${clueStatsModalTab===tab.id?"true":"false"}">${tab.label}</button>`).join("")}</div>`;
 }
 function gameStatsSummaryHTML(cs){
   return `<div class="clue-summary-card compact-list">
-    <div class="clue-summary-row"><span class="clue-summary-emoji">🧩</span><span class="clue-summary-label">Levels solved:</span><strong class="clue-summary-value">${cs.played}</strong></div>
+    <div class="clue-summary-row"><span class="clue-summary-emoji">🧩</span><span class="clue-summary-label">Puzzles solved:</span><strong class="clue-summary-value">${cs.played}</strong></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🏆</span><span class="clue-summary-label">Total score:</span><strong class="clue-summary-value">${formatScore(cs.totalScore)}</strong></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">💯</span><span class="clue-summary-label">Scores 100+:</span><strong class="clue-summary-value">${cs.scores100}</strong><span class="clue-summary-pct">${cs.scores100Pct}</span></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🌟</span><span class="clue-summary-label">Perfects:</span><strong class="clue-summary-value">${cs.perfects}</strong><span class="clue-summary-pct">${cs.perfectsPct}</span></div>
-    <div class="clue-summary-row"><span class="clue-summary-emoji">🔎</span><span class="clue-summary-label">Extra words found:</span><strong class="clue-summary-value">${cs.extraWords}</strong></div>
     <div class="clue-summary-row"><span class="clue-summary-emoji">🔥</span><span class="clue-summary-label">Best perfect streak:</span><strong class="clue-summary-value">${cs.bestPerfectStreak||0}</strong></div>
   </div>`;
 }
