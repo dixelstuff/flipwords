@@ -1237,6 +1237,49 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   }
 }
 
+
+/* v32: content-fit game stats modal height with viewport cap */
+.stats-card.game-stats-card{
+  height:auto!important;
+  max-height:min(95vh,680px)!important;
+  display:flex;
+  flex-direction:column;
+}
+.stats-card.game-stats-card .game-stats-body{
+  flex:0 1 auto!important;
+  min-height:0!important;
+  max-height:calc(95vh - 155px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+@media (max-width:520px){
+  .stats-panel{padding:16px;}
+  .stats-card.game-stats-card{
+    height:auto!important;
+    max-height:calc(100vh - 32px)!important;
+    max-height:calc(100dvh - 32px)!important;
+  }
+  .stats-card.game-stats-card .game-stats-body{
+    max-height:calc(100vh - 178px);
+    max-height:calc(100dvh - 178px);
+    padding-top:16px;
+  }
+  .stats-card.game-stats-card .game-stats-contact{
+    margin-top:8px;
+  }
+}
+@media (max-width:380px){
+  .stats-card.game-stats-card{
+    height:auto!important;
+    max-height:calc(100vh - 30px)!important;
+    max-height:calc(100dvh - 30px)!important;
+  }
+  .stats-card.game-stats-card .game-stats-body{
+    max-height:calc(100vh - 174px);
+    max-height:calc(100dvh - 174px);
+  }
+}
+
 </style>
 </head>
 <body>
