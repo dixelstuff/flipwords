@@ -1184,17 +1184,28 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   flex:0 0 auto;
 }
 .playing-tips-panel{
-  padding:15px 16px 14px;
+  padding:14px 16px 14px;
 }
 .playing-tips-list{
-  gap:7px;
+  display:block;
+  margin:0;
+  padding:0;
+  list-style:none;
 }
-.playing-tips-list li{
-  line-height:1.36;
+.playing-tips-list p{
+  margin:0 0 11px;
+  line-height:1.37;
+}
+.playing-tips-list p:last-child{
+  margin-bottom:0;
+}
+.playing-tips-list strong{
+  color:rgba(63,56,75,.92);
+  font-weight:800;
 }
 @media (max-width:380px){
   .stats-card.game-stats-card{height:min(95vh,660px);max-height:min(95vh,660px)}
-  .playing-tips-list{gap:6px}
+  .playing-tips-list p{margin-bottom:9px;line-height:1.34}
 }
 
 </style>
@@ -1708,15 +1719,14 @@ function gameStatsSummaryHTML(cs){
 }
 function gameStatsTabContentHTML(){
   if(clueStatsModalTab==="tips")return `<div class="clue-tab-placeholder playing-tips-panel">
-    <div class="playing-tips-title">Playing tips</div>
-    <ul class="playing-tips-list">
-      <li><strong>Notice rare letters.</strong> X, V, K, J and other unusual letters can narrow the search quickly.</li>
-      <li><strong>Make any word first.</strong> Finding both answers at once is hard. Extra words bring the free clue closer, so they can help you solve sooner and score more.</li>
-      <li><strong>Watch for repeated letters.</strong> If you make a word but the puzzle does not solve, swapping two identical letters may complete the other word.</li>
-      <li><strong>Look for anchors.</strong> Start/end consonants, middle vowels and common endings help. But words starting with vowels are easy to miss, because the first letter may not look like a “start”.</li>
-      <li><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Most puzzles are only a few moves from start to solve.</li>
-      <li><strong>Wait for the free clue.</strong> Tapping Clue costs time. When the free clue appears, read it — it is usually a strong nudge.</li>
-    </ul>
+    <div class="playing-tips-list">
+      <p><strong>Notice distinctive letters.</strong> X, V, K, J and other less common letters can quickly narrow your word retrieval.</p>
+      <p><strong>Just make any words.</strong> Finding both answers at once is hard. Make any word you can; if it is not the solve, that is fine — it still gets you closer to earning a free clue and a faster solve.</p>
+      <p><strong>Swap identical letters.</strong> If you make a word but the puzzle does not solve, swapping any identical letters can often complete the other word.</p>
+      <p><strong>Look for anchors.</strong> Starting consonants, middle vowels and common endings can help. But beware of words starting with vowels — they have a tendency to hide.</p>
+      <p><strong>Reset sooner than you think.</strong> If the grid gets messy, reset. Most puzzles are only a few moves from start to solve.</p>
+      <p><strong>Wait for the free clue.</strong> Tapping Clue costs time and therefore points. When a free clue appears, read it — it is usually a strong nudge.</p>
+    </div>
   </div>`;
   const cs=getOverallClueStats();
   return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
