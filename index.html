@@ -1280,6 +1280,33 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   }
 }
 
+
+/* v33: keep Game stats / Playing tips modal height based on tallest tab and add footer breathing room */
+.stats-card.game-stats-card .game-stats-contact{
+  margin-top:14px!important;
+}
+.stats-card.game-stats-card .game-stats-body{
+  transition:none!important;
+}
+.stats-card.game-stats-card .game-stats-body.game-stats-measure{
+  position:absolute!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+  left:-9999px!important;
+  top:-9999px!important;
+  width:auto;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  flex:none!important;
+}
+@media (max-width:520px){
+  .stats-card.game-stats-card .game-stats-contact{
+    margin-top:12px!important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1803,6 +1830,39 @@ function gameStatsTabContentHTML(){
   const cs=getOverallClueStats();
   return `<div class="game-stats-one-card">${gameStatsSummaryHTML(cs)}${clueLengthStatsHTML()}</div>`;
 }
+
+function gameStatsTabContentHTMLFor(tab){
+  const prev=clueStatsModalTab;
+  clueStatsModalTab=tab;
+  const html=gameStatsTabContentHTML();
+  clueStatsModalTab=prev;
+  return html;
+}
+function syncGameStatsModalBodyHeight(){
+  if(!isNewMode()||!statsPanel.classList.contains("visible"))return;
+  const card=statsPanel.querySelector(".stats-card.game-stats-card");
+  const body=statsPanel.querySelector(".game-stats-body");
+  if(!card||!body)return;
+  body.style.minHeight="0px";
+  const bodyWidth=Math.max(0,body.getBoundingClientRect().width);
+  const capRaw=parseFloat(getComputedStyle(body).maxHeight);
+  const cap=Number.isFinite(capRaw)&&capRaw>0?capRaw:Infinity;
+  let tallest=0;
+  ["stats","tips"].forEach(tab=>{
+    const probe=document.createElement("div");
+    probe.className="game-stats-body game-stats-measure";
+    probe.style.width=bodyWidth?`${bodyWidth}px`:"";
+    probe.innerHTML=gameStatsTabContentHTMLFor(tab);
+    card.appendChild(probe);
+    tallest=Math.max(tallest,Math.ceil(probe.scrollHeight));
+    probe.remove();
+  });
+  if(tallest>0){
+    const target=Math.min(tallest,cap);
+    body.style.minHeight=`${target}px`;
+  }
+}
+
 function clueLiveAttemptHTML(){return `<span class="clue-live-line"><span class="clue-live-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="clue-live-moves">Moves ${movesUsed}</span></span>`}
 function clueLevelMetaHTML(){return `<span class="level-meta"><span class="level-time">${formatClueCountdown(getActivePuzzleElapsedMs())}</span> <span aria-hidden="true">|</span> <span class="level-moves">Moves ${movesUsed}</span></span>`}
 function clueFooterTimeHTML(){return `<span class="clue-footer-time"><span class="clue-footer-label">Time</span><span class="clue-footer-clock">${formatClock(getActivePuzzleElapsedMs())}</span></span>`}
@@ -2652,6 +2712,7 @@ function updateStatsPanel(){
     statsToggle.classList.remove("visible");
     statsToggle.textContent="View details";
     statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
+    if(solved&&statsDetailsShown)requestAnimationFrame(syncGameStatsModalBodyHeight);
     return;
   }
   const tableRows=[];
