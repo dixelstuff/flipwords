@@ -1691,7 +1691,7 @@ function getScore100RunBonus(run){
   return 0;
 }
 function makeScore100RunMessage(run,bonus){
-  return `Broke 💯 ${run} in a row! +${bonus}`;
+  return `Broke 💯 ${run}-in-a-row! +${bonus}`;
 }
 function applyScore100RunForClueResult(result,hasPriorityStreakMessage=false){
   if(!isNewMode()||!result)return [];
@@ -1986,7 +1986,11 @@ function clueLevelMetaHTML(){return `<span class="level-meta"><span class="level
 function clueFooterTimeHTML(){return `<span class="clue-footer-time"><span class="clue-footer-label">Time</span><span class="clue-footer-clock">${formatClock(getActivePuzzleElapsedMs())}</span></span>`}
 function currentClueResult(){const p=currentPuzzle();if(!p)return null;if(isDailyMode()){return dailyPuzzleResults[puzzleIndex]||null}const rows=getClueResults().filter(r=>r.puzzleId===p.id);return rows.length?rows[rows.length-1]:null}
 function currentClueFooterResultHTML(){const r=currentClueResult();if(!r)return lastAccountingMessages&&lastAccountingMessages.length?lastAccountingMessages[lastAccountingMessages.length-1]:"";return r.gaveUp?"Revealed +0":`${getClueFooterRatingLabel(r.rating)} +${r.score}`}
-function currentClueAwardResultHTML(){const r=currentClueResult();if(r)return r.gaveUp?"Revealed +0":`${getClueRatingLabel(r.rating)}! +${r.score}`;return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
+function getClueRatingEmoji(rating,gaveUp=false){
+  if(gaveUp)return "👀";
+  return {perfect:"🌟",great:"💎",good:"✨",clunky:"🪨"}[String(rating||"").toLowerCase()]||"";
+}
+function currentClueAwardResultHTML(){const r=currentClueResult();if(r){if(r.gaveUp)return"👀 Revealed +0";const emoji=getClueRatingEmoji(r.rating,false);return `${emoji?emoji+" ":""}${getClueRatingLabel(r.rating)}! +${r.score}`}return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
 function getClueEarlySkipPenaltyForTarget(targetMs,p=currentPuzzle()){const len=getCluePuzzleLength(p);if(targetMs===getClueFirstUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue1[len]||0;if(targetMs===getClueSecondUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue2[len]||0;if(targetMs===getClueMaximumUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.max[len]||0;return 0}
 function clearClueFooterTimer(){if(clueFooterTimer){clearInterval(clueFooterTimer);clueFooterTimer=null}}
 function startClueFooterTimer(){if(clueFooterTimer||!isNewMode()||solved||gameStartDeferred)return;clueFooterTimer=setInterval(()=>{if(!isNewMode()||solved||gameStartDeferred){clearClueFooterTimer();return}renderGameSubtitle();updateFooterDisplay()},1000)}
@@ -2641,7 +2645,9 @@ function renderGameSolvedSubtitle(animate=false){
     void subtitle.offsetWidth;
     subtitle.classList.add("daily-complete-animate");
   }else{
-    subtitle.classList.toggle("daily-complete-animate",false);
+    // Match Daily completed behaviour: when the solved screen is newly rendered
+    // after reload or returning to Game mode, the class is added so the pop plays.
+    subtitle.classList.add("daily-complete-animate");
   }
   subtitle.innerHTML=`<span>${text}</span><span class="daily-complete-moves">Level ${puzzleIndex+1}</span>`;
 }
@@ -2969,7 +2975,7 @@ function getClueAwardClassFromText(text){
   return "";
 }
 function applyDisplayedReward(text){
-  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/(?:Perfect|Great|Good|Rough|Clunky)!? .*\+([0-9]+)/)||text.match(/Perfect streak [0-9]+🔥 \+([0-9]+)/)||text.match(/(?:🔥 )?New best streak! \+([0-9]+)/i)||text.match(/Broke 💯 [0-9]+ in a row! \+([0-9]+)/)||text.match(/Speed bonus \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
+  const add=text.match(/^\+([0-9]+)$/)||text.match(/^Solved \+([0-9]+)$/)||text.match(/(?:Perfect|Great|Good|Rough|Clunky)!? .*\+([0-9]+)/)||text.match(/Perfect streak [0-9]+🔥 \+([0-9]+)/)||text.match(/(?:🔥 )?New best streak! \+([0-9]+)/i)||text.match(/Broke 💯 [0-9]+(?: in a row|-in-a-row)! \+([0-9]+)/)||text.match(/Speed bonus \+([0-9]+)/)||text.match(/[0-9]+-streak \+([0-9]+)/)||text.match(/^Efficiency \+([0-9]+)/);
   if(add&&!isNewMode()&&!/^Efficiency \+1(?:\s|$)/.test(text))displayedTotalScore+=Number(add[1]);
   if(/^Streak \+1/.test(text)||/[0-9]+-streak/.test(text))displayedNoHintStreak=Math.min(noHintStreak,displayedNoHintStreak+1);
   const subtract=text.match(/^Hints? -([0-9]+)$/);
@@ -2983,7 +2989,7 @@ function popMessage(text,isZero=false,isFinal=false){
   const isEfficiencyShield=/^Efficiency \+1(?:\s|$)/.test(text);
   const isShieldReward=/^(?:Shield) \+[0-9]+/.test(text)||isEfficiencyShield;
   const isStreakIncrement=/^Streak \+1/.test(text);
-  const isStreakMessage=/[0-9]+-streak/.test(text)||/^Perfect streak [0-9]+🔥/.test(text)||/^(?:🔥 )?New best streak!/i.test(text)||/^Broke 💯 [0-9]+ in a row!/i.test(text);
+  const isStreakMessage=/[0-9]+-streak/.test(text)||/^Perfect streak [0-9]+🔥/.test(text)||/^(?:🔥 )?New best streak!/i.test(text)||/^Broke 💯 [0-9]+(?: in a row|-in-a-row)!/i.test(text);
   if(isNewMode()&&solved){
     setGameSolvedSubtitleText(text,true);
     message.textContent="";
@@ -3028,7 +3034,20 @@ function showDailyCompleteBurst(big=false){
   pts.forEach(([x,y,r],i)=>{const s=document.createElement("span");s.className=big?"star big-star":"star";s.textContent="★";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);s.style.animationDelay=big&&i>=12?".12s":"0s";starBurst.appendChild(s)});
   setTimeout(()=>{starBurst.innerHTML="";starBurst.classList.remove("grid-burst");starBurst.style.removeProperty("--burst-left");starBurst.style.removeProperty("--burst-top")},big?1550:1150)
 }
-function showFlameBurst(){starBurst.innerHTML="";[[-115,-55,-20],[115,-55,20],[-74,-98,28],[74,-98,-28],[-126,28,-14],[126,28,14],[-54,88,18],[54,88,-18]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star flame";s.textContent="🔥";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
+function showFlameBurst(big=false){
+  starBurst.innerHTML="";
+  starBurst.classList.toggle("grid-burst",!!big);
+  if(big){
+    const rect=board.getBoundingClientRect();
+    starBurst.style.setProperty("--burst-left",`${rect.left+rect.width/2}px`);
+    starBurst.style.setProperty("--burst-top",`${rect.top+rect.height/2}px`);
+  }else{
+    starBurst.style.removeProperty("--burst-left");
+    starBurst.style.removeProperty("--burst-top");
+  }
+  [[-115,-55,-20],[115,-55,20],[-74,-98,28],[74,-98,-28],[-126,28,-14],[126,28,14],[-54,88,18],[54,88,-18]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="star flame";s.textContent="🔥";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});
+  setTimeout(()=>{starBurst.innerHTML="";starBurst.classList.remove("grid-burst");starBurst.style.removeProperty("--burst-left");starBurst.style.removeProperty("--burst-top")},1150)
+}
 function showShieldBurst(){starBurst.innerHTML="";[[-170,-80,-35],[165,-90,30],[-115,-155,45],[120,-165,-40],[-210,10,-25],[210,8,35],[-125,125,30],[130,120,-30],[-70,-220,-20],[75,215,25]].forEach(([x,y,r])=>{const s=document.createElement("span");s.className="shield-icon";s.textContent="🛡️";s.style.setProperty("--x",`${x}px`);s.style.setProperty("--y",`${y}px`);s.style.setProperty("--r",`${r}deg`);starBurst.appendChild(s)});setTimeout(()=>{starBurst.innerHTML=""},1150)}
 function burstGlyph(char,points,className="star"){
   points.forEach(([x,y,r])=>{
@@ -3091,7 +3110,7 @@ function queueRewardAnimations(){
   const now=Date.now();
   if(messages.length){
     const finalText=messages[messages.length-1];
-    const finalDuration=/(?:[0-9]+-streak|^Perfect streak [0-9]+🔥|^(?:🔥 )?New best streak!|^Broke 💯 [0-9]+ in a row!)/i.test(finalText)?STREAK_POP_MS:FINAL_POP_MS;
+    const finalDuration=/(?:[0-9]+-streak|^Perfect streak [0-9]+🔥|^(?:🔥 )?New best streak!|^Broke 💯 [0-9]+(?: in a row|-in-a-row)!)/i.test(finalText)?STREAK_POP_MS:FINAL_POP_MS;
     solvedToggleReadyAt=now+(messages.length-1)*1250+finalDuration+150;
   }else{
     solvedToggleReadyAt=now+SOLVED_TOGGLE_DELAY_MS;
@@ -3100,9 +3119,9 @@ function queueRewardAnimations(){
     bonusTimerIds.push(setTimeout(()=>{
       applyDisplayedReward(text);
       popMessage(text,text==="+0"||/^Revealed \+0$/.test(text),i===messages.length-1);
-      const isPerfectStreakReward=/^Perfect streak [0-9]+🔥/.test(text)||/^(?:🔥 )?New best streak!/i.test(text)||/^Broke 💯 [0-9]+ in a row!/i.test(text);
-      if(isPerfectStreakReward)showFlameBurst();
-      else if(isNewMode()&&!/^Revealed/.test(text))showDailyCompleteBurst(false);
+      const isPerfectStreakReward=/^Perfect streak [0-9]+🔥/.test(text)||/^(?:🔥 )?New best streak!/i.test(text)||/^Broke 💯 [0-9]+(?: in a row|-in-a-row)!/i.test(text);
+      if(isPerfectStreakReward)showFlameBurst(true);
+      else if(isNewMode()&&!/^Revealed|^👀 Revealed/.test(text))showDailyCompleteBurst(true);
       if(/[0-9]+-streak/.test(text))showStreakCelebration();
       else if(!isPerfectStreakReward&&(/Speed bonus/.test(text)||/^Efficiency [+](?!1(?: |$))[0-9]+/.test(text)))showStarBurst();
       if(/^(?:Shield) \+[0-9]+/.test(text)||/^Efficiency \+1 .*🛡️/.test(text))showShieldBurst();
