@@ -1564,6 +1564,7 @@ let totalScore=0,displayedTotalScore=0,noHintStreak=0,displayedNoHintStreak=0,sh
 let activePuzzleElapsedMs=0,activePuzzleStartedAt=null;
 let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAwarded=false,scoreAnimationShown=false,puzzleStartTime=Date.now();
 let gameSolvedSubtitleText="";
+let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
@@ -1991,6 +1992,21 @@ function getClueRatingEmoji(rating,gaveUp=false){
   return {perfect:"🌟",great:"💎",good:"✨",clunky:"🪨"}[String(rating||"").toLowerCase()]||"";
 }
 function currentClueAwardResultHTML(){const r=currentClueResult();if(r){if(r.gaveUp)return"👀 Revealed +0";const emoji=getClueRatingEmoji(r.rating,false);return `${emoji?emoji+" ":""}${getClueRatingLabel(r.rating)}! +${r.score}`}return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
+function formatGameSolvedRewardText(text){
+  const raw=String(text||"").replace(/\s+/g," ").trim();
+  if(!raw)return raw;
+  if(/^(?:🌟|💎|✨|🪨|👀|🔥|💯)/.test(raw))return raw;
+  const m=raw.match(/^(Perfect|Great|Good|Rough|Clunky|Revealed)!?\s*(\+[0-9]+)/i);
+  if(!m)return raw;
+  const key=m[1].toLowerCase()==="clunky"?"clunky":m[1].toLowerCase();
+  const emoji=getClueRatingEmoji(key,key==="revealed");
+  return `${emoji?emoji+" ":""}${raw}`;
+}
+function restartSolvedSubtitlePop(){
+  subtitle.classList.remove("daily-complete-animate");
+  void subtitle.offsetWidth;
+  subtitle.classList.add("daily-complete-animate");
+}
 function getClueEarlySkipPenaltyForTarget(targetMs,p=currentPuzzle()){const len=getCluePuzzleLength(p);if(targetMs===getClueFirstUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue1[len]||0;if(targetMs===getClueSecondUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.clue2[len]||0;if(targetMs===getClueMaximumUnlockMs(p))return CLUE_EARLY_SKIP_SCORE_PENALTY.max[len]||0;return 0}
 function clearClueFooterTimer(){if(clueFooterTimer){clearInterval(clueFooterTimer);clueFooterTimer=null}}
 function startClueFooterTimer(){if(clueFooterTimer||!isNewMode()||solved||gameStartDeferred)return;clueFooterTimer=setInterval(()=>{if(!isNewMode()||solved||gameStartDeferred){clearClueFooterTimer();return}renderGameSubtitle();updateFooterDisplay()},1000)}
@@ -2070,7 +2086,7 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,puzzleResults:dailyPuzzleResults,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
 function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");message.textContent="";const elapsed=getActivePuzzleElapsedMs();puzzleIndex=nextIndex;dailyPuzzleStartElapsedMs=elapsed;dailyPuzzleStartMoves=dailyTotalMoves;setupPuzzle({restoreActivePuzzleElapsedMs:elapsed});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
-function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();hideVowelReveal(false);clearVowelTimers();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveActiveModeProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
+function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();hideVowelReveal(false);clearVowelTimers();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveActiveModeProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);forceSolvedSubtitlePopOnRender=true;updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
 
 function goNext(){
   if(isDailyMode()){goDailyNext();return}
@@ -2617,9 +2633,13 @@ function setDailyReviewIndex(delta){
 function renderDailySubtitle(){
   if(dailyCurrentCompleted){
     const done=dailyStats.completed[currentDaily().id];
+    const shouldPop=forceSolvedSubtitlePopOnRender||!subtitle.classList.contains("daily-complete-animate");
     subtitle.classList.remove("level-label","intro-copy");
-    subtitle.classList.add("daily-complete-title","daily-complete-animate");
+    subtitle.classList.add("daily-complete-title");
     subtitle.innerHTML=`<span>Completed in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())} 🎉</span><span class="daily-complete-moves">Moves ${done?.moves??dailyTotalMoves}</span>`;
+    if(shouldPop)restartSolvedSubtitlePop();
+    else subtitle.classList.add("daily-complete-animate");
+    forceSolvedSubtitlePopOnRender=false;
     return;
   }
   subtitle.classList.remove("daily-complete-title","daily-complete-animate");
@@ -2631,29 +2651,24 @@ function renderDailySubtitle(){
   else subtitle.textContent=isIntro?INTRO_COPY:`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
 }
 function getGameSolvedSubtitleText(){
-  const stored=String(gameSolvedSubtitleText||"").trim();
+  const stored=formatGameSolvedRewardText(gameSolvedSubtitleText);
   if(stored)return stored;
-  if(lastBonusMessages&&lastBonusMessages.length)return String(lastBonusMessages[lastBonusMessages.length-1]||"").trim();
-  return currentClueAwardResultHTML();
+  if(lastBonusMessages&&lastBonusMessages.length)return formatGameSolvedRewardText(lastBonusMessages[lastBonusMessages.length-1]);
+  return formatGameSolvedRewardText(currentClueAwardResultHTML());
 }
 function renderGameSolvedSubtitle(animate=false){
   const text=getGameSolvedSubtitleText();
+  const shouldPop=animate||forceSolvedSubtitlePopOnRender||!subtitle.classList.contains("daily-complete-animate");
   subtitle.classList.remove("level-label","intro-copy","level-with-meta");
   subtitle.classList.add("daily-complete-title");
-  if(animate){
-    subtitle.classList.remove("daily-complete-animate");
-    void subtitle.offsetWidth;
-    subtitle.classList.add("daily-complete-animate");
-  }else{
-    // Match Daily completed behaviour: when the solved screen is newly rendered
-    // after reload or returning to Game mode, the class is added so the pop plays.
-    subtitle.classList.add("daily-complete-animate");
-  }
   subtitle.innerHTML=`<span>${text}</span><span class="daily-complete-moves">Level ${puzzleIndex+1}</span>`;
+  if(shouldPop)restartSolvedSubtitlePop();
+  else subtitle.classList.add("daily-complete-animate");
+  forceSolvedSubtitlePopOnRender=false;
 }
 function setGameSolvedSubtitleText(text,animate=true){
   if(!isNewMode()||!solved)return;
-  gameSolvedSubtitleText=String(text||"").trim();
+  gameSolvedSubtitleText=formatGameSolvedRewardText(text);
   renderGameSolvedSubtitle(animate);
 }
 function renderGameSubtitle(){
