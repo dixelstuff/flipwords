@@ -192,6 +192,13 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .clue-current-detail{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 
 
+
+/* v43 how-to modal + daily stats context */
+.daily-stats-context{margin:14px 0 6px;color:var(--muted);font-size:13px;font-weight:800;text-align:left;letter-spacing:.01em}
+.howto-card-copy{background:#f7f5fb;border:1px solid rgba(37,31,52,.08);border-radius:18px;padding:15px 16px;margin-top:12px;color:var(--muted);font-size:14px;line-height:1.38;font-weight:650}
+.howto-card-copy p{margin:0 0 10px}.howto-card-copy p:last-child{margin-bottom:0}.howto-card-copy strong{color:var(--ink);font-weight:850}
+.howto-kicker{font-size:13px;font-weight:850;color:rgba(118,111,130,.82);margin:6px 0 0;text-transform:uppercase;letter-spacing:.05em}
+
 /* v43: current puzzle result shows rating/time/moves/clue count, clue text on its own line */
 .clue-current-detail{margin-top:4px;color:rgba(118,111,130,.78);font-size:13px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums}
 .clue-current-clue-text{margin-top:2px;color:rgba(118,111,130,.64);font-size:13px;font-weight:500;line-height:1.24;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -2066,6 +2073,29 @@ function formatClock(ms){const total=Math.max(0,Math.round(ms/1000)),m=Math.floo
 function formatCompactClock(ms){const total=Math.max(0,Math.round(ms/1000)),m=Math.floor(total/60),sec=total%60;return `${m}m${String(sec).padStart(2,"0")}s`}
 function getDayNumberFromId(id){const m=String(id||"").match(/day-?(\d+)/i);return m?Number(m[1]):null}
 function getDailyCompletedEntries(){return Object.values(dailyStats.completed||{}).filter(x=>x&&typeof x.timeMs==="number"&&typeof x.moves==="number")}
+function hasCompletedGameStats(){return getClueResults().length>0}
+function hasCompletedDailyStats(){return getDailyCompletedEntries().length>0}
+function isBrandNewPlayer(){return !hasCompletedGameStats()&&!hasCompletedDailyStats()}
+function getLastCompletedDailyInfo(){
+  const completed=dailyStats.completed||{};
+  let best=null;
+  Object.keys(completed).forEach(id=>{
+    const entry=completed[id];
+    if(!entry||typeof entry.timeMs!=="number"||typeof entry.moves!=="number")return;
+    const day=dailyPuzzles.find(d=>d&&d.id===id);
+    const n=getDayNumberFromId(id)||0;
+    const sortVal=Number(entry.completedAt)||n||0;
+    if(!best||sortVal>best.sortVal)best={id,entry,day,dayNumber:n,sortVal};
+  });
+  return best;
+}
+function getDailyStatsDisplayInfo(){
+  const currentDone=dailyStats.completed[currentDaily().id]||null;
+  if(currentDone)return {mode:"today",title:"Today",entry:currentDone,day:currentDaily(),puzzles:activePuzzles,results:Array.isArray(currentDone.puzzleResults)?currentDone.puzzleResults:dailyPuzzleResults};
+  const last=getLastCompletedDailyInfo();
+  if(last)return {mode:"last",title:`Last completed daily${last.dayNumber?` #${last.dayNumber}`:""}`,entry:last.entry,day:last.day,puzzles:(last.day&&Array.isArray(last.day.puzzles)?last.day.puzzles:[]),results:Array.isArray(last.entry.puzzleResults)?last.entry.puzzleResults:[]};
+  return {mode:"none",title:"Today",entry:null,day:currentDaily(),puzzles:activePuzzles,results:[]};
+}
 function getDailyStreak(){const done=new Set(Object.keys(dailyStats.completed||{}).map(getDayNumberFromId).filter(Boolean));let n=1,best=0,cur=0;while(n<=dailyPuzzles.length){if(done.has(n)){cur++;best=Math.max(best,cur)}else cur=0;n++}const latest=Math.max(0,...[...done]);let current=0;for(let i=latest;i>=1&&done.has(i);i--)current++;return {current,best}}
 function getHighestCompletedDailyIndex(){
   let best=-1;
@@ -2084,7 +2114,7 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
   }catch{}
 }
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,puzzleResults:dailyPuzzleResults,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
-function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,done=dailyStats.completed[currentDaily().id];return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10)}}
+function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,info=getDailyStatsDisplayInfo(),done=info.entry;return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10),displayTitle:info.title,displayMode:info.mode}}
 function goDailyNext(){if(!isDailyMode())return;const nextIndex=puzzleIndex+1;if(nextIndex>=activePuzzles.length)return;previewingStartWords=false;message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");message.textContent="";const elapsed=getActivePuzzleElapsedMs();puzzleIndex=nextIndex;dailyPuzzleStartElapsedMs=elapsed;dailyPuzzleStartMoves=dailyTotalMoves;setupPuzzle({restoreActivePuzzleElapsedMs:elapsed});resumePuzzleClock();startDailyTimer();saveDailyProgress()}
 function switchMode(nextMode){if(nextMode===mode)return;pausePuzzleClock();pauseAutoHintTimer();hideVowelReveal(false);clearVowelTimers();pauseDailyTimer();if(isDailyMode())saveDailyProgress();else if(isNewMode())saveActiveModeProgress();else if(!isAllWordsMode()){saveGameState();cachedGameState=readStoredGameState();}statsDetailsShown=false;dailyModalMode="stats";message.textContent="";message.className="message";scoreLine.innerHTML="";endMessage.classList.remove("visible","aw-next-link");endMessage.innerHTML="";mode=nextMode;localStorage.setItem(DAILY_MODE_KEY,mode);forceSolvedSubtitlePopOnRender=true;updateModeToggle();modeToggle.classList.remove("hidden");clearQueryString();initMode()}
 
@@ -2612,13 +2642,17 @@ function dailyReviewTiles(){
   return p.answer1.split("").map((top,i)=>({id:`daily-review-${dailyReviewIndex}-${i}`,top,bottom:p.answer2[i],flipped:false,flipAnim:"",locked:true}));
 }
 function getDailyPuzzleResults(){
+  const info=getDailyStatsDisplayInfo();
+  if(info.mode==="last")return info.results||[];
   const completed=dailyStats.completed[currentDaily().id];
   const results=Array.isArray(completed?.puzzleResults)?completed.puzzleResults:dailyPuzzleResults;
   return results||[];
 }
-function dailyPuzzleSummaryHTML(){
-  const results=getDailyPuzzleResults();
-  return `<div class="daily-puzzle-summary">${activePuzzles.map((p,i)=>{
+function dailyPuzzleSummaryHTML(info=getDailyStatsDisplayInfo()){
+  const results=info.results||getDailyPuzzleResults();
+  const puzzleList=(info.puzzles&&info.puzzles.length)?info.puzzles:activePuzzles;
+  const label=info.mode==="last"?`<div class="daily-stats-context">${escapeHtml(info.title)} results</div>`:"";
+  return `${label}<div class="daily-puzzle-summary">${puzzleList.map((p,i)=>{
     const res=results[i]||{};
     const descriptor=getDailyPlayDescriptor(p,res);
     const icon=getDailyPlayDescriptorIcon(descriptor);
@@ -2769,8 +2803,9 @@ function render(){
   hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
-  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"STATS":(showDailyStart?"STATS":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(clueGiveUpReady?"Give-up":"Clue")):"Hint")));
-  hintBtn.disabled=(showDailyCompleteControls||showDailyStart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
+  const showHowToForFreshStart=isBrandNewPlayer()&&((showDailyStart)||(isNewMode()&&gameStartDeferred&&puzzleIndex===0&&!solved));
+  hintBtn.querySelector("span").textContent=showHowToForFreshStart?"HOW TO":(showDailyCompleteControls?"STATS":(showDailyStart?"STATS":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(gameStartDeferred&&puzzleIndex===0?"HOW TO":(clueGiveUpReady?"Give-up":"Clue"))):"Hint"))));
+  hintBtn.disabled=(showDailyCompleteControls||showDailyStart||showHowToForFreshStart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
   startWordsBtn.classList.toggle("daily-start",showDailyStart);
   startWordsBtn.classList.toggle("daily-end-stats",showDailyCompleteControls);
   if(showDailyCompleteControls){
@@ -2838,10 +2873,37 @@ function copyDailyShareText(){
   }
 }
 function openDailyShare(){if(!isDailyMode()||!dailyCurrentCompleted)return;dailyModalMode="share";statsDetailsShown=true;updateStatsPanel()}
+function openHowToModal(){dailyModalMode="howto";statsDetailsShown=true;updateStatsPanel()}
+function howToModalHTML(){
+  const isDaily=isDailyMode();
+  const title=isDaily?"How to play daily":"How to play";
+  const modeLine=isDaily
+    ? "Each daily is three puzzles back-to-back: 3-letter, then 4-letter, then 5-letter. Your total time is measured."
+    : "Solve faster to score more points. Extra words and free clues can help you protect your score.";
+  return `
+    <div class="stats-card" role="dialog" aria-modal="true" aria-label="${title}">
+      <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
+      <div class="stats-title">${title}</div>
+      <div class="howto-kicker">${modeLine}</div>
+      <div class="howto-card-copy">
+        <p><strong>Make two new words.</strong> The top row and bottom row must both become valid answer words at the same time.</p>
+        <p><strong>Move and flip tiles.</strong> Drag tiles to swap positions. Tap a tile to flip its orientation.</p>
+        <p><strong>Make extra single words.</strong> Extra words along the way claim a clue bonus, bringing the free clue earlier so you can solve faster.</p>
+        <p><strong>Use clues carefully.</strong> Clues point you toward the answer words. Tapping Clue costs time${isDaily?"":" and therefore points"}, but free clues appear as you play.</p>
+        <p><strong>Reset if the grid gets messy.</strong> Most puzzles are only a few moves from start to solve.</p>
+      </div>
+    </div>`;
+}
 function updateStatsPanel(){
   if(isDailyMode()){
     const r=getDailyFinalLines();
     const completedCount=getDailyCompletedEntries().length;
+    const dailyStatsInfo=getDailyStatsDisplayInfo();
+    if(dailyModalMode==="howto"){
+      statsPanel.innerHTML=howToModalHTML();
+      statsPanel.classList.toggle("visible",statsDetailsShown);
+      return
+    }
     if(dailyModalMode==="share"){
       const shareText=getDailyShareText();
       statsPanel.innerHTML=`
@@ -2859,7 +2921,7 @@ function updateStatsPanel(){
       <div class="stats-card" role="dialog" aria-modal="true" aria-label="Daily stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
         <div class="stats-title">Your daily stats</div>
-        ${dailyPuzzleSummaryHTML()}
+        ${dailyPuzzleSummaryHTML(dailyStatsInfo)}
         <div class="daily-section-title">Progress</div>
         <div class="daily-overall-grid">
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">🔥</div><div class="daily-stat-label">Daily streak</div><div class="daily-stat-value">${r.streak}</div></div>
@@ -2872,6 +2934,11 @@ function updateStatsPanel(){
     return
   }
   if(isNewMode()){
+    if(dailyModalMode==="howto"){
+      statsPanel.innerHTML=howToModalHTML();
+      statsPanel.classList.toggle("visible",statsDetailsShown);
+      return;
+    }
     statsPanel.innerHTML=`
       <div class="stats-card game-stats-card" role="dialog" aria-modal="true" aria-label="Game stats">
         <button id="statsCloseX" class="stats-x" type="button" aria-label="Close">×</button>
@@ -3948,6 +4015,7 @@ function performClueDoubleTap(){
   performClueSingleTap();
 }
 function showClue(){
+  if(isBrandNewPlayer()&&((isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted)||(isNewMode()&&gameStartDeferred&&puzzleIndex===0&&!solved))){openHowToModal();return}
   if(!isTimedClueMode())return;
   if(solved){
     if(isDailyMode()&&!dailyCurrentCompleted)return;
@@ -4091,7 +4159,7 @@ nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsM
 nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
 document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
-function openStatsDetails(){if(!solved&&!isDailyMode())return;if(isDailyMode())dailyModalMode="stats";else{clueStatsShowCurrentClues=false;clueStatsModalTab="stats"}statsDetailsShown=true;updateStatsPanel()}
+function openStatsDetails(){if(!solved&&!isDailyMode())return;if(isDailyMode())dailyModalMode="stats";else{dailyModalMode="stats";clueStatsShowCurrentClues=false;clueStatsModalTab="stats"}statsDetailsShown=true;updateStatsPanel()}
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;if(!isAllWordsMode())openStatsDetails()});
 endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="nextAllWordsLink"){e.preventDefault();goNextAllWords();return}if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
 scoreLine.addEventListener("click",()=>{if(!isAllWordsMode())openStatsDetails()});
