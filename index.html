@@ -1399,21 +1399,26 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 
 
-/* v46 daily in-run puzzle slide transition: slower; controls stay visible */
+/* v47 daily in-run puzzle slide transition: slower with true incoming slide */
 .board-shell.daily-slide-animating,
 .feedback-area.daily-slide-animating{
-  transition:transform .82s cubic-bezier(.22,.8,.22,1), opacity .82s ease;
   will-change:transform,opacity;
 }
 .board-shell.daily-slide-out,
 .feedback-area.daily-slide-out{
-  transform:translateX(-105%);
-  opacity:0;
+  animation:dailyStageSlideOut 1.08s cubic-bezier(.18,.78,.22,1) forwards;
 }
 .board-shell.daily-slide-enter,
 .feedback-area.daily-slide-enter{
-  transform:translateX(105%);
-  opacity:0;
+  animation:dailyStageSlideIn 1.08s cubic-bezier(.18,.78,.22,1) both;
+}
+@keyframes dailyStageSlideOut{
+  0%{transform:translateX(0);opacity:1}
+  100%{transform:translateX(-115%);opacity:.12}
+}
+@keyframes dailyStageSlideIn{
+  0%{transform:translateX(115%);opacity:.12}
+  100%{transform:translateX(0);opacity:1}
 }
 .controls.daily-transition-controls{
   opacity:1;
@@ -2146,7 +2151,7 @@ function startDailyPuzzleSlideAdvance(){
   dailyTransitioning=true;
   const {shell,feedback,controls}=getDailyStageTransitionElements();
   [shell,feedback].forEach(el=>{if(el){el.classList.add("daily-slide-animating");el.classList.remove("daily-slide-enter");void el.offsetWidth;el.classList.add("daily-slide-out")}});
-  dailyAdvanceTimer=setTimeout(()=>goDailyNext({enterFromRight:true}),820);
+  dailyAdvanceTimer=setTimeout(()=>goDailyNext({enterFromRight:true}),1080);
 }
 function goDailyNext(opts={}){
   if(!isDailyMode())return;
@@ -2158,7 +2163,7 @@ function goDailyNext(opts={}){
   const elapsed=getActivePuzzleElapsedMs();
   const {shell,feedback,controls}=getDailyStageTransitionElements();
   if(opts.enterFromRight){
-    [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
+    [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out","daily-slide-enter");el.classList.add("daily-slide-animating")}});
   }else{
     clearDailyStageTransitionClasses();
   }
@@ -2170,10 +2175,8 @@ function goDailyNext(opts={}){
   startDailyTimer();
   saveDailyProgress();
   if(opts.enterFromRight){
-    requestAnimationFrame(()=>{
-      [shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-enter")});
-      setTimeout(()=>{dailyTransitioning=false;clearDailyStageTransitionClasses()},900);
-    });
+    [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
+    setTimeout(()=>{dailyTransitioning=false;clearDailyStageTransitionClasses()},1120);
   }else{
     dailyTransitioning=false;
   }
@@ -2679,7 +2682,7 @@ function checkSolved(){
         const descriptorMessage=getDailyPlayDescriptorLabel(currentPuzzle(),dailyPuzzleResults[puzzleIndex]);
         popMessage(descriptorMessage,false,true);
         showDailyCompleteBurst(false);
-        dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),980);
+        dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1550);
       }
     }else{
       awardPuzzleScoreIfNeeded();
@@ -4018,7 +4021,7 @@ function giveUpNewModePuzzle(){
       startDailyCountdownTimer();
     }else{
       showDailyCompleteBurst(false);
-      dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),980);
+      dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1550);
     }
     render();
     saveDailyProgress();
