@@ -1399,25 +1399,33 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 
 
-/* v47 daily in-run puzzle slide transition: slower with true incoming slide */
+/* v48 daily in-run puzzle slide transition: simultaneous outgoing ghost + incoming grid */
 .board-shell.daily-slide-animating,
-.feedback-area.daily-slide-animating{
+.feedback-area.daily-slide-animating,
+.daily-slide-ghost{
   will-change:transform,opacity;
 }
-.board-shell.daily-slide-out,
-.feedback-area.daily-slide-out{
-  animation:dailyStageSlideOut 1.08s cubic-bezier(.18,.78,.22,1) forwards;
+.daily-slide-ghost{
+  position:fixed!important;
+  pointer-events:none!important;
+  margin:0!important;
+  z-index:10000;
+}
+.daily-slide-ghost.daily-slide-out{
+  animation:dailyStageSlideOut 1.35s cubic-bezier(.18,.78,.22,1) forwards;
 }
 .board-shell.daily-slide-enter,
 .feedback-area.daily-slide-enter{
-  animation:dailyStageSlideIn 1.08s cubic-bezier(.18,.78,.22,1) both;
+  animation:dailyStageSlideIn 1.35s cubic-bezier(.18,.78,.22,1) both;
 }
 @keyframes dailyStageSlideOut{
   0%{transform:translateX(0);opacity:1}
-  100%{transform:translateX(-115%);opacity:.12}
+  35%{opacity:.88}
+  100%{transform:translateX(-118%);opacity:0}
 }
 @keyframes dailyStageSlideIn{
-  0%{transform:translateX(115%);opacity:.12}
+  0%{transform:translateX(118%);opacity:0}
+  25%{opacity:.20}
   100%{transform:translateX(0);opacity:1}
 }
 .controls.daily-transition-controls{
@@ -2144,14 +2152,33 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=getActivePuzzleElapsedMs();pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:dailyTotalMoves,puzzleResults:dailyPuzzleResults,completedAt:Date.now()};saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,info=getDailyStatsDisplayInfo(),done=info.entry;return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10),displayTitle:info.title,displayMode:info.mode}}
 function getDailyStageTransitionElements(){return {shell:document.querySelector(".board-shell"),feedback:document.querySelector(".feedback-area"),controls:document.querySelector(".controls")}}
-function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls")}
+function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls");document.querySelectorAll(".daily-slide-ghost").forEach(el=>el.remove())}
+function createDailySlideGhost(el){
+  if(!el)return null;
+  const r=el.getBoundingClientRect();
+  const clone=el.cloneNode(true);
+  clone.classList.remove("daily-slide-enter","daily-slide-animating","daily-slide-out");
+  clone.classList.add("daily-slide-ghost");
+  clone.style.left=r.left+"px";
+  clone.style.top=r.top+"px";
+  clone.style.width=r.width+"px";
+  clone.style.height=r.height+"px";
+  clone.style.transform="translateX(0)";
+  clone.style.opacity="1";
+  document.body.appendChild(clone);
+  // force layout so the slide-out starts from the solved position
+  void clone.offsetWidth;
+  clone.classList.add("daily-slide-out");
+  return clone;
+}
 function startDailyPuzzleSlideAdvance(){
   if(!isDailyMode()||dailyCurrentCompleted||dailyTransitioning)return;
   if(puzzleIndex>=activePuzzles.length-1)return;
   dailyTransitioning=true;
-  const {shell,feedback,controls}=getDailyStageTransitionElements();
-  [shell,feedback].forEach(el=>{if(el){el.classList.add("daily-slide-animating");el.classList.remove("daily-slide-enter");void el.offsetWidth;el.classList.add("daily-slide-out")}});
-  dailyAdvanceTimer=setTimeout(()=>goDailyNext({enterFromRight:true}),1080);
+  const {shell,feedback}=getDailyStageTransitionElements();
+  const ghosts=[createDailySlideGhost(shell),createDailySlideGhost(feedback)].filter(Boolean);
+  goDailyNext({enterFromRight:true});
+  setTimeout(()=>ghosts.forEach(el=>el.remove()),1420);
 }
 function goDailyNext(opts={}){
   if(!isDailyMode())return;
@@ -2161,7 +2188,7 @@ function goDailyNext(opts={}){
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");
   message.textContent="";
   const elapsed=getActivePuzzleElapsedMs();
-  const {shell,feedback,controls}=getDailyStageTransitionElements();
+  const {shell,feedback}=getDailyStageTransitionElements();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out","daily-slide-enter");el.classList.add("daily-slide-animating")}});
   }else{
@@ -2176,7 +2203,7 @@ function goDailyNext(opts={}){
   saveDailyProgress();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
-    setTimeout(()=>{dailyTransitioning=false;clearDailyStageTransitionClasses()},1120);
+    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")})},1420);
   }else{
     dailyTransitioning=false;
   }
