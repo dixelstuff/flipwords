@@ -1442,7 +1442,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 
 /* v52: daily welcome copy stacked cleanly */
 .subtitle.daily-welcome-copy{flex-direction:column;align-items:center;justify-content:center;gap:4px;line-height:1.08;text-align:center;}
-.subtitle.daily-welcome-copy .daily-welcome-main{display:block;font-size:clamp(22px,2.8vw,29px);font-weight:850;color:var(--ink);}
+.subtitle.daily-welcome-copy .daily-welcome-main{display:block;font-size:clamp(22px,2.8vw,29px);font-weight:850;color:var(--success);}
 .subtitle.daily-welcome-copy .daily-welcome-sub{display:block;font-size:clamp(17px,2.1vw,22px);font-weight:720;color:var(--muted);}
 .tile-wrap.solved-tile .letter{color:var(--ink);text-shadow:none;}
 .tile-wrap.solved-tile .htile .letter{color:var(--ink);text-shadow:none;}
@@ -2836,7 +2836,7 @@ function renderDailySubtitle(){
   subtitle.classList.toggle("level-label",false);
   subtitle.classList.toggle("intro-copy",isIntro);
   if(showTimer)subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`;
-  else if(isIntro&&hasCompletedDailyStats()){const target=Math.max(1,(getDailyStreak().current||0)+1);subtitle.classList.add("daily-welcome-copy");subtitle.innerHTML=`<span class="daily-welcome-main">Welcome back!</span><span class="daily-welcome-sub">Go for a ${target}-day streak 🔥</span>`;}
+  else if(isIntro&&hasCompletedDailyStats()){const target=Math.max(1,(getDailyStreak().current||0)+1);subtitle.classList.add("daily-welcome-copy");subtitle.innerHTML=`<span class="daily-welcome-main">Play today\'s triple! ⏱️</span><span class="daily-welcome-sub">${target}-day streak</span>`;}
   else subtitle.textContent=isIntro?INTRO_COPY:`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
 }
 function getGameSolvedSubtitleText(){
