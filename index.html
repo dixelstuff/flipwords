@@ -2752,11 +2752,12 @@ function render(){
   nextBtn.classList.toggle("visible",!isDailyMode()&&!isAllWordsMode()&&solved&&!isFinal);nextBtn.textContent="NEXT";
   const controlsEl=document.querySelector(".controls");
   const showDailyCompleteControls=isDailyMode()&&dailyCurrentCompleted;
+  const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
   controlsEl.style.display=isAllWordsMode()?"flex":"grid";
   controlsEl.classList.toggle("aw-score-controls",isAllWordsMode());
   const dailyHintUnavailable=false; // v79: old Daily hint-muted state is obsolete; Clue should stay yellow once Daily starts
   controlsEl.classList.toggle("daily-complete-controls",showDailyCompleteControls);
-  hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls);
+  hintBtn.classList.toggle("daily-share-button",showDailyCompleteControls||showDailyStart);
   hintBtn.classList.toggle("daily-hint-unavailable",dailyHintUnavailable);
   const dailySolvedTransition=isDailyMode()&&dailyStarted&&solved&&!dailyCurrentCompleted;
   const clueStatsMuted=isNewMode()&&!showDailyCompleteControls&&solved;
@@ -2768,16 +2769,15 @@ function render(){
   hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
-  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"SHARE":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(clueGiveUpReady?"Give-up":"Clue")):"Hint"));
-  hintBtn.disabled=showDailyCompleteControls?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
-  const showDailyStart=isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted;
+  hintBtn.querySelector("span").textContent=showDailyCompleteControls?"STATS":(showDailyStart?"STATS":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(clueGiveUpReady?"Give-up":"Clue")):"Hint")));
+  hintBtn.disabled=(showDailyCompleteControls||showDailyStart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
   startWordsBtn.classList.toggle("daily-start",showDailyStart);
   startWordsBtn.classList.toggle("daily-end-stats",showDailyCompleteControls);
   if(showDailyCompleteControls){
-    startWordsBtn.textContent="STATS";
+    startWordsBtn.textContent="SHARE";
     startWordsBtn.disabled=false;
   }else if(showDailyStart){
-    startWordsBtn.textContent="Start";
+    startWordsBtn.textContent="START";
     startWordsBtn.disabled=false;
   }else{
     startWordsBtn.textContent=(!solved&&hintsUsed>0)?"Starters":"Reset";
@@ -2852,7 +2852,7 @@ function updateStatsPanel(){
           <button id="dailyCopyBtn" class="daily-copy-button" type="button">COPY</button>
           <p class="daily-share-note">Copy the text above to share your result.</p>
         </div>`;
-      statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
+      statsPanel.classList.toggle("visible",statsDetailsShown);
       return
     }
     statsPanel.innerHTML=`
@@ -2868,7 +2868,7 @@ function updateStatsPanel(){
           <div class="daily-stat-box compact"><div class="daily-stat-emoji">🎯</div><div class="daily-stat-label">Median moves</div><div class="daily-stat-value">${r.medianMoves}</div></div>
         </div>
       </div>`;
-    statsPanel.classList.toggle("visible",solved&&statsDetailsShown);
+    statsPanel.classList.toggle("visible",statsDetailsShown);
     return
   }
   if(isNewMode()){
@@ -3230,7 +3230,7 @@ function startDailyPlay(){
   saveDailyProgress();
 }
 function showStartingWords(){
-  if(isDailyMode()&&dailyCurrentCompleted){openStatsDetails();return}
+  if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}
   if(isDailyMode()&&!dailyStarted){startDailyPlay();return}
   if(hintsUsed===0&&!solved&&!(isNewMode()&&hintOrientationInverted!==null)){resetToStartingWords();return}
   if(solved||isShowingStartingWords())return;
@@ -4079,7 +4079,11 @@ board.addEventListener("click",e=>{
   }
 });
 hintBtn.addEventListener("pointerup",e=>{if(isNewMode()&&solved)runSolvedStatsButtonAction(e)});
-hintBtn.addEventListener("click",e=>{if(isNewMode()&&solved){runSolvedStatsButtonAction(e);return}useHint()});
+hintBtn.addEventListener("click",e=>{
+  if(isDailyMode()&&(!dailyStarted||dailyCurrentCompleted)){e.preventDefault();e.stopPropagation();openStatsDetails();return}
+  if(isNewMode()&&solved){runSolvedStatsButtonAction(e);return}
+  useHint()
+});
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
 startWordsBtn.addEventListener("click",showStartingWords);
@@ -4087,7 +4091,7 @@ nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsM
 nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
 document.querySelector(".game").addEventListener("click",e=>{if(isAllWordsMode()||!solved||Date.now()<solvedToggleReadyAt||(isDailyMode()&&dailyCurrentCompleted)||e.target.closest(".controls")||e.target.closest(".stats-panel")||e.target.closest(".mode-toggle")||e.target.closest(".daily-review-nav"))return;const top=document.querySelector(".title").getBoundingClientRect().bottom,bottom=document.querySelector(".controls").getBoundingClientRect().top;if(e.clientY<top||e.clientY>bottom)return;e.preventDefault();if(isNewMode())openStatsDetails();else toggleSolvedStartPreview()});
-function openStatsDetails(){if(!solved)return;if(isDailyMode())dailyModalMode="stats";else{clueStatsShowCurrentClues=false;clueStatsModalTab="stats"}statsDetailsShown=true;updateStatsPanel()}
+function openStatsDetails(){if(!solved&&!isDailyMode())return;if(isDailyMode())dailyModalMode="stats";else{clueStatsShowCurrentClues=false;clueStatsModalTab="stats"}statsDetailsShown=true;updateStatsPanel()}
 status.addEventListener("click",e=>{if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress();return}if(jumpToNextDailyForTesting())return;if(!isAllWordsMode())openStatsDetails()});
 endMessage.addEventListener("click",e=>{if(e.target&&e.target.id==="nextAllWordsLink"){e.preventDefault();goNextAllWords();return}if(e.target&&e.target.id==="restartLink"){e.preventDefault();restartAtLevelOnePreservingProgress()}});
 scoreLine.addEventListener("click",()=>{if(!isAllWordsMode())openStatsDetails()});
