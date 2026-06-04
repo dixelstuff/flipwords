@@ -1446,6 +1446,38 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .subtitle.daily-welcome-copy .daily-welcome-sub{display:block;font-size:clamp(17px,2.1vw,22px);font-weight:720;color:var(--muted);}
 .tile-wrap.solved-tile .letter{color:var(--ink);text-shadow:none;}
 .tile-wrap.solved-tile .htile .letter{color:var(--ink);text-shadow:none;}
+
+
+/* v54: returning daily subtitle matches solved subtitle sizing and pop */
+.subtitle.daily-welcome-copy{
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  line-height:1;
+  text-align:center;
+  padding-top:2px;
+}
+.subtitle.daily-welcome-copy .daily-welcome-main{
+  display:block;
+  font-size:inherit;
+  font-weight:850;
+  color:rgba(39,32,51,.82);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.subtitle.daily-welcome-copy .daily-welcome-sub{
+  display:block;
+  font-size:clamp(20px,2.6vw,27px);
+  font-weight:760;
+  color:#d96b1d;
+  letter-spacing:0;
+  line-height:1;
+}
+@media (min-width:760px) and (min-height:650px) and (hover:hover){
+  .subtitle.daily-welcome-copy .daily-welcome-sub{font-size:clamp(17px,2.1vw,22px)}
+}
+
 </style>
 </head>
 <body>
@@ -2822,7 +2854,7 @@ function renderDailySubtitle(){
   if(dailyCurrentCompleted){
     const done=dailyStats.completed[currentDaily().id];
     const shouldPop=forceSolvedSubtitlePopOnRender||!subtitle.classList.contains("daily-complete-animate");
-    subtitle.classList.remove("level-label","intro-copy");
+    subtitle.classList.remove("level-label","intro-copy","daily-welcome-copy");
     subtitle.classList.add("daily-complete-title");
     subtitle.innerHTML=`<span>Completed in ${formatClock(done?.timeMs??getActivePuzzleElapsedMs())} 🎉</span><span class="daily-complete-moves">Moves ${done?.moves??dailyTotalMoves}</span>`;
     if(shouldPop)restartSolvedSubtitlePop();
@@ -2830,14 +2862,27 @@ function renderDailySubtitle(){
     forceSolvedSubtitlePopOnRender=false;
     return;
   }
-  subtitle.classList.remove("daily-complete-title","daily-complete-animate","daily-welcome-copy");
+  const wasWelcome=subtitle.classList.contains("daily-welcome-copy");
   const isIntro=puzzleIndex===0&&!dailyStarted;
   const showTimer=dailyStarted&&!dailyCurrentCompleted;
+  const showWelcome=isIntro&&hasCompletedDailyStats();
+  const shouldPopWelcome=forceSolvedSubtitlePopOnRender||!wasWelcome;
+  subtitle.classList.remove("daily-complete-title","daily-complete-animate","daily-welcome-copy");
   subtitle.classList.toggle("level-label",false);
-  subtitle.classList.toggle("intro-copy",isIntro);
-  if(showTimer)subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`;
-  else if(isIntro&&hasCompletedDailyStats()){const target=Math.max(1,(getDailyStreak().current||0)+1);subtitle.classList.add("daily-welcome-copy");subtitle.innerHTML=`<span class="daily-welcome-main">Play today\'s triple! ⏱️</span><span class="daily-welcome-sub">${target}-day streak</span>`;}
-  else subtitle.textContent=isIntro?INTRO_COPY:`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
+  subtitle.classList.toggle("intro-copy",isIntro&&!showWelcome);
+  if(showTimer){
+    subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`;
+  }else if(showWelcome){
+    const target=Math.max(1,(getDailyStreak().current||0)+1);
+    subtitle.classList.remove("intro-copy");
+    subtitle.classList.add("daily-complete-title","daily-welcome-copy");
+    subtitle.innerHTML=`<span class="daily-welcome-main">Play today\'s triple!</span><span class="daily-welcome-sub">${target}-day streak 🔥</span>`;
+    if(shouldPopWelcome)restartSolvedSubtitlePop();
+    else subtitle.classList.add("daily-complete-animate");
+    forceSolvedSubtitlePopOnRender=false;
+  }else{
+    subtitle.textContent=isIntro?INTRO_COPY:`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
+  }
 }
 function getGameSolvedSubtitleText(){
   const stored=formatGameSolvedRewardText(gameSolvedSubtitleText);
