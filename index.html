@@ -1399,10 +1399,10 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 
 
-/* v45 daily in-run puzzle slide transition */
+/* v46 daily in-run puzzle slide transition: slower; controls stay visible */
 .board-shell.daily-slide-animating,
 .feedback-area.daily-slide-animating{
-  transition:transform .46s cubic-bezier(.22,.8,.22,1), opacity .46s ease;
+  transition:transform .82s cubic-bezier(.22,.8,.22,1), opacity .82s ease;
   will-change:transform,opacity;
 }
 .board-shell.daily-slide-out,
@@ -1416,9 +1416,9 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   opacity:0;
 }
 .controls.daily-transition-controls{
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .18s ease;
+  opacity:1;
+  pointer-events:auto;
+  transition:none;
 }
 
 </style>
@@ -2145,9 +2145,8 @@ function startDailyPuzzleSlideAdvance(){
   if(puzzleIndex>=activePuzzles.length-1)return;
   dailyTransitioning=true;
   const {shell,feedback,controls}=getDailyStageTransitionElements();
-  if(controls)controls.classList.add("daily-transition-controls");
   [shell,feedback].forEach(el=>{if(el){el.classList.add("daily-slide-animating");el.classList.remove("daily-slide-enter");void el.offsetWidth;el.classList.add("daily-slide-out")}});
-  dailyAdvanceTimer=setTimeout(()=>goDailyNext({enterFromRight:true}),460);
+  dailyAdvanceTimer=setTimeout(()=>goDailyNext({enterFromRight:true}),820);
 }
 function goDailyNext(opts={}){
   if(!isDailyMode())return;
@@ -2173,7 +2172,7 @@ function goDailyNext(opts={}){
   if(opts.enterFromRight){
     requestAnimationFrame(()=>{
       [shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-enter")});
-      setTimeout(()=>{dailyTransitioning=false;clearDailyStageTransitionClasses()},520);
+      setTimeout(()=>{dailyTransitioning=false;clearDailyStageTransitionClasses()},900);
     });
   }else{
     dailyTransitioning=false;
@@ -2870,7 +2869,7 @@ function render(){
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
   hintBtn.querySelector("span").textContent=showHowToForFreshStart?"HOW TO":(showDailyCompleteControls?"STATS":(showDailyStart?"STATS":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(showGamePrestart?"HOW TO":(clueGiveUpReady?"Give-up":"Clue"))):"Hint"))));
-  hintBtn.disabled=dailyTransitioning?true:((showDailyCompleteControls||showDailyStart||showHowToForFreshStart||showGamePrestart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked))));
+  hintBtn.disabled=(showDailyCompleteControls||showDailyStart||showHowToForFreshStart||showGamePrestart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
   startWordsBtn.classList.toggle("daily-start",showDailyStart||showGamePrestart);
   startWordsBtn.classList.toggle("daily-end-stats",showDailyCompleteControls);
   if(showDailyCompleteControls){
@@ -4220,6 +4219,7 @@ board.addEventListener("click",e=>{
 });
 hintBtn.addEventListener("pointerup",e=>{if(isNewMode()&&solved)runSolvedStatsButtonAction(e)});
 hintBtn.addEventListener("click",e=>{
+  if(dailyTransitioning){e.preventDefault();e.stopPropagation();return}
   if(isBrandNewPlayer()&&((isDailyMode()&&!dailyStarted&&!dailyCurrentCompleted)||(isNewMode()&&gameStartDeferred&&puzzleIndex===0&&!solved))){e.preventDefault();e.stopPropagation();openHowToModal();return}
   if(isDailyMode()&&(!dailyStarted||dailyCurrentCompleted)){e.preventDefault();e.stopPropagation();openStatsDetails();return}
   if(isNewMode()&&solved){runSolvedStatsButtonAction(e);return}
@@ -4227,7 +4227,7 @@ hintBtn.addEventListener("click",e=>{
 });
 dailyModeBtn.addEventListener("click",()=>switchMode("daily"));
 gameModeBtn.addEventListener("click",()=>switchMode("game"));
-startWordsBtn.addEventListener("click",showStartingWords);
+startWordsBtn.addEventListener("click",e=>{if(dailyTransitioning){e.preventDefault();e.stopPropagation();return}showStartingWords(e)});
 nextBtn.addEventListener("pointerup",e=>{if(solved&&!isDailyMode()&&!isAllWordsMode())runNextButtonAction(e)});
 nextBtn.addEventListener("click",runNextButtonAction);
 subtitle.addEventListener("click",e=>{const btn=e.target.closest("[data-review-dir]");if(!btn)return;e.preventDefault();setDailyReviewIndex(Number(btn.dataset.reviewDir)||1)});
