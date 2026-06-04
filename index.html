@@ -1448,7 +1448,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .tile-wrap.solved-tile .htile .letter{color:var(--ink);text-shadow:none;}
 
 
-/* v56: returning daily subtitle inverted: streak/welcome headline + action subline */
+/* v57: returning daily subtitle action headline + streak/welcome subline */
 .subtitle.daily-welcome-copy{
   flex-direction:column;
   align-items:center;
@@ -1462,15 +1462,15 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   display:block;
   font-size:inherit;
   font-weight:850;
-  color:#d96b1d;
+  color:#5b5564;
   line-height:1;
   letter-spacing:-.02em;
 }
 .subtitle.daily-welcome-copy .daily-welcome-sub{
   display:block;
   font-size:clamp(20px,2.6vw,27px);
-  font-weight:760;
-  color:var(--muted);
+  font-weight:720;
+  color:rgba(118,111,130,.78);
   letter-spacing:0;
   line-height:1;
 }
@@ -2875,10 +2875,10 @@ function renderDailySubtitle(){
   }else if(showWelcome){
     const streakNow=getDailyStreak().current||0;
     const target=streakNow>0?streakNow+1:0;
-    const headline=target>0?`${target}-day streak 🔥`:"Welcome back 👋";
+    const subline=target>0?`${target}-day streak 🔥`:"Welcome back";
     subtitle.classList.remove("intro-copy");
     subtitle.classList.add("daily-complete-title","daily-welcome-copy");
-    subtitle.innerHTML=`<span class="daily-welcome-main">${headline}</span><span class="daily-welcome-sub">Solve today\'s triple!</span>`;
+    subtitle.innerHTML=`<span class="daily-welcome-main">Solve today\'s triple!</span><span class="daily-welcome-sub">${subline}</span>`;
     if(shouldPopWelcome)restartSolvedSubtitlePop();
     else subtitle.classList.add("daily-complete-animate");
     forceSolvedSubtitlePopOnRender=false;
