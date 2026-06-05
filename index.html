@@ -3578,16 +3578,18 @@ function registerAntiSpamBlockedTap(){
   showAntiSpamMessage();
 }
 function registerAntiSpamAction(){
-  if((solved&&!isAllWordsMode())||dailyTransitioning||dailyAdvancePending)return;
+  if((solved&&!isAllWordsMode())||dailyTransitioning||dailyAdvancePending)return true;
   const now=Date.now();
-  if(now<antiSpamLockedUntil){registerAntiSpamBlockedTap();return}
+  if(now<antiSpamLockedUntil){registerAntiSpamBlockedTap();return false}
   antiSpamActionTimes=antiSpamActionTimes.filter(t=>now-t<=ANTI_SPAM_WINDOW_MS);
   antiSpamActionTimes.push(now);
   if(antiSpamActionTimes.length>=ANTI_SPAM_MAX_ACTIONS){
     startAntiSpamLock(now);
+    return false;
   }
+  return true;
 }
-function noteInteraction(){interactionCount++;registerAntiSpamAction();returnedToStartNoticeShown=false;blockedNoticeShown=false;clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();if(message.classList.contains("info")&&(message.dataset.infoType==="returned-start"||message.dataset.infoType==="blocked-proper"||message.dataset.infoType==="single-start-word"))clearInfoMessage()}
+function noteInteraction(antiSpamAlreadyChecked=false){interactionCount++;if(!antiSpamAlreadyChecked&&!registerAntiSpamAction())return false;returnedToStartNoticeShown=false;blockedNoticeShown=false;clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();if(message.classList.contains("info")&&(message.dataset.infoType==="returned-start"||message.dataset.infoType==="blocked-proper"||message.dataset.infoType==="single-start-word"))clearInfoMessage();return true}
 function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved&&!isAllWordsMode())||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
 function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if((solved&&!isAllWordsMode())||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if((!solved||isAllWordsMode())&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAllWordsMode())||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
@@ -3785,13 +3787,14 @@ function handlePointerUp(e){
   if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();const t=tiles.find(x=>x.id===s.tileId);
   if(!s.hasDragged){
     if(t){
-      if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction();dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
+      if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
+      if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
+      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
   if(t&&isHorizontalTile(t)&&s.dragMode!=="move"&&s.verticalSwap&&!horizontalMoveLocked(t)){[t.top,t.bottom]=[t.bottom,t.top];changed=true}
-  if(s.hasDragged&&changed){recordMove();noteInteraction()}
+  if(s.hasDragged&&changed){if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}recordMove();noteInteraction(true)}
   dragState=null;clearDragProxy();render();maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()
 }
 function handlePointerCancel(e){if(!dragState||e.pointerId!==dragState.pointerId)return;cleanupPointerListeners();dragState=null;clearDragProxy();render()}
