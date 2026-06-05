@@ -1478,6 +1478,24 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .subtitle.daily-welcome-copy .daily-welcome-sub{font-size:clamp(17px,2.1vw,22px)}
 }
 
+
+/* v58: returning daily prestart title/date + transition clue dim */
+.subtitle.daily-welcome-copy .daily-welcome-main{
+  color:#5b5564;
+}
+.subtitle.daily-welcome-copy .daily-welcome-sub{
+  color:rgba(118,111,130,.74);
+}
+.controls.daily-transition-controls #hintBtn{
+  color:var(--ink);
+  background:var(--soft);
+  box-shadow:none;
+  opacity:.46;
+  transition:opacity .22s ease,background .22s ease,color .22s ease,box-shadow .22s ease;
+}
+.controls.daily-transition-controls #hintBtn::before{display:none!important}
+
+
 </style>
 </head>
 <body>
@@ -2191,6 +2209,18 @@ function getDailyStatsDisplayInfo(){
   return {mode:"none",title:"Today",entry:null,day:currentDaily(),puzzles:activePuzzles,results:[]};
 }
 function getDailyStreak(){const done=new Set(Object.keys(dailyStats.completed||{}).map(getDayNumberFromId).filter(Boolean));let n=1,best=0,cur=0;while(n<=dailyPuzzles.length){if(done.has(n)){cur++;best=Math.max(best,cur)}else cur=0;n++}const latest=Math.max(0,...[...done]);let current=0;for(let i=latest;i>=1&&done.has(i);i--)current++;return {current,best}}
+function getCurrentDailyNumber(){return (getDayNumberFromId(currentDaily()&&currentDaily().id)||dailyDayIndex+1)}
+function formatBrowserDateForDaily(){
+  try{return new Intl.DateTimeFormat(undefined,{day:"numeric",month:"long",year:"numeric"}).format(new Date())}
+  catch{return new Date().toDateString()}
+}
+function getDailyPrestartFooterLabel(){
+  const n=getCurrentDailyNumber();
+  if(isBrandNewPlayer())return `DAILY PUZZLE #${n}`;
+  const streak=getDailyStreak().current||0;
+  if(streak>0)return `${streak}-DAY STREAK 🔥`;
+  return "WELCOME BACK";
+}
 function getHighestCompletedDailyIndex(){
   let best=-1;
   Object.keys(dailyStats.completed||{}).forEach(id=>{
@@ -2251,7 +2281,8 @@ function startDailyPuzzleSlideAdvance(){
   if(!isDailyMode()||dailyCurrentCompleted||dailyTransitioning)return;
   if(puzzleIndex>=activePuzzles.length-1)return;
   dailyTransitioning=true;
-  const {shell,feedback}=getDailyStageTransitionElements();
+  const {shell,feedback,controls}=getDailyStageTransitionElements();
+  if(controls)controls.classList.add("daily-transition-controls");
   const ghosts=[createDailySlideGhost(shell),createDailySlideGhost(feedback)].filter(Boolean);
   goDailyNext({enterFromRight:true});
   setTimeout(()=>ghosts.forEach(el=>el.remove()),1720);
@@ -2264,7 +2295,7 @@ function goDailyNext(opts={}){
   message.classList.remove("info","score-pop","score-zero","streak-pop","quick-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","solved-award-persist","clue-award-pop","award-perfect","award-great","award-good","award-clunky");
   message.textContent="";
   const elapsed=getActivePuzzleElapsedMs();
-  const {shell,feedback}=getDailyStageTransitionElements();
+  const {shell,feedback,controls}=getDailyStageTransitionElements();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out","daily-slide-enter");el.classList.add("daily-slide-animating")}});
   }else{
@@ -2279,7 +2310,7 @@ function goDailyNext(opts={}){
   saveDailyProgress();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
-    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")})},1720);
+    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls")},1720);
   }else{
     dailyTransitioning=false;
   }
@@ -2865,7 +2896,7 @@ function renderDailySubtitle(){
   const wasWelcome=subtitle.classList.contains("daily-welcome-copy");
   const isIntro=puzzleIndex===0&&!dailyStarted;
   const showTimer=dailyStarted&&!dailyCurrentCompleted;
-  const showWelcome=isIntro&&hasCompletedDailyStats();
+  const showWelcome=isIntro&&!isBrandNewPlayer();
   const shouldPopWelcome=forceSolvedSubtitlePopOnRender||!wasWelcome;
   subtitle.classList.remove("daily-complete-title","daily-complete-animate","daily-welcome-copy");
   subtitle.classList.toggle("level-label",false);
@@ -2873,12 +2904,10 @@ function renderDailySubtitle(){
   if(showTimer){
     subtitle.innerHTML=`<span class="daily-play-time">Time ${formatClock(getActivePuzzleElapsedMs())}</span>`;
   }else if(showWelcome){
-    const streakNow=getDailyStreak().current||0;
-    const target=streakNow>0?streakNow+1:0;
-    const subline=target>0?`${target}-day streak 🔥`:"Welcome back";
+    const dayNum=getCurrentDailyNumber();
     subtitle.classList.remove("intro-copy");
     subtitle.classList.add("daily-complete-title","daily-welcome-copy");
-    subtitle.innerHTML=`<span class="daily-welcome-main">Solve today\'s triple!</span><span class="daily-welcome-sub">${subline}</span>`;
+    subtitle.innerHTML=`<span class="daily-welcome-main">Daily Tri-Puzzle #${dayNum}</span><span class="daily-welcome-sub">${formatBrowserDateForDaily()}</span>`;
     if(shouldPopWelcome)restartSolvedSubtitlePop();
     else subtitle.classList.add("daily-complete-animate");
     forceSolvedSubtitlePopOnRender=false;
@@ -3204,7 +3233,7 @@ function updateFooterDisplay(){
       startDailyCountdownTimer();
     }else{
       clearDailyCountdownTimer();
-      status.innerHTML=(!dailyStarted&&!dailyCurrentCompleted)?`DAILY 3-PUZZLE`:`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
+      status.innerHTML=(!dailyStarted&&!dailyCurrentCompleted)?getDailyPrestartFooterLabel():`DAILY ${puzzleIndex+1} OF ${activePuzzles.length}`;
       scoreLine.innerHTML="";
       status.classList.remove("footer-clickable");
       scoreLine.classList.remove("footer-clickable");
