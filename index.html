@@ -2278,7 +2278,27 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=Math.max(0,Math.round(getActivePuzzleElapsedMs()));pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;dailyCarryoverClueCreditMs=0;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:Math.max(0,Math.round(Number(dailyTotalMoves)||0)),puzzleResults:dailyPuzzleResults,completedAt:Date.now()};dailyStats=normalizeDailyStats(dailyStats);saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,info=getDailyStatsDisplayInfo(),done=info.entry;return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10),displayTitle:info.title,displayMode:info.mode}}
 function getDailyStageTransitionElements(){return {shell:document.querySelector(".board-shell"),feedback:document.querySelector(".feedback-area"),controls:document.querySelector(".controls")}}
-function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls");if(hintBtn)hintBtn.classList.remove("daily-transition-clue-muted");document.querySelectorAll(".daily-slide-ghost").forEach(el=>el.remove())}
+function setDailyTransitionClueMuted(on){
+  if(!hintBtn)return;
+  hintBtn.classList.toggle("daily-transition-clue-muted",!!on);
+  if(on){
+    // Inline !important wins over the normal yellow .hint / .vowels-mode styles during Daily slide transitions.
+    hintBtn.style.setProperty("background","var(--soft)","important");
+    hintBtn.style.setProperty("background-color","var(--soft)","important");
+    hintBtn.style.setProperty("color","rgba(39,32,51,.58)","important");
+    hintBtn.style.setProperty("box-shadow","none","important");
+    hintBtn.style.setProperty("opacity",".58","important");
+    hintBtn.style.setProperty("--hint-fill","0%","important");
+  }else{
+    hintBtn.style.removeProperty("background");
+    hintBtn.style.removeProperty("background-color");
+    hintBtn.style.removeProperty("color");
+    hintBtn.style.removeProperty("box-shadow");
+    hintBtn.style.removeProperty("opacity");
+    hintBtn.style.removeProperty("--hint-fill");
+  }
+}
+function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls");setDailyTransitionClueMuted(false);document.querySelectorAll(".daily-slide-ghost").forEach(el=>el.remove())}
 function createDailySlideGhost(el){
   if(!el)return null;
   const r=el.getBoundingClientRect();
@@ -2321,7 +2341,7 @@ function startDailyPuzzleSlideAdvance(){
   dailyTransitioning=true;
   const {shell,feedback,controls}=getDailyStageTransitionElements();
   if(controls)controls.classList.add("daily-transition-controls");
-  if(hintBtn)hintBtn.classList.add("daily-transition-clue-muted");
+  setDailyTransitionClueMuted(true);
   const ghosts=[createDailySlideGhost(shell),createDailySlideGhost(feedback)].filter(Boolean);
   goDailyNext({enterFromRight:true});
   setTimeout(()=>ghosts.forEach(el=>el.remove()),1420);
@@ -2344,12 +2364,13 @@ function goDailyNext(opts={}){
   dailyPuzzleStartElapsedMs=elapsed;
   dailyPuzzleStartMoves=dailyTotalMoves;
   setupPuzzle({restoreActivePuzzleElapsedMs:elapsed,restoreClueWordCreditMs:Math.max(0,Number(dailyCarryoverClueCreditMs)||0)});
+  if(opts.enterFromRight)setDailyTransitionClueMuted(true);
   resumePuzzleClock();
   startDailyTimer();
   saveDailyProgress();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
-    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls");if(hintBtn)hintBtn.classList.remove("daily-transition-clue-muted")},1420);
+    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls");setDailyTransitionClueMuted(false)},1420);
   }else{
     dailyTransitioning=false;
   }
