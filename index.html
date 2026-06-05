@@ -1515,6 +1515,24 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   color:inherit!important;
 }
 
+/* v61: direct Clue-button transition mute; render applies this class while dailyTransitioning */
+#hintBtn.daily-transition-clue-muted,
+#hintBtn.daily-transition-clue-muted.hint,
+#hintBtn.daily-transition-clue-muted.vowels-mode,
+#hintBtn.daily-transition-clue-muted.clue-inactive-yellow{
+  color:rgba(39,32,51,.58)!important;
+  background:var(--soft)!important;
+  box-shadow:none!important;
+  opacity:.58!important;
+}
+#hintBtn.daily-transition-clue-muted::before{
+  display:none!important;
+  width:0!important;
+}
+#hintBtn.daily-transition-clue-muted span{
+  color:inherit!important;
+}
+
 </style>
 </head>
 <body>
@@ -2260,7 +2278,7 @@ function pruneDailyPuzzleDetailsForLatest(currentId){
 function completeDailyIfNeeded(){if(dailyCurrentCompleted)return;const timeMs=Math.max(0,Math.round(getActivePuzzleElapsedMs()));pausePuzzleClock();dailyCurrentCompleted=true;dailyReviewIndex=activePuzzles.length-1;dailyCarryoverClueCreditMs=0;const id=currentDaily().id;pruneDailyPuzzleDetailsForLatest(id);dailyStats.completed[id]={dayIndex:dailyDayIndex,timeMs,moves:Math.max(0,Math.round(Number(dailyTotalMoves)||0)),puzzleResults:dailyPuzzleResults,completedAt:Date.now()};dailyStats=normalizeDailyStats(dailyStats);saveDailyStats();saveDailyProgress()}
 function getDailyFinalLines(){const entries=getDailyCompletedEntries(),medTime=medianNumber(entries.map(e=>e.timeMs)),medMoves=medianNumber(entries.map(e=>e.moves)),streak=getDailyStreak().current,info=getDailyStatsDisplayInfo(),done=info.entry;return {time:formatClock(done?.timeMs??getActivePuzzleElapsedMs()),moves:done?.moves??dailyTotalMoves,streak,medianTime:medTime===null?"—":formatClock(medTime),medianMoves:medMoves===null?"—":String(Math.round(medMoves*10)/10),displayTitle:info.title,displayMode:info.mode}}
 function getDailyStageTransitionElements(){return {shell:document.querySelector(".board-shell"),feedback:document.querySelector(".feedback-area"),controls:document.querySelector(".controls")}}
-function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls");document.querySelectorAll(".daily-slide-ghost").forEach(el=>el.remove())}
+function clearDailyStageTransitionClasses(){const {shell,feedback,controls}=getDailyStageTransitionElements();[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-out","daily-slide-enter")});if(controls)controls.classList.remove("daily-transition-controls");if(hintBtn)hintBtn.classList.remove("daily-transition-clue-muted");document.querySelectorAll(".daily-slide-ghost").forEach(el=>el.remove())}
 function createDailySlideGhost(el){
   if(!el)return null;
   const r=el.getBoundingClientRect();
@@ -2303,6 +2321,7 @@ function startDailyPuzzleSlideAdvance(){
   dailyTransitioning=true;
   const {shell,feedback,controls}=getDailyStageTransitionElements();
   if(controls)controls.classList.add("daily-transition-controls");
+  if(hintBtn)hintBtn.classList.add("daily-transition-clue-muted");
   const ghosts=[createDailySlideGhost(shell),createDailySlideGhost(feedback)].filter(Boolean);
   goDailyNext({enterFromRight:true});
   setTimeout(()=>ghosts.forEach(el=>el.remove()),1420);
@@ -2330,7 +2349,7 @@ function goDailyNext(opts={}){
   saveDailyProgress();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
-    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls")},1420);
+    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls");if(hintBtn)hintBtn.classList.remove("daily-transition-clue-muted")},1420);
   }else{
     dailyTransitioning=false;
   }
@@ -2852,7 +2871,7 @@ function checkSolved(){
         const descriptorMessage=getDailyPlayDescriptorLabel(currentPuzzle(),dailyPuzzleResults[puzzleIndex]);
         popMessage(descriptorMessage,false,true);
         showDailyCompleteBurst(false);
-        dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1550);
+        dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1850);
       }
     }else{
       awardPuzzleScoreIfNeeded();
@@ -3055,6 +3074,7 @@ function render(){
   hintBtn.classList.toggle("vowels-mode",clueButtonYellow);
   hintBtn.classList.toggle("clue-inactive-yellow",clueInactiveYellow);
   hintBtn.classList.toggle("clue-stats-muted",clueStatsMuted);
+  hintBtn.classList.toggle("daily-transition-clue-muted",isDailyMode()&&dailyTransitioning);
   hintBtn.classList.toggle("vowels-unavailable",clueSoftMuted);
   hintBtn.querySelector("span").textContent=showHowToForFreshStart?"HOW TO":(showDailyCompleteControls?"STATS":(showDailyStart?"STATS":(isDailyMode()?(dailySolvedTransition?"Clue":(clueGiveUpReady?"Give-up":"Clue")):(isNewMode()?(solved?"STATS":(showGamePrestart?"HOW TO":(clueGiveUpReady?"Give-up":"Clue"))):"Hint"))));
   hintBtn.disabled=(showDailyCompleteControls||showDailyStart||showHowToForFreshStart||showGamePrestart)?false:(isDailyMode()?(!dailyStarted):(isNewMode()?false:(solved||allLocked)));
@@ -4209,7 +4229,7 @@ function giveUpNewModePuzzle(){
       const descriptorMessage=getDailyPlayDescriptorLabel(currentPuzzle(),dailyPuzzleResults[puzzleIndex]);
       popMessage(descriptorMessage,true,true);
       showDailyCompleteBurst(false);
-      dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1550);
+      dailyAdvanceTimer=setTimeout(()=>startDailyPuzzleSlideAdvance(),1850);
     }
     render();
     saveDailyProgress();
