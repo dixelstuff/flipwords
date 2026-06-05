@@ -1543,6 +1543,36 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   animation:none!important;
   transform:translateY(0);
 }
+
+/* v69: anti-spam message uses a separate stable overlay so it never flickers or gets hidden by score/message animations */
+.anti-spam-floating-lock{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  color:var(--muted);
+  font-size:19px;
+  font-weight:750;
+  line-height:1.25;
+  transform:translateY(-5px);
+  z-index:3;
+}
+.anti-spam-floating-lock.visible{
+  opacity:1;
+  visibility:visible;
+}
+.anti-spam-floating-lock.fading{
+  opacity:0;
+  visibility:visible;
+  transition:opacity .42s ease-out;
+}
+@media (min-width:760px) and (min-height:650px) and (hover:hover){
+  .anti-spam-floating-lock{font-size:20px;transform:translateY(2px)}
+}
 </style>
 </head>
 <body>
@@ -1550,7 +1580,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <h1 class="title">FlipWords</h1>
 <p id="subtitle" class="subtitle intro-copy"></p>
 <section class="board-shell" aria-label="Puzzle board"><div id="board" class="board"></div></section>
-<div class="feedback-area"><div id="message" class="message" aria-live="polite"></div><div id="starBurst" class="star-burst" aria-hidden="true"></div></div>
+<div class="feedback-area"><div id="message" class="message" aria-live="polite"></div><div id="antiSpamLockMessage" class="anti-spam-floating-lock" aria-live="polite"></div><div id="starBurst" class="star-burst" aria-hidden="true"></div></div>
 <div class="controls"><button id="hintBtn" class="hint" type="button"><span></span></button><span class="action-slot"><button id="startWordsBtn" class="start-words" type="button"></button><button id="nextBtn" class="next" type="button">NEXT</button></span></div>
 <div id="status" class="status"></div><div id="scoreLine" class="score-line"></div>
 <button id="statsToggle" class="stats-toggle" type="button">View details</button>
@@ -1707,7 +1737,7 @@ const allWordsPuzzles=allWordsRows.map(makeAllWordsPuzzle);
 let activePuzzles=puzzles;
 
 const $=id=>document.getElementById(id);
-const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
+const board=$("board"),hintBtn=$("hintBtn"),startWordsBtn=$("startWordsBtn"),nextBtn=$("nextBtn"),message=$("message"),antiSpamLockMessage=$("antiSpamLockMessage"),starBurst=$("starBurst"),subtitle=$("subtitle"),status=$("status"),scoreLine=$("scoreLine"),statsToggle=$("statsToggle"),endMessage=$("endMessage"),statsPanel=$("statsPanel"),modeToggle=$("modeToggle"),dailyModeBtn=$("dailyModeBtn"),gameModeBtn=$("gameModeBtn");
 const boardShell=board.parentElement;
 let fitBoardRAF=0;
 document.body.appendChild(statsPanel);
@@ -2517,7 +2547,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3523,48 +3553,36 @@ function queueRewardAnimations(){
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
 function clearAntiSpamMessageTimer(){if(antiSpamMessageTimer){clearTimeout(antiSpamMessageTimer);antiSpamMessageTimer=null}}
+function showAntiSpamOverlay(){
+  if(!antiSpamLockMessage)return;
+  clearAntiSpamMessageTimer();
+  antiSpamLockMessage.textContent="🔒 Grid lock! Slow down";
+  antiSpamLockMessage.classList.remove("fading");
+  antiSpamLockMessage.classList.add("visible");
+}
+function hideAntiSpamOverlay(){
+  if(!antiSpamLockMessage)return;
+  antiSpamLockMessage.classList.remove("visible");
+  antiSpamLockMessage.classList.add("fading");
+  const el=antiSpamLockMessage;
+  setTimeout(()=>{
+    if(el.classList.contains("fading")){
+      el.classList.remove("fading");
+      el.textContent="";
+    }
+  },460);
+}
 function scheduleAntiSpamMessageClear(){
   clearAntiSpamMessageTimer();
   const delay=Math.max(0,antiSpamLockedUntil-Date.now());
   antiSpamMessageTimer=setTimeout(()=>{
     antiSpamMessageTimer=null;
     if(Date.now()<antiSpamLockedUntil){scheduleAntiSpamMessageClear();return}
-    if(message.dataset.infoType!=="anti-spam")return;
-    message.classList.remove("anti-spam-lock-msg");
-    message.style.animation="";
-    message.style.opacity="";
-    message.style.transform="";
-    message.style.animationDuration="900ms";
-    void message.offsetWidth;
-    message.classList.add("info");
-    if(infoMessageTimer)clearTimeout(infoMessageTimer);
-    infoMessageTimer=setTimeout(()=>{
-      message.classList.remove("info");
-      message.style.animationDuration="";
-      message.dataset.infoType="";
-      infoMessageTimer=null;
-      if(!solved){
-        message.textContent="";
-        restorePersistentClueIfNeeded();
-      }else{
-        message.textContent="";
-      }
-    },900);
+    hideAntiSpamOverlay();
   },delay);
 }
 function showAntiSpamMessage(){
-  if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  const alreadyShowing=message.dataset.infoType==="anti-spam"&&message.classList.contains("anti-spam-lock-msg");
-  if(!alreadyShowing){
-    message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout");
-    message.style.animationDuration="";
-    message.style.animation="none";
-    message.style.opacity="1";
-    message.style.transform="translateY(0)";
-    message.textContent="🔒 Grid lock! Slow down";
-    message.dataset.infoType="anti-spam";
-    message.classList.add("anti-spam-lock-msg");
-  }
+  showAntiSpamOverlay();
   scheduleAntiSpamMessageClear();
 }
 function startAntiSpamLock(now,repeat=false){
