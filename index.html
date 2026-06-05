@@ -3531,6 +3531,9 @@ function scheduleAntiSpamMessageClear(){
     if(Date.now()<antiSpamLockedUntil){scheduleAntiSpamMessageClear();return}
     if(message.dataset.infoType!=="anti-spam")return;
     message.classList.remove("anti-spam-lock-msg");
+    message.style.animation="";
+    message.style.opacity="";
+    message.style.transform="";
     message.style.animationDuration="900ms";
     void message.offsetWidth;
     message.classList.add("info");
@@ -3551,11 +3554,17 @@ function scheduleAntiSpamMessageClear(){
 }
 function showAntiSpamMessage(){
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
-  message.style.animationDuration="";
-  message.textContent="🔒 Grid lock! Slow down";
-  message.dataset.infoType="anti-spam";
-  message.classList.add("anti-spam-lock-msg");
+  const alreadyShowing=message.dataset.infoType==="anti-spam"&&message.classList.contains("anti-spam-lock-msg");
+  if(!alreadyShowing){
+    message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout");
+    message.style.animationDuration="";
+    message.style.animation="none";
+    message.style.opacity="1";
+    message.style.transform="translateY(0)";
+    message.textContent="🔒 Grid lock! Slow down";
+    message.dataset.infoType="anti-spam";
+    message.classList.add("anti-spam-lock-msg");
+  }
   scheduleAntiSpamMessageClear();
 }
 function startAntiSpamLock(now,repeat=false){
