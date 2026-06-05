@@ -1711,8 +1711,8 @@ let lastPuzzleScore=null,lastAccountingMessages=[],lastBonusMessages=[],puzzleAw
 let gameSolvedSubtitleText="";
 let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
-const ANTI_SPAM_WINDOW_MS=4000,ANTI_SPAM_MAX_ACTIONS=12,ANTI_SPAM_FIRST_LOCK_MS=1500,ANTI_SPAM_REPEAT_LOCK_MS=3200;
-let antiSpamActionTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0;
+const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
+let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2507,7 +2507,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3511,19 +3511,53 @@ function queueRewardAnimations(){
 }
 
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
-function showAntiSpamMessage(){showInfoMessage("Slow down and look 👀","anti-spam",Math.max(1200,antiSpamLockedUntil-Date.now()+350))}
+function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
+function showAntiSpamMessage(){
+  const duration=antiSpamMessageDuration();
+  if(message.dataset.infoType==="anti-spam"&&message.classList.contains("info")){
+    if(infoMessageTimer)clearTimeout(infoMessageTimer);
+    message.textContent="Slow down and look 👀";
+    infoMessageTimer=setTimeout(()=>{
+      message.classList.remove("info");
+      message.style.animationDuration="";
+      message.dataset.infoType="";
+      if(!solved){
+        updateMessage();
+      }else{
+        message.textContent="";
+      }
+    },duration);
+    return;
+  }
+  showInfoMessage("Slow down and look 👀","anti-spam",duration);
+}
+function startAntiSpamLock(now,repeat=false){
+  const lockMs=repeat||antiSpamTriggerCount>0?ANTI_SPAM_REPEAT_LOCK_MS:ANTI_SPAM_FIRST_LOCK_MS;
+  antiSpamTriggerCount++;
+  antiSpamLockedUntil=Math.max(antiSpamLockedUntil,now+lockMs);
+  antiSpamActionTimes=[];
+  antiSpamLockedTapTimes=[];
+  showAntiSpamMessage();
+}
+function registerAntiSpamBlockedTap(){
+  if((solved&&!isAllWordsMode())||dailyTransitioning||dailyAdvancePending)return;
+  const now=Date.now();
+  antiSpamLockedTapTimes=antiSpamLockedTapTimes.filter(t=>now-t<=ANTI_SPAM_WINDOW_MS);
+  antiSpamLockedTapTimes.push(now);
+  if(antiSpamLockedTapTimes.length>=ANTI_SPAM_MAX_ACTIONS){
+    antiSpamLockedUntil=Math.max(antiSpamLockedUntil,now+ANTI_SPAM_REPEAT_LOCK_MS);
+    antiSpamLockedTapTimes=[];
+  }
+  showAntiSpamMessage();
+}
 function registerAntiSpamAction(){
   if((solved&&!isAllWordsMode())||dailyTransitioning||dailyAdvancePending)return;
   const now=Date.now();
-  if(now<antiSpamLockedUntil)return;
+  if(now<antiSpamLockedUntil){registerAntiSpamBlockedTap();return}
   antiSpamActionTimes=antiSpamActionTimes.filter(t=>now-t<=ANTI_SPAM_WINDOW_MS);
   antiSpamActionTimes.push(now);
   if(antiSpamActionTimes.length>=ANTI_SPAM_MAX_ACTIONS){
-    const lockMs=antiSpamTriggerCount>0?ANTI_SPAM_REPEAT_LOCK_MS:ANTI_SPAM_FIRST_LOCK_MS;
-    antiSpamTriggerCount++;
-    antiSpamLockedUntil=now+lockMs;
-    antiSpamActionTimes=[];
-    showAntiSpamMessage();
+    startAntiSpamLock(now);
   }
 }
 function noteInteraction(){interactionCount++;registerAntiSpamAction();returnedToStartNoticeShown=false;blockedNoticeShown=false;clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();if(message.classList.contains("info")&&(message.dataset.infoType==="returned-start"||message.dataset.infoType==="blocked-proper"||message.dataset.infoType==="single-start-word"))clearInfoMessage()}
@@ -3652,7 +3686,7 @@ function toggleSolvedStartPreview(){if(!solved)return;previewingStartWords?hideS
 function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDeferred||solved)return;gameStartDeferred=false;resumePuzzleClock();if(isNewMode()){renderGameSubtitle();updateFooterDisplay();startClueAvailabilityTimer();}else startAutoHintTimer();saveGameState()}
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
-  if(isAntiSpamLocked()){e.preventDefault();e.stopPropagation();showAntiSpamMessage();return}
+  if(isAntiSpamLocked()){e.preventDefault();e.stopPropagation();registerAntiSpamBlockedTap();return}
   if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
