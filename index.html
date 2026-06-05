@@ -1533,6 +1533,16 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   color:inherit!important;
 }
 
+
+/* v66 anti-spam lock message stays until grid unlocks */
+.message.anti-spam-lock-msg{
+  opacity:1;
+  color:var(--muted);
+  font-size:19px;
+  font-weight:750;
+  animation:none!important;
+  transform:translateY(0);
+}
 </style>
 </head>
 <body>
@@ -1712,7 +1722,7 @@ let gameSolvedSubtitleText="";
 let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
-let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0;
+let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2507,7 +2517,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3512,24 +3522,41 @@ function queueRewardAnimations(){
 
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
-function showAntiSpamMessage(){
-  const duration=antiSpamMessageDuration();
-  if(message.dataset.infoType==="anti-spam"&&message.classList.contains("info")){
+function clearAntiSpamMessageTimer(){if(antiSpamMessageTimer){clearTimeout(antiSpamMessageTimer);antiSpamMessageTimer=null}}
+function scheduleAntiSpamMessageClear(){
+  clearAntiSpamMessageTimer();
+  const delay=Math.max(0,antiSpamLockedUntil-Date.now());
+  antiSpamMessageTimer=setTimeout(()=>{
+    antiSpamMessageTimer=null;
+    if(Date.now()<antiSpamLockedUntil){scheduleAntiSpamMessageClear();return}
+    if(message.dataset.infoType!=="anti-spam")return;
+    message.classList.remove("anti-spam-lock-msg");
+    message.style.animationDuration="900ms";
+    void message.offsetWidth;
+    message.classList.add("info");
     if(infoMessageTimer)clearTimeout(infoMessageTimer);
-    message.textContent="Slow down and look 👀";
     infoMessageTimer=setTimeout(()=>{
       message.classList.remove("info");
       message.style.animationDuration="";
       message.dataset.infoType="";
+      infoMessageTimer=null;
       if(!solved){
-        updateMessage();
+        message.textContent="";
+        restorePersistentClueIfNeeded();
       }else{
         message.textContent="";
       }
-    },duration);
-    return;
-  }
-  showInfoMessage("Slow down and look 👀","anti-spam",duration);
+    },900);
+  },delay);
+}
+function showAntiSpamMessage(){
+  if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
+  message.style.animationDuration="";
+  message.textContent="🔒 Grid lock! Slow down";
+  message.dataset.infoType="anti-spam";
+  message.classList.add("anti-spam-lock-msg");
+  scheduleAntiSpamMessageClear();
 }
 function startAntiSpamLock(now,repeat=false){
   const lockMs=repeat||antiSpamTriggerCount>0?ANTI_SPAM_REPEAT_LOCK_MS:ANTI_SPAM_FIRST_LOCK_MS;
@@ -3565,8 +3592,9 @@ function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved
 function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if((solved&&!isAllWordsMode())||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if((!solved||isAllWordsMode())&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAllWordsMode())||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info",duration=4000){
+  clearAntiSpamMessageTimer();
   if(infoMessageTimer)clearTimeout(infoMessageTimer);
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info","clue-static","clue-solved","fadeout");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
   message.style.animationDuration="";
   message.textContent=text;
   message.dataset.infoType=type;
@@ -3586,16 +3614,18 @@ function showInfoMessage(text,type="info",duration=4000){
 function clearStaticMessage(){
   clearClueCountdownMessage();
   clearClueSkipHelperTimer();
+  clearAntiSpamMessageTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  message.classList.remove("info","clue-static","clue-solved","fadeout");
+  message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
   message.dataset.infoType="";
   message.style.animationDuration="";
   message.textContent="";
 }
 function showStaticInfoMessage(text,type="info",duration=7000,opts={}){
   clearClueCountdownMessage();
+  clearAntiSpamMessageTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
   message.style.animationDuration="";
   message.textContent=text;
   message.dataset.infoType=type;
@@ -4458,7 +4488,7 @@ function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(i
 function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(returnedToStartTimer);returnedToStartTimer=null}}
 function clearSingleStartWordTimer(){if(singleStartWordTimer){clearTimeout(singleStartWordTimer);singleStartWordTimer=null}}
 function clearNoticeTimer(){if(noticeTimer){clearTimeout(noticeTimer);noticeTimer=null}}
-function clearInfoMessage(clearText=true){clearClueCountdownMessage();clearClueSkipHelperTimer();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}message.classList.remove("info","clue-static","clue-solved","fadeout");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved){message.textContent="";restorePersistentClueIfNeeded()}}
+function clearInfoMessage(clearText=true){clearClueCountdownMessage();clearClueSkipHelperTimer();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}clearAntiSpamMessageTimer();message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved){message.textContent="";restorePersistentClueIfNeeded()}}
 function clearAllTimers(){clearClueFooterTimer();clearClueTapDelayTimer();clearClueAutoRevealTimer();clearClueSkipHelperTimer();clearSolvedClueTimer();clearClueInlineCountdownTimer();if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();hideVowelReveal(false);clearVowelTimers();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();clearDailyCountdownTimer();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}dailyTransitioning=false;dailyAdvancePending=false;clearDailyStageTransitionClasses();stopAutoHintTimer()}
 
 function jumpToNextDailyForTesting(){
