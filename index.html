@@ -1412,11 +1412,11 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   z-index:10000;
 }
 .daily-slide-ghost.daily-slide-out{
-  animation:dailyStageSlideOut 1.65s cubic-bezier(.22,.78,.18,1) forwards;
+  animation:dailyStageSlideOut 1.35s cubic-bezier(.22,.78,.18,1) forwards;
 }
 .board-shell.daily-slide-enter,
 .feedback-area.daily-slide-enter{
-  animation:dailyStageSlideIn 1.65s cubic-bezier(.22,.78,.18,1) both;
+  animation:dailyStageSlideIn 1.35s cubic-bezier(.22,.78,.18,1) both;
 }
 @keyframes dailyStageSlideOut{
   0%{transform:translateX(0);opacity:1}
@@ -1495,6 +1495,25 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 }
 .controls.daily-transition-controls #hintBtn::before{display:none!important}
 
+
+
+/* v60: force Daily transition clue button to look inactive while the grid slides */
+.controls.daily-transition-controls #hintBtn,
+.controls.daily-transition-controls #hintBtn.hint,
+.controls.daily-transition-controls #hintBtn.vowels-mode,
+.controls.daily-transition-controls #hintBtn.clue-inactive-yellow{
+  color:rgba(39,32,51,.58)!important;
+  background:var(--soft)!important;
+  box-shadow:none!important;
+  opacity:.58!important;
+}
+.controls.daily-transition-controls #hintBtn::before{
+  display:none!important;
+  width:0!important;
+}
+.controls.daily-transition-controls #hintBtn span{
+  color:inherit!important;
+}
 
 </style>
 </head>
@@ -2269,12 +2288,12 @@ function createDailySlideGhost(el){
       {transform:"translate3d(0,0,0)",opacity:1},
       {transform:`translate3d(${-travel*.42}px,0,0)`,opacity:.82,offset:.42},
       {transform:`translate3d(${-travel}px,0,0)`,opacity:0}
-    ],{duration:1650,easing:"cubic-bezier(.22,.78,.18,1)",fill:"forwards"});
+    ],{duration:1350,easing:"cubic-bezier(.22,.78,.18,1)",fill:"forwards"});
     anim.onfinish=()=>wrap.remove();
   }catch{
-    wrap.style.transition="transform 1650ms cubic-bezier(.22,.78,.18,1), opacity 1650ms ease";
+    wrap.style.transition="transform 1350ms cubic-bezier(.22,.78,.18,1), opacity 1350ms ease";
     requestAnimationFrame(()=>{wrap.style.transform=`translate3d(${-travel}px,0,0)`;wrap.style.opacity="0"});
-    setTimeout(()=>wrap.remove(),1700);
+    setTimeout(()=>wrap.remove(),1400);
   }
   return wrap;
 }
@@ -2286,7 +2305,7 @@ function startDailyPuzzleSlideAdvance(){
   if(controls)controls.classList.add("daily-transition-controls");
   const ghosts=[createDailySlideGhost(shell),createDailySlideGhost(feedback)].filter(Boolean);
   goDailyNext({enterFromRight:true});
-  setTimeout(()=>ghosts.forEach(el=>el.remove()),1720);
+  setTimeout(()=>ghosts.forEach(el=>el.remove()),1420);
 }
 function goDailyNext(opts={}){
   if(!isDailyMode())return;
@@ -2311,7 +2330,7 @@ function goDailyNext(opts={}){
   saveDailyProgress();
   if(opts.enterFromRight){
     [shell,feedback].forEach(el=>{if(el){el.classList.remove("daily-slide-out");el.classList.add("daily-slide-animating","daily-slide-enter")}});
-    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls")},1720);
+    setTimeout(()=>{dailyTransitioning=false;[shell,feedback].forEach(el=>{if(el)el.classList.remove("daily-slide-animating","daily-slide-enter","daily-slide-out")});if(controls)controls.classList.remove("daily-transition-controls")},1420);
   }else{
     dailyTransitioning=false;
   }
