@@ -90,11 +90,11 @@
   {
     "id": "day-009",
     "type": "3-4-5",
-    "totalDifficulty": 34,
+    "totalDifficulty": 26,
     "maxDifficulty": 16,
     "puzzleIds": [
       "dip-top",
-      "node-snow",
+      "arch-sums",
       "began-rotor"
     ]
   },
