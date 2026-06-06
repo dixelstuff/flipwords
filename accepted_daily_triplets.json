@@ -2,771 +2,881 @@
   {
     "id": "day-001",
     "type": "3-4-5",
-    "totalDifficulty": 17,
-    "maxDifficulty": 9,
+    "totalDifficulty": 42,
+    "maxDifficulty": 21,
     "puzzleIds": [
-      "did-leg",
-      "awry-bald",
-      "sucks-voter"
+      "eel-win",
+      "edit-menu",
+      "shape-sworn"
     ]
   },
   {
     "id": "day-002",
     "type": "3-4-5",
-    "totalDifficulty": 28,
-    "maxDifficulty": 13,
+    "totalDifficulty": 21,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "pit-raw",
-      "kill-rage",
-      "score-stand"
+      "die-ram",
+      "beam-plod",
+      "seeds-singe"
     ]
   },
   {
     "id": "day-003",
     "type": "3-4-5",
-    "totalDifficulty": 37,
-    "maxDifficulty": 26,
+    "totalDifficulty": 33,
+    "maxDifficulty": 24,
     "puzzleIds": [
-      "add-yes",
-      "desk-sins",
-      "chalk-slice"
+      "age-mug",
+      "ease-rich",
+      "named-papal"
     ]
   },
   {
     "id": "day-004",
     "type": "3-4-5",
-    "totalDifficulty": 41,
-    "maxDifficulty": 18,
+    "totalDifficulty": 36,
+    "maxDifficulty": 22,
     "puzzleIds": [
-      "eat-rid",
-      "lung-safe",
-      "actor-under"
+      "dad-nod",
+      "gift-solo",
+      "dates-resin"
     ]
   },
   {
     "id": "day-005",
     "type": "3-4-5",
-    "totalDifficulty": 26,
-    "maxDifficulty": 11,
+    "totalDifficulty": 22,
+    "maxDifficulty": 18,
     "puzzleIds": [
-      "ape-ivy",
-      "bulk-lime",
-      "salsa-taste"
+      "gun-spa",
+      "golf-seat",
+      "brave-imply"
     ]
   },
   {
     "id": "day-006",
     "type": "3-4-5",
-    "totalDifficulty": 18,
-    "maxDifficulty": 9,
+    "totalDifficulty": 43,
+    "maxDifficulty": 24,
     "puzzleIds": [
-      "not-yet",
-      "oval-oven",
-      "mafia-wants"
+      "nib-wok",
+      "pelt-take",
+      "other-roses"
     ]
   },
   {
     "id": "day-007",
     "type": "3-4-5",
-    "totalDifficulty": 30,
-    "maxDifficulty": 13,
+    "totalDifficulty": 27,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "row-won",
-      "plod-trek",
-      "amble-spray"
+      "bug-mew",
+      "dibs-pile",
+      "alley-start"
     ]
   },
   {
     "id": "day-008",
     "type": "3-4-5",
-    "totalDifficulty": 33,
-    "maxDifficulty": 15,
+    "totalDifficulty": 31,
+    "maxDifficulty": 14,
     "puzzleIds": [
-      "ewe-hey",
-      "fist-pope",
-      "sword-twins"
+      "elf-pea",
+      "amen-bait",
+      "drone-spins"
     ]
   },
   {
     "id": "day-009",
     "type": "3-4-5",
-    "totalDifficulty": 40,
-    "maxDifficulty": 22,
+    "totalDifficulty": 34,
+    "maxDifficulty": 16,
     "puzzleIds": [
-      "aid-nab",
-      "knee-this",
-      "lemon-thank"
+      "dip-top",
+      "node-snow",
+      "began-rotor"
     ]
   },
   {
     "id": "day-010",
     "type": "3-4-5",
-    "totalDifficulty": 22,
-    "maxDifficulty": 11,
+    "totalDifficulty": 20,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "eel-fat",
-      "arms-earl",
-      "cores-gawky"
+      "day-was",
+      "glen-slot",
+      "rival-voter"
     ]
   },
   {
     "id": "day-011",
     "type": "3-4-5",
-    "totalDifficulty": 25,
-    "maxDifficulty": 23,
+    "totalDifficulty": 45,
+    "maxDifficulty": 22,
     "puzzleIds": [
-      "pun-set",
-      "keep-mall",
-      "feeds-tooth"
+      "bop-out",
+      "gods-pier",
+      "meets-notch"
     ]
   },
   {
     "id": "day-012",
     "type": "3-4-5",
-    "totalDifficulty": 28,
-    "maxDifficulty": 11,
+    "totalDifficulty": 25,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "did-pad",
-      "bald-grid",
-      "close-shift"
+      "dry-tea",
+      "grab-wild",
+      "blobs-every"
     ]
   },
   {
     "id": "day-013",
     "type": "3-4-5",
-    "totalDifficulty": 36,
-    "maxDifficulty": 21,
+    "totalDifficulty": 33,
+    "maxDifficulty": 26,
     "puzzleIds": [
-      "owl-pot",
-      "monk-owed",
-      "blunt-tries"
+      "guy-sat",
+      "swan-twin",
+      "chick-ninth"
     ]
   },
   {
     "id": "day-014",
     "type": "3-4-5",
-    "totalDifficulty": 44,
-    "maxDifficulty": 22,
+    "totalDifficulty": 36,
+    "maxDifficulty": 18,
     "puzzleIds": [
-      "all-way",
-      "dour-slap",
-      "eager-soils"
+      "tap-zag",
+      "drop-user",
+      "angle-bowls"
     ]
   },
   {
     "id": "day-015",
     "type": "3-4-5",
-    "totalDifficulty": 24,
-    "maxDifficulty": 9,
+    "totalDifficulty": 19,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "nun-red",
-      "lawn-snug",
-      "daily-taped"
+      "boa-dim",
+      "bars-cost",
+      "guild-slept"
     ]
   },
   {
     "id": "day-016",
     "type": "3-4-5",
-    "totalDifficulty": 19,
-    "maxDifficulty": 14,
+    "totalDifficulty": 43,
+    "maxDifficulty": 26,
     "puzzleIds": [
-      "eat-gin",
-      "beam-foot",
-      "falls-lucky"
+      "elk-eye",
+      "door-hell",
+      "goose-paths"
     ]
   },
   {
     "id": "day-017",
     "type": "3-4-5",
-    "totalDifficulty": 30,
-    "maxDifficulty": 20,
+    "totalDifficulty": 21,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "gas-pea",
-      "abet-less",
-      "links-outer"
+      "row-ten",
+      "lugs-tiff",
+      "graph-write"
     ]
   },
   {
     "id": "day-018",
     "type": "3-4-5",
-    "totalDifficulty": 33,
-    "maxDifficulty": 19,
+    "totalDifficulty": 31,
+    "maxDifficulty": 16,
     "puzzleIds": [
-      "dim-pro",
-      "loop-tips",
-      "drive-ramen"
+      "elm-rag",
+      "cone-push",
+      "menus-stray"
     ]
   },
   {
     "id": "day-019",
     "type": "3-4-5",
-    "totalDifficulty": 43,
-    "maxDifficulty": 23,
+    "totalDifficulty": 36,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "fad-goo",
-      "arts-echo",
-      "bleat-rises"
+      "pan-rue",
+      "dish-rest",
+      "crank-isles"
     ]
   },
   {
     "id": "day-020",
     "type": "3-4-5",
-    "totalDifficulty": 27,
-    "maxDifficulty": 18,
+    "totalDifficulty": 22,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "ran-you",
-      "chin-coat",
-      "enact-their"
+      "fix-mew",
+      "aged-year",
+      "gives-panel"
     ]
   },
   {
     "id": "day-021",
     "type": "3-4-5",
-    "totalDifficulty": 17,
-    "maxDifficulty": 9,
+    "totalDifficulty": 42,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "dub-pug",
-      "pair-some",
-      "knees-swats"
+      "cod-day",
+      "foot-lead",
+      "agree-usage"
     ]
   },
   {
     "id": "day-022",
     "type": "3-4-5",
-    "totalDifficulty": 26,
-    "maxDifficulty": 10,
+    "totalDifficulty": 21,
+    "maxDifficulty": 12,
     "puzzleIds": [
-      "rib-tea",
-      "dock-iron",
-      "pants-tends"
+      "cat-eon",
+      "dodo-goes",
+      "paved-rider"
     ]
   },
   {
     "id": "day-023",
     "type": "3-4-5",
-    "totalDifficulty": 35,
+    "totalDifficulty": 29,
     "maxDifficulty": 17,
     "puzzleIds": [
-      "guy-set",
-      "army-envy",
-      "lamps-views"
+      "cry-sea",
+      "jean-soil",
+      "atlas-scent"
     ]
   },
   {
     "id": "day-024",
     "type": "3-4-5",
-    "totalDifficulty": 45,
-    "maxDifficulty": 26,
+    "totalDifficulty": 32,
+    "maxDifficulty": 16,
     "puzzleIds": [
-      "pal-toy",
-      "gate-rice",
-      "corps-tense"
+      "bus-ewe",
+      "buck-laws",
+      "alter-gifts"
     ]
   },
   {
     "id": "day-025",
     "type": "3-4-5",
-    "totalDifficulty": 25,
-    "maxDifficulty": 9,
+    "totalDifficulty": 22,
+    "maxDifficulty": 13,
     "puzzleIds": [
-      "axe-elm",
-      "bops-cafe",
-      "freed-guest"
+      "ink-rib",
+      "rich-town",
+      "burns-heats"
     ]
   },
   {
     "id": "day-026",
     "type": "3-4-5",
-    "totalDifficulty": 19,
-    "maxDifficulty": 17,
+    "totalDifficulty": 42,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "sea-vie",
-      "boss-rare",
-      "canny-rogue"
+      "mad-she",
+      "dies-kill",
+      "raids-scope"
     ]
   },
   {
     "id": "day-027",
     "type": "3-4-5",
-    "totalDifficulty": 28,
-    "maxDifficulty": 10,
+    "totalDifficulty": 24,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "ewe-ray",
-      "hint-keys",
-      "fresh-usher"
+      "gag-pod",
+      "cyan-keel",
+      "story-tempo"
     ]
   },
   {
     "id": "day-028",
     "type": "3-4-5",
-    "totalDifficulty": 33,
-    "maxDifficulty": 19,
+    "totalDifficulty": 27,
+    "maxDifficulty": 13,
     "puzzleIds": [
-      "ask-rip",
-      "logo-wash",
-      "clone-glade"
+      "ray-vie",
+      "dawn-tiff",
+      "adult-spell"
     ]
   },
   {
     "id": "day-029",
     "type": "3-4-5",
-    "totalDifficulty": 45,
-    "maxDifficulty": 29,
+    "totalDifficulty": 33,
+    "maxDifficulty": 14,
     "puzzleIds": [
-      "paw-rid",
-      "aunt-item",
-      "knots-scalp"
+      "nor-pal",
+      "oils-slap",
+      "mains-super"
     ]
   },
   {
     "id": "day-030",
     "type": "3-4-5",
-    "totalDifficulty": 21,
-    "maxDifficulty": 13,
+    "totalDifficulty": 20,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "all-wow",
-      "find-post",
-      "stool-teeth"
+      "guy-war",
+      "able-wide",
+      "blink-force"
     ]
   },
   {
     "id": "day-031",
     "type": "3-4-5",
-    "totalDifficulty": 24,
-    "maxDifficulty": 14,
+    "totalDifficulty": 45,
+    "maxDifficulty": 33,
     "puzzleIds": [
-      "ear-pip",
-      "main-rude",
-      "bowel-setup"
+      "ear-pro",
+      "folk-mice",
+      "close-treat"
     ]
   },
   {
     "id": "day-032",
     "type": "3-4-5",
-    "totalDifficulty": 29,
-    "maxDifficulty": 11,
+    "totalDifficulty": 25,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "are-hog",
-      "busy-toll",
-      "crust-ships"
+      "its-pan",
+      "furl-gate",
+      "space-train"
     ]
   },
   {
     "id": "day-033",
     "type": "3-4-5",
     "totalDifficulty": 32,
-    "maxDifficulty": 14,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "hop-row",
-      "sees-yard",
-      "aided-carry"
+      "tin-wok",
+      "chai-lens",
+      "siren-tires"
     ]
   },
   {
     "id": "day-034",
     "type": "3-4-5",
-    "totalDifficulty": 39,
-    "maxDifficulty": 23,
+    "totalDifficulty": 29,
+    "maxDifficulty": 21,
     "puzzleIds": [
-      "jut-oar",
-      "keen-real",
-      "diver-total"
+      "fed-lob",
+      "item-monk",
+      "mango-wills"
     ]
   },
   {
     "id": "day-035",
     "type": "3-4-5",
-    "totalDifficulty": 26,
-    "maxDifficulty": 13,
+    "totalDifficulty": 23,
+    "maxDifficulty": 12,
     "puzzleIds": [
-      "dim-wok",
-      "cogs-park",
-      "sheep-walls"
+      "gas-keg",
+      "fake-grew",
+      "chunk-trade"
     ]
   },
   {
     "id": "day-036",
     "type": "3-4-5",
-    "totalDifficulty": 21,
-    "maxDifficulty": 9,
+    "totalDifficulty": 41,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "aim-dab",
-      "acts-lead",
-      "adult-stern"
+      "new-old",
+      "deaf-lilt",
+      "crane-gases"
     ]
   },
   {
     "id": "day-037",
     "type": "3-4-5",
-    "totalDifficulty": 28,
-    "maxDifficulty": 15,
+    "totalDifficulty": 23,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "elf-oak",
-      "cure-tidy",
-      "alert-truce"
+      "and-yet",
+      "bops-left",
+      "leads-slain"
     ]
   },
   {
     "id": "day-038",
     "type": "3-4-5",
-    "totalDifficulty": 34,
-    "maxDifficulty": 25,
+    "totalDifficulty": 31,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "dye-pan",
-      "deny-mask",
-      "gangs-prose"
+      "aid-net",
+      "diet-lift",
+      "crews-setup"
     ]
   },
   {
     "id": "day-039",
     "type": "3-4-5",
-    "totalDifficulty": 43,
-    "maxDifficulty": 23,
+    "totalDifficulty": 37,
+    "maxDifficulty": 22,
     "puzzleIds": [
-      "ape-ill",
-      "down-fell",
-      "bleat-lobby"
+      "ago-odd",
+      "roof-urge",
+      "bulbs-slope"
     ]
   },
   {
     "id": "day-040",
     "type": "3-4-5",
-    "totalDifficulty": 26,
+    "totalDifficulty": 25,
     "maxDifficulty": 10,
     "puzzleIds": [
-      "new-sad",
-      "navy-rugs",
-      "shaky-tries"
+      "bit-own",
+      "lava-only",
+      "logos-stein"
     ]
   },
   {
     "id": "day-041",
     "type": "3-4-5",
-    "totalDifficulty": 18,
-    "maxDifficulty": 13,
+    "totalDifficulty": 42,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "can-moo",
-      "duke-ends",
-      "ether-spies"
+      "are-hex",
+      "surf-taco",
+      "ashes-spoke"
     ]
   },
   {
     "id": "day-042",
     "type": "3-4-5",
-    "totalDifficulty": 26,
-    "maxDifficulty": 11,
+    "totalDifficulty": 23,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "ice-odd",
-      "arms-wine",
-      "droid-shape"
+      "air-bob",
+      "husk-newt",
+      "shirt-swung"
     ]
   },
   {
     "id": "day-043",
     "type": "3-4-5",
-    "totalDifficulty": 31,
-    "maxDifficulty": 13,
+    "totalDifficulty": 30,
+    "maxDifficulty": 14,
     "puzzleIds": [
-      "axe-yew",
-      "dork-life",
-      "creek-those"
+      "dig-pod",
+      "army-lack",
+      "dried-hairy"
     ]
   },
   {
     "id": "day-044",
     "type": "3-4-5",
-    "totalDifficulty": 42,
-    "maxDifficulty": 24,
+    "totalDifficulty": 33,
+    "maxDifficulty": 17,
     "puzzleIds": [
-      "pay-wag",
-      "ally-note",
-      "ample-demon"
+      "elf-fog",
+      "brat-role",
+      "legal-solve"
     ]
   },
   {
     "id": "day-045",
     "type": "3-4-5",
-    "totalDifficulty": 23,
-    "maxDifficulty": 10,
+    "totalDifficulty": 20,
+    "maxDifficulty": 11,
     "puzzleIds": [
-      "nun-top",
-      "milk-sent",
-      "apart-weeds"
+      "ape-not",
+      "send-wait",
+      "coast-hence"
     ]
   },
   {
     "id": "day-046",
     "type": "3-4-5",
-    "totalDifficulty": 20,
-    "maxDifficulty": 9,
+    "totalDifficulty": 42,
+    "maxDifficulty": 24,
     "puzzleIds": [
-      "add-won",
-      "blab-toll",
-      "fiery-stand"
+      "bro-emu",
+      "huge-oral",
+      "caper-lyric"
     ]
   },
   {
     "id": "day-047",
     "type": "3-4-5",
-    "totalDifficulty": 30,
-    "maxDifficulty": 18,
+    "totalDifficulty": 22,
+    "maxDifficulty": 13,
     "puzzleIds": [
-      "bus-rid",
-      "food-runt",
-      "paste-rests"
+      "ice-old",
+      "rank-wild",
+      "siren-spray"
     ]
   },
   {
     "id": "day-048",
     "type": "3-4-5",
-    "totalDifficulty": 33,
-    "maxDifficulty": 13,
+    "totalDifficulty": 32,
+    "maxDifficulty": 24,
     "puzzleIds": [
-      "nab-rib",
-      "back-nuts",
-      "pipes-stool"
+      "bay-son",
+      "mock-rose",
+      "angel-decks"
     ]
   },
   {
     "id": "day-049",
     "type": "3-4-5",
-    "totalDifficulty": 42,
-    "maxDifficulty": 26,
+    "totalDifficulty": 35,
+    "maxDifficulty": 17,
     "puzzleIds": [
-      "hug-net",
-      "fade-sick",
-      "china-lyric"
+      "ewe-rod",
+      "ears-with",
+      "motto-quasi"
     ]
   },
   {
     "id": "day-050",
     "type": "3-4-5",
-    "totalDifficulty": 26,
-    "maxDifficulty": 10,
+    "totalDifficulty": 21,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "ark-tie",
-      "cult-gold",
-      "opera-sulks"
+      "eon-rot",
+      "leaf-miss",
+      "jolly-pumps"
     ]
   },
   {
     "id": "day-051",
     "type": "3-4-5",
-    "totalDifficulty": 21,
-    "maxDifficulty": 9,
+    "totalDifficulty": 44,
+    "maxDifficulty": 25,
     "puzzleIds": [
-      "did-nib",
-      "grow-lose",
-      "furry-seals"
+      "ads-pub",
+      "bunt-tier",
+      "depot-stern"
     ]
   },
   {
     "id": "day-052",
     "type": "3-4-5",
-    "totalDifficulty": 28,
-    "maxDifficulty": 11,
+    "totalDifficulty": 25,
+    "maxDifficulty": 21,
     "puzzleIds": [
-      "ass-hew",
-      "dock-ends",
-      "chest-fried"
+      "gas-hot",
+      "left-pays",
+      "chart-feast"
     ]
   },
   {
     "id": "day-053",
     "type": "3-4-5",
-    "totalDifficulty": 35,
-    "maxDifficulty": 18,
+    "totalDifficulty": 33,
+    "maxDifficulty": 20,
     "puzzleIds": [
-      "ink-let",
-      "hurt-oath",
-      "delay-salon"
+      "all-wag",
+      "acts-bake",
+      "dingo-trace"
     ]
   },
   {
     "id": "day-054",
     "type": "3-4-5",
-    "totalDifficulty": 42,
-    "maxDifficulty": 26,
+    "totalDifficulty": 36,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "ape-arc",
-      "cape-give",
-      "agree-heels"
+      "ink-odd",
+      "bush-cute",
+      "canon-pores"
     ]
   },
   {
     "id": "day-055",
     "type": "3-4-5",
-    "totalDifficulty": 21,
-    "maxDifficulty": 12,
+    "totalDifficulty": 25,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "bob-mad",
-      "dibs-seat",
-      "crane-hopes"
+      "gap-gun",
+      "glue-only",
+      "chaos-dream"
     ]
   },
   {
     "id": "day-056",
     "type": "3-4-5",
-    "totalDifficulty": 18,
-    "maxDifficulty": 10,
+    "totalDifficulty": 45,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "rap-too",
-      "diet-ones",
-      "edged-onset"
+      "bot-far",
+      "goof-norm",
+      "laden-moats"
     ]
   },
   {
     "id": "day-057",
     "type": "3-4-5",
     "totalDifficulty": 26,
-    "maxDifficulty": 11,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "ran-rue",
-      "feta-palm",
-      "alien-earns"
+      "alp-eye",
+      "life-lord",
+      "sorts-viper"
     ]
   },
   {
     "id": "day-058",
     "type": "3-4-5",
-    "totalDifficulty": 33,
-    "maxDifficulty": 16,
+    "totalDifficulty": 32,
+    "maxDifficulty": 14,
     "puzzleIds": [
-      "fog-oaf",
-      "hero-memo",
-      "order-tease"
+      "nap-yes",
+      "dive-wide",
+      "nicer-romps"
     ]
   },
   {
     "id": "day-059",
     "type": "3-4-5",
-    "totalDifficulty": 44,
-    "maxDifficulty": 25,
+    "totalDifficulty": 35,
+    "maxDifficulty": 23,
     "puzzleIds": [
-      "lay-top",
-      "chug-team",
-      "gauge-pants"
+      "now-run",
+      "late-surf",
+      "mural-twins"
     ]
   },
   {
     "id": "day-060",
     "type": "3-4-5",
-    "totalDifficulty": 25,
-    "maxDifficulty": 13,
+    "totalDifficulty": 20,
+    "maxDifficulty": 9,
     "puzzleIds": [
-      "don-law",
-      "amen-site",
-      "anger-crams"
+      "ago-art",
+      "army-rope",
+      "blank-child"
     ]
   },
   {
     "id": "day-061",
     "type": "3-4-5",
-    "totalDifficulty": 22,
-    "maxDifficulty": 12,
+    "totalDifficulty": 43,
+    "maxDifficulty": 26,
     "puzzleIds": [
-      "his-two",
-      "acts-sued",
-      "kicks-roles"
+      "boy-web",
+      "beat-whip",
+      "gases-twist"
     ]
   },
   {
     "id": "day-062",
     "type": "3-4-5",
-    "totalDifficulty": 29,
-    "maxDifficulty": 16,
+    "totalDifficulty": 25,
+    "maxDifficulty": 15,
     "puzzleIds": [
-      "tip-way",
-      "lazy-name",
-      "fails-stout"
+      "ilk-sad",
+      "ribs-salt",
+      "corny-flats"
     ]
   },
   {
     "id": "day-063",
     "type": "3-4-5",
-    "totalDifficulty": 36,
-    "maxDifficulty": 22,
+    "totalDifficulty": 29,
+    "maxDifficulty": 19,
     "puzzleIds": [
-      "out-sir",
-      "agog-gory",
-      "alloy-elbow"
+      "met-new",
+      "boom-slap",
+      "grown-heals"
     ]
   },
   {
     "id": "day-064",
     "type": "3-4-5",
-    "totalDifficulty": 39,
-    "maxDifficulty": 29,
+    "totalDifficulty": 34,
+    "maxDifficulty": 18,
     "puzzleIds": [
-      "bot-nor",
-      "dual-gods",
-      "legit-roots"
+      "hot-use",
+      "pigs-walk",
+      "flare-skits"
     ]
   },
   {
     "id": "day-065",
     "type": "3-4-5",
-    "totalDifficulty": 25,
-    "maxDifficulty": 13,
+    "totalDifficulty": 22,
+    "maxDifficulty": 10,
     "puzzleIds": [
-      "due-gym",
-      "gnaw-then",
-      "alert-mango"
+      "orb-pop",
+      "dork-prep",
+      "blade-crane"
     ]
   },
   {
     "id": "day-066",
     "type": "3-4-5",
-    "totalDifficulty": 22,
-    "maxDifficulty": 9,
+    "totalDifficulty": 40,
+    "maxDifficulty": 14,
     "puzzleIds": [
-      "one-saw",
-      "bees-hail",
-      "pools-quake"
+      "dud-tar",
+      "lily-mere",
+      "cedar-media"
     ]
   },
   {
     "id": "day-067",
     "type": "3-4-5",
-    "totalDifficulty": 30,
-    "maxDifficulty": 18,
+    "totalDifficulty": 26,
+    "maxDifficulty": 12,
     "puzzleIds": [
-      "baa-bro",
-      "grip-soon",
-      "natal-yodel"
+      "lap-two",
+      "coal-self",
+      "crews-hopes"
     ]
   },
   {
     "id": "day-068",
     "type": "3-4-5",
-    "totalDifficulty": 37,
-    "maxDifficulty": 23,
+    "totalDifficulty": 29,
+    "maxDifficulty": 12,
     "puzzleIds": [
-      "gem-pig",
-      "glut-ship",
-      "aided-wrong"
+      "her-one",
+      "rode-told",
+      "rites-shack"
     ]
   },
   {
     "id": "day-069",
     "type": "3-4-5",
-    "totalDifficulty": 43,
-    "maxDifficulty": 25,
+    "totalDifficulty": 33,
+    "maxDifficulty": 22,
     "puzzleIds": [
-      "key-say",
-      "cage-eons",
-      "balls-niece"
+      "all-irk",
+      "land-role",
+      "diver-salon"
     ]
   },
   {
     "id": "day-070",
     "type": "3-4-5",
-    "totalDifficulty": 21,
+    "totalDifficulty": 24,
+    "maxDifficulty": 11,
+    "puzzleIds": [
+      "guy-map",
+      "farm-pull",
+      "shout-slots"
+    ]
+  },
+  {
+    "id": "day-071",
+    "type": "3-4-5",
+    "totalDifficulty": 41,
+    "maxDifficulty": 22,
+    "puzzleIds": [
+      "boa-rim",
+      "cash-ogre",
+      "slate-wrist"
+    ]
+  },
+  {
+    "id": "day-072",
+    "type": "3-4-5",
+    "totalDifficulty": 27,
+    "maxDifficulty": 18,
+    "puzzleIds": [
+      "the-war",
+      "kiss-mall",
+      "blast-crest"
+    ]
+  },
+  {
+    "id": "day-073",
+    "type": "3-4-5",
+    "totalDifficulty": 33,
+    "maxDifficulty": 19,
+    "puzzleIds": [
+      "eon-why",
+      "ours-pity",
+      "erase-oddly"
+    ]
+  },
+  {
+    "id": "day-074",
+    "type": "3-4-5",
+    "totalDifficulty": 36,
+    "maxDifficulty": 19,
+    "puzzleIds": [
+      "kid-yes",
+      "gear-oops",
+      "curse-filet"
+    ]
+  },
+  {
+    "id": "day-075",
+    "type": "3-4-5",
+    "totalDifficulty": 20,
+    "maxDifficulty": 9,
+    "puzzleIds": [
+      "are-elf",
+      "easy-glut",
+      "goals-prove"
+    ]
+  },
+  {
+    "id": "day-076",
+    "type": "3-4-5",
+    "totalDifficulty": 45,
+    "maxDifficulty": 29,
+    "puzzleIds": [
+      "ewe-pad",
+      "drum-fail",
+      "genes-strip"
+    ]
+  },
+  {
+    "id": "day-077",
+    "type": "3-4-5",
+    "totalDifficulty": 25,
+    "maxDifficulty": 10,
+    "puzzleIds": [
+      "age-gym",
+      "glen-swig",
+      "lacks-voter"
+    ]
+  },
+  {
+    "id": "day-078",
+    "type": "3-4-5",
+    "totalDifficulty": 29,
+    "maxDifficulty": 13,
+    "puzzleIds": [
+      "aid-dab",
+      "buys-kale",
+      "ponds-terms"
+    ]
+  },
+  {
+    "id": "day-079",
+    "type": "3-4-5",
+    "totalDifficulty": 32,
     "maxDifficulty": 12,
     "puzzleIds": [
-      "eye-wet",
-      "cult-deny",
-      "blood-dairy"
+      "nib-pod",
+      "font-pile",
+      "isles-thank"
+    ]
+  },
+  {
+    "id": "day-080",
+    "type": "3-4-5",
+    "totalDifficulty": 23,
+    "maxDifficulty": 9,
+    "puzzleIds": [
+      "ago-hex",
+      "lord-rage",
+      "runts-toned"
     ]
   }
 ]
