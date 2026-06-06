@@ -1985,7 +1985,7 @@ function applyTenMinuteSprintReward(result){
   const reward=getTenLevelSprintInfoForResult(result);
   if(!reward||!reward.bonus)return [];
   result.bonusScore=(Number(result.bonusScore)||0)+reward.bonus;
-  return [`🚀 10 levels: ${reward.mins} mins! +${reward.bonus}`];
+  return [`🚀 10-levels in ${reward.mins} mins! +${reward.bonus}`];
 }
 function getCluePuzzleLength(p=currentPuzzle()){return Number(p&&p.answer1&&p.answer1.length)||tiles.length||4}
 function getClueMaxScoreForPuzzle(p=currentPuzzle()){return CLUE_MAX_SCORE_BY_LENGTH[getCluePuzzleLength(p)]||CLUE_MAX_SCORE_BY_LENGTH[5]}
