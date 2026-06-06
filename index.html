@@ -1944,32 +1944,48 @@ function formatBestPerfectStreak(){
 }
 function applyPerfectStreakForClueResult(result){
   if(!isNewMode()||!result)return [];
-  const messages=[];
-  let bonusScore=0;
+  // Live Perfect-streak rewards are currently disabled, but streak tracking remains
+  // active so the stats modal can continue to show Best perfect streak.
   if(!result.gaveUp&&result.rating==="perfect"){
     perfectStreak++;
     if(perfectStreak>bestPerfectStreak)bestPerfectStreak=perfectStreak;
-    if(perfectStreak>=3){
-      const bonus=getPerfectStreakBonus(perfectStreak);
-      if(bonus>0){
-        bonusScore+=bonus;
-        messages.push(`Perfect-streak ${perfectStreak}🔥 +${bonus}`);
-      }
-    }
   }else{
-    if(perfectStreak>=3&&perfectStreak>rewardedBestPerfectStreak){
-      const bonus=getPerfectStreakBonus(perfectStreak+2);
-      if(bonus>0){
-        bonusScore+=bonus;
-        messages.push(`🔥 New best streak! +${bonus}`);
-      }
-      rewardedBestPerfectStreak=perfectStreak;
-    }
     perfectStreak=0;
   }
-  if(bonusScore>0)result.bonusScore=(Number(result.bonusScore)||0)+bonusScore;
   syncPerfectStreakStats();
-  return messages;
+  return [];
+}
+function getTenLevelSprintReward(totalMs){
+  totalMs=Math.max(0,Number(totalMs)||0);
+  const minute=60*1000;
+  // Bucket by total active solve time for the most recent 10 Game-mode levels.
+  // 5:00 means anything up to 5:59.999; 10:00 means anything up to 10:59.999.
+  if(totalMs<6*minute)return {mins:5,bonus:700};
+  if(totalMs<7*minute)return {mins:6,bonus:600};
+  if(totalMs<8*minute)return {mins:7,bonus:500};
+  if(totalMs<9*minute)return {mins:8,bonus:400};
+  if(totalMs<10*minute)return {mins:9,bonus:300};
+  if(totalMs<11*minute)return {mins:10,bonus:200};
+  return null;
+}
+function getTenLevelSprintInfoForResult(result){
+  if(!isNewMode()||!result||result.gaveUp)return null;
+  const rows=[...getClueResults(),result].filter(Boolean);
+  if(rows.length<10)return null;
+  const lastTen=rows.slice(-10);
+  if(lastTen.length<10||lastTen.some(r=>r&&r.gaveUp))return null;
+  const totalMs=lastTen.reduce((sum,r)=>sum+Math.max(0,Number(r&&r.timeMs)||0),0);
+  const reward=getTenLevelSprintReward(totalMs);
+  return reward?{...reward,totalMs}:null;
+}
+function applyTenMinuteSprintReward(result){
+  if(!isNewMode()||!result||result.gaveUp)return [];
+  const levelNumber=(Math.max(0,Number(puzzleIndex)||0)+1);
+  if(levelNumber%10!==0)return [];
+  const reward=getTenLevelSprintInfoForResult(result);
+  if(!reward||!reward.bonus)return [];
+  result.bonusScore=(Number(result.bonusScore)||0)+reward.bonus;
+  return [`🚀 10 levels: ${reward.mins} mins! +${reward.bonus}`];
 }
 function getCluePuzzleLength(p=currentPuzzle()){return Number(p&&p.answer1&&p.answer1.length)||tiles.length||4}
 function getClueMaxScoreForPuzzle(p=currentPuzzle()){return CLUE_MAX_SCORE_BY_LENGTH[getCluePuzzleLength(p)]||CLUE_MAX_SCORE_BY_LENGTH[5]}
@@ -2710,13 +2726,14 @@ function awardPuzzleScoreIfNeeded(){
     const result=calculateClueScoreResult({elapsedMs,moves:movesUsed,gaveUp:false,cluesShown:getCluesShownForRecordedResult(false)});
     const streakMessages=applyPerfectStreakForClueResult(result);
     const runMessages=applyScore100RunForClueResult(result,streakMessages.length>0);
+    const sprintMessages=applyTenMinuteSprintReward(result);
     recordClueResult(result);
     clueVisible=false;
     clearClueInlineCountdownTimer();
     clearClueCountdownMessage();
     lastPuzzleScore=result.score;
     lastAccountingMessages=[result.displayText];
-    lastBonusMessages=[...streakMessages,...runMessages];
+    lastBonusMessages=[...streakMessages,...runMessages,...sprintMessages];
     puzzleAwarded=true;
     scoreAnimationShown=false;
     return;
