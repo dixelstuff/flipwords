@@ -1,5 +1,5 @@
 const puzzleRows = [
-  ["hill-hunt","hill","hunt","hint","hull",1,"","","hint-hull",1,77,4,7,0], // allWords 1: thin
+  ["hill-hunt","hill","hunt","hint","hull",1,"","","hint-hull",1,71,5,9,0], // allWords 1: thin
   ["daddy-rises","daddy","rises","sided","yards",5,"","","cannot be reversed",35,92,1,4,0], // allWords 9: dares|dries|reads|ready|rides|sears|sides|sired|years
   ["brain-tarot","brain","tarot","baron","trait",2,"","","baron-trait",3], // allWords 3: abort|tabor|train
   ["debt-life","debt","life","bide","felt",4,"","","bide-felt",13], // allWords 9: belt|bile|feed|feel|file|flee|flit|left|lift
@@ -25,14 +25,13 @@ const puzzleRows = [
   ["maple-table","maple","table","blame","plate",3,"","","blame-plate",18,85,2,7,0], // allWords 6: amble|ample|bleat|leapt|petal|pleat
   ["bulk-lime","bulk","lime","lube","milk",3,"","","lube-milk",8,57,7,15,0], // allWords 5: bile|blue|kill|mile|mule
   ["nuts-pack","nuts","pack","cups","tank",4,"","","cups-tank",13], // allWords 11: ants|cans|caps|past|pats|puck|puts|scan|spat|stun|taps
-  ["earth-kills","earth","kills","heart","skill",1,"","","heart-skill",3,0,36,67,48], // allWords 28: aster|earls|hater|islet|karts|laser|lathe|least|lisle|rates|reals|riles|rites|skirt|slate|stale|stalk|stare|stark|steal|tales|talks|tears|their|tiers|tiles|tires|tries
+  ["earth-kills","earth","kills","heart","skill",1,"","","heart-skill",3,0,37,69,48], // allWords 28: aster|earls|hater|islet|karts|laser|lathe|least|lisle|rates|reals|riles|rites|skirt|slate|stale|stalk|stare|stark|steal|tales|talks|tears|their|tiers|tiles|tires|tries
   ["meet-shut","meet","shut","teem","thus",2,"","","teem-thus",19,48,9,16,0], // allWords 5: huts|meth|mute|tees|them
   ["maps-swig","maps","swig","gaps","swim",4,"","","gaps-swim",23], // allWords 6: aims|amps|gasp|pass|saps|wigs
   ["new-old","new","old","end","low",2,"","","end-low",7], // allWords 4: den|doe|owe|owl
   ["grab-wild","grab","wild","glib","ward",3,"","","glib-ward",9], // allWords 4: brag|drag|draw|grad
   ["guide-mines","guide","mines","guise","mined",3,"","","guise-mined",4,0,34,37,24], // allWords 8: denim|dings|genie|genus|menus|minds|nudge|singe
   ["drug-mood","drug","mood","drum","good",4,"","","drum-good",23,92,1,4,0], // allWords 4: dodo|doom|dorm|rudd
-  ["bean-fart","bean","fart","barn","feat",2,"","","barn-feat",2], // allWords 12: abet|bane|beat|beta|bran|brat|fate|fern|feta|frat|fret|raft
   ["actor-under","actor","under","react","round",3,"","","react-round",18,92,1,4,0], // allWords 16: adorn|cadre|cared|carte|cater|cedar|court|crate|crude|cured|cuter|raced|radon|trace|truce|tuner
   ["grew-wore","grew","wore","grow","were",3,"","","grow-were",9,51,8,17,0], // allWords 3: ergo|gore|ogre
   ["ended-poets","ended","poets","needs","opted",3,"","","needs-opted",19,87,2,5,0], // allWords 13: dense|dents|depot|doped|dopes|dotes|pesto|posed|spend|spent|teens|tends|tense
@@ -44,7 +43,7 @@ const puzzleRows = [
   ["bunny-tried","bunny","tried","briny","tuned",2,"","","briny-tuned",2], // allWords 5: bride|entry|tired|trend|unity
   ["moss-yeti","moss","yeti","semi","toys",4,"","","semi-toys",13,92,1,4,0], // allWords 8: emit|item|mess|miso|mite|most|stem|time
   ["baby-name","baby","name","babe","many",3,"","","cannot be reversed",8,82,3,6,0], // allWords 6: amen|bane|beam|bean|mane|mean
-  ["firm-sons","firm","sons","form","sins",1,"","","form-sins",1,25,13,23,0], // allWords 3: fins|from|rims
+  ["firm-sons","firm","sons","form","sins",1,"","","form-sins",1,20,14,24,0], // allWords 3: fins|from|rims
   ["isle-lazy","lazy","isle","ally","size",2,"","","ally-size",6], // allWords 3: lies|sell|zeal
   ["atlas-erase","atlas","erase","areas","stale",4,"","","areas-stale",25,87,2,5,0], // allWords 19: asset|earls|laser|lasts|least|leers|reals|reels|salts|saree|sears|seats|slate|slats|sleet|steal|steel|tales|tease
   ["buck-laws","buck","laws","cubs","walk",3,"","","cubs-walk",8,82,3,6,0], // allWords 6: awls|back|cabs|lack|luck|swab
@@ -75,7 +74,7 @@ const puzzleRows = [
   ["range-swine","swine","range","anger","wines",1,"","","anger-wines",3], // allWords 2: anise|senna
   ["deeds-first","deeds","first","drift","seeds",4,"freds","deist","drift-seeds",21], // allWords 12: diets|dress|edits|feeds|frets|rifts|serfs|sided|sides|sited|steed|tides
   ["rows-yard","yard","rows","rays","word",3,"","","rays-word",8], // allWords 7: dory|draw|rosy|sway|ward|wars|ways
-  ["diet-lamp","diet","lamp","palm","tide",2,"","","palm-tide",18,53,8,15,0], // allWords 15: damp|date|edit|late|leap|limp|lite|malt|pale|pile|plea|tale|teal|tied|tile
+  ["diet-lamp","diet","lamp","palm","tide",2,"","","palm-tide",18,47,9,17,0], // allWords 15: damp|date|edit|late|leap|limp|lite|malt|pale|pile|plea|tale|teal|tied|tile
   ["birch-prong","birch","prong","bring","porch",3,"","","bring-porch",9,86,2,6,0], // allWords 3: bingo|boing|chirp
   ["props-spiky","props","spiky","poppy","risks",3,"","","poppy-risks",13,87,2,5,0], // allWords 4: porky|risky|skips|spork
   ["oral-poll","oral","poll","opal","roll",2,"","","opal-roll",6], // allWords 0
@@ -97,10 +96,10 @@ const puzzleRows = [
   ["ample-demon","ample","demon","modem","plane",4,"","","modem-plane",24,92,1,4,0], // allWords 6: lemma|maple|monde|moped|panel|penal
   ["bare-slot","bare","slot","brat","sole",2,"","","brat-sole",6,92,1,4,0], // allWords 16: arts|bear|blot|boat|bolt|ears|eras|lobe|lose|lost|lots|oats|rats|sera|star|tsar
   ["ages-hour","ages","hour","ragu","shoe",3,"","","ragu-shoe",9], // allWords 8: aero|gear|gush|hero|hose|hugs|rage|sage
-  ["fist-pope","fist","pope","pipe","soft",3,"","","cannot be reversed",15,64,6,12,0], // allWords 13: fits|foes|pies|pits|pose|post|pots|sift|spit|spot|stop|tips|tops
+  ["fist-pope","fist","pope","pipe","soft",3,"","","cannot be reversed",15,59,7,13,0], // allWords 13: fits|foes|pies|pits|pose|post|pots|sift|spit|spot|stop|tips|tops
   ["scene-smash","scene","smash","chess","means",4,"","","chess-means",25], // allWords 8: canes|cases|masse|mensa|names|seams|seems|shams
   ["lists-strap","lists","strap","lasts","strip",4,"","","lasts-strip",12], // allWords 20: lapis|liars|pairs|parts|pasts|pilar|rails|sails|salts|slats|slits|spats|spilt|spits|splat|split|stars|stirs|traps|trips
-  ["dude-worn","dude","worn","down","rude",3,"","","down-rude",9,80,3,8,0], // allWords 4: owed|redo|rode|wore
+  ["dude-worn","dude","worn","down","rude",3,"","","down-rude",9,81,3,7,0], // allWords 4: owed|redo|rode|wore
   ["smear-swill","smear","swill","mills","wears",2,"","","mills-wears",7,86,2,6,0], // allWords 11: mails|males|mares|meals|smell|swear|swell|swirl|wares|wells|wills
   ["bases-begun","bases","begun","began","buses",4,"","","began-buses",12,77,4,7,0], // allWords 1: beans
   ["seem-toss","seem","toss","most","sees",3,"","","cannot be reversed",23,87,2,5,0], // allWords 10: meet|mess|moss|sets|some|stem|teem|tees|toes|tome
@@ -119,7 +118,7 @@ const puzzleRows = [
   ["raw-saw","raw","saw","war","was",2,"","","war-was",5,31,12,21,0], // allWords 0
   ["shirt-swine","shirt","swine","hints","wires",2,"","","hints-wires",7], // allWords 9: heirs|hires|shine|shire|twins|weirs|wines|wiser|wrist
   ["couch-singe","couch","singe","cough","since",1,"","","cough-since",1,75,4,9,0], // allWords 6: chins|cinch|conch|cones|guise|scone
-  ["over-then","over","then","hero","vent",2,"","","hero-vent",8,87,2,5,0], // allWords 3: hone|oven|rove
+  ["over-then","over","then","hero","vent",2,"","","hero-vent",8,82,3,6,0], // allWords 3: hone|oven|rove
   ["level-wagon","level","wagon","legal","woven",4,"","","legal-woven",16], // allWords 8: aglow|along|angel|angle|glean|navel|novel|vowel
   ["asks-want","asks","want","swan","task",2,"","","swan-task",7,66,6,10,0], // allWords 2: ants|sans
   ["ranch-towns","ranch","towns","notch","warns",4,"","","notch-warns",16,92,1,4,0], // allWords 7: chant|crows|scant|scorn|sworn|wants|watch
@@ -144,12 +143,12 @@ const puzzleRows = [
   ["grant-swore","grant","swore","range","worst",2,"","","range-worst",6], // allWords 24: anger|earns|goner|nears|rager|rants|rears|roger|senor|snare|snore|snort|straw|swear|towns|trans|twang|wager|wanes|wants|wares|warts|wears|worse
   ["hot-use","hot","use","out","she",2,"","","out-she",7,92,1,4,0], // allWords 2: hes|sue
   ["mouse-prose","mouse","prose","moose","purse",2,"","","moose-purse",4], // allWords 7: mores|pores|poser|ropes|serum|spore|super
-  ["camps-crews","camps","crews","scamp","screw",1,"","","scamp-screw",3,0,24,47,48], // allWords 4: capes|paces|scape|space
+  ["camps-crews","camps","crews","scamp","screw",1,"","","scamp-screw",3,0,24,48,48], // allWords 4: capes|paces|scape|space
   ["bail-drag","bail","drag","grab","laid",3,"","","grab-laid",23,92,1,4,0], // allWords 7: alba|brag|brig|dial|gird|grad|grid
   ["safe-vice","safe","vice","case","five",3,"","","case-five",9,76,4,8,0], // allWords 3: aces|cave|fave
   ["dome-eyes","dome","eyes","eyed","some",4,"","","cannot be reversed",19,66,6,10,0], // allWords 6: demo|does|dose|dyes|mode|mods
   ["edges-hovel","hovel","edges","ledge","shove",2,"","","ledge-shove",6,87,2,5,0], // allWords 2: delve|devel
-  ["door-fans","door","fans","roof","sand",3,"","","roof-sand",23,68,5,12,0], // allWords 9: darn|dons|dosa|nods|odor|rand|road|soda|sofa
+  ["door-fans","door","fans","roof","sand",3,"","","roof-sand",23,63,6,13,0], // allWords 9: darn|dons|dosa|nods|odor|rand|road|soda|sofa
   ["hope-salt","hope","salt","heal","stop",3,"","","heal-stop",9], // allWords 25: apes|hale|halt|heap|hole|holt|last|lose|lost|lots|past|path|pats|peas|pose|post|pots|sale|seal|slot|sole|spat|spot|taps|tops
   ["ads-say","ads","say","ass","day",2,"","","ass-day",7,87,2,5,0], // allWords 1: sad
   ["merry-quiet","merry","quiet","merit","query",3,"","","merit-query",9,87,2,5,0], // allWords 7: emery|meter|metre|mitre|quite|remit|timer
@@ -165,7 +164,7 @@ const puzzleRows = [
   ["logs-tiff","logs","tiff","fits","golf",3,"","","fits-golf",8], // allWords 6: fist|gift|gist|sift|slog|soft
   ["bone-pity","bone","pity","bite","pony",2,"","","bite-pony",2], // allWords 6: bony|nope|open|pine|poet|typo
   ["event-viral","event","viral","inter","valve",4,"","","cannot be reversed",24,86,2,6,0], // allWords 10: alive|avert|inert|irate|leave|liner|liven|ravel|rival|vitae
-  ["felt-kale","felt","kale","lake","left",2,"","","lake-left",4,0,21,38,24], // allWords 9: feel|flat|flea|flee|keel|leaf|leak|leek|talk
+  ["felt-kale","felt","kale","lake","left",2,"","","lake-left",4,0,20,36,24], // allWords 9: feel|flat|flea|flee|keel|leaf|leak|leek|talk
   ["paved-rider","paved","rider","dared","viper",4,"","","dared-viper",12], // allWords 12: adder|diver|drape|dread|dried|drier|drive|padre|pared|pride|raver|river
   ["canon-pores","canon","pores","acorn","opens",3,"","","cannot be reversed",19,92,1,4,0], // allWords 29: acres|apron|canes|cares|cones|cores|crane|crone|nance|orcas|panes|parse|pears|porno|poser|prone|prose|races|rance|recon|ropes|scare|scone|score|snoop|spare|spear|spoon|spore
   ["opal-role","opal","role","oral","pole",3,"","","oral-pole",9,87,2,5,0], // allWords 6: aero|lore|pear|poll|reap|roll
@@ -179,11 +178,11 @@ const puzzleRows = [
   ["egg-tea","egg","tea","age","get",3,"","","cannot be reversed",10,92,1,4,0], // allWords 3: ate|eat|tag
   ["alone-zones","alone","zones","lanes","ozone",3,"","","lanes-ozone",8,82,3,6,0], // allWords 4: leans|loans|oozes|salon
   ["furl-guns","furl","guns","lung","surf",3,"","","lung-surf",23,72,5,8,0], // allWords 4: gnus|rugs|snug|sung
-  ["anger-crams","anger","crams","range","scram",1,"","","range-scram",3,0,34,59,48], // allWords 15: acres|areas|arena|canes|carer|cares|crane|gears|grams|racer|races|rager|rages|rance|scare
+  ["anger-crams","anger","crams","range","scram",1,"","","range-scram",3,0,35,61,48], // allWords 15: acres|areas|arena|canes|carer|cares|crane|gears|grams|racer|races|rager|rages|rance|scare
   ["packs-tents","packs","tents","spent","stack",2,"","","spent-stack",5], // allWords 8: pacts|pants|spank|speck|stank|stent|tacks|tanks
   ["feel-redo","feel","redo","flee","rode",2,"","","flee-rode",4,42,10,18,0], // allWords 3: fled|leer|reel
   ["soul-spit","soul","spit","oils","puts",2,"","","oils-puts",8], // allWords 7: lips|outs|pits|plus|slip|soil|tips
-  ["cafe-lake","lake","cafe","face","kale",2,"","","face-kale",4,0,29,41,0], // allWords 4: cake|flea|leaf|leak
+  ["cafe-lake","lake","cafe","face","kale",2,"","","face-kale",4,0,28,40,0], // allWords 4: cake|flea|leaf|leak
   ["bells-flash","bells","flash","balls","flesh",3,"","","balls-flesh",8], // allWords 13: bales|bases|bless|falls|false|fells|fleas|leafs|sable|safes|sheaf|shelf|slabs
   ["cans-pick","pick","cans","caps","nick",4,"","","caps-nick",13,87,2,5,0], // allWords 10: pack|pans|pics|pink|pins|scan|snap|snip|span|spin
   ["pen-toy","toy","pen","not","yep",3,"","","not-yep",10], // allWords 4: net|ten|ton|yet
@@ -193,14 +192,14 @@ const puzzleRows = [
   ["drill-store","drill","store","rolls","tired",3,"","","rolls-tired",11,92,1,4,0], // allWords 23: drier|droll|islet|lilts|loser|older|order|rider|riled|riles|riser|rites|roles|still|stole|tiers|tiled|tiles|tills|tires|tolls|tried|tries
   ["fair-loud","loud","fair","four","laid",2,"","","four-laid",2,87,2,5,0], // allWords 7: dial|dual|idol|lair|liar|ludo|rail
   ["roads-steel","steel","roads","loads","steer",4,"","","loads-steer",25], // allWords 26: alert|alter|arose|asset|aster|darts|doers|doser|doses|ester|later|least|older|rates|reset|seats|slate|sleet|sodas|stale|stare|steal|tales|tears|terse|trees
-  ["bare-down","bare","down","bore","dawn",1,"","","bore-dawn",1,0,18,26,16], // allWords 15: barn|bear|born|bran|dare|darn|dear|owed|rand|read|redo|robe|rode|wade|wand
+  ["bare-down","bare","down","bore","dawn",1,"","","bore-dawn",1,0,19,28,16], // allWords 15: barn|bear|born|bran|dare|darn|dear|owed|rand|read|redo|robe|rode|wade|wand
   ["pools-tides","pools","tides","edits","loops",3,"","","edits-loops",18], // allWords 15: diets|dopes|dotes|plods|poise|polis|posed|sited|sloop|spied|spoil|spool|stool|toils|tools
   ["ape-arc","ape","arc","cap","ear",2,"","","cap-ear",8,86,2,6,0], // allWords 5: are|car|era|pac|pea
   ["seen-sets","seen","sets","nets","sees",3,"","","nets-sees",22], // allWords 3: nest|sent|tens
   ["modes-polar","polar","modes","moral","posed",3,"","","moral-posed",10,92,1,4,0], // allWords 10: demos|domes|dopes|lopes|molar|moles|morel|poles|roped|slope
   ["mint-opal","mint","opal","into","palm",2,"","","into-palm",7], // allWords 6: atop|lamp|lima|lion|mail|tamp
   ["aced-yell","aced","yell","call","eyed",3,"","","call-eyed",9,92,1,4,0], // allWords 5: clad|dale|deal|lace|lead
-  ["began-piper","piper","began","begin","paper",4,"","","begin-paper",12,25,11,21,10], // allWords 6: barge|being|binge|grape|gripe|pager
+  ["began-piper","piper","began","begin","paper",4,"","","begin-paper",12,24,11,22,10], // allWords 6: barge|being|binge|grape|gripe|pager
   ["doll-swap","doll","swap","laws","plod",4,"","","laws-plod",22], // allWords 7: also|awls|load|paws|slop|soap|wasp
   ["hangs-light","hangs","light","slang","thigh",2,"","","slang-thigh",5], // allWords 5: glint|highs|night|sling|thing
   ["necks-rotor","necks","rotor","corks","tenor",4,"","","corks-tenor",16,92,1,4,0], // allWords 21: cones|cores|crone|crore|knots|notes|onset|recon|retro|rocks|roost|roots|scone|score|seton|stone|store|stork|toner|tones|torso
@@ -209,7 +208,7 @@ const puzzleRows = [
   ["huge-plan","huge","plan","hung","plea",2,"","","hung-plea",5], // allWords 4: hale|heal|leap|pale
   ["dodge-tales","dodge","tales","dates","lodge",3,"","","dates-lodge",8,87,2,5,0], // allWords 15: dales|deals|dosed|dotes|gated|glade|golds|leads|least|slate|stade|stale|stead|steal|stole
   ["canoe-loyal","loyal","canoe","alloy","ocean",2,"","","alloy-ocean",19,80,3,8,0], // allWords 4: allay|alone|canal|colon
-  ["died-note","died","note","diet","node",3,"","","diet-node",9,76,4,8,0], // allWords 9: dine|dint|done|dote|edit|tide|tied|tine|tone
+  ["died-note","died","note","diet","node",3,"","","diet-node",9,75,4,9,0], // allWords 9: dine|dint|done|dote|edit|tide|tied|tine|tone
   ["name-team","team","name","amen","meat",3,"","","amen-meat",19], // allWords 8: mana|mane|mate|mean|meet|meta|tame|teem
   ["crowd-large","large","crowd","grace","world",4,"","","grace-world",22,81,3,7,0], // allWords 4: glare|lager|lower|regal
   ["fiery-stand","fiery","stand","fined","stray",3,"","","fined-stray",8], // allWords 17: artsy|darts|dents|draft|dries|fairy|fiend|fired|fried|nasty|raids|rides|sired|snide|tends|trays|tyres
@@ -241,7 +240,7 @@ const puzzleRows = [
   ["notes-pores","notes","pores","ropes","tones",2,"","","ropes-tones",3,70,5,10,0], // allWords 10: onset|pesto|poets|poser|prose|senor|seton|snore|spore|stone
   ["dash-kind","dash","kind","disk","hand",3,"","","disk-hand",22,82,3,6,0], // allWords 9: adds|dads|dank|dish|hank|hind|khan|kids|skid
   ["the-war","the","war","art","hew",2,"","","art-hew",8], // allWords 7: ate|awe|eat|rat|raw|tar|tea
-  ["blush-croak","blush","croak","brush","cloak",1,"","","brush-cloak",1,15,11,21,20], // allWords 7: abhor|corks|crush|locks|roach|rocks|shrub
+  ["blush-croak","blush","croak","brush","cloak",1,"","","brush-cloak",1,4,12,22,26], // allWords 7: abhor|corks|crush|locks|roach|rocks|shrub
   ["easy-glut","easy","glut","seat","ugly",2,"","","seat-ugly",9,87,2,5,0], // allWords 8: east|eats|gays|lest|lets|stag|tags|teas
   ["lamps-views","lamps","views","palms","wives",2,"","","palms-wives",17,81,3,7,0], // allWords 10: lapse|leaps|pales|piles|pleas|plies|psalm|spiel|waves|wiles
   ["avail-still","still","avail","tails","villa",3,"","","tails-villa",10,92,1,4,0], // allWords 5: lilts|silva|stall|tills|vials
@@ -275,13 +274,13 @@ const puzzleRows = [
   ["bin-tip","bin","tip","nib","pit",2,"","","nib-pit",5,28,13,20,0], // allWords 2: nit|tin
   ["straw-years","straw","years","stray","wears",4,"","","stray-wears",25,92,1,4,0], // allWords 10: artsy|satay|sears|stars|swear|trays|wares|warts|warty|weary
   ["board-decor","board","decor","arbor","coded",3,"","","arbor-coded",17], // allWords 13: abode|adder|adobe|adore|bared|barre|beard|bread|broad|coder|credo|dared|dread
-  ["plot-weak","weak","plot","poet","walk",2,"","","poet-walk",6,69,5,11,0], // allWords 7: peak|peat|plat|poke|tape|wake|woke
+  ["plot-weak","weak","plot","poet","walk",2,"","","poet-walk",6,63,6,13,0], // allWords 7: peak|peat|plat|poke|tape|wake|woke
   ["panic-total","total","panic","natal","topic",4,"","","natal-topic",15], // allWords 12: actin|antic|attic|canto|cotta|optic|pilot|plain|tacit|talon|tonal|tonic
   ["glue-only","only","glue","lone","ugly",2,"","","lone-ugly",9,87,2,5,0], // allWords 2: glen|noel
   ["clad-wool","wool","clad","call","wood",2,"","","call-wood",6], // allWords 7: clod|coal|cola|cold|cool|loco|wall
   ["siren-songs","siren","songs","noses","rings",4,"","","noses-rings",21], // allWords 14: grins|gross|nines|reins|resin|rinse|risen|rises|roses|senor|signs|sings|snore|sores
   ["busy-toll","busy","toll","bull","toys",3,"","","cannot be reversed",9,85,2,7,0], // allWords 7: boys|buys|lost|lots|lust|slot|slut
-  ["cafe-mode","cafe","mode","dome","face",2,"","","dome-face",4,0,29,34,0], // allWords 8: aced|code|dame|deco|demo|fame|made|mead
+  ["cafe-mode","cafe","mode","dome","face",2,"","","dome-face",4,0,28,33,0], // allWords 8: aced|code|dame|deco|demo|fame|made|mead
   ["ago-urn","ago","urn","nag","our",2,"","","nag-our",8,92,1,4,0], // allWords 5: gnu|gun|oar|ran|run
   ["cross-story","cross","story","costs","sorry",2,"","","costs-sorry",6], // allWords 2: scots|sorts
   ["asks-lend","asks","lend","elks","sand",3,"","","elks-sand",9,92,1,4,0], // allWords 5: dean|lens|sake|sane|sans
@@ -334,18 +333,18 @@ const puzzleRows = [
   ["later-these","later","these","ether","slate",3,"","","ether-slate",11,77,4,7,0], // allWords 29: alert|alter|aster|earls|easel|eater|heels|laser|lease|least|rates|reals|sheet|stale|stare|start|state|steal|tales|tarts|taste|tater|tears|tease|teeth|tetra|there|three|treat
   ["chive-foist","chive","foist","shift","voice",3,"","","shift-voice",21,81,3,7,0], // allWords 1: stoic
   ["bare-bibs","bare","bibs","babe","ribs",3,"","","babe-ribs",9,82,3,6,0], // allWords 4: bars|bear|bras|brie
-  ["lamp-lilt","lamp","lilt","palm","till",2,"","","palm-till",18,40,10,20,0], // allWords 4: limp|malt|pill|tall
+  ["lamp-lilt","lamp","lilt","palm","till",2,"","","palm-till",18,34,11,22,0], // allWords 4: limp|malt|pill|tall
   ["spear-swath","spear","swath","paths","wears",2,"","","paths-wears",7,87,2,5,0], // allWords 19: awash|heaps|paras|parse|parts|pasha|pears|phase|shape|spare|strap|straw|strep|swear|traps|wares|warts|whats|wrest
   ["deal-plug","deal","plug","dull","page",3,"","","dull-page",12,87,2,5,0], // allWords 9: aged|dale|duel|glad|lead|leap|pale|plea|pull
   ["coins-sings","coins","sings","signs","sonic",3,"","","signs-sonic",25,86,2,6,0], // allWords 3: icons|scion|songs
-  ["dork-rope","dork","rope","pork","rode",3,"","","pork-rode",8,73,4,11,0], // allWords 4: dope|pore|redo|repo
+  ["dork-rope","dork","rope","pork","rode",3,"","","pork-rode",8,72,4,12,0], // allWords 4: dope|pore|redo|repo
   ["pay-pet","pay","pet","tap","yep",3,"","","tap-yep",10,86,2,6,0], // allWords 2: pat|yap
   ["burnt-super","burnt","super","brute","spurn",3,"","","brute-spurn",19,81,3,7,0], // allWords 9: brunt|punts|purse|rebut|runts|setup|tuber|turns|upset
   ["gaps-swim","gaps","swim","maps","swig",4,"","","maps-swig",23,92,1,4,0], // allWords 6: aims|amps|gasp|pass|saps|wigs
   ["boost-pores","boost","pores","boots","prose",2,"","","boots-prose",15,17,16,19,0], // allWords 11: bores|ports|poser|prost|robes|ropes|sober|spore|sport|stoop|trope
-  ["bury-tone","bury","tone","note","ruby",2,"","","note-ruby",4,0,31,38,24], // allWords 10: bone|bony|bore|robe|tore|tory|troy|true|tune|yurt
+  ["bury-tone","bury","tone","note","ruby",2,"","","note-ruby",4,0,30,37,24], // allWords 10: bone|bony|bore|robe|tore|tory|troy|true|tune|yurt
   ["about-gross","about","gross","bogus","roast",3,"","","bogus-roast",11,92,1,4,0], // allWords 4: boast|boats|grout|soars
-  ["adds-doze","adds","doze","daze","odds",3,"","","daze-odds",9,0,20,27,24], // allWords 4: dads|dead|dosa|soda
+  ["adds-doze","adds","doze","daze","odds",3,"","","daze-odds",9,0,21,28,24], // allWords 4: dads|dead|dosa|soda
   ["pair-some","pair","some","poem","sari",2,"","","poem-sari",9,87,2,5,0], // allWords 10: airs|arms|mars|mesa|prom|ramp|rams|romp|same|seam
   ["drugs-spiky","drugs","spiky","pudgy","risks",3,"","","pudgy-risks",13,87,2,5,0], // allWords 4: gipsy|grids|risky|skips
   ["named-react","named","react","armed","enact",2,"","","armed-enact",5,92,1,4,0], // allWords 20: amend|cadre|carat|cared|carte|cater|cedar|crate|dance|dream|eared|eaten|eater|madre|meant|meter|metre|raced|tamer|trace
@@ -374,7 +373,7 @@ const puzzleRows = [
   ["eye-sat","eye","sat","ate","yes",2,"","","cannot be reversed",8,72,5,8,0], // allWords 5: eat|sea|sty|tea|yet
   ["races-topic","races","topic","acres","optic",1,"","","acres-optic",3], // allWords 28: cacti|caper|cares|caste|circa|cores|pacer|pairs|parse|paste|pears|pesto|poets|pores|poser|posit|prose|recap|ropes|scare|score|septa|spare|spate|spear|spore|stoic|tapes
   ["chaos-meter","chaos","meter","chase","metro",2,"","","chase-metro",5,76,4,8,0], // allWords 14: aches|cease|chest|erect|harem|meets|metre|moths|reach|roach|shame|teems|tomes|torch
-  ["lean-rain","lean","rain","nail","near",3,"alan","erin","nail-near",23,85,2,7,0], // allWords 5: earn|lane|lien|line|rein
+  ["lean-rain","lean","rain","nail","near",3,"alan","erin","nail-near",23,80,3,8,0], // allWords 5: earn|lane|lien|line|rein
   ["east-poet","east","poet","tape","toes",3,"","","tape-toes",19,82,3,6,0], // allWords 13: eats|past|pats|peat|post|pots|seat|spat|spot|stop|taps|teas|tops
   ["great-heats","great","heats","gates","heart",2,"","","gates-heart",8,92,1,4,0], // allWords 18: agate|earth|gears|grate|hares|haste|hater|hates|hears|rages|share|shear|sheet|stage|teeth|these|theta|trash
   ["empty-mills","empty","mills","imply","melts",3,"","","imply-melts",11,92,1,4,0], // allWords 12: islet|lisle|piety|piles|plies|smell|smelt|spiel|spite|stipe|temps|tiles
@@ -382,11 +381,11 @@ const puzzleRows = [
   ["salt-work","salt","work","sort","walk",2,"","","sort-walk",2,86,2,6,0], // allWords 9: arts|last|lost|lots|rats|slot|star|tsar|wart
   ["parts-spins","parts","spins","snips","strap",4,"","","snips-strap",25,51,8,17,0], // allWords 4: pains|spits|stars|traps
   ["pit-raw","pit","raw","tip","war",2,"","","tip-war",5,32,12,20,0], // allWords 6: art|pat|paw|rat|tap|tar
-  ["cents-teams","cents","teams","scent","steam",1,"","","scent-steam",3,0,25,39,24], // allWords 8: caste|mates|meats|state|stent|tames|taste|tents
+  ["cents-teams","cents","teams","scent","steam",1,"","","scent-steam",3,0,25,40,24], // allWords 8: caste|mates|meats|state|stent|tames|taste|tents
   ["bezel-saint","bezel","saint","blaze","stein",2,"","","blaze-stein",5], // allWords 9: aisle|inset|liens|lines|nails|satin|slain|snail|stain
   ["guns-ragu","guns","ragu","guru","nags",3,"","","guru-nags",15,75,4,9,0], // allWords 8: gnus|rags|rugs|runs|sang|snag|snug|sung
   ["amend-worry","amend","worry","marry","owned",4,"","","marry-owned",22,87,2,5,0], // allWords 11: adore|adorn|anode|armed|dream|drown|madre|named|radon|rayon|rowed
-  ["clad-cram","clad","cram","calm","card",2,"","","calm-card",6,87,2,5,0], // allWords 1: clam
+  ["clad-cram","clad","cram","calm","card",2,"","","calm-card",6,86,2,6,0], // allWords 1: clam
   ["lord-lube","lord","lube","bold","rule",3,"","","bold-rule",9,77,4,7,0], // allWords 5: blue|lobe|lore|lure|role
   ["bacon-tubes","bacon","tubes","baton","cubes",4,"","","baton-cubes",12,72,5,8,0], // allWords 17: ascot|babes|banco|bates|beast|beats|boast|boats|bouts|canto|caste|coast|coats|count|enact|scout|tacos
   ["lied-wise","lied","wise","lies","wide",2,"","","lies-wide",7,54,8,14,0], // allWords 5: deli|idle|isle|lids|slid
@@ -394,7 +393,6 @@ const puzzleRows = [
   ["bug-new","bug","new","gun","web",3,"","","gun-web",9,70,5,10,0], // allWords 3: beg|gen|gnu
   ["breed-spoke","breed","spoke","broke","speed",2,"","","broke-speed",1,75,4,9,0], // allWords 11: bored|doers|dopes|dorks|doser|keeps|peeks|pokes|posed|reeds|reeks
   ["seal-sets","seal","sets","lets","seas",3,"","","cannot be reversed",22,81,3,7,0], // allWords 2: lest|sale
-  ["fits-pass","fits","pass","saps","sift",2,"","","cannot be reversed",18,56,7,16,0], // allWords 10: fast|fats|fist|past|pats|pits|spat|spit|taps|tips
   ["fate-nest","fate","nest","safe","tent",3,"","","safe-tent",9,87,2,5,0], // allWords 16: ante|ants|fast|fats|feat|fees|feet|feta|fete|neat|nets|sane|seen|sent|teen|tens
   ["lemur-paste","lemur","paste","mural","steep",3,"","","mural-steep",18,87,2,5,0], // allWords 22: least|lures|metal|parts|pause|purse|rules|septa|slate|sleet|spate|stale|steal|steel|strap|strep|super|supra|tales|tapes|tramp|traps
   ["sees-yaks","sees","yaks","asks","eyes",2,"","","asks-eyes",6,82,3,6,0], // allWords 3: easy|keys|seas
@@ -410,7 +408,7 @@ const puzzleRows = [
   ["ape-ill","ill","ape","lie","pal",2,"","","lie-pal",7,92,1,4,0], // allWords 6: all|alp|lap|lip|pea|pie
   ["boss-memo","boss","memo","boom","mess",3,"","","cannot be reversed",9,92,1,4,0], // allWords 6: mobs|moms|moos|moss|sobs|some
   ["lasts-yelps","lasts","yelps","spell","stays",4,"","","spell-stays",29,92,1,4,0], // allWords 9: palsy|plays|salts|salty|slaps|slats|stall|style|tells
-  ["blab-toll","blab","toll","blob","tall",3,"","","blob-tall",9,29,13,19,0], // allWords 5: alto|ball|blot|boat|bolt
+  ["blab-toll","blab","toll","blob","tall",3,"","","blob-tall",9,19,15,21,0], // allWords 5: alto|ball|blot|boat|bolt
   ["dame-male","dame","male","lame","made",2,"","","lame-made",4,21,14,23,0], // allWords 5: dale|deal|lead|mead|meal
   ["awash-elves","awash","elves","leash","waves",3,"","","leash-waves",8,92,1,4,0], // allWords 11: easel|hales|halve|heals|lease|sales|salsa|salve|seals|shale|slave
   ["aisle-corps","aisle","corps","rails","scope",3,"","","rails-scope",12,92,1,4,0], // allWords 17: close|crisp|crops|epics|lasso|liars|opera|pairs|price|relic|sails|scrip|sepia|slice|soaps|solar|spice
@@ -420,7 +418,7 @@ const puzzleRows = [
   ["kids-lack","kids","lack","kick","lads",2,"","","kick-lads",1], // allWords 8: cask|disk|lick|lids|sack|sick|skid|slid
   ["drive-month","drive","month","third","venom",5,"","","third-venom",24,92,1,4,0], // allWords 13: diver|merit|mirth|mitre|movie|noted|remit|timer|tired|toned|trend|tried|video
   ["need-stay","need","stay","easy","tend",2,"","","easy-tend",8,87,2,5,0], // allWords 5: dean|dent|eyes|seed|tyne
-  ["began-fixes","began","fixes","begin","faxes",4,"","","begin-faxes",12,53,8,15,0], // allWords 2: being|binge
+  ["began-fixes","began","fixes","begin","faxes",4,"","","begin-faxes",12,48,9,16,0], // allWords 2: being|binge
   ["agent-salsa","agent","salsa","nasal","stage",3,"","","nasal-stage",18,92,1,4,0], // allWords 14: asset|atlas|gases|gates|gents|glass|lasts|natal|sages|salts|seats|slang|slant|slats
   ["shoe-tags","shoe","tags","ages","host",3,"","","ages-host",10,87,2,5,0], // allWords 6: gate|hose|oats|sage|shot|stag
   ["abet-less","abet","less","bats","else",3,"abes","lest","bats-else",20,82,3,6,0], // allWords 17: base|bass|beat|belt|beta|ease|east|eats|eels|lest|lets|seas|seat|stab|tabs|teas|tele
@@ -444,11 +442,11 @@ const puzzleRows = [
   ["fat-moo","fat","moo","oaf","tom",3,"","","oaf-tom",10], // allWords 2: mat|moa
   ["spurn-stuck","spurn","stuck","pucks","turns",2,"","","pucks-turns",7,41,9,13,10], // allWords 2: runts|tucks
   ["drops-hooks","drops","hooks","dorks","hoops",2,"","","cannot be reversed",5,71,5,9,0], // allWords 1: shook
-  ["fame-pass","fame","pass","maps","safe",3,"","","maps-safe",9,82,3,6,0], // allWords 4: amps|apes|peas|saps
+  ["fame-pass","fame","pass","maps","safe",3,"","","maps-safe",9,81,3,7,0], // allWords 4: amps|apes|peas|saps
   ["lamb-pure","pure","lamb","bump","earl",4,"","","bump-earl",26], // allWords 13: balm|blur|burp|lame|lear|lure|male|meal|mule|pear|real|reap|rule
   ["flow-tide","flow","tide","edit","wolf",3,"","","edit-wolf",19], // allWords 3: diet|fled|tied
   ["ahead-rates","ahead","rates","areas","hated",3,"","","areas-hated",8,92,1,4,0], // allWords 21: aster|death|eared|erase|hares|haste|hates|heard|hears|heats|heres|rated|saree|share|shear|sheer|stare|tears|trade|trash|tread
-  ["back-fast","back","fast","bask","fact",1,"","","bask-fact",1,73,4,11,0], // allWords 4: bats|fats|stab|tabs
+  ["back-fast","back","fast","bask","fact",1,"","","bask-fact",1,79,3,9,0], // allWords 4: bats|fats|stab|tabs
   ["kill-rage","kill","rage","girl","lake",4,"","","girl-lake",13], // allWords 8: earl|gear|kale|leak|lear|like|real|rile
   ["don-rap","don","rap","nor","pad",3,"","","nor-pad",9,92,1,4,0], // allWords 5: and|nod|pod|pro|ran
   ["food-runt","food","runt","fund","root",2,"","","fund-root",2,87,2,5,0], // allWords 11: door|dour|fond|font|foot|odor|tofu|torn|toro|tour|turn
@@ -458,7 +456,7 @@ const puzzleRows = [
   ["motto-wiser","motto","wiser","moist","wrote",3,"","","moist-wrote",8], // allWords 18: merit|metro|mitre|moose|mores|omits|remit|storm|swore|timer|tower|trims|weirs|wires|worse|worst|wrist|write
   ["land-once","land","once","clad","none",2,"","","clad-none",7], // allWords 5: cone|lace|lane|lean|neon
   ["erase-slips","erase","slips","lapse","rises",3,"","","lapse-rises",11,92,1,4,0], // allWords 20: easel|isles|leaps|lease|pales|parse|pears|piers|piles|pleas|plies|sales|saree|seals|sears|slaps|spare|spear|spiel|spire
-  ["blabs-doors","blabs","doors","blobs","roads",3,"","","cannot be reversed",21,4,18,24,0], // allWords 4: boars|boobs|lords|odors
+  ["blabs-doors","blabs","doors","blobs","roads",3,"","","cannot be reversed",21,9,17,23,0], // allWords 4: boars|boobs|lords|odors
   ["chant-takes","chant","takes","cheat","tanks",2,"","","cheat-tanks",4], // allWords 13: aches|cakes|chase|haste|hates|heats|skate|snack|stake|stank|steak|teach|theta
   ["met-new","met","new","mew","net",1,"","","mew-net",0,85,2,7,0], // allWords 1: ten
   ["nets-yard","nets","yard","rays","tend",3,"","","rays-tend",8,82,3,6,0], // allWords 10: ants|darn|dent|dyer|nerd|nest|rand|sent|stay|tens
@@ -474,30 +472,30 @@ const puzzleRows = [
   ["saved-seeds","saved","seeds","deeds","saves",3,"daves","seeds","deeds-saves",12], // allWords 3: eased|eases|vases
   ["duke-plan","duke","plan","dunk","plea",2,"","","dunk-plea",5], // allWords 8: dale|deal|land|lead|leap|pale|puke|punk
   ["night-pests","night","pests","steps","thing",3,"","","steps-thing",25,76,4,8,0], // allWords 11: gents|hints|nests|shins|ships|spits|stent|sting|stint|tents|tints
-  ["halls-hosts","halls","hosts","shall","shots",2,"","","shall-shots",19,5,17,27,0], // allWords 6: halts|shalt|slash|slosh|sloth|stash
+  ["halls-hosts","halls","hosts","shall","shots",2,"","","shall-shots",19,0,18,28,0], // allWords 6: halts|shalt|slash|slosh|sloth|stash
   ["buys-kale","buys","kale","lube","yaks",4,"","","lube-yaks",13,92,1,4,0], // allWords 10: able|bale|bays|blue|busy|labs|lake|leak|slab|sulk
   ["file-sole","file","sole","life","lose",2,"","","life-lose",4,9,17,23,0], // allWords 2: isle|lies
   ["draws-liars","draws","liars","rails","wards",3,"","","rails-wards",18,77,4,7,0], // allWords 1: raids
   ["dint-soul","dint","soul","loud","tins",3,"","","loud-tins",23,64,6,12,0], // allWords 4: ludo|outs|suit|tons
   ["jet-put","jet","put","jut","pet",1,"","","jut-pet",0,69,5,11,0], // allWords 0
-  ["been-fort","been","fort","born","feet",2,"","","born-feet",2,76,4,8,0], // allWords 4: bone|fern|fete|fret
+  ["been-fort","been","fort","born","feet",2,"","","born-feet",2,77,4,7,0], // allWords 4: bone|fern|fete|fret
   ["radio-taped","radio","taped","dared","patio",4,"","","dared-patio",11], // allWords 10: adder|adept|adore|dated|drape|dread|opera|padre|pared|rapid
   ["firms-pride","firms","pride","fired","prism",3,"","","fired-prism",8], // allWords 4: drips|fermi|fried|prime
   ["late-surf","late","surf","eats","furl",3,"","","eats-furl",23], // allWords 19: earl|ears|east|eras|fast|fats|flat|lear|lure|real|rule|ruse|seat|sera|sure|tale|teal|teas|user
   ["aced-nick","aced","nick","acid","neck",3,"","","acid-neck",9,66,6,10,0], // allWords 4: aide|cake|dine|idea
-  ["ether-trade","ether","trade","rated","there",2,"","","rated-there",17,27,14,17,0], // allWords 9: eared|eater|tater|teeth|terra|tetra|three|tread|treat
+  ["ether-trade","ether","trade","rated","there",2,"","","rated-there",17,22,15,18,0], // allWords 9: eared|eater|tater|teeth|terra|tetra|three|tread|treat
   ["carts-rooms","carts","rooms","crams","roots",2,"","","crams-roots",5,92,1,4,0], // allWords 10: ascot|coast|coats|moors|roast|roost|scoot|scram|tacos|torso
   ["cash-cure","cash","cure","race","such",3,"","","race-such",13,79,3,9,0], // allWords 8: aces|acre|arch|care|case|char|cues|ecru
   ["craft-snowy","craft","snowy","fancy","worst",5,"","","fancy-worst",26,92,1,4,0], // allWords 11: croft|farts|fonts|forts|frost|rafts|straw|towns|wants|warts|yawns
   ["mad-sax","mad","sax","max","sad",1,"","","max-sad",0,85,2,7,0], // allWords 2: ads|dam
   ["gates-miner","gates","miner","names","tiger",4,"niger","tames","names-tiger",12,92,1,4,0], // allWords 26: anger|emits|grate|great|items|mates|means|meats|mensa|merit|mines|mites|mitre|ramen|range|reign|remit|singe|smite|stage|steam|tamer|tames|teams|timer|times
   ["issue-ought","issue","ought","guise","shout",3,"","","guise-shout",18,87,2,5,0], // allWords 11: ghost|gusto|hoses|hosts|house|shoes|shots|sight|south|suits|tough
-  ["lamp-lots","lamp","lots","plot","slam",2,"","","plot-slam",7,86,2,6,0], // allWords 6: last|lost|palm|plat|salt|slot
+  ["lamp-lots","lamp","lots","plot","slam",2,"","","plot-slam",7,81,3,7,0], // allWords 6: last|lost|palm|plat|salt|slot
   ["bawl-slip","bawl","slip","bill","swap",3,"","","bill-swap",9,92,1,4,0], // allWords 8: awls|bail|blip|laws|lips|paws|sail|wasp
   ["rings-speak","rings","speak","kings","spear",4,"","","kings-spear",25], // allWords 15: arise|grins|parse|peaks|pears|prank|rains|raise|sarin|signs|sings|snaps|spank|spans|spare
   ["fatal-slink","fatal","slink","final","stalk",3,"","","final-stalk",8,72,5,8,0], // allWords 13: alias|atlas|flail|kilns|links|nails|slain|slant|snail|stall|stank|talks|tanks
   ["dawn-tied","dawn","tied","dead","twin",3,"","","dead-twin",9,86,2,6,0], // allWords 13: ante|date|dean|died|diet|dine|edit|neat|tide|tine|wand|want|wind
-  ["shark-shown","shark","shown","hawks","horns",2,"","","hawks-horns",7], // allWords 1: shawn
+  ["shark-shown","shark","shown","hawks","horns",2,"","","hawks-horns",7], // allWords 1: shorn
   ["add-won","add","won","dad","own",1,"","","dad-own",3,8,14,20,16], // allWords 2: and|now
   ["mills-stork","mills","stork","kills","storm",4,"","","kills-storm",25], // allWords 8: kilos|milos|sills|silos|skill|slots|soils|sorts
   ["dull-puts","dull","puts","dust","pull",2,"","","dust-pull",9,55,8,13,0], // allWords 2: plus|stud
@@ -520,7 +518,7 @@ const puzzleRows = [
   ["bench-pasta","bench","pasta","baths","pecan",3,"","","baths-pecan",12], // allWords 14: bates|beast|beats|capes|chaps|paces|paste|paths|scape|septa|space|spate|tapas|tapes
   ["gang-used","gang","used","aged","sung",3,"","","aged-sung",9], // allWords 8: dang|dues|eggs|gage|gnus|guns|snug|sued
   ["clean-pills","clean","pills","cells","plain",3,"","","cells-plain",9], // allWords 20: calls|cline|laces|lance|lapis|lapse|leaps|pales|panel|penal|piles|plane|pleas|plies|scale|sepia|slice|spell|spiel|spill
-  ["knew-spin","knew","spin","news","pink",2,"","","news-pink",7,92,1,4,0], // allWords 6: pens|pins|sewn|snip|wink|wins
+  ["knew-spin","knew","spin","news","pink",2,"","","news-pink",7,92,1,4,0], // allWords 7: pens|pins|sewn|snip|wink|wins|wisp
   ["bed-kit","bed","kit","bet","kid",1,"","","bet-kid",0,70,5,10,0], // allWords 2: bid|bit
   ["reds-talk","reds","talk","dark","lets",4,"","","dark-lets",13], // allWords 6: drek|lark|lars|last|lest|salt
   ["bits-lied","bits","lied","bide","list",2,"","","bide-list",9], // allWords 5: deli|idle|isle|lies|slit
@@ -552,9 +550,9 @@ const puzzleRows = [
   ["beads-first","beads","first","birds","feast",2,"","","birds-feast",2,87,2,5,0], // allWords 17: baits|based|bases|basis|bates|beast|beats|brits|drift|fades|fated|fates|feats|frets|rifts|safes|serfs
   ["donor-omega","donor","omega","among","rodeo",3,"","","among-rodeo",22,92,1,4,0], // allWords 5: mango|moron|nomad|romeo|rondo
   ["silk-very","silk","very","levy","risk",3,"","","levy-risk",9,75,4,9,0], // allWords 2: elks|kris
-  ["shape-sworn","shape","sworn","hopes","warns",2,"","","hopes-warns",7], // allWords 17: hares|heaps|hears|heros|horns|horse|pawns|phase|share|shear|shore|spawn|swear|swore|wares|wears|worse
+  ["shape-sworn","shape","sworn","hopes","warns",2,"","","hopes-warns",7], // allWords 18: hares|heaps|hears|heros|horns|horse|pawns|phase|share|shear|shore|shorn|spawn|swear|swore|wares|wears|worse
   ["knee-step","knee","step","kept","seen",2,"","","kept-seen",9,92,1,4,0], // allWords 5: keen|pens|pest|pets|tees
-  ["fits-goat","fits","goat","sift","toga",2,"","","sift-toga",18,51,8,17,0], // allWords 6: fiat|fist|gist|sago|sofa|soft
+  ["fits-goat","fits","goat","sift","toga",2,"","","sift-toga",18,47,9,17,0], // allWords 6: fiat|fist|gist|sago|sofa|soft
   ["cheek-lacks","cheek","lacks","check","lakes",2,"","","check-lakes",5,72,5,8,0], // allWords 9: cakes|cease|easel|heels|laces|leaks|lease|scale|slack
   ["ragu-rude","ragu","rude","dare","guru",3,"","","dare-guru",13,77,4,7,0], // allWords 5: dear|gear|rage|read|urge
   ["damn-wade","damn","wade","dawn","made",3,"","","dawn-made",8,92,1,4,0], // allWords 4: dame|dead|mead|wand
@@ -562,7 +560,7 @@ const puzzleRows = [
   ["crane-surge","crane","surge","grace","nurse",3,"","","grace-nurse",22,87,2,5,0], // allWords 9: earns|gears|nears|rages|rance|runes|snare|urges|usage
   ["acid-mask","acid","mask","amid","cask",3,"","","amid-cask",9,82,3,6,0], // allWords 4: dams|maid|maki|sack
   ["blot-goof","blot","goof","boot","golf",2,"","","cannot be reversed",6,69,5,11,0], // allWords 1: bolt
-  ["links-outer","links","outer","route","slink",1,"","","route-slink",3,0,29,51,24], // allWords 8: islet|kilns|liens|liner|lines|noise|rouen|tiles
+  ["links-outer","links","outer","route","slink",1,"","","route-slink",3,0,29,52,24], // allWords 8: islet|kilns|liens|liner|lines|noise|rouen|tiles
   ["part-spit","part","spit","tips","trap",3,"","","tips-trap",19,50,8,18,0], // allWords 7: arts|pita|pits|rats|star|tarp|tsar
   ["slash-touch","slash","touch","clash","south",3,"","","cannot be reversed",22,87,2,5,0], // allWords 7: chaos|halts|latch|oaths|shalt|shout|slush
   ["ban-yap","ban","yap","nab","pay",2,"","","nab-pay",5,15,13,23,10], // allWords 1: any
@@ -573,12 +571,12 @@ const puzzleRows = [
   ["dowel-ruler","dowel","ruler","lower","ruled",3,"","","cannot be reversed",12,87,2,5,0], // allWords 4: lured|older|rowed|rower
   ["farm-pull","farm","pull","furl","palm",2,"","","furl-palm",3,92,1,4,0], // allWords 6: fall|full|lamp|lump|plum|ramp
   ["amend-rover","amend","rover","drove","ramen",2,"","","drove-ramen",6,87,2,5,0], // allWords 5: anode|drone|edema|erode|named
-  ["dock-iron","dock","iron","dork","icon",3,"","","dork-icon",9,87,2,5,0], // allWords 3: coin|noir|nori
+  ["dock-iron","dock","iron","dork","icon",3,"","","dork-icon",9,92,1,4,0], // allWords 3: coin|noir|nori
   ["each-fall","each","fall","half","lace",3,"","","half-lace",23,76,4,8,0], // allWords 4: ache|calf|hale|heal
   ["jelly-nodes","jelly","nodes","jolly","needs",2,"","","jolly-needs",7,54,7,12,6], // allWords 6: dense|lends|needy|nelly|nosed|snell
   ["dibs-seat","dibs","seat","aids","best",3,"","","aids-best",9,82,3,6,0], // allWords 11: beds|bets|bids|bits|date|debt|east|eats|said|seas|teas
   ["blade-poets","blade","poets","bleat","posed",2,"","","bleat-posed",7,81,3,7,0], // allWords 20: abode|adobe|belts|blast|bleed|boast|boats|dopes|leapt|pedal|pelts|pesto|petal|plate|plead|pleat|slept|spelt|splat|table
-  ["enter-owned","enter","owned","newer","toned",3,"","","newer-toned",11,92,1,4,0], // allWords 10: donne|noted|owner|renew|tenor|toner|towed|tower|tweed|wrote
+  ["enter-owned","enter","owned","newer","toned",3,"","","newer-toned",11,87,2,5,0], // allWords 10: donne|noted|owner|renew|tenor|toner|towed|tower|tweed|wrote
   ["pair-tons","pair","tons","riot","snap",5,"","","riot-snap",26,92,1,4,0], // allWords 10: ants|pans|pons|porn|rant|roti|span|tori|torn|trio
   ["acted-pores","acted","pores","cares","opted",3,"","","cares-opted",8,82,3,6,0], // allWords 19: acres|adore|arose|cadet|cadre|cared|caste|cedar|depot|pesto|poets|poser|prose|raced|races|roped|ropes|scare|spore
   ["until-upper","until","upper","pupil","tuner",3,"","","pupil-tuner",11,92,1,4,0], // allWords 4: erupt|lupin|prune|tulip
@@ -597,7 +595,7 @@ const puzzleRows = [
   ["fast-pick","fast","pick","fist","pack",1,"","","fist-pack",1,72,5,8,0], // allWords 13: fact|fats|fits|pact|past|pats|pits|sift|skip|spat|spit|taps|tips
   ["skin-tags","skin","tags","nags","skit",4,"","","nags-skit",23], // allWords 10: anti|kiss|kits|knit|sang|sink|skis|snag|stag|tang
   ["range-romps","range","romps","grams","prone",3,"","","grams-prone",11,87,2,5,0], // allWords 6: anger|gamer|goner|marge|proms|ramps
-  ["calm-seed","calm","seed","clad","seem",2,"","","cannot be reversed",6,86,2,6,0], // allWords 10: aced|came|clam|lads|mace|mesa|same|seam|slam|sled
+  ["calm-seed","calm","seed","clad","seem",2,"","","cannot be reversed",6,85,2,7,0], // allWords 10: aced|came|clam|lads|mace|mesa|same|seam|slam|sled
   ["cross-singe","cross","singe","gross","since",4,"","","gross-since",26,79,3,9,0], // allWords 8: cores|goers|ogres|roses|score|signs|sings|sores
   ["haven-lemur","haven","lemur","human","lever",4,"","","human-lever",17,92,1,4,0], // allWords 8: harem|lumen|merle|mural|navel|ravel|realm|revel
   ["dud-eel","dud","eel","due","led",3,"","","due-led",9,80,3,8,0], // allWords 1: dee
@@ -606,8 +604,7 @@ const puzzleRows = [
   ["mess-twin","mess","twin","nest","swim",4,"","","nest-swim",23,86,2,6,0], // allWords 10: mine|nets|semi|sent|sets|site|tens|ties|tine|wits
   ["boom-stop","boom","stop","oops","tomb",2,"","","oops-tomb",8,87,2,5,0], // allWords 6: moos|most|post|pots|spot|tops
   ["fires-noble","fires","noble","bones","rifle",4,"","","bones-rifle",11], // allWords 13: enrol|flier|fries|liner|loner|reins|resin|rinse|risen|senor|serif|siren|snore
-  ["pass-ruby","pass","ruby","bury","saps",2,"","","bury-saps",4], // allWords 8: bars|bras|bray|pays|pubs|rays|rubs|yaps
-  ["gosh-pipe","gosh","pipe","pope","sigh",3,"","","pope-sigh",15,66,6,10,0], // allWords 10: egos|goes|hips|hogs|hops|pies|pose|posh|ship|shop
+  ["gosh-pipe","gosh","pipe","pope","sigh",3,"","","pope-sigh",15,61,7,11,0], // allWords 10: egos|goes|hips|hogs|hops|pies|pose|posh|ship|shop
   ["hoped-rites","hoped","rites","pride","those",4,"","","pride-those",23,92,1,4,0], // allWords 17: ethos|heist|hopes|piers|pores|poser|prose|roped|ropes|spire|spore|store|tiers|tired|tires|tried|tries
   ["dry-tea","dry","tea","dye","tar",2,"","","dye-tar",7,92,1,4,0], // allWords 6: art|ate|eat|rat|try|yet
   ["bolt-fund","bolt","fund","bunt","fold",2,"","","bunt-fold",2,92,1,4,0], // allWords 6: blot|bold|bond|fond|font|loft
@@ -638,7 +635,7 @@ const puzzleRows = [
   ["cubs-puck","cubs","puck","buck","cups",3,"","","buck-cups",8], // allWords 1: pubs
   ["heart-stone","heart","stone","earth","tones",1,"","","earth-tones",3], // allWords 17: aster|erase|hater|neath|notes|onset|other|rates|saree|seton|stare|start|store|tarts|tears|thane|torts
   ["sage-tire","sage","tire","gate","rise",3,"","","gate-rise",8], // allWords 9: ages|ears|eras|rate|rite|sera|sire|tear|tier
-  ["glass-roots","glass","roots","gloss","roast",2,"","","cannot be reversed",6,31,13,17,0], // allWords 4: goats|roost|soars|torso
+  ["glass-roots","glass","roots","gloss","roast",2,"","","cannot be reversed",6,36,12,16,0], // allWords 4: goats|roost|soars|torso
   ["count-swore","count","swore","ounce","worst",2,"","","ounce-worst",6], // allWords 11: court|euros|noose|roost|roots|rouse|snout|torso|tours|towns|worse
   ["glen-kiss","glen","kiss","elks","sign",4,"","","elks-sign",12], // allWords 5: legs|sing|sink|skin|skis
   ["pros-yaps","pros","yaps","soap","spry",4,"","","soap-spry",23,92,1,4,0], // allWords 2: pays|rosy
@@ -646,7 +643,7 @@ const puzzleRows = [
   ["baby-dale","baby","dale","babe","lady",3,"","","cannot be reversed",8,81,3,7,0], // allWords 6: able|ably|bale|bead|deal|lead
   ["kid-now","kid","now","din","wok",3,"","","din-wok",9], // allWords 5: don|nod|own|win|won
   ["crude-think","crude","think","chide","trunk",2,"","","chide-trunk",2], // allWords 14: chink|chunk|cider|cried|cured|inert|inter|nicer|niche|thine|thunk|tired|tried|tuner
-  ["kills-traps","kills","traps","skill","strap",1,"","","skill-strap",3,0,29,45,24], // allWords 9: lilts|parks|parts|spark|spilt|split|still|tails|tills
+  ["kills-traps","kills","traps","skill","strap",1,"","","skill-strap",3,0,30,46,24], // allWords 9: lilts|parks|parts|spark|spilt|split|still|tails|tills
   ["fade-sick","fade","sick","cafe","disk",3,"","","cafe-disk",9,81,3,7,0], // allWords 10: aces|case|cask|deaf|dies|face|kids|sack|side|skid
   ["meet-spot","meet","spot","teem","tops",3,"","","teem-tops",19,45,9,19,0], // allWords 10: pest|pets|post|pots|step|stop|tees|temp|toes|tome
   ["fines-shell","fines","shell","lines","shelf",4,"","","lines-shelf",25,87,2,5,0], // allWords 8: files|flesh|flies|heels|hells|isles|liens|lisle
@@ -654,7 +651,7 @@ const puzzleRows = [
   ["owed-runt","owed","runt","down","true",2,"","","down-true",8,87,2,5,0], // allWords 7: drew|rude|town|turn|udon|undo|unto
   ["begin-trout","begin","trout","binge","tutor",2,"","","binge-tutor",14,75,4,9,0], // allWords 10: begun|being|bring|grunt|intro|nitro|orbit|robin|tinge|turbo
   ["eyed-labs","eyed","labs","bald","eyes",3,"abes","yeld","cannot be reversed",6,67,6,9,0], // allWords 9: base|bead|dale|deal|ease|lead|sale|seal|slab
-  ["horns-steer","horns","steer","horse","stern",2,"","","horse-stern",5,71,5,9,0], // allWords 21: ester|ether|heron|heros|nests|noses|rents|reset|rests|roses|senor|sheet|shone|shore|snore|sores|terse|there|these|three|trees
+  ["horns-steer","horns","steer","horse","stern",2,"","","horse-stern",5,71,5,9,0], // allWords 22: ester|ether|heron|heros|nests|noses|rents|reset|rests|roses|senor|sheet|shone|shore|shorn|snore|sores|terse|there|these|three|trees
   ["leap-pins","leap","pins","plea","spin",1,"","","plea-spin",3,50,8,18,0], // allWords 9: apes|lens|pale|peas|pens|sail|sale|seal|snip
   ["align-every","align","every","given","relay",5,"","","given-relay",26,92,1,4,0], // allWords 16: angel|angle|early|elegy|glean|layer|learn|leary|liang|liner|nerve|never|raven|renal|riven|vegan
   ["held-lone","held","lone","hole","lend",2,"","","hole-lend",3,87,2,5,0], // allWords 5: doll|heel|hold|hone|noel
@@ -663,7 +660,7 @@ const puzzleRows = [
   ["dead-near","dead","near","dean","read",3,"","","dean-read",23,81,3,7,0], // allWords 3: dare|dear|earn
   ["cheer-lasts","cheer","lasts","chess","later",3,"","","chess-later",9,81,3,7,0], // allWords 32: acres|alert|alter|cares|carte|carts|cases|caste|casts|cater|cease|chest|crate|earls|easel|heels|laser|lease|least|races|react|reals|sales|salts|scare|seals|slate|slats|stale|steal|tales|trace
   ["age-yep","age","yep","eye","gap",2,"","","eye-gap",7,81,3,7,0], // allWords 2: ape|pea
-  ["hats-stir","hats","stir","hits","star",3,"","","hits-star",9,82,3,6,0], // allWords 10: airs|arts|hair|hart|hast|rats|sari|sits|this|tsar
+  ["hats-stir","hats","stir","hits","star",3,"","","hits-star",9,77,4,7,0], // allWords 10: airs|arts|hair|hart|hast|rats|sari|sits|this|tsar
   ["lips-oils","lips","oils","slip","soil",1,"","","slip-soil",3,41,10,19,0], // allWords 0
   ["alias-small","alias","small","llama","sails",5,"","","llama-sails",29,77,4,7,0], // allWords 9: amass|amiss|mails|malls|massa|mills|salsa|sills|slams
   ["fair-solo","fair","solo","fool","sari",2,"","","fool-sari",9,75,4,9,0], // allWords 6: airs|also|foal|lars|loaf|rolf
@@ -679,7 +676,7 @@ const puzzleRows = [
   ["drop-feet","drop","feet","deep","fort",3,"","","cannot be reversed",9,81,3,7,0], // allWords 6: dope|dote|fete|fret|peed|prod
   ["deeds-suing","deeds","suing","genus","sided",4,"","","genus-sided",28,87,2,5,0], // allWords 16: dense|dudes|dunes|edged|edges|genes|needs|nudes|nudge|seeds|sense|sides|singe|sinus|snide|using
   ["dame-poet","dame","poet","date","poem",3,"","","date-poem",9,71,5,9,0], // allWords 9: demo|dome|dote|made|mead|mode|peat|tamp|tape
-  ["bury-tens","bury","tens","nets","ruby",2,"","","nets-ruby",4,0,31,35,24], // allWords 12: buns|nest|nuts|rest|rubs|rust|sent|stun|trey|tyne|tyre|yurt
+  ["bury-tens","bury","tens","nets","ruby",2,"","","nets-ruby",4,0,30,34,24], // allWords 12: buns|nest|nuts|rest|rubs|rust|sent|stun|trey|tyne|tyre|yurt
   ["bops-cafe","bops","cafe","fobs","pace",3,"","","fobs-pace",9,81,3,7,0], // allWords 5: cape|caps|cope|cops|face
   ["ads-sad","ads","sad","ass","dad",2,"","","ass-dad",7,81,3,7,0], // allWords 1: add
   ["dirt-plot","dirt","plot","told","trip",4,"","","told-trip",23,87,2,5,0], // allWords 0
@@ -719,7 +716,7 @@ const puzzleRows = [
   ["flair-trout","flair","trout","flour","trait",2,"","","flour-trait",2,92,1,4,0], // allWords 8: fault|flout|frail|friar|trail|trial|tutor|ultra
   ["knee-stat","knee","stat","nest","take",3,"kate","sent","cannot be reversed",9,86,2,6,0], // allWords 14: ants|east|eats|keen|nets|sane|seat|seen|sent|tank|teas|tees|tens|test
   ["balls-niece","balls","niece","cable","lines",4,"","","cable-lines",25,92,1,4,0], // allWords 14: bales|bills|canes|clans|clean|cline|label|lance|lanes|leans|libel|liens|sable|since
-  ["birds-toned","birds","toned","bonds","tired",2,"","","bonds-tired",2,92,1,4,0], // allWords 22: binds|boned|bones|bored|bores|bride|inset|noted|notes|onset|rites|robes|seton|sober|stein|stone|store|tiers|tires|tones|tried|tries
+  ["birds-toned","birds","toned","bonds","tired",2,"","","bonds-tired",2,86,2,6,0], // allWords 22: binds|boned|bones|bored|bores|bride|inset|noted|notes|onset|rites|robes|seton|sober|stein|stone|store|tiers|tires|tones|tried|tries
   ["ark-tie","ark","tie","era","kit",3,"","","era-kit",10,87,2,5,0], // allWords 2: are|ear
   ["leap-mean","leap","mean","name","pale",2,"","","name-pale",15,85,2,7,0], // allWords 5: amen|lane|lean|mane|plea
   ["gifts-waves","gifts","waves","gives","wafts",2,"","","gives-wafts",1,92,1,4,0], // allWords 3: swift|views|wives
@@ -740,7 +737,7 @@ const puzzleRows = [
   ["gear-oops","gear","oops","ages","poor",2,"","","ages-poor",9,87,2,5,0], // allWords 9: aero|pore|pose|prog|rage|repo|rope|sage|sago
   ["film-tens","film","tens","mint","self",4,"","","mint-self",26,92,1,4,0], // allWords 10: fins|lest|lets|list|melt|nest|nets|sent|slit|tins
   ["alp-eye","alp","eye","eel","pay",2,"","","eel-pay",9,92,1,4,0], // allWords 5: aye|lap|pal|yap|yep
-  ["beam-foot","beam","foot","boom","feat",2,"","","boom-feat",2,92,1,4,0], // allWords 9: abet|beat|beta|boat|boot|fame|fate|feta|foam
+  ["beam-foot","beam","foot","boom","feat",2,"","","boom-feat",2,87,2,5,0], // allWords 9: abet|beat|beta|boat|boot|fame|fate|feta|foam
   ["dude-zone","dude","zone","doze","nude",3,"","","doze-nude",9,82,3,6,0], // allWords 3: done|dune|node
   ["kicks-songs","kicks","songs","kings","socks",2,"","","kings-socks",1,92,1,4,0], // allWords 5: kinks|signs|sings|sinks|skins
   ["meets-notch","meets","notch","comes","tenth",4,"","","comes-tenth",22,92,1,4,0], // allWords 19: cents|chemo|cones|hence|notes|onset|scene|scent|scone|seton|stent|stone|teems|teens|tense|tents|theme|tomes|tones
@@ -795,7 +792,7 @@ const puzzleRows = [
   ["amen-void","amen","void","maid","oven",3,"","","maid-oven",9,87,2,5,0], // allWords 11: amid|amin|dame|dove|made|main|mane|mead|mean|mina|name
   ["rates-sharp","rates","sharp","parts","shear",5,"","","parts-shear",32,92,1,4,0], // allWords 22: areas|ashes|asset|aster|hares|heaps|hears|paras|paste|phase|seats|septa|shape|share|spate|stare|stars|strap|taper|tapes|tears|traps
   ["cling-props","cling","props","clips","prong",2,"","","clips-prong",1,92,1,4,0], // allWords 6: corps|crisp|crops|plops|scorn|scrip
-  ["dunk-nope","dunk","nope","node","punk",4,"","","node-punk",13,92,1,4,0], // allWords 8: done|dope|dune|dupe|neon|none|nude|open
+  ["dunk-nope","dunk","nope","node","punk",4,"","","node-punk",13,87,2,5,0], // allWords 8: done|dope|dune|dupe|neon|none|nude|open
   ["fill-lout","fill","lout","foul","lilt",2,"","","foul-lilt",2,92,1,4,0], // allWords 6: flit|lift|loft|till|tofu|toll
   ["nifty-talks","nifty","talks","fatty","links",4,"","","fatty-links",16,87,2,5,0], // allWords 7: kilns|lanky|slant|slink|stalk|stilt|tilts
   ["aids-deer","aids","deer","read","side",4,"","","read-side",23,92,1,4,0], // allWords 11: arid|dare|dear|dies|dire|ease|raid|reed|ride|said|seed
@@ -821,7 +818,7 @@ const puzzleRows = [
   ["bus-mew","bus","mew","sum","web",3,"","","sum-web",9,81,3,7,0], // allWords 1: sub
   ["eons-tiff","eons","tiff","fine","soft",4,"","","fine-soft",26,92,1,4,0], // allWords 11: fife|fist|fits|foes|font|nose|ones|sift|sine|tins|tons
   ["paper-vista","paper","vista","pasta","viper",2,"","","pasta-viper",1,92,1,4,0], // allWords 16: parse|parts|pears|piers|piper|raves|saver|sepia|spare|spear|spire|strap|strip|tapas|traps|trips
-  ["muted-rinse","muted","rinse","nurse","timed",3,"","","nurse-timed",14,92,1,4,0], // allWords 26: denim|diner|durst|emits|items|menus|midst|minds|mined|mines|mites|reins|resin|rinds|risen|rites|runes|siren|smite|tiers|times|tired|tires|tried|tries|under
+  ["muted-rinse","muted","rinse","nurse","timed",3,"","","nurse-timed",14,92,1,4,0], // allWords 27: denim|diner|durst|emits|items|menus|midst|minds|mined|mines|mites|mutes|reins|resin|rinds|risen|rites|runes|siren|smite|tiers|times|tired|tires|tried|tries|under
   ["evil-wise","evil","wise","isle","view",3,"","","isle-view",10,92,1,4,0], // allWords 4: lies|live|veil|vile
   ["edits-rents","edits","rents","tends","tries",3,"","","tends-tries",20,92,1,4,0], // allWords 10: dents|diets|rites|sited|stern|teens|tense|tides|tiers|tires
   ["dish-ugly","dish","ugly","gush","idly",3,"","","gush-idly",9,92,1,4,0], // allWords 2: guys|hugs
@@ -859,17 +856,15 @@ const puzzleRows = [
   ["cover-viral","cover","viral","river","vocal",4,"","","river-vocal",11,92,1,4,0], // allWords 11: carol|clove|coral|crore|liver|lover|relic|rival|rover|valor|vicar
   ["till-wood","till","wood","tool","wild",2,"","","tool-wild",2,92,1,4,0], // allWords 6: lilt|loot|told|toll|will|wool
   ["arc-due","arc","due","cud","era",3,"","","cud-era",10,87,2,5,0], // allWords 4: are|car|ear|red
-  ["fart-sold","fart","sold","ford","salt",2,"","","ford-salt",3,92,1,4,0], // allWords 18: arts|flat|fold|fort|frat|lads|last|loft|lost|lots|olds|raft|rats|rods|slot|sort|star|tsar
   ["comfy-reads","comfy","reads","decay","forms",4,"","","decay-forms",25,92,1,4,0], // allWords 10: cafes|dares|dorms|faces|fares|fears|foray|ready|roads|safer
   ["diet-lift","diet","lift","edit","flit",1,"","","edit-flit",3,81,3,7,0], // allWords 4: lite|tide|tied|tile
   ["depot-liner","depot","liner","noted","peril",3,"","","noted-peril",19,92,1,4,0], // allWords 14: diner|drone|ender|enrol|inlet|leper|loner|opted|pilot|pride|repel|roped|tepid|toned
   ["been-snug","been","snug","bung","seen",2,"","","cannot be reversed",8,92,1,4,0], // allWords 4: gnus|guns|nuns|sung
   ["lotus-nippy","lotus","nippy","plops","unity",3,"","","cannot be reversed",11,92,1,4,0], // allWords 6: pints|plots|snout|spilt|split|units
-  ["node-wait","node","wait","anti","owed",3,"","","anti-owed",20,92,1,4,0], // allWords 4: dean|done|into|wade
   ["agent-veins","agent","veins","event","gains",3,"","","event-gains",8,92,1,4,0], // allWords 6: anise|eaten|evens|giant|seven|vines
   ["hippo-hosts","hippo","hosts","photo","ships",3,"","","photo-ships",11,92,1,4,0], // allWords 5: hoist|hoops|shoot|shops|shots
   ["and-its","and","its","din","sat",2,"dan","sit","din-sat",7,92,1,4,0], // allWords 3: ins|sin|sit
-  ["mason-suite","mason","suite","mouse","stain",3,"","","mouse-stain",11,92,1,4,0], // allWords 13: amino|asset|mates|meats|moans|saint|satin|seats|steam|stuns|tames|teams|units
+  ["mason-suite","mason","suite","mouse","stain",3,"","","mouse-stain",11,92,1,4,0], // allWords 14: amino|asset|mates|meats|moans|mutes|saint|satin|seats|steam|stuns|tames|teams|units
   ["dull-snap","dull","snap","land","plus",5,"","","land-plus",26,92,1,4,0], // allWords 4: dual|pans|saul|span
   ["cores-swept","cores","swept","corps","sweet",1,"","","corps-sweet",1,92,1,4,0], // allWords 17: crews|crops|pesos|pesto|poets|ports|poses|posse|prost|roses|scope|score|screw|sores|sport|store|wrest
   ["file-task","file","task","leaf","skit",3,"","","leaf-skit",19,92,1,4,0], // allWords 16: east|eats|flea|kits|late|life|lite|safe|seat|site|tale|talk|teal|teas|ties|tile
@@ -941,7 +936,7 @@ const puzzleRows = [
   ["lord-rage","lord","rage","gold","rare",3,"","","gold-rare",9,92,1,4,0], // allWords 14: drag|earl|ergo|gale|gear|glad|gore|grad|lear|lore|ogre|real|rear|role
   ["cache-plant","cache","plant","clean","patch",3,"","","clean-patch",12,92,1,4,0], // allWords 11: apnea|catch|cheap|lance|latch|leach|panel|peach|pecan|penal|plane
   ["actor-homes","actor","homes","macro","those",3,"","","macro-those",21,92,1,4,0], // allWords 17: ascot|carte|caste|cater|chest|coast|coats|crate|cream|ethos|ortho|other|react|shoot|tacos|torch|trace
-  ["each-pole","each","pole","echo","plea",2,"","","echo-plea",7,92,1,4,0], // allWords 11: ache|cape|chap|chop|cope|hale|heal|hole|leap|pace|pale
+  ["each-pole","each","pole","echo","plea",2,"","","echo-plea",7,87,2,5,0], // allWords 11: ache|cape|chap|chop|cope|hale|heal|hole|leap|pace|pale
   ["guns-team","guns","team","meat","sung",2,"guam","tens","meat-sung",19,87,2,5,0], // allWords 18: ages|east|eats|game|gnus|mate|meta|nest|nets|nuts|sage|seat|sent|snug|stun|tame|teas|tens
   ["ponds-terms","ponds","terms","spend","storm",2,"","","spend-storm",7,92,1,4,0], // allWords 6: dents|drops|proms|romps|sperm|tends
   ["keen-nope","keen","nope","keep","none",3,"","","keep-none",9,92,1,4,0], // allWords 5: knee|neon|open|peek|poke
@@ -957,7 +952,7 @@ const puzzleRows = [
   ["noble-rinse","noble","rinse","linen","sober",4,"","","linen-sober",25,92,1,4,0], // allWords 14: bones|bores|enrol|liber|liner|loner|nines|reins|resin|risen|robes|senor|siren|snore
   ["bunt-very","bunt","very","bury","vent",2,"","","bury-vent",1,92,1,4,0], // allWords 3: bent|envy|ruby
   ["bit-own","bit","own","nib","two",3,"","","nib-two",10,87,2,5,0], // allWords 4: bin|ion|now|won
-  ["dude-nuts","dude","nuts","duds","tune",3,"","","cannot be reversed",8,86,2,6,0], // allWords 6: duet|dune|dust|nude|stud|stun
+  ["dude-nuts","dude","nuts","duds","tune",3,"","","cannot be reversed",8,80,3,8,0], // allWords 6: duet|dune|dust|nude|stud|stun
   ["lanky-meals","lanky","meals","leaks","manly",2,"","","leaks-manly",3,92,1,4,0], // allWords 8: allay|alley|lakes|leaky|makes|males|nelly|snell
   ["newer-tenor","newer","tenor","enter","owner",3,"","","cannot be reversed",18,92,1,4,0], // allWords 4: renew|toner|tower|wrote
   ["dies-kill","dies","kill","lied","silk",3,"lidl","sike","lied-silk",23,92,1,4,0], // allWords 7: deli|dill|idle|lids|like|side|slid
@@ -980,10 +975,8 @@ const puzzleRows = [
   ["acted-risks","acted","risks","sacks","tried",3,"","","sacks-tried",8,92,1,4,0], // allWords 21: aides|aside|cadet|cases|casks|caste|cress|crest|dries|ideas|rides|rises|rites|sired|skirt|stack|tacks|tiers|tired|tires|tries
   ["legs-runs","legs","runs","lens","rugs",1,"","","lens-rugs",1,92,1,4,0], // allWords 2: lugs|slug
   ["beard-count","beard","count","dance","turbo",5,"","","dance-turbo",32,92,1,4,0], // allWords 28: abort|actor|bared|baton|board|bound|bread|broad|brute|cadre|canto|cared|carte|cater|cedar|court|crate|crude|cured|cuter|enact|raced|react|rebut|tabor|trace|truce|tuber
-  ["area-hint","area","hint","anti","hear",2,"","","anti-hear",9,92,1,4,0], // allWords 5: hare|rant|rate|tear|thin
   ["dad-don","dad","don","and","odd",2,"","","cannot be reversed",7,85,2,7,0], // allWords 2: add|nod
   ["droid-swear","droid","swear","roads","weird",3,"","","roads-weird",11,92,1,4,0], // allWords 24: adder|dared|dares|dewar|dread|dried|drier|dries|reads|rears|rider|rides|riser|roars|sawed|sired|wares|wears|weirs|wider|wired|wires|wised|wiser
-  ["fart-held","fart","held","felt","hard",2,"","","felt-hard",2,92,1,4,0], // allWords 10: dahl|flat|fled|frat|fret|halt|hart|herd|left|raft
   ["loves-steam","loves","steam","moves","steal",4,"","","moves-steal",25,92,1,4,0], // allWords 18: asset|least|mates|meats|meets|metal|salvo|seats|slate|sleet|solve|stale|steel|tales|tames|teams|teems|vests
   ["baron-given","baron","given","robin","vegan",3,"","","robin-vegan",17,92,1,4,0], // allWords 9: anger|argon|brine|groan|groin|orang|organ|range|reign
   ["came-such","came","such","case","much",4,"","","case-much",13,87,2,5,0], // allWords 11: aces|cash|cues|mace|mach|mash|mesa|muse|same|seam|sham
@@ -1042,7 +1035,7 @@ const puzzleRows = [
   ["dare-edgy","dare","edgy","edge","yard",3,"","","edge-yard",23,92,1,4,0], // allWords 7: aged|dear|deer|dyer|read|reed|year
   ["pay-way","pay","way","yap","yaw",2,"","","yap-yaw",5,74,4,10,0], // allWords 0
   ["intro-steel","intro","steel","inlet","store",4,"","","inlet-store",17,92,1,4,0], // allWords 15: elite|liner|nitro|notes|onset|senor|seton|sleet|snore|snort|stone|title|tones|torts|totes
-  ["free-sour","free","sour","ours","reef",1,"","","ours-reef",3,61,7,11,0], // allWords 8: fore|four|rees|rose|ruse|sore|sure|user
+  ["free-sour","free","sour","ours","reef",1,"","","ours-reef",3,60,7,12,0], // allWords 8: fore|four|rees|rose|ruse|sore|sure|user
   ["crews-stalk","crews","stalk","clerk","swats",4,"","","clerk-swats",12,92,1,4,0], // allWords 9: celts|lasts|salts|screw|slats|stews|talks|wests|wreck
   ["jean-soil","jean","soil","join","seal",2,"jane","silo","join-seal",2,92,1,4,0], // allWords 8: also|ions|isle|lies|oils|sale|sane|sine
   ["nicer-romps","nicer","romps","corps","miner",3,"","","corps-miner",8,92,1,4,0], // allWords 17: cones|cores|cries|crisp|crone|crops|crore|mines|mores|omens|prism|proms|recon|scone|score|scrip|since
@@ -1081,7 +1074,7 @@ const puzzleRows = [
   ["prep-what","prep","what","phew","trap",4,"","","cannot be reversed",26,92,1,4,0], // allWords 7: part|path|tarp|thaw|warp|wart|wrap
   ["curse-grill","curse","grill","cruel","girls",3,"","","cannot be reversed",19,92,1,4,0], // allWords 12: cries|cures|curls|gruel|guile|guise|luger|relic|sulci|surge|ulcer|urges
   ["tidy-yaps","tidy","yaps","days","pity",3,"","","days-pity",9,87,2,5,0], // allWords 8: past|pats|pays|pits|spat|spit|taps|tips
-  ["tern-true","true","tern","tree","turn",2,"","","tree-turn",6,92,1,4,0], // allWords 3: rent|runt|tune
+  ["tern-true","true","tern","tree","turn",2,"","","tree-turn",6,87,2,5,0], // allWords 3: rent|runt|tune
   ["full-king","full","king","gulf","link",3,"","","gulf-link",23,92,1,4,0], // allWords 4: fill|gunk|kill|kiln
   ["buys-kegs","buys","kegs","bugs","keys",1,"","","bugs-keys",1], // allWords 2: begs|busy
   ["acted-horse","horse","acted","raced","those",2,"","","raced-those",6,92,1,4,0], // allWords 20: acres|adore|arose|cadet|cadre|cards|cared|cares|caste|cedar|cheer|chest|ethos|heros|horde|races|roads|scare|shore|toads
@@ -1115,14 +1108,13 @@ const puzzleRows = [
   ["hates-later","hates","later","heart","least",3,"","","heart-least",17,92,1,4,0], // allWords 10: alert|alter|earth|haste|hater|heats|slate|stale|steal|tales
   ["mad-she","she","mad","ads","hem",2,"","","ads-hem",8], // allWords 4: dam|hes|sad|sea
   ["bluff-start","bluff","start","blurt","staff",2,"","","blurt-staff",1,92,1,4,0], // allWords 9: farts|flats|rafts|strut|stuff|sturt|tarts|trust|tufts
-  ["saps-toes","toes","saps","seas","spot",4,"","","seas-spot",23,92,1,4,0], // allWords 13: east|eats|pass|past|pats|post|pots|seat|spat|stop|taps|teas|tops
   ["cups-tick","tick","cups","cuts","pick",4,"","","cuts-pick",13,87,2,5,0], // allWords 7: pics|pits|puck|puts|spit|tips|tuck
   ["caste-rebel","rebel","caste","cable","reset",3,"","","cable-reset",11], // allWords 21: aster|beret|cease|celeb|celts|earls|erase|ester|laces|laser|leers|rates|reals|reels|saree|scale|stare|steer|tears|terse|trees
   ["delay-salon","salon","delay","nasal","yodel",3,"","","nasal-yodel",18,87,2,5,0], // allWords 5: laden|lanes|leans|loans|olden
   ["duke-ends","duke","ends","duds","knee",4,"","","duds-knee",13,87,2,5,0], // allWords 8: dude|dues|dusk|keen|need|send|sued|used
   ["donor-waist","waist","donor","radio","towns",4,"","","radio-towns",23,92,1,4,0], // allWords 10: adorn|radon|raids|rondo|rowan|stand|sworn|waits|wants|warns
   ["neon-skit","neon","skit","note","sink",2,"","","note-sink",6], // allWords 15: eons|kits|knit|knot|nine|none|nose|ones|sine|site|skin|ties|tine|toes|tone
-  ["dense-karma","karma","dense","maker","sedan",3,"","","maker-sedan",19,87,2,5,0], // allWords 16: amend|armed|dares|deans|drama|dream|knees|madre|named|needs|rakes|reads|reeds|reeks|snake|sneak
+  ["dense-karma","karma","dense","maker","sedan",3,"","","maker-sedan",19,82,3,6,0], // allWords 16: amend|armed|dares|deans|drama|dream|knees|madre|named|needs|rakes|reads|reeds|reeks|snake|sneak
   ["eye-rot","eye","rot","ore","yet",2,"","","cannot be reversed",7,86,2,6,0], // allWords 2: toe|try
   ["third-weigh","third","weigh","thigh","weird",2,"","","thigh-weird",1], // allWords 6: eight|their|tired|tried|wider|wired
   ["anger-toils","anger","toils","goals","inter",4,"","","goals-inter",12,92,1,4,0], // allWords 11: anise|gents|inert|inset|largo|nails|range|slain|slang|snail|stein
@@ -1174,7 +1166,7 @@ const puzzleRows = [
   ["spit-year","spit","year","ears","pity",2,"","","ears-pity",7], // allWords 21: east|eats|eras|past|pats|pits|pray|raps|rasp|rips|rise|seat|sera|sire|site|spat|taps|teas|ties|tips|yeti
   ["truce-yells","yells","truce","elect","surly",5,"","","elect-surly",34], // allWords 4: celts|crust|cuter|tells
   ["bilge-gross","gross","bilge","gorge","bliss",3,"","","bliss-gorge",9,92,1,4,0], // allWords 6: bores|goers|grogs|ogres|robes|sober
-  ["care-vice","care","vice","cave","rice",3,"","","cave-rice",13,81,3,7,0], // allWords 4: acre|race|rave|vera
+  ["care-vice","care","vice","cave","rice",3,"","","cave-rice",13,79,3,9,0], // allWords 4: acre|race|rave|vera
   ["aging-cites","aging","cites","gates","icing",3,"","","gates-icing",8,92,1,4,0], // allWords 7: angst|gains|giant|saint|satin|stage|stain
   ["this-unto","this","unto","into","thus",4,"","","into-thus",13], // allWords 6: hits|huts|nuts|shut|stun|tins
   ["surf-taco","surf","taco","ours","fact",3,"","","fact-ours",23], // allWords 8: coat|fart|frat|raft|soar|sour|tour|turf
@@ -1205,7 +1197,7 @@ const puzzleRows = [
   ["scoop-shore","shore","scoop","cores","hoops",2,"","","cores-hoops",7,87,2,5,0], // allWords 5: corps|crops|heros|horse|score
   ["nerve-rests","nerve","rests","serve","rents",4,"","","rents-serve",11,92,1,4,0], // allWords 16: enter|ester|evens|nests|never|reset|seven|sever|steer|stern|teens|tense|terse|trees|veers|verse
   ["hers-must","hers","must","mess","hurt",2,"","","hurt-mess",3,92,1,4,0], // allWords 8: huts|rush|shes|shut|stem|sums|term|thus
-  ["even-swig","even","swig","give","news",5,"","","give-news",26,92,1,4,0], // allWords 6: sewn|vein|vine|wigs|wine|wins
+  ["even-swig","even","swig","give","news",5,"","","give-news",26,87,2,5,0], // allWords 6: sewn|vein|vine|wigs|wine|wins
   ["nor-wed","nor","wed","den","row",3,"","","den-row",9], // allWords 3: don|end|nod
   ["dinky-liars","dinky","liars","diary","links",2,"","","diary-links",2], // allWords 7: dairy|kilns|kinds|raids|rails|rinds|slink
   ["atoms-clear","clear","atoms","actor","males",3,"","","actor-males",10,92,1,4,0], // allWords 27: aorta|ascot|carol|carte|caste|cater|coals|coast|coats|coral|crate|laces|mates|meals|meats|moats|molar|moral|react|realm|scale|steam|tacos|tamer|tames|teams|trace
@@ -1243,7 +1235,6 @@ const puzzleRows = [
   ["ivory-notes","ivory","notes","envoy","riots",3,"","","envoy-riots",9], // allWords 10: noose|onset|ovens|seton|snort|stone|tones|trois|vents|visor
   ["nib-wok","wok","nib","bow","kin",3,"","","bow-kin",10], // allWords 2: bin|ink
   ["disc-slam","disc","slam","clad","miss",4,"","","clad-miss",23], // allWords 5: acid|aims|amid|maid|sims
-  ["amen-site","amen","site","anti","seem",4,"tina","emes","anti-seem",13], // allWords 12: mane|mate|mean|meat|meta|name|sine|stem|tame|team|ties|tins
   ["drone-spins","drone","spins","rinse","ponds",3,"","","ponds-rinse",11,92,1,4,0], // allWords 13: diner|opens|pines|reins|resin|rinds|risen|senor|siren|snipe|snips|snore|spine
   ["owed-tins","owed","tins","owns","tied",2,"","","owns-tied",1,92,1,4,0], // allWords 13: diet|dint|down|edit|ions|owes|site|snow|stew|tide|ties|west|woes
   ["corgi-winds","corgi","winds","icing","sword",3,"","","icing-sword",10,87,2,5,0], // allWords 8: cords|downs|gowns|grows|owing|swing|wings|words
@@ -1447,7 +1438,7 @@ const puzzleRows = [
   ["bagel-males","bagel","males","games","label",3,"","","games-label",8,87,2,5,0], // allWords 6: bales|gable|gleam|mages|meals|sable
   ["legit-roots","legit","roots","tiger","stool",5,"","","stool-tiger",29,92,1,4,0], // allWords 8: lotte|lotto|otter|roost|stole|store|tools|torso
   ["mate-oven","mate","oven","vote","amen",3,"","","amen-vote",9], // allWords 8: mane|mean|meat|meta|name|tame|team|veto
-  ["dark-rope","dark","rope","park","rode",4,"","","park-rode",13,87,2,5,0], // allWords 13: dare|dear|dope|dork|pear|pore|pork|rare|read|reap|rear|redo|repo
+  ["dark-rope","dark","rope","park","rode",4,"","","park-rode",13,82,3,6,0], // allWords 13: dare|dear|dope|dork|pear|pore|pork|rare|read|reap|rear|redo|repo
   ["bot-far","bot","far","bat","for",1,"","","bat-for",1], // allWords 7: bar|bra|bro|fat|orb|rob|tab
   ["creek-those","creek","those","choke","trees",3,"","","choke-trees",10], // allWords 17: ceres|cheek|chose|cores|corks|ester|ethos|reset|rocks|score|sheet|shock|steer|store|stork|terse|these
   ["inner-tears","inner","tears","rains","enter",4,"","","enter-rains",20], // allWords 23: anise|arise|aster|eater|nines|raise|rants|rates|reins|rents|resin|rinse|risen|sarin|seine|siren|stare|stern|tease|teens|tense|terra|trans
@@ -1522,7 +1513,7 @@ const puzzleRows = [
   ["bold-list","bold","list","toll","dibs",4,"lidl","bots","dibs-toll",22,92,1,4,0], // allWords 17: bids|bits|blot|bolt|bots|dill|doll|lids|lilt|lost|lots|olds|slid|slit|slot|sold|till
   ["neck-sage","neck","sage","cask","gene",4,"","","cask-gene",13,92,1,4,0], // allWords 7: aces|acne|ages|cane|case|kegs|sack
   ["sense-taken","sense","taken","snake","teens",2,"","","snake-teens",6], // allWords 14: eaten|knees|sakes|seeks|senna|skate|skeet|sneak|stake|stank|steak|takes|tanks|tense
-  ["equip-spurs","equip","spurs","quips","purse",2,"","","purse-quips",6,92,1,4,0], // allWords 3: pique|super|upper
+  ["equip-spurs","equip","spurs","quips","purse",2,"","","purse-quips",6,87,2,5,0], // allWords 3: pique|super|upper
   ["cores-spoke","cores","spoke","cooks","spree",2,"","","cooks-spree",2], // allWords 16: corks|creep|crepe|peers|perks|pesos|pokes|poses|posse|press|rocks|roses|scope|score|sores|speer
   ["diary-noise","diary","noise","aside","irony",4,"","","aside-irony",21], // allWords 10: adore|aides|aired|anise|dairy|daisy|ideas|noisy|rainy|rayon
   ["did-leg","leg","did","dig","led",1,"","","cannot be reversed",0,86,2,6,0], // allWords 2: gel|lid
@@ -1537,7 +1528,7 @@ const puzzleRows = [
   ["birds-cease","birds","cease","basis","creed",4,"","","basis-creed",21], // allWords 15: abide|acids|based|bases|beads|beers|breed|brees|bride|cases|ceres|cider|cress|cried|cries
   ["fig-wed","fig","wed","fed","wig",1,"","","fed-wig",0], // allWords 0
   ["pond-ragu","pond","ragu","drag","upon",2,"","","drag-upon",7], // allWords 3: darn|grad|rand
-  ["flat-good","flat","good","glad","foot",2,"","","foot-glad",2,87,2,5,0], // allWords 6: fold|food|goat|gold|loft|toga
+  ["flat-good","flat","good","glad","foot",2,"","","foot-glad",2,86,2,6,0], // allWords 6: fold|food|goat|gold|loft|toga
   ["apart-weeds","apart","weeds","swear","taped",3,"","","swear-taped",10,92,1,4,0], // allWords 24: adapt|adept|areas|eased|eater|erase|paras|parse|pears|saree|sawed|sewed|sewer|spade|spare|spear|swede|taper|tweed|twerp|wares|water|wears|wraps
   ["drop-keen","keen","drop","need","pork",4,"","","cannot be reversed",23,92,1,4,0], // allWords 13: deep|done|dope|keep|kern|knee|nerd|node|peed|peek|perk|poke|prod
   ["pool-some","pool","some","poem","solo",2,"","","poem-solo",9], // allWords 2: loop|polo
@@ -1547,7 +1538,7 @@ const puzzleRows = [
   ["laden-moats","laden","moats","demon","atlas",4,"","","atlas-demon",21,92,1,4,0], // allWords 17: alone|amend|atoms|dales|dames|deals|demos|domes|leads|manta|modes|monde|named|natal|olden|talon|tonal
   ["fly-irk","fly","irk","ilk","fry",1,"","","fry-ilk",1,92,1,4,0], // allWords 0
   ["huge-oral","huge","oral","ogre","haul",3,"","","haul-ogre",9], // allWords 6: aero|ergo|gore|hare|hear|hula
-  ["cure-tidy","cure","tidy","duty","rice",3,"","","duty-rice",15,87,2,5,0], // allWords 13: dice|diet|duet|ecru|edit|iced|rite|tide|tied|tier|tire|true|yurt
+  ["cure-tidy","cure","tidy","duty","rice",3,"","","duty-rice",15,86,2,6,0], // allWords 13: dice|diet|duet|ecru|edit|iced|rite|tide|tied|tier|tire|true|yurt
   ["slain-smack","smack","slain","lacks","mains",2,"","","lacks-mains",7,92,1,4,0], // allWords 5: clans|minas|nails|slack|snail
   ["hovel-react","hovel","react","teach","lover",3,"","","lover-teach",22,87,2,5,0], // allWords 16: actor|carol|carte|cater|cheat|clear|coral|crate|eater|leach|lever|overt|revel|trace|trove|voter
   ["aged-year","aged","year","area","edgy",3,"","","area-edgy",19,92,1,4,0], // allWords 4: eyed|eyre|gear|rage
@@ -1643,7 +1634,7 @@ const puzzleRows = [
   ["delay-pairs","delay","pairs","diary","pleas",3,"","","diary-pleas",12,92,1,4,0], // allWords 20: aides|aside|dairy|dales|deals|dries|ideas|lapse|leads|leaps|pales|piers|playa|raids|reply|rides|salad|sepia|sired|spire
   ["acre-bald","bald","acre","card","able",2,"","","able-card",9], // allWords 9: area|bale|bard|bare|bear|care|clad|lace|race
   ["plop-tire","tire","plop","pole","trip",2,"","","pole-trip",6,92,1,4,0], // allWords 5: pier|plot|ripe|rite|tier
-  ["alter-tunes","alter","tunes","utter","lanes",3,"","","lanes-utter",8,92,1,4,0], // allWords 11: alert|later|leans|learn|least|renal|slate|stale|steal|tales|tuner
+  ["alter-tunes","alter","tunes","utter","lanes",3,"","","lanes-utter",8,86,2,6,0], // allWords 11: alert|later|leans|learn|least|renal|slate|stale|steal|tales|tuner
   ["dowel-wagon","dowel","wagon","aglow","owned",3,"","","aglow-owned",11], // allWords 3: glade|lodge|waned
   ["bop-bus","bus","bop","pub","sob",3,"","","pub-sob",10,87,2,5,0], // allWords 1: sub
   ["back-suit","back","suit","bait","suck",2,"","","bait-suck",1,92,1,4,0], // allWords 7: acts|buck|cask|cast|cats|cuts|sack
@@ -1700,7 +1691,7 @@ const puzzleRows = [
   ["coin-thin","thin","coin","inch","into",3,"","","inch-into",18,87,2,5,0], // allWords 3: chin|hint|icon
   ["epic-song","epic","song","once","pigs",3,"","","once-pigs",10,92,1,4,0], // allWords 5: cone|cons|gone|pics|snog
   ["sleep-tally","sleep","tally","pleat","yells",5,"","","pleat-yells",32], // allWords 11: lapse|leaps|leapt|pales|pease|peels|petal|plate|pleas|spell|telly
-  ["bolt-seen","seen","bolt","been","slot",2,"","","cannot be reversed",8,92,1,4,0], // allWords 13: belt|blot|bone|eons|lens|lest|lets|lost|lots|nose|ones|tees|toes
+  ["bolt-seen","seen","bolt","been","slot",2,"","","cannot be reversed",8,87,2,5,0], // allWords 13: belt|blot|bone|eons|lens|lest|lets|lost|lots|nose|ones|tees|toes
   ["gag-pod","gag","pod","dog","gap",3,"","","dog-gap",9], // allWords 2: god|pad
   ["coal-rats","coal","rats","acts","oral",2,"","","acts-oral",6,87,2,5,0], // allWords 13: arts|casa|cast|cats|clot|cola|colt|cost|scot|soar|sort|star|tsar
   ["began-rotor","rotor","began","baton","roger",4,"","","baton-roger",16], // allWords 18: abort|anger|argon|barge|bento|bongo|goner|groan|orang|organ|rager|range|retro|robot|tabor|tenor|terra|toner
@@ -1733,7 +1724,7 @@ const puzzleRows = [
   ["noble-seals","noble","seals","alone","bless",3,"","","alone-bless",19,92,1,4,0], // allWords 9: easel|lanes|lasso|leans|lease|loans|lobes|sales|salon
   ["rib-tea","tea","rib","air","bet",3,"","","air-bet",10], // allWords 7: are|ate|bit|ear|eat|era|ria
   ["faint-joust","faint","joust","foist","jaunt",2,"","","foist-jaunt",3,92,1,4,0], // allWords 4: futon|joint|joist|junta
-  ["grog-wins","grog","wins","grow","sing",3,"","","grow-sing",23,92,1,4,0], // allWords 3: rows|sign|wing
+  ["grog-wins","grog","wins","grow","sing",3,"","","grow-sing",23,87,2,5,0], // allWords 3: rows|sign|wing
   ["envy-mean","mean","envy","even","many",3,"","","even-many",9,87,2,5,0], // allWords 3: amen|mane|name
   ["stale-swift","stale","swift","tiles","wafts",2,"","","tiles-wafts",7,92,1,4,0], // allWords 11: fates|feast|feats|islet|least|slate|steal|stilt|tales|tilts|wiles
   ["cogs-rude","rude","cogs","code","rugs",2,"","","code-rugs",1], // allWords 9: deco|docs|ergo|gore|ogre|redo|rode|rods|urge
@@ -1806,8 +1797,7 @@ const puzzleRows = [
   ["fed-lob","fed","lob","fob","led",1,"","","fob-led",0,86,2,6,0], // allWords 1: old
   ["hello-lives","hello","lives","olive","shell",2,"","","olive-shell",6,86,2,6,0], // allWords 10: elves|evils|heels|hells|hills|hives|hovel|lisle|shill|veils
   ["dolls-pearl","pearl","dolls","droll","pleas",3,"","","droll-pleas",12,92,1,4,0], // allWords 22: alder|dales|dares|deals|ladle|lapel|lapse|leads|leaps|loads|lords|paler|pales|parse|pears|polar|polls|reads|roads|spare|spear|spell
-  ["send-yaps","send","yaps","deny","saps",3,"","","deny-saps",23], // allWords 8: ends|ness|pads|pass|pays|sand|sans|sped
-  ["glade-spray","spray","glade","grape","sadly",3,"","","grape-sadly",12,92,1,4,0], // allWords 20: agape|algae|dales|deals|earls|glare|lager|large|laser|leads|pager|parse|pears|prays|raspy|reals|regal|spade|spare|spear
+  ["glade-spray","spray","glade","grape","sadly",3,"","","grape-sadly",12,87,2,5,0], // allWords 20: agape|algae|dales|deals|earls|glare|lager|large|laser|leads|pager|parse|pears|prays|raspy|reals|regal|spade|spare|spear
   ["cress-treat","treat","cress","react","rests",2,"","","react-rests",6,87,2,5,0], // allWords 15: acres|aster|cares|carte|cater|crate|crest|races|rates|scare|stare|tater|tears|tetra|trace
   ["fast-rows","fast","rows","soft","wars",3,"","","soft-wars",15,87,2,5,0], // allWords 8: arts|fats|rats|sort|star|tsar|waft|wart
   ["rate-slot","slot","rate","role","stat",3,"","","role-stat",9,92,1,4,0], // allWords 15: aero|east|eats|lest|lets|lore|lose|lost|lots|oats|seat|sole|tart|tear|teas
@@ -1971,7 +1961,7 @@ const puzzleRows = [
   ["medal-solar","solar","medal","realm","loads",5,"","","loads-realm",32], // allWords 15: armed|dales|dares|deals|dream|earls|laser|leads|madre|modal|molar|moral|reads|reals|roads
   ["nib-pod","nib","pod","bop","din",3,"","","bop-din",10], // allWords 4: bin|dip|don|nod
   ["blunt-tries","blunt","tries","burnt","tiles",2,"","","burnt-tiles",5,92,1,4,0], // allWords 17: biter|blues|brunt|brute|burns|islet|rebut|rites|runts|tiers|tires|title|tribe|trite|tuber|turns|utter
-  ["aids-lamp","lamp","aids","paid","slam",2,"","","paid-slam",7,86,2,6,0], // allWords 8: aims|lads|lids|limp|palm|said|slid|slim
+  ["aids-lamp","lamp","aids","paid","slam",2,"","","paid-slam",7,81,3,7,0], // allWords 8: aims|lads|lids|limp|palm|said|slid|slim
   ["actor-route","actor","route","acute","rotor",2,"","","acute-rotor",1,92,1,4,0], // allWords 6: cuter|otter|outer|tarot|tract|truce
   ["arson-three","arson","three","earns","other",3,"","","earns-other",22,92,1,4,0], // allWords 24: arose|erase|ester|ether|ethos|nears|north|rents|reset|retro|saree|sheet|snare|snort|sonar|steer|stern|store|terse|there|these|thorn|those|trees
   ["dawn-rise","dawn","rise","side","warn",3,"","","side-warn",8], // allWords 14: dies|ears|eras|sand|sera|sire|wade|wand|ware|wear|weir|wide|wind|wire
@@ -1980,19 +1970,18 @@ const puzzleRows = [
   ["many-open","many","open","amen","pony",3,"","","amen-pony",9], // allWords 5: anon|mane|mean|name|nope
   ["deaf-seat","deaf","seat","date","safe",2,"","","date-safe",6], // allWords 4: east|eats|fade|teas
   ["air-met","air","met","rim","tea",3,"","","rim-tea",9,86,2,6,0], // allWords 6: are|ate|ear|eat|era|ria
-  ["dense-pasta","dense","pasta","sedan","tapes",3,"","","sedan-tapes",19,87,2,5,0], // allWords 14: dates|deans|needs|panes|paste|seeds|seeps|septa|spate|stade|stead|steed|steep|tapas
+  ["dense-pasta","dense","pasta","sedan","tapes",3,"","","sedan-tapes",19,82,3,6,0], // allWords 14: dates|deans|needs|panes|paste|seeds|seeps|septa|spate|stade|stead|steed|steep|tapas
   ["main-rude","rude","main","made","ruin",2,"","","made-ruin",1], // allWords 11: amin|dame|damn|dare|darn|dear|mead|mina|rain|rand|read
   ["vent-wage","wage","vent","gave","newt",3,"","","gave-newt",8], // allWords 5: anew|even|wane|want|went
   ["ideas-liars","liars","ideas","alias","rides",2,"","","alias-rides",6], // allWords 12: aides|aisle|aside|dales|deals|dries|leads|raids|rails|riles|salad|sired
   ["pool-true","true","pool","pure","tool",2,"","","pure-tool",8,87,2,5,0], // allWords 8: loop|loot|lout|polo|pore|repo|rope|tore
-  ["surf-yaps","surf","yaps","fury","saps",3,"","","fury-saps",23], // allWords 4: fray|pass|pays|rays
   ["ashes-spoke","ashes","spoke","poses","shake",3,"","","poses-shake",10], // allWords 7: heaps|pesos|phase|pokes|posse|shape|sheep
   ["boom-pelt","boom","pelt","blot","poem",3,"","","blot-poem",9], // allWords 5: belt|bolt|boot|plot|poet
   ["nap-old","old","nap","and","lop",2,"","","and-lop",7], // allWords 1: pan
   ["gives-paper","paper","gives","pages","viper",4,"","","pages-viper",14], // allWords 7: giver|grape|grave|gripe|pager|piper|pipes
   ["kink-trap","kink","trap","knit","park",4,"","","cannot be reversed",23,92,1,4,0], // allWords 6: kart|part|pink|pint|pita|tarp
   ["filed-setup","filed","setup","fluid","steep",2,"","","fluid-steep",5], // allWords 18: diets|duels|duets|edits|field|peels|piles|plies|pulse|sited|sleep|slide|spiel|spite|steed|stipe|tides|upset
-  ["obese-stump","obese","stump","buses","tempo",3,"","","buses-tempo",11], // allWords 9: bumps|meets|pesto|pests|poets|spout|steps|teems|temps
+  ["obese-stump","obese","stump","buses","tempo",3,"","","buses-tempo",11], // allWords 10: bumps|meets|mutes|pesto|pests|poets|spout|steps|teems|temps
   ["mess-tank","mess","tank","mask","tens",2,"","","mask-tens",3], // allWords 8: ants|mans|mass|nest|nets|sent|sets|task
   ["loss-pile","loss","pile","lips","sole",3,"","","lips-sole",8], // allWords 8: isle|lies|lose|pies|pole|pose|slip|slop
   ["slang-tutor","slang","tutor","gloat","runts",5,"","","gloat-runts",32], // allWords 9: gaunt|goals|gusto|snarl|solar|stung|tours|trout|turns
@@ -2012,7 +2001,7 @@ const puzzleRows = [
   ["deal-over","deal","over","deer","oval",2,"","","deer-oval",1,92,1,4,0], // allWords 9: aero|dale|dare|dear|lead|love|read|reed|rove
   ["neat-sour","neat","sour","earn","outs",2,"","","earn-outs",6], // allWords 17: ante|ears|east|eats|eras|near|oats|ours|ruse|seat|sera|soar|sure|teas|tune|unto|user
   ["paste-style","style","paste","petty","seals",4,"","","petty-seals",24,92,1,4,0], // allWords 15: asset|lapse|leaps|pales|pelts|pleas|sales|seats|septa|slept|spate|spelt|tapes|tests|yeast
-  ["dibs-dude","dude","dibs","bide","duds",3,"","","cannot be reversed",8,86,2,6,0], // allWords 3: bids|buds|died
+  ["dibs-dude","dude","dibs","bide","duds",3,"","","cannot be reversed",8,81,3,7,0], // allWords 3: bids|buds|died
   ["foot-pigs","foot","pigs","oops","gift",4,"","","gift-oops",12], // allWords 1: figs
   ["tired-whale","tired","whale","tidal","where",3,"","","tidal-where",8], // allWords 10: death|ether|hated|lathe|there|three|tried|weird|wider|wired
   ["nifty-rider","nifty","rider","dirty","finer",4,"","","dirty-finer",11], // allWords 4: diner|drier|fiery|infer
@@ -2115,7 +2104,7 @@ const puzzleRows = [
   ["baby-nope","baby","nope","babe","pony",3,"","","cannot be reversed",8,82,3,6,0], // allWords 5: bane|bean|bone|bony|open
   ["rotor-timed","timed","rotor","motor","tired",4,"","","cannot be reversed",12,92,1,4,0], // allWords 12: ditto|merit|metro|mired|mitre|otter|remit|retro|timer|tried|trier|trite
   ["fold-pelt","fold","pelt","fled","plot",2,"","","fled-plot",6,92,1,4,0], // allWords 4: felt|left|loft|plod
-  ["shots-tenor","tenor","shots","rents","shoot",4,"","","rents-shoot",25], // allWords 23: horns|horst|hosts|nests|north|noses|notes|onset|ortho|otter|senor|seton|short|snore|stent|stern|stone|store|tents|thorn|toner|tones|totes
+  ["shots-tenor","tenor","shots","rents","shoot",4,"","","rents-shoot",25], // allWords 24: horns|horst|hosts|nests|north|noses|notes|onset|ortho|otter|senor|seton|shorn|short|snore|stent|stern|stone|store|tents|thorn|toner|tones|totes
   ["ass-pug","ass","pug","sag","ups",2,"","","sag-ups",7,87,2,5,0], // allWords 1: gas
   ["hags-pill","hags","pill","hall","pigs",2,"","","hall-pigs",1,92,1,4,0], // allWords 11: alps|gaps|gasp|hill|laps|lash|lips|pals|sigh|slap|slip
   ["grown-heals","grown","heals","leash","wrong",2,"","","leash-wrong",19,86,2,6,0], // allWords 11: angel|angle|gales|glean|grows|hales|holes|howes|shale|wages|whose
@@ -2128,7 +2117,7 @@ const puzzleRows = [
   ["blobs-write","blobs","write","blows","tribe",3,"","","blows-tribe",22,92,1,4,0], // allWords 16: below|bible|biter|bolts|bowel|bower|bowls|bribe|brits|brows|elbow|towel|tower|worst|wrist|wrote
   ["pan-rue","pan","rue","ape","urn",2,"","","ape-urn",7], // allWords 8: are|ear|era|nap|pea|pun|ran|run
   ["front-prize","front","prize","froze","print",2,"","","froze-print",1,92,1,4,0], // allWords 5: finer|fritz|infer|prone|ripen
-  ["fact-newt","fact","newt","cent","waft",3,"","","cent-waft",9,87,2,5,0], // allWords 2: want|went
+  ["fact-newt","fact","newt","cent","waft",3,"","","cent-waft",9,86,2,6,0], // allWords 2: want|went
   ["earth-weeds","earth","weeds","heard","sweet",2,"","","heard-sweet",7,87,2,5,0], // allWords 32: aster|dares|draws|eased|ester|ether|hater|heart|rates|reads|reeds|reset|sawed|sewed|stare|steer|straw|sweat|swede|tears|tease|terse|there|three|threw|trees|wards|warts|waste|wheat|wrath|wrest
   ["acid-dash","acid","dash","chai","adds",3,"","","adds-chai",16], // allWords 2: cash|dads
   ["ships-skate","ships","skate","shape","skits",2,"","","shape-skits",3], // allWords 17: haste|hates|heaps|heats|heist|kites|peaks|phase|pikes|skips|speak|spike|stake|stash|steak|takes|tasks
@@ -2223,7 +2212,7 @@ const puzzleRows = [
   ["raids-scope","raids","scope","aside","crops",3,"","","aside-crops",11], // allWords 24: adore|aides|aired|cider|coder|codes|cords|corps|credo|cried|crisp|decor|discs|epics|ideas|opera|pairs|price|roads|scrip|sepia|soaps|sodas|spice
   ["drew-tear","tear","drew","reed","wart",5,"","","reed-wart",26,92,1,4,0], // allWords 10: dare|dear|deer|draw|rate|read|tree|wade|ward|weed
   ["farm-fool","fool","farm","foal","from",2,"","","foal-from",6,86,2,6,0], // allWords 4: foam|form|loaf|rolf
-  ["moss-nose","moss","nose","some","sons",3,"","","cannot be reversed",8,81,3,7,0], // allWords 2: eons|ones
+  ["moss-nose","moss","nose","some","sons",3,"","","cannot be reversed",8,76,4,8,0], // allWords 2: eons|ones
   ["bob-tar","bob","tar","bat","rob",3,"","","cannot be reversed",10,81,3,7,0], // allWords 9: art|bar|bot|bra|bro|orb|rat|rot|tab
   ["glove-probe","glove","probe","globe","prove",1,"","","globe-prove",1], // allWords 1: grove
   ["rogue-spent","spent","rogue","purge","onset",3,"","","onset-purge",17], // allWords 18: erupt|goner|grout|gusto|notes|outer|puree|rouge|route|rupee|seton|setup|stone|tenor|toner|tones|tongs|upset
@@ -2289,16 +2278,16 @@ const puzzleRows = [
   ["isles-thank","isles","thank","hates","slink",3,"","","hates-slink",10], // allWords 13: asset|haste|heats|kilns|likes|links|seats|skate|stake|stank|steak|takes|tanks
   ["glen-stir","glen","stir","girl","sent",3,"","","girl-sent",9], // allWords 10: gent|grit|lens|ling|nest|nets|rest|tens|ting|tins
   ["score-stand","score","stand","cards","tones",3,"","","cards-tones",10], // allWords 19: acres|aster|canes|cares|cones|cords|cores|darts|notes|onset|races|rates|scare|scone|seton|stare|stone|store|tears
-  ["horns-wires","horns","wires","shire","sworn",2,"","","shire-sworn",5], // allWords 9: heirs|heros|hires|horse|shore|swore|weirs|wiser|worse
+  ["horns-wires","horns","wires","shire","sworn",2,"","","shire-sworn",5], // allWords 10: heirs|heros|hires|horse|shore|shorn|swore|weirs|wiser|worse
   ["glib-pins","glib","pins","blip","sing",3,"","","blip-sing",23], // allWords 5: lips|sign|slip|snip|spin
   ["doom-lets","doom","lets","demo","lost",2,"","","demo-lost",8], // allWords 15: does|dome|dose|dots|lest|loom|lose|lots|melt|mode|mole|mood|slot|sole|solo
   ["cave-mice","mice","cave","came","vice",3,"","","came-vice",13], // allWords 1: mace
   ["nun-top","top","nun","not","pun",3,"","","cannot be reversed",10,86,2,6,0], // allWords 5: nut|opt|pot|put|ton
-  ["back-fare","back","fare","bark","face",1,"","","bark-face",1,87,2,5,0], // allWords 4: bare|bear|cafe|fear
+  ["back-fare","back","fare","bark","face",1,"","","bark-face",1,92,1,4,0], // allWords 4: bare|bear|cafe|fear
   ["lone-raid","raid","lone","idol","near",4,"","","idol-near",21], // allWords 10: arid|darn|dial|earn|laid|land|lane|lean|noel|rand
   ["aptly-peach","peach","aptly","apply","teach",4,"","","apply-teach",12], // allWords 6: alpha|cheap|cheat|lathe|patch|playa
   ["leads-slain","slain","leads","laden","sails",2,"","","laden-sails",6], // allWords 10: aisle|alien|anise|dales|deals|deans|lands|nails|sedan|snail
-  ["dose-sigh","sigh","dose","gosh","side",3,"","","gosh-side",15,71,5,9,0], // allWords 6: dies|dish|does|egos|goes|hogs
+  ["dose-sigh","sigh","dose","gosh","side",3,"","","gosh-side",15,66,6,10,0], // allWords 6: dies|dish|does|egos|goes|hogs
   ["looks-packs","packs","looks","slack","spook",2,"","","slack-spook",5], // allWords 2: lacks|locks
   ["badge-diner","badge","diner","begin","dread",4,"","","begin-dread",20,92,1,4,0], // allWords 14: adder|bared|beard|began|being|binge|bread|bride|brine|bring|dared|dried|grand|grind
   ["pelt-take","pelt","take","kept","late",3,"kate","lept","kept-late",9,87,2,5,0], // allWords 11: keep|leap|pale|peak|peek|peel|plat|plea|tale|teal|tele
@@ -2350,7 +2339,7 @@ const puzzleRows = [
   ["leave-rites","leave","rites","alive","trees",2,"","","alive-trees",7,87,2,5,0], // allWords 26: aisle|arise|easel|elite|erase|ester|islet|lease|raise|raves|reset|rivet|salve|saree|saver|silva|slave|sleet|steel|steer|terse|tiers|tiles|tires|tries|vials
   ["slosh-usher","slosh","usher","loser","shush",3,"","","loser-shush",10], // allWords 9: euros|holes|hoses|house|roles|roses|rouse|shoes|sores
   ["boa-rim","boa","rim","air","mob",3,"","","air-mob",10], // allWords 2: oar|ria
-  ["coin-game","coin","game","come","gain",2,"","","come-gain",1,92,1,4,0], // allWords 4: cain|came|icon|mace
+  ["coin-game","coin","game","come","gain",2,"","","come-gain",1,87,2,5,0], // allWords 4: cain|came|icon|mace
   ["kill-life","life","kill","fill","like",3,"","","cannot be reversed",8,81,3,7,0], // allWords 1: file
   ["stall-worse","worse","stall","allow","rests",5,"","","allow-rests",29], // allWords 21: asset|lasso|lasts|least|loser|lower|roles|rolls|roses|salts|seats|slate|slats|sores|stale|steal|sweat|swore|tales|waste|wrest
   ["hedge-intro","hedge","intro","dingo","there",3,"","","dingo-there",12,92,1,4,0], // allWords 14: diner|doing|ether|horde|inert|ingot|inter|nitro|north|other|thong|thorn|three|tinge
@@ -2361,7 +2350,7 @@ const puzzleRows = [
   ["queer-warty","warty","queer","query","water",3,"","","query-water",9,92,1,4,0], // allWords 1: weary
   ["ilk-sad","sad","ilk","ask","lid",2,"","","ask-lid",7], // allWords 2: ads|aid
   ["relay-table","relay","table","bleat","layer",2,"","","bleat-layer",14], // allWords 8: abate|beryl|early|leary|rally|rebel|tally|telly
-  ["iron-test","test","iron","nets","trio",3,"","","nets-trio",22,87,2,5,0], // allWords 18: nest|noir|nori|note|riot|roti|sent|sine|site|stir|tens|ties|tone|tori|torn|tort|tote|trot
+  ["iron-test","test","iron","nets","trio",3,"","","nets-trio",22,82,3,6,0], // allWords 18: nest|noir|nori|note|riot|roti|sent|sine|site|stir|tens|ties|tone|tori|torn|tort|tote|trot
   ["bogus-raise","bogus","raise","basis","rouge",3,"","","basis-rouge",12], // allWords 12: argue|argus|arise|auger|gears|goers|grass|gross|ogres|rages|rogue|sugar
   ["cafe-talk","cafe","talk","fate","lack",3,"","","fate-lack",8], // allWords 7: face|feat|feta|lace|late|tale|teal
   ["ends-want","want","ends","swan","tend",2,"","","swan-tend",7,66,6,10,0], // allWords 6: ante|date|dent|neat|sane|send
@@ -2396,7 +2385,7 @@ const puzzleRows = [
   ["arms-wine","wine","arms","earn","swim",3,"","","earn-swim",9], // allWords 6: aims|mare|mars|near|rams|wins
   ["drive-slain","slain","drive","lived","rains",2,"","","lived-rains",7,87,2,5,0], // allWords 19: aired|aisle|arise|devil|diver|drain|evils|ideal|lives|nadir|nails|raise|raves|salve|sarin|saver|slave|snail|veils
   ["cyan-keel","cyan","keel","clay","knee",3,"","","clay-knee",9,92,1,4,0], // allWords 10: acne|cane|kale|keen|lace|lacy|lake|leak|leek|yank
-  ["foot-song","foot","song","goof","tons",3,"","","cannot be reversed",23,86,2,6,0], // allWords 2: font|snog
+  ["foot-song","foot","song","goof","tons",3,"","","cannot be reversed",23,81,3,7,0], // allWords 2: font|snog
   ["gem-pig","gem","pig","imp","egg",2,"","","egg-imp",7], // allWords 2: gig|peg
   ["fire-push","fire","push","fish","pure",2,"","","fish-pure",1,92,1,4,0], // allWords 7: fuse|hips|pier|pies|rife|ripe|ship
   ["acres-swath","acres","swath","cases","wrath",3,"","","cases-wrath",9], // allWords 19: aches|cares|carts|casts|chart|chase|chats|cress|races|reach|scare|shrew|straw|swats|swear|wares|warts|wears|whats
@@ -2458,7 +2447,7 @@ const puzzleRows = [
   ["theme-wears","theme","wears","teams","where",2,"","","teams-where",3], // allWords 28: aster|earth|eater|ester|ether|hater|heart|mates|maths|meats|meets|rates|reset|sewer|shrew|stare|steam|steer|swear|tames|tears|teems|terse|there|three|trash|trees|wares
   ["antic-dealt","dealt","antic","clade","titan",4,"","","clade-titan",20,92,1,4,0], // allWords 10: actin|canal|cited|decal|delta|edict|laced|latte|natal|taint
   ["left-sons","sons","left","lens","soft",2,"","","lens-soft",1,92,1,4,0], // allWords 10: felt|lent|loft|ness|nest|nets|self|sent|tens|tons
-  ["nest-nick","nest","nick","cent","sink",3,"","","cent-sink",9,87,2,5,0], // allWords 6: neck|nets|sent|skin|tens|tins
+  ["nest-nick","nest","nick","cent","sink",3,"","","cent-sink",9,85,2,7,0], // allWords 6: neck|nets|sent|skin|tens|tins
   ["notch-ruled","notch","ruled","lurch","toned",4,"","","lurch-toned",11], // allWords 8: lunch|lured|noted|olden|older|other|torch|tuned
   ["lace-only","lace","only","clay","lone",2,"","","clay-lone",9,87,2,5,0], // allWords 5: ally|cone|lacy|noel|once
   ["limit-sands","limit","sands","midst","nails",4,"","","midst-nails",12], // allWords 9: amiss|lands|mails|saint|satin|slain|snail|stain|stand
@@ -2475,7 +2464,7 @@ const puzzleRows = [
   ["bibs-tire","bibs","tire","bite","ribs",3,"","","cannot be reversed",9,81,3,7,0], // allWords 5: bits|brie|rite|stir|tier
   ["goal-solo","solo","goal","also","logo",3,"","","also-logo",18], // allWords 0
   ["ewe-rod","ewe","rod","ore","wed",2,"","","cannot be reversed",7,86,2,6,0], // allWords 2: doe|wee
-  ["fast-monk","fast","monk","font","mask",2,"","","font-mask",2,87,2,5,0], // allWords 5: fats|mast|mats|most|soft
+  ["fast-monk","fast","monk","font","mask",2,"","","font-mask",2,92,1,4,0], // allWords 5: fats|mast|mats|most|soft
   ["spear-trawl","spear","trawl","alert","wraps",5,"","","alert-wraps",29,92,1,4,0], // allWords 23: altar|alter|apart|earls|lapse|laser|later|leaps|leapt|pales|paras|parse|pears|petal|plate|pleas|pleat|reals|rears|spare|taper|terra|twerp
   ["evil-used","used","evil","sued","veil",1,"","","sued-veil",3,81,3,7,0], // allWords 11: dies|dive|dues|eels|else|isle|lies|live|seed|side|vile
   ["meat-whip","meat","whip","math","wipe",2,"","","math-wipe",7], // allWords 12: emit|item|mate|meta|mite|tame|team|thaw|time|what|whit|with
@@ -2500,7 +2489,7 @@ const puzzleRows = [
   ["sulks-votes","sulks","votes","loves","tusks",3,"","","loves-tusks",8,81,3,7,0], // allWords 4: loses|soles|solve|stove
   ["earl-stat","earl","stat","arts","tale",3,"","","arts-tale",10,82,3,6,0], // allWords 14: alas|lars|last|late|lear|rate|rats|real|salt|star|tate|teal|tear|tsar
   ["adore-build","adore","build","aloud","bride",4,"","","aloud-bride",16,92,1,4,0], // allWords 3: aired|bored|ideal
-  ["none-pole","pole","none","lone","nope",3,"","","cannot be reversed",8,80,3,8,0], // allWords 3: neon|noel|open
+  ["none-pole","pole","none","lone","nope",3,"","","cannot be reversed",8,79,3,9,0], // allWords 3: neon|noel|open
   ["lamp-poor","poor","lamp","pool","ramp",4,"","","pool-ramp",23,87,2,5,0], // allWords 8: loop|opal|oral|palm|polo|poop|prom|romp
   ["beta-guru","guru","beta","ragu","tube",3,"","","cannot be reversed",17,77,4,7,0], // allWords 8: abet|bare|bear|beat|gate|gear|rage|urge
   ["ago-hex","hex","ago","axe","hog",2,"","","axe-hog",9,86,2,6,0], // allWords 0
@@ -2606,7 +2595,7 @@ const puzzleRows = [
   ["male-nick","nick","male","came","link",3,"","","came-link",9,81,3,7,0], // allWords 16: acne|cane|kiln|lame|lane|lean|lien|lime|line|mace|mack|meal|mice|mile|milk|nice
   ["looks-picks","looks","picks","slick","spook",2,"","","slick-spook",5], // allWords 3: kilos|licks|locks
   ["bulbs-slope","bulbs","slope","blobs","pulse",4,"","","blobs-pulse",22], // allWords 7: bells|blues|lobes|lopes|poles|soups|spell
-  ["duty-tips","tips","duty","puts","tidy",3,"","","puts-tidy",15,72,5,8,0], // allWords 7: dips|dust|pits|pity|spit|stud|tits
+  ["duty-tips","tips","duty","puts","tidy",3,"","","puts-tidy",15,67,6,9,0], // allWords 7: dips|dust|pits|pity|spit|stud|tits
   ["carry-meter","carry","meter","cater","merry",2,"","","cater-merry",1,92,1,4,0], // allWords 12: carer|carte|crate|emery|erect|marry|meaty|metre|racer|react|tamer|trace
   ["heard-rains","heard","rains","drain","shear",2,"sarah","diner","drain-shear",6], // allWords 26: diner|drier|earns|hairs|hares|hears|heirs|hired|hires|nadir|nears|radar|rears|reins|resin|rider|rinse|risen|riser|saran|sarin|share|shine|shire|siren|snare
   ["robot-using","using","robot","bogus","intro",4,"","","bogus-intro",22,92,1,4,0], // allWords 10: bouts|bunts|grins|groin|nitro|rings|riots|suing|trois|units
@@ -2719,7 +2708,7 @@ const puzzleRows = [
   ["basil-hexes","basil","hexes","bases","helix",4,"","","bases-helix",17,92,1,4,0], // allWords 10: ashes|bales|basis|hails|hales|heals|heels|leash|sable|shale
   ["ocean-stale","ocean","stale","cease","talon",3,"","","cease-talon",10], // allWords 16: atone|canes|canoe|clans|clone|laces|least|scale|slant|slate|sleet|steal|steel|tales|tease|tonal
   ["eye-wag","eye","wag","age","yew",2,"","","age-yew",8], // allWords 1: awe
-  ["corn-view","corn","view","crow","vein",2,"","","crow-vein",6,92,1,4,0], // allWords 6: cone|nice|once|oven|vine|wove
+  ["corn-view","corn","view","crow","vein",2,"","","crow-vein",6,87,2,5,0], // allWords 6: cone|nice|once|oven|vine|wove
   ["bond-sums","bond","sums","dumb","sons",4,"","","dumb-sons",23,87,2,5,0], // allWords 8: bums|buns|dons|mobs|mods|moss|nods|suns
   ["chord-thick","chord","thick","chock","third",2,"","","chock-third",1], // allWords 2: chick|ditch
   ["lips-sell","sell","lips","less","pill",3,"","","cannot be reversed",8,87,2,5,0], // allWords 1: slip
@@ -2779,7 +2768,7 @@ const puzzleRows = [
   ["horse-ideas","horse","ideas","aides","shore",1,"","","aides-shore",3], // allWords 18: aired|aside|dries|hades|heads|heard|herds|heros|hoses|raids|rides|shade|shard|sheds|shoes|shred|sides|sired
   ["purse-salty","salty","purse","lapse","rusty",4,"","","lapse-rusty",15], // allWords 40: aptly|artsy|aster|erupt|leaps|leapt|least|lusty|pales|palsy|parse|party|pears|petal|plate|plays|pleas|pleat|prays|pulse|raspy|rates|sales|seals|sears|slate|spare|spear|spray|stale|stare|steal|stray|super|syrup|tales|taper|tears|trays|users
   ["tune-twin","twin","tune","unit","went",3,"","","unit-went",11], // allWords 1: newt
-  ["left-vibe","left","vibe","five","belt",3,"","","belt-five",9,92,1,4,0], // allWords 8: bile|feel|felt|file|flee|flit|life|lift
+  ["left-vibe","left","vibe","five","belt",3,"","","belt-five",9,87,2,5,0], // allWords 8: bile|feel|felt|file|flee|flit|life|lift
   ["basis-vowel","basis","vowel","below","visas",3,"","","below-visas",19,92,1,4,0], // allWords 17: bales|bases|basil|boils|bowel|elbow|lobes|loves|sable|salve|saves|silva|slave|solve|vases|vials|waves
   ["crane-ropes","crane","ropes","prone","acres",3,"","","acres-prone",12,85,2,7,0], // allWords 18: arose|arson|canoe|cares|creep|crepe|ocean|ponce|pores|poser|prose|races|rance|rears|scare|scope|sonar|spore
   ["grow-loud","grow","loud","wool","drug",4,"","","drug-wool",26], // allWords 3: good|lord|ludo
@@ -2797,7 +2786,7 @@ const puzzleRows = [
   ["fret-teen","fret","teen","feet","tern",2,"","","feet-tern",6,87,2,5,0], // allWords 3: fern|fete|rent
   ["nags-sums","nags","sums","guns","mass",3,"","","guns-mass",13], // allWords 6: gnus|mans|sang|snag|snug|sung
   ["files-sixth","files","sixth","filth","sixes",2,"","","filth-sixes",1,92,1,4,0], // allWords 7: fixes|flies|flits|isles|lifts|lists|slits
-  ["shown-skate","skate","shown","heats","knows",3,"","","heats-knows",22], // allWords 17: askew|ethos|haste|hates|howes|knots|shawn|stake|stank|steak|stoke|swank|takes|tanks|those|wakes|whose
+  ["shown-skate","skate","shown","heats","knows",3,"","","heats-knows",22], // allWords 16: askew|ethos|haste|hates|howes|knots|stake|stank|steak|stoke|swank|takes|tanks|those|wakes|whose
   ["cone-trio","trio","cone","onto","rice",3,"","","onto-rice",9,82,3,6,0], // allWords 14: coir|corn|note|once|rent|riot|rite|roti|tern|tier|tire|tone|tori|torn
   ["cork-site","cork","site","rose","tick",4,"","","rose-tick",12], // allWords 13: cite|core|kits|kris|rice|rise|risk|rock|sire|skit|sore|ties|toes
   ["daisy-flare","daisy","flare","diary","false",2,"","","diary-false",5,92,1,4,0], // allWords 20: aides|aired|alder|aside|dairy|dales|deals|fairy|feral|files|fleas|flier|flies|ideas|leads|leafs|rifle|riled|sadly|slide
@@ -2844,7 +2833,7 @@ const puzzleRows = [
   ["elk-rig","elk","rig","irk","leg",2,"","","irk-leg",7,81,3,7,0], // allWords 1: gel
   ["dusty-tacos","dusty","tacos","study","coats",2,"","","coats-study",14], // allWords 8: ascot|coast|ducts|scout|sodas|stats|studs|tasty
   ["like-scan","scan","like","lace","skin",3,"","","lace-skin",9], // allWords 8: aces|cans|case|clan|kiln|link|nail|sink
-  ["brute-smash","brute","smash","sears","thumb",5,"","","sears-thumb",25,92,1,4,0], // allWords 27: aster|beams|bears|brash|brush|hurst|hurts|masse|mates|maths|meats|muses|rates|rebut|saber|sabre|seams|shams|shrub|stare|steam|tames|teams|tears|trash|tuber|users
+  ["brute-smash","brute","smash","sears","thumb",5,"","","sears-thumb",25,92,1,4,0], // allWords 28: aster|beams|bears|brash|brush|hurst|hurts|masse|mates|maths|meats|muses|mutes|rates|rebut|saber|sabre|seams|shams|shrub|stare|steam|tames|teams|tears|trash|tuber|users
   ["canal-tasks","canal","tasks","sacks","natal",3,"","","natal-sacks",7], // allWords 11: atlas|casas|casks|clank|lacks|slack|snack|stalk|stank|talks|tanks
   ["doll-head","doll","head","deal","hold",2,"","","deal-hold",2], // allWords 9: dale|dead|hale|halo|heal|held|hell|lead|load
   ["small-swift","small","swift","mills","wafts",2,"","","mills-wafts",7], // allWords 6: films|flaws|malls|swill|walls|wills
@@ -2942,7 +2931,7 @@ const puzzleRows = [
   ["army-ends","army","ends","deny","mars",2,"mary","dens","deny-mars",9,82,3,6,0], // allWords 9: arms|dyer|mans|many|rams|reds|sand|send|yard
   ["excel-press","excel","press","cress","expel",4,"","","cress-expel",12], // allWords 10: ceres|execs|leers|leper|peers|reels|repel|sexes|speer|spree
   ["meat-tarp","meat","tarp","part","team",2,"","","part-team",19,76,4,8,0], // allWords 13: mart|mate|meta|peat|perm|ramp|tame|tape|tart|tate|term|tram|trap
-  ["horns-wafts","horns","wafts","shaft","sworn",2,"","","shaft-sworn",5], // allWords 7: horst|short|straw|trash|warns|warts|worst
+  ["horns-wafts","horns","wafts","shaft","sworn",2,"","","shaft-sworn",5], // allWords 8: horst|shorn|short|straw|trash|warns|warts|worst
   ["rich-sung","rich","sung","ring","such",2,"","","ring-such",1,92,1,4,0], // allWords 9: gnus|grin|guns|rung|shin|shun|sign|sing|snug
   ["chug-skit","chug","skit","gush","tick",3,"","","gush-tick",18], // allWords 11: hits|hugs|huts|itch|kits|shut|sigh|this|thus|tuck|tusk
   ["bibs-save","bibs","save","bass","vibe",4,"","","cannot be reversed",13,87,2,5,0], // allWords 3: babe|base|vase
@@ -2992,7 +2981,7 @@ const puzzleRows = [
   ["nuts-tidy","tidy","nuts","duty","tins",3,"","","duty-tins",15], // allWords 5: dust|stud|stun|tiny|tits
   ["canon-holds","canon","holds","colon","hands",2,"","","colon-hands",2,92,1,4,0], // allWords 7: clods|coals|colds|cools|halos|scold|shoal
   ["scent-stage","scent","stage","tents","cages",2,"","","cages-tents",7,82,3,6,0], // allWords 8: canes|cents|gates|scant|scene|stent|teens|tense
-  ["nest-wing","nest","wing","newt","sing",4,"","","newt-sing",13,87,2,5,0], // allWords 12: nets|sent|sign|stew|swig|tens|tins|twin|went|west|wigs|wits
+  ["nest-wing","nest","wing","newt","sing",4,"","","newt-sing",13,82,3,6,0], // allWords 12: nets|sent|sign|stew|swig|tens|tins|twin|went|west|wigs|wits
   ["cogs-side","side","cogs","disc","goes",4,"","","disc-goes",13], // allWords 10: code|deco|dice|dies|diss|docs|does|dose|egos|iced
   ["badge-loses","loses","badge","bases","lodge",2,"","","bases-lodge",1,92,1,4,0], // allWords 16: based|beads|dales|deals|easel|gales|glade|glass|gloss|golds|leads|lease|obese|sales|seals|soles
   ["and-lob","and","lob","old","nab",2,"","","nab-old",7,80,3,8,0], // allWords 2: ban|boa
@@ -3008,7 +2997,7 @@ const puzzleRows = [
   ["dip-pop","dip","pop","pip","pod",3,"","","pip-pod",9,74,4,10,0], // allWords 0
   ["layer-media","layer","media","aimed","relay",2,"","","aimed-relay",14], // allWords 14: alder|armed|dream|early|edema|elder|emery|ideal|laird|leary|lidar|madre|mired|riled
   ["cart-room","cart","room","cram","root",2,"","","cram-root",6,87,2,5,0], // allWords 7: coat|coma|moor|mora|roam|taco|toro
-  ["lied-poem","lied","poem","dope","mile",3,"","","dope-mile",22,92,1,4,0], // allWords 5: deli|dole|idle|lime|mole
+  ["lied-poem","lied","poem","dope","mile",3,"","","dope-mile",22,87,2,5,0], // allWords 5: deli|dole|idle|lime|mole
   ["catch-focus","focus","catch","couch","facts",3,"","","couch-facts",12,92,1,4,0], // allWords 2: scout|touch
   ["list-play","play","list","ally","spit",2,"","","ally-spit",6], // allWords 7: pita|pits|plat|slit|tail|tall|tips
   ["fully-pairs","pairs","fully","fairy","pulls",2,"","","cannot be reversed",3,92,1,4,0], // allWords 5: fails|fairs|falls|lapis|slurp
@@ -3038,7 +3027,6 @@ const puzzleRows = [
   ["guy-web","guy","web","bug","yew",3,"","","bug-yew",10], // allWords 1: beg
   ["deity-skins","deity","skins","dinky","sites",3,"","","dinky-sites",9], // allWords 8: diets|edits|kinds|sinks|sited|skits|snide|tides
   ["atoms-state","atoms","state","moats","taste",2,"","","moats-taste",14,65,6,11,0], // allWords 11: masts|mates|meats|stats|steam|stoat|tames|teams|toast|tomes|totes
-  ["pain-they","pain","they","anti","hype",3,"","","anti-hype",17], // allWords 5: ante|hint|neat|then|thin
   ["coast-tears","tears","coast","cases","tarot",3,"","","cases-tarot",10], // allWords 28: acres|actor|ascot|asset|aster|cares|carte|caste|cater|coats|crate|orcas|races|rates|react|roast|scare|seats|stare|state|stoat|tacos|taste|tater|tetra|toast|trace|treat
   ["shaft-sweat","sweat","shaft","heats","wafts",2,"","","heats-wafts",7,76,4,8,0], // allWords 3: haste|hates|waste
   ["navy-rile","rile","navy","line","vary",3,"","","line-vary",8], // allWords 10: earl|lane|lean|lear|lien|rave|real|vein|vera|vine
@@ -3065,7 +3053,7 @@ const puzzleRows = [
   ["awake-setup","awake","setup","askew","taupe",3,"","","askew-taupe",22,92,1,4,0], // allWords 7: pause|peaks|skeet|speak|tweak|upset|wakes
   ["bully-hints","bully","hints","bunts","hilly",2,"billy","hunts","bunts-hilly",1,92,1,4,0], // allWords 7: bills|bulls|hills|hulls|hunts|shill|shunt
   ["dim-dud","dim","dud","did","mud",3,"","","cannot be reversed",10,69,5,11,0], // allWords 1: mid
-  ["horns-walls","walls","horns","shall","sworn",2,"","","shall-sworn",5], // allWords 3: halls|lawns|warns
+  ["horns-walls","walls","horns","shall","sworn",2,"","","shall-sworn",5], // allWords 4: halls|lawns|shorn|warns
   ["event-males","event","males","elves","meant",3,"","","cannot be reversed",11,92,1,4,0], // allWords 12: easel|eaten|evens|lanes|leans|lease|meals|means|mensa|metal|names|seven
   ["doom-fair","doom","fair","maid","roof",4,"dior","foam","cannot be reversed",23,87,2,5,0], // allWords 9: amid|arid|door|foam|modi|mood|odor|raid|road
   ["great-route","great","route","agree","trout",2,"","","agree-trout",8,76,4,8,0], // allWords 10: argue|auger|eager|grate|greet|otter|outer|terra|truer|tutor
@@ -3076,13 +3064,583 @@ const puzzleRows = [
   ["lint-wear","wear","lint","liar","went",2,"","","liar-went",1], // allWords 14: earl|lair|late|lear|lent|newt|rail|real|tail|tale|teal|twin|wait|ware
   ["dog-sag","dog","sag","gas","god",2,"","","gas-god",5,66,6,10,0], // allWords 0
   ["onto-ride","ride","onto","done","trio",3,"","","done-trio",9], // allWords 14: dire|nerd|node|note|rent|riot|rite|roti|tern|tier|tire|tone|tori|torn
-  ["fool-plot","fool","plot","foot","poll",2,"","","foot-poll",6,82,3,6,0], // allWords 4: loft|loop|polo|pool
+  ["fool-plot","fool","plot","foot","poll",2,"","","foot-poll",6,81,3,7,0], // allWords 4: loft|loop|polo|pool
   ["throw-yours","throw","yours","shout","worry",5,"","","shout-worry",33,92,1,4,0], // allWords 11: horst|hurst|hurts|roost|roots|short|sorry|south|torso|tours|worth
-  ["fluid-meats","fluid","meats","fails","muted",3,"","","fails-muted",11], // allWords 15: aimed|fated|fates|feast|feats|fetus|flats|mails|mated|mates|media|steam|tamed|tames|teams
+  ["fluid-meats","fluid","meats","fails","muted",3,"","","fails-muted",11], // allWords 16: aimed|fated|fates|feast|feats|fetus|flats|mails|mated|mates|media|mutes|steam|tamed|tames|teams
   ["demo-item","demo","item","emit","mode",2,"","","emit-mode",14,86,2,6,0], // allWords 5: deem|dome|dote|mite|time
   ["most-safe","most","safe","fast","some",3,"","","fast-some",8], // allWords 11: fame|fats|foes|mast|mats|mesa|same|seam|seas|soft|toss
   ["heart-rains","heart","rains","shear","train",2,"","","shear-train",6,76,4,8,0], // allWords 30: earns|earth|hairs|hares|hater|hears|heirs|hires|inert|inter|nears|neath|rears|reins|resin|rinse|risen|riser|saran|sarin|share|shine|shire|siren|snare|terra|thane|their|thine|trier
   ["ready-stand","ready","stand","dared","nasty",3,"","","dared-nasty",20,92,1,4,0], // allWords 6: adder|deans|dread|sedan|tardy|yearn
+  ["coat-wild","wild","coat","clod","wait",3,"","","clod-wait",9], // allWords 6: acid|clot|cold|colt|taco|wilt
+  ["lord-nope","lord","nope","pond","role",3,"","","pond-role",8,87,2,5,0], // allWords 4: lore|open|plod|pole
+  ["clone-grave","clone","grave","glove","crane",2,"","","crane-glove",2,92,1,4,0], // allWords 17: angel|anger|angle|carve|clean|clove|cover|crave|crone|gavel|glean|goner|grove|lance|rance|range|recon
+  ["bible-tones","bible","tones","bites","noble",4,"","","cannot be reversed",15,81,3,7,0], // allWords 10: blobs|bolts|bones|inlet|inset|notes|onset|seton|stein|stone
+  ["lie-tag","lie","tag","lag","tie",1,"","","lag-tie",0], // allWords 4: ate|eat|gal|tea
+  ["glad-idea","glad","idea","aged","dial",3,"","","aged-dial",21,87,2,5,0], // allWords 8: aide|deli|died|gala|gale|idle|laid|lied
+  ["slam-week","slam","week","seem","walk",3,"","","seem-walk",9], // allWords 8: elks|mesa|sake|same|seam|seek|wake|weak
+  ["shade-trace","shade","trace","heads","react",2,"","","heads-react",19], // allWords 19: aches|acres|cares|carte|cater|chase|cheat|crate|dares|death|hades|hated|races|rated|reads|scare|teach|trade|tread
+  ["free-tier","free","tier","fire","tree",2,"","","cannot be reversed",9,92,1,4,0], // allWords 4: reef|rife|rite|tire
+  ["cages-tasks","cages","tasks","gates","sacks",3,"","","gates-sacks",7], // allWords 5: asset|cases|casks|seats|stage
+  ["gunk-peel","gunk","peel","keep","lung",3,"","","keep-lung",23,87,2,5,0], // allWords 7: geek|glee|glen|glue|peek|puke|punk
+  ["enter-shuts","enter","shuts","tents","usher",3,"","","tents-usher",12,81,3,7,0], // allWords 21: ensue|ether|hurst|hurts|nests|nurse|rents|runes|runts|sheet|stent|stern|stuns|teens|tense|there|these|three|tuner|tunes|turns
+  ["buses-cabin","cabin","buses","basin","cubes",2,"","","basin-cubes",3], // allWords 7: babes|bases|basic|basis|beans|canes|cases
+  ["steps-stops","steps","stops","pests","posts",2,"","","pests-posts",14], // allWords 1: spots
+  ["old-orb","old","orb","lob","rod",2,"","","lob-rod",6], // allWords 2: bro|rob
+  ["opal-rest","opal","rest","lose","trap",4,"","","lose-trap",25,87,2,5,0], // allWords 16: atop|earl|lear|part|post|pots|rate|real|slop|sole|spot|stop|tarp|tear|toes|tops
+  ["crow-folk","crow","folk","cork","flow",2,"","","cork-flow",6], // allWords 6: cook|fork|lock|rock|wolf|woof
+  ["raise-suing","raise","suing","arise","using",1,"","","arise-using",3], // allWords 5: anise|gains|grain|issue|urine
+  ["lance-loyal","loyal","lance","clean","alloy",2,"","","alloy-clean",19,81,3,7,0], // allWords 4: allay|alone|clone|lacey
+  ["babe-hall","babe","hall","blab","heal",2,"","","blab-heal",7,87,2,5,0], // allWords 5: able|bale|ball|blah|hale
+  ["clans-siege","clans","siege","glass","niece",4,"","","glass-niece",26,92,1,4,0], // allWords 8: anise|clean|gales|lance|lanes|leans|seine|since
+  ["flint-salsa","flint","salsa","falls","stain",3,"","","falls-stain",9], // allWords 19: fails|faint|final|flats|flits|lasts|lifts|lists|nails|nasal|sails|saint|salts|satin|slain|slant|slats|slits|snail
+  ["bibs-dive","dive","bibs","bids","vibe",3,"","","cannot be reversed",8,86,2,6,0], // allWords 2: bide|dibs
+  ["guru-lady","lady","guru","duly","ragu",3,"","","duly-ragu",15], // allWords 1: dual
+  ["not-pie","not","pie","eon","tip",3,"","","eon-tip",10], // allWords 8: nit|one|opt|pit|pot|tin|ton|top
+  ["bill-page","bill","page","glib","leap",3,"","","glib-leap",20,92,1,4,0], // allWords 8: able|bale|ball|bile|pale|pile|pill|plea
+  ["layer-minor","minor","layer","liner","mayor",2,"","","liner-mayor",2,92,1,4,0], // allWords 11: early|learn|leary|manor|miner|moray|ramen|relay|renal|roman|royal
+  ["shift-slide","slide","shift","hides","lifts",2,"","","hides-lifts",7,76,4,8,0], // allWords 3: files|flies|flits
+  ["cape-kick","cape","kick","cake","pick",4,"","","cake-pick",13], // allWords 5: epic|pace|pack|peak|pike
+  ["cute-tiny","cute","tiny","city","tune",2,"","","city-tune",3], // allWords 3: cite|nice|tine
+  ["north-sails","sails","north","lions","trash",5,"","","lions-trash",26,92,1,4,0], // allWords 21: hails|hoist|horst|loins|nails|rants|saint|saith|satin|short|silos|slain|snail|snarl|snort|soils|sorts|stain|stars|thorn|trans
+  ["evil-maid","evil","maid","veil","amid",1,"","","amid-veil",3], // allWords 7: aide|dive|idea|lima|live|mail|vile
+  ["knees-thief","knees","thief","knife","these",3,"","","knife-these",7], // allWords 8: heist|hikes|inset|sheet|sheik|stein|teens|tense
+  ["apple-marks","apple","marks","parks","ample",3,"","","ample-parks",8], // allWords 9: lamps|maker|maple|paler|palms|pearl|psalm|realm|spark
+  ["ear-pun","ear","pun","rue","nap",3,"","","nap-rue",14,77,4,7,0], // allWords 4: are|era|pan|rap
+  ["deer-sofa","deer","sofa","deaf","sore",3,"","","deaf-sore",9], // allWords 10: ease|fade|ford|redo|reed|rees|refs|rode|rose|safe
+  ["agile-pairs","agile","pairs","alias","gripe",4,"","","alias-gripe",14], // allWords 3: arias|grips|lapis
+  ["tacos-tales","tacos","tales","coast","least",2,"","","coast-least",19,87,2,5,0], // allWords 6: ascot|caste|coats|slate|stale|steal
+  ["pilot-tears","pilot","tears","trait","poles",4,"","","poles-trait",11], // allWords 21: aster|lopes|lotte|pairs|parse|patio|pears|polis|rates|slope|spare|spear|spoil|stair|stare|stole|taper|tater|tetra|toils|treat
+  ["nope-sour","nope","sour","open","ours",1,"","","open-ours",3,65,6,11,0], // allWords 3: porn|pose|pros
+  ["rated-views","rated","views","evade","wrist",4,"","","evade-wrist",25,92,1,4,0], // allWords 33: aster|dewar|eared|eaves|erase|rates|rites|saree|sieve|stare|stave|straw|swear|tears|tiers|tired|tires|trade|tread|tried|tries|wares|warts|waved|waves|wears|weird|weirs|wider|wired|wires|wiser|wives
+  ["bold-hire","bold","hire","bird","hole",2,"","","bird-hole",2], // allWords 8: bile|bore|brie|heir|hero|hold|lobe|robe
+  ["downs-spree","spree","downs","owned","press",2,"","","owned-press",5], // allWords 13: doers|doser|drone|erode|peers|roses|senor|snore|snows|sores|speer|sweep|weeps
+  ["pay-peg","pay","peg","gap","yep",3,"","","gap-yep",10], // allWords 1: yap
+  ["style-super","super","style","steep","surly",4,"","","steep-surly",12], // allWords 8: pelts|pulse|purse|slept|slurp|spelt|strep|tyres
+  ["even-lets","even","lets","else","vent",3,"","","cannot be reversed",20,87,2,5,0], // allWords 7: eels|lent|lest|teen|tees|vest|vets
+  ["ages-sung","ages","sung","uses","gang",3,"","","gang-uses",9,87,2,5,0], // allWords 11: anus|eggs|gage|gnus|guns|nags|sage|sang|snag|snug|suns
+  ["clade-stray","stray","clade","crate","sadly",3,"","","crate-sadly",12,92,1,4,0], // allWords 26: acted|artsy|aster|cadet|carte|cater|clary|clear|dales|dates|deals|decal|earls|laced|laser|leads|rates|react|reals|satay|stade|stare|stead|tears|trace|trays
+  ["ozone-sling","ozone","sling","lingo","zones",2,"","","lingo-zones",6], // allWords 5: gonzo|liens|lines|longs|zings
+  ["rind-sale","rind","sale","sand","rile",2,"","","rile-sand",1], // allWords 16: darn|earl|earn|isle|lads|lear|lids|lies|near|rand|real|rein|sane|seal|sine|slid
+  ["basic-veers","basic","veers","crabs","sieve",4,"","","crabs-sieve",29,92,1,4,0], // allWords 18: basis|bears|beers|brace|brass|brees|carbs|carve|crave|raves|saber|sabre|saver|serve|sever|verse|vices|visas
+  ["mild-race","mild","race","card","lime",3,"","","card-lime",8], // allWords 14: acre|came|care|earl|lame|lear|mace|male|meal|mice|mile|real|rice|rile
+  ["chin-item","chin","item","emit","inch",2,"","","emit-inch",14,76,4,8,0], // allWords 4: cent|mite|time|tine
+  ["elk-rid","elk","rid","irk","led",2,"","","irk-led",7,80,3,8,0], // allWords 1: die
+  ["badge-panel","badge","panel","plead","began",3,"","","began-plead",19,92,1,4,0], // allWords 4: blade|pedal|penal|plane
+  ["props-sauce","props","sauce","crops","pause",3,"","","cannot be reversed",22,92,1,4,0], // allWords 17: cause|cores|corps|cross|cures|curse|pores|poser|prose|purse|ropes|score|soaps|spore|spurs|super|upper
+  ["able-sits","able","sits","isle","bats",3,"","","bats-isle",9,77,4,7,0], // allWords 14: abet|bale|beat|best|beta|bets|labs|lies|sail|site|slab|stab|tabs|ties
+  ["flit-gear","flit","gear","girl","fate",3,"","","fate-girl",12,87,2,5,0], // allWords 10: fare|fear|feat|feta|fire|flat|gate|lift|rage|rife
+  ["shake-sweat","shake","sweat","heats","wakes",2,"","","heats-wakes",7,77,4,7,0], // allWords 5: askew|haste|hates|waste|weeks
+  ["ogre-slog","ogre","slog","grog","lose",2,"","","grog-lose",7], // allWords 9: egos|ergo|goes|gore|logo|logs|lore|role|sole
+  ["beard-fault","beard","fault","bleat","fraud",3,"","","bleat-fraud",12,92,1,4,0], // allWords 13: after|bared|blade|bread|brute|fared|fatal|fetal|flute|rabat|rebut|table|tuber
+  ["ape-row","ape","row","ore","paw",2,"","","ore-paw",7,81,3,7,0], // allWords 2: pea|per
+  ["done-seen","done","seen","eons","need",3,"","","eons-need",18], // allWords 3: node|nose|ones
+  ["maple-terms","maple","terms","lamps","metre",3,"","","lamps-metre",23,92,1,4,0], // allWords 22: alert|alter|ample|later|leapt|merle|meter|palms|pelts|petal|plate|pleat|psalm|realm|slept|smart|spelt|splat|stamp|tamer|temps|trams
+  ["fixed-heels","fixed","heels","field","hexes",2,"","","field-hexes",2], // allWords 6: feels|filed|files|fixes|flees|flies
+  ["nude-pack","nude","pack","cape","dunk",3,"","","cape-dunk",8], // allWords 8: acne|cane|dank|dean|dune|dupe|pace|puck
+  ["flame-parts","flame","parts","farms","plate",2,"","","farms-plate",3], // allWords 21: after|ample|farts|fetal|flats|frame|lamps|leapt|maple|palms|pasta|petal|pleat|psalm|rafts|ramps|splat|strap|tapas|taper|traps
+  ["axis-east","axis","east","seas","taxi",2,"","","seas-taxi",7,87,2,5,0], // allWords 4: eats|exit|seat|teas
+  ["dozen-sides","dozen","sides","nodes","sized",4,"","","nodes-sized",25,92,1,4,0], // allWords 9: dined|dosed|doses|nosed|sided|sizes|snide|zoned|zones
+  ["host-link","host","link","honk","list",2,"","","honk-list",1], // allWords 12: hint|hits|kiln|lint|lost|lots|shot|silk|slit|slot|thin|this
+  ["named-vocal","named","vocal","canal","moved",4,"","","canal-moved",16,82,3,6,0], // allWords 12: amend|caved|clean|clone|clove|dance|demon|lance|lemon|melon|monde|nomad
+  ["ewe-ton","ewe","ton","one","wet",2,"","","cannot be reversed",8,81,3,7,0], // allWords 5: eon|new|not|toe|wee
+  ["coin-read","read","coin","aced","iron",2,"","","aced-iron",6], // allWords 16: acne|cane|dare|dear|dice|dire|earn|iced|icon|near|nice|noir|nori|rein|ride|road
+  ["lord-oath","lord","oath","halt","door",3,"","","door-halt",22,92,1,4,0], // allWords 5: holt|odor|road|toad|told
+  ["twist-viral","twist","viral","trawl","visit",3,"","","trawl-visit",12,92,1,4,0], // allWords 5: rival|trail|trait|trial|twits
+  ["fists-toned","toned","fists","noted","sifts",2,"","","noted-sifts",3,60,7,12,0], // allWords 19: diets|dotes|edits|fiend|fined|fines|fonts|inset|notes|onset|seton|sited|sites|stein|stint|stone|tides|tints|tones
+  ["tide-turn","turn","tide","diet","runt",2,"","","diet-runt",6], // allWords 8: dint|duet|edit|rite|tied|tier|tire|true
+  ["duke-yaps","duke","yaps","dupe","yaks",1,"","","dupe-yaks",1,87,2,5,0], // allWords 3: dusk|pads|pays
+  ["dance-tests","dance","tests","caste","tends",4,"","","caste-tends",25], // allWords 18: casts|cents|dates|dents|enact|scant|scent|sects|stade|stand|state|stats|stead|steed|stent|taste|tenet|tents
+  ["bucks-lanky","lanky","bucks","banks","lucky",2,"","","banks-lucky",2], // allWords 4: backs|bunks|lacks|slack
+  ["owing-sleek","sleek","owing","lingo","weeks",2,"","","lingo-weeks",7,76,4,8,0], // allWords 12: glens|keels|kilns|leeks|likes|links|sling|slink|swing|wings|winks|woken
+  ["nor-tar","nor","tar","ran","rot",3,"","","ran-rot",9,77,4,7,0], // allWords 2: art|rat
+  ["dark-west","dark","west","desk","wart",2,"","","desk-wart",2,87,2,5,0], // allWords 4: dart|drek|stew|swat
+  ["discs-reset","reset","discs","cress","edits",4,"","","cress-edits",24,92,1,4,0], // allWords 16: crest|diets|ester|rises|rites|seeds|sides|sited|steed|steer|terse|tides|tiers|tires|trees|tries
+  ["bald-rays","bald","rays","labs","yard",3,"","","labs-yard",8,72,5,8,0], // allWords 3: bays|lars|slab
+  ["guess-means","guess","means","menus","gases",3,"","","gases-menus",11,92,1,4,0], // allWords 11: gauss|genes|genus|manus|masse|mensa|muses|names|sages|seams|seems
+  ["life-teem","teem","life","emit","feel",3,"","","emit-feel",19], // allWords 11: feet|fete|file|film|flee|item|lime|meet|mile|mite|time
+  ["gold-heat","gold","heat","goat","held",2,"","","goat-held",1], // allWords 8: aged|gate|hate|head|hold|holt|oath|toga
+  ["ramen-sweet","sweet","ramen","newer","teams",5,"","","newer-teams",29], // allWords 11: eater|mates|means|meats|mensa|names|renew|steam|tamer|tames|tease
+  ["cook-true","cook","true","cure","took",2,"","","cure-took",8,87,2,5,0], // allWords 6: core|cork|ecru|rock|tore|turk
+  ["lodge-rally","rally","lodge","dolly","large",4,"","","dolly-large",11], // allWords 15: alder|dally|glade|glare|glory|godly|golly|grade|ladle|lager|legal|lolly|older|raged|regal
+  ["bob-pad","bob","pad","bop","dab",3,"","","cannot be reversed",9,71,5,9,0], // allWords 2: bad|pod
+  ["bait-moon","moon","bait","boot","main",2,"","","boot-main",2,82,3,6,0], // allWords 9: amin|atom|boat|boon|mina|moan|moat|mono|moot
+  ["rush-sake","rush","sake","ears","husk",4,"","","ears-husk",23,92,1,4,0], // allWords 10: eras|rake|rash|ruse|sash|seas|sera|sure|user|uses
+  ["hands-tales","hands","tales","shale","stand",2,"","","shale-stand",5], // allWords 7: hales|heals|leash|least|slate|stale|steal
+  ["court-privy","court","privy","curry","pivot",3,"","","curry-pivot",10], // allWords 1: curvy
+  ["gate-newt","gate","newt","tent","wage",3,"","","tent-wage",9,86,2,6,0], // allWords 7: anew|ante|neat|teen|wane|want|went
+  ["free-slog","free","slog","logs","reef",1,"","","logs-reef",3,62,7,10,0], // allWords 13: eels|else|feel|flee|fore|frog|golf|legs|lose|rees|rose|sole|sore
+  ["corks-shoot","corks","shoot","shock","torso",4,"","","shock-torso",23], // allWords 8: cooks|horst|rocks|roost|roots|short|stork|torch
+  ["grow-skin","grow","skin","king","rows",2,"","","king-rows",7,87,2,5,0], // allWords 3: grin|ring|sink
+  ["board-stunt","board","stunt","bound","start",2,"","","bound-start",2,92,1,4,0], // allWords 18: abort|baton|broad|darts|durst|roads|roast|santo|snout|sound|stand|strut|sturt|tabor|tarts|tours|trust|turbo
+  ["dad-ski","ski","dad","kid","ads",2,"","","ads-kid",8], // allWords 3: add|aid|sad
+  ["tear-trip","tear","trip","tarp","tier",2,"","","tarp-tier",5], // allWords 7: part|peat|rate|rite|tape|tire|trap
+  ["lilt-solo","lilt","solo","toll","oils",3,"","","oils-toll",22,87,2,5,0], // allWords 7: list|lost|lots|slit|slot|soil|till
+  ["shove-slink","shove","slink","honks","lives",3,"","","honks-lives",8], // allWords 11: evils|hives|kilns|liens|lines|links|loves|shine|shone|solve|veils
+  ["creek-float","creek","float","croak","fleet",2,"","","croak-fleet",2,92,1,4,0], // allWords 16: actor|after|aloft|carte|cater|cloak|crate|elect|erect|faker|fetal|flake|forte|freak|react|trace
+  ["mind-past","mind","past","damn","tips",3,"","","damn-tips",19,80,3,8,0], // allWords 14: dams|dips|mast|mats|mint|mist|pads|pant|pats|pint|pits|spat|spit|taps
+  ["pagan-veins","pagan","veins","vegan","pains",2,"","","pains-vegan",1,92,1,4,0], // allWords 9: avian|naive|pages|pangs|pines|sepia|snipe|spine|vines
+  ["drop-epic","epic","drop","cord","pipe",4,"","","cord-pipe",22], // allWords 11: cope|core|drip|pier|pope|pore|prod|repo|rice|ripe|rope
+  ["rapid-whole","rapid","whole","radio","whelp",3,"","","radio-whelp",7], // allWords 2: paler|pearl
+  ["donor-names","donor","names","manor","nodes",4,"","","cannot be reversed",11,87,2,5,0], // allWords 26: adorn|armed|dames|deans|demos|domes|dream|drone|madre|mason|means|mensa|moans|modes|moods|moons|moron|nosed|omens|radon|ramen|roman|rondo|sedan|senna|sodom
+  ["gem-wig","gem","wig","gig","mew",3,"","","gig-mew",9,87,2,5,0], // allWords 1: egg
+  ["debt-file","debt","file","bide","left",4,"","","bide-left",13], // allWords 10: beef|deli|feel|felt|flee|flit|idle|lied|life|lift
+  ["scarf-trial","scarf","trial","craft","rails",3,"","","craft-rails",10], // allWords 4: altar|fairs|liars|trail
+  ["done-safe","done","safe","fade","nose",3,"","","fade-nose",8], // allWords 7: deaf|dean|eons|foes|node|ones|sane
+  ["ingot-siren","siren","ingot","intro","singe",2,"","","intro-singe",5], // allWords 21: gents|inert|inner|inter|irons|nitro|reins|rents|resin|rinse|riots|risen|rites|snort|stern|tiers|tinge|tires|tongs|tries|trois
+  ["case-role","case","role","lace","sore",3,"","","lace-sore",9,82,3,6,0], // allWords 9: aces|earl|ears|eras|lear|lore|real|rose|sera
+  ["hack-nets","hack","nets","hats","neck",2,"","","hats-neck",1,87,2,5,0], // allWords 10: ants|cans|cash|hast|heck|nest|scan|sent|tank|tens
+  ["doubt-horse","doubt","horse","bored","south",4,"","","bored-south",25], // allWords 11: broth|doers|doser|douse|heros|horst|house|shore|short|shout|throb
+  ["caper-stems","caper","stems","camps","steer",3,"","","camps-steer",8], // allWords 33: capes|cease|cramp|cream|crept|eases|erase|erect|ester|mares|masse|pacer|paces|parse|pears|pests|ramps|recap|reset|saree|scamp|scape|seams|smear|space|spare|spasm|spear|steps|strep|terms|terse|trees
+  ["state-teams","state","teams","mates","taste",2,"","","mates-taste",14], // allWords 11: asset|masse|masts|matte|meats|seams|seats|stats|steam|tames|tease
+  ["eye-tax","eye","tax","yet","axe",2,"","","axe-yet",8], // allWords 3: ate|eat|tea
+  ["cure-peel","cure","peel","clue","peer",3,"","","clue-peer",10], // allWords 3: curl|ecru|pure
+  ["age-rap","age","rap","gap","are",2,"","","are-gap",7,80,3,8,0], // allWords 2: ear|era
+  ["dodo-kegs","dodo","kegs","desk","good",3,"","","desk-good",11], // allWords 3: dogs|gods|odds
+  ["match-renal","renal","match","metal","ranch",2,"","","metal-ranch",3,92,1,4,0], // allWords 9: alert|altar|alter|chart|earth|hater|heart|later|learn
+  ["snide-storm","snide","storm","norms","tides",2,"","","norms-tides",7,87,2,5,0], // allWords 21: diets|dotes|edits|midst|minds|nodes|nosed|reins|resin|rinse|risen|rites|senor|siren|sited|snore|store|tiers|tires|tries|trims
+  ["dare-teen","teen","dare","dean","tree",3,"","","dean-tree",9,92,1,4,0], // allWords 15: ante|darn|dear|deer|neat|need|nerd|rand|rant|rate|read|reed|rent|tear|tern
+  ["realm-skies","realm","skies","meals","skier",3,"","","meals-skier",12], // allWords 20: earls|eases|erase|isles|laser|limes|maker|makes|males|miles|rakes|reals|riles|sakes|sales|saree|seals|silks|slime|smile
+  ["other-plans","other","plans","lapse","thorn",3,"","","lapse-thorn",21,92,1,4,0], // allWords 19: ethos|helps|holes|leaps|loans|north|paler|pales|pants|paste|pearl|pleas|salon|santo|septa|spate|taper|tapes|those
+  ["clay-lime","clay","lime","ally","mice",3,"","","ally-mice",8], // allWords 3: lace|lacy|mile
+  ["fond-labs","fond","labs","land","fobs",2,"","","fobs-land",1], // allWords 4: bald|bold|fans|slab
+  ["lists-shoes","lists","shoes","hosts","isles",2,"","","hosts-isles",6], // allWords 6: holes|hoses|shots|slits|sloth|toils
+  ["bar-rot","bar","rot","rob","tar",3,"","","rob-tar",14,74,4,10,0], // allWords 8: art|bat|bot|bra|bro|orb|rat|tab
+  ["shame-worst","worst","shame","moats","shrew",4,"","","moats-shrew",25], // allWords 14: ashes|atoms|maths|mores|mower|roses|sores|sorts|stash|storm|swath|swore|whats|worse
+  ["eons-mark","eons","mark","ears","monk",2,"","","ears-monk",2], // allWords 12: arms|eras|mans|mars|nose|ones|rake|rams|rose|sane|sera|sore
+  ["kale-soft","soft","kale","fake","lost",3,"","","fake-lost",9,86,2,6,0], // allWords 15: fast|fats|foes|lake|last|leak|lose|lots|safe|sale|salt|seal|slot|sole|talk
+  ["heard-rolls","heard","rolls","droll","shear",2,"","","droll-shear",6], // allWords 20: ahold|alder|earls|hales|halos|hares|heals|hears|hells|hoard|laser|leash|reals|rears|roars|shale|share|shell|shoal|solar
+  ["blows-coast","coast","blows","boost","claws",2,"","","boost-claws",3,92,1,4,0], // allWords 14: ascot|blast|boast|boats|bolts|boots|bowls|class|clots|coats|colts|scoot|slabs|tacos
+  ["pink-tins","pink","tins","knit","snip",4,"","","knit-snip",22], // allWords 2: pins|spin
+  ["crime-stark","stark","crime","smirk","crate",4,"","","crate-smirk",13], // allWords 34: aster|carer|carte|cater|cream|emits|items|karts|mares|marks|mates|meats|mites|racer|rates|react|rears|riser|rites|skirt|smear|smite|stare|steam|tames|teams|tears|tiers|times|tires|trace|track|trick|tries
+  ["novel-wipes","novel","wipes","pines","vowel",3,"","","pines-vowel",7], // allWords 10: liven|opens|ovens|snipe|spine|swipe|veins|views|vines|wives
+  ["each-must","each","must","east","much",2,"","","east-much",1,87,2,5,0], // allWords 11: ache|cute|eats|mach|mash|mast|mats|seat|sham|shea|teas
+  ["did-new","did","new","din","wed",3,"","","cannot be reversed",9,77,4,7,0], // allWords 3: den|end|win
+  ["draw-pair","draw","pair","raid","wrap",3,"","","raid-wrap",23,82,3,6,0], // allWords 4: arid|para|ward|warp
+  ["dome-vibe","dome","vibe","bide","move",3,"","","bide-move",8], // allWords 3: demo|dime|mode
+  ["drain-surge","drain","surge","urged","rains",2,"","","rains-urged",6,80,3,8,0], // allWords 17: adieu|aired|arise|drier|gears|grade|grand|nadir|raged|rages|raise|rider|riser|ruins|sarin|urges|usage
+  ["lady-sums","lady","sums","mass","duly",3,"","","duly-mass",15], // allWords 4: days|lads|slam|slum
+  ["filed-smack","filed","smack","famed","slick",3,"","","famed-slick",8], // allWords 11: acids|aides|aside|dames|field|flick|ideas|licks|likes|makes|slide
+  ["outer-suits","outer","suits","issue","trout",3,"","","issue-trout",20], // allWords 7: route|stout|strut|sturt|touts|trust|tutor
+  ["cage-talk","cage","talk","gate","lack",3,"","","gate-lack",8], // allWords 4: lace|late|tale|teal
+  ["hardy-mason","hardy","mason","mayor","hands",4,"","","hands-mayor",12], // allWords 6: hydra|manor|moans|moray|roman|shady
+  ["later-maple","later","maple","ample","alter",1,"","","alter-ample",3], // allWords 6: alert|lapel|metal|paler|pearl|tamer
+  ["elk-sag","sag","elk","ask","leg",2,"","","ask-leg",7], // allWords 3: age|gas|gel
+  ["lube-tofu","lube","tofu","bout","fuel",3,"","","bout-fuel",11], // allWords 4: blue|foul|lobe|tube
+  ["overt-sense","sense","overt","onset","serve",3,"","","onset-serve",12], // allWords 24: ester|nests|notes|ovens|rents|reset|seton|sever|sneer|steer|stern|stone|stove|tenor|terse|toner|tones|trees|trove|veers|verse|vests|voter|votes
+  ["none-sole","sole","none","lone","nose",3,"","","cannot be reversed",8,80,3,8,0], // allWords 5: eons|lose|neon|noel|ones
+  ["cute-plus","cute","plus","clue","puts",2,"","","clue-puts",2], // allWords 2: cuts|pelt
+  ["shook-slide","shook","slide","hides","looks",2,"","","hides-looks",7,76,4,8,0], // allWords 3: hooks|kilos|loose
+  ["down-rare","rare","down","rode","warn",4,"","","rode-warn",13,92,1,4,0], // allWords 15: dare|darn|dawn|dear|owed|rand|read|rear|redo|wade|wand|ware|wear|wore|worn
+  ["rind-tool","rind","tool","door","lint",4,"","","door-lint",23], // allWords 3: dint|loot|odor
+  ["force-polka","force","polka","poker","focal",3,"","","focal-poker",9], // allWords 0
+  ["cares-suing","cares","suing","acres","using",1,"","","acres-using",3], // allWords 15: cures|curse|gains|gears|grace|guise|issue|races|rages|scare|sears|sinus|surge|urges|users
+  ["key-way","key","way","yak","yew",3,"","","yak-yew",9,76,4,8,0], // allWords 2: kay|yaw
+  ["cope-eats","cope","eats","pace","toes",3,"","","pace-toes",15,86,2,6,0], // allWords 14: acts|apes|cape|caps|cast|cats|cops|cost|east|peas|pose|scot|seat|teas
+  ["pylon-tease","pylon","tease","elope","nasty",5,"","","elope-nasty",33,92,1,4,0], // allWords 11: atone|panes|pansy|pease|peels|sleep|sleet|steel|style|yeast|yelps
+  ["beta-hall","beta","hall","ball","heat",2,"","","cannot be reversed",9,92,1,4,0], // allWords 12: abet|able|alba|bale|beat|bell|belt|hale|halt|hate|heal|hell
+  ["sent-shut","sent","shut","tens","thus",2,"","","tens-thus",19,68,5,12,0], // allWords 3: huts|nest|nets
+  ["angle-piece","angle","piece","agile","pence",2,"","","agile-pence",5,92,1,4,0], // allWords 2: angel|glean
+  ["dated-shirt","dated","shirt","dates","third",3,"","","dates-third",12,75,4,9,0], // allWords 16: aided|aides|aside|darts|heist|hides|ideas|raids|stade|stair|start|state|stead|tarts|taste|triad
+  ["acts-euro","euro","acts","coat","user",3,"","","coat-user",16], // allWords 11: arcs|auto|cars|cast|cats|core|ruse|scar|sect|sure|taco
+  ["stoke-weird","stoke","weird","skied","wrote",4,"","","skied-wrote",12], // allWords 16: doers|doser|dries|kites|rides|rites|rowed|sired|store|tiers|tires|tower|tries|wider|wired|write
+  ["horse-worse","worse","horse","swore","shore",1,"","","shore-swore",3,87,2,5,0], // allWords 1: heros
+  ["ewe-not","ewe","not","one","wet",2,"","","cannot be reversed",7,80,3,8,0], // allWords 5: eon|new|toe|ton|wee
+  ["deny-ever","deny","ever","envy","deer",3,"","","deer-envy",9], // allWords 3: eyed|nerd|reed
+  ["logo-slap","logo","slap","logs","opal",4,"","","logs-opal",15], // allWords 6: alps|also|laps|pals|slog|soap
+  ["seeds-stops","stops","seeds","doses","pests",3,"","","doses-pests",18], // allWords 7: pesos|poses|posse|posts|seeps|spots|steps
+  ["bids-such","bids","such","cubs","dish",4,"","","cubs-dish",12], // allWords 4: buds|cuss|dibs|diss
+  ["airy-keel","airy","keel","like","year",3,"","","like-year",19,82,3,6,0], // allWords 7: earl|lair|lear|leek|liar|rail|real
+  ["flour-least","least","flour","fault","loser",3,"","","fault-loser",11], // allWords 21: earls|fares|fates|fears|feast|feats|flats|flout|laser|lofts|reals|roles|rolls|safer|slate|stale|stall|steal|stole|tales|tolls
+  ["chefs-lines","chefs","lines","shelf","since",3,"","","shelf-since",23,92,1,4,0], // allWords 5: files|flesh|flies|heels|liens
+  ["clip-more","clip","more","crop","mile",3,"","","crop-mile",9,87,2,5,0], // allWords 6: core|lice|lime|limp|prom|romp
+  ["below-state","state","below","elbow","taste",1,"","","elbow-taste",3,60,7,12,0], // allWords 10: betta|bowel|lowes|sleet|steel|stole|sweat|tease|waste|watts
+  ["pay-pot","pay","pot","top","yap",2,"","","top-yap",5,69,5,11,0], // allWords 3: opt|pat|tap
+  ["cheer-tired","tired","cheer","cider","three",3,"","","cider-three",10,92,1,4,0], // allWords 5: cried|ether|there|tried|trier
+  ["fill-leak","fill","leak","leaf","kill",4,"","","kill-leaf",23,86,2,6,0], // allWords 6: fail|fake|fell|flea|kale|lake
+  ["dale-inch","dale","inch","chai","lend",3,"","","chai-lend",19], // allWords 10: aced|chad|chin|dahl|deal|hail|lead|lien|line|nice
+  ["fades-stern","stern","fades","frets","sedan",4,"","","frets-sedan",13,92,1,4,0], // allWords 15: deans|dents|earns|eases|fares|fears|nears|rents|rests|safer|sears|snare|teens|tends|tense
+  ["king-lads","king","lads","glad","skin",2,"","","glad-skin",7], // allWords 8: disk|kids|lids|ling|sank|sink|skid|slid
+  ["diets-views","diets","views","wives","tides",2,"","","tides-wives",17,80,3,8,0], // allWords 3: edits|sited|wised
+  ["armed-villa","armed","villa","alarm","devil",4,"","","alarm-devil",22], // allWords 9: aimed|alder|alive|dream|ideal|lived|madre|media|ravel
+  ["cart-sack","cart","sack","cast","rack",3,"","","cast-rack",8,87,2,5,0], // allWords 7: acts|arts|cask|cats|rats|star|tsar
+  ["bops-link","bops","link","bonk","lips",2,"","","bonk-lips",1], // allWords 6: bins|kiln|knob|nibs|slip|slop
+  ["ore-ran","ore","ran","era","nor",2,"","","era-nor",8], // allWords 2: are|ear
+  ["fled-foot","fled","foot","felt","food",2,"","","felt-food",6], // allWords 3: fold|left|loft
+  ["dread-kinds","dread","kinds","sided","drank",5,"","","drank-sided",33,92,1,4,0], // allWords 14: adder|aided|aides|aside|dared|dares|drake|ideas|raked|rakes|ranks|reads|skied|snark
+  ["ashes-prove","ashes","prove","ropes","shave",3,"","","ropes-shave",10], // allWords 15: arose|hares|haves|hears|pesos|pores|poser|poses|posse|prose|savor|share|shear|sheep|spore
+  ["time-when","time","when","them","wine",2,"","","them-wine",8], // allWords 7: emit|item|meth|mint|mite|then|tine
+  ["loops-serve","loops","serve","pools","verse",2,"","","pools-verse",18,68,5,12,0], // allWords 30: elope|leper|lever|lopes|lover|loves|overs|peers|pesos|poles|pores|poser|poses|posse|press|prose|repel|revel|ropes|servo|sever|sloop|slope|solve|speer|spool|spore|spree|veers|verso
+  ["stork-swell","swell","stork","tells","works",2,"","","tells-works",7,76,4,8,0], // allWords 2: tolls|wells
+  ["bees-post","bees","post","pose","bets",3,"bose","pets","bets-pose",9,92,1,4,0], // allWords 12: best|boss|bots|pest|pets|poet|pots|sobs|spot|step|stop|tops
+  ["tense-wharf","tense","wharf","renew","shaft",4,"","","renew-shaft",26], // allWords 16: after|earth|eater|enter|fates|feast|feats|haste|hater|hates|heart|heats|newer|tease|teens|wafer
+  ["half-word","half","word","hard","wolf",2,"","","hard-wolf",1,92,1,4,0], // allWords 6: dahl|draw|flaw|flow|hold|ward
+  ["ton-yes","ton","yes","net","soy",3,"","","net-soy",14], // allWords 5: not|set|ten|yen|yon
+  ["cage-oral","oral","cage","acre","goal",3,"","","acre-goal",12,82,3,6,0], // allWords 6: aero|care|ergo|gore|ogre|race
+  ["raced-relay","raced","relay","layer","cedar",2,"","","cedar-layer",14], // allWords 7: alder|cadre|cared|creed|early|elder|leary
+  ["risk-soup","risk","soup","kiss","pour",3,"","","kiss-pour",23], // allWords 5: kris|opus|pros|rips|skis
+  ["salad-style","salad","style","sadly","steal",4,"","","sadly-steal",12], // allWords 6: least|slate|stale|tales|tells|yeast
+  ["lasts-noted","noted","lasts","salts","toned",2,"","","salts-toned",3,65,6,11,0], // allWords 28: dales|deals|dealt|deans|delta|leads|least|loses|nodes|nosed|noses|notes|onset|sales|seals|sedan|seton|slate|slats|slots|soles|stale|stand|steal|stole|stone|tales|tones
+  ["arms-lane","arms","lane","slam","earn",3,"","","earn-slam",9], // allWords 8: lame|lean|male|mare|mars|meal|near|rams
+  ["pixel-sears","pixel","sears","sixes","pearl",2,"","","pearl-sixes",3], // allWords 20: aisle|earls|easel|eases|expel|laser|lease|liars|pairs|paler|parse|pears|pease|pilar|rails|reals|sepia|sexes|spare|spear
+  ["stay-true","true","stay","eats","yurt",4,"","","eats-yurt",22], // allWords 14: ears|east|eras|rate|rays|ruse|seat|sera|sure|tate|tear|teas|tray|user
+  ["gavel-homes","gavel","homes","games","hovel",2,"","","games-hovel",1], // allWords 9: gleam|glove|golem|halve|haves|mages|shame|shave|shove
+  ["ark-rim","ark","rim","irk","ram",2,"","","irk-ram",7,75,4,9,0], // allWords 3: aim|arm|mar
+  ["cubes-polar","polar","cubes","cobra","pulse",3,"","","cobra-pulse",13], // allWords 13: carol|close|clues|coals|coral|cruel|lopes|poles|probe|pubes|scuba|slope|ulcer
+  ["bacon-table","bacon","table","baton","cable",4,"","","baton-cable",11,72,5,8,0], // allWords 4: babel|banco|bleat|canto
+  ["ease-silk","ease","silk","lies","sake",3,"","","lies-sake",9], // allWords 11: asks|isle|kale|kiss|lake|leak|like|sale|seal|seas|skis
+  ["diner-laden","diner","laden","dared","linen",4,"","","dared-linen",13,92,1,4,0], // allWords 10: adder|alder|dined|dread|dried|learn|lined|liner|renal|riled
+  ["gate-nuts","gate","nuts","tags","tune",3,"nate","guts","tags-tune",8,82,3,6,0], // allWords 7: ante|ants|gust|guts|neat|stag|stun
+  ["core-mice","core","mice","come","rice",3,"","","come-rice",13], // allWords 1: more
+  ["mates-wagon","wagon","mates","mango","waste",2,"","","mango-waste",9], // allWords 12: among|atoms|games|mages|meant|meats|moats|steam|sweat|tames|teams|wages
+  ["eight-tract","eight","tract","trace","tight",3,"","","tight-trace",22,92,1,4,0], // allWords 9: attic|carte|cater|crate|earth|hater|heart|react|tacit
+  ["open-pins","open","pins","nope","spin",1,"","","nope-spin",3], // allWords 6: ions|pies|pine|pons|pose|snip
+  ["bot-owl","owl","bot","two","lob",3,"","","lob-two",10,72,5,8,0], // allWords 2: low|too
+  ["bald-cook","bald","cook","clad","book",2,"","","book-clad",8,87,2,5,0], // allWords 5: bold|clod|cold|lack|lock
+  ["tape-town","tape","town","poet","want",3,"","","poet-want",14], // allWords 2: pant|peat
+  ["spear-tally","spear","tally","aptly","laser",4,"","","aptly-laser",22,92,1,4,0], // allWords 14: alert|altar|alter|areas|earls|later|palsy|parse|pears|plays|reals|spare|taper|yelps
+  ["crest-slope","crest","slope","slots","creep",3,"","","creep-slots",8], // allWords 35: celts|ceres|close|clots|colts|cores|crepe|crept|lopes|loses|peels|peers|pelts|plots|poles|pores|ports|poser|prose|prost|rests|ropes|roses|score|sleep|slept|soles|sores|sorts|speer|spelt|spore|sport|spree|strep
+  ["sift-turn","sift","turn","fits","runt",2,"","","fits-runt",6], // allWords 5: fins|fist|runs|rust|stir
+  ["fold-snug","fold","snug","fund","slog",3,"","","fund-slog",9,92,1,4,0], // allWords 7: gnus|golf|guns|logs|olds|sold|sung
+  ["paint-rents","paint","rents","spent","train",2,"","","spent-train",5], // allWords 28: inept|inert|inter|pains|pants|petit|pines|rains|rants|reins|resin|rinse|risen|rites|sarin|siren|snipe|spine|spite|stair|stern|stipe|tiers|tires|trait|trans|tries|trite
+  ["prime-tough","prime","tough","gripe","mouth",3,"","","gripe-mouth",22], // allWords 11: girth|merit|mirth|mitre|ought|purge|remit|right|thrum|tiger|timer
+  ["diver-fetch","diver","fetch","fever","ditch",2,"","","ditch-fever",1], // allWords 8: deter|drive|fitch|fiver|refit|thief|tired|tried
+  ["nod-pie","nod","pie","dip","eon",3,"","","dip-eon",10], // allWords 4: din|don|one|pod
+  ["flit-room","flit","room","root","film",2,"","","film-root",6], // allWords 9: foot|lift|loft|moor|riot|roti|tori|toro|trio
+  ["dork-lube","dork","lube","rode","bulk",3,"","","bulk-rode",8], // allWords 9: blue|lobe|lore|lure|lurk|redo|role|rude|rule
+  ["dodge-rugby","rugby","dodge","buddy","gorge",4,"","","buddy-gorge",24,92,1,4,0], // allWords 6: bored|budge|debug|dodgy|doggy|urged
+  ["lead-twin","twin","lead","lawn","tied",3,"","","lawn-tied",9], // allWords 18: ante|dale|date|deal|deli|diet|edit|idle|lane|lean|lied|lien|line|neat|tide|tine|want|wild
+  ["fade-name","fade","name","deaf","mean",2,"","","deaf-mean",15], // allWords 4: amen|dean|fame|mane
+  ["agree-count","agree","count","great","ounce",2,"","","great-ounce",6], // allWords 8: anger|crone|eager|gaunt|grant|grate|range|recon
+  ["smell-stand","smell","stand","tends","malls",2,"","","malls-tends",7], // allWords 5: dents|slant|small|stall|tells
+  ["dairy-noble","dairy","noble","blade","irony",4,"","","blade-irony",22], // allWords 18: aired|alien|badly|bared|beard|boner|bored|borne|bread|daily|diary|doily|ideal|inlay|nobly|oiled|oldie|rainy
+  ["hiker-jolly","hiker","jolly","joker","hilly",2,"","","hilly-joker",1,92,1,4,0], // allWords 3: hokey|holly|hoyle
+  ["dad-yap","dad","yap","day","pad",3,"","","cannot be reversed",9,74,4,10,0], // allWords 2: add|pay
+  ["duty-rise","duty","rise","tidy","sure",3,"","","sure-tidy",15,67,6,9,0], // allWords 18: dies|diet|dues|duet|edit|rite|ruse|side|sire|sued|tide|tied|tier|tire|true|used|user|yurt
+  ["blot-veil","blot","veil","bill","vote",3,"","","bill-vote",9], // allWords 10: bile|bite|bolt|evil|live|lobe|love|veto|vile|volt
+  ["gears-rehab","gears","rehab","barge","share",4,"","","barge-share",29,92,1,4,0], // allWords 7: areas|barre|hares|hears|rages|rears|shear
+  ["dense-grill","dense","grill","drill","genes",2,"","","cannot be reversed",8,92,1,4,0], // allWords 12: dries|girls|glens|lends|liege|needs|nerds|rides|riled|siege|sired|slide
+  ["lost-save","lost","save","sole","vast",3,"","","sole-vast",8,70,5,10,0], // allWords 14: last|lose|lots|love|sale|salt|seal|seas|slot|toss|vale|vase|veal|volt
+  ["ashes-drift","ashes","drift","shaft","rides",3,"","","rides-shaft",10], // allWords 26: arise|diets|dries|earth|edits|fairs|hares|haste|hater|hates|hears|heart|heats|herds|irate|raise|share|shear|sheds|shred|sides|sired|sited|tides|tired|tried
+  ["perk-site","perk","site","peer","skit",2,"","","peer-skit",7], // allWords 11: kept|kits|kris|pier|rees|ripe|rise|risk|sire|tees|ties
+  ["foul-nest","foul","nest","lens","tofu",3,"","","lens-tofu",22,92,1,4,0], // allWords 9: fuel|nets|self|sent|soft|tens|tons|tune|unto
+  ["aimed-cores","aimed","cores","aired","comes",1,"","","aired-comes",2,92,1,4,0], // allWords 13: adore|arise|arose|cider|coder|credo|cried|cries|decor|media|medic|raise|score
+  ["web-won","web","won","new","bow",3,"","","bow-new",10], // allWords 2: now|own
+  ["care-owed","care","owed","wore","aced",3,"","","aced-wore",9], // allWords 7: acre|aero|card|crew|race|road|word
+  ["clan-fort","clan","fort","corn","flat",2,"","","corn-flat",2,87,2,5,0], // allWords 3: coat|flan|taco
+  ["champ-seals","champ","seals","place","smash",5,"","","place-smash",25,92,1,4,0], // allWords 13: chasm|clash|laces|lapse|leaps|masse|pales|pleas|sales|scale|seams|shams|slash
+  ["semi-that","that","semi","emit","hats",2,"","","emit-hats",7], // allWords 10: east|eats|hast|item|mite|seat|stem|tate|teas|time
+  ["least-mould","least","mould","medal","lotus",3,"","","lotus-medal",9], // allWords 26: allot|atoll|atoms|dales|dames|deals|duels|ladle|leads|loads|mates|meats|metal|moats|modal|modus|mused|mutes|slate|stale|steal|steam|tales|tames|teams|tulle
+  ["ample-parry","ample","parry","apple","marry",3,"","","apple-marry",8,67,6,9,0], // allWords 9: amply|apply|array|maple|paler|paper|pearl|playa|realm
+  ["gosh-nice","gosh","nice","sigh","cone",3,"","","cone-sigh",15], // allWords 11: chin|egos|eons|goes|hogs|inch|nose|once|ones|shin|sine
+  ["choir-straw","choir","straw","roach","wrist",4,"","","roach-wrist",28,92,1,4,0], // allWords 5: actor|riots|roast|trois|warts
+  ["crank-drums","crank","drums","crams","drunk",2,"","","crams-drunk",1], // allWords 3: drank|scram|scrum
+  ["bag-pro","bag","pro","gap","orb",3,"","","gap-orb",9,77,4,7,0], // allWords 3: boa|bro|rob
+  ["beta-chin","beta","chin","chai","bent",2,"","","bent-chai",5], // allWords 7: abet|bath|beat|cent|chat|inch|nice
+  ["atlas-prose","atlas","prose","lasts","opera",3,"","","lasts-opera",23,92,1,4,0], // allWords 31: arose|earls|laser|leapt|least|paler|pearl|pelts|pesto|petal|plate|pleat|poets|pores|poser|posts|reals|ropes|salts|slate|slats|slept|soars|spelt|splat|spore|spots|stale|steal|stops|tales
+  ["dude-sets","sets","dude","dust","seed",3,"","","dust-seed",9,85,2,7,0], // allWords 8: deed|duds|dues|duet|stud|sued|tees|used
+  ["lamp-mate","mate","lamp","male","tamp",3,"","","male-tamp",8,87,2,5,0], // allWords 11: lame|late|meal|meat|meta|palm|plat|tale|tame|teal|team
+  ["berry-fluid","berry","fluid","burly","fried",3,"","","burly-fried",11,87,2,5,0], // allWords 7: bride|build|buyer|ferry|fiery|fired|fryer
+  ["spoil-stump","spoil","stump","pumps","toils",2,"","","pumps-toils",7,56,8,12,0], // allWords 6: lumps|plums|polis|posit|slump|stomp
+  ["menus-yards","menus","yards","sandy","serum",3,"","","sandy-serum",23,92,1,4,0], // allWords 1: manus
+  ["oops-pure","pure","oops","pope","ours",2,"","","ours-pope",2,87,2,5,0], // allWords 11: euro|opus|pops|pore|pros|pups|repo|rope|soup|sour|spur
+  ["quiet-winds","quiet","winds","squid","twine",3,"","","squid-twine",11,92,1,4,0], // allWords 3: quite|swine|wines
+  ["lead-shoe","lead","shoe","ease","hold",3,"","","ease-hold",9], // allWords 12: dahl|dale|dash|deal|does|dole|dose|hale|heal|hole|hose|shea
+  ["dark-mess","dark","mess","desk","mars",2,"","","desk-mars",2,87,2,5,0], // allWords 7: arms|drek|mark|mask|mass|rams|reds
+  ["ocean-pests","ocean","pests","notes","space",4,"","","notes-space",24], // allWords 17: canoe|capes|conte|costs|onset|paces|panes|pease|pecan|scape|scots|seton|spent|steep|steps|stone|tones
+  ["cited-ranch","ranch","cited","cinch","rated",2,"","","cinch-rated",1], // allWords 19: acted|cadet|catch|chart|cheat|dance|diner|earth|edict|ethic|hater|heart|niche|teach|their|tired|trade|tread|tried
+  ["eye-sax","sax","eye","axe","yes",2,"","","axe-yes",8], // allWords 1: sea
+  ["aids-pull","pull","aids","dual","lips",4,"","","dual-lips",13,87,2,5,0], // allWords 9: dial|dips|laid|pill|plus|said|sail|saul|slip
+  ["among-lakes","among","lakes","along","makes",3,"","","along-makes",8], // allWords 9: golem|leaks|loans|mango|mason|moans|moles|omega|salon
+  ["proof-tight","tight","proof","fight","troop",3,"","","fight-troop",22], // allWords 2: forth|froth
+  ["grow-land","grow","land","gnaw","lord",3,"","","gnaw-lord",9], // allWords 3: dang|lawn|load
+  ["later-yells","yells","later","layer","tells",4,"","","layer-tells",12,86,2,6,0], // allWords 18: alert|alter|early|leary|least|rally|relay|salty|slate|sleet|stale|stall|steal|steel|style|tales|teary|yeast
+  ["dive-logo","dive","logo","good","veil",3,"","","good-veil",19,87,2,5,0], // allWords 6: dove|evil|live|love|vile|void
+  ["sari-stem","sari","stem","same","stir",2,"","","same-stir",8], // allWords 8: airs|arms|mars|mesa|rams|seam|site|ties
+  ["enter-spies","spies","enter","risen","steep",5,"","","risen-steep",34,92,1,4,0], // allWords 15: nests|pests|piers|reins|rents|resin|rinse|seine|siren|spire|steps|stern|strep|teens|tense
+  ["arts-pier","pier","arts","rare","spit",3,"","","rare-spit",9], // allWords 13: ears|eras|pies|pits|rats|rear|reps|ripe|sera|star|tips|trip|tsar
+  ["dip-nod","nod","dip","din","pod",3,"","","din-pod",14], // allWords 4: did|don|odd|pin
+  ["levy-role","levy","role","rely","love",2,"","","love-rely",3,86,2,6,0], // allWords 8: ever|leer|lore|over|reel|rove|very|yell
+  ["mind-nags","mind","nags","damn","sing",3,"","","damn-sing",19,80,3,8,0], // allWords 6: dang|ding|mans|sang|sign|snag
+  ["curls-feast","feast","curls","cress","fault",3,"","","cress-fault",9,92,1,4,0], // allWords 16: cases|caste|crest|crust|false|fates|feats|fetal|fleas|frets|laces|leafs|safes|scale|serfs|surfs
+  ["mite-riot","riot","mite","emit","trio",1,"","","emit-trio",3], // allWords 8: item|mitt|rite|roti|tier|time|tire|tori
+  ["hence-idols","idols","hence","chose","lined",4,"","","chose-lined",25,92,1,4,0], // allWords 11: disco|holds|holed|holes|liens|lines|niece|oiled|oldie|since|solid
+  ["atoms-peers","atoms","peers","ropes","meats",3,"","","meats-ropes",18,87,2,5,0], // allWords 26: arose|aster|erase|mates|moats|poems|pores|ports|poser|prose|prost|rates|roast|saree|speer|spore|sport|spree|stare|steam|stomp|strep|tames|teams|tears|temps
+  ["gawk-nice","nice","gawk","cage","wink",4,"","","cage-wink",13,92,1,4,0], // allWords 7: acne|anew|cane|nick|wage|wane|wine
+  ["hero-ride","hero","ride","hire","redo",2,"","","hire-redo",3,87,2,5,0], // allWords 8: deer|dire|heed|heir|here|hide|reed|rode
+  ["warns-worms","warns","worms","swarm","sworn",2,"","","swarm-sworn",7,77,4,7,0], // allWords 1: warms
+  ["nor-pie","nor","pie","rip","eon",3,"","","eon-rip",10], // allWords 2: one|pro
+  ["nuts-skip","nuts","skip","puts","skin",4,"","","puts-skin",23,87,2,5,0], // allWords 6: kiss|pink|punt|sink|skis|stun
+  ["fell-plod","fell","plod","poll","fled",2,"","","fled-poll",6,86,2,6,0], // allWords 3: dope|fold|pole
+  ["asset-swear","asset","swear","sears","waste",3,"","","cannot be reversed",19,77,4,7,0], // allWords 14: areas|aware|erase|saree|seats|sewer|stews|swats|sweat|sweet|tease|wares|wears|wests
+  ["check-float","check","float","cheat","flock",2,"","","cannot be reversed",1,92,1,4,0], // allWords 9: aloft|chock|cleft|cloak|clock|fetal|fetch|flake|teach
+  ["newt-vary","newt","vary","rent","wavy",3,"","","rent-wavy",9,92,1,4,0], // allWords 6: rant|tern|very|want|went|yarn
+  ["gouge-sands","gouge","sands","douse","gangs",4,"","","douse-gangs",26], // allWords 9: deans|gauge|gauss|nodes|nosed|sedan|snags|songs|usage
+  ["lifts-nosey","nosey","lifts","loses","nifty",2,"","","loses-nifty",3,92,1,4,0], // allWords 14: files|fines|flies|flits|fonts|isles|lists|lofts|lofty|noses|slits|slots|soles|stony
+  ["part-read","read","part","dear","tarp",2,"","","dear-tarp",19], // allWords 6: dare|peat|rate|tape|tear|trap
+  ["mark-open","open","mark","pork","amen",3,"","","amen-pork",9], // allWords 9: kemp|make|mane|mean|name|nope|okra|poke|porn
+  ["age-ray","age","ray","are","gay",2,"","","are-gay",7,74,4,10,0], // allWords 2: ear|era
+  ["funds-roots","funds","roots","foods","runts",2,"","","foods-runts",2], // allWords 8: doors|fonts|odors|roost|snort|torso|tours|turns
+  ["leap-says","leap","says","pays","seal",3,"","","cannot be reversed",23,86,2,6,0], // allWords 12: alas|apes|lays|pale|peas|play|plea|sale|seas|slay|yaps|yelp
+  ["sleek-swung","sleek","swung","weeks","lungs",2,"","","lungs-weeks",7,76,4,8,0], // allWords 4: glens|keels|leeks|slung
+  ["sued-tick","sued","tick","tied","suck",2,"","","suck-tied",1], // allWords 13: dies|diet|disc|duct|dues|duet|edit|kite|sick|side|tide|tuck|used
+  ["realm-splat","realm","splat","alter","lamps",3,"","","alter-lamps",17], // allWords 16: alert|apart|later|least|males|meals|palms|pasta|psalm|slate|smell|stale|steal|tales|tapas|tells
+  ["spoke-stand","spoke","stand","ponds","takes",3,"","","ponds-takes",8], // allWords 14: notes|onset|opens|panes|peaks|pokes|seton|skate|speak|stake|steak|stoke|stone|tones
+  ["farm-gold","farm","gold","from","glad",2,"","","from-glad",6,86,2,6,0], // allWords 7: drag|fold|ford|form|glam|grad|gram
+  ["arena-edges","arena","edges","agree","sedan",5,"","","agree-sedan",32], // allWords 18: adage|anger|deans|degas|dense|eager|earns|eased|erase|gears|nears|needs|rages|range|saree|serge|snare|sneer
+  ["brow-slam","brow","slam","lamb","rows",2,"","","lamb-rows",7,92,1,4,0], // allWords 13: arms|awls|balm|bawl|blow|bowl|laws|lows|mars|owls|rams|slow|wars
+  ["ear-rub","ear","rub","bar","rue",3,"","","bar-rue",14], // allWords 3: are|bra|era
+  ["bait-mood","mood","bait","boot","maid",2,"","","boot-maid",2,82,3,6,0], // allWords 7: amid|atom|boat|doom|moat|modi|moot
+  ["acre-rugs","acre","rugs","cars","urge",2,"","","cars-urge",9,87,2,5,0], // allWords 5: arcs|cage|care|race|scar
+  ["grade-touch","grade","touch","crate","dough",4,"","","crate-dough",26], // allWords 15: carte|cater|chart|cough|cuter|grace|outed|raged|rated|react|trace|trade|tread|truce|urged
+  ["knock-steel","knock","steel","stock","kneel",2,"","","kneel-stock",1], // allWords 9: celts|clots|colts|knees|necks|skeet|sleet|stoke|stole
+  ["more-safe","more","safe","rose","fame",3,"","","fame-rose",8], // allWords 6: ears|eras|foes|mare|sera|sore
+  ["sums-tidy","tidy","sums","duty","miss",3,"","","duty-miss",15], // allWords 6: diss|dust|mist|must|sims|stud
+  ["handy-sieve","handy","sieve","snide","heavy",3,"","","heavy-snide",8], // allWords 10: deans|eased|eaves|haven|heady|heave|sandy|sedan|veins|vines
+  ["meets-niche","meets","niche","hence","times",3,"","","hence-times",18], // allWords 15: cents|chime|chins|emits|inset|items|mites|scent|sheen|shine|smite|stein|teems|teens|tense
+  ["ropes-slips","slips","ropes","isles","props",2,"","","isles-props",8,79,3,9,0], // allWords 8: pesos|pores|poser|poses|posse|prose|riles|spore
+  ["peg-tag","peg","tag","gap","get",3,"","","gap-get",9], // allWords 0
+  ["full-goof","full","goof","fool","gulf",2,"","","fool-gulf",2], // allWords 3: foul|golf|logo
+  ["skier-socks","skier","socks","skies","rocks",3,"","","rocks-skies",12], // allWords 3: cores|corks|score
+  ["clove-papal","papal","clove","apple","vocal",4,"","","apple-vocal",23,92,1,4,0], // allWords 2: local|place
+  ["bird-code","bird","code","cord","bide",2,"","","bide-cord",1], // allWords 8: bore|brie|core|deco|dice|iced|rice|robe
+  ["bias-mute","mute","bias","aims","tube",3,"mias","bute","aims-tube",8], // allWords 10: beau|bite|bits|bust|emit|item|mist|mite|must|time
+  ["stage-swear","stage","swear","tears","wages",2,"","","tears-wages",7,75,4,9,0], // allWords 7: aster|gates|rates|stare|tease|wares|wears
+  ["bonk-fast","bonk","fast","bask","font",2,"","","bask-font",2], // allWords 8: bank|bats|bots|fats|knob|soft|stab|tabs
+  ["seats-turbo","turbo","seats","bases","trout",4,"","","bases-trout",28], // allWords 21: about|asset|autos|bates|beast|beats|bores|burst|otter|rests|robes|sober|state|store|strut|sturt|taste|tours|truss|trust|tutor
+  ["nodes-sales","sales","nodes","doses","lanes",3,"","","doses-lanes",7], // allWords 7: deans|leans|loses|nosed|seals|sedan|soles
+  ["tap-yap","tap","yap","pat","pay",2,"","","pat-pay",5], // allWords 0
+  ["flies-giant","giant","flies","filet","gains",2,"","","filet-gains",8], // allWords 12: faint|false|fetal|files|fleas|flint|gales|glint|leafs|legit|slang|sling
+  ["acted-polls","acted","polls","calls","opted",3,"","","calls-opted",8,82,3,6,0], // allWords 14: cadet|caste|clade|decal|depot|laced|laces|lopes|pesto|plots|poets|poles|scale|slope
+  ["neat-sync","neat","sync","tens","cyan",4,"","","cyan-tens",26], // allWords 13: aces|acne|ante|cane|case|east|eats|nest|nets|seat|sent|stay|teas
+  ["burn-easy","easy","burn","busy","earn",2,"","","busy-earn",1,87,2,5,0], // allWords 13: bans|barn|bays|bran|bray|buns|bury|buys|nabs|near|ruby|sane|year
+  ["shack-slang","shack","slang","lacks","hangs",2,"","","hangs-lacks",7,71,5,9,0], // allWords 5: hacks|hanks|khans|shank|slack
+  ["later-voter","later","voter","alert","overt",2,"","","alert-overt",17,81,3,7,0], // allWords 3: alter|avert|trove
+  ["perk-wine","wine","perk","pink","were",2,"","","pink-were",2,87,2,5,0], // allWords 8: knew|peer|pier|pine|ripe|weir|wink|wire
+  ["rites-shift","shift","rites","sifts","their",5,"","","sifts-their",32], // allWords 14: first|firth|fists|frith|heirs|heist|hires|rifts|shire|sites|tiers|tires|tries|trite
+  ["plot-star","star","plot","tarp","lots",2,"","","lots-tarp",7], // allWords 14: arts|lars|last|lost|part|plat|port|rats|salt|slot|sort|stat|trap|tsar
+  ["bib-tar","bib","tar","rib","bat",3,"","","cannot be reversed",10,66,6,10,0], // allWords 6: art|bar|bit|bra|rat|tab
+  ["beers-stalk","beers","stalk","sleek","brats",4,"","","brats-sleek",16], // allWords 29: baker|bales|bears|belts|blast|bleak|brake|break|brees|karts|keels|lakes|lasts|leaks|leeks|rakes|reeks|rests|saber|sable|sabre|sales|salts|seals|sears|slats|stark|stars|talks
+  ["cared-noted","cared","noted","toned","raced",2,"","","raced-toned",3,75,4,9,0], // allWords 8: acted|cadet|cadre|cedar|coder|credo|decor|drone
+  ["runt-site","site","runt","tier","nuts",3,"","","nuts-tier",10], // allWords 10: rein|rite|sine|stun|ties|tins|tire|tits|true|turn
+  ["badly-surge","surge","badly","badge","surly",2,"","","badge-surly",1], // allWords 22: barge|blade|budge|burly|dales|deals|debug|degas|duels|earls|gears|grays|laser|leads|lures|rages|reals|ruble|rugby|rules|sadly|urges
+  ["even-role","even","role","ever","lone",4,"","","cannot be reversed",13,72,5,8,0], // allWords 2: lore|noel
+  ["case-yaps","case","yaps","pace","says",3,"","","pace-says",9,86,2,6,0], // allWords 5: aces|cape|caps|easy|pays
+  ["pairs-taken","taken","pairs","train","peaks",3,"","","peaks-train",11,92,1,4,0], // allWords 12: karts|parks|prank|sepia|skate|spark|speak|stair|stake|stark|steak|takes
+  ["drew-fear","fear","drew","ward","reef",4,"","","reef-ward",23,82,3,6,0], // allWords 10: dare|dear|deer|draw|fare|free|read|reed|wade|weed
+  ["lend-wait","wait","lend","laid","went",2,"","","laid-went",2], // allWords 14: dawn|deli|dial|idle|land|lent|lied|lite|newt|tail|tile|wand|want|wide
+  ["ark-saw","saw","ark","raw","ask",2,"","","ask-raw",7,77,4,7,0], // allWords 2: war|was
+  ["break-stool","break","stool","steal","brook",2,"","","brook-steal",2,87,2,5,0], // allWords 24: baker|bleat|bloat|brake|broke|earls|laser|least|loser|rakes|reals|roles|skate|slate|solar|stake|stale|steak|stoke|stole|table|takes|tales|tools
+  ["ideas-loyal","loyal","ideas","alloy","aside",2,"","","alloy-aside",14], // allWords 10: aides|daily|daisy|dales|dally|deals|ideal|ladle|leads|sadly
+  ["disc-goal","disc","goal","acid","slog",3,"","","acid-slog",20,87,2,5,0], // allWords 10: cogs|dial|docs|laid|lids|load|logs|olds|slid|sold
+  ["crux-flow","crux","flow","flux","crow",2,"","","crow-flux",1], // allWords 1: wolf
+  ["atoms-means","atoms","means","names","moats",2,"","","moats-names",14,67,6,9,0], // allWords 4: memos|mensa|omens|santo
+  ["back-isle","back","isle","sick","able",3,"","","able-sick",9], // allWords 3: bale|lies|silk
+  ["aids-bold","bold","aids","dibs","load",3,"","","dibs-load",8], // allWords 9: also|bids|dial|dosa|laid|libs|said|sail|soda
+  ["claim-timed","timed","claim","mimic","dealt",6,"","","dealt-mimic",33,92,1,4,0], // allWords 9: camel|clade|decal|delta|laced|medic|metal|tidal|timid
+  ["gawk-same","gawk","same","wage","mask",3,"","","mask-wage",8,81,3,7,0], // allWords 3: game|mesa|seam
+  ["mid-tip","mid","tip","dim","pit",2,"","","dim-pit",5], // allWords 1: imp
+  ["dale-feet","dale","feet","feel","date",3,"","","date-feel",9,85,2,7,0], // allWords 12: deal|fate|feat|felt|feta|fete|flat|flea|flee|lead|leaf|left
+  ["relay-remix","relay","remix","mixer","layer",2,"","","layer-mixer",14], // allWords 4: early|laxer|leary|relax
+  ["bears-scare","scare","bears","erase","crabs",3,"","","crabs-erase",10], // allWords 11: acres|brace|carbs|cares|crass|races|saber|sabre|saree|scars|sears
+  ["mock-neon","mock","neon","moon","neck",2,"","","moon-neck",1,87,2,5,0], // allWords 6: conn|mono|none|nook|noon|omen
+  ["slide-stink","stink","slide","links","tides",2,"","","links-tides",7,77,4,7,0], // allWords 10: diets|edits|inset|kilns|knits|liens|lines|sited|slink|stein
+  ["cell-hood","hood","cell","cool","held",2,"","","cool-held",2,82,3,6,0], // allWords 8: clod|code|cold|deco|hell|hold|hole|loco
+  ["lean-stir","lean","stir","tins","earl",2,"","","earl-tins",6], // allWords 19: ants|arts|ears|eras|lane|lear|lien|line|lint|rats|real|rile|rise|sane|sera|sine|sire|star|tsar
+  ["helps-light","light","helps","thigh","spell",4,"","","spell-thigh",29,92,1,4,0], // allWords 7: hells|highs|hills|pills|shell|shill|spill
+  ["hoops-siren","siren","hoops","heirs","spoon",3,"","","heirs-spoon",12], // allWords 18: heron|heros|hires|horse|noise|noose|reins|resin|rinse|risen|rises|roses|senor|shire|shore|snoop|snore|sores
+  ["leg-two","two","leg","get","owl",3,"","","get-owl",9], // allWords 3: gel|low|toe
+  ["honey-steer","honey","steer","ether","nosey",3,"","","ether-nosey",7], // allWords 11: ester|heron|rents|reset|senor|snore|stern|terse|there|three|trees
+  ["levee-ruins","levee","ruins","elves","urine",2,"","","elves-urine",8], // allWords 16: eerie|liens|lines|nerve|never|reeve|reins|resin|revue|rinse|risen|serve|sever|siren|veers|verse
+  ["four-shot","four","shot","thus","roof",3,"","","roof-thus",22,87,2,5,0], // allWords 9: foot|host|huts|ours|outs|rush|shut|sour|tofu
+  ["bush-wing","bush","wing","bung","wish",2,"","","bung-wish",1], // allWords 4: bugs|hubs|swig|wigs
+  ["plate-quips","plate","quips","equip","splat",2,"","","equip-splat",6], // allWords 12: apple|leapt|petal|pique|pleat|quiet|quite|quits|spilt|split|squat|taupe
+  ["rude-vice","rude","vice","cure","dive",3,"","","cure-dive",9,85,2,7,0], // allWords 4: dire|ecru|rice|ride
+  ["ford-pink","pink","ford","pork","find",2,"","","find-pork",2], // allWords 6: drip|drop|fond|fork|pond|prod
+  ["crane-price","crane","price","caper","nicer",4,"","","caper-nicer",29,92,1,4,0], // allWords 4: pacer|rance|recap|ripen
+  ["photo-wives","photo","wives","pivot","whose",3,"","","pivot-whose",10,92,1,4,0], // allWords 5: hopes|howes|poise|posit|views
+  ["art-can","art","can","act","ran",2,"","","act-ran",7], // allWords 4: ana|cat|rat|tar
+  ["node-soft","soft","node","dose","font",3,"","","dose-font",8], // allWords 4: does|done|dots|foes
+  ["sees-stem","sees","stem","seem","sets",2,"","","seem-sets",6,86,2,6,0], // allWords 0
+  ["order-sorts","order","sorts","dress","rotor",4,"","","dress-rotor",13], // allWords 11: doers|doser|doses|error|rodeo|roost|roots|roses|sores|stood|torso
+  ["flit-knew","flit","knew","flew","knit",2,"","","flew-knit",1], // allWords 4: felt|left|lift|wink
+  ["fade-vast","vast","fade","daft","save",3,"","","daft-save",8], // allWords 5: deaf|fast|fats|safe|vase
+  ["sulks-voter","voter","sulks","lover","tusks",3,"","","lover-tusks",8,81,3,7,0], // allWords 15: loser|loses|loves|lures|lurks|overt|roles|rules|soles|solve|store|stork|stove|trove|votes
+  ["ropes-sling","sling","ropes","isles","prong",3,"","","isles-prong",12,87,2,5,0], // allWords 11: groin|grope|irons|pesos|pores|poser|poses|posse|prose|riles|spore
+  ["candy-taste","candy","taste","dance","tasty",3,"","","dance-tasty",22,92,1,4,0], // allWords 7: caste|dates|enact|natty|stade|state|stead
+  ["metre-slash","metre","slash","melts","shear",3,"","","melts-shear",10], // allWords 26: ashes|earls|eases|erase|ester|harem|hares|hears|laser|males|meals|meets|meter|realm|reals|reset|sales|saree|seals|shame|share|smelt|steer|teems|terse|trees
+  ["bag-ewe","bag","ewe","age","web",2,"","","cannot be reversed",8,81,3,7,0], // allWords 1: wee
+  ["madam-pixel","madam","pixel","maxim","pedal",4,"","","maxim-pedal",16], // allWords 4: medal|piled|plaid|plead
+  ["spoil-stole","spoil","stole","poles","toils",2,"","","poles-toils",7,57,8,11,0], // allWords 6: lopes|poise|polis|polls|slope|tolls
+  ["look-mild","look","mild","kill","doom",4,"","","doom-kill",23], // allWords 8: dill|doll|idol|kilo|milk|modi|mold|mood
+  ["based-optic","based","optic","basic","opted",2,"","","basic-opted",1,92,1,4,0], // allWords 7: adios|beads|depot|dopes|posed|scope|topic
+  ["noted-salts","noted","salts","lasts","toned",2,"","","lasts-toned",3], // allWords 26: asset|dales|dates|deals|dotes|laden|lanes|leads|leans|loses|notes|olden|onset|sales|seals|seats|seton|slant|slats|slots|soles|stade|stats|stead|stone|tones
+  ["beer-data","beer","data","beat","dare",3,"","","cannot be reversed",9,92,1,4,0], // allWords 12: abet|bare|bear|beta|brat|bree|dart|date|dear|deer|read|reed
+  ["cask-duly","cask","duly","lady","suck",3,"","","lady-suck",15,65,6,11,0], // allWords 7: clay|days|dusk|lack|lacy|luck|sack
+  ["next-that","next","that","text","than",3,"","","text-than",23,86,2,6,0], // allWords 3: ante|neat|tate
+  ["stay-twin","stay","twin","tint","ways",2,"","","tint-ways",8,92,1,4,0], // allWords 6: ants|swan|sway|tins|want|wins
+  ["gag-mew","mew","gag","gem","wag",3,"","","gem-wag",10,56,8,12,0], // allWords 1: egg
+  ["scene-stunt","scene","stunt","tunes","cents",2,"","","cents-tunes",5], // allWords 5: scent|stent|teens|tense|tents
+  ["brand-teens","brand","teens","beans","trend",2,"","","beans-trend",3], // allWords 6: barns|rants|rents|stern|tense|trans
+  ["need-pigs","pigs","need","deep","sign",3,"","","deep-sign",23], // allWords 7: dine|ding|peed|pies|seen|sine|sing
+  ["doily-icing","doily","icing","icily","doing",2,"","","doing-icily",1,92,1,4,0], // allWords 1: dingo
+  ["party-valet","party","valet","avert","aptly",3,"","","aptly-avert",19,92,1,4,0], // allWords 7: leapt|payer|petal|plate|pleat|repay|taper
+  ["arts-pile","arts","pile","spit","earl",3,"","","earl-spit",9], // allWords 13: lars|lear|lips|pits|rate|rats|real|sail|slip|star|tear|tips|tsar
+  ["shed-time","shed","time","them","side",2,"","","side-them",8,87,2,5,0], // allWords 11: dies|diet|edit|emit|item|mesh|meth|mite|semi|tide|tied
+  ["reset-sheep","reset","sheep","peers","these",4,"","","cannot be reversed",29,92,1,4,0], // allWords 11: ester|ether|seeps|sheet|speer|spree|steer|terse|there|three|trees
+  ["head-park","head","park","peak","hard",2,"","","hard-peak",2], // allWords 2: herd|perk
+  ["ask-rap","ask","rap","sap","ark",2,"","","ark-sap",7], // allWords 1: spa
+  ["heart-mains","heart","mains","meant","hairs",2,"","","hairs-meant",3], // allWords 27: earth|hares|hater|hears|heirs|hires|manta|mares|means|mensa|merit|minas|mines|mitre|names|neath|remit|share|shear|shine|shire|smear|tamer|thane|their|thine|timer
+  ["guru-race","guru","race","ragu","cure",3,"","","cure-ragu",15], // allWords 9: acre|cage|care|ecru|gear|rage|rare|rear|urge
+  ["damn-kiwi","damn","kiwi","wink","maid",3,"","","maid-wink",9], // allWords 8: amid|dawn|maki|midi|mind|mink|wand|wind
+  ["foam-kale","kale","foam","amok","leaf",3,"","","amok-leaf",19], // allWords 3: flea|lake|leak
+  ["pound-whole","whole","pound","phone","would",2,"","","phone-would",3], // allWords 1: wound
+  ["bath-hero","bath","hero","herb","oath",4,"","","herb-oath",23,92,1,4,0], // allWords 6: boar|boat|bora|bore|hath|robe
+  ["swept-tenor","swept","tenor","spent","tower",3,"","","spent-tower",8], // allWords 18: notes|onset|peers|senor|seton|snore|speer|spree|steep|stone|swore|sworn|toner|tones|towns|twerp|worse|wrote
+  ["glide-smart","smart","glide","large","midst",3,"","","large-midst",8], // allWords 22: dales|dames|deals|dimes|earls|gamer|glade|glare|grime|lager|laser|leads|mares|marge|midge|reals|regal|riles|slide|smear|trams|trims
+  ["chef-wane","chef","wane","cafe","when",2,"","","cafe-when",8], // allWords 4: acne|anew|cane|face
+  ["duet-kind","kind","duet","dunk","tied",3,"","","dunk-tied",22,87,2,5,0], // allWords 9: died|diet|dint|dude|duke|edit|kite|knit|tide
+  ["inner-quote","inner","quote","intro","queen",3,"","","intro-queen",11,92,1,4,0], // allWords 3: nitro|unite|urine
+  ["bawl-live","live","bawl","vibe","wall",3,"","","vibe-wall",8], // allWords 6: evil|vale|veal|veil|vile|will
+  ["rope-sort","sort","rope","port","rose",3,"","","port-rose",8], // allWords 9: pore|pose|post|pots|repo|sore|spot|stop|tops
+  ["shelf-white","white","shelf","shift","wheel",3,"","","shift-wheel",10,92,1,4,0], // allWords 6: flesh|heels|heist|sheet|these|while
+  ["fern-solo","solo","fern","lens","roof",4,"","","lens-roof",15], // allWords 6: fool|fore|lose|rose|sole|sore
+  ["bar-bid","bar","bid","rib","dab",3,"","","dab-rib",10,71,5,9,0], // allWords 2: bad|bra
+  ["deli-long","long","deli","glen","idol",2,"","","glen-idol",8,92,1,4,0], // allWords 8: dine|dong|gold|idle|lied|lien|line|lion
+  ["bolt-fury","fury","bolt","loft","ruby",3,"","","loft-ruby",8], // allWords 4: blot|bury|fort|turf
+  ["shiny-splat","shiny","splat","hints","plays",2,"","","hints-plays",5], // allWords 6: halts|palsy|pints|saith|shalt|spiny
+  ["bite-gaff","bite","gaff","biff","gate",2,"","","biff-gate",1], // allWords 4: abet|beat|beta|gift
+  ["clad-idea","clad","idea","aced","dial",3,"","","aced-dial",21,87,2,5,0], // allWords 7: aide|deli|died|idle|lace|laid|lied
+  ["extra-ruler","extra","ruler","exert","rural",3,"","","exert-rural",8], // allWords 3: laxer|relax|truer
+  ["elbow-tapas","tapas","elbow","bowel","pasta",2,"","","bowel-pasta",14], // allWords 17: bales|below|blast|boast|boats|bolts|lapse|leaps|lobes|lopes|pales|pleas|plots|poles|sable|slope|splat
+  ["local-snipe","local","snipe","lance","spoil",3,"","","lance-spoil",11], // allWords 14: alien|anise|canes|clans|clean|coals|nails|pines|poise|polis|scope|slain|snail|spine
+  ["rotor-stale","stale","rotor","alert","torso",3,"","","cannot be reversed",18,76,4,8,0], // allWords 14: alter|later|least|otter|roast|roost|roots|slate|solar|steal|stole|tales|torts|totes
+  ["gin-row","gin","row","nor","wig",3,"","","nor-wig",10,86,2,6,0], // allWords 0
+  ["carry-lunch","carry","lunch","ranch","curly",4,"","","curly-ranch",25,92,1,4,0], // allWords 4: churn|clary|curry|lurch
+  ["real-slog","real","slog","roll","sage",3,"","","roll-sage",12,92,1,4,0], // allWords 19: ages|earl|egos|ergo|gals|gear|goes|gore|lear|logs|lore|lose|ogre|rage|role|sale|seal|slag|sole
+  ["remix-timer","remix","timer","mixer","merit",2,"","","merit-mixer",14], // allWords 4: meter|metre|mitre|remit
+  ["basin-crate","basin","crate","brain","caste",2,"","","brain-caste",2,87,2,5,0], // allWords 13: abate|bates|beast|beats|brant|cairn|carte|cater|crest|cries|react|scant|trace
+  ["halo-puts","puts","halo","opal","shut",2,"","","opal-shut",6], // allWords 17: alps|atop|hast|hats|huts|laps|lash|lush|oath|pals|past|pats|plus|slap|spat|taps|thus
+  ["core-gear","core","gear","ergo","race",3,"","","ergo-race",18], // allWords 5: acre|care|gore|ogre|rage
+  ["raven-women","raven","women","ramen","woven",1,"","","ramen-woven",1], // allWords 0
+  ["bank-isle","bank","isle","able","sink",3,"","","able-sink",9], // allWords 8: akin|bale|bane|bean|lies|silk|sine|skin
+  ["boil-flap","boil","flap","blip","foal",2,"","","blip-foal",3], // allWords 7: ball|bill|fall|fill|flip|foil|loaf
+  ["bit-new","new","bit","tin","web",3,"","","tin-web",9,72,5,8,0], // allWords 5: bet|net|nit|ten|win
+  ["leak-pill","leak","pill","kill","leap",4,"","","kill-leap",23], // allWords 5: kale|lake|pale|peak|plea
+  ["aside-badly","aside","badly","abide","sadly",3,"","","abide-sadly",8], // allWords 8: aides|aisle|blade|daisy|dales|deals|ideas|leads
+  ["shear-trail","shear","trail","heart","rails",2,"sarah","tiler","heart-rails",6], // allWords 30: alert|altar|alter|earls|earth|hails|hairs|hales|hares|hater|heals|hears|heirs|hires|laser|later|lathe|leash|liars|reals|rears|riles|riser|shale|share|shire|terra|their|trial|trier
+  ["mini-then","mini","then","mine","thin",3,"","","mine-thin",9], // allWords 2: hint|tine
+  ["otter-tuned","tuned","otter","toned","utter",3,"","","toned-utter",8,75,4,9,0], // allWords 8: noted|outed|outer|rouen|route|tenor|toner|tuner
+  ["math-seat","math","seat","hats","team",3,"","","hats-team",23], // allWords 14: ahem|east|eats|hast|mate|meat|meta|meth|shea|stat|tame|teas|test|them
+  ["holy-rest","holy","rest","host","rely",2,"","","host-rely",1,87,2,5,0], // allWords 4: holt|rosy|shot|sort
+  ["spend-stark","stark","spend","parks","tends",2,"","","parks-tends",7,81,3,7,0], // allWords 9: darts|dents|karts|perks|spank|spark|stand|stank|tanks
+  ["laser-shush","laser","shush","usher","slash",3,"","","slash-usher",12,82,3,6,0], // allWords 9: ashes|earls|hales|hauls|heals|leash|reals|sears|shale
+  ["ear-rut","ear","rut","rue","tar",3,"","","rue-tar",14,74,4,10,0], // allWords 7: are|art|ate|eat|era|rat|tea
+  ["raise-teach","teach","raise","areas","ethic",3,"","","areas-ethic",16], // allWords 20: arise|chair|cheat|erase|hairs|hares|haste|hates|hears|heats|heirs|heist|hires|reach|saith|saree|share|shear|shire|tease
+  ["adore-begun","adore","begun","agree","bound",3,"","","agree-bound",11,92,1,4,0], // allWords 13: adorn|anger|boner|bored|borne|budge|debug|eager|grade|grand|radon|raged|range
+  ["deli-salt","deli","salt","laid","lets",3,"","","laid-lets",13], // allWords 8: dial|idle|isle|last|lest|lied|lies|sail
+  ["stone-viper","stone","viper","spine","voter",3,"","","spine-voter",8], // allWords 17: irons|noise|notes|onset|overt|piers|pines|seton|snipe|snort|spent|spire|steep|store|strep|tones|trove
+  ["rival-siren","siren","rival","risen","viral",2,"","","risen-viral",3], // allWords 17: evils|liars|liver|lives|rails|rains|reins|resin|riles|rinse|riven|sarin|silva|veils|veins|vials|vines
+  ["runt-sake","sake","runt","earn","tusk",4,"","","earn-tusk",23,92,1,4,0], // allWords 11: ants|kart|near|nuts|rake|rant|sane|stun|task|turk|turn
+  ["chant-mouse","mouse","chant","chase","mount",2,"","","chase-mount",1,92,1,4,0], // allWords 16: aches|ascot|atoms|canoe|canto|chats|coast|coats|count|maths|moats|ocean|ounce|scout|shame|tacos
+  ["dirt-note","dirt","note","rode","tint",4,"","","rode-tint",13,87,2,5,0], // allWords 12: diet|dire|dote|edit|redo|rein|ride|tide|tied|tine|tone|torn
+  ["lime-talk","lime","talk","milk","late",3,"","","late-milk",8], // allWords 18: emit|item|kill|lame|lite|male|mate|meal|meat|meta|mile|mite|tale|tame|teal|team|tile|time
+  ["elk-lid","elk","lid","led","ilk",2,"","","ilk-led",7,75,4,9,0], // allWords 1: die
+  ["magic-there","magic","there","cream","eight",6,"","","cream-eight",33], // allWords 15: carte|cater|chime|crate|eater|ether|ethic|gamer|grate|great|image|marge|react|three|trace
+  ["beast-loose","beast","loose","lease","boost",2,"","","boost-lease",2,87,2,5,0], // allWords 15: bates|beats|boast|boats|boots|easel|least|obese|slate|stale|steal|stole|stool|tales|tools
+  ["mean-read","mean","read","dare","name",2,"","","dare-name",15], // allWords 8: amen|dame|dear|earn|made|mane|mead|near
+  ["finch-wrote","finch","wrote","froth","wince",2,"","","froth-wince",3,92,1,4,0], // allWords 8: force|forte|forth|throw|tower|twine|winch|worth
+  ["rural-times","rural","times","mural","rites",3,"","","cannot be reversed",8,87,2,5,0], // allWords 17: emits|items|lemur|mites|mutes|riser|ruler|serum|smite|stair|sutra|tiers|tires|trail|trial|tries|ultra
+  ["dude-tide","tide","dude","died","duet",3,"","","cannot be reversed",10,92,1,4,0], // allWords 3: diet|edit|tied
+  ["bent-wavy","wavy","bent","bevy","want",2,"","","bevy-want",1,87,2,5,0], // allWords 2: newt|went
+  ["dose-exam","dose","exam","some","axed",4,"","","axed-some",13], // allWords 2: does|mods
+  ["redo-wing","redo","wing","grin","owed",2,"owen","grid","grin-owed",6], // allWords 7: gird|grid|iron|noir|nori|ring|rode
+  ["ark-rig","ark","rig","irk","rag",2,"","","irk-rag",7,76,3,12,0], // allWords 0
+  ["hulk-pool","hulk","pool","hook","pull",2,"","","hook-pull",2], // allWords 4: hull|loop|poll|polo
+  ["semi-tour","semi","tour","emit","ours",2,"","","emit-ours",7], // allWords 10: item|miso|mite|ruse|sour|sure|term|time|true|user
+  ["eater-traps","eater","traps","apart","terse",4,"","","cannot be reversed",24,87,2,5,0], // allWords 31: aster|erase|ester|parse|parts|pasta|paste|pears|rates|reset|saree|septa|spare|spate|spear|stare|state|steer|strap|strep|tapas|taper|tapes|taste|tater|tears|tease|terra|tetra|treat|trees
+  ["share-trace","share","trace","hears","react",2,"","","hears-react",19], // allWords 18: aches|acres|cares|carte|cater|chase|cheat|crate|earth|hares|hater|heart|races|rears|scare|shear|teach|terra
+  ["memo-tree","memo","tree","more","teem",3,"","","more-teem",9,87,2,5,0], // allWords 5: meet|mere|term|tome|tore
+  ["tapas-upset","tapas","upset","pasta","setup",2,"","","pasta-setup",14], // allWords 14: asset|paste|pasts|pause|pests|seats|septa|spate|spats|state|steps|tapes|taste|taupe
+  ["born-felt","felt","born","bolt","fern",2,"","","bolt-fern",1], // allWords 6: belt|blot|fort|fret|left|loft
+  ["angel-docks","angel","docks","lodge","snack",4,"","","lodge-snack",24,87,2,5,0], // allWords 9: angle|canes|clank|clean|cloak|codes|dolce|glean|lance
+  ["delay-start","delay","start","dealt","stray",2,"","","dealt-stray",5], // allWords 21: artsy|aster|delta|least|rated|rates|ready|salty|satay|slate|stale|stare|steal|tales|tardy|tarts|tears|trade|trays|tread|years
+  ["eye-row","eye","row","yew","ore",2,"","","ore-yew",7,81,3,7,0], // allWords 1: owe
+  ["cage-nope","cage","nope","gone","pace",3,"","","gone-pace",9,87,2,5,0], // allWords 3: cape|cope|open
+  ["acres-viola","viola","acres","arise","vocal",3,"","","arise-vocal",19,87,2,5,0], // allWords 12: cares|carve|coals|crave|liars|races|rails|raise|rival|scare|viral|voila
+  ["gods-neat","neat","gods","send","toga",4,"","","send-toga",23,92,1,4,0], // allWords 13: ages|ante|dent|dogs|dons|ends|gate|goat|nods|sage|sago|sane|tend
+  ["loft-sold","sold","loft","fold","lost",3,"","","fold-lost",8], // allWords 6: doll|lots|olds|slot|soft|toll
+  ["laugh-otter","laugh","otter","alter","tough",3,"","","alter-tough",8], // allWords 8: alert|gator|grout|later|lathe|ought|outer|route
+  ["daft-safe","daft","safe","fade","fast",3,"","","fade-fast",8,72,5,8,0], // allWords 2: deaf|fats
+  ["aired-badge","aired","badge","aided","barge",1,"","","aided-barge",2], // allWords 5: adage|bared|beard|bread|bride
+  ["awful-stake","awful","stake","askew","fault",3,"","","askew-fault",22,92,1,4,0], // allWords 10: awake|fetus|sault|skate|stalk|steak|takes|talks|wakes|walks
+  ["clash-short","clash","short","slosh","chart",2,"","","chart-slosh",3], // allWords 15: chats|clots|colts|harsh|horst|hosts|lasts|salts|shots|slash|slats|slots|stash|torch|trash
+  ["one-pad","one","pad","ape","nod",2,"","","ape-nod",7], // allWords 4: don|eon|pea|pen
+  ["cloud-nerve","cloud","nerve","crude","novel",3,"","","crude-novel",11,92,1,4,0], // allWords 7: clove|could|cruel|cured|never|ulcer|under
+  ["clean-ocean","clean","ocean","canoe","lance",2,"","","canoe-lance",15], // allWords 1: alone
+  ["stem-yarn","stem","yarn","army","tens",2,"","","army-tens",6], // allWords 11: arms|mars|mesa|nest|nets|rams|same|sane|seam|sent|tyne
+  ["lead-plum","plum","lead","dupe","mall",4,"","","dupe-mall",22], // allWords 11: dale|deal|duel|dull|lame|lamp|lump|male|meal|mule|palm
+  ["fails-shaft","shaft","fails","fifth","salsa",3,"","","fifth-salsa",11,87,2,5,0], // allWords 10: atlas|fatal|filth|flash|halts|sails|shalt|shift|slash|tails
+  ["frets-usher","usher","frets","refer","shuts",3,"","","refer-shuts",10], // allWords 8: freer|frees|fresh|hurst|hurts|reefs|reuse|truer
+  ["tied-till","tied","till","diet","lilt",2,"","","cannot be reversed",19,86,2,6,0], // allWords 4: edit|lite|tide|tile
+  ["blue-real","real","blue","earl","lube",1,"","","earl-lube",3,70,5,10,0], // allWords 7: able|bale|ball|bull|lear|lure|rule
+  ["nasal-tiger","tiger","nasal","great","slain",4,"","","great-slain",25], // allWords 46: align|angel|anger|angle|aster|atlas|earns|glean|grain|grate|islet|lanes|leans|least|legit|liang|liens|lines|nails|nears|rains|range|rates|reign|reins|resin|rinse|risen|rites|saran|sarin|siren|slate|snail|snare|stair|stale|stare|steal|tails|tales|tears|tiers|tiles|tires|tries
+  ["act-rap","rap","act","art","cap",2,"","","art-cap",7,76,4,8,0], // allWords 4: cat|pac|rat|tar
+  ["halo-peel","halo","peel","hole","plea",3,"","","hole-plea",8], // allWords 9: hale|hall|heal|heel|hell|leap|opal|pale|pole
+  ["rate-vice","vice","rate","cave","tire",3,"","","cave-tire",13], // allWords 7: acre|care|race|rice|rite|tear|tier
+  ["matte-panel","matte","panel","plate","meant",2,"","","meant-plate",7,87,2,5,0], // allWords 8: enema|leapt|metal|penal|petal|plane|plant|pleat
+  ["iron-sets","iron","sets","nose","stir",4,"","","nose-stir",21,86,2,6,0], // allWords 11: eons|nest|nets|noir|nori|ones|sent|site|tens|ties|tine
+  ["cargo-wines","cargo","wines","owing","scare",3,"","","owing-scare",11,87,2,5,0], // allWords 21: acres|canes|canoe|cares|conga|corgi|cries|ocean|races|since|swear|swine|swing|wagon|wanes|wares|wears|weirs|wings|wires|wiser
+  ["busy-mode","busy","mode","muse","body",2,"","","body-muse",2], // allWords 5: boys|buys|demo|dome|some
+  ["groom-salon","groom","salon","along","rooms",2,"","","along-rooms",6], // allWords 2: loans|moors
+  ["curse-worry","curse","worry","curry","worse",2,"","","curry-worse",1], // allWords 7: cores|crore|cures|recur|rower|score|swore
+  ["give-newt","give","newt","even","twig",5,"","","even-twig",26], // allWords 6: twin|vein|vent|vine|went|wine
+  ["elk-sat","elk","sat","ask","let",2,"","","ask-let",7], // allWords 4: ate|eat|tea|tel
+  ["ranch-uncle","ranch","uncle","crane","lunch",2,"","","crane-lunch",8,87,2,5,0], // allWords 4: clear|learn|rance|renal
+  ["pasta-shrew","pasta","shrew","paths","swear",3,"","","paths-swear",17], // allWords 18: apart|areas|ashes|hares|heaps|hears|phase|shape|share|shear|stash|straw|swats|tapas|trash|wares|warts|wears
+  ["lime-pork","lime","pork","milk","rope",3,"","","milk-rope",8,71,5,9,0], // allWords 10: lore|mile|mole|pier|poem|pore|repo|rile|ripe|role
+  ["oops-rail","oops","rail","loop","sari",3,"","","cannot be reversed",22,86,2,6,0], // allWords 10: airs|lair|liar|opal|polo|pool|pros|raps|rasp|soap
+  ["dream-freak","dream","freak","drake","frame",2,"","","drake-frame",5], // allWords 4: armed|faker|madre|raked
+  ["alter-using","alter","using","later","suing",1,"","","later-suing",3,69,5,11,0], // allWords 25: agile|alert|align|angst|arise|aster|gains|gates|guest|guile|guise|liang|rains|raise|rants|rates|ruins|runts|sarin|stage|stare|stung|tears|trans|turns
+  ["cold-rock","cold","rock","lock","cord",3,"","","cord-lock",8,81,3,7,0], // allWords 3: clod|cork|lord
+  ["deli-mass","deli","mass","lads","semi",4,"","","cannot be reversed",13,92,1,4,0], // allWords 16: aids|aims|dial|dies|idle|laid|lied|lima|lime|mail|mess|mile|said|side|slam|sled
+  ["coven-route","coven","route","ounce","overt",3,"","","ounce-overt",19], // allWords 6: count|covet|outer|rouen|trove|voter
+  ["gig-nib","gig","nib","big","gin",3,"","","cannot be reversed",9,70,5,10,0], // allWords 1: bin
+  ["mirth-wedge","mirth","wedge","merge","width",2,"","","merge-width",3], // allWords 12: grime|merit|meter|metre|midge|mitre|remit|threw|timed|timer|tweed|write
+  ["fast-sale","fast","sale","last","safe",3,"","","last-safe",8,72,5,8,0], // allWords 7: fats|flat|flea|leaf|salt|seal|seas
+  ["seek-tern","seek","tern","seen","trek",2,"","","seen-trek",6,85,2,7,0], // allWords 2: rent|teen
+  ["cedar-rehab","cedar","rehab","reach","beard",4,"","","beard-reach",29,92,1,4,0], // allWords 6: bared|beach|bread|cadre|cared|raced
+  ["fear-plug","fear","plug","page","furl",3,"","","furl-page",12,86,2,6,0], // allWords 6: fare|flag|gulf|pear|pure|reap
+  ["grin-seat","grin","seat","eats","ring",1,"sean","grit","eats-ring",3], // allWords 15: arts|east|gate|gran|grit|rang|rats|sane|sine|site|star|stir|teas|ties|tsar
+  ["eager-tones","eager","tones","onset","agree",2,"","","agree-onset",6], // allWords 9: gates|grate|great|notes|seton|stage|stone|tenor|toner
+  ["smirk-taped","taped","smirk","spark","timed",3,"","","spark-timed",8,87,2,5,0], // allWords 11: adept|aides|aside|dimes|ideas|parks|peaks|raids|spade|speak|triad
+  ["dead-ogre","dead","ogre","aged","redo",4,"","","aged-redo",15], // allWords 5: deer|ergo|gore|reed|rode
+  ["dud-gum","dud","gum","dug","mud",3,"","","cannot be reversed",9,63,6,13,0], // allWords 1: mug
+  ["brow-vein","brow","vein","view","born",2,"","","born-view",6], // allWords 4: bone|oven|vine|wove
+  ["lift-ride","lift","ride","dirt","file",3,"","","dirt-file",8], // allWords 9: deli|dire|fire|flit|idle|lied|life|rife|rift
+  ["breed-ethic","breed","ethic","cheer","debit",5,"","","cheer-debit",34,92,1,4,0], // allWords 3: birch|bride|hired
+  ["clove-shake","clove","shake","choke","slave",2,"","","choke-slave",3], // allWords 8: haves|lakes|leaks|loves|salve|shave|shove|solve
+  ["case-nerd","case","nerd","race","send",3,"acer","ends","race-send",9,86,2,6,0], // allWords 12: aces|acre|card|care|darn|earn|ends|near|rand|sand|sane|seen
+  ["paid-star","paid","star","tarp","aids",2,"","","aids-tarp",7], // allWords 12: airs|arts|pair|para|part|rats|said|sari|stir|trap|trip|tsar
+  ["force-truth","force","truth","truce","forth",2,"","","forth-truce",1,92,1,4,0], // allWords 7: cuter|forte|froth|otter|torch|touch|utter
+  ["lose-slap","lose","slap","less","opal",4,"elsa","pols","less-opal",15], // allWords 9: alps|laps|pals|sale|seal|sell|slop|soap|sole
+  ["acorn-spray","acorn","spray","apron","scary",2,"","","apron-scary",7,87,2,5,0], // allWords 6: carry|parry|prays|raspy|scorn|soapy
+  ["tap-tip","tap","tip","pat","pit",2,"","","pat-pit",5], // allWords 0
+  ["muse-site","muse","site","item","uses",2,"","","item-uses",7], // allWords 6: emit|mite|mute|semi|ties|time
+  ["crash-solve","crash","solve","carve","slosh",3,"","","carve-slosh",9], // allWords 15: acres|cares|chaos|close|clove|crave|havoc|loses|loves|races|raves|saver|scare|sears|soles
+  ["alone-gravy","alone","gravy","angle","ovary",4,"","","angle-ovary",22,92,1,4,0], // allWords 12: angel|anger|angry|arena|gavel|glean|glove|goner|grave|grove|range|rayon
+  ["awry-balm","awry","balm","ably","warm",2,"","","ably-warm",9], // allWords 5: alma|bray|lama|lamb|wary
+  ["fresh-sushi","fresh","sushi","fires","shush",2,"","","fires-shush",6], // allWords 7: fries|heirs|hires|issue|rises|serif|shire
+  ["input-light","light","input","thing","tulip",4,"","","thing-tulip",20], // allWords 2: guilt|night
+  ["nude-pine","nude","pine","dupe","nine",3,"","","dupe-nine",8], // allWords 2: dine|dune
+  ["dull-hack","dull","hack","duck","hall",2,"","","duck-hall",1], // allWords 4: clad|hulk|hull|lakh
+  ["gosh-want","gosh","want","hags","town",3,"","","hags-town",19,67,6,9,0], // allWords 11: hang|hogs|hong|shaw|show|stag|swat|tags|tang|tong|wash
+  ["ear-pug","ear","pug","gap","rue",3,"","","gap-rue",14,77,4,7,0], // allWords 4: age|are|era|rap
+  ["perk-weed","perk","weed","drew","keep",4,"","","drew-keep",23], // allWords 4: deep|peed|peek|week
+  ["quest-shore","quest","shore","queer","shots",3,"","","queer-shots",8], // allWords 13: euros|heres|heros|horse|horst|hoses|hosts|reuse|rouse|sheer|shoes|short|tours
+  ["late-mask","late","mask","same","talk",3,"","","same-talk",8,75,4,9,0], // allWords 11: mate|meat|mesa|meta|sale|seal|seam|tale|tame|teal|team
+  ["cone-icon","cone","icon","once","coin",1,"","","coin-once",3], // allWords 2: conn|nice
+  ["salty-voter","salty","voter","lover","tasty",3,"","","lover-tasty",8,76,4,8,0], // allWords 18: aster|avert|earls|laser|loser|overt|rates|ravel|reals|roles|stare|start|store|tarts|tears|torts|trove|yeast
+  ["alert-decor","decor","alert","older","react",4,"","","older-react",21,92,1,4,0], // allWords 16: alter|carer|carol|carte|cater|coder|coral|crate|credo|deter|eater|erode|erred|later|racer|trace
 ];
 
 const puzzleClues = {
@@ -3119,7 +3677,6 @@ const puzzleClues = {
   "grab-wild": "slick talk · hospital wing",
   "guide-mines": "outward appearance · dug up",
   "drug-mood": "beat keeper · morally right",
-  "bean-fart": "farm building · impressive act | flip",
   "actor-under": "respond · circular turn | flip",
   "grew-wore": "increase in size · existed before | flip",
   "ended-poets": "requires · chose | flip",
@@ -3481,7 +4038,6 @@ const puzzleClues = {
   "bug-new": "firearm · internet page | flip",
   "breed-spoke": "snapped · quickness | flip",
   "seal-sets": "permits · oceans | flip",
-  "fits-pass": "drains strength · flour detective",
   "fate-nest": "not dangerous · canvas shelter | flip",
   "lemur-paste": "wall artwork · sharply rising | flip",
   "sees-yaks": "poses questions · vision organs | flip",
@@ -3503,7 +4059,7 @@ const puzzleClues = {
   "aisle-corps": "train tracks · range",
   "elks-lung": "valley hollow · brood silently",
   "bore-even": "skeleton piece · always",
-  "eon-why": "greeting · possessed",
+  "eon-why": "greeting · possess",
   "kids-lack": "foot strike · young men | flip",
   "drive-month": "ranking after second · poison",
   "need-stay": "not difficult · look after | flip",
@@ -3585,7 +4141,7 @@ const puzzleClues = {
   "fatal-slink": "last · plant stem | flip",
   "dawn-tied": "not alive · matching sibling | flip",
   "shark-shown": "sells aggressively · head spikes | flip",
-  "add-won": "father · possessed | flip",
+  "add-won": "father · possess | flip",
   "mills-stork": "ends lives · tempest | flip",
   "dull-puts": "fine powder · tug | flip",
   "nifty-tasks": "greasy · drops below | flip",
@@ -3693,7 +4249,6 @@ const puzzleClues = {
   "mess-twin": "bird home · move in water",
   "boom-stop": "mistake sound · burial chamber",
   "fires-noble": "skeleton pieces · long-barrel firearm | flip",
-  "pass-ruby": "put underground · drains strength | flip",
   "gosh-pipe": "bishop of Rome · deep breath",
   "hoped-rites": "self-respect · those ones",
   "dry-tea": "colour liquid · black road stuff",
@@ -3817,7 +4372,7 @@ const puzzleClues = {
   "mixed-souls": "shaping fungus · double threes",
   "idol-rate": "spoken · coastal rhythm | flip",
   "rush-teen": "present place · snack kernels | flip",
-  "new-two": "possessed · rain-soaked",
+  "new-two": "possess · rain-soaked",
   "logos-stein": "not tight · sharp pain | flip",
   "ample-raise": "get up · syrup tree",
   "blot-stem": "permits · burial chamber | flip",
@@ -3913,7 +4468,7 @@ const puzzleClues = {
   "edits-rents": "leans toward · attempts",
   "dish-ugly": "pour out · without effort",
   "bars-cost": "person in charge · wagon",
-  "one-saw": "possessed · ocean",
+  "one-saw": "possess · ocean",
   "keep-mall": "mild onion · hand surface | flip",
   "funds-rainy": "amusing · sudden attacks",
   "arms-oven": "usual standard · rescue",
@@ -3946,13 +4501,11 @@ const puzzleClues = {
   "cover-viral": "flowing water · using the voice",
   "till-wood": "handy implement · untamed",
   "arc-due": "cow’s chew · historical period | flip",
-  "fart-sold": "shallow crossing · seasoning mineral",
   "comfy-reads": "rot slowly · shapes",
   "diet-lift": "revise copy · dart briefly | flip",
   "depot-liner": "observed · danger",
   "been-snug": "stopper plug · observed | flip",
   "lotus-nippy": "drops heavily · oneness | flip",
-  "node-wait": "opposed prefix · had a debt",
   "agent-veins": "scheduled happening · profits",
   "hippo-hosts": "snapshot · vessels",
   "and-its": "racket · took a seat",
@@ -4067,10 +4620,8 @@ const puzzleClues = {
   "acted-risks": "bags · made an attempt",
   "legs-runs": "focus glass · floor coverings",
   "beard-count": "rhythmic steps · engine boost",
-  "area-hint": "opposed prefix · catch sound | flip",
   "dad-don": "joining word · strange",
   "droid-swear": "routes · strange",
-  "fart-held": "sensed by touch · not soft",
   "loves-steam": "relocates · take secretly",
   "baron-given": "red-breast bird · plant-only eater | flip",
   "came-such": "courtroom matter · a lot",
@@ -4202,7 +4753,6 @@ const puzzleClues = {
   "hates-later": "feeling centre · minimum amount",
   "mad-she": "sales pitches · stitched edge",
   "bluff-start": "say suddenly · workplace crew",
-  "saps-toes": "oceans · small mark",
   "cups-tick": "slices · chosen option | flip",
   "caste-rebel": "thick wire · start again",
   "delay-salon": "nose-related · mountain singing | flip",
@@ -4330,7 +4880,6 @@ const puzzleClues = {
   "ivory-notes": "diplomatic messenger · civil unrest",
   "nib-wok": "ribbon knot · family",
   "disc-slam": "dressed in · fail to hit",
-  "amen-site": "opposed prefix · appear",
   "drone-spins": "wash lightly · small waters",
   "owed-tins": "has possession · fastened",
   "corgi-winds": "cake topping · bladed weapon",
@@ -4893,7 +5442,6 @@ const puzzleClues = {
   "fed-lob": "key tag · guided",
   "hello-lives": "green fruit · outer casing",
   "dolls-pearl": "dryly funny · earnest requests",
-  "send-yaps": "refuse · drains strength",
   "glade-spray": "vine bunch · with sorrow",
   "cress-treat": "respond · pauses",
   "fast-rows": "gentle to touch · armed conflicts",
@@ -5072,7 +5620,6 @@ const puzzleClues = {
   "vent-wage": "handed over · pond amphibian",
   "ideas-liars": "false name · fairground turns",
   "pool-true": "unmixed · handy implement",
-  "surf-yaps": "hot rage · drains strength",
   "ashes-spoke": "model stances · tremble",
   "boom-pelt": "ink stain · verse piece",
   "nap-old": "joining word · chop off",
@@ -6125,7 +6672,6 @@ const puzzleClues = {
   "guy-web": "insect · bow-maker’s wood",
   "deity-skins": "tiny and cute · web locations",
   "atoms-state": "defensive ditches · sample flavour",
-  "pain-they": "opposed prefix · overblown buzz",
   "coast-tears": "examples · fortune cards",
   "shaft-sweat": "warms up · drifts gently",
   "navy-rile": "straight mark · differ",
@@ -6170,6 +6716,576 @@ const puzzleClues = {
   "most-safe": "quick · a few",
   "heart-rains": "cut wool · rail convoy",
   "ready-stand": "challenged · unpleasant",
+  "coat-wild": "earth lump · stay put",
+  "lord-nope": "small lake · play function",
+  "clone-grave": "hand covering · lifting bird | flip",
+  "bible-tones": "teeth marks · high-born",
+  "lie-tag": "fall behind · neckwear knot",
+  "glad-idea": "grown old · numbered face",
+  "slam-week": "appear · stroll",
+  "shade-trace": "skull tops · respond",
+  "free-tier": "flames · woody plant",
+  "cages-tasks": "entry barriers · rough bags",
+  "gunk-peel": "retain · breathing organ",
+  "enter-shuts": "canvas shelters · doorway guide | flip",
+  "buses-cabin": "wash bowl · blocks",
+  "steps-stops": "annoyances · upright poles",
+  "old-orb": "toss high · straight stick",
+  "opal-rest": "fail to keep · hidden snare | flip",
+  "crow-folk": "bottle stopper · move like water",
+  "raise-suing": "get up · employing",
+  "lance-loyal": "not dirty · metal mixture",
+  "babe-hall": "spill secrets · make well",
+  "clans-siege": "transparent pane · sibling’s daughter",
+  "flint-salsa": "drops down · stubborn mark",
+  "bibs-dive": "offers · atmosphere",
+  "guru-lady": "properly · Italian sauce | flip",
+  "not-pie": "vast age · pointy end",
+  "bill-page": "slick talk · sudden jump",
+  "layer-minor": "inside covering · town leader | flip",
+  "shift-slide": "conceals · raises upward",
+  "cape-kick": "sweet slice · chosen option",
+  "cute-tiny": "urban centre · melody",
+  "north-sails": "big cats · rubbish",
+  "evil-maid": "face covering · surrounded by",
+  "knees-thief": "cutting blade · nearby ones",
+  "apple-marks": "green spaces · plentiful",
+  "ear-pun": "regret · short sleep",
+  "deer-sofa": "unable to hear · tender",
+  "agile-pairs": "false name · complain",
+  "tacos-tales": "shoreline · minimum amount | flip",
+  "pilot-tears": "character feature · upright sticks",
+  "nope-sour": "not shut · belonging to us",
+  "rated-views": "steer clear · hand hinge",
+  "bold-hire": "feathered animal · opening",
+  "downs-spree": "possessed · push down",
+  "pay-peg": "opening space · casual yes",
+  "style-super": "sharply rising · bad-tempered",
+  "even-lets": "otherwise · air outlet",
+  "ages-sung": "employs · organised crew | flip",
+  "clade-stray": "wooden box · with sorrow",
+  "ozone-sling": "special jargon · areas",
+  "rind-sale": "beach grains · provoke",
+  "basic-veers": "sideways scuttlers · kitchen strainer",
+  "mild-race": "playing rectangle · citrus wedge",
+  "chin-item": "send out · small measure",
+  "elk-rid": "annoy · guided",
+  "badge-panel": "beg earnestly · started",
+  "props-sauce": "harvests · brief halt",
+  "able-sits": "small island · flying mammals",
+  "flit-gear": "young woman · destined outcome",
+  "shake-sweat": "warms up · funeral vigils",
+  "ogre-slog": "pirate drink · fail to keep",
+  "beard-fault": "sheep cry · deception",
+  "ape-row": "metal-bearing rock · animal foot",
+  "done-seen": "ages · require",
+  "maple-terms": "light sources · poetic measure | flip",
+  "fixed-heels": "open ground · casts spells | flip",
+  "nude-pack": "headland · plunge",
+  "flame-parts": "cultivated lands · dinner surface",
+  "axis-east": "oceans · cab ride",
+  "dozen-sides": "network points · measured out",
+  "host-link": "car horn sound · catalogue",
+  "named-vocal": "waterway · relocated",
+  "ewe-ton": "single unit · rain-soaked",
+  "coin-read": "nailed the test · pressing metal | flip",
+  "lord-oath": "stop signal · entry panel",
+  "twist-viral": "dragnet search · call in briefly",
+  "fists-toned": "observed · sieves finely",
+  "tide-turn": "eating plan · litter’s smallest",
+  "duke-yaps": "trick · long-haired oxen",
+  "dance-tests": "social class · leans toward",
+  "bucks-lanky": "river edges · fortunate | flip",
+  "owing-sleek": "special jargon · calendar stretches",
+  "nor-tar": "sprinted · decay",
+  "dark-west": "work surface · skin bump",
+  "discs-reset": "peppery greens · revises copy",
+  "bald-rays": "science rooms · grassy enclosure",
+  "guess-means": "restaurant lists · vapours | flip",
+  "life-teem": "send out · sense by touch",
+  "gold-heat": "horned farm animal · kept in grip",
+  "ramen-sweet": "more recent · groups",
+  "cook-true": "remedy · carried away",
+  "lodge-rally": "wheeled doll · not small",
+  "bob-pad": "dance hit · paint touch",
+  "bait-moon": "footwear · principal one",
+  "rush-sake": "hearing organs · outer shell",
+  "hands-tales": "layered rock · hold ground",
+  "court-privy": "spiced stew · turning point",
+  "gate-newt": "canvas shelter · earnings",
+  "free-slog": "wood records · coral ridge | flip",
+  "corks-shoot": "sudden jolt · body trunk",
+  "grow-skin": "ruler · lines of text",
+  "board-stunt": "spring forward · opening spark",
+  "dad-ski": "youngster · sales pitches",
+  "tear-trip": "cover sheet · level",
+  "lilt-solo": "road charge · lubricates | flip",
+  "shove-slink": "car horn sounds · exists",
+  "creek-float": "frog sound · naval group",
+  "mind-past": "condemn mildly · pointers | flip",
+  "pagan-veins": "plant-only eater · aches",
+  "drop-epic": "flexible line · smoking tube | flip",
+  "rapid-whole": "broadcast device · young pup",
+  "donor-names": "country estate · network points",
+  "gem-wig": "live job · cat sound",
+  "debt-file": "wait it out · departed",
+  "scarf-trial": "skilled making · train tracks",
+  "done-safe": "grow dim · scent organ",
+  "ingot-siren": "opening section · scorch lightly",
+  "case-role": "delicate trim · painful",
+  "hack-nets": "head coverings · collar zone",
+  "doubt-horse": "lost interest · compass point",
+  "caper-stems": "holiday sites · guide the wheel",
+  "state-teams": "friends · sample flavour",
+  "eye-tax": "up to now · chopping tool",
+  "cure-peel": "answer hint · social equal",
+  "age-rap": "opening space · being verb",
+  "dodo-kegs": "work surface · morally right",
+  "match-renal": "hard alloy · cattle spread",
+  "snide-storm": "social standards · coastal rhythms",
+  "dare-teen": "faculty head · woody plant",
+  "realm-skies": "dinner portions · snow-slope rider",
+  "other-plans": "brief delay · rose prickle",
+  "clay-lime": "supporter · small rodents",
+  "fond-labs": "touch down · key tags",
+  "lists-shoes": "party givers · small islands",
+  "bar-rot": "steal from · black road stuff",
+  "shame-worst": "defensive ditches · tiny insect-hunter",
+  "eons-mark": "hearing organs · robed ascetic",
+  "kale-soft": "not genuine · no longer found",
+  "heard-rolls": "dryly funny · cut wool",
+  "blows-coast": "extra lift · animal talons",
+  "pink-tins": "make loops · tiny cut",
+  "crime-stark": "smug half-smile · wooden box",
+  "novel-wipes": "yearns · speech sound",
+  "each-must": "sunrise direction · a great deal",
+  "did-new": "racket · marry",
+  "draw-pair": "sudden attack · fold around",
+  "dome-vibe": "wait it out · change position",
+  "drain-surge": "pushed strongly · falls from clouds | flip",
+  "lady-sums": "crowd of matter · properly | flip",
+  "filed-smack": "well known · smooth and glossy",
+  "outer-suits": "matter at hand · river fish",
+  "cage-talk": "entry barrier · absence",
+  "hardy-mason": "town leader · body helpers",
+  "later-maple": "plentiful · change",
+  "elk-sag": "pose a question · walking limb",
+  "lube-tofu": "contest round · energy source",
+  "overt-sense": "beginning phase · tennis delivery",
+  "none-sole": "solitary · scent organ",
+  "cute-plus": "answer hint · places down",
+  "shook-slide": "conceals · appears",
+  "down-rare": "travelled · caution",
+  "rind-tool": "entry panel · clothing fluff",
+  "force-polka": "card-table game · central",
+  "cares-suing": "land units · employing",
+  "key-way": "shaggy ox · bow-maker’s wood",
+  "cope-eats": "walking speed · foot digits",
+  "pylon-tease": "run off to wed · unpleasant",
+  "beta-hall": "round toy · warmth",
+  "sent-shut": "double-digit set · therefore",
+  "angle-piece": "nimble · small coin",
+  "dated-shirt": "calendar fruits · after second",
+  "acts-euro": "outer layer · account holder",
+  "stoke-weird": "took to snow · put in words",
+  "horse-worse": "promised aloud · coastline | flip",
+  "ewe-not": "single unit · rain-soaked",
+  "deny-ever": "green-eyed ache · antlered animal",
+  "logo-slap": "wood records · milky gem",
+  "seeds-stops": "measured amounts · annoyances",
+  "bids-such": "young bears · serving plate",
+  "airy-keel": "similar to · calendar span",
+  "flour-least": "defect · defeated person",
+  "chefs-lines": "storage ledge · from then",
+  "clip-more": "grain harvest · distance unit",
+  "below-state": "joint bend · sample flavour",
+  "pay-pot": "upper surface · chatter",
+  "cheer-tired": "apple pour · number after two",
+  "fill-leak": "tree part · end life",
+  "dale-inch": "spiced tea · loan out",
+  "fades-stern": "worries · family car",
+  "king-lads": "pleased · body covering",
+  "diets-views": "spouses · coastal rhythms",
+  "armed-villa": "warning signal · underworld figure",
+  "cart-sack": "stage lineup · storage frame",
+  "bops-link": "light knock · mouth edges",
+  "ore-ran": "historical period · neither partner",
+  "fled-foot": "sensed by touch · edibles",
+  "dread-kinds": "took a position · swallowed drink",
+  "ashes-prove": "cords · remove stubble",
+  "time-when": "those people · cellar pour",
+  "loops-serve": "swimming spots · poetic lines",
+  "stork-swell": "spills secrets · labours",
+  "bees-post": "model’s stance · wagers",
+  "tense-wharf": "refresh · long pole",
+  "half-word": "not soft · wild canine",
+  "ton-yes": "mesh trap · bean sauce",
+  "cage-oral": "land measure · target",
+  "raced-relay": "cake stratum · fragrant timber",
+  "risk-soup": "lip press · decant",
+  "salad-style": "with sorrow · take secretly",
+  "lasts-noted": "seasoning crystals · softened in tone",
+  "arms-lane": "door-bang · receive payment",
+  "pixel-sears": "double threes · oyster gem",
+  "stay-true": "consumes · round nomad tent",
+  "gavel-homes": "contests · rough dwelling",
+  "ark-rim": "annoy · charging sheep",
+  "cubes-polar": "hooded snake · beating signal",
+  "bacon-table": "conductor’s stick · thick wire",
+  "ease-silk": "falsehoods · for this reason",
+  "diner-laden": "challenged · woven cloth",
+  "gate-nuts": "labels · melody",
+  "core-mice": "arrive · grain bowl",
+  "mates-wagon": "tropical fruit · squander",
+  "eight-tract": "visible remnant · clenched",
+  "open-pins": "flat refusal · rotate",
+  "bot-owl": "number after one · toss high",
+  "bald-cook": "dressed in · printed volume",
+  "tape-town": "verse maker · desire",
+  "spear-tally": "fittingly · focused beam",
+  "crest-slope": "narrow openings · move stealthily",
+  "sift-turn": "sudden seizures · litter’s smallest",
+  "fold-snug": "money pool · weary trudge",
+  "paint-rents": "used up · rail convoy",
+  "prime-tough": "complain · oral opening",
+  "diver-fetch": "high temperature · abandon channel",
+  "nod-pie": "brief plunge · vast age",
+  "flit-room": "plant base · movie layer",
+  "dork-lube": "travelled · large mass",
+  "dodge-rugby": "close friend · deep ravine",
+  "lead-twin": "grass patch · knotted fast",
+  "fade-name": "unable to hear · unkind",
+  "agree-count": "excellent · small weight",
+  "smell-stand": "leans toward · retail complexes",
+  "dairy-noble": "knife edge · twist of fate",
+  "hiker-jolly": "wildcard comic · full of slopes",
+  "dad-yap": "24 hours · cushion",
+  "duty-rise": "shipshape · certain",
+  "blot-veil": "invoice · ballot choice",
+  "gears-rehab": "flat-bottomed boat · portion together",
+  "dense-grill": "practice routine · DNA units",
+  "lost-save": "bottom of shoe · immense",
+  "ashes-drift": "long pole · fairground turns",
+  "perk-site": "social equal · comedy sketch",
+  "foul-nest": "focus glass · bean curd",
+  "aimed-cores": "shown publicly · arrives",
+  "web-won": "fresh · ribbon knot",
+  "care-owed": "was dressed in · nailed the test",
+  "clan-fort": "yellow kernels · level dwelling",
+  "champ-seals": "spot to be · crash violently",
+  "semi-that": "send out · head coverings",
+  "least-mould": "podium prize · sacred water flower",
+  "ample-parry": "crisp fruit · join at altar",
+  "gosh-nice": "weary exhale · traffic marker",
+  "choir-straw": "house pest · hand hinge",
+  "crank-drums": "stuffs in · intoxicated",
+  "bag-pro": "opening space · round object",
+  "beta-chin": "spiced tea · not straight",
+  "atlas-prose": "continues · stage song",
+  "dude-sets": "fine powder · plant starter",
+  "lamp-mate": "not female · press firmly",
+  "berry-fluid": "sturdy-built · cooked in oil",
+  "spoil-stump": "pushes liquid · hard labours",
+  "menus-yards": "gritty with grains · blood liquid",
+  "oops-pure": "pontiff · belonging to us",
+  "quiet-winds": "ink swimmer · twisted thread",
+  "lead-shoe": "comfort · keep in grip",
+  "dark-mess": "work surface · damages | flip",
+  "ocean-pests": "quick jottings · empty expanse",
+  "cited-ranch": "easy task · ranked",
+  "eye-sax": "chopping tool · agreement word",
+  "aids-pull": "two-part · mouth edges",
+  "among-lakes": "beside · creates",
+  "proof-tight": "struggle · soldier group | flip",
+  "grow-land": "chew steadily · noble master",
+  "later-yells": "cake stratum · spills secrets",
+  "dive-logo": "morally right · face covering",
+  "sari-stem": "identical · mix round",
+  "enter-spies": "got up · sharply rising",
+  "arts-pier": "uncommon · mouth missile",
+  "dip-nod": "racket · seed case",
+  "levy-role": "depend on · deep affection",
+  "mind-nags": "condemn mildly · carry a tune",
+  "curls-feast": "peppery greens · defect",
+  "mite-riot": "send out · group of three",
+  "hence-idols": "selected · striped | flip",
+  "atoms-peers": "cords · butcher cuts | flip",
+  "gawk-nice": "barred enclosure · quick blink | flip",
+  "hero-ride": "employ · do-over",
+  "warns-worms": "crowd together · under oath | flip",
+  "nor-pie": "tear apart · vast age",
+  "nuts-skip": "places down · body covering | flip",
+  "fell-plod": "survey count · ran away",
+  "asset-swear": "burns on surface · squander",
+  "check-float": "break rules · woolly group",
+  "newt-vary": "monthly due · undulating",
+  "gouge-sands": "soak thoroughly · groups of thugs",
+  "lifts-nosey": "misplaces · stylish",
+  "part-read": "beloved one · cover sheet | flip",
+  "mark-open": "pig meat · prayer ending",
+  "age-ray": "being verb · cheerful",
+  "funds-roots": "edibles · litter’s smallest",
+  "leap-says": "settles a bill · fasten closed",
+  "sleek-swung": "calendar stretches · breathing organs",
+  "sued-tick": "knotted fast · draw inward",
+  "realm-splat": "change · light sources | flip",
+  "spoke-stand": "small waters · accepts",
+  "farm-gold": "originating at · pleased",
+  "arena-edges": "see eye to eye · family car",
+  "brow-slam": "young sheep · lines of text",
+  "ear-rub": "pub counter · regret",
+  "bait-mood": "footwear · house worker",
+  "acre-rugs": "road vehicles · inner push",
+  "grade-touch": "wooden box · bread money",
+  "knock-steel": "merchandise supply · drop to one knee | flip",
+  "more-safe": "flower · renown",
+  "sums-tidy": "obligation · fail to hit",
+  "handy-sieve": "cutting remark · weighty",
+  "meets-niche": "therefore · multiplied by",
+  "ropes-slips": "small islands · stage supports",
+  "peg-tag": "opening space · obtain",
+  "full-goof": "silly person · deep divide",
+  "skier-socks": "heavens · stones",
+  "clove-papal": "crisp fruit · using the voice",
+  "bird-code": "flexible line · wait it out",
+  "bias-mute": "targets · hollow pipe",
+  "stage-swear": "cries · earnings",
+  "bonk-fast": "warm in sun · type style",
+  "seats-turbo": "foundations · river fish",
+  "nodes-sales": "measured amounts · road channels",
+  "tap-yap": "gentle touch · wages",
+  "flies-giant": "boneless cut · profits",
+  "acted-polls": "rings up · selected",
+  "neat-sync": "double-digit set · blue-green shade",
+  "burn-easy": "occupied · receive payment",
+  "shack-slang": "is missing · dangles",
+  "later-voter": "on guard · openly visible",
+  "perk-wine": "rosy shade · existed before",
+  "rites-shift": "sieves finely · belonging to them",
+  "plot-star": "cover sheet · many",
+  "bib-tar": "curved bone · night flyer",
+  "beers-stalk": "smooth and glossy · naughty kids",
+  "cared-noted": "softened in tone · sped in contest",
+  "runt-site": "level · snack kernels",
+  "badly-surge": "small emblem · bad-tempered",
+  "even-role": "always · solitary",
+  "case-yaps": "walking speed · states",
+  "pairs-taken": "rail convoy · mountain tops",
+  "drew-fear": "hospital section · coral ridge | flip",
+  "lend-wait": "placed flat · departed",
+  "ark-saw": "uncooked · pose a question",
+  "break-stool": "take secretly · small stream",
+  "ideas-loyal": "metal mixture · to one side",
+  "disc-goal": "sour chemical · weary trudge",
+  "crux-flow": "constant change · black bird",
+  "atoms-means": "labels · defensive ditches | flip",
+  "back-isle": "under the weather · has the skill",
+  "aids-bold": "first claim · cargo burden",
+  "claim-timed": "copycat act · handled cards",
+  "gawk-same": "earnings · disguise cover",
+  "mid-tip": "low-lit · deep hole",
+  "dale-feet": "sense by touch · calendar square",
+  "relay-remix": "kitchen blender · cake stratum",
+  "bears-scare": "rub out · sideways scuttlers",
+  "mock-neon": "night orb · collar zone",
+  "slide-stink": "connections · coastal rhythms",
+  "cell-hood": "unbothered · kept in grip",
+  "lean-stir": "metal cans · minor noble",
+  "helps-light": "upper-leg part · casts letters",
+  "hoops-siren": "inheritors · soup utensil",
+  "leg-two": "obtain · night bird",
+  "honey-steer": "old knock-out gas · prying",
+  "levee-ruins": "pointy-eared folk · bladder output",
+  "four-shot": "therefore · top cover",
+  "bush-wing": "stopper plug · desire",
+  "plate-quips": "provide tools · wet smack",
+  "rude-vice": "remedy · plunge",
+  "ford-pink": "pig meat · locate",
+  "crane-price": "playful exploit · more pleasant",
+  "photo-wives": "turning point · belonging to whom",
+  "art-can": "perform · sprinted",
+  "node-soft": "measured medicine · type style",
+  "sees-stem": "appear · groups",
+  "order-sorts": "garment · spinning blade",
+  "flit-knew": "travelled by air · make loops",
+  "fade-vast": "foolish · rescue",
+  "sulks-voter": "sweetheart · ivory curves",
+  "ropes-sling": "small islands · fork point",
+  "candy-taste": "rhythmic steps · delicious",
+  "metre-slash": "softens with heat · cut wool",
+  "bag-ewe": "years lived · internet page",
+  "madam-pixel": "pithy saying · foot lever",
+  "spoil-stole": "upright sticks · hard labours",
+  "look-mild": "end life · dark fate",
+  "based-optic": "simple · selected",
+  "noted-salts": "continues · softened in tone",
+  "beer-data": "rhythm pulse · bold challenge",
+  "cask-duly": "woman · draw inward",
+  "next-that": "written words · comparison word",
+  "stay-twin": "colour wash · paths",
+  "gag-mew": "jewel · tail flick",
+  "scene-stunt": "melodies · small coins",
+  "brand-teens": "chilli staples · fashion direction | flip",
+  "need-pigs": "not shallow · visible mark",
+  "doily-icing": "coldly · in progress",
+  "party-valet": "turn aside · fittingly",
+  "arts-pile": "mouth missile · minor noble",
+  "shed-time": "those people · team half",
+  "reset-sheep": "equals in rank · nearby ones",
+  "head-park": "mountain top · not soft",
+  "ask-rap": "drain vitality · flood boat",
+  "heart-mains": "intended · strands on head",
+  "guru-race": "Italian sauce · remedy",
+  "damn-kiwi": "quick blink · house worker",
+  "foam-kale": "wildly loose · tree part",
+  "pound-whole": "call device · conditional helper",
+  "bath-hero": "flavour leaf · solemn promise",
+  "swept-tenor": "used up · tall structure",
+  "glide-smart": "not small · in the middle | flip",
+  "chef-wane": "coffee spot · at what time",
+  "duet-kind": "brief plunge · knotted fast",
+  "inner-quote": "opening section · monarch",
+  "bawl-live": "atmosphere · vertical barrier",
+  "rope-sort": "harbour · flower",
+  "shelf-white": "move a bit · circular mover",
+  "fern-solo": "focus glass · top cover",
+  "bar-bid": "curved bone · paint touch | flip",
+  "deli-long": "valley hollow · worship figure",
+  "bolt-fury": "upper room · red gem",
+  "shiny-splat": "subtle nudges · stage works",
+  "bite-gaff": "quick punch · entry barrier",
+  "clad-idea": "nailed the test · numbered face",
+  "extra-ruler": "apply effort · countryside",
+  "elbow-tapas": "gut section · noodle dish",
+  "local-snipe": "spear · ruin",
+  "rotor-stale": "on guard · body trunk",
+  "gin-row": "neither partner · hairpiece",
+  "carry-lunch": "cattle spread · full of curls",
+  "real-slog": "bread cylinder · wise herb",
+  "remix-timer": "kitchen blender · worthiness | flip",
+  "basin-crate": "thought organ · social class",
+  "halo-puts": "milky gem · closed",
+  "core-gear": "therefore · speed contest",
+  "raven-women": "noodle soup · interlaced",
+  "bank-isle": "has the skill · drain down",
+  "boil-flap": "tiny signal · young horse",
+  "bit-new": "metal can · internet page",
+  "leak-pill": "end life · sudden jump",
+  "aside-badly": "put up with · with sorrow",
+  "shear-trail": "feeling centre · train tracks",
+  "mini-then": "ore source · slender",
+  "otter-tuned": "softened in tone · speak aloud",
+  "math-seat": "head coverings · sports side",
+  "holy-rest": "presenter · depend on",
+  "spend-stark": "green spaces · leans toward",
+  "laser-shush": "doorway guide · diagonal cut",
+  "ear-rut": "regret · black road stuff",
+  "raise-teach": "mapped zones · moral code",
+  "adore-begun": "see eye to eye · spring forward",
+  "deli-salt": "placed flat · permits",
+  "stone-viper": "backbone · ballot caster",
+  "rival-siren": "got up · internet-popular",
+  "runt-sake": "receive payment · ivory spike",
+  "chant-mouse": "pursuit · climb aboard",
+  "dirt-note": "travelled · colour wash | flip",
+  "lime-talk": "cow pour · not on time",
+  "elk-lid": "guided · kind or sort | flip",
+  "magic-there": "rich dairy top · number after seven",
+  "beast-loose": "rental agreement · extra lift",
+  "mean-read": "bold challenge · label",
+  "finch-wrote": "foam crown · pain flinch",
+  "rural-times": "wall artwork · ceremonies | flip",
+  "dude-tide": "no longer lived · two-person song",
+  "bent-wavy": "large group · desire",
+  "dose-exam": "a few · cut from list | flip",
+  "redo-wing": "broad smile · had a debt",
+  "ark-rig": "annoy · scrap cloth",
+  "hulk-pool": "curved catch · tug",
+  "semi-tour": "send out · belonging to us | flip",
+  "eater-traps": "separated · brief",
+  "share-trace": "catches sound · respond",
+  "memo-tree": "extra amount · swarm abundantly | flip",
+  "tapas-upset": "noodle dish · arrangement",
+  "born-felt": "door fastener · forest frond",
+  "angel-docks": "woodland cabin · quick bite",
+  "delay-start": "handled cards · wanders off",
+  "eye-row": "bow-maker’s wood · metal-bearing rock",
+  "cage-nope": "no longer here · walking speed",
+  "acres-viola": "get up · using the voice",
+  "gods-neat": "dispatch · Roman robe",
+  "loft-sold": "crease · no longer found",
+  "laugh-otter": "change · hard to handle",
+  "daft-safe": "grow dim · quick",
+  "aired-badge": "helped · flat-bottomed boat",
+  "awful-stake": "crooked · defect",
+  "clash-short": "splashing mess · map graphic",
+  "one-pad": "imitate · head dip",
+  "cloud-nerve": "rough · fiction book",
+  "clean-ocean": "paddle boat · spear",
+  "stem-yarn": "military force · double-digit set",
+  "lead-plum": "trick · shopping centre",
+  "fails-shaft": "after fourth · spicy dance",
+  "frets-usher": "cite · closes",
+  "tied-till": "eating plan · sing-song rhythm",
+  "blue-real": "minor noble · slick helper",
+  "nasal-tiger": "excellent · killed",
+  "act-rap": "creative craft · headwear",
+  "halo-peel": "opening · earnest request",
+  "rate-vice": "hollow shelter · wheel covering",
+  "matte-panel": "dinner surface · intended",
+  "iron-sets": "scent organ · mix round",
+  "cargo-wines": "still due · frighten",
+  "busy-mode": "source of inspiration · torso",
+  "groom-salon": "beside · chambers",
+  "curse-worry": "spiced stew · less good",
+  "give-newt": "level, no oddities · small branch | flip",
+  "elk-sat": "pose a question · allow",
+  "ranch-uncle": "lifting bird · midday meal",
+  "pasta-shrew": "routes · vow strongly",
+  "lime-pork": "cow pour · cord",
+  "oops-rail": "closed curve · draped garment | flip",
+  "dream-freak": "male duck · outer structure",
+  "alter-using": "afterwards · taking to court",
+  "cold-rock": "fastening mechanism · flexible line",
+  "deli-mass": "young men · halfway prefix",
+  "coven-route": "small weight · openly visible",
+  "gig-nib": "large · clear spirit",
+  "mirth-wedge": "combine · breadth",
+  "fast-sale": "final one · out of danger",
+  "seek-tern": "observed · long journey",
+  "cedar-rehab": "stretch out · chin forest",
+  "fear-plug": "paper sheet · roll cloth | flip",
+  "grin-seat": "consumes · circular band",
+  "eager-tones": "beginning phase · see eye to eye",
+  "smirk-taped": "bright flash · clocked",
+  "dead-ogre": "grown old · do-over",
+  "dud-gum": "excavated · wet earth",
+  "brow-vein": "outlook · came into life",
+  "lift-ride": "soil · document",
+  "breed-ethic": "encouragement · account subtraction | flip",
+  "clove-shake": "block the throat · forced worker",
+  "case-nerd": "speed contest · dispatch",
+  "paid-star": "cover sheet · assists",
+  "force-truth": "ceasefire · onward",
+  "lose-slap": "not as much · milky gem | flip",
+  "acorn-spray": "kitchen cover · frightening",
+  "tap-tip": "gentle touch · deep hole",
+  "muse-site": "list piece · employs",
+  "crash-solve": "cut into shape · splashing mess | flip",
+  "alone-gravy": "viewpoint · egg organ | flip",
+  "awry-balm": "skilfully · not cold",
+  "fresh-sushi": "starts flames · quiet noise",
+  "input-light": "object · spring flower | flip",
+  "nude-pine": "trick · number after eight",
+  "dull-hack": "water bird · corridor",
+  "gosh-want": "crones · small settlement",
+  "ear-pug": "opening space · regret",
+  "perk-weed": "sketched · retain",
+  "quest-shore": "odd/unsettling · small drinks",
+  "late-mask": "identical · speak",
+  "cone-icon": "one-time past · minted money",
+  "salty-voter": "sweetheart · delicious",
+  "alert-decor": "less young · respond",
 };
 
 const clueBonusWords = {
@@ -6206,7 +7322,6 @@ const clueBonusWords = {
   "grab-wild": ["brag","drag","draw","grad"],
   "guide-mines": ["denim","dings","genie","genus","menus","minds","nudge","singe"],
   "drug-mood": ["dodo","doom","dorm","rudd"],
-  "bean-fart": ["abet","bane","beat","beta","bran","brat","fate","fern","feta","frat","fret","raft"],
   "actor-under": ["adorn","cadre","cared","carte","cater","cedar","court","crate","crude","cured","cuter","raced","radon","trace","truce","tuner"],
   "grew-wore": ["ergo","gore","ogre"],
   "ended-poets": ["dense","dents","depot","doped","dopes","dotes","pesto","posed","spend","spent","teens","tends","tense"],
@@ -6559,7 +7674,6 @@ const clueBonusWords = {
   "bug-new": ["beg","gen","gnu"],
   "breed-spoke": ["bored","doers","dopes","dorks","doser","keeps","peeks","pokes","posed","reeds","reeks"],
   "seal-sets": ["lest","sale"],
-  "fits-pass": ["fast","fats","fist","past","pats","pits","spat","spit","taps","tips"],
   "fate-nest": ["ante","ants","fast","fats","feat","fees","feet","feta","fete","neat","nets","sane","seen","sent","teen","tens"],
   "lemur-paste": ["least","lures","metal","parts","pause","purse","rules","septa","slate","sleet","spate","stale","steal","steel","strap","strep","super","supra","tales","tapes","tramp","traps"],
   "sees-yaks": ["easy","keys","seas"],
@@ -6660,7 +7774,7 @@ const clueBonusWords = {
   "rings-speak": ["arise","grins","parse","peaks","pears","prank","rains","raise","sarin","signs","sings","snaps","spank","spans","spare"],
   "fatal-slink": ["alias","atlas","flail","kilns","links","nails","slain","slant","snail","stall","stank","talks","tanks"],
   "dawn-tied": ["ante","date","dean","died","diet","dine","edit","neat","tide","tine","wand","want","wind"],
-  "shark-shown": ["shawn"],
+  "shark-shown": ["shorn"],
   "add-won": ["and","now"],
   "mills-stork": ["kilos","milos","sills","silos","skill","slots","soils","sorts"],
   "dull-puts": ["plus","stud"],
@@ -6683,7 +7797,7 @@ const clueBonusWords = {
   "bench-pasta": ["bates","beast","beats","capes","chaps","paces","paste","paths","scape","septa","space","spate","tapas","tapes"],
   "gang-used": ["dang","dues","eggs","gage","gnus","guns","snug","sued"],
   "clean-pills": ["calls","cline","laces","lance","lapis","lapse","leaps","pales","panel","penal","piles","plane","pleas","plies","scale","sepia","slice","spell","spiel","spill"],
-  "knew-spin": ["pens","pins","sewn","snip","wink","wins"],
+  "knew-spin": ["pens","pins","sewn","snip","wink","wins","wisp"],
   "bed-kit": ["bid","bit"],
   "reds-talk": ["drek","lark","lars","last","lest","salt"],
   "bits-lied": ["deli","idle","isle","lies","slit"],
@@ -6714,7 +7828,7 @@ const clueBonusWords = {
   "beads-first": ["baits","based","bases","basis","bates","beast","beats","brits","drift","fades","fated","fates","feats","frets","rifts","safes","serfs"],
   "donor-omega": ["mango","moron","nomad","romeo","rondo"],
   "silk-very": ["elks","kris"],
-  "shape-sworn": ["hares","heaps","hears","heros","horns","horse","pawns","phase","share","shear","shore","spawn","swear","swore","wares","wears","worse"],
+  "shape-sworn": ["hares","heaps","hears","heros","horns","horse","pawns","phase","share","shear","shore","shorn","spawn","swear","swore","wares","wears","worse"],
   "knee-step": ["keen","pens","pest","pets","tees"],
   "fits-goat": ["fiat","fist","gist","sago","sofa","soft"],
   "cheek-lacks": ["cakes","cease","easel","heels","laces","leaks","lease","scale","slack"],
@@ -6768,7 +7882,6 @@ const clueBonusWords = {
   "mess-twin": ["mine","nets","semi","sent","sets","site","tens","ties","tine","wits"],
   "boom-stop": ["moos","most","post","pots","spot","tops"],
   "fires-noble": ["enrol","flier","fries","liner","loner","reins","resin","rinse","risen","senor","serif","siren","snore"],
-  "pass-ruby": ["bars","bras","bray","pays","pubs","rays","rubs","yaps"],
   "gosh-pipe": ["egos","goes","hips","hogs","hops","pies","pose","posh","ship","shop"],
   "hoped-rites": ["ethos","heist","hopes","piers","pores","poser","prose","roped","ropes","spire","spore","store","tiers","tired","tires","tried","tries"],
   "dry-tea": ["art","ate","eat","rat","try","yet"],
@@ -6816,7 +7929,7 @@ const clueBonusWords = {
   "owed-runt": ["drew","rude","town","turn","udon","undo","unto"],
   "begin-trout": ["begun","being","bring","grunt","intro","nitro","orbit","robin","tinge","turbo"],
   "eyed-labs": ["base","bead","dale","deal","ease","lead","sale","seal","slab"],
-  "horns-steer": ["ester","ether","heron","heros","nests","noses","rents","reset","rests","roses","senor","sheet","shone","shore","snore","sores","terse","there","these","three","trees"],
+  "horns-steer": ["ester","ether","heron","heros","nests","noses","rents","reset","rests","roses","senor","sheet","shone","shore","shorn","snore","sores","terse","there","these","three","trees"],
   "leap-pins": ["apes","lens","pale","peas","pens","sail","sale","seal","snip"],
   "align-every": ["angel","angle","early","elegy","glean","layer","learn","leary","liang","liner","nerve","never","raven","renal","riven","vegan"],
   "held-lone": ["doll","heel","hold","hone","noel"],
@@ -6979,7 +8092,7 @@ const clueBonusWords = {
   "bus-mew": ["sub"],
   "eons-tiff": ["fife","fist","fits","foes","font","nose","ones","sift","sine","tins","tons"],
   "paper-vista": ["parse","parts","pears","piers","piper","raves","saver","sepia","spare","spear","spire","strap","strip","tapas","traps","trips"],
-  "muted-rinse": ["denim","diner","durst","emits","items","menus","midst","minds","mined","mines","mites","reins","resin","rinds","risen","rites","runes","siren","smite","tiers","times","tired","tires","tried","tries","under"],
+  "muted-rinse": ["denim","diner","durst","emits","items","menus","midst","minds","mined","mines","mites","mutes","reins","resin","rinds","risen","rites","runes","siren","smite","tiers","times","tired","tires","tried","tries","under"],
   "evil-wise": ["lies","live","veil","vile"],
   "edits-rents": ["dents","diets","rites","sited","stern","teens","tense","tides","tiers","tires"],
   "dish-ugly": ["guys","hugs"],
@@ -7017,17 +8130,15 @@ const clueBonusWords = {
   "cover-viral": ["carol","clove","coral","crore","liver","lover","relic","rival","rover","valor","vicar"],
   "till-wood": ["lilt","loot","told","toll","will","wool"],
   "arc-due": ["are","car","ear","red"],
-  "fart-sold": ["arts","flat","fold","fort","frat","lads","last","loft","lost","lots","olds","raft","rats","rods","slot","sort","star","tsar"],
   "comfy-reads": ["cafes","dares","dorms","faces","fares","fears","foray","ready","roads","safer"],
   "diet-lift": ["lite","tide","tied","tile"],
   "depot-liner": ["diner","drone","ender","enrol","inlet","leper","loner","opted","pilot","pride","repel","roped","tepid","toned"],
   "been-snug": ["gnus","guns","nuns","sung"],
   "lotus-nippy": ["pints","plots","snout","spilt","split","units"],
-  "node-wait": ["dean","done","into","wade"],
   "agent-veins": ["anise","eaten","evens","giant","seven","vines"],
   "hippo-hosts": ["hoist","hoops","shoot","shops","shots"],
   "and-its": ["ins","sin","sit"],
-  "mason-suite": ["amino","asset","mates","meats","moans","saint","satin","seats","steam","stuns","tames","teams","units"],
+  "mason-suite": ["amino","asset","mates","meats","moans","mutes","saint","satin","seats","steam","stuns","tames","teams","units"],
   "dull-snap": ["dual","pans","saul","span"],
   "cores-swept": ["crews","crops","pesos","pesto","poets","ports","poses","posse","prost","roses","scope","score","screw","sores","sport","store","wrest"],
   "file-task": ["east","eats","flea","kits","late","life","lite","safe","seat","site","tale","talk","teal","teas","ties","tile"],
@@ -7137,10 +8248,8 @@ const clueBonusWords = {
   "acted-risks": ["aides","aside","cadet","cases","casks","caste","cress","crest","dries","ideas","rides","rises","rites","sired","skirt","stack","tacks","tiers","tired","tires","tries"],
   "legs-runs": ["lugs","slug"],
   "beard-count": ["abort","actor","bared","baton","board","bound","bread","broad","brute","cadre","canto","cared","carte","cater","cedar","court","crate","crude","cured","cuter","enact","raced","react","rebut","tabor","trace","truce","tuber"],
-  "area-hint": ["hare","rant","rate","tear","thin"],
   "dad-don": ["add","nod"],
   "droid-swear": ["adder","dared","dares","dewar","dread","dried","drier","dries","reads","rears","rider","rides","riser","roars","sawed","sired","wares","wears","weirs","wider","wired","wires","wised","wiser"],
-  "fart-held": ["dahl","flat","fled","frat","fret","halt","hart","herd","left","raft"],
   "loves-steam": ["asset","least","mates","meats","meets","metal","salvo","seats","slate","sleet","solve","stale","steel","tales","tames","teams","teems","vests"],
   "baron-given": ["anger","argon","brine","groan","groin","orang","organ","range","reign"],
   "came-such": ["aces","cash","cues","mace","mach","mash","mesa","muse","same","seam","sham"],
@@ -7270,7 +8379,6 @@ const clueBonusWords = {
   "hates-later": ["alert","alter","earth","haste","hater","heats","slate","stale","steal","tales"],
   "mad-she": ["dam","hes","sad","sea"],
   "bluff-start": ["farts","flats","rafts","strut","stuff","sturt","tarts","trust","tufts"],
-  "saps-toes": ["east","eats","pass","past","pats","post","pots","seat","spat","stop","taps","teas","tops"],
   "cups-tick": ["pics","pits","puck","puts","spit","tips","tuck"],
   "caste-rebel": ["aster","beret","cease","celeb","celts","earls","erase","ester","laces","laser","leers","rates","reals","reels","saree","scale","stare","steer","tears","terse","trees"],
   "delay-salon": ["laden","lanes","leans","loans","olden"],
@@ -7396,7 +8504,6 @@ const clueBonusWords = {
   "ivory-notes": ["noose","onset","ovens","seton","snort","stone","tones","trois","vents","visor"],
   "nib-wok": ["bin","ink"],
   "disc-slam": ["acid","aims","amid","maid","sims"],
-  "amen-site": ["mane","mate","mean","meat","meta","name","sine","stem","tame","team","ties","tins"],
   "drone-spins": ["diner","opens","pines","reins","resin","rinds","risen","senor","siren","snipe","snips","snore","spine"],
   "owed-tins": ["diet","dint","down","edit","ions","owes","site","snow","stew","tide","ties","west","woes"],
   "corgi-winds": ["cords","downs","gowns","grows","owing","swing","wings","words"],
@@ -7951,7 +9058,6 @@ const clueBonusWords = {
   "fed-lob": ["old"],
   "hello-lives": ["elves","evils","heels","hells","hills","hives","hovel","lisle","shill","veils"],
   "dolls-pearl": ["alder","dales","dares","deals","ladle","lapel","lapse","leads","leaps","loads","lords","paler","pales","parse","pears","polar","polls","reads","roads","spare","spear","spell"],
-  "send-yaps": ["ends","ness","pads","pass","pays","sand","sans","sped"],
   "glade-spray": ["agape","algae","dales","deals","earls","glare","lager","large","laser","leads","pager","parse","pears","prays","raspy","reals","regal","spade","spare","spear"],
   "cress-treat": ["acres","aster","cares","carte","cater","crate","crest","races","rates","scare","stare","tater","tears","tetra","trace"],
   "fast-rows": ["arts","fats","rats","sort","star","tsar","waft","wart"],
@@ -8129,14 +9235,13 @@ const clueBonusWords = {
   "vent-wage": ["anew","even","wane","want","went"],
   "ideas-liars": ["aides","aisle","aside","dales","deals","dries","leads","raids","rails","riles","salad","sired"],
   "pool-true": ["loop","loot","lout","polo","pore","repo","rope","tore"],
-  "surf-yaps": ["fray","pass","pays","rays"],
   "ashes-spoke": ["heaps","pesos","phase","pokes","posse","shape","sheep"],
   "boom-pelt": ["belt","bolt","boot","plot","poet"],
   "nap-old": ["pan"],
   "gives-paper": ["giver","grape","grave","gripe","pager","piper","pipes"],
   "kink-trap": ["kart","part","pink","pint","pita","tarp"],
   "filed-setup": ["diets","duels","duets","edits","field","peels","piles","plies","pulse","sited","sleep","slide","spiel","spite","steed","stipe","tides","upset"],
-  "obese-stump": ["bumps","meets","pesto","pests","poets","spout","steps","teems","temps"],
+  "obese-stump": ["bumps","meets","mutes","pesto","pests","poets","spout","steps","teems","temps"],
   "mess-tank": ["ants","mans","mass","nest","nets","sent","sets","task"],
   "loss-pile": ["isle","lies","lose","pies","pole","pose","slip","slop"],
   "slang-tutor": ["gaunt","goals","gusto","snarl","solar","stung","tours","trout","turns"],
@@ -8257,7 +9362,7 @@ const clueBonusWords = {
   "baby-nope": ["bane","bean","bone","bony","open"],
   "rotor-timed": ["ditto","merit","metro","mired","mitre","otter","remit","retro","timer","tried","trier","trite"],
   "fold-pelt": ["felt","left","loft","plod"],
-  "shots-tenor": ["horns","horst","hosts","nests","north","noses","notes","onset","ortho","otter","senor","seton","short","snore","stent","stern","stone","store","tents","thorn","toner","tones","totes"],
+  "shots-tenor": ["horns","horst","hosts","nests","north","noses","notes","onset","ortho","otter","senor","seton","shorn","short","snore","stent","stern","stone","store","tents","thorn","toner","tones","totes"],
   "ass-pug": ["gas"],
   "hags-pill": ["alps","gaps","gasp","hill","laps","lash","lips","pals","sigh","slap","slip"],
   "grown-heals": ["angel","angle","gales","glean","grows","hales","holes","howes","shale","wages","whose"],
@@ -8429,7 +9534,7 @@ const clueBonusWords = {
   "isles-thank": ["asset","haste","heats","kilns","likes","links","seats","skate","stake","stank","steak","takes","tanks"],
   "glen-stir": ["gent","grit","lens","ling","nest","nets","rest","tens","ting","tins"],
   "score-stand": ["acres","aster","canes","cares","cones","cords","cores","darts","notes","onset","races","rates","scare","scone","seton","stare","stone","store","tears"],
-  "horns-wires": ["heirs","heros","hires","horse","shore","swore","weirs","wiser","worse"],
+  "horns-wires": ["heirs","heros","hires","horse","shore","shorn","swore","weirs","wiser","worse"],
   "glib-pins": ["lips","sign","slip","snip","spin"],
   "doom-lets": ["does","dome","dose","dots","lest","loom","lose","lots","melt","mode","mole","mood","slot","sole","solo"],
   "cave-mice": ["mace"],
@@ -8926,7 +10031,7 @@ const clueBonusWords = {
   "fret-teen": ["fern","fete","rent"],
   "nags-sums": ["gnus","mans","sang","snag","snug","sung"],
   "files-sixth": ["fixes","flies","flits","isles","lifts","lists","slits"],
-  "shown-skate": ["askew","ethos","haste","hates","howes","knots","shawn","stake","stank","steak","stoke","swank","takes","tanks","those","wakes","whose"],
+  "shown-skate": ["askew","ethos","haste","hates","howes","knots","stake","stank","steak","stoke","swank","takes","tanks","those","wakes","whose"],
   "cone-trio": ["coir","corn","note","once","rent","riot","rite","roti","tern","tier","tire","tone","tori","torn"],
   "cork-site": ["cite","core","kits","kris","rice","rise","risk","rock","sire","skit","sore","ties","toes"],
   "daisy-flare": ["aides","aired","alder","aside","dairy","dales","deals","fairy","feral","files","fleas","flier","flies","ideas","leads","leafs","rifle","riled","sadly","slide"],
@@ -8973,7 +10078,7 @@ const clueBonusWords = {
   "elk-rig": ["gel"],
   "dusty-tacos": ["ascot","coast","ducts","scout","sodas","stats","studs","tasty"],
   "like-scan": ["aces","cans","case","clan","kiln","link","nail","sink"],
-  "brute-smash": ["aster","beams","bears","brash","brush","hurst","hurts","masse","mates","maths","meats","muses","rates","rebut","saber","sabre","seams","shams","shrub","stare","steam","tames","teams","tears","trash","tuber","users"],
+  "brute-smash": ["aster","beams","bears","brash","brush","hurst","hurts","masse","mates","maths","meats","muses","mutes","rates","rebut","saber","sabre","seams","shams","shrub","stare","steam","tames","teams","tears","trash","tuber","users"],
   "canal-tasks": ["atlas","casas","casks","clank","lacks","slack","snack","stalk","stank","talks","tanks"],
   "doll-head": ["dale","dead","hale","halo","heal","held","hell","lead","load"],
   "small-swift": ["films","flaws","malls","swill","walls","wills"],
@@ -9071,7 +10176,7 @@ const clueBonusWords = {
   "army-ends": ["arms","dyer","mans","many","rams","reds","sand","send","yard"],
   "excel-press": ["ceres","execs","leers","leper","peers","reels","repel","sexes","speer","spree"],
   "meat-tarp": ["mart","mate","meta","peat","perm","ramp","tame","tape","tart","tate","term","tram","trap"],
-  "horns-wafts": ["horst","short","straw","trash","warns","warts","worst"],
+  "horns-wafts": ["horst","shorn","short","straw","trash","warns","warts","worst"],
   "rich-sung": ["gnus","grin","guns","rung","shin","shun","sign","sing","snug"],
   "chug-skit": ["hits","hugs","huts","itch","kits","shut","sigh","this","thus","tuck","tusk"],
   "bibs-save": ["babe","base","vase"],
@@ -9166,7 +10271,6 @@ const clueBonusWords = {
   "guy-web": ["beg"],
   "deity-skins": ["diets","edits","kinds","sinks","sited","skits","snide","tides"],
   "atoms-state": ["masts","mates","meats","stats","steam","stoat","tames","teams","toast","tomes","totes"],
-  "pain-they": ["ante","hint","neat","then","thin"],
   "coast-tears": ["acres","actor","ascot","asset","aster","cares","carte","caste","cater","coats","crate","orcas","races","rates","react","roast","scare","seats","stare","state","stoat","tacos","taste","tater","tetra","toast","trace","treat"],
   "shaft-sweat": ["haste","hates","waste"],
   "navy-rile": ["earl","lane","lean","lear","lien","rave","real","vein","vera","vine"],
@@ -9193,7 +10297,7 @@ const clueBonusWords = {
   "awake-setup": ["pause","peaks","skeet","speak","tweak","upset","wakes"],
   "bully-hints": ["bills","bulls","hills","hulls","hunts","shill","shunt"],
   "dim-dud": ["mid"],
-  "horns-walls": ["halls","lawns","warns"],
+  "horns-walls": ["halls","lawns","shorn","warns"],
   "event-males": ["easel","eaten","evens","lanes","leans","lease","meals","means","mensa","metal","names","seven"],
   "doom-fair": ["amid","arid","door","foam","modi","mood","odor","raid","road"],
   "great-route": ["argue","auger","eager","grate","greet","otter","outer","terra","truer","tutor"],
@@ -9205,9 +10309,571 @@ const clueBonusWords = {
   "onto-ride": ["dire","nerd","node","note","rent","riot","rite","roti","tern","tier","tire","tone","tori","torn"],
   "fool-plot": ["loft","loop","polo","pool"],
   "throw-yours": ["horst","hurst","hurts","roost","roots","short","sorry","south","torso","tours","worth"],
-  "fluid-meats": ["aimed","fated","fates","feast","feats","fetus","flats","mails","mated","mates","media","steam","tamed","tames","teams"],
+  "fluid-meats": ["aimed","fated","fates","feast","feats","fetus","flats","mails","mated","mates","media","mutes","steam","tamed","tames","teams"],
   "demo-item": ["deem","dome","dote","mite","time"],
   "most-safe": ["fame","fats","foes","mast","mats","mesa","same","seam","seas","soft","toss"],
   "heart-rains": ["earns","earth","hairs","hares","hater","hears","heirs","hires","inert","inter","nears","neath","rears","reins","resin","rinse","risen","riser","saran","sarin","share","shine","shire","siren","snare","terra","thane","their","thine","trier"],
   "ready-stand": ["adder","deans","dread","sedan","tardy","yearn"],
+  "coat-wild": ["acid","clot","cold","colt","taco","wilt"],
+  "lord-nope": ["lore","open","plod","pole"],
+  "clone-grave": ["angel","anger","angle","carve","clean","clove","cover","crave","crone","gavel","glean","goner","grove","lance","rance","range","recon"],
+  "bible-tones": ["blobs","bolts","bones","inlet","inset","notes","onset","seton","stein","stone"],
+  "lie-tag": ["ate","eat","gal","tea"],
+  "glad-idea": ["aide","deli","died","gala","gale","idle","laid","lied"],
+  "slam-week": ["elks","mesa","sake","same","seam","seek","wake","weak"],
+  "shade-trace": ["aches","acres","cares","carte","cater","chase","cheat","crate","dares","death","hades","hated","races","rated","reads","scare","teach","trade","tread"],
+  "free-tier": ["reef","rife","rite","tire"],
+  "cages-tasks": ["asset","cases","casks","seats","stage"],
+  "gunk-peel": ["geek","glee","glen","glue","peek","puke","punk"],
+  "enter-shuts": ["ensue","ether","hurst","hurts","nests","nurse","rents","runes","runts","sheet","stent","stern","stuns","teens","tense","there","these","three","tuner","tunes","turns"],
+  "buses-cabin": ["babes","bases","basic","basis","beans","canes","cases"],
+  "steps-stops": ["spots"],
+  "old-orb": ["bro","rob"],
+  "opal-rest": ["atop","earl","lear","part","post","pots","rate","real","slop","sole","spot","stop","tarp","tear","toes","tops"],
+  "crow-folk": ["cook","fork","lock","rock","wolf","woof"],
+  "raise-suing": ["anise","gains","grain","issue","urine"],
+  "lance-loyal": ["allay","alone","clone","lacey"],
+  "babe-hall": ["able","bale","ball","blah","hale"],
+  "clans-siege": ["anise","clean","gales","lance","lanes","leans","seine","since"],
+  "flint-salsa": ["fails","faint","final","flats","flits","lasts","lifts","lists","nails","nasal","sails","saint","salts","satin","slain","slant","slats","slits","snail"],
+  "bibs-dive": ["bide","dibs"],
+  "guru-lady": ["dual"],
+  "not-pie": ["nit","one","opt","pit","pot","tin","ton","top"],
+  "bill-page": ["able","bale","ball","bile","pale","pile","pill","plea"],
+  "layer-minor": ["early","learn","leary","manor","miner","moray","ramen","relay","renal","roman","royal"],
+  "shift-slide": ["files","flies","flits"],
+  "cape-kick": ["epic","pace","pack","peak","pike"],
+  "cute-tiny": ["cite","nice","tine"],
+  "north-sails": ["hails","hoist","horst","loins","nails","rants","saint","saith","satin","short","silos","slain","snail","snarl","snort","soils","sorts","stain","stars","thorn","trans"],
+  "evil-maid": ["aide","dive","idea","lima","live","mail","vile"],
+  "knees-thief": ["heist","hikes","inset","sheet","sheik","stein","teens","tense"],
+  "apple-marks": ["lamps","maker","maple","paler","palms","pearl","psalm","realm","spark"],
+  "ear-pun": ["are","era","pan","rap"],
+  "deer-sofa": ["ease","fade","ford","redo","reed","rees","refs","rode","rose","safe"],
+  "agile-pairs": ["arias","grips","lapis"],
+  "tacos-tales": ["ascot","caste","coats","slate","stale","steal"],
+  "pilot-tears": ["aster","lopes","lotte","pairs","parse","patio","pears","polis","rates","slope","spare","spear","spoil","stair","stare","stole","taper","tater","tetra","toils","treat"],
+  "nope-sour": ["porn","pose","pros"],
+  "rated-views": ["aster","dewar","eared","eaves","erase","rates","rites","saree","sieve","stare","stave","straw","swear","tears","tiers","tired","tires","trade","tread","tried","tries","wares","warts","waved","waves","wears","weird","weirs","wider","wired","wires","wiser","wives"],
+  "bold-hire": ["bile","bore","brie","heir","hero","hold","lobe","robe"],
+  "downs-spree": ["doers","doser","drone","erode","peers","roses","senor","snore","snows","sores","speer","sweep","weeps"],
+  "pay-peg": ["yap"],
+  "style-super": ["pelts","pulse","purse","slept","slurp","spelt","strep","tyres"],
+  "even-lets": ["eels","lent","lest","teen","tees","vest","vets"],
+  "ages-sung": ["anus","eggs","gage","gnus","guns","nags","sage","sang","snag","snug","suns"],
+  "clade-stray": ["acted","artsy","aster","cadet","carte","cater","clary","clear","dales","dates","deals","decal","earls","laced","laser","leads","rates","react","reals","satay","stade","stare","stead","tears","trace","trays"],
+  "ozone-sling": ["gonzo","liens","lines","longs","zings"],
+  "rind-sale": ["darn","earl","earn","isle","lads","lear","lids","lies","near","rand","real","rein","sane","seal","sine","slid"],
+  "basic-veers": ["basis","bears","beers","brace","brass","brees","carbs","carve","crave","raves","saber","sabre","saver","serve","sever","verse","vices","visas"],
+  "mild-race": ["acre","came","care","earl","lame","lear","mace","male","meal","mice","mile","real","rice","rile"],
+  "chin-item": ["cent","mite","time","tine"],
+  "elk-rid": ["die"],
+  "badge-panel": ["blade","pedal","penal","plane"],
+  "props-sauce": ["cause","cores","corps","cross","cures","curse","pores","poser","prose","purse","ropes","score","soaps","spore","spurs","super","upper"],
+  "able-sits": ["abet","bale","beat","best","beta","bets","labs","lies","sail","site","slab","stab","tabs","ties"],
+  "flit-gear": ["fare","fear","feat","feta","fire","flat","gate","lift","rage","rife"],
+  "shake-sweat": ["askew","haste","hates","waste","weeks"],
+  "ogre-slog": ["egos","ergo","goes","gore","logo","logs","lore","role","sole"],
+  "beard-fault": ["after","bared","blade","bread","brute","fared","fatal","fetal","flute","rabat","rebut","table","tuber"],
+  "ape-row": ["pea","per"],
+  "done-seen": ["node","nose","ones"],
+  "maple-terms": ["alert","alter","ample","later","leapt","merle","meter","palms","pelts","petal","plate","pleat","psalm","realm","slept","smart","spelt","splat","stamp","tamer","temps","trams"],
+  "fixed-heels": ["feels","filed","files","fixes","flees","flies"],
+  "nude-pack": ["acne","cane","dank","dean","dune","dupe","pace","puck"],
+  "flame-parts": ["after","ample","farts","fetal","flats","frame","lamps","leapt","maple","palms","pasta","petal","pleat","psalm","rafts","ramps","splat","strap","tapas","taper","traps"],
+  "axis-east": ["eats","exit","seat","teas"],
+  "dozen-sides": ["dined","dosed","doses","nosed","sided","sizes","snide","zoned","zones"],
+  "host-link": ["hint","hits","kiln","lint","lost","lots","shot","silk","slit","slot","thin","this"],
+  "named-vocal": ["amend","caved","clean","clone","clove","dance","demon","lance","lemon","melon","monde","nomad"],
+  "ewe-ton": ["eon","new","not","toe","wee"],
+  "coin-read": ["acne","cane","dare","dear","dice","dire","earn","iced","icon","near","nice","noir","nori","rein","ride","road"],
+  "lord-oath": ["holt","odor","road","toad","told"],
+  "twist-viral": ["rival","trail","trait","trial","twits"],
+  "fists-toned": ["diets","dotes","edits","fiend","fined","fines","fonts","inset","notes","onset","seton","sited","sites","stein","stint","stone","tides","tints","tones"],
+  "tide-turn": ["dint","duet","edit","rite","tied","tier","tire","true"],
+  "duke-yaps": ["dusk","pads","pays"],
+  "dance-tests": ["casts","cents","dates","dents","enact","scant","scent","sects","stade","stand","state","stats","stead","steed","stent","taste","tenet","tents"],
+  "bucks-lanky": ["backs","bunks","lacks","slack"],
+  "owing-sleek": ["glens","keels","kilns","leeks","likes","links","sling","slink","swing","wings","winks","woken"],
+  "nor-tar": ["art","rat"],
+  "dark-west": ["dart","drek","stew","swat"],
+  "discs-reset": ["crest","diets","ester","rises","rites","seeds","sides","sited","steed","steer","terse","tides","tiers","tires","trees","tries"],
+  "bald-rays": ["bays","lars","slab"],
+  "guess-means": ["gauss","genes","genus","manus","masse","mensa","muses","names","sages","seams","seems"],
+  "life-teem": ["feet","fete","file","film","flee","item","lime","meet","mile","mite","time"],
+  "gold-heat": ["aged","gate","hate","head","hold","holt","oath","toga"],
+  "ramen-sweet": ["eater","mates","means","meats","mensa","names","renew","steam","tamer","tames","tease"],
+  "cook-true": ["core","cork","ecru","rock","tore","turk"],
+  "lodge-rally": ["alder","dally","glade","glare","glory","godly","golly","grade","ladle","lager","legal","lolly","older","raged","regal"],
+  "bob-pad": ["bad","pod"],
+  "bait-moon": ["amin","atom","boat","boon","mina","moan","moat","mono","moot"],
+  "rush-sake": ["eras","rake","rash","ruse","sash","seas","sera","sure","user","uses"],
+  "hands-tales": ["hales","heals","leash","least","slate","stale","steal"],
+  "court-privy": ["curvy"],
+  "gate-newt": ["anew","ante","neat","teen","wane","want","went"],
+  "free-slog": ["eels","else","feel","flee","fore","frog","golf","legs","lose","rees","rose","sole","sore"],
+  "corks-shoot": ["cooks","horst","rocks","roost","roots","short","stork","torch"],
+  "grow-skin": ["grin","ring","sink"],
+  "board-stunt": ["abort","baton","broad","darts","durst","roads","roast","santo","snout","sound","stand","strut","sturt","tabor","tarts","tours","trust","turbo"],
+  "dad-ski": ["add","aid","sad"],
+  "tear-trip": ["part","peat","rate","rite","tape","tire","trap"],
+  "lilt-solo": ["list","lost","lots","slit","slot","soil","till"],
+  "shove-slink": ["evils","hives","kilns","liens","lines","links","loves","shine","shone","solve","veils"],
+  "creek-float": ["actor","after","aloft","carte","cater","cloak","crate","elect","erect","faker","fetal","flake","forte","freak","react","trace"],
+  "mind-past": ["dams","dips","mast","mats","mint","mist","pads","pant","pats","pint","pits","spat","spit","taps"],
+  "pagan-veins": ["avian","naive","pages","pangs","pines","sepia","snipe","spine","vines"],
+  "drop-epic": ["cope","core","drip","pier","pope","pore","prod","repo","rice","ripe","rope"],
+  "rapid-whole": ["paler","pearl"],
+  "donor-names": ["adorn","armed","dames","deans","demos","domes","dream","drone","madre","mason","means","mensa","moans","modes","moods","moons","moron","nosed","omens","radon","ramen","roman","rondo","sedan","senna","sodom"],
+  "gem-wig": ["egg"],
+  "debt-file": ["beef","deli","feel","felt","flee","flit","idle","lied","life","lift"],
+  "scarf-trial": ["altar","fairs","liars","trail"],
+  "done-safe": ["deaf","dean","eons","foes","node","ones","sane"],
+  "ingot-siren": ["gents","inert","inner","inter","irons","nitro","reins","rents","resin","rinse","riots","risen","rites","snort","stern","tiers","tinge","tires","tongs","tries","trois"],
+  "case-role": ["aces","earl","ears","eras","lear","lore","real","rose","sera"],
+  "hack-nets": ["ants","cans","cash","hast","heck","nest","scan","sent","tank","tens"],
+  "doubt-horse": ["broth","doers","doser","douse","heros","horst","house","shore","short","shout","throb"],
+  "caper-stems": ["capes","cease","cramp","cream","crept","eases","erase","erect","ester","mares","masse","pacer","paces","parse","pears","pests","ramps","recap","reset","saree","scamp","scape","seams","smear","space","spare","spasm","spear","steps","strep","terms","terse","trees"],
+  "state-teams": ["asset","masse","masts","matte","meats","seams","seats","stats","steam","tames","tease"],
+  "eye-tax": ["ate","eat","tea"],
+  "cure-peel": ["curl","ecru","pure"],
+  "age-rap": ["ear","era"],
+  "dodo-kegs": ["dogs","gods","odds"],
+  "match-renal": ["alert","altar","alter","chart","earth","hater","heart","later","learn"],
+  "snide-storm": ["diets","dotes","edits","midst","minds","nodes","nosed","reins","resin","rinse","risen","rites","senor","siren","sited","snore","store","tiers","tires","tries","trims"],
+  "dare-teen": ["ante","darn","dear","deer","neat","need","nerd","rand","rant","rate","read","reed","rent","tear","tern"],
+  "realm-skies": ["earls","eases","erase","isles","laser","limes","maker","makes","males","miles","rakes","reals","riles","sakes","sales","saree","seals","silks","slime","smile"],
+  "other-plans": ["ethos","helps","holes","leaps","loans","north","paler","pales","pants","paste","pearl","pleas","salon","santo","septa","spate","taper","tapes","those"],
+  "clay-lime": ["lace","lacy","mile"],
+  "fond-labs": ["bald","bold","fans","slab"],
+  "lists-shoes": ["holes","hoses","shots","slits","sloth","toils"],
+  "bar-rot": ["art","bat","bot","bra","bro","orb","rat","tab"],
+  "shame-worst": ["ashes","atoms","maths","mores","mower","roses","sores","sorts","stash","storm","swath","swore","whats","worse"],
+  "eons-mark": ["arms","eras","mans","mars","nose","ones","rake","rams","rose","sane","sera","sore"],
+  "kale-soft": ["fast","fats","foes","lake","last","leak","lose","lots","safe","sale","salt","seal","slot","sole","talk"],
+  "heard-rolls": ["ahold","alder","earls","hales","halos","hares","heals","hears","hells","hoard","laser","leash","reals","rears","roars","shale","share","shell","shoal","solar"],
+  "blows-coast": ["ascot","blast","boast","boats","bolts","boots","bowls","class","clots","coats","colts","scoot","slabs","tacos"],
+  "pink-tins": ["pins","spin"],
+  "crime-stark": ["aster","carer","carte","cater","cream","emits","items","karts","mares","marks","mates","meats","mites","racer","rates","react","rears","riser","rites","skirt","smear","smite","stare","steam","tames","teams","tears","tiers","times","tires","trace","track","trick","tries"],
+  "novel-wipes": ["liven","opens","ovens","snipe","spine","swipe","veins","views","vines","wives"],
+  "each-must": ["ache","cute","eats","mach","mash","mast","mats","seat","sham","shea","teas"],
+  "did-new": ["den","end","win"],
+  "draw-pair": ["arid","para","ward","warp"],
+  "dome-vibe": ["demo","dime","mode"],
+  "drain-surge": ["adieu","aired","arise","drier","gears","grade","grand","nadir","raged","rages","raise","rider","riser","ruins","sarin","urges","usage"],
+  "lady-sums": ["days","lads","slam","slum"],
+  "filed-smack": ["acids","aides","aside","dames","field","flick","ideas","licks","likes","makes","slide"],
+  "outer-suits": ["route","stout","strut","sturt","touts","trust","tutor"],
+  "cage-talk": ["lace","late","tale","teal"],
+  "hardy-mason": ["hydra","manor","moans","moray","roman","shady"],
+  "later-maple": ["alert","lapel","metal","paler","pearl","tamer"],
+  "elk-sag": ["age","gas","gel"],
+  "lube-tofu": ["blue","foul","lobe","tube"],
+  "overt-sense": ["ester","nests","notes","ovens","rents","reset","seton","sever","sneer","steer","stern","stone","stove","tenor","terse","toner","tones","trees","trove","veers","verse","vests","voter","votes"],
+  "none-sole": ["eons","lose","neon","noel","ones"],
+  "cute-plus": ["cuts","pelt"],
+  "shook-slide": ["hooks","kilos","loose"],
+  "down-rare": ["dare","darn","dawn","dear","owed","rand","read","rear","redo","wade","wand","ware","wear","wore","worn"],
+  "rind-tool": ["dint","loot","odor"],
+  "cares-suing": ["cures","curse","gains","gears","grace","guise","issue","races","rages","scare","sears","sinus","surge","urges","users"],
+  "key-way": ["kay","yaw"],
+  "cope-eats": ["acts","apes","cape","caps","cast","cats","cops","cost","east","peas","pose","scot","seat","teas"],
+  "pylon-tease": ["atone","panes","pansy","pease","peels","sleep","sleet","steel","style","yeast","yelps"],
+  "beta-hall": ["abet","able","alba","bale","beat","bell","belt","hale","halt","hate","heal","hell"],
+  "sent-shut": ["huts","nest","nets"],
+  "angle-piece": ["angel","glean"],
+  "dated-shirt": ["aided","aides","aside","darts","heist","hides","ideas","raids","stade","stair","start","state","stead","tarts","taste","triad"],
+  "acts-euro": ["arcs","auto","cars","cast","cats","core","ruse","scar","sect","sure","taco"],
+  "stoke-weird": ["doers","doser","dries","kites","rides","rites","rowed","sired","store","tiers","tires","tower","tries","wider","wired","write"],
+  "horse-worse": ["heros"],
+  "ewe-not": ["eon","new","toe","ton","wee"],
+  "deny-ever": ["eyed","nerd","reed"],
+  "logo-slap": ["alps","also","laps","pals","slog","soap"],
+  "seeds-stops": ["pesos","poses","posse","posts","seeps","spots","steps"],
+  "bids-such": ["buds","cuss","dibs","diss"],
+  "airy-keel": ["earl","lair","lear","leek","liar","rail","real"],
+  "flour-least": ["earls","fares","fates","fears","feast","feats","flats","flout","laser","lofts","reals","roles","rolls","safer","slate","stale","stall","steal","stole","tales","tolls"],
+  "chefs-lines": ["files","flesh","flies","heels","liens"],
+  "clip-more": ["core","lice","lime","limp","prom","romp"],
+  "below-state": ["betta","bowel","lowes","sleet","steel","stole","sweat","tease","waste","watts"],
+  "pay-pot": ["opt","pat","tap"],
+  "cheer-tired": ["cried","ether","there","tried","trier"],
+  "fill-leak": ["fail","fake","fell","flea","kale","lake"],
+  "dale-inch": ["aced","chad","chin","dahl","deal","hail","lead","lien","line","nice"],
+  "fades-stern": ["deans","dents","earns","eases","fares","fears","nears","rents","rests","safer","sears","snare","teens","tends","tense"],
+  "king-lads": ["disk","kids","lids","ling","sank","sink","skid","slid"],
+  "diets-views": ["edits","sited","wised"],
+  "armed-villa": ["aimed","alder","alive","dream","ideal","lived","madre","media","ravel"],
+  "cart-sack": ["acts","arts","cask","cats","rats","star","tsar"],
+  "bops-link": ["bins","kiln","knob","nibs","slip","slop"],
+  "ore-ran": ["are","ear"],
+  "fled-foot": ["fold","left","loft"],
+  "dread-kinds": ["adder","aided","aides","aside","dared","dares","drake","ideas","raked","rakes","ranks","reads","skied","snark"],
+  "ashes-prove": ["arose","hares","haves","hears","pesos","pores","poser","poses","posse","prose","savor","share","shear","sheep","spore"],
+  "time-when": ["emit","item","meth","mint","mite","then","tine"],
+  "loops-serve": ["elope","leper","lever","lopes","lover","loves","overs","peers","pesos","poles","pores","poser","poses","posse","press","prose","repel","revel","ropes","servo","sever","sloop","slope","solve","speer","spool","spore","spree","veers","verso"],
+  "stork-swell": ["tolls","wells"],
+  "bees-post": ["best","boss","bots","pest","pets","poet","pots","sobs","spot","step","stop","tops"],
+  "tense-wharf": ["after","earth","eater","enter","fates","feast","feats","haste","hater","hates","heart","heats","newer","tease","teens","wafer"],
+  "half-word": ["dahl","draw","flaw","flow","hold","ward"],
+  "ton-yes": ["not","set","ten","yen","yon"],
+  "cage-oral": ["aero","care","ergo","gore","ogre","race"],
+  "raced-relay": ["alder","cadre","cared","creed","early","elder","leary"],
+  "risk-soup": ["kris","opus","pros","rips","skis"],
+  "salad-style": ["least","slate","stale","tales","tells","yeast"],
+  "lasts-noted": ["dales","deals","dealt","deans","delta","leads","least","loses","nodes","nosed","noses","notes","onset","sales","seals","sedan","seton","slate","slats","slots","soles","stale","stand","steal","stole","stone","tales","tones"],
+  "arms-lane": ["lame","lean","male","mare","mars","meal","near","rams"],
+  "pixel-sears": ["aisle","earls","easel","eases","expel","laser","lease","liars","pairs","paler","parse","pears","pease","pilar","rails","reals","sepia","sexes","spare","spear"],
+  "stay-true": ["ears","east","eras","rate","rays","ruse","seat","sera","sure","tate","tear","teas","tray","user"],
+  "gavel-homes": ["gleam","glove","golem","halve","haves","mages","shame","shave","shove"],
+  "ark-rim": ["aim","arm","mar"],
+  "cubes-polar": ["carol","close","clues","coals","coral","cruel","lopes","poles","probe","pubes","scuba","slope","ulcer"],
+  "bacon-table": ["babel","banco","bleat","canto"],
+  "ease-silk": ["asks","isle","kale","kiss","lake","leak","like","sale","seal","seas","skis"],
+  "diner-laden": ["adder","alder","dined","dread","dried","learn","lined","liner","renal","riled"],
+  "gate-nuts": ["ante","ants","gust","guts","neat","stag","stun"],
+  "core-mice": ["more"],
+  "mates-wagon": ["among","atoms","games","mages","meant","meats","moats","steam","sweat","tames","teams","wages"],
+  "eight-tract": ["attic","carte","cater","crate","earth","hater","heart","react","tacit"],
+  "open-pins": ["ions","pies","pine","pons","pose","snip"],
+  "bot-owl": ["low","too"],
+  "bald-cook": ["bold","clod","cold","lack","lock"],
+  "tape-town": ["pant","peat"],
+  "spear-tally": ["alert","altar","alter","areas","earls","later","palsy","parse","pears","plays","reals","spare","taper","yelps"],
+  "crest-slope": ["celts","ceres","close","clots","colts","cores","crepe","crept","lopes","loses","peels","peers","pelts","plots","poles","pores","ports","poser","prose","prost","rests","ropes","roses","score","sleep","slept","soles","sores","sorts","speer","spelt","spore","sport","spree","strep"],
+  "sift-turn": ["fins","fist","runs","rust","stir"],
+  "fold-snug": ["gnus","golf","guns","logs","olds","sold","sung"],
+  "paint-rents": ["inept","inert","inter","pains","pants","petit","pines","rains","rants","reins","resin","rinse","risen","rites","sarin","siren","snipe","spine","spite","stair","stern","stipe","tiers","tires","trait","trans","tries","trite"],
+  "prime-tough": ["girth","merit","mirth","mitre","ought","purge","remit","right","thrum","tiger","timer"],
+  "diver-fetch": ["deter","drive","fitch","fiver","refit","thief","tired","tried"],
+  "nod-pie": ["din","don","one","pod"],
+  "flit-room": ["foot","lift","loft","moor","riot","roti","tori","toro","trio"],
+  "dork-lube": ["blue","lobe","lore","lure","lurk","redo","role","rude","rule"],
+  "dodge-rugby": ["bored","budge","debug","dodgy","doggy","urged"],
+  "lead-twin": ["ante","dale","date","deal","deli","diet","edit","idle","lane","lean","lied","lien","line","neat","tide","tine","want","wild"],
+  "fade-name": ["amen","dean","fame","mane"],
+  "agree-count": ["anger","crone","eager","gaunt","grant","grate","range","recon"],
+  "smell-stand": ["dents","slant","small","stall","tells"],
+  "dairy-noble": ["aired","alien","badly","bared","beard","boner","bored","borne","bread","daily","diary","doily","ideal","inlay","nobly","oiled","oldie","rainy"],
+  "hiker-jolly": ["hokey","holly","hoyle"],
+  "dad-yap": ["add","pay"],
+  "duty-rise": ["dies","diet","dues","duet","edit","rite","ruse","side","sire","sued","tide","tied","tier","tire","true","used","user","yurt"],
+  "blot-veil": ["bile","bite","bolt","evil","live","lobe","love","veto","vile","volt"],
+  "gears-rehab": ["areas","barre","hares","hears","rages","rears","shear"],
+  "dense-grill": ["dries","girls","glens","lends","liege","needs","nerds","rides","riled","siege","sired","slide"],
+  "lost-save": ["last","lose","lots","love","sale","salt","seal","seas","slot","toss","vale","vase","veal","volt"],
+  "ashes-drift": ["arise","diets","dries","earth","edits","fairs","hares","haste","hater","hates","hears","heart","heats","herds","irate","raise","share","shear","sheds","shred","sides","sired","sited","tides","tired","tried"],
+  "perk-site": ["kept","kits","kris","pier","rees","ripe","rise","risk","sire","tees","ties"],
+  "foul-nest": ["fuel","nets","self","sent","soft","tens","tons","tune","unto"],
+  "aimed-cores": ["adore","arise","arose","cider","coder","credo","cried","cries","decor","media","medic","raise","score"],
+  "web-won": ["now","own"],
+  "care-owed": ["acre","aero","card","crew","race","road","word"],
+  "clan-fort": ["coat","flan","taco"],
+  "champ-seals": ["chasm","clash","laces","lapse","leaps","masse","pales","pleas","sales","scale","seams","shams","slash"],
+  "semi-that": ["east","eats","hast","item","mite","seat","stem","tate","teas","time"],
+  "least-mould": ["allot","atoll","atoms","dales","dames","deals","duels","ladle","leads","loads","mates","meats","metal","moats","modal","modus","mused","mutes","slate","stale","steal","steam","tales","tames","teams","tulle"],
+  "ample-parry": ["amply","apply","array","maple","paler","paper","pearl","playa","realm"],
+  "gosh-nice": ["chin","egos","eons","goes","hogs","inch","nose","once","ones","shin","sine"],
+  "choir-straw": ["actor","riots","roast","trois","warts"],
+  "crank-drums": ["drank","scram","scrum"],
+  "bag-pro": ["boa","bro","rob"],
+  "beta-chin": ["abet","bath","beat","cent","chat","inch","nice"],
+  "atlas-prose": ["arose","earls","laser","leapt","least","paler","pearl","pelts","pesto","petal","plate","pleat","poets","pores","poser","posts","reals","ropes","salts","slate","slats","slept","soars","spelt","splat","spore","spots","stale","steal","stops","tales"],
+  "dude-sets": ["deed","duds","dues","duet","stud","sued","tees","used"],
+  "lamp-mate": ["lame","late","meal","meat","meta","palm","plat","tale","tame","teal","team"],
+  "berry-fluid": ["bride","build","buyer","ferry","fiery","fired","fryer"],
+  "spoil-stump": ["lumps","plums","polis","posit","slump","stomp"],
+  "menus-yards": ["manus"],
+  "oops-pure": ["euro","opus","pops","pore","pros","pups","repo","rope","soup","sour","spur"],
+  "quiet-winds": ["quite","swine","wines"],
+  "lead-shoe": ["dahl","dale","dash","deal","does","dole","dose","hale","heal","hole","hose","shea"],
+  "dark-mess": ["arms","drek","mark","mask","mass","rams","reds"],
+  "ocean-pests": ["canoe","capes","conte","costs","onset","paces","panes","pease","pecan","scape","scots","seton","spent","steep","steps","stone","tones"],
+  "cited-ranch": ["acted","cadet","catch","chart","cheat","dance","diner","earth","edict","ethic","hater","heart","niche","teach","their","tired","trade","tread","tried"],
+  "eye-sax": ["sea"],
+  "aids-pull": ["dial","dips","laid","pill","plus","said","sail","saul","slip"],
+  "among-lakes": ["golem","leaks","loans","mango","mason","moans","moles","omega","salon"],
+  "proof-tight": ["forth","froth"],
+  "grow-land": ["dang","lawn","load"],
+  "later-yells": ["alert","alter","early","leary","least","rally","relay","salty","slate","sleet","stale","stall","steal","steel","style","tales","teary","yeast"],
+  "dive-logo": ["dove","evil","live","love","vile","void"],
+  "sari-stem": ["airs","arms","mars","mesa","rams","seam","site","ties"],
+  "enter-spies": ["nests","pests","piers","reins","rents","resin","rinse","seine","siren","spire","steps","stern","strep","teens","tense"],
+  "arts-pier": ["ears","eras","pies","pits","rats","rear","reps","ripe","sera","star","tips","trip","tsar"],
+  "dip-nod": ["did","don","odd","pin"],
+  "levy-role": ["ever","leer","lore","over","reel","rove","very","yell"],
+  "mind-nags": ["dang","ding","mans","sang","sign","snag"],
+  "curls-feast": ["cases","caste","crest","crust","false","fates","feats","fetal","fleas","frets","laces","leafs","safes","scale","serfs","surfs"],
+  "mite-riot": ["item","mitt","rite","roti","tier","time","tire","tori"],
+  "hence-idols": ["disco","holds","holed","holes","liens","lines","niece","oiled","oldie","since","solid"],
+  "atoms-peers": ["arose","aster","erase","mates","moats","poems","pores","ports","poser","prose","prost","rates","roast","saree","speer","spore","sport","spree","stare","steam","stomp","strep","tames","teams","tears","temps"],
+  "gawk-nice": ["acne","anew","cane","nick","wage","wane","wine"],
+  "hero-ride": ["deer","dire","heed","heir","here","hide","reed","rode"],
+  "warns-worms": ["warms"],
+  "nor-pie": ["one","pro"],
+  "nuts-skip": ["kiss","pink","punt","sink","skis","stun"],
+  "fell-plod": ["dope","fold","pole"],
+  "asset-swear": ["areas","aware","erase","saree","seats","sewer","stews","swats","sweat","sweet","tease","wares","wears","wests"],
+  "check-float": ["aloft","chock","cleft","cloak","clock","fetal","fetch","flake","teach"],
+  "newt-vary": ["rant","tern","very","want","went","yarn"],
+  "gouge-sands": ["deans","gauge","gauss","nodes","nosed","sedan","snags","songs","usage"],
+  "lifts-nosey": ["files","fines","flies","flits","fonts","isles","lists","lofts","lofty","noses","slits","slots","soles","stony"],
+  "part-read": ["dare","peat","rate","tape","tear","trap"],
+  "mark-open": ["kemp","make","mane","mean","name","nope","okra","poke","porn"],
+  "age-ray": ["ear","era"],
+  "funds-roots": ["doors","fonts","odors","roost","snort","torso","tours","turns"],
+  "leap-says": ["alas","apes","lays","pale","peas","play","plea","sale","seas","slay","yaps","yelp"],
+  "sleek-swung": ["glens","keels","leeks","slung"],
+  "sued-tick": ["dies","diet","disc","duct","dues","duet","edit","kite","sick","side","tide","tuck","used"],
+  "realm-splat": ["alert","apart","later","least","males","meals","palms","pasta","psalm","slate","smell","stale","steal","tales","tapas","tells"],
+  "spoke-stand": ["notes","onset","opens","panes","peaks","pokes","seton","skate","speak","stake","steak","stoke","stone","tones"],
+  "farm-gold": ["drag","fold","ford","form","glam","grad","gram"],
+  "arena-edges": ["adage","anger","deans","degas","dense","eager","earns","eased","erase","gears","nears","needs","rages","range","saree","serge","snare","sneer"],
+  "brow-slam": ["arms","awls","balm","bawl","blow","bowl","laws","lows","mars","owls","rams","slow","wars"],
+  "ear-rub": ["are","bra","era"],
+  "bait-mood": ["amid","atom","boat","doom","moat","modi","moot"],
+  "acre-rugs": ["arcs","cage","care","race","scar"],
+  "grade-touch": ["carte","cater","chart","cough","cuter","grace","outed","raged","rated","react","trace","trade","tread","truce","urged"],
+  "knock-steel": ["celts","clots","colts","knees","necks","skeet","sleet","stoke","stole"],
+  "more-safe": ["ears","eras","foes","mare","sera","sore"],
+  "sums-tidy": ["diss","dust","mist","must","sims","stud"],
+  "handy-sieve": ["deans","eased","eaves","haven","heady","heave","sandy","sedan","veins","vines"],
+  "meets-niche": ["cents","chime","chins","emits","inset","items","mites","scent","sheen","shine","smite","stein","teems","teens","tense"],
+  "ropes-slips": ["pesos","pores","poser","poses","posse","prose","riles","spore"],
+  "full-goof": ["foul","golf","logo"],
+  "skier-socks": ["cores","corks","score"],
+  "clove-papal": ["local","place"],
+  "bird-code": ["bore","brie","core","deco","dice","iced","rice","robe"],
+  "bias-mute": ["beau","bite","bits","bust","emit","item","mist","mite","must","time"],
+  "stage-swear": ["aster","gates","rates","stare","tease","wares","wears"],
+  "bonk-fast": ["bank","bats","bots","fats","knob","soft","stab","tabs"],
+  "seats-turbo": ["about","asset","autos","bates","beast","beats","bores","burst","otter","rests","robes","sober","state","store","strut","sturt","taste","tours","truss","trust","tutor"],
+  "nodes-sales": ["deans","leans","loses","nosed","seals","sedan","soles"],
+  "flies-giant": ["faint","false","fetal","files","fleas","flint","gales","glint","leafs","legit","slang","sling"],
+  "acted-polls": ["cadet","caste","clade","decal","depot","laced","laces","lopes","pesto","plots","poets","poles","scale","slope"],
+  "neat-sync": ["aces","acne","ante","cane","case","east","eats","nest","nets","seat","sent","stay","teas"],
+  "burn-easy": ["bans","barn","bays","bran","bray","buns","bury","buys","nabs","near","ruby","sane","year"],
+  "shack-slang": ["hacks","hanks","khans","shank","slack"],
+  "later-voter": ["alter","avert","trove"],
+  "perk-wine": ["knew","peer","pier","pine","ripe","weir","wink","wire"],
+  "rites-shift": ["first","firth","fists","frith","heirs","heist","hires","rifts","shire","sites","tiers","tires","tries","trite"],
+  "plot-star": ["arts","lars","last","lost","part","plat","port","rats","salt","slot","sort","stat","trap","tsar"],
+  "bib-tar": ["art","bar","bit","bra","rat","tab"],
+  "beers-stalk": ["baker","bales","bears","belts","blast","bleak","brake","break","brees","karts","keels","lakes","lasts","leaks","leeks","rakes","reeks","rests","saber","sable","sabre","sales","salts","seals","sears","slats","stark","stars","talks"],
+  "cared-noted": ["acted","cadet","cadre","cedar","coder","credo","decor","drone"],
+  "runt-site": ["rein","rite","sine","stun","ties","tins","tire","tits","true","turn"],
+  "badly-surge": ["barge","blade","budge","burly","dales","deals","debug","degas","duels","earls","gears","grays","laser","leads","lures","rages","reals","ruble","rugby","rules","sadly","urges"],
+  "even-role": ["lore","noel"],
+  "case-yaps": ["aces","cape","caps","easy","pays"],
+  "pairs-taken": ["karts","parks","prank","sepia","skate","spark","speak","stair","stake","stark","steak","takes"],
+  "drew-fear": ["dare","dear","deer","draw","fare","free","read","reed","wade","weed"],
+  "lend-wait": ["dawn","deli","dial","idle","land","lent","lied","lite","newt","tail","tile","wand","want","wide"],
+  "ark-saw": ["war","was"],
+  "break-stool": ["baker","bleat","bloat","brake","broke","earls","laser","least","loser","rakes","reals","roles","skate","slate","solar","stake","stale","steak","stoke","stole","table","takes","tales","tools"],
+  "ideas-loyal": ["aides","daily","daisy","dales","dally","deals","ideal","ladle","leads","sadly"],
+  "disc-goal": ["cogs","dial","docs","laid","lids","load","logs","olds","slid","sold"],
+  "crux-flow": ["wolf"],
+  "atoms-means": ["memos","mensa","omens","santo"],
+  "back-isle": ["bale","lies","silk"],
+  "aids-bold": ["also","bids","dial","dosa","laid","libs","said","sail","soda"],
+  "claim-timed": ["camel","clade","decal","delta","laced","medic","metal","tidal","timid"],
+  "gawk-same": ["game","mesa","seam"],
+  "mid-tip": ["imp"],
+  "dale-feet": ["deal","fate","feat","felt","feta","fete","flat","flea","flee","lead","leaf","left"],
+  "relay-remix": ["early","laxer","leary","relax"],
+  "bears-scare": ["acres","brace","carbs","cares","crass","races","saber","sabre","saree","scars","sears"],
+  "mock-neon": ["conn","mono","none","nook","noon","omen"],
+  "slide-stink": ["diets","edits","inset","kilns","knits","liens","lines","sited","slink","stein"],
+  "cell-hood": ["clod","code","cold","deco","hell","hold","hole","loco"],
+  "lean-stir": ["ants","arts","ears","eras","lane","lear","lien","line","lint","rats","real","rile","rise","sane","sera","sine","sire","star","tsar"],
+  "helps-light": ["hells","highs","hills","pills","shell","shill","spill"],
+  "hoops-siren": ["heron","heros","hires","horse","noise","noose","reins","resin","rinse","risen","rises","roses","senor","shire","shore","snoop","snore","sores"],
+  "leg-two": ["gel","low","toe"],
+  "honey-steer": ["ester","heron","rents","reset","senor","snore","stern","terse","there","three","trees"],
+  "levee-ruins": ["eerie","liens","lines","nerve","never","reeve","reins","resin","revue","rinse","risen","serve","sever","siren","veers","verse"],
+  "four-shot": ["foot","host","huts","ours","outs","rush","shut","sour","tofu"],
+  "bush-wing": ["bugs","hubs","swig","wigs"],
+  "plate-quips": ["apple","leapt","petal","pique","pleat","quiet","quite","quits","spilt","split","squat","taupe"],
+  "rude-vice": ["dire","ecru","rice","ride"],
+  "ford-pink": ["drip","drop","fond","fork","pond","prod"],
+  "crane-price": ["pacer","rance","recap","ripen"],
+  "photo-wives": ["hopes","howes","poise","posit","views"],
+  "art-can": ["ana","cat","rat","tar"],
+  "node-soft": ["does","done","dots","foes"],
+  "order-sorts": ["doers","doser","doses","error","rodeo","roost","roots","roses","sores","stood","torso"],
+  "flit-knew": ["felt","left","lift","wink"],
+  "fade-vast": ["deaf","fast","fats","safe","vase"],
+  "sulks-voter": ["loser","loses","loves","lures","lurks","overt","roles","rules","soles","solve","store","stork","stove","trove","votes"],
+  "ropes-sling": ["groin","grope","irons","pesos","pores","poser","poses","posse","prose","riles","spore"],
+  "candy-taste": ["caste","dates","enact","natty","stade","state","stead"],
+  "metre-slash": ["ashes","earls","eases","erase","ester","harem","hares","hears","laser","males","meals","meets","meter","realm","reals","reset","sales","saree","seals","shame","share","smelt","steer","teems","terse","trees"],
+  "bag-ewe": ["wee"],
+  "madam-pixel": ["medal","piled","plaid","plead"],
+  "spoil-stole": ["lopes","poise","polis","polls","slope","tolls"],
+  "look-mild": ["dill","doll","idol","kilo","milk","modi","mold","mood"],
+  "based-optic": ["adios","beads","depot","dopes","posed","scope","topic"],
+  "noted-salts": ["asset","dales","dates","deals","dotes","laden","lanes","leads","leans","loses","notes","olden","onset","sales","seals","seats","seton","slant","slats","slots","soles","stade","stats","stead","stone","tones"],
+  "beer-data": ["abet","bare","bear","beta","brat","bree","dart","date","dear","deer","read","reed"],
+  "cask-duly": ["clay","days","dusk","lack","lacy","luck","sack"],
+  "next-that": ["ante","neat","tate"],
+  "stay-twin": ["ants","swan","sway","tins","want","wins"],
+  "gag-mew": ["egg"],
+  "scene-stunt": ["scent","stent","teens","tense","tents"],
+  "brand-teens": ["barns","rants","rents","stern","tense","trans"],
+  "need-pigs": ["dine","ding","peed","pies","seen","sine","sing"],
+  "doily-icing": ["dingo"],
+  "party-valet": ["leapt","payer","petal","plate","pleat","repay","taper"],
+  "arts-pile": ["lars","lear","lips","pits","rate","rats","real","sail","slip","star","tear","tips","tsar"],
+  "shed-time": ["dies","diet","edit","emit","item","mesh","meth","mite","semi","tide","tied"],
+  "reset-sheep": ["ester","ether","seeps","sheet","speer","spree","steer","terse","there","three","trees"],
+  "head-park": ["herd","perk"],
+  "ask-rap": ["spa"],
+  "heart-mains": ["earth","hares","hater","hears","heirs","hires","manta","mares","means","mensa","merit","minas","mines","mitre","names","neath","remit","share","shear","shine","shire","smear","tamer","thane","their","thine","timer"],
+  "guru-race": ["acre","cage","care","ecru","gear","rage","rare","rear","urge"],
+  "damn-kiwi": ["amid","dawn","maki","midi","mind","mink","wand","wind"],
+  "foam-kale": ["flea","lake","leak"],
+  "pound-whole": ["wound"],
+  "bath-hero": ["boar","boat","bora","bore","hath","robe"],
+  "swept-tenor": ["notes","onset","peers","senor","seton","snore","speer","spree","steep","stone","swore","sworn","toner","tones","towns","twerp","worse","wrote"],
+  "glide-smart": ["dales","dames","deals","dimes","earls","gamer","glade","glare","grime","lager","laser","leads","mares","marge","midge","reals","regal","riles","slide","smear","trams","trims"],
+  "chef-wane": ["acne","anew","cane","face"],
+  "duet-kind": ["died","diet","dint","dude","duke","edit","kite","knit","tide"],
+  "inner-quote": ["nitro","unite","urine"],
+  "bawl-live": ["evil","vale","veal","veil","vile","will"],
+  "rope-sort": ["pore","pose","post","pots","repo","sore","spot","stop","tops"],
+  "shelf-white": ["flesh","heels","heist","sheet","these","while"],
+  "fern-solo": ["fool","fore","lose","rose","sole","sore"],
+  "bar-bid": ["bad","bra"],
+  "deli-long": ["dine","dong","gold","idle","lied","lien","line","lion"],
+  "bolt-fury": ["blot","bury","fort","turf"],
+  "shiny-splat": ["halts","palsy","pints","saith","shalt","spiny"],
+  "bite-gaff": ["abet","beat","beta","gift"],
+  "clad-idea": ["aide","deli","died","idle","lace","laid","lied"],
+  "extra-ruler": ["laxer","relax","truer"],
+  "elbow-tapas": ["bales","below","blast","boast","boats","bolts","lapse","leaps","lobes","lopes","pales","pleas","plots","poles","sable","slope","splat"],
+  "local-snipe": ["alien","anise","canes","clans","clean","coals","nails","pines","poise","polis","scope","slain","snail","spine"],
+  "rotor-stale": ["alter","later","least","otter","roast","roost","roots","slate","solar","steal","stole","tales","torts","totes"],
+  "carry-lunch": ["churn","clary","curry","lurch"],
+  "real-slog": ["ages","earl","egos","ergo","gals","gear","goes","gore","lear","logs","lore","lose","ogre","rage","role","sale","seal","slag","sole"],
+  "remix-timer": ["meter","metre","mitre","remit"],
+  "basin-crate": ["abate","bates","beast","beats","brant","cairn","carte","cater","crest","cries","react","scant","trace"],
+  "halo-puts": ["alps","atop","hast","hats","huts","laps","lash","lush","oath","pals","past","pats","plus","slap","spat","taps","thus"],
+  "core-gear": ["acre","care","gore","ogre","rage"],
+  "bank-isle": ["akin","bale","bane","bean","lies","silk","sine","skin"],
+  "boil-flap": ["ball","bill","fall","fill","flip","foil","loaf"],
+  "bit-new": ["bet","net","nit","ten","win"],
+  "leak-pill": ["kale","lake","pale","peak","plea"],
+  "aside-badly": ["aides","aisle","blade","daisy","dales","deals","ideas","leads"],
+  "shear-trail": ["alert","altar","alter","earls","earth","hails","hairs","hales","hares","hater","heals","hears","heirs","hires","laser","later","lathe","leash","liars","reals","rears","riles","riser","shale","share","shire","terra","their","trial","trier"],
+  "mini-then": ["hint","tine"],
+  "otter-tuned": ["noted","outed","outer","rouen","route","tenor","toner","tuner"],
+  "math-seat": ["ahem","east","eats","hast","mate","meat","meta","meth","shea","stat","tame","teas","test","them"],
+  "holy-rest": ["holt","rosy","shot","sort"],
+  "spend-stark": ["darts","dents","karts","perks","spank","spark","stand","stank","tanks"],
+  "laser-shush": ["ashes","earls","hales","hauls","heals","leash","reals","sears","shale"],
+  "ear-rut": ["are","art","ate","eat","era","rat","tea"],
+  "raise-teach": ["arise","chair","cheat","erase","hairs","hares","haste","hates","hears","heats","heirs","heist","hires","reach","saith","saree","share","shear","shire","tease"],
+  "adore-begun": ["adorn","anger","boner","bored","borne","budge","debug","eager","grade","grand","radon","raged","range"],
+  "deli-salt": ["dial","idle","isle","last","lest","lied","lies","sail"],
+  "stone-viper": ["irons","noise","notes","onset","overt","piers","pines","seton","snipe","snort","spent","spire","steep","store","strep","tones","trove"],
+  "rival-siren": ["evils","liars","liver","lives","rails","rains","reins","resin","riles","rinse","riven","sarin","silva","veils","veins","vials","vines"],
+  "runt-sake": ["ants","kart","near","nuts","rake","rant","sane","stun","task","turk","turn"],
+  "chant-mouse": ["aches","ascot","atoms","canoe","canto","chats","coast","coats","count","maths","moats","ocean","ounce","scout","shame","tacos"],
+  "dirt-note": ["diet","dire","dote","edit","redo","rein","ride","tide","tied","tine","tone","torn"],
+  "lime-talk": ["emit","item","kill","lame","lite","male","mate","meal","meat","meta","mile","mite","tale","tame","teal","team","tile","time"],
+  "elk-lid": ["die"],
+  "magic-there": ["carte","cater","chime","crate","eater","ether","ethic","gamer","grate","great","image","marge","react","three","trace"],
+  "beast-loose": ["bates","beats","boast","boats","boots","easel","least","obese","slate","stale","steal","stole","stool","tales","tools"],
+  "mean-read": ["amen","dame","dear","earn","made","mane","mead","near"],
+  "finch-wrote": ["force","forte","forth","throw","tower","twine","winch","worth"],
+  "rural-times": ["emits","items","lemur","mites","mutes","riser","ruler","serum","smite","stair","sutra","tiers","tires","trail","trial","tries","ultra"],
+  "dude-tide": ["diet","edit","tied"],
+  "bent-wavy": ["newt","went"],
+  "dose-exam": ["does","mods"],
+  "redo-wing": ["gird","grid","iron","noir","nori","ring","rode"],
+  "hulk-pool": ["hull","loop","poll","polo"],
+  "semi-tour": ["item","miso","mite","ruse","sour","sure","term","time","true","user"],
+  "eater-traps": ["aster","erase","ester","parse","parts","pasta","paste","pears","rates","reset","saree","septa","spare","spate","spear","stare","state","steer","strap","strep","tapas","taper","tapes","taste","tater","tears","tease","terra","tetra","treat","trees"],
+  "share-trace": ["aches","acres","cares","carte","cater","chase","cheat","crate","earth","hares","hater","heart","races","rears","scare","shear","teach","terra"],
+  "memo-tree": ["meet","mere","term","tome","tore"],
+  "tapas-upset": ["asset","paste","pasts","pause","pests","seats","septa","spate","spats","state","steps","tapes","taste","taupe"],
+  "born-felt": ["belt","blot","fort","fret","left","loft"],
+  "angel-docks": ["angle","canes","clank","clean","cloak","codes","dolce","glean","lance"],
+  "delay-start": ["artsy","aster","delta","least","rated","rates","ready","salty","satay","slate","stale","stare","steal","tales","tardy","tarts","tears","trade","trays","tread","years"],
+  "eye-row": ["owe"],
+  "cage-nope": ["cape","cope","open"],
+  "acres-viola": ["cares","carve","coals","crave","liars","races","rails","raise","rival","scare","viral","voila"],
+  "gods-neat": ["ages","ante","dent","dogs","dons","ends","gate","goat","nods","sage","sago","sane","tend"],
+  "loft-sold": ["doll","lots","olds","slot","soft","toll"],
+  "laugh-otter": ["alert","gator","grout","later","lathe","ought","outer","route"],
+  "daft-safe": ["deaf","fats"],
+  "aired-badge": ["adage","bared","beard","bread","bride"],
+  "awful-stake": ["awake","fetus","sault","skate","stalk","steak","takes","talks","wakes","walks"],
+  "clash-short": ["chats","clots","colts","harsh","horst","hosts","lasts","salts","shots","slash","slats","slots","stash","torch","trash"],
+  "one-pad": ["don","eon","pea","pen"],
+  "cloud-nerve": ["clove","could","cruel","cured","never","ulcer","under"],
+  "clean-ocean": ["alone"],
+  "stem-yarn": ["arms","mars","mesa","nest","nets","rams","same","sane","seam","sent","tyne"],
+  "lead-plum": ["dale","deal","duel","dull","lame","lamp","lump","male","meal","mule","palm"],
+  "fails-shaft": ["atlas","fatal","filth","flash","halts","sails","shalt","shift","slash","tails"],
+  "frets-usher": ["freer","frees","fresh","hurst","hurts","reefs","reuse","truer"],
+  "tied-till": ["edit","lite","tide","tile"],
+  "blue-real": ["able","bale","ball","bull","lear","lure","rule"],
+  "nasal-tiger": ["align","angel","anger","angle","aster","atlas","earns","glean","grain","grate","islet","lanes","leans","least","legit","liang","liens","lines","nails","nears","rains","range","rates","reign","reins","resin","rinse","risen","rites","saran","sarin","siren","slate","snail","snare","stair","stale","stare","steal","tails","tales","tears","tiers","tiles","tires","tries"],
+  "act-rap": ["cat","pac","rat","tar"],
+  "halo-peel": ["hale","hall","heal","heel","hell","leap","opal","pale","pole"],
+  "rate-vice": ["acre","care","race","rice","rite","tear","tier"],
+  "matte-panel": ["enema","leapt","metal","penal","petal","plane","plant","pleat"],
+  "iron-sets": ["eons","nest","nets","noir","nori","ones","sent","site","tens","ties","tine"],
+  "cargo-wines": ["acres","canes","canoe","cares","conga","corgi","cries","ocean","races","since","swear","swine","swing","wagon","wanes","wares","wears","weirs","wings","wires","wiser"],
+  "busy-mode": ["boys","buys","demo","dome","some"],
+  "groom-salon": ["loans","moors"],
+  "curse-worry": ["cores","crore","cures","recur","rower","score","swore"],
+  "give-newt": ["twin","vein","vent","vine","went","wine"],
+  "elk-sat": ["ate","eat","tea","tel"],
+  "ranch-uncle": ["clear","learn","rance","renal"],
+  "pasta-shrew": ["apart","areas","ashes","hares","heaps","hears","phase","shape","share","shear","stash","straw","swats","tapas","trash","wares","warts","wears"],
+  "lime-pork": ["lore","mile","mole","pier","poem","pore","repo","rile","ripe","role"],
+  "oops-rail": ["airs","lair","liar","opal","polo","pool","pros","raps","rasp","soap"],
+  "dream-freak": ["armed","faker","madre","raked"],
+  "alter-using": ["agile","alert","align","angst","arise","aster","gains","gates","guest","guile","guise","liang","rains","raise","rants","rates","ruins","runts","sarin","stage","stare","stung","tears","trans","turns"],
+  "cold-rock": ["clod","cork","lord"],
+  "deli-mass": ["aids","aims","dial","dies","idle","laid","lied","lima","lime","mail","mess","mile","said","side","slam","sled"],
+  "coven-route": ["count","covet","outer","rouen","trove","voter"],
+  "gig-nib": ["bin"],
+  "mirth-wedge": ["grime","merit","meter","metre","midge","mitre","remit","threw","timed","timer","tweed","write"],
+  "fast-sale": ["fats","flat","flea","leaf","salt","seal","seas"],
+  "seek-tern": ["rent","teen"],
+  "cedar-rehab": ["bared","beach","bread","cadre","cared","raced"],
+  "fear-plug": ["fare","flag","gulf","pear","pure","reap"],
+  "grin-seat": ["arts","east","gate","gran","grit","rang","rats","sane","sine","site","star","stir","teas","ties","tsar"],
+  "eager-tones": ["gates","grate","great","notes","seton","stage","stone","tenor","toner"],
+  "smirk-taped": ["adept","aides","aside","dimes","ideas","parks","peaks","raids","spade","speak","triad"],
+  "dead-ogre": ["deer","ergo","gore","reed","rode"],
+  "dud-gum": ["mug"],
+  "brow-vein": ["bone","oven","vine","wove"],
+  "lift-ride": ["deli","dire","fire","flit","idle","lied","life","rife","rift"],
+  "breed-ethic": ["birch","bride","hired"],
+  "clove-shake": ["haves","lakes","leaks","loves","salve","shave","shove","solve"],
+  "case-nerd": ["aces","acre","card","care","darn","earn","ends","near","rand","sand","sane","seen"],
+  "paid-star": ["airs","arts","pair","para","part","rats","said","sari","stir","trap","trip","tsar"],
+  "force-truth": ["cuter","forte","froth","otter","torch","touch","utter"],
+  "lose-slap": ["alps","laps","pals","sale","seal","sell","slop","soap","sole"],
+  "acorn-spray": ["carry","parry","prays","raspy","scorn","soapy"],
+  "muse-site": ["emit","mite","mute","semi","ties","time"],
+  "crash-solve": ["acres","cares","chaos","close","clove","crave","havoc","loses","loves","races","raves","saver","scare","sears","soles"],
+  "alone-gravy": ["angel","anger","angry","arena","gavel","glean","glove","goner","grave","grove","range","rayon"],
+  "awry-balm": ["alma","bray","lama","lamb","wary"],
+  "fresh-sushi": ["fries","heirs","hires","issue","rises","serif","shire"],
+  "input-light": ["guilt","night"],
+  "nude-pine": ["dine","dune"],
+  "dull-hack": ["clad","hulk","hull","lakh"],
+  "gosh-want": ["hang","hogs","hong","shaw","show","stag","swat","tags","tang","tong","wash"],
+  "ear-pug": ["age","are","era","rap"],
+  "perk-weed": ["deep","peed","peek","week"],
+  "quest-shore": ["euros","heres","heros","horse","horst","hoses","hosts","reuse","rouse","sheer","shoes","short","tours"],
+  "late-mask": ["mate","meat","mesa","meta","sale","seal","seam","tale","tame","teal","team"],
+  "cone-icon": ["conn","nice"],
+  "salty-voter": ["aster","avert","earls","laser","loser","overt","rates","ravel","reals","roles","stare","start","store","tarts","tears","torts","trove","yeast"],
+  "alert-decor": ["alter","carer","carol","carte","cater","coder","coral","crate","credo","deter","eater","erode","erred","later","racer","trace"],
 };
