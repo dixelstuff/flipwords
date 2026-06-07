@@ -1619,12 +1619,26 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
   .anti-spam-floating-lock{font-size:20px;transform:translateY(2px)}
 }
 
-/* v78: revealed/give-up message uses grey text and no emoji */
-.game-solved-main{color:var(--success);}
-.game-solved-main.award-perfect{color:var(--clue-perfect);}
-.game-solved-main.award-great{color:var(--clue-great);}
-.game-solved-main.award-good{color:var(--clue-good);}
-.game-solved-main.award-clunky,.game-solved-main.score-zero{color:var(--muted);}
+/* v79: only Revealed +0 is muted; normal Rough/Good/Great/Perfect solve messages stay green */
+.game-solved-main,
+.game-solved-main.award-perfect,
+.game-solved-main.award-great,
+.game-solved-main.award-good,
+.game-solved-main.award-clunky{color:var(--success);}
+.game-solved-main.score-zero{color:var(--muted);}
+
+/* v79: auto/free clue uses text glow only; manual Clue still uses grid flash */
+.message.clue-free-glow,
+.message.clue-auto-text-glow{
+  color:#6f5500;
+  text-shadow:0 0 14px rgba(212,167,44,.38),0 0 3px rgba(244,223,138,.42);
+  animation:clue-text-glow-fade 3.15s ease-out forwards;
+}
+@keyframes clue-text-glow-fade{
+  0%{color:#5c4700;text-shadow:0 0 18px rgba(212,167,44,.54),0 0 4px rgba(244,223,138,.55)}
+  56%{color:#5c4700;text-shadow:0 0 16px rgba(212,167,44,.42),0 0 3px rgba(244,223,138,.42)}
+  100%{color:var(--muted);text-shadow:none}
+}
 
 </style>
 </head>
@@ -3706,7 +3720,7 @@ function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAl
 function showInfoMessage(text,type="info",duration=4000){
   clearAntiSpamMessageTimer();
   if(infoMessageTimer)clearTimeout(infoMessageTimer);
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg","clue-free-glow","clue-auto-text-glow");
   message.style.animationDuration="";
   message.textContent=text;
   message.dataset.infoType=type;
@@ -3728,7 +3742,7 @@ function clearStaticMessage(){
   clearClueSkipHelperTimer();
   clearAntiSpamMessageTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
+  message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg","clue-free-glow","clue-auto-text-glow");
   message.dataset.infoType="";
   message.style.animationDuration="";
   message.textContent="";
@@ -3737,12 +3751,13 @@ function showStaticInfoMessage(text,type="info",duration=7000,opts={}){
   clearClueCountdownMessage();
   clearAntiSpamMessageTimer();
   if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","final-pop","hold-score","hold-fade","info","clue-static","clue-solved","fadeout","anti-spam-lock-msg","clue-free-glow","clue-auto-text-glow");
   message.style.animationDuration="";
   message.textContent=text;
   message.dataset.infoType=type;
   void message.offsetWidth;
   message.classList.add("clue-static");
+  if(type==="clue-available")message.classList.add("clue-free-glow");
   if(duration===null||duration===Infinity)return;
   infoMessageTimer=setTimeout(()=>{
     message.classList.add("fadeout");
@@ -4222,9 +4237,15 @@ function updatePersistentClueDisplay(forceFull=false){
   if(!html)return;
   message.innerHTML=html;
   message.dataset.infoType="clue-shown";
-  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-solved","fadeout");
+  message.classList.remove("score-pop","score-zero","quick-pop","streak-pop","shield-pop","accounting-pop","penalty-pop","final-pop","hold-score","hold-fade","vowel-reveal-msg","info","clue-solved","fadeout","clue-free-glow","clue-auto-text-glow");
   message.classList.add("clue-static");
   message.classList.toggle("clue-solved",!!solved);
+}
+function glowAutoClueText(){
+  if(!message||solved)return;
+  message.classList.remove("clue-free-glow","clue-auto-text-glow");
+  void message.offsetWidth;
+  message.classList.add("clue-auto-text-glow");
 }
 function restorePersistentClueIfNeeded(){
   if(!isTimedClueMode()||solved||!clueVisible)return false;
@@ -4262,8 +4283,12 @@ function showPersistentClue(forceFull=false,opts={}){
   updatePersistentClueDisplay(fullVisible);
   clearClueInlineCountdownTimer();
   if(clueRevealStage>prevStage){
-    if(opts&&opts.auto&&clueGridFlashActive)render();
-    else flashGridForNewClue(opts&&opts.auto?CLUE_GRID_FREE_FLASH_MS:CLUE_GRID_FLASH_MS);
+    if(opts&&opts.auto){
+      render();
+      glowAutoClueText();
+    }else{
+      flashGridForNewClue(CLUE_GRID_FLASH_MS);
+    }
   }
   else render(); // v62: update the Clue/Give-up button immediately after a clue is taken
   saveActiveModeProgress();
@@ -4302,13 +4327,7 @@ function scheduleAutoRevealFreeClue(stage){
   clearClueAutoRevealTimer();
   const forceFull=stage>=2;
   showStaticInfoMessage("Free clue unlocked","clue-available",900,{allowHelper:false});
-  const preflashDelay=Math.max(0,CLUE_AUTO_REVEAL_DELAY_MS-CLUE_GRID_FREE_PREFLASH_LEAD_MS);
-  setTimeout(()=>{
-    if(!isTimedClueMode()||solved||gameStartDeferred)return;
-    if(forceFull){
-      if(currentSplitClue().hasTwo&&clueRevealStage<2)flashGridForNewClue(CLUE_GRID_FREE_FLASH_MS,"free");
-    }else if(clueRevealStage<1)flashGridForNewClue(CLUE_GRID_FREE_FLASH_MS,"free");
-  },preflashDelay);
+  // v79: auto/free clues no longer flash the grid; the clue text itself glows when it appears.
   clueAutoRevealTimer=setTimeout(()=>{
     clueAutoRevealTimer=null;
     if(!isTimedClueMode()||solved||gameStartDeferred)return;
@@ -4630,7 +4649,7 @@ function clearCelebrationTimers(){celebrationTimerIds.forEach(id=>clearTimeout(i
 function clearReturnedToStartTimer(){if(returnedToStartTimer){clearTimeout(returnedToStartTimer);returnedToStartTimer=null}}
 function clearSingleStartWordTimer(){if(singleStartWordTimer){clearTimeout(singleStartWordTimer);singleStartWordTimer=null}}
 function clearNoticeTimer(){if(noticeTimer){clearTimeout(noticeTimer);noticeTimer=null}}
-function clearInfoMessage(clearText=true){clearClueCountdownMessage();clearClueSkipHelperTimer();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}clearAntiSpamMessageTimer();message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved){message.textContent="";restorePersistentClueIfNeeded()}}
+function clearInfoMessage(clearText=true){clearClueCountdownMessage();clearClueSkipHelperTimer();if(infoMessageTimer){clearTimeout(infoMessageTimer);infoMessageTimer=null}clearAntiSpamMessageTimer();message.classList.remove("info","clue-static","clue-solved","fadeout","anti-spam-lock-msg","clue-free-glow","clue-auto-text-glow");message.dataset.infoType="";message.style.animationDuration="";if(clearText&&!solved){message.textContent="";restorePersistentClueIfNeeded()}}
 function clearAllTimers(){clearClueFooterTimer();clearClueTapDelayTimer();clearClueAutoRevealTimer();clearClueSkipHelperTimer();clearSolvedClueTimer();clearClueInlineCountdownTimer();if(clueTimeTravelRevealTimer){clearTimeout(clueTimeTravelRevealTimer);clueTimeTravelRevealTimer=null}clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();clearInfoMessage();hideVowelReveal(false);clearVowelTimers();clearSolvedPreviewTimer();clearBonusTimers();clearCelebrationTimers();clearDailyCountdownTimer();if(dailyAdvanceTimer){clearTimeout(dailyAdvanceTimer);dailyAdvanceTimer=null}dailyTransitioning=false;dailyAdvancePending=false;clearDailyStageTransitionClasses();stopAutoHintTimer()}
 
 function jumpToNextDailyForTesting(){
