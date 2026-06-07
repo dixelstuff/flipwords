@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="format-detection" content="telephone=no,email=no,address=no" />
 <title>FlipWords</title>
+<!-- BUILT FROM flipwords_stats_tabs_modal_v17 + clue credit/preroll + 5L perfect 0.89 (v21) -->
 <style>
 :root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24);--grid-scale:1;--tile-w-base:84px;--base-tile-h-base:142px;--tile-gap-base:10px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:50px;--tile-radius-base:18px;--tile-border-w:1.5px;--divider:1px;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -1626,18 +1627,7 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 .game-solved-main.award-clunky{color:var(--success);}
 .game-solved-main.score-zero{color:var(--muted);}
 
-/* v79: auto/free clue uses text glow only; manual Clue still uses grid flash */
-.message.clue-free-glow,
-.message.clue-auto-text-glow{
-  color:#6f5500;
-  text-shadow:0 0 14px rgba(212,167,44,.38),0 0 3px rgba(244,223,138,.42);
-  animation:clue-text-glow-fade 3.15s ease-out forwards;
-}
-@keyframes clue-text-glow-fade{
-  0%{color:#5c4700;text-shadow:0 0 18px rgba(212,167,44,.54),0 0 4px rgba(244,223,138,.55)}
-  56%{color:#5c4700;text-shadow:0 0 16px rgba(212,167,44,.42),0 0 3px rgba(244,223,138,.42)}
-  100%{color:var(--muted);text-shadow:none}
-}
+/* v81: removed auto/free clue yellow text glow; manual tapped Clue still uses grid flash */
 
 </style>
 </head>
@@ -3756,7 +3746,6 @@ function showStaticInfoMessage(text,type="info",duration=7000,opts={}){
   message.dataset.infoType=type;
   void message.offsetWidth;
   message.classList.add("clue-static");
-  if(type==="clue-available")message.classList.add("clue-free-glow");
   if(duration===null||duration===Infinity)return;
   infoMessageTimer=setTimeout(()=>{
     message.classList.add("fadeout");
@@ -4242,10 +4231,8 @@ function updatePersistentClueDisplay(forceFull=false){
   message.classList.toggle("clue-solved",!!solved);
 }
 function glowAutoClueText(){
-  if(!message||solved)return;
-  message.classList.remove("clue-free-glow","clue-auto-text-glow");
-  void message.offsetWidth;
-  message.classList.add("clue-auto-text-glow");
+  // v81: auto/free clue arrival no longer uses yellow text glow.
+  return;
 }
 function restorePersistentClueIfNeeded(){
   if(!isTimedClueMode()||solved||!clueVisible)return false;
