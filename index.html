@@ -4159,7 +4159,8 @@ function getAllWordClueCreditMs(p=currentPuzzle()){
   const n=getClueBonusWordSet(p).size;
   if(n<=3)return 10000;
   if(n<=8)return 7000;
-  return CLUE_BONUS_WORD_CREDIT_MS;
+  if(n<=15)return CLUE_BONUS_WORD_CREDIT_MS;
+  return 3000;
 }
 function flashClueBonusRow(row){
   if(row!=="top"&&row!=="bottom")return;
