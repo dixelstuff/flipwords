@@ -1655,6 +1655,12 @@ const DAILY_CLUE_CARRYOVER_CAP_MS=15000;
 const CLUE_AUTO_REVEAL_DELAY_MS=1420;
 const CLUE_AUTO_PREROLL_MS=CLUE_AUTO_REVEAL_DELAY_MS;
 const CLUE_AUTO_CLUE_LOCKOUT_MS=3000;
+const CLUE_GRID_FLASH_MS=720;
+const CLUE_GRID_FREE_FLASH_MS=1250;
+const CLUE_GRID_FREE_PREFLASH_LEAD_MS=220;
+const START_WORDS_NOTICE_DELAY_MS=900;
+const START_WORDS_NOTICE_DURATION_MS=2800;
+const SOLVED_START_PREVIEW_MS=3500;
 const CLUE_RATING_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough"};
 const CLUE_RATING_FOOTER_LABELS={perfect:"Perfect",great:"Great",good:"Good",clunky:"Rough"};
 const CLUE_RATING_ORDER=["perfect","great","good","clunky"];
@@ -3649,7 +3655,7 @@ function registerAntiSpamAction(){
   return true;
 }
 function noteInteraction(antiSpamAlreadyChecked=false){interactionCount++;if(!antiSpamAlreadyChecked&&!registerAntiSpamAction())return false;returnedToStartNoticeShown=false;blockedNoticeShown=false;clearReturnedToStartTimer();clearSingleStartWordTimer();clearNoticeTimer();if(message.classList.contains("info")&&(message.dataset.infoType==="returned-start"||message.dataset.infoType==="blocked-proper"||message.dataset.infoType==="single-start-word"))clearInfoMessage();return true}
-function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved&&!isAllWordsMode())||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start")}},1500)}
+function maybeShowReturnedToStartNotice(){clearReturnedToStartTimer();if((solved&&!isAllWordsMode())||interactionCount<3||returnedToStartNoticeShown||!isShowingStartingWords())return;returnedToStartTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!returnedToStartNoticeShown&&isShowingStartingWords()){returnedToStartNoticeShown=true;showInfoMessage("These were the start words","returned-start",START_WORDS_NOTICE_DURATION_MS)}},START_WORDS_NOTICE_DELAY_MS)}
 function maybeShowSingleStartWordNotice(){clearSingleStartWordTimer();if((solved&&!isAllWordsMode())||isSolved()||isShowingStartingWords()||isBlockedProperNounSolution())return;const word=getSingleStartWordMatch();if(!word)return;singleStartWordTimer=setTimeout(()=>{const wordNow=getSingleStartWordMatch();if((!solved||isAllWordsMode())&&!isSolved()&&!isShowingStartingWords()&&!isBlockedProperNounSolution()&&wordNow)showInfoMessage(`${wordNow.toUpperCase()} was a start word`,"single-start-word")},1500)}
 function maybeShowBlockedProperNounNotice(){clearNoticeTimer();if((solved&&!isAllWordsMode())||blockedNoticeShown||!isBlockedProperNounSolution())return;noticeTimer=setTimeout(()=>{if((!solved||isAllWordsMode())&&!blockedNoticeShown&&isBlockedProperNounSolution()){blockedNoticeShown=true;showInfoMessage("Proper nouns not allowed","blocked-proper")}},1500)}
 function showInfoMessage(text,type="info",duration=4000){
@@ -3754,7 +3760,7 @@ function showSolvedStartPreview(){
   message.classList.add("hold-score");
   message.textContent="These were the start words";
   render();
-  solvedPreviewTimer=setTimeout(()=>hideSolvedStartPreview(true),5000);
+  solvedPreviewTimer=setTimeout(()=>hideSolvedStartPreview(true),SOLVED_START_PREVIEW_MS);
 }
 function hideSolvedStartPreview(fade=false){
   clearSolvedPreviewTimer();
@@ -4113,7 +4119,7 @@ function flashClueBonusRepeatRow(row){
     if(isTimedClueMode()&&!solved)render();
   },520);
 }
-function flashGridForNewClue(){
+function flashGridForNewClue(duration=CLUE_GRID_FLASH_MS){
   if(!isTimedClueMode()||solved)return;
   if(clueGridFlashTimer){clearTimeout(clueGridFlashTimer);clueGridFlashTimer=null;}
   clueGridFlashActive=true;
@@ -4122,7 +4128,7 @@ function flashGridForNewClue(){
     clueGridFlashTimer=null;
     clueGridFlashActive=false;
     if(isTimedClueMode()&&!solved)render();
-  },720);
+  },duration);
 }
 function applyClueWordCredit(word,row){
   word=String(word||"").toLowerCase();
@@ -4203,7 +4209,10 @@ function showPersistentClue(forceFull=false,opts={}){
   }
   updatePersistentClueDisplay(fullVisible);
   clearClueInlineCountdownTimer();
-  if(clueRevealStage>prevStage)flashGridForNewClue();
+  if(clueRevealStage>prevStage){
+    if(opts&&opts.auto&&clueGridFlashActive)render();
+    else flashGridForNewClue(opts&&opts.auto?CLUE_GRID_FREE_FLASH_MS:CLUE_GRID_FLASH_MS);
+  }
   else render(); // v62: update the Clue/Give-up button immediately after a clue is taken
   saveActiveModeProgress();
 }
@@ -4241,6 +4250,13 @@ function scheduleAutoRevealFreeClue(stage){
   clearClueAutoRevealTimer();
   const forceFull=stage>=2;
   showStaticInfoMessage("Free clue unlocked","clue-available",900,{allowHelper:false});
+  const preflashDelay=Math.max(0,CLUE_AUTO_REVEAL_DELAY_MS-CLUE_GRID_FREE_PREFLASH_LEAD_MS);
+  setTimeout(()=>{
+    if(!isTimedClueMode()||solved||gameStartDeferred)return;
+    if(forceFull){
+      if(currentSplitClue().hasTwo&&clueRevealStage<2)flashGridForNewClue(CLUE_GRID_FREE_FLASH_MS);
+    }else if(clueRevealStage<1)flashGridForNewClue(CLUE_GRID_FREE_FLASH_MS);
+  },preflashDelay);
   clueAutoRevealTimer=setTimeout(()=>{
     clueAutoRevealTimer=null;
     if(!isTimedClueMode()||solved||gameStartDeferred)return;
