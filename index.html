@@ -1618,6 +1618,14 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 @media (min-width:760px) and (min-height:650px) and (hover:hover){
   .anti-spam-floating-lock{font-size:20px;transform:translateY(2px)}
 }
+
+/* v78: revealed/give-up message uses grey text and no emoji */
+.game-solved-main{color:var(--success);}
+.game-solved-main.award-perfect{color:var(--clue-perfect);}
+.game-solved-main.award-great{color:var(--clue-great);}
+.game-solved-main.award-good{color:var(--clue-good);}
+.game-solved-main.award-clunky,.game-solved-main.score-zero{color:var(--muted);}
+
 </style>
 </head>
 <body>
@@ -2243,14 +2251,15 @@ function clueFooterTimeHTML(){return `<span class="clue-footer-time"><span class
 function currentClueResult(){const p=currentPuzzle();if(!p)return null;if(isDailyMode()){return dailyPuzzleResults[puzzleIndex]||null}const rows=getClueResults().filter(r=>r.puzzleId===p.id);return rows.length?rows[rows.length-1]:null}
 function currentClueFooterResultHTML(){const r=currentClueResult();if(!r)return lastAccountingMessages&&lastAccountingMessages.length?lastAccountingMessages[lastAccountingMessages.length-1]:"";return r.gaveUp?"Revealed +0":`${getClueFooterRatingLabel(r.rating)} +${r.score}`}
 function getClueRatingEmoji(rating,gaveUp=false){
-  if(gaveUp)return "👀";
+  if(gaveUp)return "";
   return {perfect:"🌟",great:"💎",good:"✨",clunky:"🪨"}[String(rating||"").toLowerCase()]||"";
 }
-function currentClueAwardResultHTML(){const r=currentClueResult();if(r){if(r.gaveUp)return"👀 Revealed +0";const emoji=getClueRatingEmoji(r.rating,false);return `${emoji?emoji+" ":""}${getClueRatingLabel(r.rating)} solve! +${r.score}`}return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
+function currentClueAwardResultHTML(){const r=currentClueResult();if(r){if(r.gaveUp)return"Revealed +0";const emoji=getClueRatingEmoji(r.rating,false);return `${emoji?emoji+" ":""}${getClueRatingLabel(r.rating)} solve! +${r.score}`}return lastAccountingMessages&&lastAccountingMessages.length?String(lastAccountingMessages[lastAccountingMessages.length-1]).replace(/\s+/g," ").trim():""}
 function formatGameSolvedRewardText(text){
   const raw=String(text||"").replace(/\s+/g," ").trim();
   if(!raw)return raw;
-  if(/^(?:🌟|💎|✨|🪨|👀|🔥|💯)/.test(raw))return raw;
+  if(/^👀\s*Revealed \+0$/i.test(raw))return "Revealed +0";
+  if(/^(?:🌟|💎|✨|🪨|🔥|💯)/.test(raw))return raw;
   const m=raw.match(/^(Perfect|Great|Good|Rough|Clunky|Revealed)(?: solve)?!?\s*(\+[0-9]+)/i);
   if(!m)return raw;
   const key=m[1].toLowerCase()==="clunky"?"clunky":m[1].toLowerCase();
@@ -3100,7 +3109,9 @@ function renderGameSolvedSubtitle(animate=false){
   const shouldPop=animate||forceSolvedSubtitlePopOnRender||!subtitle.classList.contains("daily-complete-animate");
   subtitle.classList.remove("level-label","intro-copy","level-with-meta");
   subtitle.classList.add("daily-complete-title");
-  subtitle.innerHTML=`<span>${text}</span><span class="daily-complete-moves">Level ${puzzleIndex+1}</span>`;
+  const awardClass=getClueAwardClassFromText(text);
+  const zeroClass=/^Revealed \+0$/i.test(text)?" score-zero":"";
+  subtitle.innerHTML=`<span class="game-solved-main ${awardClass}${zeroClass}">${text}</span><span class="daily-complete-moves">Level ${puzzleIndex+1}</span>`;
   if(shouldPop)restartSolvedSubtitlePop();
   else subtitle.classList.add("daily-complete-animate");
   forceSolvedSubtitlePopOnRender=false;
