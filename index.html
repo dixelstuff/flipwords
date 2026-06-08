@@ -1817,6 +1817,8 @@ const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2
 let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
 let flipInputLockedUntil=0,flipInputUnlockTimer=null,lastGridTapAt=0;
 const GRID_TAP_DEBOUNCE_MS=110;
+const FLIP_ANIM_MS=360;
+const flipAnimTimers=new Map();
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2629,7 +2631,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;flipInputLockedUntil=0;lastGridTapAt=0;clearFlipInputUnlockTimer();clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;flipInputLockedUntil=0;lastGridTapAt=0;clearFlipInputUnlockTimer();clearAllFlipAnimTimers();clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3640,11 +3642,20 @@ function queueRewardAnimations(){
 
 function isFlipInputLocked(t=null){
   const now=Date.now();
-  if(now-lastGridTapAt<GRID_TAP_DEBOUNCE_MS)return true;
-  return !!(t&&t.flipAnim);
+  // Only block near-simultaneous taps. Do not block for the whole flip animation,
+  // so a deliberate second tap can reverse the same tile after the debounce.
+  return now-lastGridTapAt<GRID_TAP_DEBOUNCE_MS;
 }
 function clearFlipInputUnlockTimer(){if(flipInputUnlockTimer){clearTimeout(flipInputUnlockTimer);flipInputUnlockTimer=null}}
-function lockFlipInput(ms=360){
+function clearFlipAnimTimerFor(id){
+  const timer=flipAnimTimers.get(id);
+  if(timer){clearTimeout(timer);flipAnimTimers.delete(id)}
+}
+function clearAllFlipAnimTimers(){
+  flipAnimTimers.forEach(timer=>clearTimeout(timer));
+  flipAnimTimers.clear();
+}
+function lockFlipInput(ms=FLIP_ANIM_MS){
   lastGridTapAt=Date.now();
   // Keep the old variables harmlessly reset for legacy callers, but do not globally lock
   // the whole grid for the full flip animation. Other tiles can still be used after
@@ -3653,7 +3664,29 @@ function lockFlipInput(ms=360){
   clearFlipInputUnlockTimer();
 }
 function clearOtherFlipAnimations(activeTileId){
-  tiles.forEach(x=>{if(x&&x.id!==activeTileId)x.flipAnim=""});
+  // Rendering rebuilds tile DOM. If another tile still carries an animation class,
+  // that animation can visually restart on render. Clear only other tiles; keep the
+  // active tile free to reverse its own flip after the debounce.
+  tiles.forEach(x=>{if(x&&x.id!==activeTileId){x.flipAnim="";clearFlipAnimTimerFor(x.id)}});
+}
+function startVerticalTileFlip(t){
+  if(!t)return;
+  clearFlipAnimTimerFor(t.id);
+  clearOtherFlipAnimations(t.id);
+  const anim=t.flipped?"anim-flip-up":"anim-flip-down";
+  t.flipAnim=anim;
+  t.flipped=!t.flipped;
+  lockFlipInput(FLIP_ANIM_MS);
+  flipAnimTimers.set(t.id,setTimeout(()=>{
+    flipAnimTimers.delete(t.id);
+    const cur=tiles.find(x=>x.id===t.id);
+    if(cur&&cur.flipAnim===anim)cur.flipAnim="";
+    maybeShowReturnedToStartNotice();
+    maybeShowBlockedProperNounNotice();
+    maybeShowSingleStartWordNotice();
+    checkSolved();
+    if(!solved&&!dragState)render();
+  },FLIP_ANIM_MS));
 }
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
@@ -3923,7 +3956,7 @@ function handlePointerUp(e){
       if(isFlipInputLocked(t)){dragState=null;clearDragProxy();render();return}
       if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
       if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      clearOtherFlipAnimations(t.id);t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;lockFlipInput(360);recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
+      startVerticalTileFlip(t);recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
