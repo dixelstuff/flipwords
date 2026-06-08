@@ -1814,9 +1814,7 @@ let gameSolvedSubtitleText="";
 let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
-const TAP_GLOBAL_COOLDOWN_MS=110,TAP_SAME_TILE_COOLDOWN_MS=430;
 let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
-let lastAcceptedTapAt=0,lastTapByKey=new Map();
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2629,7 +2627,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;lastAcceptedTapAt=0;lastTapByKey=new Map();clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3639,23 +3637,6 @@ function queueRewardAnimations(){
 }
 
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
-function tapCooldownKey(id,row){return `${id||""}:${row||""}`}
-function registerTapCooldown(id,row=""){
-  const now=Date.now();
-  const key=tapCooldownKey(id,row);
-  const lastSame=lastTapByKey.get(key)||0;
-  if(now-lastSame<TAP_SAME_TILE_COOLDOWN_MS)return false;
-  if(now-lastAcceptedTapAt<TAP_GLOBAL_COOLDOWN_MS)return false;
-  lastTapByKey.set(key,now);
-  lastAcceptedTapAt=now;
-  // Keep the map small during longer sessions.
-  if(lastTapByKey.size>40){
-    for(const [k,t] of lastTapByKey){
-      if(now-t>3000)lastTapByKey.delete(k);
-    }
-  }
-  return true;
-}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
 function clearAntiSpamMessageTimer(){if(antiSpamMessageTimer){clearTimeout(antiSpamMessageTimer);antiSpamMessageTimer=null}}
 function showAntiSpamOverlay(){
@@ -3919,11 +3900,9 @@ function handlePointerUp(e){
   if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();const t=tiles.find(x=>x.id===s.tileId);
   if(!s.hasDragged){
     if(t){
-      if(!registerTapCooldown(t.id,s.hrow||"")){dragState=null;clearDragProxy();render();return}
       if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
       if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      if(t.flipAnim){dragState=null;clearDragProxy();render();return}
-      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
+      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},460);return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
