@@ -3671,13 +3671,19 @@ function clearOtherFlipAnimations(activeTileId){
 function applyVerticalFlipDOM(t,anim){
   const el=tileWrapForId(t.id);
   if(!el)return false;
-  // Restart only this tile's animation. Do not force a layout after changing
-  // the final flipped state, because that can briefly start the CSS transition
-  // before the keyframe animation and creates a flicker/double-flip look.
-  el.classList.remove("flip-feedback","anim-flip-down","anim-flip-up");
-  void el.offsetWidth;
+  // Restart only this tile's animation. The important ordering is:
+  // 1) remove old animation classes
+  // 2) add flip-feedback BEFORE changing the final flipped class, so the
+  //    normal .tile transform transition is suppressed
+  // 3) set the final state
+  // 4) force a reflow, then add the keyframe animation class
+  // This prevents the small pre-animation transform transition that made
+  // quick cross-tile taps look like a second/double flip.
+  el.classList.remove("anim-flip-down","anim-flip-up");
+  el.classList.add("flip-feedback");
   el.classList.toggle("flipped",!!t.flipped);
-  el.classList.add("flip-feedback",anim);
+  void el.offsetWidth;
+  el.classList.add(anim);
   return true;
 }
 function clearVerticalFlipDOM(t,anim){
