@@ -1816,7 +1816,7 @@ let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false
 const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
 let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
 let flipInputLockedUntil=0,flipInputUnlockTimer=null,lastGridTapAt=0;
-const GRID_TAP_DEBOUNCE_MS=110;
+const GRID_TAP_DEBOUNCE_MS=90;
 const FLIP_ANIM_MS=360;
 const flipAnimTimers=new Map();
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
@@ -3663,30 +3663,47 @@ function lockFlipInput(ms=FLIP_ANIM_MS){
   flipInputLockedUntil=0;
   clearFlipInputUnlockTimer();
 }
+function tileWrapForId(id){return [...board.querySelectorAll(".tile-wrap")].find(el=>el.dataset.id===id)||null}
 function clearOtherFlipAnimations(activeTileId){
-  // Rendering rebuilds tile DOM. If another tile still carries an animation class,
-  // that animation can visually restart on render. Clear only other tiles; keep the
-  // active tile free to reverse its own flip after the debounce.
-  tiles.forEach(x=>{if(x&&x.id!==activeTileId){x.flipAnim="";clearFlipAnimTimerFor(x.id)}});
+  // Kept for legacy callers, but do not clear other active tile animations here.
+  // Independent tile animations are preserved by avoiding full board re-renders mid-flip.
+}
+function applyVerticalFlipDOM(t,anim){
+  const el=tileWrapForId(t.id);
+  if(!el)return false;
+  el.classList.toggle("flipped",!!t.flipped);
+  el.classList.remove("flip-feedback","anim-flip-down","anim-flip-up");
+  // Force the browser to see the class removal before starting/reversing this tile's animation.
+  void el.offsetWidth;
+  el.classList.add("flip-feedback",anim);
+  return true;
+}
+function clearVerticalFlipDOM(t,anim){
+  const el=tileWrapForId(t.id);
+  if(!el)return;
+  el.classList.remove("flip-feedback",anim,"anim-flip-down","anim-flip-up");
+  el.classList.toggle("flipped",!!t.flipped);
 }
 function startVerticalTileFlip(t){
-  if(!t)return;
+  if(!t)return false;
   clearFlipAnimTimerFor(t.id);
-  clearOtherFlipAnimations(t.id);
   const anim=t.flipped?"anim-flip-up":"anim-flip-down";
   t.flipAnim=anim;
   t.flipped=!t.flipped;
   lockFlipInput(FLIP_ANIM_MS);
+  const applied=applyVerticalFlipDOM(t,anim);
   flipAnimTimers.set(t.id,setTimeout(()=>{
     flipAnimTimers.delete(t.id);
     const cur=tiles.find(x=>x.id===t.id);
-    if(cur&&cur.flipAnim===anim)cur.flipAnim="";
+    if(cur&&cur.flipAnim===anim){cur.flipAnim="";clearVerticalFlipDOM(cur,anim)}
     maybeShowReturnedToStartNotice();
     maybeShowBlockedProperNounNotice();
     maybeShowSingleStartWordNotice();
     checkSolved();
-    if(!solved&&!dragState)render();
+    // Avoid re-rendering while another tile is still mid-animation, because that restarts its CSS animation.
+    if(!solved&&!dragState&&flipAnimTimers.size===0)render();
   },FLIP_ANIM_MS));
+  return applied;
 }
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
@@ -3956,7 +3973,7 @@ function handlePointerUp(e){
       if(isFlipInputLocked(t)){dragState=null;clearDragProxy();render();return}
       if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
       if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      startVerticalTileFlip(t);recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();return
+      const flipApplied=startVerticalTileFlip(t);recordMove();noteInteraction(true);dragState=null;clearDragProxy();if(!flipApplied)render();return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
