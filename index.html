@@ -1815,6 +1815,7 @@ let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
 let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
+let flipInputLockedUntil=0,flipInputUnlockTimer=null;
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2627,7 +2628,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;flipInputLockedUntil=0;clearFlipInputUnlockTimer();clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -3636,6 +3637,14 @@ function queueRewardAnimations(){
   showPersistentSolvedAwardAfterRewards(false);
 }
 
+function isFlipInputLocked(){return Date.now()<flipInputLockedUntil || tiles.some(t=>t&&t.flipAnim)}
+function clearFlipInputUnlockTimer(){if(flipInputUnlockTimer){clearTimeout(flipInputUnlockTimer);flipInputUnlockTimer=null}}
+function lockFlipInput(ms=360){
+  const until=Date.now()+ms;
+  flipInputLockedUntil=Math.max(flipInputLockedUntil,until);
+  clearFlipInputUnlockTimer();
+  flipInputUnlockTimer=setTimeout(()=>{flipInputUnlockTimer=null;flipInputLockedUntil=0},Math.max(0,flipInputLockedUntil-Date.now()));
+}
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
 function clearAntiSpamMessageTimer(){if(antiSpamMessageTimer){clearTimeout(antiSpamMessageTimer);antiSpamMessageTimer=null}}
@@ -3832,6 +3841,7 @@ function ensureGameStarted(){if(isDailyMode()||isAllWordsMode()||!gameStartDefer
 function handlePointerDown(e,id){
   if(vowelRevealActive){e.preventDefault();hideVowelReveal(true);return}
   if(isAntiSpamLocked()){e.preventDefault();e.stopPropagation();registerAntiSpamBlockedTap();return}
+  if(isFlipInputLocked()){e.preventDefault();e.stopPropagation();return}
   if((solved&&!isAllWordsMode())||(isDailyMode()&&!dailyStarted)||(e.button!==undefined&&e.button!==0))return;
   const t=tiles.find(x=>x.id===id);if(!t)return;
   const hTileEl=e.target?.closest?.(".htile")||null;
@@ -3900,9 +3910,10 @@ function handlePointerUp(e){
   if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();const t=tiles.find(x=>x.id===s.tileId);
   if(!s.hasDragged){
     if(t){
+      if(isFlipInputLocked()){dragState=null;clearDragProxy();render();return}
       if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
       if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},460);return
+      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;lockFlipInput(360);recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
