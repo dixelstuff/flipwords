@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="format-detection" content="telephone=no,email=no,address=no" />
 <title>FlipWords</title>
-<!-- BUILT FROM flipwords_stats_tabs_modal_v17 + clue credit/preroll + 5L perfect 0.89 (v2222) -->
+<!-- BUILT FROM flipwords_stats_tabs_modal_v17 + clue credit/preroll + 5L perfect 0.89 (v21) -->
 <style>
 :root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24);--grid-scale:1;--tile-w-base:84px;--base-tile-h-base:142px;--tile-gap-base:10px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:50px;--tile-radius-base:18px;--tile-border-w:1.5px;--divider:1px;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -1814,7 +1814,9 @@ let gameSolvedSubtitleText="";
 let forceSolvedSubtitlePopOnRender=false;
 let interactionCount=0,returnedToStartNoticeShown=false,blockedNoticeShown=false;
 const ANTI_SPAM_WINDOW_MS=2000,ANTI_SPAM_MAX_ACTIONS=6,ANTI_SPAM_FIRST_LOCK_MS=2500,ANTI_SPAM_REPEAT_LOCK_MS=5000;
+const TAP_GLOBAL_COOLDOWN_MS=110,TAP_SAME_TILE_COOLDOWN_MS=430;
 let antiSpamActionTimes=[],antiSpamLockedTapTimes=[],antiSpamLockedUntil=0,antiSpamTriggerCount=0,antiSpamMessageTimer=null;
+let lastAcceptedTapAt=0,lastTapByKey=new Map();
 let returnedToStartTimer=null,singleStartWordTimer=null,noticeTimer=null,infoMessageTimer=null,footerInfoTimer=null,footerInfoShown=false,solvedPreviewTimer=null,bonusTimerIds=[],celebrationTimerIds=[];
 let autoHintDelayTimer=null,autoHintFrame=null,autoHintDelayStartedAt=null,autoHintDelayRemainingMs=null,autoHintFillStart=null,autoHintFillElapsedMs=0,autoHintFilling=false;
 let vowelRevealActive=false,vowelRevealTimer=null,vowelAvailabilityTimer=null,clueCountdownTimer=null,clueCountdownHideTimer=null,clueSkipHelperTimer=null,clueFooterTimer=null,clueTimeTravelRevealTimer=null,clueTapDelayTimer=null,clueInlineCountdownTimer=null,clueAutoRevealTimer=null,solvedClueTimer=null,vowelAvailableNotified=false;
@@ -2627,7 +2629,7 @@ function setupPuzzle(opts={}){
   puzzleAwarded=false;scoreAnimationShown=false;lastPuzzleScore=null;gameSolvedSubtitleText="";
   lastAccountingMessages=Array.isArray(opts.restoreLastAccountingMessages)?opts.restoreLastAccountingMessages.map(x=>String(x||"")).filter(Boolean):[];
   lastBonusMessages=Array.isArray(opts.restoreLastBonusMessages)?opts.restoreLastBonusMessages.map(x=>String(x||"")).filter(Boolean):[];
-  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
+  interactionCount=0;returnedToStartNoticeShown=false;blockedNoticeShown=false;antiSpamActionTimes=[];antiSpamLockedTapTimes=[];antiSpamLockedUntil=0;antiSpamTriggerCount=0;lastAcceptedTapAt=0;lastTapByKey=new Map();clearAntiSpamMessageTimer();hideAntiSpamOverlay();message.classList.remove("anti-spam-lock-msg");puzzleStartTime=opts.restoreStartTime||Date.now();
   activePuzzleElapsedMs=Number.isFinite(Number(opts.restoreActivePuzzleElapsedMs))?Math.max(0,Number(opts.restoreActivePuzzleElapsedMs)):0;
   activePuzzleStartedAt=(solved||isAllWordsMode()||(isDailyMode()&&!dailyStarted)||opts.deferGameStart)?null:performance.now();
   clearDragProxy();
@@ -2986,7 +2988,6 @@ function checkSolved(){
   if(isSolved()){
     const wasSolved=solved;
     if(!wasSolved){const w=currentWords();solvedAnswerInverted=w.top===currentPuzzle().answer2&&w.bottom===currentPuzzle().answer1}
-    forceCanonicalSolvedGrid(solvedAnswerInverted);
     solved=true;
     clueBonusFlashRows={top:false,bottom:false};
     clueBonusRepeatFlashRows={top:false,bottom:false};
@@ -3638,6 +3639,23 @@ function queueRewardAnimations(){
 }
 
 function isAntiSpamLocked(){return Date.now()<antiSpamLockedUntil}
+function tapCooldownKey(id,row){return `${id||""}:${row||""}`}
+function registerTapCooldown(id,row=""){
+  const now=Date.now();
+  const key=tapCooldownKey(id,row);
+  const lastSame=lastTapByKey.get(key)||0;
+  if(now-lastSame<TAP_SAME_TILE_COOLDOWN_MS)return false;
+  if(now-lastAcceptedTapAt<TAP_GLOBAL_COOLDOWN_MS)return false;
+  lastTapByKey.set(key,now);
+  lastAcceptedTapAt=now;
+  // Keep the map small during longer sessions.
+  if(lastTapByKey.size>40){
+    for(const [k,t] of lastTapByKey){
+      if(now-t>3000)lastTapByKey.delete(k);
+    }
+  }
+  return true;
+}
 function antiSpamMessageDuration(){return Math.max(1300,antiSpamLockedUntil-Date.now()+350)}
 function clearAntiSpamMessageTimer(){if(antiSpamMessageTimer){clearTimeout(antiSpamMessageTimer);antiSpamMessageTimer=null}}
 function showAntiSpamOverlay(){
@@ -3901,9 +3919,11 @@ function handlePointerUp(e){
   if(!dragState||e.pointerId!==dragState.pointerId)return;const s=dragState;cleanupPointerListeners();const t=tiles.find(x=>x.id===s.tileId);
   if(!s.hasDragged){
     if(t){
+      if(!registerTapCooldown(t.id,s.hrow||"")){dragState=null;clearDragProxy();render();return}
       if(!registerAntiSpamAction()){dragState=null;clearDragProxy();render();return}
-      if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();if(isSolved()){checkSolved();return}render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
-      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();if(isSolved()){checkSolved();return}render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
+      if(isHorizontalTile(t)){reverseHorizontalRow(t,s.hrow||"top");recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},120);return}
+      if(t.flipAnim){dragState=null;clearDragProxy();render();return}
+      t.flipAnim=t.flipped?"anim-flip-up":"anim-flip-down";t.flipped=!t.flipped;recordMove();noteInteraction(true);dragState=null;clearDragProxy();render();setTimeout(()=>{t.flipAnim="";maybeShowReturnedToStartNotice();maybeShowBlockedProperNounNotice();maybeShowSingleStartWordNotice();checkSolved()},360);return
     }
   }
   let changed=s.startOrder!==tiles.map(t=>t.id).join("|");
@@ -3962,17 +3982,6 @@ function applyOneHint({silent=false}={}){while(hintCursor<hintOrder.length){cons
 }else{t.locked=true;if(hintOrientationInverted===null&&t.top!==t.bottom){hintOrientationInverted=t.flipped!==t.targetFlipped}if(t.top!==t.bottom){t.flipped=t.targetFlipped!==!!hintOrientationInverted}t.flipAnim=""}hintsUsed++;if(!silent)noteInteraction();tiles=rebuildWithLockedTiles(tiles.filter(t=>!(t.locked||horizontalMoveLocked(t))));forceNonSolvedStateIfNeeded();return true}return false}
 function applyHintsSilently(n){for(let i=0;i<n;i++)if(!applyOneHint({silent:true}))break}
 function lockAllTilesToAnswer(inverted=false){tiles.forEach(t=>{if(isHorizontalTile(t)){t.locked=true;t.lockedTop=true;t.lockedBottom=true;const top=inverted?t.targetBottom:t.targetTop,bottom=inverted?t.targetTop:t.targetBottom;t.top=top;t.bottom=bottom}else{t.locked=true;if(t.top!==t.bottom)t.flipped=inverted?!t.targetFlipped:t.targetFlipped}});tiles=[...tiles].sort((a,b)=>(a.targetSlot??a.targetIndex??0)-(b.targetSlot??b.targetIndex??0))}
-function forceCanonicalSolvedGrid(inverted=false){
-  // Defensive solve finalizer: a very fast late tap/drag can otherwise leave
-  // one tile visually out of place while the puzzle is already solved. As soon
-  // as a solve is detected, cancel any active interaction/animation and force
-  // the board into the canonical answer layout with the minimum required change.
-  try{cleanupPointerListeners()}catch{}
-  dragState=null;
-  clearDragProxy();
-  tiles.forEach(t=>{t.flipAnim=""});
-  lockAllTilesToAnswer(!!inverted);
-}
 function forceNonSolvedStateIfNeeded(){if(!isSolved()||tiles.every(t=>t.locked||horizontalMoveLocked(t)))return;const f=tiles.find(t=>!t.locked&&!isHorizontalTile(t)&&t.top!==t.bottom);if(f){f.flipped=!f.flipped;return}const h=tiles.find(t=>isHorizontalTile(t)&&!t.lockedTop&&t.top.length===2);if(h){h.top=reverseString(h.top);return}const u=tiles.map((tile,index)=>({tile,index})).filter(i=>!(i.tile.locked||horizontalMoveLocked(i.tile)));if(u.length>=2)[tiles[u[0].index],tiles[u[1].index]]=[tiles[u[1].index],tiles[u[0].index]]}
 function useHint(opts={}){if(isTimedClueMode()){showClue();return}if(isAllWordsMode())return;if(isDailyMode()&&dailyCurrentCompleted){openDailyShare();return}if(solved)return;if(opts.auto&&!canAutoHintRevealAnotherTile()){stopAutoHintTimer();return}if(isDailyMode()){if(getDailyHintsAvailable()<1){showInfoMessage(dailyHintsEarned<1?"Hint available at 4:00":(dailyHintsEarned<DAILY_HINT_UNLOCKS_MS.length?"Next hint at 6:00":"No more hints available"),"daily-hint-unavailable");return}dailyHintsUsed++;if(applyOneHint()){render();checkSolved();saveDailyProgress()}else render();return}ensureGameStarted();stopAutoHintTimer();if(applyOneHint()){render();checkSolved();saveGameState()}else render();if(!solved)startAutoHintTimer()}
 
