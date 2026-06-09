@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="format-detection" content="telephone=no,email=no,address=no" />
 <title>FlipWords</title>
-<!-- v93 built from restored v81 baseline -->
+<!-- v93 built from restored v81 baseline + message-only double-tap clue behaviour -->
 <style>
 :root{--bg:#f7f5fb;--ink:#272033;--muted:#766f82;--tile-bg:#fff;--tile-border:#d8d1e5;--tile-shadow:0 8px 20px rgba(39,32,51,.10);--tile-shadow-lift:0 14px 28px rgba(39,32,51,.18);--success:#30a46c;--soft:#e9e3f4;--hint:#f4df8a;--hint-border:#d4a72c;--hint-glow:rgba(212,167,44,.24);--grid-scale:1;--tile-w-base:84px;--base-tile-h-base:142px;--tile-gap-base:10px;--mixed-gap-base:9px;--middle-band-base:8px;--bump-base:14px;--h-width-trim-base:8px;--letter-size-base:50px;--tile-radius-base:18px;--tile-border-w:1.5px;--divider:1px;--tile-w:calc(var(--tile-w-base)*var(--grid-scale));--base-tile-h:calc(var(--base-tile-h-base)*var(--grid-scale));--tile-gap:calc(var(--tile-gap-base)*var(--grid-scale));--mixed-gap:calc(var(--mixed-gap-base)*var(--grid-scale));--middle-band:calc(var(--middle-band-base)*var(--grid-scale));--bump:calc(var(--bump-base)*var(--grid-scale));--h-width-trim:calc(var(--h-width-trim-base)*var(--grid-scale));--letter-size:calc(var(--letter-size-base)*var(--grid-scale));--tile-radius:calc(var(--tile-radius-base)*var(--grid-scale));--tile-h:calc(var(--base-tile-h) + var(--bump));--letter-row-h:calc(((var(--base-tile-h) - var(--middle-band))/2) + (var(--bump)/2));--h-tile-w:calc((var(--tile-w)*2) + var(--tile-gap) - var(--h-width-trim))}
 *{box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
@@ -1645,10 +1645,19 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 <div id="statsPanel" class="stats-panel"></div>
 <div id="modeToggle" class="mode-toggle" aria-label="Mode"><button id="dailyModeBtn" type="button">daily</button><button id="gameModeBtn" type="button">game</button></div>
 </main>
-<script src="reviewed_puzzles.js"></script>
+<script>
+(function(){
+  const params=new URLSearchParams(location.search);
+  const forceFresh=params.has("reset");
+  const version="v94";
+  const bust=forceFresh?`?v=${Date.now()}`:`?v=${version}`;
+  window.__FW_DATA_BUST=bust;
+  document.write(`<script src="reviewed_puzzles.js${bust}"><\/script>`);
+})();
+</script>
 <script>
 if(typeof puzzleRows==="undefined"){
-  document.write('<script src="final_puzzles.js"><\/script>');
+  document.write(`<script src="final_puzzles.js${window.__FW_DATA_BUST||''}"><\/script>`);
 }
 </script>
 <script>
@@ -1785,7 +1794,7 @@ function buildDailyPuzzles(){
 }
 async function loadDailyTriplets(){
   try{
-    const res=await fetch("accepted_daily_triplets.json",{cache:"no-store"});
+    const res=await fetch(`accepted_daily_triplets.json${window.__FW_DATA_BUST||""}`,{cache:"no-store"});
     if(!res.ok)throw new Error(`HTTP ${res.status}`);
     const data=await res.json();
     if(!Array.isArray(data))throw new Error("Daily triplets JSON must be an array");
