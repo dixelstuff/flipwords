@@ -1649,11 +1649,16 @@ body{margin:0;min-height:100vh;min-height:100dvh;display:grid;place-items:center
 (function(){
   const params=new URLSearchParams(location.search);
   const forceFresh=params.has("reset");
-  const version="v94";
+  const version="v95";
   const bust=forceFresh?`?v=${Date.now()}`:`?v=${version}`;
   window.__FW_DATA_BUST=bust;
-  document.write(`<script src="reviewed_puzzles.js${bust}"><\/script>`);
+  document.write(`<script src="mode23_app_puzzle_source_10000.js${bust}"><\/script>`);
 })();
+</script>
+<script>
+if(typeof puzzleRows==="undefined"){
+  document.write(`<script src="reviewed_puzzles.js${window.__FW_DATA_BUST||''}"><\/script>`);
+}
 </script>
 <script>
 if(typeof puzzleRows==="undefined"){
@@ -1721,13 +1726,13 @@ const CLUE_RATING_ORDER=["perfect","great","good","clunky"];
 const VOWELS_UNLOCK_MS=10000; // dormant old experiment
 const VOWELS_REVEAL_MS=6000; // dormant old experiment
 
-/* puzzleRows moved to reviewed_puzzles.js or final_puzzles.js */
+/* puzzleRows moved to mode23_app_puzzle_source_10000.js, reviewed_puzzles.js, or final_puzzles.js */
 
 
-/* puzzleClues moved to reviewed_puzzles.js or final_puzzles.js */
+/* puzzleClues moved to mode23_app_puzzle_source_10000.js, reviewed_puzzles.js, or final_puzzles.js */
 
 
-/* clueBonusWords moved to reviewed_puzzles.js or final_puzzles.js */
+/* clueBonusWords moved to mode23_app_puzzle_source_10000.js, reviewed_puzzles.js, or final_puzzles.js */
 
 
 
